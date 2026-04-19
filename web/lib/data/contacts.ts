@@ -13,6 +13,7 @@ export const seedContacts: Contact[] = [
     stage: "coffee-chat",
     tags: ["TMT", "target", "Stanford alum"],
     lastInteractionAt: "2025-10-18",
+    lastContactAt: "2025-10-18",
     linkedinBio: `Investment Banking Analyst at Goldman Sachs, TMT group. Stanford '23, Economics + CS. Prior internship at Qatalyst Partners. Interests: semiconductor M&A, enterprise software.`,
   },
   {
@@ -27,6 +28,7 @@ export const seedContacts: Contact[] = [
     stage: "warm",
     tags: ["EB", "M&A", "responsive"],
     lastInteractionAt: "2026-01-12",
+    lastContactAt: "2026-01-12",
     linkedinBio: `Associate in Evercore's general M&A practice. Wharton '20, Finance + Mathematics. Prior: JPMorgan M&A analyst. Active on deals in industrials and healthcare services.`,
   },
   {
@@ -41,6 +43,7 @@ export const seedContacts: Contact[] = [
     stage: "interviewed",
     tags: ["Healthcare", "senior", "referred"],
     lastInteractionAt: "2026-02-04",
+    lastContactAt: "2026-02-14",
     linkedinBio: `VP in JPMorgan's Healthcare coverage. Focus on large-cap pharma and medical devices M&A. Duke '14, Public Policy. Started at JPM as summer analyst.`,
   },
   {
@@ -55,6 +58,7 @@ export const seedContacts: Contact[] = [
     stage: "outreach-sent",
     tags: ["EB", "elite", "generalist"],
     lastInteractionAt: "2026-03-22",
+    lastContactAt: "2026-03-22",
     linkedinBio: `First-year analyst at Centerview Partners, generalist. Harvard '24, Economics. Led Harvard Finance Club junior year.`,
   },
   {
@@ -68,7 +72,8 @@ export const seedContacts: Contact[] = [
     howMet: "Mutual friend intro",
     stage: "coffee-chat",
     tags: ["Energy", "candid", "Ross alum"],
-    lastInteractionAt: "2026-02-20",
+    lastInteractionAt: "2026-04-08",
+    lastContactAt: "2026-04-08",
     linkedinBio: `Analyst, Morgan Stanley Energy group. Ross '23, Finance. Focus on oilfield services and energy transition. Previously interned at Lazard.`,
   },
 ];
@@ -78,7 +83,7 @@ export const seedChatLogs: ChatLog[] = [
     id: "ch1",
     contactId: "c1",
     happenedAt: "2025-10-18",
-    rawNotes: `30 min zoom. Alex super nice, no bs. Talked about how GS TMT is weighted heavy toward semis coverage now (not just software). He worked on the Marvell/Innovium deal. Said MD's name is Bill — loves when candidates mention the Berkshire letter. Told me to apply SA and mention him. He said he'd intro me to a 2nd year named Priya. Don't ask comp ever. Said culture is grindy but people are genuinely sharp. He has a golden retriever named Miso — mentioned it a lot.`,
+    rawNotes: `30 min zoom. Alex super nice, no bs. Talked about how Goldman Sachs TMT is weighted heavy toward semis coverage now (not just software). He worked on the Marvell/Innovium deal. Said MD's name is Bill — loves when candidates mention the Berkshire letter. Told me to apply SA and mention him. He said he'd intro me to a 2nd year named Priya. Compared GS culture to peers — said Morgan Stanley was friendlier in his Superday process but he chose GS for the franchise. Don't ask comp ever. He has a golden retriever named Miso — mentioned it a lot.`,
     structured: {
       topics: [
         "GS TMT group composition (semis-heavy)",
