@@ -1,0 +1,205 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Bell, Mail, CalendarClock, ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+import type { Contact } from "@/lib/types";
+import type { Followup } from "@/lib/data/followups";
+import { OutreachDrawer } from "@/components/relationships/outreach-drawer";
+
+const SIX_WEEKS_MS = 1000 * 60 * 60 * 24 * 7 * 6;
+
+function weeksAgo(iso: string, now: number): number {
+  const then = Date.parse(iso);
+  if (Number.isNaN(then)) return 0;
+  return Math.floor((now - then) / (1000 * 60 * 60 * 24 * 7));
+}
+
+function relativeDue(
+  iso: string,
+  now: number,
+): { label: string; overdue: boolean } {
+  const due = Date.parse(iso);
+  if (Number.isNaN(due)) return { label: iso, overdue: false };
+  const diffMs = due - now;
+  const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+  if (diffDays < -1) return { label: `${Math.abs(diffDays)}d overdue`, overdue: true };
+  if (diffDays === -1) return { label: "yesterday (overdue)", overdue: true };
+  if (diffDays === 0) return { label: "today", overdue: false };
+  if (diffDays === 1) return { label: "tomorrow", overdue: false };
+  if (diffDays < 7) return { label: `in ${diffDays}d`, overdue: false };
+  return { label: `in ${Math.round(diffDays / 7)}w`, overdue: false };
+}
+
+export function RelationshipsTopWidgets({
+  contacts,
+  followups,
+}: {
+  contacts: Contact[];
+  followups: Followup[];
+}) {
+  const [outreachContact, setOutreachContact] = useState<Contact | null>(null);
+
+  // Capture "now" once per mount to keep the render pure (lint rule react-hooks/purity).
+  // The lazy initializer runs on the client when the component mounts.
+  // Acceptable for a relative-time widget — no real-time updates needed.
+  const [now] = useState<number>(() => Date.now());
+
+  // Stale = no contact in >6 weeks. Take the 3 stalest.
+  const staleContacts = useMemo(() => {
+    return contacts
+      .filter((c) => {
+        if (!c.lastContactAt) return false;
+        const t = Date.parse(c.lastContactAt);
+        if (Number.isNaN(t)) return false;
+        return now - t > SIX_WEEKS_MS;
+      })
+      .sort((a, b) =>
+        (a.lastContactAt ?? "").localeCompare(b.lastContactAt ?? ""),
+      )
+      .slice(0, 3);
+  }, [contacts, now]);
+
+  const sortedFollowups = useMemo(
+    () =>
+      [...followups].sort((a, b) => a.dueAt.localeCompare(b.dueAt)),
+    [followups],
+  );
+
+  if (staleContacts.length === 0 && sortedFollowups.length === 0) return null;
+
+  return (
+    <div className="max-w-6xl mx-auto px-6 md:px-8 pt-8 space-y-6">
+      {staleContacts.length > 0 && (
+        <section>
+          <h2 className="flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-3">
+            <Bell className="size-3.5" />
+            Gentle nudges
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {staleContacts.map((c) => {
+              const w = weeksAgo(c.lastContactAt!, now);
+              return (
+                <Card
+                  key={c.id}
+                  className="p-4 hover:border-primary/40 transition-colors"
+                >
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <Link
+                      href={`/relationships/${c.id}`}
+                      className="font-semibold text-sm hover:text-primary transition-colors"
+                    >
+                      {c.name}
+                    </Link>
+                    <Badge
+                      variant="outline"
+                      className="text-[10px] shrink-0 text-amber-700 border-amber-300"
+                    >
+                      {w}w cold
+                    </Badge>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    {c.firm}
+                    {c.group ? ` · ${c.group}` : ""}
+                  </p>
+                  <p className="text-[11px] text-muted-foreground mt-1">
+                    Last spoke {w} {w === 1 ? "week" : "weeks"} ago
+                  </p>
+                  <div className="flex items-center gap-2 mt-3">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="h-7 text-xs gap-1.5"
+                      onClick={() => setOutreachContact(c)}
+                    >
+                      <Mail className="size-3" />
+                      Draft check-in
+                    </Button>
+                    <Button
+                      asChild
+                      size="sm"
+                      variant="ghost"
+                      className="h-7 text-xs gap-1"
+                    >
+                      <Link href={`/relationships/${c.id}`}>
+                        Open
+                        <ArrowRight className="size-3" />
+                      </Link>
+                    </Button>
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {sortedFollowups.length > 0 && (
+        <section>
+          <h2 className="flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-3">
+            <CalendarClock className="size-3.5" />
+            Upcoming follow-ups
+          </h2>
+          <Card className="divide-y">
+            {sortedFollowups.map((f) => {
+              const contact = contacts.find((c) => c.id === f.contactId);
+              if (!contact) return null;
+              const due = relativeDue(f.dueAt, now);
+              return (
+                <Link
+                  key={f.id}
+                  href={`/relationships/${contact.id}`}
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-accent/30 transition-colors first:rounded-t-xl last:rounded-b-xl"
+                >
+                  <div
+                    className={cn(
+                      "shrink-0 w-20 text-xs font-medium tabular-nums",
+                      due.overdue
+                        ? "text-red-600"
+                        : "text-muted-foreground",
+                    )}
+                  >
+                    {due.label}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium truncate">
+                      {contact.name}
+                      <span className="text-muted-foreground font-normal">
+                        {" · "}
+                        {contact.firm}
+                      </span>
+                    </p>
+                    <p className="text-xs text-muted-foreground truncate">
+                      {f.note}
+                    </p>
+                  </div>
+                  <Badge
+                    variant="secondary"
+                    className="text-[10px] capitalize shrink-0"
+                  >
+                    {f.kind === "post-chat" ? "post-chat" : "outreach"}
+                  </Badge>
+                  <ArrowRight className="size-3.5 text-muted-foreground shrink-0" />
+                </Link>
+              );
+            })}
+          </Card>
+        </section>
+      )}
+
+      {outreachContact && (
+        <OutreachDrawer
+          contact={outreachContact}
+          open={!!outreachContact}
+          onOpenChange={(o) => {
+            if (!o) setOutreachContact(null);
+          }}
+        />
+      )}
+    </div>
+  );
+}

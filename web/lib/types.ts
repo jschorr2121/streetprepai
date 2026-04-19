@@ -49,6 +49,12 @@ export type Contact = {
   stage: ContactStage;
   tags: string[];
   lastInteractionAt?: string;
+  /**
+   * ISO date of the last meaningful inbound/outbound contact (chat, email, intro).
+   * Drives the "gentle nudges" widget on the relationships page.
+   * TODO (needs Supabase + auth): derive from chats/outreach tables instead of seed data.
+   */
+  lastContactAt?: string;
 };
 
 export type ChatLog = {

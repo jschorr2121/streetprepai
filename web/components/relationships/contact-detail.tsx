@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -17,9 +17,13 @@ import {
   NotebookPen,
   Copy,
   Check,
+  Mic,
+  Square,
 } from "lucide-react";
 import { toast } from "sonner";
 import type { Contact, ChatLog, CalendarEvent } from "@/lib/types";
+import { OutreachDrawer } from "@/components/relationships/outreach-drawer";
+import { cn } from "@/lib/utils";
 
 export function ContactDetail({
   contact,
@@ -43,6 +47,104 @@ export function ContactDetail({
   } | null>(null);
   const [draftingFollowUp, setDraftingFollowUp] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  // Outreach drawer
+  const [outreachOpen, setOutreachOpen] = useState(false);
+
+  // Voice capture for "Log a chat"
+  const [recording, setRecording] = useState(false);
+  const [transcribing, setTranscribing] = useState(false);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const recordedChunksRef = useRef<Blob[]>([]);
+  const recordingStreamRef = useRef<MediaStream | null>(null);
+
+  useEffect(() => {
+    // Cleanup on unmount: stop any active recording.
+    return () => {
+      if (mediaRecorderRef.current?.state === "recording") {
+        mediaRecorderRef.current.stop();
+      }
+      recordingStreamRef.current
+        ?.getTracks()
+        .forEach((t) => t.stop());
+    };
+  }, []);
+
+  async function startRecording() {
+    if (typeof navigator === "undefined" || !navigator.mediaDevices?.getUserMedia) {
+      toast.error("Your browser doesn't support voice capture. Type instead.");
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      recordingStreamRef.current = stream;
+      // MediaRecorder picks a sensible default (webm/opus on Chrome, mp4 on Safari).
+      const mr = new MediaRecorder(stream);
+      recordedChunksRef.current = [];
+      mr.ondataavailable = (e) => {
+        if (e.data && e.data.size > 0) recordedChunksRef.current.push(e.data);
+      };
+      mr.onstop = () => {
+        const blob = new Blob(recordedChunksRef.current, {
+          type: mr.mimeType || "audio/webm",
+        });
+        recordingStreamRef.current?.getTracks().forEach((t) => t.stop());
+        recordingStreamRef.current = null;
+        void transcribeBlob(blob);
+      };
+      mr.start();
+      mediaRecorderRef.current = mr;
+      setRecording(true);
+    } catch (err) {
+      toast.error(
+        err instanceof Error
+          ? `Mic permission denied: ${err.message}`
+          : "Could not access microphone.",
+      );
+    }
+  }
+
+  function stopRecording() {
+    const mr = mediaRecorderRef.current;
+    if (mr && mr.state === "recording") mr.stop();
+    setRecording(false);
+  }
+
+  async function transcribeBlob(blob: Blob) {
+    if (blob.size === 0) {
+      toast.error("Empty recording — try again.");
+      return;
+    }
+    setTranscribing(true);
+    try {
+      const ext = blob.type.includes("mp4") ? "mp4" : "webm";
+      const file = new File([blob], `recording.${ext}`, { type: blob.type });
+      const fd = new FormData();
+      fd.append("audio", file);
+      const res = await fetch("/api/whisper/transcribe", {
+        method: "POST",
+        body: fd,
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        toast.error(data.error ?? "Transcription failed.");
+        return;
+      }
+      const transcript = (data.transcript as string | undefined)?.trim() ?? "";
+      if (!transcript) {
+        toast.error("No speech detected.");
+        return;
+      }
+      setNotes((prev) => (prev ? `${prev.trim()}\n\n${transcript}` : transcript));
+      toast.success("Transcribed — review and structure when ready.");
+    } catch (err) {
+      toast.error(
+        err instanceof Error ? err.message : "Transcription failed.",
+      );
+    } finally {
+      setTranscribing(false);
+    }
+  }
 
   async function generatePrepSheet() {
     setPrepLoading(true);
@@ -166,9 +268,20 @@ export function ContactDetail({
               </p>
             )}
           </div>
-          <Badge variant="outline" className="capitalize">
-            {contact.stage.replace("-", " ")}
-          </Badge>
+          <div className="flex items-center gap-2">
+            <Badge variant="outline" className="capitalize">
+              {contact.stage.replace("-", " ")}
+            </Badge>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => setOutreachOpen(true)}
+              className="gap-1.5"
+            >
+              <Mail className="size-3.5" />
+              Draft cold outreach
+            </Button>
+          </div>
         </div>
         {contact.howMet && (
           <p className="text-sm text-muted-foreground mt-3">
@@ -255,13 +368,60 @@ export function ContactDetail({
               Type rough notes. Claude structures them into a memory record and
               drafts a personalized follow-up.
             </p>
-            <Textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              rows={8}
-              placeholder="e.g. 30-min zoom with Alex. Talked about GS TMT being heavy on semis. Said he'd intro me to Priya. Don't ask about comp. Mentioned his dog Miso a lot…"
-              className="resize-none"
-            />
+            <div className="relative">
+              <Textarea
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                rows={8}
+                placeholder="e.g. 30-min zoom with Alex. Talked about GS TMT being heavy on semis. Said he'd intro me to Priya. Don't ask about comp. Mentioned his dog Miso a lot…"
+                className="resize-none pr-12"
+              />
+              <Button
+                type="button"
+                size="icon"
+                variant={recording ? "default" : "outline"}
+                onClick={recording ? stopRecording : startRecording}
+                disabled={transcribing}
+                title={
+                  recording
+                    ? "Stop recording"
+                    : transcribing
+                      ? "Transcribing…"
+                      : "Record voice memo"
+                }
+                className={cn(
+                  "absolute top-2 right-2 size-8 rounded-full",
+                  recording &&
+                    "bg-red-500 hover:bg-red-600 text-white animate-pulse",
+                )}
+              >
+                {transcribing ? (
+                  <Loader2 className="size-3.5 animate-spin" />
+                ) : recording ? (
+                  <Square className="size-3.5" />
+                ) : (
+                  <Mic className="size-3.5" />
+                )}
+                <span className="sr-only">
+                  {recording ? "Stop recording" : "Record voice memo"}
+                </span>
+              </Button>
+            </div>
+            {(recording || transcribing) && (
+              <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1.5">
+                {recording ? (
+                  <>
+                    <span className="size-1.5 rounded-full bg-red-500 animate-pulse" />
+                    Recording — click the square to stop and transcribe.
+                  </>
+                ) : (
+                  <>
+                    <Loader2 className="size-3 animate-spin" />
+                    Transcribing your memo…
+                  </>
+                )}
+              </p>
+            )}
             <div className="flex gap-2 mt-3">
               <Button
                 size="sm"
@@ -456,6 +616,12 @@ export function ContactDetail({
           )}
         </TabsContent>
       </Tabs>
+
+      <OutreachDrawer
+        contact={contact}
+        open={outreachOpen}
+        onOpenChange={setOutreachOpen}
+      />
     </div>
   );
 }
