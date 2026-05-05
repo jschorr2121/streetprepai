@@ -50,7 +50,7 @@ export function Markdown({
   let key = 0;
 
   while (i < lines.length) {
-    const line = lines[i];
+    const line = lines[i]!;
 
     if (!line.trim()) {
       i++;
@@ -78,8 +78,8 @@ export function Markdown({
 
     if (line.startsWith("> ")) {
       const bqLines: string[] = [];
-      while (i < lines.length && lines[i].startsWith("> ")) {
-        bqLines.push(lines[i].slice(2));
+      while (i < lines.length && lines[i]!.startsWith("> ")) {
+        bqLines.push(lines[i]!.slice(2));
         i++;
       }
       blocks.push(
@@ -94,8 +94,8 @@ export function Markdown({
 
     if (/^[-*] /.test(line)) {
       const items: string[] = [];
-      while (i < lines.length && /^[-*] /.test(lines[i])) {
-        items.push(lines[i].replace(/^[-*] /, ""));
+      while (i < lines.length && /^[-*] /.test(lines[i]!)) {
+        items.push(lines[i]!.replace(/^[-*] /, ""));
         i++;
       }
       blocks.push(
@@ -110,8 +110,8 @@ export function Markdown({
 
     if (/^\d+\. /.test(line)) {
       const items: string[] = [];
-      while (i < lines.length && /^\d+\. /.test(lines[i])) {
-        items.push(lines[i].replace(/^\d+\. /, ""));
+      while (i < lines.length && /^\d+\. /.test(lines[i]!)) {
+        items.push(lines[i]!.replace(/^\d+\. /, ""));
         i++;
       }
       blocks.push(
@@ -127,13 +127,13 @@ export function Markdown({
     const paragraph: string[] = [];
     while (
       i < lines.length &&
-      lines[i].trim() &&
-      !/^#{1,3} /.test(lines[i]) &&
-      !/^[-*] /.test(lines[i]) &&
-      !/^\d+\. /.test(lines[i]) &&
-      !lines[i].startsWith("> ")
+      lines[i]!.trim() &&
+      !/^#{1,3} /.test(lines[i]!) &&
+      !/^[-*] /.test(lines[i]!) &&
+      !/^\d+\. /.test(lines[i]!) &&
+      !lines[i]!.startsWith("> ")
     ) {
-      paragraph.push(lines[i]);
+      paragraph.push(lines[i]!);
       i++;
     }
     blocks.push(

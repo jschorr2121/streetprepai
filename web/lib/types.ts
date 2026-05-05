@@ -129,3 +129,57 @@ export type Story = {
   rawExperience: string;
   framings: StoryFraming[];
 };
+
+export type AppliedJobStage =
+  | "shortlist"
+  | "applied"
+  | "interview"
+  | "superday"
+  | "offer"
+  | "rejected";
+
+export type AppliedJob = {
+  id: string;
+  firm: string;
+  role: string;
+  group?: string;
+  deadline?: string;
+  url?: string;
+  stage: AppliedJobStage;
+  notes?: string;
+  addedAt: string;
+  updatedAt?: string;
+};
+
+export type Profile = {
+  userId: string;
+  fullName?: string;
+  school?: string;
+  graduationYear?: number;
+  targetRoles: string[];
+  targetFirms: string[];
+  bioSummary?: string;
+  resumeRawText?: string;
+  experiences: unknown[];
+  education: unknown[];
+  skills: string[];
+  updatedAt?: string;
+};
+
+export type GuideProgressEntry = {
+  id: string;
+  guideSlug: string;
+  readAt: string;
+  completed: boolean;
+};
+
+export type MockInterview = {
+  id: string;
+  questionText: string;
+  mode: string;
+  transcript?: string;
+  scorecard?: unknown;
+  audioMetrics?: unknown;
+  durationSeconds?: number;
+  createdAt: string;
+};

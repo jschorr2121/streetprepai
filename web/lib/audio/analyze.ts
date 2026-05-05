@@ -50,7 +50,7 @@ export function analyzeAudio(words: TimestampedWord[]): AudioMetrics {
   // Total speaking duration: first start → last end.
   const totalSpeakingMs = Math.max(
     0,
-    Math.round((words[words.length - 1].end - words[0].start) * 1000),
+    Math.round((words[words.length - 1]!.end - words[0]!.start) * 1000),
   );
 
   const minutes = totalSpeakingMs / 60_000;
@@ -63,7 +63,7 @@ export function analyzeAudio(words: TimestampedWord[]): AudioMetrics {
   for (let i = 1; i < words.length; i++) {
     const gapMs = Math.max(
       0,
-      Math.round((words[i].start - words[i - 1].end) * 1000),
+      Math.round((words[i]!.start - words[i - 1]!.end) * 1000),
     );
     totalGapMs += gapMs;
     if (gapMs > longestPauseMs) longestPauseMs = gapMs;

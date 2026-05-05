@@ -75,9 +75,10 @@ export function ContactsView({
   >({});
   const effectiveContacts = useMemo(
     () =>
-      contacts.map((c) =>
-        stageOverrides[c.id] ? { ...c, stage: stageOverrides[c.id] } : c,
-      ),
+      contacts.map((c) => {
+        const override = stageOverrides[c.id];
+        return override ? { ...c, stage: override } : c;
+      }),
     [contacts, stageOverrides],
   );
 
@@ -135,7 +136,7 @@ export function ContactsView({
       offer: [],
     };
     for (const c of effectiveContacts) {
-      map[c.stage].push(c);
+      map[c.stage]?.push(c);
     }
     return map;
   }, [effectiveContacts]);

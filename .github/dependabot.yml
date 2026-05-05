@@ -1,0 +1,24 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /web
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      next-and-react:
+        patterns: ["next", "react", "react-dom", "@types/react*"]
+      sentry:
+        patterns: ["@sentry/*"]
+      supabase:
+        patterns: ["@supabase/*"]
+      testing:
+        patterns: ["vitest", "@vitest/*", "@testing-library/*", "msw", "happy-dom", "@playwright/test"]
+      types:
+        patterns: ["@types/*"]
+        update-types: [version-update:semver-patch, version-update:semver-minor]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

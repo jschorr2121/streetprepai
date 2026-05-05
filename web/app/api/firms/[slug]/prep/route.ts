@@ -1,15 +1,27 @@
+import { requireUser } from "@/lib/security/require-user";
+import { parseJson } from "@/lib/validation/parse";
+import { FirmSlugSchema } from "@/lib/validation/schemas/firms";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { PREP_FIRM_SYSTEM } from "@/lib/ai/prompts";
-import { seedFirms } from "@/lib/data/firms";
+import { trackStream } from "@/lib/ai/usage";
+import { getFirmBySlug } from "@/lib/data/firms";
 
 export const runtime = "nodejs";
 
 export async function POST(
   req: Request,
   { params }: { params: Promise<{ slug: string }> },
-) {
+): Promise<Response> {
+  const gate = await requireUser(req, { tier: "expensive", route: "firms/prep" });
+  if (!gate.ok) return gate.response;
+
   const { slug } = await params;
-  const firm = seedFirms.find((f) => f.slug === slug);
+  const slugParsed = FirmSlugSchema.safeParse(slug);
+  if (!slugParsed.success) {
+    return Response.json({ error: "invalid slug" }, { status: 400 });
+  }
+
+  const firm = await getFirmBySlug(slugParsed.data);
   if (!firm) {
     return Response.json({ error: "firm not found" }, { status: 404 });
   }
@@ -39,6 +51,8 @@ export async function POST(
     ],
     messages: [{ role: "user", content: userPrompt }],
   });
+
+  trackStream(stream, "firms/prep", { userId: gate.user.id });
 
   const encoder = new TextEncoder();
   const readable = new ReadableStream({

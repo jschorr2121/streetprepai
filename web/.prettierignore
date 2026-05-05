@@ -1,0 +1,11 @@
+.next/
+node_modules/
+coverage/
+playwright-report/
+test-results/
+public/
+*.min.*
+pnpm-lock.yaml
+.logs/
+content/guides/
+tsconfig.json

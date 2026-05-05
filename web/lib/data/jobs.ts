@@ -1,4 +1,42 @@
 import type { Job } from "@/lib/types";
+import { createClient } from "@/lib/supabase/server";
+
+type DbRow = {
+  id: string;
+  firm: string;
+  role: string;
+  group_name: string | null;
+  location: string;
+  year_target: string;
+  deadline: string | null;
+  url: string;
+  tags: string[] | null;
+};
+
+function mapRow(r: DbRow): Job {
+  return {
+    id: r.id,
+    firm: r.firm,
+    role: r.role,
+    group: r.group_name ?? undefined,
+    location: r.location,
+    yearTarget: r.year_target,
+    deadline: r.deadline ?? undefined,
+    url: r.url,
+    tags: r.tags ?? [],
+  };
+}
+
+export async function getJobs(): Promise<Job[]> {
+  const sb = await createClient();
+  const { data, error } = await sb
+    .from("jobs")
+    .select("*")
+    .order("deadline", { ascending: true, nullsFirst: false });
+  if (error) throw error;
+  return (data as DbRow[]).map(mapRow);
+}
+
 
 export const seedJobs: Job[] = [
   {

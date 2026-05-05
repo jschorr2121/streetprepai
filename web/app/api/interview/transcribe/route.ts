@@ -1,3 +1,4 @@
+import { requireUser } from "@/lib/security/require-user";
 import type { TimestampedWord } from "@/lib/audio/analyze";
 
 export const runtime = "nodejs";
@@ -17,7 +18,10 @@ interface WhisperVerboseJson {
   words?: Array<{ word: string; start: number; end: number }>;
 }
 
-export async function POST(req: Request) {
+export async function POST(req: Request): Promise<Response> {
+  const gate = await requireUser(req, { tier: "whisper", route: "interview/transcribe" });
+  if (!gate.ok) return gate.response;
+
   const contentType = req.headers.get("content-type") ?? "";
 
   let audioBuffer: Buffer;
@@ -58,8 +62,7 @@ export async function POST(req: Request) {
         return Response.json({ error: "Empty audio body." }, { status: 400 });
       }
       audioBuffer = Buffer.from(arrayBuf);
-      mimeType = contentType.split(";")[0];
-      // Map common audio MIMEs to a sensible default file extension for Whisper.
+      mimeType = contentType.split(";")[0] ?? "audio/webm";
       const extMap: Record<string, string> = {
         "audio/webm": "webm",
         "audio/ogg": "ogg",
@@ -98,7 +101,6 @@ export async function POST(req: Request) {
     return Response.json(buildMockTranscript());
   }
 
-  // Build multipart form for OpenAI.
   const upstream = new FormData();
   upstream.append(
     "file",
@@ -156,20 +158,15 @@ export async function POST(req: Request) {
   return Response.json(payload);
 }
 
-/**
- * Mock transcript used when OPENAI_API_KEY is missing — keeps the demo flow
- * working locally without any external credentials.
- */
 function buildMockTranscript(): TranscribeResponse {
   const text =
     "So a DCF, um, is basically how you value a company based on its future cash flows. You project unlevered free cash flow for, like, five to ten years, then you discount each one back to the present using WACC. After that you calculate a terminal value, you know, either with the Gordon Growth method or an exit multiple, discount that back too, sum it all up to get enterprise value, and then you bridge to equity value by subtracting net debt.";
   const tokens = text.split(/\s+/);
-  let cursor = 0.4; // small leading silence
+  let cursor = 0.4;
   const words: TimestampedWord[] = tokens.map((tok) => {
     const dur = 0.28 + Math.random() * 0.12;
     const start = cursor;
     const end = cursor + dur;
-    // Insert a small pause every ~12 words to simulate breathing room.
     cursor = end + (Math.random() < 0.08 ? 0.55 : 0.05);
     return { word: tok, start: Number(start.toFixed(2)), end: Number(end.toFixed(2)) };
   });

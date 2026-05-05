@@ -1,6 +1,10 @@
+import { requireUser } from "@/lib/security/require-user";
+import { parseJson } from "@/lib/validation/parse";
+import { InterviewScoreSchema } from "@/lib/validation/schemas/interview";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { INTERVIEW_SCORE_SYSTEM } from "@/lib/ai/prompts";
-import type { AudioMetrics } from "@/lib/audio/analyze";
+import { logUsage } from "@/lib/ai/usage";
+import { capText } from "@/lib/ai/sanitize";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -21,47 +25,14 @@ export interface Scorecard {
   model_answer: string;
 }
 
-export interface ScoreRequestBody {
-  question: string;
-  mode: string;
-  transcript: string;
-  audioMetrics: AudioMetrics;
-  idealAnswerOutline: string;
-}
+export async function POST(req: Request): Promise<Response> {
+  const gate = await requireUser(req, { tier: "expensive", route: "interview/score" });
+  if (!gate.ok) return gate.response;
 
-const MAX_TRANSCRIPT_CHARS = 10_000;
+  const parsed = await parseJson(req, InterviewScoreSchema);
+  if (!parsed.ok) return parsed.response;
 
-export async function POST(req: Request) {
-  let body: Partial<ScoreRequestBody>;
-  try {
-    body = (await req.json()) as Partial<ScoreRequestBody>;
-  } catch {
-    return Response.json({ error: "Invalid JSON body." }, { status: 400 });
-  }
-
-  const question = (body.question ?? "").trim();
-  const mode = (body.mode ?? "").trim();
-  const transcript = (body.transcript ?? "").trim();
-  const idealAnswerOutline = (body.idealAnswerOutline ?? "").trim();
-  const audioMetrics = body.audioMetrics;
-
-  if (!question || !transcript || !audioMetrics || !mode) {
-    return Response.json(
-      {
-        error:
-          "Missing required fields: question, mode, transcript, audioMetrics.",
-      },
-      { status: 400 },
-    );
-  }
-  if (transcript.length > MAX_TRANSCRIPT_CHARS) {
-    return Response.json(
-      {
-        error: `Transcript is ${transcript.length} chars; max is ${MAX_TRANSCRIPT_CHARS}.`,
-      },
-      { status: 413 },
-    );
-  }
+  const { question, mode, transcript, audioMetrics, idealAnswerOutline } = parsed.data;
 
   const fillersPerMin =
     audioMetrics.totalSpeakingMs > 0
@@ -75,9 +46,11 @@ export async function POST(req: Request) {
 
   const userPrompt = [
     `Interview mode: ${mode}`,
-    `Question: ${question}`,
-    idealAnswerOutline ? `Ideal-answer outline (for your reference, not to be parroted back): ${idealAnswerOutline}` : null,
-    `\nStudent's spoken answer (Whisper transcript):\n"""\n${transcript}\n"""`,
+    `Question: ${capText(question, 1500)}`,
+    idealAnswerOutline
+      ? `Ideal-answer outline (for your reference, not to be parroted back): ${capText(idealAnswerOutline, 4000)}`
+      : null,
+    `\nStudent's spoken answer (Whisper transcript):\n"""\n${capText(transcript, 15000)}\n"""`,
     `\nDelivery metrics:`,
     `- words-per-minute: ${audioMetrics.wpm}`,
     `- filler tokens: ${audioMetrics.fillerCount} (${fillersPerMin}/min)`,
@@ -204,6 +177,18 @@ export async function POST(req: Request) {
       { status: 502 },
     );
   }
+
+  logUsage({
+    model: MODELS.opus,
+    usage: {
+      input_tokens: response.usage.input_tokens,
+      output_tokens: response.usage.output_tokens,
+      cache_creation_input_tokens: response.usage.cache_creation_input_tokens ?? undefined,
+      cache_read_input_tokens: response.usage.cache_read_input_tokens ?? undefined,
+    },
+    endpoint: "interview/score",
+    userId: gate.user.id,
+  });
 
   const toolUse = response.content.find((c) => c.type === "tool_use");
   if (!toolUse || toolUse.type !== "tool_use") {

@@ -334,11 +334,11 @@ export function ReadingLens({
                   <div className="flex items-center gap-1.5 text-xs font-medium text-primary mb-2">
                     <Sparkles className="size-3" />
                     Beginner rewrite
-                    {rewrites[section.id].streaming && (
+                    {rewrites[section.id]?.streaming && (
                       <Loader2 className="size-3 animate-spin ml-1" />
                     )}
                   </div>
-                  <Markdown content={rewrites[section.id].content} />
+                  <Markdown content={rewrites[section.id]?.content ?? ""} />
                   <details className="mt-3 text-xs">
                     <summary className="cursor-pointer text-muted-foreground hover:text-foreground">
                       Show original

@@ -1,49 +1,49 @@
+import { requireUser } from "@/lib/security/require-user";
+import { parseJson } from "@/lib/validation/parse";
+import { DraftFollowupSchema } from "@/lib/validation/schemas/relationships";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { DRAFT_FOLLOWUP_SYSTEM } from "@/lib/ai/prompts";
+import { logUsage } from "@/lib/ai/usage";
+import { capText } from "@/lib/ai/sanitize";
 
 export const runtime = "nodejs";
 
-export async function POST(req: Request) {
-  const body = (await req.json()) as {
-    contactName: string;
-    contactFirm: string;
-    contactTitle: string;
-    contactSchool?: string;
-    summary: {
-      topics?: string[];
-      adviceGiven?: string[];
-      commitments?: string[];
-      personalDetails?: string[];
-    };
-    studentName?: string;
-  };
+export async function POST(req: Request): Promise<Response> {
+  const gate = await requireUser(req, { tier: "expensive", route: "relationships/draft-followup" });
+  if (!gate.ok) return gate.response;
+
+  const parsed = await parseJson(req, DraftFollowupSchema);
+  if (!parsed.ok) return parsed.response;
+
+  const { contactName, contactFirm, contactTitle, contactSchool, summary, studentName } =
+    parsed.data;
 
   const client = getAnthropic();
 
   const summaryText = [
-    body.summary.topics?.length
-      ? `Topics discussed: ${body.summary.topics.join("; ")}`
+    summary.topics?.length
+      ? `Topics discussed: ${summary.topics.join("; ")}`
       : null,
-    body.summary.adviceGiven?.length
-      ? `Advice given: ${body.summary.adviceGiven.join("; ")}`
+    summary.adviceGiven?.length
+      ? `Advice given: ${summary.adviceGiven.join("; ")}`
       : null,
-    body.summary.commitments?.length
-      ? `Commitments from them: ${body.summary.commitments.join("; ")}`
+    summary.commitments?.length
+      ? `Commitments from them: ${summary.commitments.join("; ")}`
       : null,
-    body.summary.personalDetails?.length
-      ? `Personal details: ${body.summary.personalDetails.join("; ")}`
+    summary.personalDetails?.length
+      ? `Personal details: ${summary.personalDetails.join("; ")}`
       : null,
   ]
     .filter(Boolean)
     .join("\n");
 
   const prompt = [
-    `Draft a follow-up email from the student to ${body.contactName} (${body.contactTitle}, ${body.contactFirm})${body.contactSchool ? `, a ${body.contactSchool} alum` : ""}.`,
+    `Draft a follow-up email from the student to ${capText(contactName, 200)} (${capText(contactTitle, 200)}, ${capText(contactFirm, 200)})${contactSchool ? `, a ${capText(contactSchool, 200)} alum` : ""}.`,
     "",
     `Conversation summary:`,
     summaryText || "(no structured summary available)",
     "",
-    `Student name: ${body.studentName ?? "Jake"}`,
+    `Student name: ${capText(studentName ?? "Jake", 200)}`,
   ].join("\n");
 
   const response = await client.messages.create({
@@ -53,16 +53,28 @@ export async function POST(req: Request) {
     messages: [{ role: "user", content: prompt }],
   });
 
+  logUsage({
+    model: MODELS.haiku,
+    usage: {
+      input_tokens: response.usage.input_tokens,
+      output_tokens: response.usage.output_tokens,
+      cache_creation_input_tokens: response.usage.cache_creation_input_tokens ?? undefined,
+      cache_read_input_tokens: response.usage.cache_read_input_tokens ?? undefined,
+    },
+    endpoint: "relationships/draft-followup",
+    userId: gate.user.id,
+  });
+
   const text = response.content
     .filter((c) => c.type === "text")
     .map((c) => (c.type === "text" ? c.text : ""))
     .join("");
 
   const subjectMatch = text.match(/^Subject:\s*(.+)$/m);
-  const subject = subjectMatch ? subjectMatch[1].trim() : "Thank you";
-  const body_ = text
+  const subject = subjectMatch?.[1]?.trim() ?? "Thank you";
+  const body = text
     .replace(/^Subject:\s*.+$/m, "")
     .trim();
 
-  return Response.json({ subject, body: body_ });
+  return Response.json({ subject, body });
 }

@@ -1,5 +1,10 @@
+import { requireUser } from "@/lib/security/require-user";
+import { parseJson } from "@/lib/validation/parse";
+import { DraftOutreachSchema } from "@/lib/validation/schemas/relationships";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { OUTREACH_DRAFT_SYSTEM } from "@/lib/ai/prompts";
+import { logUsage } from "@/lib/ai/usage";
+import { wrapUserText, capText } from "@/lib/ai/sanitize";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -15,49 +20,31 @@ export interface OutreachDraft {
   followups: OutreachFollowup[];
 }
 
-export async function POST(req: Request) {
-  let body: {
-    contactName?: string;
-    contactFirm?: string;
-    contactTitle?: string;
-    linkedInContext?: string;
-    studentGoal?: string;
-  };
-  try {
-    body = (await req.json()) as typeof body;
-  } catch {
-    return Response.json({ error: "Invalid JSON body." }, { status: 400 });
-  }
+export async function POST(req: Request): Promise<Response> {
+  const gate = await requireUser(req, { tier: "expensive", route: "relationships/draft-outreach" });
+  if (!gate.ok) return gate.response;
 
-  const contactName = (body.contactName ?? "").trim();
-  const contactFirm = (body.contactFirm ?? "").trim();
-  const contactTitle = (body.contactTitle ?? "").trim();
-  const linkedInContext = (body.linkedInContext ?? "").trim();
-  const studentGoal = (body.studentGoal ?? "").trim();
+  const parsed = await parseJson(req, DraftOutreachSchema);
+  if (!parsed.ok) return parsed.response;
 
-  if (!contactName || !contactFirm) {
-    return Response.json(
-      { error: "Missing `contactName` or `contactFirm`." },
-      { status: 400 },
-    );
-  }
+  const { contactName, contactFirm, contactTitle, linkedInContext, studentGoal } = parsed.data;
 
   const client = getAnthropic();
 
   const userPrompt = [
     `Recipient:`,
-    `- Name: ${contactName}`,
-    `- Firm: ${contactFirm}`,
-    contactTitle ? `- Title: ${contactTitle}` : null,
+    `- Name: ${capText(contactName, 200)}`,
+    `- Firm: ${capText(contactFirm, 200)}`,
+    contactTitle ? `- Title: ${capText(contactTitle, 200)}` : null,
     "",
     `LinkedIn / background context the student has on them:`,
     linkedInContext
-      ? `"""${linkedInContext}"""`
+      ? wrapUserText(linkedInContext, "linkedin_context", { maxChars: 12000 })
       : "(none provided — keep specifics minimal)",
     "",
     `Student goal / context for this outreach:`,
     studentGoal
-      ? `"""${studentGoal}"""`
+      ? wrapUserText(studentGoal, "student_goal", { maxChars: 4000 })
       : "(none provided — assume an undergrad targeting IB SA roles seeking a 15-min coffee chat)",
     "",
     `Draft the cold outreach. Call the save_outreach_draft tool.`,
@@ -140,6 +127,18 @@ export async function POST(req: Request) {
     );
   }
 
+  logUsage({
+    model: MODELS.sonnet,
+    usage: {
+      input_tokens: response.usage.input_tokens,
+      output_tokens: response.usage.output_tokens,
+      cache_creation_input_tokens: response.usage.cache_creation_input_tokens ?? undefined,
+      cache_read_input_tokens: response.usage.cache_read_input_tokens ?? undefined,
+    },
+    endpoint: "relationships/draft-outreach",
+    userId: gate.user.id,
+  });
+
   const toolUse = response.content.find((c) => c.type === "tool_use");
   if (!toolUse || toolUse.type !== "tool_use") {
     return Response.json(
@@ -158,7 +157,6 @@ export async function POST(req: Request) {
     })),
   };
 
-  // Pad subjects defensively to length 2 so the UI radio always has two options.
   while (result.subjects.length < 2) {
     result.subjects.push(`Quick note from a student`);
   }

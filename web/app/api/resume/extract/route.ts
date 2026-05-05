@@ -1,3 +1,4 @@
+import { requireUser } from "@/lib/security/require-user";
 import { PDFParse } from "pdf-parse";
 
 export const runtime = "nodejs";
@@ -5,7 +6,10 @@ export const maxDuration = 30;
 
 const MAX_PDF_BYTES = 5 * 1024 * 1024; // 5 MB
 
-export async function POST(req: Request) {
+export async function POST(req: Request): Promise<Response> {
+  const gate = await requireUser(req, { tier: "cheap", route: "resume/extract" });
+  if (!gate.ok) return gate.response;
+
   const contentType = req.headers.get("content-type") ?? "";
 
   let buf: Buffer;
@@ -84,7 +88,7 @@ export async function POST(req: Request) {
 
   const cleaned = textResult.text
     .split(/\r?\n/)
-    .map((line) => line.replace(/\s+$/g, ""))
+    .map((line: string) => line.replace(/\s+$/g, ""))
     .join("\n")
     .replace(/\n{3,}/g, "\n\n")
     .trim();

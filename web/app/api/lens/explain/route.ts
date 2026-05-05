@@ -1,28 +1,33 @@
+import { requireUser } from "@/lib/security/require-user";
+import { parseJson } from "@/lib/validation/parse";
+import { LensExplainSchema } from "@/lib/validation/schemas/lens";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { LENS_EXPLAIN_SYSTEM } from "@/lib/ai/prompts";
+import { trackStream } from "@/lib/ai/usage";
+import { wrapUserText, capText } from "@/lib/ai/sanitize";
 
 export const runtime = "nodejs";
 
-export async function POST(req: Request) {
-  const body = (await req.json()) as {
-    guideTitle: string;
-    sectionHeading?: string;
-    selection: string;
-    surroundingContext?: string;
-    question?: string;
-  };
+export async function POST(req: Request): Promise<Response> {
+  const gate = await requireUser(req, { tier: "expensive", route: "lens/explain" });
+  if (!gate.ok) return gate.response;
+
+  const parsed = await parseJson(req, LensExplainSchema);
+  if (!parsed.ok) return parsed.response;
+
+  const { guideTitle, sectionHeading, selection, surroundingContext, question } = parsed.data;
 
   const client = getAnthropic();
 
   const userPrompt = [
-    `Guide: ${body.guideTitle}`,
-    body.sectionHeading ? `Section: ${body.sectionHeading}` : null,
-    body.surroundingContext
-      ? `Surrounding context:\n"""${body.surroundingContext}"""`
+    `Guide: ${capText(guideTitle, 300)}`,
+    sectionHeading ? `Section: ${capText(sectionHeading, 300)}` : null,
+    surroundingContext
+      ? `Surrounding context:\n${wrapUserText(surroundingContext, "context", { maxChars: 12000 })}`
       : null,
-    `The student highlighted this passage:\n"""${body.selection}"""`,
-    body.question
-      ? `Their follow-up question: ${body.question}`
+    `The student highlighted this passage:\n${wrapUserText(selection, "selection", { maxChars: 4000 })}`,
+    question
+      ? `Their follow-up question: ${capText(question, 1000)}`
       : `Explain this passage in plain English.`,
   ]
     .filter(Boolean)
@@ -40,6 +45,8 @@ export async function POST(req: Request) {
     ],
     messages: [{ role: "user", content: userPrompt }],
   });
+
+  trackStream(stream, "lens/explain", { userId: gate.user.id });
 
   const encoder = new TextEncoder();
   const readable = new ReadableStream({

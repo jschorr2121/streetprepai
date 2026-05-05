@@ -1,5 +1,4 @@
-// Plain `fetch` call to OpenAI Whisper. No new SDK dependency.
-// Used by the "Log a chat" voice-capture button on contact detail pages.
+import { requireUser } from "@/lib/security/require-user";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -10,7 +9,10 @@ export interface TranscribeResult {
   transcript: string;
 }
 
-export async function POST(req: Request) {
+export async function POST(req: Request): Promise<Response> {
+  const gate = await requireUser(req, { tier: "whisper", route: "whisper/transcribe" });
+  if (!gate.ok) return gate.response;
+
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     return Response.json(
@@ -52,7 +54,6 @@ export async function POST(req: Request) {
     );
   }
 
-  // Forward to OpenAI Whisper as multipart/form-data.
   const upstream = new FormData();
   upstream.append("file", file, file.name || "recording.webm");
   upstream.append("model", "whisper-1");
@@ -86,7 +87,6 @@ export async function POST(req: Request) {
     );
   }
 
-  // response_format=text returns the raw transcript string.
   const transcript = (await res.text()).trim();
 
   return Response.json({ transcript } satisfies TranscribeResult);

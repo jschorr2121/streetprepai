@@ -1,16 +1,21 @@
+import { requireUser } from "@/lib/security/require-user";
+import { parseJson } from "@/lib/validation/parse";
+import { ChatStreamSchema } from "@/lib/validation/schemas/chat";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { CHAT_SYSTEM } from "@/lib/ai/prompts";
+import { trackStream } from "@/lib/ai/usage";
+import { capText } from "@/lib/ai/sanitize";
 
 export const runtime = "nodejs";
 
-type Message = { role: "user" | "assistant"; content: string };
+export async function POST(req: Request): Promise<Response> {
+  const gate = await requireUser(req, { tier: "expensive", route: "chat/stream" });
+  if (!gate.ok) return gate.response;
 
-export async function POST(req: Request) {
-  const body = (await req.json()) as {
-    guideTitle: string;
-    guideContent: string;
-    messages: Message[];
-  };
+  const parsed = await parseJson(req, ChatStreamSchema);
+  if (!parsed.ok) return parsed.response;
+
+  const { guideTitle, guideContent, messages } = parsed.data;
 
   const client = getAnthropic();
 
@@ -18,7 +23,7 @@ export async function POST(req: Request) {
     { type: "text" as const, text: CHAT_SYSTEM },
     {
       type: "text" as const,
-      text: `The student is reading this guide:\n\n# ${body.guideTitle}\n\n${body.guideContent}`,
+      text: `The student is reading this guide:\n\n# ${capText(guideTitle, 2000)}\n\n${capText(guideContent, 120000)}`,
       cache_control: { type: "ephemeral" as const },
     },
   ];
@@ -27,8 +32,10 @@ export async function POST(req: Request) {
     model: MODELS.sonnet,
     max_tokens: 700,
     system,
-    messages: body.messages,
+    messages,
   });
+
+  trackStream(stream, "chat/stream", { userId: gate.user.id });
 
   const encoder = new TextEncoder();
   const readable = new ReadableStream({

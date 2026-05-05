@@ -1,5 +1,10 @@
+import { requireUser } from "@/lib/security/require-user";
+import { parseJson } from "@/lib/validation/parse";
+import { ResumeCritiqueSchema } from "@/lib/validation/schemas/resume";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { RESUME_CRITIQUE_SYSTEM } from "@/lib/ai/prompts";
+import { logUsage } from "@/lib/ai/usage";
+import { wrapUserText } from "@/lib/ai/sanitize";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -41,21 +46,15 @@ export interface CritiqueResult {
   summary: CritiqueSummary;
 }
 
-export async function POST(req: Request) {
-  let body: { rawText?: string };
-  try {
-    body = (await req.json()) as { rawText?: string };
-  } catch {
-    return Response.json({ error: "Invalid JSON body." }, { status: 400 });
-  }
+export async function POST(req: Request): Promise<Response> {
+  const gate = await requireUser(req, { tier: "expensive", route: "resume/critique" });
+  if (!gate.ok) return gate.response;
 
-  const rawText = (body.rawText ?? "").trim();
-  if (!rawText) {
-    return Response.json(
-      { error: "Missing `rawText`." },
-      { status: 400 },
-    );
-  }
+  const parsed = await parseJson(req, ResumeCritiqueSchema);
+  if (!parsed.ok) return parsed.response;
+
+  const { rawText } = parsed.data;
+
   if (rawText.length > MAX_RESUME_CHARS) {
     return Response.json(
       {
@@ -189,7 +188,7 @@ export async function POST(req: Request) {
       messages: [
         {
           role: "user",
-          content: `Here is the raw text of a student's resume (extracted from PDF — formatting may be imperfect):\n\n"""\n${rawText}\n"""\n\nIdentify the sections, extract every bullet, and produce a banker-style critique and rewrite for each one. Call the \`critique_resume\` tool with the result.`,
+          content: `Here is the raw text of a student's resume (extracted from PDF — formatting may be imperfect):\n\n${wrapUserText(rawText, "resume", { maxChars: 25000 })}\n\nIdentify the sections, extract every bullet, and produce a banker-style critique and rewrite for each one. Call the \`critique_resume\` tool with the result.`,
         },
       ],
     });
@@ -204,6 +203,18 @@ export async function POST(req: Request) {
     );
   }
 
+  logUsage({
+    model: MODELS.opus,
+    usage: {
+      input_tokens: response.usage.input_tokens,
+      output_tokens: response.usage.output_tokens,
+      cache_creation_input_tokens: response.usage.cache_creation_input_tokens ?? undefined,
+      cache_read_input_tokens: response.usage.cache_read_input_tokens ?? undefined,
+    },
+    endpoint: "resume/critique",
+    userId: gate.user.id,
+  });
+
   const toolUse = response.content.find((c) => c.type === "tool_use");
   if (!toolUse || toolUse.type !== "tool_use") {
     return Response.json(
@@ -212,27 +223,5 @@ export async function POST(req: Request) {
     );
   }
 
-  // Best-effort defensive normalization — the tool schema enforces shape, but
-  // we still want to guarantee non-undefined arrays for the UI.
-  const input = toolUse.input as Partial<CritiqueResult>;
-  const result: CritiqueResult = {
-    sections: (input.sections ?? []).map((s) => ({
-      heading: s.heading ?? "Section",
-      bullets: (s.bullets ?? []).map((b, i) => ({
-        id: b.id ?? `${(s.heading ?? "section").toLowerCase()}-${i}`,
-        original: b.original ?? "",
-        rewritten: b.rewritten ?? "",
-        weakness_flags: b.weakness_flags ?? [],
-        critique: b.critique ?? "",
-        confidence: b.confidence ?? "medium",
-      })),
-    })),
-    summary: {
-      total_bullets: input.summary?.total_bullets ?? 0,
-      weak_bullets: input.summary?.weak_bullets ?? 0,
-      top_issues: input.summary?.top_issues ?? [],
-    },
-  };
-
-  return Response.json(result);
+  return Response.json(toolUse.input);
 }

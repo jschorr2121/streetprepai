@@ -5,10 +5,13 @@ import type { Guide, GuideCategory, Difficulty, Section } from "@/lib/types";
 
 const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
 
+let _guidesCache: Guide[] | null = null;
+
 export function getAllGuides(): Guide[] {
+  if (_guidesCache) return _guidesCache;
   if (!fs.existsSync(GUIDES_DIR)) return [];
   const files = fs.readdirSync(GUIDES_DIR).filter((f) => f.endsWith(".md"));
-  return files
+  _guidesCache = files
     .map((file) => {
       const raw = fs.readFileSync(path.join(GUIDES_DIR, file), "utf8");
       const { data, content } = matter(raw);
@@ -24,6 +27,7 @@ export function getAllGuides(): Guide[] {
       } satisfies Guide;
     })
     .sort((a, b) => a.title.localeCompare(b.title));
+  return _guidesCache;
 }
 
 export function getGuideBySlug(slug: string): Guide | null {
@@ -53,7 +57,7 @@ export function parseSections(content: string): Section[] {
         });
         preamble = [];
       }
-      const heading = (h2 ? h2[1] : h3![1]).trim();
+      const heading = (h2 ? h2[1]! : h3![1]!).trim();
       current = {
         id: slugify(heading),
         heading,

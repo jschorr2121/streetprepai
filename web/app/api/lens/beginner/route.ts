@@ -1,14 +1,21 @@
+import { requireUser } from "@/lib/security/require-user";
+import { parseJson } from "@/lib/validation/parse";
+import { LensBeginnerSchema } from "@/lib/validation/schemas/lens";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { LENS_BEGINNER_SYSTEM } from "@/lib/ai/prompts";
+import { trackStream } from "@/lib/ai/usage";
+import { wrapUserText, capText } from "@/lib/ai/sanitize";
 
 export const runtime = "nodejs";
 
-export async function POST(req: Request) {
-  const body = (await req.json()) as {
-    guideTitle: string;
-    sectionHeading: string;
-    sectionContent: string;
-  };
+export async function POST(req: Request): Promise<Response> {
+  const gate = await requireUser(req, { tier: "expensive", route: "lens/beginner" });
+  if (!gate.ok) return gate.response;
+
+  const parsed = await parseJson(req, LensBeginnerSchema);
+  if (!parsed.ok) return parsed.response;
+
+  const { guideTitle, sectionHeading, sectionContent } = parsed.data;
 
   const client = getAnthropic();
 
@@ -25,10 +32,12 @@ export async function POST(req: Request) {
     messages: [
       {
         role: "user",
-        content: `Guide: ${body.guideTitle}\nSection: ${body.sectionHeading}\n\nOriginal passage:\n"""${body.sectionContent}"""\n\nRewrite this section in plain, beginner-friendly language following the rules. Keep the same section-level heading off (it's already shown elsewhere).`,
+        content: `Guide: ${capText(guideTitle, 300)}\nSection: ${capText(sectionHeading, 300)}\n\nOriginal passage:\n${wrapUserText(sectionContent, "passage", { maxChars: 12000 })}\n\nRewrite this section in plain, beginner-friendly language following the rules. Keep the same section-level heading off (it's already shown elsewhere).`,
       },
     ],
   });
+
+  trackStream(stream, "lens/beginner", { userId: gate.user.id });
 
   const encoder = new TextEncoder();
   const readable = new ReadableStream({

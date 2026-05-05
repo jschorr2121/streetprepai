@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# Husky v9+ pre-commit hook.
+# Runs from the repo root (parent of web/). cd into web/ so pnpm finds package.json.
+cd "$(dirname "$0")/.." && pnpm exec lint-staged

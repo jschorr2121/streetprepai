@@ -256,5 +256,7 @@ export function pickRandomQuestion(
 ): InterviewQuestion {
   const pool = getQuestionsByMode(mode).filter((q) => q.id !== excludeId);
   const source = pool.length > 0 ? pool : getQuestionsByMode(mode);
-  return source[Math.floor(Math.random() * source.length)];
+  const picked = source[Math.floor(Math.random() * source.length)];
+  if (!picked) throw new Error(`no interview questions available for mode: ${mode}`);
+  return picked;
 }
