@@ -1,5 +1,4 @@
 import type { Job } from "@/lib/types";
-import { createClient } from "@/lib/supabase/server";
 
 type DbRow = {
   id: string;
@@ -28,6 +27,7 @@ function mapRow(r: DbRow): Job {
 }
 
 export async function getJobs(): Promise<Job[]> {
+  const { createClient } = await import("@/lib/supabase/server");
   const sb = await createClient();
   const { data, error } = await sb
     .from("jobs")
