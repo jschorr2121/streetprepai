@@ -149,11 +149,11 @@ export default function LandingPage() {
               <h2 className="font-display text-3xl">Contents</h2>
               <p className="eyebrow">16 chapters · weighted toward technicals</p>
             </div>
-            <ol className="mt-8 grid grid-cols-1 gap-x-12 md:grid-cols-2">
+            <ol className="mt-8 grid grid-cols-1 gap-x-12 md:grid-flow-col md:grid-cols-2 md:grid-rows-8">
               {CHAPTERS.map((title, i) => (
                 <li
                   key={title}
-                  className="flex items-baseline gap-4 border-b py-3 last:border-b-0 md:nth-[15]:border-b-0"
+                  className="flex items-baseline gap-4 border-b py-3 last:border-b-0 md:nth-[8]:border-b-0"
                 >
                   <span className="text-muted-foreground w-6 shrink-0 font-mono text-xs">
                     {String(i + 1).padStart(2, "0")}
@@ -256,7 +256,7 @@ export default function LandingPage() {
         {/* ── CTA ────────────────────────────────────────────────── */}
         <section>
           <div className="mx-auto max-w-5xl px-6 py-20 text-center md:py-24">
-            <h2 className="font-display mx-auto max-w-2xl text-3xl md:text-4xl">
+            <h2 className="font-display mx-auto max-w-2xl text-3xl text-balance md:text-4xl">
               The cycle moved up a year. Start where you are.
             </h2>
             <div className="mt-8">

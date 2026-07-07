@@ -12,7 +12,18 @@ needs action it can't perform itself.
 
 ## 🔴 Needed now (blocks the current unit from working end-to-end)
 
-_Nothing blocking right now — all current items resolved (see Done below)._
+- [ ] **Unpause/restore the Supabase project** — `gmtmcdcwtilcsninbsvt.supabase.co`
+  no longer resolves in DNS (Supabase pauses free-tier projects after ~1 week
+  idle; paused projects lose their DNS). Every auth/DB call fails with "fetch
+  failed", so signup/login are dead in dev and the UI revamp's authenticated
+  visual QA is blocked. Fix in the Supabase dashboard (Restore project). If the
+  project is gone, create a new one and update `NEXT_PUBLIC_SUPABASE_URL`,
+  `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `DATABASE_URL`,
+  `DIRECT_URL` in `web/.env.local` (then re-copy it into
+  `.claude/worktrees/ui-overhaul/web/.env.local`). After that, ask Claude to
+  rerun the authenticated screenshot QA pass. (UI revamp session, 2026-07-07)
+  - Note: the worktree's `.env.local` also had the OLD deleted Upstash host;
+    already re-synced from the main checkout on 2026-07-07.
 
 > Reminder: when you deploy, make sure the **new Upstash creds + the Supabase
 > auth settings are also set in Vercel project env**, not just `web/.env.local`.
