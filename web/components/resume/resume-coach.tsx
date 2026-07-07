@@ -116,23 +116,18 @@ export function ResumeCoach() {
   const hasResult = !!result;
   const totalBullets = result?.summary.total_bullets ?? 0;
   const weakBullets = result?.summary.weak_bullets ?? 0;
-  const appliedCount = useMemo(
-    () => Object.values(applied).filter(Boolean).length,
-    [applied],
-  );
+  const appliedCount = useMemo(() => Object.values(applied).filter(Boolean).length, [applied]);
 
   return (
-    <div className="max-w-6xl mx-auto px-6 md:px-8 py-8 space-y-6">
+    <div className="mx-auto max-w-6xl space-y-6 px-6 py-8 md:px-8">
       <header>
-        <div className="flex items-center gap-2 text-primary text-sm font-medium mb-2">
+        <div className="text-primary mb-2 flex items-center gap-2 text-sm font-medium">
           <FileText className="size-4" /> Resume Coach
         </div>
-        <h1 className="text-3xl font-semibold tracking-tight">
-          Banker-speak your resume
-        </h1>
+        <h1 className="text-3xl font-semibold tracking-tight">Banker-speak your resume</h1>
         <p className="text-muted-foreground mt-2 max-w-2xl">
-          Drop a PDF or paste your resume. Claude rewrites each bullet in
-          banker-style, flags weak items, and lets you apply changes one by one.
+          Drop a PDF or paste your resume. Claude rewrites each bullet in banker-style, flags weak
+          items, and lets you apply changes one by one.
         </p>
       </header>
 
@@ -154,16 +149,14 @@ export function ResumeCoach() {
                   const f = e.dataTransfer.files?.[0];
                   if (f) void onFile(f);
                 }}
-                className="w-full border-2 border-dashed rounded-lg p-10 text-center hover:bg-accent/40 transition-colors"
+                className="hover:bg-accent/40 w-full rounded-lg border-2 border-dashed p-10 text-center transition-colors"
               >
-                <Upload className="size-6 mx-auto text-muted-foreground" />
-                <p className="font-medium mt-3">
-                  {extracting
-                    ? "Extracting…"
-                    : "Drop your resume PDF here or click to browse"}
+                <Upload className="text-muted-foreground mx-auto size-6" />
+                <p className="mt-3 font-medium">
+                  {extracting ? "Extracting…" : "Drop your resume PDF here or click to browse"}
                 </p>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Max 5 MB. We don't store the file.
+                <p className="text-muted-foreground mt-1 text-sm">
+                  Max 5 MB. We don&apos;t store the file.
                 </p>
                 <input
                   ref={fileInputRef}
@@ -178,7 +171,7 @@ export function ResumeCoach() {
               </button>
               {rawText && (
                 <div className="space-y-2">
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     Extracted preview ({rawText.length.toLocaleString()} chars):
                   </p>
                   <Textarea
@@ -187,10 +180,7 @@ export function ResumeCoach() {
                     className="min-h-40 font-mono text-xs"
                   />
                   <div className="flex justify-end">
-                    <Button
-                      onClick={() => void runCritique(rawText)}
-                      disabled={critiquing}
-                    >
+                    <Button onClick={() => void runCritique(rawText)} disabled={critiquing}>
                       {critiquing ? (
                         <Loader2 className="size-4 animate-spin" />
                       ) : (
@@ -230,7 +220,7 @@ export function ResumeCoach() {
 
       {hasResult && result && (
         <>
-          <Card className="p-5 flex flex-wrap items-center gap-4 justify-between">
+          <Card className="flex flex-wrap items-center justify-between gap-4 p-5">
             <div className="flex items-center gap-4">
               <div>
                 <p className="text-2xl font-semibold">
@@ -241,16 +231,14 @@ export function ResumeCoach() {
                   </span>
                 </p>
                 {result.summary.top_issues.length > 0 && (
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <p className="text-muted-foreground mt-1 text-sm">
                     Top issues: {result.summary.top_issues.join(" · ")}
                   </p>
                 )}
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Badge variant="secondary">
-                {appliedCount} applied
-              </Badge>
+              <Badge variant="secondary">{appliedCount} applied</Badge>
               <Button variant="outline" size="sm" onClick={rejectAll}>
                 <RotateCcw className="size-4" /> Revert all
               </Button>
@@ -272,8 +260,8 @@ export function ResumeCoach() {
             </div>
           </Card>
 
-          <div className="grid lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 space-y-6">
+          <div className="grid gap-6 lg:grid-cols-3">
+            <div className="space-y-6 lg:col-span-2">
               {result.sections.map((section) => (
                 <SectionDiff
                   key={section.heading}
@@ -286,10 +274,10 @@ export function ResumeCoach() {
               ))}
             </div>
             <aside className="space-y-3">
-              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+              <h2 className="text-muted-foreground text-sm font-medium tracking-wider uppercase">
                 Edited preview
               </h2>
-              <Card className="p-5 sticky top-6 max-h-[80vh] overflow-y-auto">
+              <Card className="sticky top-6 max-h-[80vh] overflow-y-auto p-5">
                 <PreviewPane result={result} applied={applied} />
               </Card>
             </aside>
@@ -345,13 +333,13 @@ function BulletDiff({
 }) {
   const lowConfidence = bullet.confidence === "low";
   return (
-    <Card className="p-4 space-y-3">
-      <div className="grid md:grid-cols-2 gap-4">
+    <Card className="space-y-3 p-4">
+      <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <span className="uppercase tracking-wider">Original</span>
+          <div className="text-muted-foreground flex items-center gap-2 text-xs">
+            <span className="tracking-wider uppercase">Original</span>
             {bullet.weakness_flags.map((f) => (
-              <Badge key={f} variant="outline" className="text-[10px] py-0 h-5">
+              <Badge key={f} variant="outline" className="h-5 py-0 text-[10px]">
                 {FLAG_LABELS[f]}
               </Badge>
             ))}
@@ -359,19 +347,19 @@ function BulletDiff({
           <p className="text-sm leading-relaxed">{bullet.original}</p>
         </div>
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <span className="uppercase tracking-wider">
+          <div className="text-muted-foreground flex items-center gap-2 text-xs">
+            <span className="tracking-wider uppercase">
               {lowConfidence ? "Guidance" : "Rewrite"}
             </span>
             {lowConfidence ? (
               <Badge
                 variant="outline"
-                className="text-[10px] py-0 h-5 text-amber-700 border-amber-300"
+                className="h-5 border-amber-300 py-0 text-[10px] text-amber-700"
               >
                 low confidence
               </Badge>
             ) : (
-              <Badge variant="secondary" className="text-[10px] py-0 h-5">
+              <Badge variant="secondary" className="h-5 py-0 text-[10px]">
                 {bullet.confidence}
               </Badge>
             )}
@@ -386,8 +374,8 @@ function BulletDiff({
         </div>
       </div>
       {bullet.critique && (
-        <p className="text-xs text-muted-foreground flex items-start gap-2">
-          <AlertCircle className="size-3.5 mt-0.5 shrink-0" />
+        <p className="text-muted-foreground flex items-start gap-2 text-xs">
+          <AlertCircle className="mt-0.5 size-3.5 shrink-0" />
           {bullet.critique}
         </p>
       )}
@@ -408,23 +396,16 @@ function BulletDiff({
   );
 }
 
-function PreviewPane({
-  result,
-  applied,
-}: {
-  result: CritiqueResult;
-  applied: AppliedMap;
-}) {
+function PreviewPane({ result, applied }: { result: CritiqueResult; applied: AppliedMap }) {
   return (
     <div className="space-y-5 text-sm">
       {result.sections.map((section, i) => (
         <div key={section.heading}>
           {i > 0 && <Separator className="mb-4" />}
-          <h3 className="font-semibold mb-2">{section.heading}</h3>
-          <ul className="space-y-2 list-disc list-inside marker:text-muted-foreground">
+          <h3 className="mb-2 font-semibold">{section.heading}</h3>
+          <ul className="marker:text-muted-foreground list-inside list-disc space-y-2">
             {section.bullets.map((b) => {
-              const useRewrite =
-                applied[b.id] && b.confidence !== "low";
+              const useRewrite = applied[b.id] && b.confidence !== "low";
               const text = useRewrite ? b.rewritten : b.original;
               return (
                 <li

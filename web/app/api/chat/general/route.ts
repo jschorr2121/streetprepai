@@ -4,7 +4,8 @@ import { ChatGeneralSchema } from "@/lib/validation/schemas/chat";
 import { getOpenAI, OPENAI_MODELS } from "@/lib/ai/openai";
 import { ASSISTANT_TOOLS_OPENAI } from "@/lib/ai/assistant-tools-openai";
 import { executeTool } from "@/lib/ai/assistant-tools";
-import { getProfile } from "@/lib/data/profile";
+import { withUser } from "@/lib/db/client";
+import { getProfile } from "@/lib/db/queries/profile";
 import { logUsage } from "@/lib/ai/usage";
 
 export const runtime = "nodejs";
@@ -17,7 +18,11 @@ export async function POST(req: Request): Promise<Response> {
   if (!parsed.ok) return parsed.response;
 
   const openai = getOpenAI();
-  const profile = await getProfile(gate.user.id);
+  // Drizzle read scoped to the authenticated user via RLS (Unit 3 migration).
+  const profile = await withUser(
+    { sub: gate.user.id, role: "authenticated" },
+    (tx) => getProfile(tx, gate.user.id),
+  );
 
   const systemContent = [
     `You are Street Prep AI, a specialized advisor for investment banking recruiting.`,

@@ -25,12 +25,7 @@ import {
   KanbanSquare,
   ChevronDown,
 } from "lucide-react";
-import type {
-  Contact,
-  ChatLog,
-  CalendarEvent,
-  ContactStage,
-} from "@/lib/types";
+import type { Contact, ChatLog, CalendarEvent, ContactStage } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 const stageLabels: Record<ContactStage, string> = {
@@ -61,18 +56,14 @@ export function ContactsView({
   chatLogs: ChatLog[];
   events: CalendarEvent[];
 }) {
-  const [tab, setTab] = useState<
-    "calendar" | "contacts" | "pipeline" | "search"
-  >("calendar");
+  const [tab, setTab] = useState<"calendar" | "contacts" | "pipeline" | "search">("calendar");
   const [query, setQuery] = useState("");
   const [stageFilter, setStageFilter] = useState<string | "all">("all");
 
   // Pipeline supports in-memory stage overrides (so the user can drag-drop / dropdown-change
   // a contact's stage and see it move immediately). TODO (needs Supabase + auth):
   // persist these changes to the contacts table.
-  const [stageOverrides, setStageOverrides] = useState<
-    Record<string, ContactStage>
-  >({});
+  const [stageOverrides, setStageOverrides] = useState<Record<string, ContactStage>>({});
   const effectiveContacts = useMemo(
     () =>
       contacts.map((c) => {
@@ -149,34 +140,29 @@ export function ContactsView({
     .sort((a, b) => b.startsAt.localeCompare(a.startsAt));
 
   return (
-    <div className="max-w-6xl mx-auto px-6 md:px-8 py-8">
-      <header className="mb-6 flex flex-col md:flex-row md:items-end md:justify-between gap-3">
+    <div className="mx-auto max-w-6xl px-6 py-8 md:px-8">
+      <header className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
-          <div className="flex items-center gap-2 text-primary text-sm font-medium mb-2">
+          <div className="text-primary mb-2 flex items-center gap-2 text-sm font-medium">
             <Users className="size-4" /> Relationship Memory
           </div>
           <h1 className="text-3xl font-semibold tracking-tight">
             Your recruiting funnel, remembered
           </h1>
           <p className="text-muted-foreground mt-2 max-w-2xl">
-            Every coffee chat and interview on a calendar. Per-person notes,
-            follow-up drafts, and search across everything you've ever
-            discussed.
+            Every coffee chat and interview on a calendar. Per-person notes, follow-up drafts, and
+            search across everything you&apos;ve ever discussed.
           </p>
         </div>
         <Button asChild size="sm">
-          <Link href="/relationships/new">
-            <Plus className="size-3.5 mr-1.5" /> Add contact
+          <Link href="/tools/relationships/new">
+            <Plus className="mr-1.5 size-3.5" /> Add contact
           </Link>
         </Button>
       </header>
 
-      <Tabs
-        value={tab}
-        onValueChange={(v) => setTab(v as typeof tab)}
-        className="space-y-6"
-      >
-        <div className="flex flex-col md:flex-row md:items-center gap-3 justify-between">
+      <Tabs value={tab} onValueChange={(v) => setTab(v as typeof tab)} className="space-y-6">
+        <div className="flex flex-col justify-between gap-3 md:flex-row md:items-center">
           <TabsList>
             <TabsTrigger value="calendar" className="gap-1.5">
               <CalendarIcon className="size-3.5" /> Calendar
@@ -192,7 +178,7 @@ export function ContactsView({
             </TabsTrigger>
           </TabsList>
           <div className="relative md:w-80">
-            <Search className="size-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <Search className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2" />
             <Input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -205,10 +191,10 @@ export function ContactsView({
 
         <TabsContent value="calendar" className="space-y-8">
           <section>
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-3">
+            <h2 className="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">
               Upcoming
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {upcoming.map((e) => (
                 <CalendarCard
                   key={e.id}
@@ -219,10 +205,10 @@ export function ContactsView({
             </div>
           </section>
           <section>
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-3">
+            <h2 className="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">
               Past
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {past.map((e) => (
                 <CalendarCard
                   key={e.id}
@@ -241,7 +227,7 @@ export function ContactsView({
                 key={s}
                 onClick={() => setStageFilter(s)}
                 className={cn(
-                  "px-3 py-1 rounded-full text-xs font-medium border transition-colors",
+                  "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
                   stageFilter === s
                     ? "bg-primary text-primary-foreground border-primary"
                     : "bg-background hover:bg-accent border-border text-muted-foreground",
@@ -251,19 +237,19 @@ export function ContactsView({
               </button>
             ))}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             {filtered.map((c) => (
               <Link
                 key={c.id}
                 href={`/relationships/${c.id}`}
-                className="group rounded-xl border bg-card p-4 hover:border-primary/40 hover:shadow-sm transition-all"
+                className="group bg-card hover:border-primary/40 rounded-xl border p-4 transition-all hover:shadow-sm"
               >
-                <div className="flex items-center justify-between gap-3 mb-2">
+                <div className="mb-2 flex items-center justify-between gap-3">
                   <div>
-                    <p className="font-semibold group-hover:text-primary transition-colors">
+                    <p className="group-hover:text-primary font-semibold transition-colors">
                       {c.name}
                     </p>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-muted-foreground text-xs">
                       {c.title} · {c.firm}
                       {c.group ? ` · ${c.group}` : ""}
                     </p>
@@ -273,30 +259,26 @@ export function ContactsView({
                   </Badge>
                 </div>
                 {c.school && (
-                  <p className="text-xs text-muted-foreground">
-                    {c.school} '{c.gradYear?.toString().slice(-2)}
+                  <p className="text-muted-foreground text-xs">
+                    {c.school} &apos;{c.gradYear?.toString().slice(-2)}
                   </p>
                 )}
-                <div className="flex flex-wrap gap-1 mt-2">
+                <div className="mt-2 flex flex-wrap gap-1">
                   {c.tags.map((t) => (
-                    <Badge
-                      key={t}
-                      variant="secondary"
-                      className="text-[10px] rounded-full"
-                    >
+                    <Badge key={t} variant="secondary" className="rounded-full text-[10px]">
                       {t}
                     </Badge>
                   ))}
                 </div>
                 {c.lastInteractionAt && (
-                  <p className="text-[11px] text-muted-foreground mt-3">
+                  <p className="text-muted-foreground mt-3 text-[11px]">
                     Last touched: {c.lastInteractionAt}
                   </p>
                 )}
               </Link>
             ))}
             {filtered.length === 0 && (
-              <div className="col-span-full text-sm text-muted-foreground text-center py-12 border-dashed border rounded-lg">
+              <div className="text-muted-foreground col-span-full rounded-lg border border-dashed py-12 text-center text-sm">
                 No contacts matching those filters.
               </div>
             )}
@@ -304,26 +286,23 @@ export function ContactsView({
         </TabsContent>
 
         <TabsContent value="pipeline" className="space-y-3">
-          <p className="text-xs text-muted-foreground">
-            Drag-and-drop is coming. For now, click a stage label on any card to
-            move that contact through the funnel.
+          <p className="text-muted-foreground text-xs">
+            Drag-and-drop is coming. For now, click a stage label on any card to move that contact
+            through the funnel.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
             {PIPELINE_STAGES.map((stage) => {
               const items = pipelineGrouped[stage];
               return (
                 <div
                   key={stage}
-                  className="rounded-xl border bg-muted/20 p-3 flex flex-col gap-2 min-h-[160px]"
+                  className="bg-muted/20 flex min-h-[160px] flex-col gap-2 rounded-xl border p-3"
                 >
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    <h3 className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
                       {stageLabels[stage]}
                     </h3>
-                    <Badge
-                      variant="secondary"
-                      className="text-[10px] rounded-full h-5 px-1.5"
-                    >
+                    <Badge variant="secondary" className="h-5 rounded-full px-1.5 text-[10px]">
                       {items.length}
                     </Badge>
                   </div>
@@ -332,15 +311,11 @@ export function ContactsView({
                       <PipelineCard
                         key={c.id}
                         contact={c}
-                        onChangeStage={(next) =>
-                          setStageOverrides((p) => ({ ...p, [c.id]: next }))
-                        }
+                        onChangeStage={(next) => setStageOverrides((p) => ({ ...p, [c.id]: next }))}
                       />
                     ))}
                     {items.length === 0 && (
-                      <p className="text-[11px] text-muted-foreground/70 italic px-1 py-2">
-                        Empty
-                      </p>
+                      <p className="text-muted-foreground/70 px-1 py-2 text-[11px] italic">Empty</p>
                     )}
                   </div>
                 </div>
@@ -351,31 +326,31 @@ export function ContactsView({
 
         <TabsContent value="search" className="space-y-3">
           {query.trim() === "" ? (
-            <div className="text-sm text-muted-foreground py-12 text-center border-dashed border rounded-lg">
-              Type to search across every chat note, commitment, and personal
-              detail you've ever recorded.
+            <div className="text-muted-foreground rounded-lg border border-dashed py-12 text-center text-sm">
+              Type to search across every chat note, commitment, and personal detail you&apos;ve
+              ever recorded.
             </div>
           ) : searchResults.length === 0 ? (
-            <div className="text-sm text-muted-foreground py-12 text-center border-dashed border rounded-lg">
-              No notes mention "{query}". Try a different term.
+            <div className="text-muted-foreground rounded-lg border border-dashed py-12 text-center text-sm">
+              No notes mention &quot;{query}&quot;. Try a different term.
             </div>
           ) : (
             searchResults.map(({ log, contact }) => (
               <Link
                 key={log.id}
                 href={`/relationships/${contact.id}`}
-                className="block rounded-xl border bg-card p-4 hover:border-primary/40 transition-all"
+                className="bg-card hover:border-primary/40 block rounded-xl border p-4 transition-all"
               >
-                <div className="flex items-center justify-between gap-3 mb-2">
+                <div className="mb-2 flex items-center justify-between gap-3">
                   <div>
-                    <p className="font-semibold text-sm">{contact.name}</p>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-sm font-semibold">{contact.name}</p>
+                    <p className="text-muted-foreground text-xs">
                       {contact.firm} · {log.happenedAt}
                     </p>
                   </div>
-                  <ArrowRight className="size-4 text-muted-foreground" />
+                  <ArrowRight className="text-muted-foreground size-4" />
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                <p className="text-muted-foreground line-clamp-3 text-xs leading-relaxed">
                   {log.rawNotes}
                 </p>
               </Link>
@@ -387,13 +362,7 @@ export function ContactsView({
   );
 }
 
-function CalendarCard({
-  event,
-  contact,
-}: {
-  event: CalendarEvent;
-  contact?: Contact;
-}) {
+function CalendarCard({ event, contact }: { event: CalendarEvent; contact?: Contact }) {
   const d = new Date(event.startsAt);
   const dayName = d.toLocaleDateString("en-US", { weekday: "short" });
   const date = d.toLocaleDateString("en-US", {
@@ -406,37 +375,35 @@ function CalendarCard({
   });
 
   const content = (
-    <div className="flex items-start gap-3 rounded-xl border bg-card p-4 hover:border-primary/40 hover:shadow-sm transition-all h-full">
-      <div className="shrink-0 w-14 text-center rounded-lg bg-accent/60 py-2 px-1">
-        <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+    <div className="bg-card hover:border-primary/40 flex h-full items-start gap-3 rounded-xl border p-4 transition-all hover:shadow-sm">
+      <div className="bg-accent/60 w-14 shrink-0 rounded-lg px-1 py-2 text-center">
+        <p className="text-muted-foreground text-[10px] font-semibold tracking-wide uppercase">
           {dayName}
         </p>
         <p className="text-base font-semibold">
           {d.toLocaleDateString("en-US", { day: "numeric" })}
         </p>
-        <p className="text-[10px] text-muted-foreground">
+        <p className="text-muted-foreground text-[10px]">
           {d.toLocaleDateString("en-US", { month: "short" })}
         </p>
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-start justify-between gap-2">
-          <p className="font-semibold text-sm truncate">{event.title}</p>
+          <p className="truncate text-sm font-semibold">{event.title}</p>
           <Badge
             variant={event.kind === "interview" ? "default" : "outline"}
-            className="text-[10px] capitalize shrink-0"
+            className="shrink-0 text-[10px] capitalize"
           >
             {event.kind.replace("-", " ")}
           </Badge>
         </div>
-        <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
+        <p className="text-muted-foreground mt-1 flex items-center gap-1 text-xs">
           <Clock className="size-3" />
           {time} · {event.durationMinutes} min
           {event.location ? ` · ${event.location}` : ""}
         </p>
         {event.notes && (
-          <p className="text-xs text-muted-foreground mt-2 line-clamp-2">
-            {event.notes}
-          </p>
+          <p className="text-muted-foreground mt-2 line-clamp-2 text-xs">{event.notes}</p>
         )}
       </div>
     </div>
@@ -462,33 +429,31 @@ function PipelineCard({
   const router = useRouter();
 
   return (
-    <div className="rounded-lg border bg-card p-2.5 hover:border-primary/40 hover:shadow-sm transition-all">
+    <div className="bg-card hover:border-primary/40 rounded-lg border p-2.5 transition-all hover:shadow-sm">
       <button
         type="button"
         onClick={() => router.push(`/relationships/${contact.id}`)}
-        className="text-left w-full block"
+        className="block w-full text-left"
       >
-        <p className="font-semibold text-sm leading-tight truncate">
-          {contact.name}
-        </p>
-        <p className="text-[11px] text-muted-foreground truncate">
+        <p className="truncate text-sm leading-tight font-semibold">{contact.name}</p>
+        <p className="text-muted-foreground truncate text-[11px]">
           {contact.firm}
           {contact.group ? ` · ${contact.group}` : ""}
         </p>
       </button>
-      <div className="flex items-center justify-between mt-2">
+      <div className="mt-2 flex items-center justify-between">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button
               type="button"
-              className="inline-flex items-center gap-0.5 text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground hover:bg-accent/70 transition-colors"
+              className="bg-accent text-accent-foreground hover:bg-accent/70 inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-medium transition-colors"
             >
               {stageLabels[contact.stage]}
               <ChevronDown className="size-2.5" />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="min-w-[160px]">
-            <DropdownMenuLabel className="text-[10px] uppercase tracking-wide text-muted-foreground">
+            <DropdownMenuLabel className="text-muted-foreground text-[10px] tracking-wide uppercase">
               Move to stage
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -496,10 +461,7 @@ function PipelineCard({
               <DropdownMenuItem
                 key={s}
                 onClick={() => onChangeStage(s)}
-                className={cn(
-                  "text-xs",
-                  s === contact.stage && "font-semibold text-primary",
-                )}
+                className={cn("text-xs", s === contact.stage && "text-primary font-semibold")}
               >
                 {stageLabels[s]}
               </DropdownMenuItem>
@@ -507,7 +469,7 @@ function PipelineCard({
           </DropdownMenuContent>
         </DropdownMenu>
         {contact.lastContactAt && (
-          <span className="text-[10px] text-muted-foreground/80">
+          <span className="text-muted-foreground/80 text-[10px]">
             {contact.lastContactAt.slice(5)}
           </span>
         )}

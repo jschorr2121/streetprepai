@@ -2,7 +2,7 @@
  * Shared helpers for golden-path E2E specs.
  *
  * Auth-skip strategy:
- * Most app pages sit behind a Supabase auth wall via middleware.ts. To keep CI
+ * Most app pages sit behind a Supabase auth wall via proxy.ts. To keep CI
  * green by default, authed specs are skipped unless STREETPREP_E2E_AUTH=1 is
  * set. To actually run them locally, you must also provide a logged-in
  * Supabase session via storageState (or run with a dev-mode auth bypass).

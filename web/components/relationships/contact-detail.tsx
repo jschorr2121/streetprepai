@@ -38,9 +38,7 @@ export function ContactDetail({
   const [prepLoading, setPrepLoading] = useState(false);
   const [notes, setNotes] = useState("");
   const [structuring, setStructuring] = useState(false);
-  const [structured, setStructured] = useState<ChatLog["structured"] | null>(
-    null,
-  );
+  const [structured, setStructured] = useState<ChatLog["structured"] | null>(null);
   const [followUp, setFollowUp] = useState<{
     subject: string;
     body: string;
@@ -64,9 +62,7 @@ export function ContactDetail({
       if (mediaRecorderRef.current?.state === "recording") {
         mediaRecorderRef.current.stop();
       }
-      recordingStreamRef.current
-        ?.getTracks()
-        .forEach((t) => t.stop());
+      recordingStreamRef.current?.getTracks().forEach((t) => t.stop());
     };
   }, []);
 
@@ -138,9 +134,7 @@ export function ContactDetail({
       setNotes((prev) => (prev ? `${prev.trim()}\n\n${transcript}` : transcript));
       toast.success("Transcribed — review and structure when ready.");
     } catch (err) {
-      toast.error(
-        err instanceof Error ? err.message : "Transcription failed.",
-      );
+      toast.error(err instanceof Error ? err.message : "Transcription failed.");
     } finally {
       setTranscribing(false);
     }
@@ -173,9 +167,7 @@ export function ContactDetail({
         setPrepSheet(acc);
       }
     } catch {
-      setPrepSheet(
-        "Sorry, couldn't reach Claude. Check ANTHROPIC_API_KEY in .env.local.",
-      );
+      setPrepSheet("Sorry, couldn't reach Claude. Check ANTHROPIC_API_KEY in .env.local.");
     } finally {
       setPrepLoading(false);
     }
@@ -231,9 +223,7 @@ export function ContactDetail({
 
   function copyFollowUp() {
     if (!followUp) return;
-    navigator.clipboard.writeText(
-      `Subject: ${followUp.subject}\n\n${followUp.body}`,
-    );
+    navigator.clipboard.writeText(`Subject: ${followUp.subject}\n\n${followUp.body}`);
     setCopied(true);
     toast.success("Copied to clipboard.");
     setTimeout(() => setCopied(false), 1500);
@@ -244,27 +234,25 @@ export function ContactDetail({
     .sort((a, b) => b.startsAt.localeCompare(a.startsAt));
 
   return (
-    <div className="max-w-5xl mx-auto px-6 md:px-8 py-8">
-      <Button asChild variant="ghost" size="sm" className="gap-1 mb-4 -ml-2">
-        <Link href="/relationships">
+    <div className="mx-auto max-w-5xl px-6 py-8 md:px-8">
+      <Button asChild variant="ghost" size="sm" className="mb-4 -ml-2 gap-1">
+        <Link href="/tools/relationships">
           <ArrowLeft className="size-3.5" />
           Back to relationships
         </Link>
       </Button>
 
-      <header className="mb-8 pb-6 border-b">
-        <div className="flex items-start justify-between gap-4 flex-wrap">
+      <header className="mb-8 border-b pb-6">
+        <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-semibold tracking-tight">
-              {contact.name}
-            </h1>
+            <h1 className="text-3xl font-semibold tracking-tight">{contact.name}</h1>
             <p className="text-muted-foreground mt-1">
               {contact.title} · {contact.firm}
               {contact.group ? ` · ${contact.group}` : ""}
             </p>
             {contact.school && (
-              <p className="text-sm text-muted-foreground mt-0.5">
-                {contact.school} '{contact.gradYear?.toString().slice(-2)}
+              <p className="text-muted-foreground mt-0.5 text-sm">
+                {contact.school} &apos;{contact.gradYear?.toString().slice(-2)}
               </p>
             )}
           </div>
@@ -284,9 +272,8 @@ export function ContactDetail({
           </div>
         </div>
         {contact.howMet && (
-          <p className="text-sm text-muted-foreground mt-3">
-            <span className="font-medium text-foreground">How met:</span>{" "}
-            {contact.howMet}
+          <p className="text-muted-foreground mt-3 text-sm">
+            <span className="text-foreground font-medium">How met:</span> {contact.howMet}
           </p>
         )}
       </header>
@@ -306,54 +293,50 @@ export function ContactDetail({
 
         <TabsContent value="prep" className="space-y-4">
           <Card className="p-6">
-            <div className="flex items-start justify-between gap-3 mb-4">
+            <div className="mb-4 flex items-start justify-between gap-3">
               <div>
-                <h2 className="text-lg font-semibold flex items-center gap-1.5">
-                  <Sparkles className="size-4 text-primary" />
+                <h2 className="flex items-center gap-1.5 text-lg font-semibold">
+                  <Sparkles className="text-primary size-4" />
                   AI prep sheet
                 </h2>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Claude pulls signal from {contact.name}'s background and
-                  suggests smart questions, hooks, and things to avoid.
+                <p className="text-muted-foreground mt-1 text-sm">
+                  Claude pulls signal from {contact.name}&apos;s background and suggests smart
+                  questions, hooks, and things to avoid.
                 </p>
               </div>
-              <Button
-                size="sm"
-                onClick={generatePrepSheet}
-                disabled={prepLoading}
-              >
+              <Button size="sm" onClick={generatePrepSheet} disabled={prepLoading}>
                 {prepLoading ? (
                   <>
-                    <Loader2 className="size-3.5 mr-1.5 animate-spin" />
+                    <Loader2 className="mr-1.5 size-3.5 animate-spin" />
                     Generating…
                   </>
                 ) : prepSheet ? (
                   "Regenerate"
                 ) : (
                   <>
-                    <Sparkles className="size-3.5 mr-1.5" /> Generate
+                    <Sparkles className="mr-1.5 size-3.5" /> Generate
                   </>
                 )}
               </Button>
             </div>
             {contact.linkedinBio && (
               <details className="mb-4">
-                <summary className="cursor-pointer text-xs text-muted-foreground hover:text-foreground">
+                <summary className="text-muted-foreground hover:text-foreground cursor-pointer text-xs">
                   Source bio
                 </summary>
-                <p className="text-xs text-muted-foreground leading-relaxed mt-2 whitespace-pre-wrap">
+                <p className="text-muted-foreground mt-2 text-xs leading-relaxed whitespace-pre-wrap">
                   {contact.linkedinBio}
                 </p>
               </details>
             )}
             {prepSheet ? (
-              <div className="rounded-lg border bg-accent/30 p-5">
+              <div className="bg-accent/30 rounded-lg border p-5">
                 <Markdown content={prepSheet} />
               </div>
             ) : (
-              <div className="rounded-lg border border-dashed bg-muted/30 px-4 py-10 text-sm text-muted-foreground text-center">
-                Click Generate to have Claude build a prep sheet from{" "}
-                {contact.name}'s background.
+              <div className="bg-muted/30 text-muted-foreground rounded-lg border border-dashed px-4 py-10 text-center text-sm">
+                Click Generate to have Claude build a prep sheet from {contact.name}&apos;s
+                background.
               </div>
             )}
           </Card>
@@ -361,12 +344,10 @@ export function ContactDetail({
 
         <TabsContent value="log" className="space-y-4">
           <Card className="p-6">
-            <h2 className="text-lg font-semibold mb-1">
-              Log a chat with {contact.name}
-            </h2>
-            <p className="text-sm text-muted-foreground mb-4">
-              Type rough notes. Claude structures them into a memory record and
-              drafts a personalized follow-up.
+            <h2 className="mb-1 text-lg font-semibold">Log a chat with {contact.name}</h2>
+            <p className="text-muted-foreground mb-4 text-sm">
+              Type rough notes. Claude structures them into a memory record and drafts a
+              personalized follow-up.
             </p>
             <div className="relative">
               <Textarea
@@ -391,8 +372,7 @@ export function ContactDetail({
                 }
                 className={cn(
                   "absolute top-2 right-2 size-8 rounded-full",
-                  recording &&
-                    "bg-red-500 hover:bg-red-600 text-white animate-pulse",
+                  recording && "animate-pulse bg-red-500 text-white hover:bg-red-600",
                 )}
               >
                 {transcribing ? (
@@ -408,10 +388,10 @@ export function ContactDetail({
               </Button>
             </div>
             {(recording || transcribing) && (
-              <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1.5">
+              <p className="text-muted-foreground mt-2 flex items-center gap-1.5 text-xs">
                 {recording ? (
                   <>
-                    <span className="size-1.5 rounded-full bg-red-500 animate-pulse" />
+                    <span className="size-1.5 animate-pulse rounded-full bg-red-500" />
                     Recording — click the square to stop and transcribe.
                   </>
                 ) : (
@@ -422,20 +402,16 @@ export function ContactDetail({
                 )}
               </p>
             )}
-            <div className="flex gap-2 mt-3">
-              <Button
-                size="sm"
-                onClick={structureNotes}
-                disabled={!notes.trim() || structuring}
-              >
+            <div className="mt-3 flex gap-2">
+              <Button size="sm" onClick={structureNotes} disabled={!notes.trim() || structuring}>
                 {structuring ? (
                   <>
-                    <Loader2 className="size-3.5 mr-1.5 animate-spin" />
+                    <Loader2 className="mr-1.5 size-3.5 animate-spin" />
                     Structuring…
                   </>
                 ) : (
                   <>
-                    <Sparkles className="size-3.5 mr-1.5" />
+                    <Sparkles className="mr-1.5 size-3.5" />
                     Structure notes
                   </>
                 )}
@@ -443,15 +419,9 @@ export function ContactDetail({
             </div>
 
             {structured && (
-              <div className="mt-6 rounded-lg border bg-accent/30 p-5 space-y-4 text-sm">
-                <StructuredSection
-                  label="Topics"
-                  items={structured.topics ?? []}
-                />
-                <StructuredSection
-                  label="Advice given"
-                  items={structured.adviceGiven ?? []}
-                />
+              <div className="bg-accent/30 mt-6 space-y-4 rounded-lg border p-5 text-sm">
+                <StructuredSection label="Topics" items={structured.topics ?? []} />
+                <StructuredSection label="Advice given" items={structured.adviceGiven ?? []} />
                 <StructuredSection
                   label="Commitments from them"
                   items={structured.commitments ?? []}
@@ -461,20 +431,17 @@ export function ContactDetail({
                   items={structured.personalDetails ?? []}
                 />
                 <div>
-                  <p className="font-medium text-xs uppercase tracking-wide text-muted-foreground mb-2">
+                  <p className="text-muted-foreground mb-2 text-xs font-medium tracking-wide uppercase">
                     Follow-ups for you
                   </p>
                   <ul className="space-y-1">
                     {(structured.followUps ?? []).map((f, i) => (
-                      <li key={i} className="flex gap-2 items-start">
+                      <li key={i} className="flex items-start gap-2">
                         <span className="text-muted-foreground">–</span>
                         <span>
                           {f.description}
                           {f.dueBy && (
-                            <span className="text-muted-foreground">
-                              {" "}
-                              (by {f.dueBy})
-                            </span>
+                            <span className="text-muted-foreground"> (by {f.dueBy})</span>
                           )}
                         </span>
                       </li>
@@ -485,14 +452,14 @@ export function ContactDetail({
             )}
 
             {structured && (
-              <div className="mt-6 pt-6 border-t">
-                <div className="flex items-start justify-between gap-3 mb-4">
+              <div className="mt-6 border-t pt-6">
+                <div className="mb-4 flex items-start justify-between gap-3">
                   <div>
-                    <h3 className="font-semibold flex items-center gap-1.5">
-                      <Mail className="size-4 text-primary" />
+                    <h3 className="flex items-center gap-1.5 font-semibold">
+                      <Mail className="text-primary size-4" />
                       Follow-up email
                     </h3>
-                    <p className="text-sm text-muted-foreground mt-0.5">
+                    <p className="text-muted-foreground mt-0.5 text-sm">
                       Drafted from the chat above. Edit before sending.
                     </p>
                   </div>
@@ -504,7 +471,7 @@ export function ContactDetail({
                   >
                     {draftingFollowUp ? (
                       <>
-                        <Loader2 className="size-3.5 mr-1.5 animate-spin" />
+                        <Loader2 className="mr-1.5 size-3.5 animate-spin" />
                         Drafting…
                       </>
                     ) : followUp ? (
@@ -515,9 +482,9 @@ export function ContactDetail({
                   </Button>
                 </div>
                 {followUp ? (
-                  <Card className="p-4 bg-background">
-                    <div className="flex items-center justify-between gap-3 mb-2">
-                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  <Card className="bg-background p-4">
+                    <div className="mb-2 flex items-center justify-between gap-3">
+                      <p className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
                         Subject
                       </p>
                       <Button
@@ -528,26 +495,26 @@ export function ContactDetail({
                       >
                         {copied ? (
                           <>
-                            <Check className="size-3 mr-1" /> Copied
+                            <Check className="mr-1 size-3" /> Copied
                           </>
                         ) : (
                           <>
-                            <Copy className="size-3 mr-1" /> Copy
+                            <Copy className="mr-1 size-3" /> Copy
                           </>
                         )}
                       </Button>
                     </div>
-                    <p className="font-medium text-sm mb-3">{followUp.subject}</p>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+                    <p className="mb-3 text-sm font-medium">{followUp.subject}</p>
+                    <p className="text-muted-foreground mb-2 text-xs font-semibold tracking-wide uppercase">
                       Body
                     </p>
-                    <pre className="whitespace-pre-wrap text-sm leading-relaxed font-sans">
+                    <pre className="font-sans text-sm leading-relaxed whitespace-pre-wrap">
                       {followUp.body}
                     </pre>
                   </Card>
                 ) : (
-                  <div className="rounded-lg border border-dashed bg-muted/30 px-4 py-6 text-sm text-muted-foreground text-center">
-                    Click "Draft follow-up" to generate a personalized email.
+                  <div className="bg-muted/30 text-muted-foreground rounded-lg border border-dashed px-4 py-6 text-center text-sm">
+                    Click &quot;Draft follow-up&quot; to generate a personalized email.
                   </div>
                 )}
               </div>
@@ -557,49 +524,42 @@ export function ContactDetail({
 
         <TabsContent value="history" className="space-y-4">
           {relatedEvents.length === 0 && chatLogs.length === 0 ? (
-            <div className="text-sm text-muted-foreground text-center py-12 border-dashed border rounded-lg">
+            <div className="text-muted-foreground rounded-lg border border-dashed py-12 text-center text-sm">
               No prior events logged with {contact.name}.
             </div>
           ) : (
             <div className="space-y-3">
               {relatedEvents.map((e) => (
                 <Card key={e.id} className="p-4">
-                  <div className="flex items-center justify-between gap-3 mb-1">
+                  <div className="mb-1 flex items-center justify-between gap-3">
                     <p className="text-sm font-semibold">{e.title}</p>
                     <Badge
-                      variant={
-                        e.status === "upcoming" ? "default" : "outline"
-                      }
+                      variant={e.status === "upcoming" ? "default" : "outline"}
                       className="text-xs capitalize"
                     >
                       {e.status}
                     </Badge>
                   </div>
-                  <p className="text-xs text-muted-foreground">
-                    {new Date(e.startsAt).toLocaleString()} · {e.durationMinutes}{" "}
-                    min {e.location ? `· ${e.location}` : ""}
+                  <p className="text-muted-foreground text-xs">
+                    {new Date(e.startsAt).toLocaleString()} · {e.durationMinutes} min{" "}
+                    {e.location ? `· ${e.location}` : ""}
                   </p>
                   {e.notes && (
-                    <p className="text-sm mt-2 text-muted-foreground leading-relaxed">
-                      {e.notes}
-                    </p>
+                    <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{e.notes}</p>
                   )}
                 </Card>
               ))}
               {chatLogs.map((log) => (
-                <Card key={log.id} className="p-4 bg-accent/30">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+                <Card key={log.id} className="bg-accent/30 p-4">
+                  <p className="text-muted-foreground mb-2 text-xs font-semibold tracking-wide uppercase">
                     Chat notes · {log.happenedAt}
                   </p>
-                  <p className="text-sm text-muted-foreground whitespace-pre-wrap leading-relaxed">
+                  <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-wrap">
                     {log.rawNotes}
                   </p>
                   {log.structured && (
-                    <div className="mt-4 pt-4 border-t text-sm space-y-3">
-                      <StructuredSection
-                        label="Topics"
-                        items={log.structured.topics}
-                      />
+                    <div className="mt-4 space-y-3 border-t pt-4 text-sm">
+                      <StructuredSection label="Topics" items={log.structured.topics} />
                       <StructuredSection
                         label="Commitments from them"
                         items={log.structured.commitments}
@@ -617,31 +577,21 @@ export function ContactDetail({
         </TabsContent>
       </Tabs>
 
-      <OutreachDrawer
-        contact={contact}
-        open={outreachOpen}
-        onOpenChange={setOutreachOpen}
-      />
+      <OutreachDrawer contact={contact} open={outreachOpen} onOpenChange={setOutreachOpen} />
     </div>
   );
 }
 
-function StructuredSection({
-  label,
-  items,
-}: {
-  label: string;
-  items: string[];
-}) {
+function StructuredSection({ label, items }: { label: string; items: string[] }) {
   if (!items?.length) return null;
   return (
     <div>
-      <p className="font-medium text-xs uppercase tracking-wide text-muted-foreground mb-2">
+      <p className="text-muted-foreground mb-2 text-xs font-medium tracking-wide uppercase">
         {label}
       </p>
       <ul className="space-y-1">
         {items.map((t, i) => (
-          <li key={i} className="flex gap-2 items-start">
+          <li key={i} className="flex items-start gap-2">
             <span className="text-muted-foreground">–</span>
             <span>{t}</span>
           </li>

@@ -85,23 +85,23 @@ export function ChatPanel({
   return (
     <div className="flex h-full flex-col">
       <ScrollArea className="flex-1 px-4">
-        <div className="py-4 space-y-4">
+        <div className="space-y-4 py-4">
           {messages.length === 0 && (
-            <div className="text-sm text-muted-foreground space-y-3">
-              <div className="flex items-center gap-1.5 text-foreground font-medium">
-                <Sparkles className="size-3.5 text-primary" />
+            <div className="text-muted-foreground space-y-3 text-sm">
+              <div className="text-foreground flex items-center gap-1.5 font-medium">
+                <Sparkles className="text-primary size-3.5" />
                 Chat with this guide
               </div>
               <p className="leading-relaxed">
-                Ask anything about what you're reading. Answers are grounded in
-                the guide and reference specific sections.
+                Ask anything about what you&apos;re reading. Answers are grounded in the guide and
+                reference specific sections.
               </p>
               <div className="space-y-1.5 pt-2">
                 {suggestions.map((s) => (
                   <button
                     key={s}
                     onClick={() => setInput(s)}
-                    className="block text-left text-xs text-primary hover:underline"
+                    className="text-primary block text-left text-xs hover:underline"
                   >
                     → {s}
                   </button>
@@ -110,19 +110,12 @@ export function ChatPanel({
             </div>
           )}
           {messages.map((m, i) => (
-            <div
-              key={i}
-              className={
-                m.role === "user"
-                  ? "flex justify-end"
-                  : "flex justify-start"
-              }
-            >
+            <div key={i} className={m.role === "user" ? "flex justify-end" : "flex justify-start"}>
               <div
                 className={
                   m.role === "user"
-                    ? "max-w-[85%] rounded-2xl bg-primary text-primary-foreground px-3 py-2 text-sm"
-                    : "max-w-[95%] rounded-2xl bg-muted px-3 py-2 text-sm"
+                    ? "bg-primary text-primary-foreground max-w-[85%] rounded-2xl px-3 py-2 text-sm"
+                    : "bg-muted max-w-[95%] rounded-2xl px-3 py-2 text-sm"
                 }
               >
                 {m.role === "user" ? (
@@ -130,7 +123,7 @@ export function ChatPanel({
                 ) : m.content ? (
                   <Markdown content={m.content} className="text-sm" />
                 ) : (
-                  <Loader2 className="size-3.5 animate-spin text-muted-foreground" />
+                  <Loader2 className="text-muted-foreground size-3.5 animate-spin" />
                 )}
               </div>
             </div>
@@ -139,7 +132,7 @@ export function ChatPanel({
         </div>
       </ScrollArea>
       <div className="border-t p-3">
-        <div className="flex gap-2 items-end">
+        <div className="flex items-end gap-2">
           <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}

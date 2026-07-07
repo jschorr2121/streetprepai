@@ -156,6 +156,7 @@ export type Profile = {
   fullName?: string;
   school?: string;
   graduationYear?: number;
+  currentSemester?: string;
   targetRoles: string[];
   targetFirms: string[];
   bioSummary?: string;
@@ -163,6 +164,7 @@ export type Profile = {
   experiences: unknown[];
   education: unknown[];
   skills: string[];
+  onboardedAt?: string;
   updatedAt?: string;
 };
 

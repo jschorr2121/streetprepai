@@ -1,0 +1,114 @@
+/**
+ * Named rate limiters for Server Actions.
+ *
+ * Architecture: reuses the Upstash Redis client (`lib/security/redis.ts`) and
+ * the Ratelimit class already imported by `lib/security/rate-limit.ts`. This
+ * module is the canonical home for Server Action limiters; Route Handler
+ * limiters live in `lib/security/rate-limit.ts` (unchanged).
+ *
+ * Each limiter is a sliding-window Upstash Ratelimit keyed by `userId` (not
+ * IP) — Server Actions run after auth, so user identity is always known.
+ *
+ * If Upstash env is unset (local dev without Redis), `check()` returns
+ * `{ allowed: true }` so development is unblocked. Production must have
+ * `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` set.
+ *
+ * DEGRADE-OPEN POLICY (R1/R3):
+ * When the Upstash store is unreachable (network error, DNS failure, etc.) the
+ * limiter returns `{ allowed: true }` instead of throwing. Rationale: a dead
+ * store must NEVER crash a mutation or auth action. The tradeoff is that
+ * throttling is temporarily disabled while the store is down. Operators are
+ * alerted via Sentry + logger.error so the outage is observable. Fail-closed
+ * (blocking all requests) is NOT the right default here because the store
+ * may be dead while the app is still healthy.
+ */
+
+import * as Sentry from "@sentry/nextjs";
+import { Ratelimit } from "@upstash/ratelimit";
+
+import { logger } from "@/lib/logging/logger";
+import { getRedis } from "@/lib/security/redis";
+
+export type LimiterResult = { allowed: true } | { allowed: false; retryAfterSeconds: number };
+
+// Tracks whether we have already emitted the "rate limiting disabled in
+// production" warning for each prefix, so it fires once per cold start rather
+// than on every request.
+const warnedMisconfiguredPrefixes = new Set<string>();
+
+function makeSlidingWindow(
+  prefix: string,
+  requests: number,
+  windowSec: number,
+): (key: string) => Promise<LimiterResult> {
+  const redis = getRedis();
+
+  if (!redis) {
+    // No Upstash credentials in this environment.
+    // In production this is a misconfiguration — alert once per cold start.
+    const isProduction =
+      process.env.NODE_ENV === "production" || process.env.VERCEL_ENV === "production";
+
+    if (isProduction && !warnedMisconfiguredPrefixes.has(prefix)) {
+      warnedMisconfiguredPrefixes.add(prefix);
+      const msg = "rate_limiting_disabled_no_redis";
+      logger.error({ prefix }, msg);
+      Sentry.captureMessage(`Rate limiting disabled — Upstash env not set (prefix: ${prefix})`, {
+        level: "error",
+      });
+    }
+
+    // Degrade open: allow all calls when env is missing.
+    return async () => ({ allowed: true });
+  }
+
+  const limiter = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(requests, `${windowSec} s`),
+    prefix,
+    analytics: false,
+  });
+
+  return async (key: string): Promise<LimiterResult> => {
+    try {
+      const result = await limiter.limit(key);
+      if (result.success) return { allowed: true };
+      return {
+        allowed: false,
+        retryAfterSeconds: Math.max(1, Math.ceil((result.reset - Date.now()) / 1000)),
+      };
+    } catch (err) {
+      // Store unreachable (DNS failure, network timeout, etc.).
+      // Log + alert so operators know throttling is temporarily disabled,
+      // then degrade open so the action itself is never crashed by infra.
+      logger.error({ err, prefix }, "ratelimit_store_error");
+      Sentry.captureException(err);
+      return { allowed: true };
+    }
+  };
+}
+
+/**
+ * Limiter for `saveProfileAction`. Profile edits are not an abuse vector
+ * (no AI calls, no expensive operations) but the spec requires every Server
+ * Action to be wrapped. 60 writes per minute is generous for real use.
+ */
+export const profileMutationLimiter = makeSlidingWindow("rl:action:profile:save", 60, 60);
+
+/**
+ * Limiter for Application Tracker mutations (create / update / delete).
+ * No AI calls; cheap CRUD. 120 writes per minute is intentionally generous
+ * to support rapid edits without friction.
+ */
+export const applicationsLimiter = makeSlidingWindow("rl:action:applications", 120, 60);
+
+/**
+ * Limiter for unauthenticated auth actions (sign-in, sign-up, password reset).
+ * Keyed by client IP rather than userId because these run before auth.
+ *
+ * 10 attempts per 60 seconds per IP is permissive for normal users but limits
+ * scripted abuse. The forgot-password path is especially important to throttle
+ * to prevent email-send abuse. Degrades open (R1) if the store is down — that
+ * is safe because the store is currently unreachable and we must not break auth.
+ */
+export const authActionLimiter = makeSlidingWindow("rl:action:auth", 10, 60);

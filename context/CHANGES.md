@@ -1,0 +1,298 @@
+# Spec-Driven Development — Running Changes Doc
+
+A live log of decisions and changes that emerge as we fill in the `templates/context/` files. Anything here that diverges from what's currently in the codebase is a deliberate change to make.
+
+---
+
+## Decisions made (vs. current codebase)
+
+- **Project name:** Street Prep AI (unchanged).
+- **Target user:** US undergrads targeting IB Summer Analyst roles. Finance-vertical expansion deferred to "much later" — do not bake other verticals into the spec.
+- **Information architecture shift:** the product is a **structured learning flow (course-like: chapters → readings → interactive tutorials → graded practice)** with **tools layered on top**, not a flat 12-pillar feature menu. The current codebase has the 12 pillars as side-by-side surfaces; the spec should reframe them as: (a) the learning flow spine, and (b) tools available at any time.
+- **Learning flow ordering** (per user): how to apply → which firms do what → sectors → guides → technicals → behavioral.
+- **Authenticated-only:** Goal #1 explicitly requires authenticated user access. The current prototype has stubbed auth — this is a confirmed change for the spec target.
+- **Resume-driven profile:** users fill out their profile by uploading their resume; profile data feeds the chatbot, story framer, and prep sheets.
+- **Chatbot is tool-using:** chatbot can pull from profile, networking history, web, IB knowledge, and firm data — not just guide-scoped Q&A.
+- **HireVue practice** is a first-class mock-interview mode (currently the codebase mentions only voice mock; HireVue framing is explicit).
+- **Networking discovery:** in addition to tracking past contacts, the spec includes discovering *new* people to network with (new feature, not in current codebase).
+- **Learning flow teaches the tools:** chapters in the learning flow don't just teach concepts — they teach users *how to use the product's own tools* in context. E.g., the Networking chapter walks the user through the Relationship Manager; the Behavioral chapter walks them through the Story Framer. Pedagogy and practice are integrated.
+- **Cut from the spec** (currently in codebase as stubs or partially built):
+  - Job hub (filterable IB postings)
+  - Community forum + interview report exchange
+  - Mentor marketplace + office hours / live AMAs
+  - Spaced-repetition flashcards
+- **Goals confirmed/added:**
+  - Discover new people to network with — promoted to a top-level goal.
+  - Sector deep-dives (TMT, healthcare, FIG, etc.) — top-level goal.
+  - Firm-specific pages (earnings, deals, intel) — top-level goal.
+  - "AI prep at the moment of need" — folded into the chatbot goal, not a separate goal. The chatbot is the surface for synthesizing personalized prep.
+
+## Open questions
+
+- Do guides need **interactive tutorials** as a distinct content type beyond reading + practice questions? (User listed it; current codebase has only reading + chat.)
+- Are jobs hub, community forum, mentor marketplace, and office hours still in the product? They're in the codebase as stubs but absent from the user's restated goals.
+- Should the dashboard be the primary landing surface or should it be the learning flow itself?
+- Sector deep dives (TMT, healthcare, FIG, etc.) — separate content type or just chapters within "which firms do what"?
+- Does "track progress" mean a mastery model + heatmap (current codebase) or simpler completion tracking?
+
+## Codebase changes implied by the spec
+
+- Reorganize routing so the learning flow is a first-class IA surface (chapters → sections → practice), not a flat library of guides.
+- Build a profile system seeded from a resume upload (resume parser + structured profile store). Currently no profile system exists.
+- Extend the chatbot beyond guide-scoped Q&A: add tool use for profile lookup, networking history search, web search, firm data.
+- Add a HireVue practice mode to the mock interview studio.
+- Add a technical-question bank (DB-backed, with AI-generated fallback by topic/type). Currently no question bank exists.
+- Add a "discover people to network with" surface in Relationship Memory.
+- Replace stubbed auth with a real authenticated experience (Supabase, per existing stack decision).
+
+---
+
+## Resolved details
+
+- **Interactive tutorials:** support all three formats (inline exercises, worked examples, AI socratic tutoring); each chapter author picks the right mix.
+- **Discovery mechanism for new people to network with:** deferred — feature in scope, mechanism TBD.
+- **Progress tracking:** hybrid — mastery model under the hood + completion stats and streak in the UI.
+- **Calendar:** Google Calendar OAuth, auto-link events to contacts, trigger pre-event prep sheets.
+
+## Updates from `IB_research.md` review (round 2)
+
+- **Chapter sequence locked at 16 chapters**, with technicals as 7 of them (the bulk):
+  1. Recruiting Cycle & Timeline
+  2. How to Apply
+  3. Firm Overviews (BB / EB / MM + group types)
+  4. Sector Deep-Dives
+  5. Resume & Cover Letter (uses Resume Coach)
+  6. Networking Mastery (uses Relationship Manager)
+  7. Behavioral & Fit (uses Story Framer)
+  8. Technicals — Accounting & 3 Statements
+  9. Technicals — EV vs Equity Value
+  10. Technicals — Valuation: Comps & Precedent Transactions
+  11. Technicals — DCF (own chapter; 23% of all reported IB Qs)
+  12. Technicals — M&A & Merger Models
+  13. Technicals — LBO Models
+  14. Technicals — Brain Teasers & Mental Math
+  15. Mock Interviews & HireVue Practice (uses Mock Interview Studio)
+  16. Superday & Logistics
+- **Recruiting Cycle Widget** added to the dashboard — personalized to grad year + current semester, surfaces what to focus on this semester. Goal #13.
+- **Profile** now stores current semester (in addition to grad year), to drive the cycle widget.
+- **Technical Question Bank** extended with three new behaviors:
+  - Difficulty levels (easy / medium / hard) per question.
+  - Follow-up question trees: 3–5 deeper probes per Q, fired on correct answer.
+  - Spaced re-surfacing of weak/incorrect questions every 2–3 days. (Note: this is *not* the standalone flashcard feature — that stays cut. This is in-Q-bank re-serving driven by mastery model state.)
+- **Mock Interview Studio** now includes adaptive follow-up questions that branch off each answer, mimicking real interviewer probing.
+- **Firm Pages** now include 10–15 firm-specific interview questions per firm (sourced from interview reports), in addition to earnings/deals/intel.
+- **Brain Teasers & Mental Math** added as a dedicated technical chapter (was missing before).
+- **DCF promoted to its own chapter** (separate from Comps/Precedents) given its outsized weight in real interviews.
+- **School-tier-aware strategy** considered but NOT picked. Profile data is captured; we can revisit later if it earns its place.
+
+## Architecture decisions
+
+### Stack (locked 2026-05-09)
+
+- **Framework / lang:** Next.js 16 App Router + TypeScript (unchanged from current).
+- **UI:** Tailwind v4 + shadcn/ui (unchanged).
+- **Auth:** Supabase Auth — email + Google OAuth. Replaces stubbed auth in current prototype.
+- **Database / ORM:** Supabase Postgres + Drizzle ORM (unchanged choice; new in build — no DB exists in current prototype).
+- **Vector store:** **pgvector inside Supabase Postgres**. Not a separate vector DB. RLS applies normally; joins to `contacts`/`chats` are direct.
+- **Object storage:** Supabase Storage for resumes and mock-interview audio. Per-user prefixes; signed URLs.
+- **LLM:** Anthropic Claude — server-side only.
+- **AI SDK layer:** **Hybrid — Vercel AI SDK for the chatbot UI** (`useChat` for tool-using streaming), **raw `@anthropic-ai/sdk` everywhere else** (explain, beginner mode, scoring, prep sheets, structuring) so we keep tight control of prompt caching and tool-use details.
+- **Web search tool:** **Anthropic's native `web_search` tool**. No separate Tavily/Exa/Brave vendor.
+- **Embeddings:** **Voyage AI `voyage-4-lite`** as default (queries + most documents), **`voyage-4-large`** available for high-quality indexing where it earns its place. Voyage 4's MoE means lite/large share a vector space — no re-indexing needed to swap.
+- **Speech-to-text:** **Groq Whisper Turbo**. Replaces OpenAI Whisper API plan.
+- **Resume parsing:** **Two-stage — `pdf-parse` for text extraction, then Claude tool use for structured profile JSON.** Not Claude vision and not a dedicated parser like Affinda.
+- **Background jobs:** **Inngest**. Used for: spaced re-surfacing of weak Q-bank items, weekly firm-data refresh, prep-sheet pre-generation, embedding backfills, scheduled follow-up reminders.
+- **Rate limiting:** **Upstash Ratelimit + Upstash Redis** sliding-window. Required, not optional, on every AI endpoint.
+- **Calendar integration:** **Direct Google Calendar API + OAuth 2.0** (granular consent). Not Nylas, not Cronofy.
+- **Email:** **Resend** + React Email templates for both auth and Relationship Manager follow-up sends.
+- **Analytics:** **PostHog** (cloud) for product events, funnels, replays, feature flags.
+- **Error + perf monitoring:** **Sentry**. Axiom optional later for AI-call log streaming.
+- **API style:** **Server Actions for mutations** (save story, log chat, create contact, etc.) + **Route Handlers for streaming endpoints and external webhooks** (Claude SSE, Inngest, Google Calendar). Replaces the current codebase's pure-Route-Handler approach.
+- **Testing:** **Vitest (unit) + Playwright (e2e on critical flows)**. LLM calls mocked.
+- **CI/CD:** **GitHub Actions on PRs (typecheck + lint + tests) → Vercel preview deploys → manual promotion to prod.** Not auto-deploy.
+- **Hosting:** Vercel (unchanged).
+- ~~**Deferred from stack:** HireVue-style video capture and storage. Voice-only mock interviews in phase 1.~~ **Reversed 2026-05-11 — HireVue is back in phase 1.** Stack: **browser `MediaRecorder` API → Supabase Storage** (no Mux, no Cloudflare Stream, no transcoding pipeline). Cheapest path; playback UX is "good enough" for practice video. Migration to Mux later is straightforward if needed. Project-overview Goal #5 ("voice mock interviews and HireVue-style video practice") now aligns with architecture again.
+- **Video retention:** 30 days (matches mock-audio retention). Transcripts and scorecards persist forever; raw video expires via the same Inngest cron that handles audio.
+- **`mock_sessions.mode`** field added: `voice` | `hirevue`. **`mock_turns`** stores either an `audio_url` or `video_url` depending on session mode.
+
+### System Boundaries (locked 2026-05-11)
+
+- **Routing model:** *learning flow as the spine + tools layered on top.* `app/(app)/learn/[chapter]/[section]` is the spine; `app/(app)/tools/{chatbot,story-framer,resume-coach,mock-interview,question-bank,relationships}` is the toolset; `app/(app)/{dashboard,firms,sectors,profile,progress}` are top-level surfaces. **This is a re-architecture from the current codebase**, which has a flat `(app)/` with all features as siblings.
+- **Server Actions for mutations + Route Handlers for streaming/webhooks only.** Replaces the current "everything is a Route Handler" pattern.
+- **`lib/` is domain-driven** (one folder per concern) with explicit public APIs and enforced boundary rules. Replaces the current `lib/ai`/`lib/data`/`lib/supabase` minimal split.
+- **`components/`** split into `ui/` (shadcn primitives), `learn/`, `tools/*/`, surface-specific folders, and `shared/`.
+
+### Storage Model (locked 2026-05-11)
+
+- **Four physical stores:** Postgres (Supabase + pgvector), Supabase Storage, Upstash Redis, MDX files in repo.
+- **Hybrid content model:** reading prose in MDX (reviewable in PRs); practice questions, tutorials, follow-up trees in Postgres (queryable, AI-extendable, drives spaced re-surfacing).
+- **Granular mock-interview schema:** `mock_sessions` → `mock_turns` (per Q-A pair with adaptive follow-up chain) → `mock_scorecards`. Enables cross-session analytics.
+- **Storage retention policy:** resume PDFs persisted indefinitely; mock-interview audio expires after **30 days** via an Inngest cron; transcripts and scorecards persisted forever.
+- **pgvector embeddings live inside Postgres** on the rows that need them (`chats.embedding`, `qbank_questions.embedding`, `firm_data.embedding`). No separate vector DB.
+- **Tables added that don't exist in current codebase:** `profiles`, `experiences`, `resumes`, all learning-flow tables, `topic_mastery`, `streaks`, `stories`, all mock-interview tables, all qbank tables with spaced-rep state, `chats` with embeddings, `calendar_events`, `outreach`, `prep_sheets`, `firms`+`firm_data`+`firm_interview_questions`, `sectors`, `chat_threads`+`chat_messages`, `llm_usage`, `audit_log`, `admins`.
+
+### Auth and Access Model (locked 2026-05-11)
+
+- **Two roles:** `user` (default) and `admin` (founder + future content editors). Admins write shared content (chapters metadata, firms, sectors, qbank). Role mirrored into the Supabase JWT via an auth hook from an `admins` table.
+- **RLS is the enforcement layer.** Every user-owned table scoped by `user_id = auth.uid()`. Service-role key reserved for `lib/inngest/**`, webhook handlers, and explicit admin ops.
+- **Onboarding:** profile required (school, grad year, current semester, target firms). **Resume upload is optional** but heavily prompted; tools that need it (Resume Coach, experience-driven Story Framer) gate themselves accordingly. `profiles.onboarded_at` is the completion flag.
+- **Account deletion supported in phase 1** (self-serve, cascading delete across DB + Storage + PostHog). **Data export deferred to phase 2** — manual via email until then.
+- **All LLM API keys** (Anthropic, Voyage, Groq) live server-side only; never touched by client code.
+
+### Invariants (locked 2026-05-11)
+
+Ten rules the codebase must never violate. Highlights — full list in architecture.md:
+
+1. All LLM/embedding/STT calls server-side.
+2. No free-form JSON parsing from LLM output — tool use with Zod schemas only.
+3. RLS on every user-owned table; service-role key gated to background/admin paths.
+4. Every LLM call writes one `llm_usage` row.
+5. Rate-limit wrapping on every AI-calling Server Action and Route Handler.
+6. Mutations through Server Actions, not Route Handlers.
+7. Prompt caching default for >1K-token stable system content.
+8. Background work in Inngest, not in request handlers.
+9. Folder boundaries enforced (`components/` ↛ `lib/db`/`lib/ai`; `lib/` ↛ `components/`/`app/`; `lib/db` ↮ `lib/ai`).
+10. Postgres is the source of truth for everything user-authoritative.
+
+---
+
+## Updated open questions
+
+- ~~Project overview Goal #5 vs HireVue deferral.~~ **Resolved 2026-05-11 — HireVue is back in phase 1; overview and architecture aligned.**
+- Confirm Inngest is the chosen background-job vendor in production (vs. moving to a self-hosted queue later when scale demands it).
+
+## UI Context decisions (locked 2026-05-11)
+
+Direction picked from a 4-aesthetic visual shotgun (samples in `templates/samples/`):
+
+- **Aesthetic:** Modern edtech with finance gravity. (Sample `2-modern-edtech.html`. The other three — premium banker, terminal-dark, Linear-minimal — explicitly rejected.)
+- **Mode:** Light mode only in phase 1. Dark deferred.
+- **Accent:** Emerald `#047857` / `oklch(0.55 0.15 160)`. Stays unchanged from current codebase. Explored five other greens (jade, teal, hunter, forest, pine) and two non-greens (indigo, burgundy); emerald held up best.
+- **Typography:** Geist Sans + Geist Mono. Stays unchanged. Explored Inter, Source Serif 4 + Inter, Fraunces + Inter; Geist held up.
+- **Border radius base:** 0.75rem; sm/md/lg/xl scale derived. Unchanged.
+- **Component library:** shadcn/ui `new-york` style on Tailwind v4. Customize by editing files in `components/ui/`, not by wrapping.
+- **Icon library:** Lucide React only. Strict 14/16/20px scale.
+- **Layout patterns documented:** marketing single-column; signed-in app shell (left sidebar + main); chapter reader (3-column with natural-flow center, sticky rails); tool surfaces (single max-w-4xl column); firm/sector pages (2/3-1/3 split); dashboard 12-col grid; modals via shadcn Dialog; forms via shadcn Form + react-hook-form + Zod; skeletons for loads; token-by-token streaming with cursor.
+- **Motion rules:** 200ms default; subtle card lift on hover; reduced-motion respected.
+
+The currently-shipping UI is essentially the locked target, with two notable additions implied by the architecture:
+
+- **Sidebar nav reorganization** to reflect the spine-and-tools IA: Dashboard, Learn, Tools (chatbot/story-framer/resume-coach/mock-interview/question-bank/relationships), Firms, Sectors, Profile, Progress. Replaces the current flat 11-item sidebar that lists every feature as a sibling.
+- **Reader 3-column layout** preserved with explicit "natural flow center, sticky rails" rule documented as a do-not-break invariant (it has been broken before).
+
+## Code Standards decisions (locked 2026-05-18)
+
+### TypeScript
+- **`strict: true` plus `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noPropertyAccessFromIndexSignature`.** Three extras chosen because together they catch ~40% of runtime bugs strict alone misses.
+- **`any` banned**, `unknown` for external input, `as` only for already-validated external shapes.
+- **Branded types for IDs** (`UserId`, `ContactId`, etc.) to prevent ID mix-ups at the type level.
+- **Parse, don't validate, at boundaries** — every external input flows through Zod before reaching business logic.
+
+### Next.js + React
+- **Server Components by default.** `'use client'` only for interactivity/hooks/browser APIs.
+- **Server Actions for all mutations**; Route Handlers for streaming, webhooks, health only.
+- **Server Action return shape:** discriminated union `{ ok: true, data } | { ok: false, error: { code, message, fieldErrors? } }`.
+- **Standard Server Action skeleton** documented: requireUser → Zod parse → rate limit → ownership check → work → log → return.
+- **Zod schemas colocated with the action** that uses them; extracted to `schemas.ts` siblings only when the client form needs them too.
+- **Client state strategy:** `useState` + URL query params + Server Components for data. No Zustand/Jotai/Redux/Context until a concrete cross-component case demands it.
+- **`react-hook-form` + Zod resolver** for forms with >3 inputs; same schema used on client and server.
+- **No `useEffect` for data fetching.** Server Components or Server Actions only.
+
+### Drizzle / Data Access
+- **Module-per-domain query files** in `lib/db/queries/<domain>.ts`. Named-function exports, no class repositories.
+- **Functions take `(db, ...args)` explicitly** so the same function works inside transactions.
+- **Transactions for multi-step mutations** that must atomically succeed or fail. No external HTTP calls inside transactions.
+- **Indexes on every FK + every WHERE/ORDER BY column**, added in the same PR as the query.
+- **Migrations generated by Drizzle Kit**; never edited in place.
+- **No raw SQL outside `lib/db/queries/`**.
+- **No mocking the database in tests** — real Postgres or PGlite.
+
+### Errors + Logging
+- **Custom `AppError` hierarchy in `lib/errors.ts`:** `ValidationError`, `UnauthorizedError`, `NotFoundError`, `RateLimitedError`, `LLMError`, `ExternalServiceError`. Translated to discriminated-union failures at the Server Action boundary; unknowns captured to Sentry.
+- **Pino structured logger** in `lib/logger.ts`. Standard fields `userId`, `action`, resource IDs. Levels: `error`/`warn`/`info`/`debug`. `console.log` banned by ESLint.
+- **Sensitive data redaction** via pino's `redact` config; LLM outputs logged as token counts + 80-char preview only.
+
+### Dates
+- **Postgres `timestamp with time zone`** in UTC; ISO 8601 over the wire.
+- **Native `Date` + `date-fns`** (tree-shakeable). No moment, no luxon, no day.js.
+- **Immutable use only** — never `Date.setX()`.
+- **User-facing display in local timezone** via `Intl.DateTimeFormat`.
+
+### Naming
+- **Files:** `kebab-case.tsx`.
+- **Folders:** `kebab-case`.
+- **React components:** `PascalCase` named exports inside kebab-case files.
+- **Hooks:** `use-camel-case.ts` exporting `useCamelCase`.
+- **Functions/variables:** `camelCase`.
+- **Constants:** `SCREAMING_SNAKE_CASE` for true compile-time only.
+- **Types:** `PascalCase`, no `I` prefix.
+- **Zod schemas:** `camelCaseSchema`; inferred type drops the `Schema` suffix.
+- **DB tables/columns:** `snake_case` plurals.
+
+### Exports + Imports
+- **Named exports throughout.** Default exports only where Next.js requires (`page.tsx`, `layout.tsx`, `error.tsx`, `not-found.tsx`, `loading.tsx`, `template.tsx`, `route.ts`, middleware, Inngest handler).
+- **Path alias `@/` for all cross-folder imports**; `./` for siblings.
+- **Import order auto-sorted by Prettier:** built-in → third-party → `@/` → relative.
+
+### Comments
+- **Light. Comment the non-obvious WHY + brief orientation comments on substantial sections of code** (the user's explicit preference, slightly more than "minimal" — encourages 1-line section summaries on 30+ line blocks, especially in `lib/ai/` prompts, `lib/mastery/` math, Inngest functions). No JSDoc on every function. No "added for X" notes.
+
+### Styling
+- **Tailwind utility classes only.** No CSS modules, no styled-components.
+- **Tokens, not hex.** `bg-primary`, never `#047857`.
+- **Radius scale from `ui-context.md`.**
+- **`cn()` helper for conditional classes.**
+- **shadcn primitives edited in place**, never wrapped.
+
+### Testing
+- **Vitest** for unit; **Playwright** for critical e2e flows.
+- **LLM calls mocked** in CI; **real DB** in integration tests.
+- **No coverage targets** — meaningful tests over high numbers.
+
+### CI/Quality Gates
+- **ESLint + Prettier on every PR via GitHub Actions.** Custom ESLint rules: no `console.log`, no `any`, no default exports outside Next.js conventions, no imports of server-only modules from `components/**`.
+
+## AI Workflow decisions (locked 2026-05-18)
+
+- **Agent default mode:** plan first, then execute. Trivial tasks skip the plan step. Plan includes user-visible behavior, steps, files to touch, risks, and verification step. Wait for approval before coding.
+- **Slicing:** tracer-bullet vertical slices. Each unit ships one user-visible behavior end-to-end (migration + query + Server Action + UI + tests). Each PR independently shippable.
+- **Commits:** Conventional commits (`feat:`, `fix:`, `chore:`, `refactor:`, `docs:`, `test:`, `perf:`). One feature per PR; PR description = what / why / how-to-verify, 1–3 bullets each.
+- **Protected files (no AI edits without explicit ask):** `components/ui/*`, `lib/db/migrations/*`, `templates/context/*`, `.env*`. `content/chapters/*` left editable.
+- **Doc-sync responsibilities** spelled out per topic: architecture changes → `architecture.md`+`CHANGES.md`; UI tokens → `ui-context.md`; new code rule → `code-standards.md`; feature scope shift → `project-overview.md`+`CHANGES.md`.
+- **"Done" definition** for a unit: works e2e, no invariant violated, `progress-tracker.md` updated, typecheck + lint + tests pass, `pnpm build` passes, PR merged.
+
+## Progress Tracker decisions (locked 2026-05-19)
+
+- **Migration strategy: in-place migrate** (Option 2). Decided after a corrected audit of `/web` that found ~50–60% spec alignment already (Sentry, Upstash, PostHog, Pino, Supabase auth helpers, real DB tables, testing infra all installed). Greenfield rebuild was considered and rejected as wasteful given the foundation that already exists.
+- **First seven implementation units defined** in `progress-tracker.md` Next Up:
+  1. Cleanup (` 2.ts` files + cut routes)
+  2. Dependency parity (Drizzle, Inngest, Voyage, Groq, Google APIs, Resend, react-hook-form, date-fns)
+  3. Drizzle wrap (introspect existing Supabase tables, prove pattern with one query)
+  4. Auth UI + middleware
+  5. IA refactor (spine + tools)
+  6. Server Action pattern proof (one mutation migrated)
+  7. First net-new feature (Q-Bank tracer-bullet)
+
+## Spec file status
+
+- [x] `context/project-overview.md` — drafted, awaiting review
+- [x] `context/architecture.md` — Stack, System Boundaries, Storage Model, Auth and Access Model, Invariants all drafted
+- [x] `context/ui-context.md` — Theme, Colors, Typography, Border Radius, Component Library, Layout Patterns, Icons, Motion all drafted
+- [x] `context/code-standards.md` — General, TS, Next.js, React, Styling, Server Actions, Data Access, Storage, Naming, Exports/Imports, Comments, Errors, Logging, Dates, Testing, Performance, Linting, File Organization
+- [x] `context/ai-workflow-rules.md` — Approach, Scoping, Slicing, Splitting, Missing Requirements, Protected Files, Commits + PRs, Doc Sync, Done Definition, When Things Go Wrong
+- [x] `context/progress-tracker.md` — Current phase, completed work, in progress, 7-unit backlog, open questions, architecture decisions reference, session notes
+
+**All six spec files now drafted.** Spec-authoring phase complete; implementation phase begins.
+
+## Unit 3 — Drizzle wrap (implemented 2026-06-02)
+
+Implemented per `feature-specs/unit-3-drizzle-wrap.md`, with two deviations from the spec's assumptions worth recording:
+
+- **Introspection: custom postgres.js generator, not `drizzle-kit pull`.** `drizzle-kit pull` reliably hangs against this project's Supabase pooler (it prints "Pulling from public" then deadlocks — its internal parallel catalog queries don't survive Supavisor). A plain `postgres.js` connection runs the same catalog queries in ~1s. So `scripts/introspect.mjs` reads `pg_catalog`/`information_schema` and emits `lib/db/schema/<table>.ts` per table + an `index.ts` barrel. It is **deterministic** — re-running against an unchanged DB produces no diff — which preserves the spec's reproducibility requirement. It captures columns, types (incl. `text[]` arrays and `vector(N)` pgvector dims), nullability, primary keys, and the common `gen_random_uuid()`/`now()` defaults. **Not captured (future enhancement):** FK constraints and index definitions — not needed for typed querying. `pnpm db:pull` runs this generator; `drizzle.config.ts` (for `generate`/`migrate`) is retained for future Drizzle-managed migrations.
+- **RLS: `withUser(token, fn)` wrapper in `lib/db/client.ts`** (the spec's recommended hybrid option 3). Runs `fn` inside a transaction that sets `request.jwt.claims` + `set local role authenticated`, then resets — so `auth.uid()`-based RLS policies apply even though the pooler connection itself is privileged. Role value is whitelisted before interpolation.
+
+Other notes:
+- **Connection:** `DATABASE_URL` = transaction pooler (port 6543, `prepare: false`) for app runtime; `DIRECT_URL` = session pooler (port 5432) for schema ops. Both on `aws-1-us-east-2.pooler.supabase.com`. drizzle-kit env is loaded via Node's native `--env-file=.env.local` (no `dotenv` dependency added).
+- **Introspected tables (15):** the DB still contains the cut `jobs` and `applied_jobs` tables (Unit 1 removed their app code, not the tables). They're introspected as-is; a cleanup migration to drop them can come later.
+- **Migrated call site:** the profile *read* in `app/api/chat/general/route.ts` now uses `withUser(...) → getProfile(tx, userId)` from `lib/db/queries/profile.ts`. `lib/data/profile.ts` and its other callers (`lib/ai/assistant-tools.ts`, the save route) are untouched — both paths coexist, per spec.
+- **Verification:** custom introspection determinism check (no diff on re-run), typecheck ✅, lint ✅, 3 Vitest unit tests for `getProfile` ✅, `pnpm build` (see progress-tracker).

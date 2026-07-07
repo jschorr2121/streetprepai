@@ -10,6 +10,11 @@ export const APPLIED_JOB_STAGES = [
   "rejected",
 ] as const;
 
+// Single source of truth for the notes character cap (spec: 5 000).
+// The action schema in app/(app)/tools/applications/actions.ts references
+// this constant so there is no second literal.
+export const NOTES_MAX_LENGTH = 5000;
+
 export const AppliedJobInputSchema = z.object({
   firm: z.string().trim().min(1).max(120),
   role: z.string().trim().min(1).max(120),
@@ -17,7 +22,7 @@ export const AppliedJobInputSchema = z.object({
   deadline: z.string().trim().max(40).optional(),
   url: z.string().trim().url().max(2048).optional(),
   stage: z.enum(APPLIED_JOB_STAGES),
-  notes: z.string().trim().max(2000).optional(),
+  notes: z.string().trim().max(NOTES_MAX_LENGTH).optional(),
 });
 export type AppliedJobInput = z.infer<typeof AppliedJobInputSchema>;
 

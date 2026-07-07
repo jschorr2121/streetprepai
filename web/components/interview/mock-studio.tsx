@@ -30,10 +30,7 @@ import {
   pickRandomQuestion,
 } from "@/lib/data/interview-questions";
 import { analyzeAudio, type TimestampedWord } from "@/lib/audio/analyze";
-import type {
-  Scorecard,
-  RubricItem,
-} from "@/app/api/interview/score/route";
+import type { Scorecard, RubricItem } from "@/app/api/interview/score/route";
 
 const MODES: Array<{
   id: InterviewMode;
@@ -144,9 +141,7 @@ export function MockStudio() {
         : MediaRecorder.isTypeSupported("audio/webm")
           ? "audio/webm"
           : "";
-      const mr = mimeType
-        ? new MediaRecorder(stream, { mimeType })
-        : new MediaRecorder(stream);
+      const mr = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
       mediaRecorderRef.current = mr;
       chunksRef.current = [];
       mr.ondataavailable = (e) => {
@@ -177,10 +172,7 @@ export function MockStudio() {
           const next = e + 1;
           if (next >= MAX_RECORD_SECONDS) {
             // Auto-stop at the cap.
-            if (
-              mediaRecorderRef.current &&
-              mediaRecorderRef.current.state !== "inactive"
-            ) {
+            if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
               mediaRecorderRef.current.stop();
             }
           }
@@ -189,18 +181,13 @@ export function MockStudio() {
       }, 1000);
     } catch (err) {
       toast.error(
-        `Could not access mic: ${
-          err instanceof Error ? err.message : "permission denied"
-        }`,
+        `Could not access mic: ${err instanceof Error ? err.message : "permission denied"}`,
       );
     }
   }, [audioUrl]);
 
   const stopRecording = () => {
-    if (
-      mediaRecorderRef.current &&
-      mediaRecorderRef.current.state !== "inactive"
-    ) {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
       mediaRecorderRef.current.stop();
     }
   };
@@ -249,14 +236,10 @@ export function MockStudio() {
       mocked = !!data.mocked;
       setTranscript(text);
       if (mocked) {
-        toast.message(
-          "Using a demo transcript (no OPENAI_API_KEY set).",
-        );
+        toast.message("Using a demo transcript (no OPENAI_API_KEY set).");
       }
     } catch (err) {
-      toast.error(
-        err instanceof Error ? err.message : "Transcription failed.",
-      );
+      toast.error(err instanceof Error ? err.message : "Transcription failed.");
       setPhase("review");
       return;
     }
@@ -293,24 +276,22 @@ export function MockStudio() {
   const remaining = Math.max(0, MAX_RECORD_SECONDS - elapsed);
 
   return (
-    <div className="max-w-4xl mx-auto px-6 md:px-8 py-8 space-y-6">
+    <div className="mx-auto max-w-4xl space-y-6 px-6 py-8 md:px-8">
       <header>
-        <div className="flex items-center gap-2 text-primary text-sm font-medium mb-2">
+        <div className="text-primary mb-2 flex items-center gap-2 text-sm font-medium">
           <Mic className="size-4" /> Mock Interview Studio
         </div>
-        <h1 className="text-3xl font-semibold tracking-tight">
-          Voice-based interview practice
-        </h1>
+        <h1 className="text-3xl font-semibold tracking-tight">Voice-based interview practice</h1>
         <p className="text-muted-foreground mt-2 max-w-2xl">
-          Pick a mode, record your answer, and Claude scores content and
-          delivery — with the questions a real interviewer would ask next.
+          Pick a mode, record your answer, and Claude scores content and delivery — with the
+          questions a real interviewer would ask next.
         </p>
       </header>
 
       {/* Mode picker */}
       <Card className="p-5">
-        <p className="text-sm font-medium mb-3">Choose a mode</p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <p className="mb-3 text-sm font-medium">Choose a mode</p>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {MODES.map((m) => {
             const Icon = m.icon;
             const active = mode === m.id;
@@ -319,19 +300,15 @@ export function MockStudio() {
                 key={m.id}
                 type="button"
                 onClick={() => pickMode(m.id)}
-                className={`text-left rounded-lg border p-4 transition-colors ${
-                  active
-                    ? "border-primary bg-primary/5"
-                    : "hover:bg-accent/50"
+                className={`rounded-lg border p-4 text-left transition-colors ${
+                  active ? "border-primary bg-primary/5" : "hover:bg-accent/50"
                 }`}
               >
-                <div className="flex items-center gap-2 mb-1.5">
-                  <Icon className="size-4 text-primary" />
-                  <p className="font-medium text-sm">{m.label}</p>
+                <div className="mb-1.5 flex items-center gap-2">
+                  <Icon className="text-primary size-4" />
+                  <p className="text-sm font-medium">{m.label}</p>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {m.blurb}
-                </p>
+                <p className="text-muted-foreground text-xs leading-relaxed">{m.blurb}</p>
               </button>
             );
           })}
@@ -340,10 +317,10 @@ export function MockStudio() {
 
       {/* Question + recording */}
       {question && (
-        <Card className="p-6 space-y-5">
+        <Card className="space-y-5 p-6">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Badge variant="secondary" className="text-[10px] uppercase tracking-wider">
+            <div className="mb-2 flex items-center gap-2">
+              <Badge variant="secondary" className="text-[10px] tracking-wider uppercase">
                 {question.mode}
               </Badge>
               <Badge variant="outline" className="text-[10px]">
@@ -362,7 +339,7 @@ export function MockStudio() {
                 <RefreshCw className="size-3.5" /> New question
               </Button>
             </div>
-            <p className="text-lg font-medium leading-snug">{question.text}</p>
+            <p className="text-lg leading-snug font-medium">{question.text}</p>
           </div>
 
           <Separator />
@@ -372,9 +349,9 @@ export function MockStudio() {
               <Button size="lg" onClick={startRecording}>
                 <Mic className="size-4" /> Start recording
               </Button>
-              <p className="text-xs text-muted-foreground">
-                You'll have up to {MAX_RECORD_SECONDS} seconds. Speak like
-                you'd answer in person.
+              <p className="text-muted-foreground text-xs">
+                You&apos;ll have up to {MAX_RECORD_SECONDS} seconds. Speak like you&apos;d answer in
+                person.
               </p>
             </div>
           )}
@@ -382,16 +359,14 @@ export function MockStudio() {
           {phase === "recording" && (
             <div className="flex flex-col items-center gap-4 py-2">
               <RecordingIndicator elapsed={elapsed} />
-              <div className="text-3xl font-mono tabular-nums">
+              <div className="font-mono text-3xl tabular-nums">
                 {formatTime(elapsed)}
                 <span className="text-muted-foreground text-base">
                   {" "}
                   / {formatTime(MAX_RECORD_SECONDS)}
                 </span>
               </div>
-              <p className="text-xs text-muted-foreground">
-                {remaining}s remaining
-              </p>
+              <p className="text-muted-foreground text-xs">{remaining}s remaining</p>
               <Button size="lg" variant="destructive" onClick={stopRecording}>
                 <Square className="size-4" /> Stop
               </Button>
@@ -400,12 +375,11 @@ export function MockStudio() {
 
           {phase === "review" && audioUrl && (
             <div className="space-y-3">
-              <p className="text-sm text-muted-foreground">
-                Recorded {formatTime(elapsed)}. Play it back, or submit for
-                scoring.
+              <p className="text-muted-foreground text-sm">
+                Recorded {formatTime(elapsed)}. Play it back, or submit for scoring.
               </p>
               <audio src={audioUrl} controls className="w-full" />
-              <div className="flex flex-wrap gap-2 justify-end">
+              <div className="flex flex-wrap justify-end gap-2">
                 <Button variant="outline" onClick={reRecord}>
                   <RotateCcw className="size-4" /> Re-record
                 </Button>
@@ -417,12 +391,10 @@ export function MockStudio() {
           )}
 
           {(phase === "transcribing" || phase === "scoring") && (
-            <div className="flex items-center justify-center gap-3 py-6 text-muted-foreground">
-              <Loader2 className="size-5 animate-spin text-primary" />
+            <div className="text-muted-foreground flex items-center justify-center gap-3 py-6">
+              <Loader2 className="text-primary size-5 animate-spin" />
               <span className="text-sm">
-                {phase === "transcribing"
-                  ? "Transcribing your answer…"
-                  : "Claude is scoring…"}
+                {phase === "transcribing" ? "Transcribing your answer…" : "Claude is scoring…"}
               </span>
             </div>
           )}
@@ -431,14 +403,14 @@ export function MockStudio() {
 
       {/* Transcript */}
       {transcript && (phase === "scoring" || phase === "scored") && (
-        <Card className="p-5 space-y-2">
+        <Card className="space-y-2 p-5">
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium">Transcript</p>
             <Badge variant="outline" className="text-[10px]">
               Whisper
             </Badge>
           </div>
-          <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap">
+          <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-wrap">
             {transcript}
           </p>
         </Card>
@@ -446,10 +418,7 @@ export function MockStudio() {
 
       {/* Scorecard */}
       {scorecard && phase === "scored" && (
-        <ScorecardView
-          scorecard={scorecard}
-          onTryAnother={nextQuestionSameMode}
-        />
+        <ScorecardView scorecard={scorecard} onTryAnother={nextQuestionSameMode} />
       )}
     </div>
   );
@@ -459,12 +428,9 @@ function RecordingIndicator({ elapsed }: { elapsed: number }) {
   // Simple breathing dot — no real waveform, but visible feedback that the
   // mic is hot.
   return (
-    <div className="relative size-16 grid place-items-center">
-      <span
-        className="absolute inset-0 rounded-full bg-red-500/20 animate-ping"
-        aria-hidden
-      />
-      <span className="relative size-8 rounded-full bg-red-500 grid place-items-center">
+    <div className="relative grid size-16 place-items-center">
+      <span className="absolute inset-0 animate-ping rounded-full bg-red-500/20" aria-hidden />
+      <span className="relative grid size-8 place-items-center rounded-full bg-red-500">
         <Mic className="size-4 text-white" />
       </span>
       <span className="sr-only">Recording, {elapsed} seconds elapsed</span>
@@ -493,23 +459,23 @@ function ScorecardView({
   return (
     <div className="space-y-5">
       <Card className="p-6">
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className="grid gap-6 sm:grid-cols-2">
           <ScoreReadout label="Content" score={scorecard.content_score} />
           <ScoreReadout label="Delivery" score={scorecard.delivery_score} />
         </div>
       </Card>
 
-      <Card className="p-5 space-y-4">
+      <Card className="space-y-4 p-5">
         <button
           type="button"
           onClick={() => setShowRubric((s) => !s)}
-          className="flex items-center justify-between w-full text-left"
+          className="flex w-full items-center justify-between text-left"
         >
           <p className="text-sm font-medium">Rubric ({scorecard.rubric.length})</p>
           {showRubric ? (
-            <ChevronUp className="size-4 text-muted-foreground" />
+            <ChevronUp className="text-muted-foreground size-4" />
           ) : (
-            <ChevronDown className="size-4 text-muted-foreground" />
+            <ChevronDown className="text-muted-foreground size-4" />
           )}
         </button>
         {showRubric && (
@@ -521,10 +487,10 @@ function ScorecardView({
         )}
       </Card>
 
-      <div className="grid md:grid-cols-2 gap-5">
-        <Card className="p-5 space-y-3">
+      <div className="grid gap-5 md:grid-cols-2">
+        <Card className="space-y-3 p-5">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="size-4 text-primary" />
+            <CheckCircle2 className="text-primary size-4" />
             <p className="text-sm font-medium">What worked</p>
           </div>
           <ul className="space-y-2 text-sm">
@@ -536,9 +502,9 @@ function ScorecardView({
             ))}
           </ul>
         </Card>
-        <Card className="p-5 space-y-3">
+        <Card className="space-y-3 p-5">
           <div className="flex items-center gap-2">
-            <Target className="size-4 text-primary" />
+            <Target className="text-primary size-4" />
             <p className="text-sm font-medium">Highest-leverage fixes</p>
           </div>
           <ul className="space-y-2 text-sm">
@@ -552,11 +518,9 @@ function ScorecardView({
         </Card>
       </div>
 
-      <Card className="p-5 space-y-3">
-        <p className="text-sm font-medium">
-          Follow-up questions a real interviewer would ask
-        </p>
-        <ol className="space-y-2 text-sm list-decimal list-inside marker:text-muted-foreground">
+      <Card className="space-y-3 p-5">
+        <p className="text-sm font-medium">Follow-up questions a real interviewer would ask</p>
+        <ol className="marker:text-muted-foreground list-inside list-decimal space-y-2 text-sm">
           {scorecard.follow_up_questions.map((q, i) => (
             <li key={i} className="leading-relaxed">
               {q}
@@ -565,27 +529,27 @@ function ScorecardView({
         </ol>
       </Card>
 
-      <Card className="p-5 space-y-3">
+      <Card className="space-y-3 p-5">
         <button
           type="button"
           onClick={() => setShowModel((s) => !s)}
-          className="flex items-center justify-between w-full text-left"
+          className="flex w-full items-center justify-between text-left"
         >
           <p className="text-sm font-medium">Model answer (banker-speak)</p>
           {showModel ? (
-            <ChevronUp className="size-4 text-muted-foreground" />
+            <ChevronUp className="text-muted-foreground size-4" />
           ) : (
-            <ChevronDown className="size-4 text-muted-foreground" />
+            <ChevronDown className="text-muted-foreground size-4" />
           )}
         </button>
         {showModel && (
-          <p className="text-sm leading-relaxed whitespace-pre-wrap text-muted-foreground">
+          <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-wrap">
             {scorecard.model_answer}
           </p>
         )}
       </Card>
 
-      <div className="flex flex-wrap gap-2 justify-end">
+      <div className="flex flex-wrap justify-end gap-2">
         <Button
           variant="outline"
           onClick={() => {
@@ -607,23 +571,16 @@ function ScoreReadout({ label, score }: { label: string; score: number }) {
   const tone = useMemo(() => scoreTone(score), [score]);
   return (
     <div className="space-y-1.5">
-      <p className="text-xs uppercase tracking-wider text-muted-foreground">
-        {label}
-      </p>
+      <p className="text-muted-foreground text-xs tracking-wider uppercase">{label}</p>
       <div className="flex items-baseline gap-2">
-        <p className={`text-5xl font-semibold tabular-nums ${tone.text}`}>
-          {score}
-        </p>
+        <p className={`text-5xl font-semibold tabular-nums ${tone.text}`}>{score}</p>
         <p className="text-muted-foreground text-sm">/ 100</p>
         <Badge variant="secondary" className={`ml-1 ${tone.badge}`}>
           {tone.label}
         </Badge>
       </div>
-      <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
-        <div
-          className={`h-full rounded-full ${tone.bar}`}
-          style={{ width: `${score}%` }}
-        />
+      <div className="bg-muted h-2 w-full overflow-hidden rounded-full">
+        <div className={`h-full rounded-full ${tone.bar}`} style={{ width: `${score}%` }} />
       </div>
     </div>
   );
@@ -632,15 +589,11 @@ function ScoreReadout({ label, score }: { label: string; score: number }) {
 function RubricRow({ item }: { item: RubricItem }) {
   const tone = scoreTone(item.score);
   return (
-    <div className="grid grid-cols-[140px_1fr_auto] gap-3 items-start">
-      <p className="text-sm font-medium leading-snug">{item.dimension}</p>
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        {item.comment}
-      </p>
+    <div className="grid grid-cols-[140px_1fr_auto] items-start gap-3">
+      <p className="text-sm leading-snug font-medium">{item.dimension}</p>
+      <p className="text-muted-foreground text-sm leading-relaxed">{item.comment}</p>
       <div className="flex items-center gap-2">
-        <span className={`text-sm font-semibold tabular-nums ${tone.text}`}>
-          {item.score}
-        </span>
+        <span className={`text-sm font-semibold tabular-nums ${tone.text}`}>{item.score}</span>
       </div>
     </div>
   );

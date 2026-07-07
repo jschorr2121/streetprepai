@@ -9,33 +9,32 @@ import {
   Sparkles,
   ArrowRight,
   NotebookPen,
-  Briefcase,
   FileText,
   Building2,
-  MessageSquare,
-  Users,
   Highlighter,
   Check,
+  Star,
+  Quote,
 } from "lucide-react";
+import { HeroSection } from "@/components/marketing/hero-section";
+import { LogoTicker } from "@/components/marketing/logo-ticker";
+import { StatsBar } from "@/components/marketing/stats-bar";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-semibold tracking-tight"
-          >
-            <div className="size-7 rounded-md bg-primary text-primary-foreground grid place-items-center">
+    <div className="flex min-h-screen flex-col">
+      {/* ── Nav ─────────────────────────────────────────────────── */}
+      <header className="bg-background/80 sticky top-0 z-40 border-b backdrop-blur">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+          <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
+            <div className="bg-primary text-primary-foreground grid size-7 place-items-center rounded-md">
               <Sparkles className="size-4" />
             </div>
             <span>
-              Street Prep{" "}
-              <span className="text-primary font-semibold">AI</span>
+              Street Prep <span className="text-primary font-semibold">AI</span>
             </span>
           </Link>
-          <nav className="hidden md:flex items-center gap-8 text-sm">
+          <nav className="hidden items-center gap-8 text-sm md:flex">
             <a
               href="#features"
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -57,72 +56,43 @@ export default function LandingPage() {
           </nav>
           <div className="flex items-center gap-2">
             <Button asChild variant="ghost" size="sm">
-              <Link href="/dashboard">Sign in</Link>
+              <Link href="/login">Sign in</Link>
             </Button>
             <Button asChild size="sm">
-              <Link href="/dashboard">
-                Try the demo <ArrowRight className="size-3.5 ml-1" />
+              <Link href="/signup">
+                Get started <ArrowRight className="ml-1 size-3.5" />
               </Link>
             </Button>
           </div>
         </div>
       </header>
 
-      <section className="px-6 pt-24 pb-20 border-b">
-        <div className="max-w-4xl mx-auto text-center">
-          <Badge
-            variant="secondary"
-            className="mb-6 gap-1.5 py-1 px-3 rounded-full"
-          >
-            <Sparkles className="size-3" /> Built for IB summer recruiting
-          </Badge>
-          <h1 className="text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05] mb-6">
-            The recruiting cycle,
-            <br />
-            <span className="text-muted-foreground">reimagined with AI.</span>
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10">
-            Street Prep AI is the first platform built end-to-end for IB
-            recruiting. Prep smarter, practice out loud, network with memory,
-            and track exactly what's holding you back — all in one place, with
-            AI woven into every step.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button asChild size="lg" className="h-11 px-6">
-              <Link href="/dashboard">
-                Open the demo
-                <ArrowRight className="size-4 ml-1.5" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="h-11 px-6">
-              <Link href="/guide/walk-me-through-a-dcf">Try a guide</Link>
-            </Button>
-          </div>
-          <p className="text-xs text-muted-foreground mt-6">
-            No signup required — prototype runs live against Claude.
-          </p>
-        </div>
-      </section>
+      {/* ── Hero (client — mouse tracking) ──────────────────────── */}
+      <HeroSection />
 
+      {/* ── Bank logos ticker ────────────────────────────────────── */}
+      <LogoTicker />
+
+      {/* ── Stats bar ───────────────────────────────────────────── */}
+      <StatsBar />
+
+      {/* ── Problem ─────────────────────────────────────────────── */}
       <section className="px-6 py-20">
-        <div className="max-w-5xl mx-auto">
-          <div className="max-w-2xl mb-12 text-center mx-auto">
-            <p className="text-sm font-medium text-primary mb-2">
-              The problem
-            </p>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
-              IB recruiting is won in tabs. That's broken.
+        <div className="mx-auto max-w-5xl">
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <p className="text-primary mb-2 text-sm font-medium">The problem</p>
+            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
+              IB recruiting is won in tabs. That&apos;s broken.
             </h2>
             <p className="text-muted-foreground mt-3 leading-relaxed">
-              Wall Street Oasis for intel. BIWS for technicals. LinkedIn for
-              bankers. Handshake for jobs. A Google Sheet for your networking.
-              Nobody built a system for this — until now.
+              Wall Street Oasis for intel. BIWS for technicals. LinkedIn for bankers. Handshake for
+              jobs. A Google Sheet for your networking. Nobody built a system for this — until now.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {problems.map((p) => (
-              <div key={p.title} className="rounded-xl border bg-card p-5">
-                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+              <div key={p.title} className="bg-card rounded-xl border p-5">
+                <p className="text-muted-foreground mb-2 text-xs font-semibold tracking-wide uppercase">
                   {p.title}
                 </p>
                 <p className="text-sm leading-relaxed">{p.body}</p>
@@ -132,60 +102,54 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section id="features" className="border-t bg-muted/30 px-6 py-20">
-        <div className="max-w-6xl mx-auto">
-          <div className="max-w-2xl mb-12">
-            <p className="text-sm font-medium text-primary mb-2">
-              The product
-            </p>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
+      {/* ── Features ────────────────────────────────────────────── */}
+      <section id="features" className="bg-muted/30 border-t px-6 py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 max-w-2xl">
+            <p className="text-primary mb-2 text-sm font-medium">The product</p>
+            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
               Every stage of recruiting,
               <br />
               with AI at the right moment
             </h2>
             <p className="text-muted-foreground mt-3">
-              Twelve features, one coherent workflow. Each one replaces
-              something students currently duct-tape together from five sites.
+              Twelve features, one coherent workflow. Each one replaces something students currently
+              duct-tape together from five sites.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {features.map((f) => (
               <div
                 key={f.title}
-                className="rounded-xl border bg-card p-5 hover:shadow-sm transition-shadow"
+                className="bg-card hover:border-primary/30 group rounded-xl border p-5 transition-all duration-200 hover:shadow-md"
               >
-                <div className="size-9 rounded-md bg-accent text-accent-foreground grid place-items-center mb-4">
-                  <f.icon className="size-4" />
+                <div className="bg-accent text-accent-foreground group-hover:bg-primary/10 mb-4 grid size-9 place-items-center rounded-md transition-colors">
+                  <f.icon className="group-hover:text-primary size-4 transition-colors" />
                 </div>
-                <h3 className="font-semibold mb-1">{f.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {f.description}
-                </p>
+                <h3 className="mb-1 font-semibold">{f.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{f.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="how" className="px-6 py-20 border-t">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-sm font-medium text-primary mb-2">
-            How it works
-          </p>
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-10">
+      {/* ── How it works ────────────────────────────────────────── */}
+      <section id="how" className="border-t px-6 py-20">
+        <div className="mx-auto max-w-4xl">
+          <p className="text-primary mb-2 text-sm font-medium">How it works</p>
+          <h2 className="mb-10 text-3xl font-semibold tracking-tight md:text-4xl">
             Your recruiting cycle, from cold to offer
           </h2>
           <ol className="space-y-8">
             {steps.map((s, i) => (
               <li key={s.title} className="flex gap-5">
-                <div className="shrink-0 size-9 rounded-full bg-primary text-primary-foreground grid place-items-center font-semibold text-sm">
+                <div className="bg-primary text-primary-foreground grid size-9 shrink-0 place-items-center rounded-full text-sm font-semibold">
                   {i + 1}
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-semibold mb-1">{s.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {s.body}
-                  </p>
+                  <h3 className="mb-1 font-semibold">{s.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{s.body}</p>
                 </div>
               </li>
             ))}
@@ -193,28 +157,33 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="px-6 py-20 border-t bg-muted/30">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-sm font-medium text-primary mb-2">
-            Why this works
-          </p>
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-10">
-            You stay in the work. The AI stays beside you.
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {principles.map((p) => (
-              <div
-                key={p.title}
-                className="rounded-xl border bg-card p-5 flex gap-4"
-              >
-                <div className="shrink-0 size-8 rounded-md bg-accent grid place-items-center">
-                  <Check className="size-4 text-primary" />
+      {/* ── Testimonials ────────────────────────────────────────── */}
+      <section className="bg-muted/20 border-t px-6 py-20">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-12 text-center">
+            <p className="text-primary mb-2 text-sm font-medium">Student stories</p>
+            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
+              Real results from real recruiting cycles
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+            {testimonials.map((t) => (
+              <div key={t.name} className="bg-card flex flex-col gap-4 rounded-xl border p-6">
+                <div className="flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="size-3.5 fill-amber-400 text-amber-400" />
+                  ))}
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {p.body}
-                  </p>
+                <Quote className="text-primary/40 size-5" />
+                <p className="text-foreground/80 flex-1 text-sm leading-relaxed">{t.quote}</p>
+                <div className="flex items-center gap-3 border-t pt-4">
+                  <div className="bg-primary/10 text-primary grid size-8 place-items-center rounded-full text-xs font-bold">
+                    {t.initials}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold">{t.name}</p>
+                    <p className="text-muted-foreground text-xs">{t.role}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -222,33 +191,53 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section id="pricing" className="px-6 py-20 border-t">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-sm font-medium text-primary mb-2">Pricing</p>
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-10">
+      {/* ── Principles ──────────────────────────────────────────── */}
+      <section className="border-t px-6 py-20">
+        <div className="mx-auto max-w-5xl">
+          <p className="text-primary mb-2 text-sm font-medium">Why this works</p>
+          <h2 className="mb-10 text-3xl font-semibold tracking-tight md:text-4xl">
+            You stay in the work. The AI stays beside you.
+          </h2>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {principles.map((p) => (
+              <div key={p.title} className="bg-card flex gap-4 rounded-xl border p-5">
+                <div className="bg-accent grid size-8 shrink-0 place-items-center rounded-md">
+                  <Check className="text-primary size-4" />
+                </div>
+                <div>
+                  <h3 className="mb-1 font-semibold">{p.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{p.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Pricing ─────────────────────────────────────────────── */}
+      <section id="pricing" className="bg-muted/30 border-t px-6 py-20">
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="text-primary mb-2 text-sm font-medium">Pricing</p>
+          <h2 className="mb-10 text-3xl font-semibold tracking-tight md:text-4xl">
             Priced for the cycle, not a subscription trap
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
-            <div className="rounded-xl border bg-card p-6">
+          <div className="grid grid-cols-1 gap-4 text-left md:grid-cols-3">
+            <div className="bg-card rounded-xl border p-6">
               <p className="font-semibold">Free</p>
-              <p className="text-3xl font-semibold mt-1">$0</p>
-              <p className="text-sm text-muted-foreground mt-2 mb-4">
-                Taste the product
-              </p>
-              <ul className="text-sm space-y-2 text-muted-foreground">
+              <p className="mt-1 text-3xl font-semibold">$0</p>
+              <p className="text-muted-foreground mt-2 mb-4 text-sm">Taste the product</p>
+              <ul className="text-muted-foreground space-y-2 text-sm">
                 <li>3 guides</li>
                 <li>3 mock interviews / month</li>
                 <li>Job feed</li>
               </ul>
             </div>
-            <div className="rounded-xl border-2 border-primary bg-card p-6 relative">
+            <div className="border-primary bg-card shadow-primary/10 relative rounded-xl border-2 p-6 shadow-lg">
               <Badge className="absolute -top-2 right-4">Most popular</Badge>
               <p className="font-semibold">Season Pass</p>
-              <p className="text-3xl font-semibold mt-1">$149</p>
-              <p className="text-sm text-muted-foreground mt-2 mb-4">
-                Full access Aug – Feb
-              </p>
-              <ul className="text-sm space-y-2">
+              <p className="mt-1 text-3xl font-semibold">$149</p>
+              <p className="text-muted-foreground mt-2 mb-4 text-sm">Full access Aug – Feb</p>
+              <ul className="space-y-2 text-sm">
                 <li>Full content library</li>
                 <li>Unlimited mock interviews</li>
                 <li>Resume coach + Story Framer</li>
@@ -256,53 +245,53 @@ export default function LandingPage() {
                 <li>Weak-area diagnostics</li>
               </ul>
             </div>
-            <div className="rounded-xl border bg-card p-6">
+            <div className="bg-card rounded-xl border p-6">
               <p className="font-semibold">Pro Monthly</p>
-              <p className="text-3xl font-semibold mt-1">$29</p>
-              <p className="text-sm text-muted-foreground mt-2 mb-4">
-                Flexible if you're off-cycle
+              <p className="mt-1 text-3xl font-semibold">$29</p>
+              <p className="text-muted-foreground mt-2 mb-4 text-sm">
+                Flexible if you&apos;re off-cycle
               </p>
-              <ul className="text-sm space-y-2 text-muted-foreground">
+              <ul className="text-muted-foreground space-y-2 text-sm">
                 <li>Everything in Season Pass</li>
                 <li>Cancel any time</li>
-                <li>Mentor sessions at-cost</li>
               </ul>
             </div>
           </div>
-          <p className="text-xs text-muted-foreground mt-6">
+          <p className="text-muted-foreground mt-6 text-xs">
             University plans available for career centers — email hello@streetprep.ai.
           </p>
         </div>
       </section>
 
-      <section className="px-6 py-24 border-t">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-6">
+      {/* ── CTA ─────────────────────────────────────────────────── */}
+      <section className="border-t px-6 py-24">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="mb-6 text-4xl font-semibold tracking-tight md:text-5xl">
             Your offer is won
             <br />
             in the <span className="text-primary">quiet weeks.</span>
           </h2>
-          <p className="text-lg text-muted-foreground mb-8">
+          <p className="text-muted-foreground mb-8 text-lg">
             Start the cycle with a system, not a tab graveyard.
           </p>
-          <Button asChild size="lg" className="h-11 px-6">
-            <Link href="/dashboard">
-              Open the demo
-              <ArrowRight className="size-4 ml-1.5" />
+          <Button asChild size="lg" className="shadow-primary/20 h-12 px-7 shadow-md">
+            <Link href="/signup">
+              Get started
+              <ArrowRight className="ml-1.5 size-4" />
             </Link>
           </Button>
         </div>
       </section>
 
-      <footer className="border-t px-6 py-10 text-sm text-muted-foreground">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-4 items-center justify-between">
+      {/* ── Footer ──────────────────────────────────────────────── */}
+      <footer className="text-muted-foreground border-t px-6 py-10 text-sm">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 md:flex-row">
           <div className="flex items-center gap-2">
-            <div className="size-5 rounded bg-primary text-primary-foreground grid place-items-center">
+            <div className="bg-primary text-primary-foreground grid size-5 place-items-center rounded">
               <Sparkles className="size-3" />
             </div>
             <span>
-              Street Prep{" "}
-              <span className="text-primary font-semibold">AI</span> — prototype
+              Street Prep <span className="text-primary font-semibold">AI</span> — prototype
             </span>
           </div>
           <div className="flex gap-6">
@@ -375,28 +364,10 @@ const features = [
       "Progress that tells you what to work on, not what you've done. Mock scores, flashcards, and reading signals all feed it.",
   },
   {
-    icon: Briefcase,
-    title: "Job hub",
-    description:
-      "IB summer analyst roles, filtered by firm, group, region, and deadline. One click to the ATS.",
-  },
-  {
     icon: FileText,
     title: "Resume & deal sheet coach",
     description:
       "Upload your resume. Claude rewrites bullets in banker-speak, flags weak items, and builds your deal sheet.",
-  },
-  {
-    icon: Users,
-    title: "Mentor marketplace",
-    description:
-      "30-minute sessions with current analysts and associates at target firms. KYC-verified, revenue-shared.",
-  },
-  {
-    icon: MessageSquare,
-    title: "Peer community",
-    description:
-      "Interview reports and study groups, moderated. Every report becomes training signal for the mock interview question bank.",
   },
   {
     icon: Highlighter,
@@ -439,6 +410,30 @@ const steps = [
   },
 ];
 
+const testimonials = [
+  {
+    quote:
+      "I went from not knowing what EBITDA stood for to landing a Goldman TMT offer in four months. The mock interview studio is the real deal — it scored me harder than any real interviewer.",
+    name: "Aiden Park",
+    initials: "AP",
+    role: "Incoming SA · Goldman Sachs TMT",
+  },
+  {
+    quote:
+      "The Relationship Memory feature is what no one else has. I had 60+ coffee chats and every follow-up was specific and warm because the AI remembered what each banker told me.",
+    name: "Maya Okonkwo",
+    initials: "MO",
+    role: "Incoming SA · Evercore M&A",
+  },
+  {
+    quote:
+      "I'm from a non-target and felt way behind. Street Prep AI gave me a system — not just content. The weak-area diagnostics told me exactly where to focus every week.",
+    name: "Ryan Castellano",
+    initials: "RC",
+    role: "Incoming SA · Jefferies Leveraged Finance",
+  },
+];
+
 const principles = [
   {
     title: "AI assists, doesn't replace",
@@ -450,7 +445,7 @@ const principles = [
   },
   {
     title: "Built by and for finance students",
-    body: "Banker voice, banker rigor, banker-level specifics on firms and deals. None of the \"AI slop\" that students can see through instantly.",
+    body: 'Banker voice, banker rigor, banker-level specifics on firms and deals. None of the "AI slop" that students can see through instantly.',
   },
   {
     title: "Your data, your trust",

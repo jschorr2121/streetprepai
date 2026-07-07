@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { SidebarProfileMenu } from "@/components/auth/sidebar-profile-menu";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
@@ -9,82 +10,104 @@ import {
   Mic,
   NotebookPen,
   BarChart3,
-  Briefcase,
   FileText,
-  Users,
   HeartHandshake,
-  MessageSquare,
   Building2,
   Sparkles,
+  MessageSquare,
+  Layers,
+  Briefcase,
+  ListChecks,
+  User,
 } from "lucide-react";
 
-const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/library", label: "Library", icon: BookOpenText },
-  { href: "/interview", label: "Mock Interview", icon: Mic },
-  { href: "/story-framer", label: "Story Framer", icon: NotebookPen },
-  { href: "/progress", label: "Progress", icon: BarChart3 },
-  { href: "/jobs", label: "Jobs", icon: Briefcase },
-  { href: "/resume", label: "Resume Coach", icon: FileText },
-  { href: "/relationships", label: "Relationships", icon: HeartHandshake },
-  { href: "/firms", label: "Firms", icon: Building2 },
-  { href: "/network", label: "Mentors", icon: Users },
-  { href: "/community", label: "Community", icon: MessageSquare },
+type NavItem = { href: string; label: string; icon: typeof LayoutDashboard };
+type NavSection =
+  | { kind: "item"; item: NavItem }
+  | { kind: "group"; label: string; items: NavItem[] };
+
+const sections: NavSection[] = [
+  { kind: "item", item: { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard } },
+  { kind: "item", item: { href: "/learn", label: "Learn", icon: BookOpenText } },
+  {
+    kind: "group",
+    label: "Tools",
+    items: [
+      { href: "/tools/chatbot", label: "Chatbot", icon: MessageSquare },
+      { href: "/tools/story-framer", label: "Story Framer", icon: NotebookPen },
+      { href: "/tools/resume-coach", label: "Resume Coach", icon: FileText },
+      { href: "/tools/mock-interview", label: "Mock Interview", icon: Mic },
+      { href: "/tools/question-bank", label: "Question Bank", icon: ListChecks },
+      { href: "/tools/relationships", label: "Relationships", icon: HeartHandshake },
+      { href: "/tools/applications", label: "Applications", icon: Briefcase },
+    ],
+  },
+  { kind: "item", item: { href: "/firms", label: "Firms", icon: Building2 } },
+  { kind: "item", item: { href: "/sectors", label: "Sectors", icon: Layers } },
+  { kind: "item", item: { href: "/profile", label: "Profile", icon: User } },
+  { kind: "item", item: { href: "/progress", label: "Progress", icon: BarChart3 } },
 ];
 
-export function AppNav() {
+function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
+  const active =
+    pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
+  const Icon = item.icon;
+  return (
+    <li>
+      <Link
+        href={item.href}
+        className={cn(
+          "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+          active
+            ? "bg-accent text-accent-foreground"
+            : "text-muted-foreground hover:bg-accent/50 hover:text-foreground",
+        )}
+      >
+        <Icon className="size-4" />
+        <span>{item.label}</span>
+      </Link>
+    </li>
+  );
+}
+
+export function AppNav({ email, fullName }: { email: string; fullName?: string | undefined }) {
   const pathname = usePathname();
   return (
-    <aside className="hidden lg:flex lg:w-60 lg:shrink-0 flex-col border-r bg-background/40 backdrop-blur">
-      <div className="h-14 flex items-center px-5 border-b">
-        <Link
-          href="/dashboard"
-          className="flex items-center gap-2 font-semibold tracking-tight"
-        >
-          <div className="size-7 rounded-md bg-primary text-primary-foreground grid place-items-center">
+    <aside className="bg-background/40 hidden flex-col border-r backdrop-blur lg:flex lg:w-60 lg:shrink-0">
+      <div className="flex h-14 items-center border-b px-5">
+        <Link href="/dashboard" className="flex items-center gap-2 font-semibold tracking-tight">
+          <div className="bg-primary text-primary-foreground grid size-7 place-items-center rounded-md">
             <Sparkles className="size-4" />
           </div>
           <div className="leading-tight">
             <span className="text-sm">Street Prep</span>
-            <span className="text-xs text-primary ml-1 font-semibold">AI</span>
+            <span className="text-primary ml-1 text-xs font-semibold">AI</span>
           </div>
         </Link>
       </div>
-      <nav className="flex-1 py-4 px-3 overflow-y-auto">
+      <nav className="flex-1 overflow-y-auto px-3 py-4">
         <ul className="space-y-0.5">
-          {navItems.map((item) => {
-            const active =
-              pathname === item.href ||
-              (item.href !== "/dashboard" && pathname.startsWith(item.href));
-            const Icon = item.icon;
+          {sections.map((section, i) => {
+            if (section.kind === "item") {
+              return <NavLink key={section.item.href} item={section.item} pathname={pathname} />;
+            }
             return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                    active
-                      ? "bg-accent text-accent-foreground"
-                      : "text-muted-foreground hover:bg-accent/50 hover:text-foreground",
-                  )}
-                >
-                  <Icon className="size-4" />
-                  <span>{item.label}</span>
-                </Link>
+              <li key={`group-${i}`} className="pt-3">
+                <p className="text-muted-foreground/70 mb-1 px-3 text-[10px] font-semibold tracking-wider uppercase">
+                  {section.label}
+                </p>
+                <ul className="space-y-0.5">
+                  {section.items.map((item) => (
+                    <NavLink key={item.href} item={item} pathname={pathname} />
+                  ))}
+                </ul>
               </li>
             );
           })}
         </ul>
       </nav>
-      <div className="p-4 border-t">
-        <div className="rounded-lg bg-accent/60 p-3 text-xs">
-          <p className="font-medium text-accent-foreground mb-1">
-            Prototype demo
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            Data is seeded. Lens, Chat, and Prep Sheets call Claude live.
-          </p>
-        </div>
+      <div className="border-t p-3">
+        <SidebarProfileMenu email={email} fullName={fullName} />
       </div>
     </aside>
   );

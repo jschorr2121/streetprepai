@@ -1,8 +1,15 @@
 import { getProfile } from "@/lib/data/profile";
-import { getAppliedJobs } from "@/lib/data/applied-jobs";
-import { getContacts, getContactById, getChatLogs, getChatLogsForContact } from "@/lib/data/contacts";
+import {
+  getContacts,
+  getContactById,
+  getChatLogs,
+  getChatLogsForContact,
+} from "@/lib/data/contacts";
 import { getCalendarEvents } from "@/lib/data/calendar";
+import { withUser } from "@/lib/db/client";
+import { getApplications } from "@/lib/db/queries/applications";
 import type { AppliedJobStage } from "@/lib/types";
+import { APPLIED_JOB_STAGES } from "@/lib/validation/schemas/applied-jobs";
 
 export const ASSISTANT_TOOLS = [
   {
@@ -11,21 +18,6 @@ export const ASSISTANT_TOOLS = [
     input_schema: {
       type: "object" as const,
       properties: {},
-      required: [],
-    },
-  },
-  {
-    name: "get_applied_jobs",
-    description: "List jobs the user has applied to, optionally filtered by stage.",
-    input_schema: {
-      type: "object" as const,
-      properties: {
-        stage: {
-          type: "string",
-          enum: ["shortlist", "applied", "interview", "superday", "offer", "rejected"],
-          description: "Only return jobs at this stage.",
-        },
-      },
       required: [],
     },
   },
@@ -78,6 +70,21 @@ export const ASSISTANT_TOOLS = [
     },
   },
   {
+    name: "get_applied_jobs",
+    description: "List jobs the user has applied to, optionally filtered by stage.",
+    input_schema: {
+      type: "object" as const,
+      properties: {
+        stage: {
+          type: "string",
+          enum: [...APPLIED_JOB_STAGES],
+          description: "Only return jobs at this stage.",
+        },
+      },
+      required: [],
+    },
+  },
+  {
     name: "web_search",
     description: "Search the web for current market news, firm info, or deal updates.",
     input_schema: {
@@ -111,19 +118,6 @@ export async function executeTool(
           education: profile.education,
           skills: profile.skills,
         };
-      }
-
-      case "get_applied_jobs": {
-        let jobs = await getAppliedJobs(userId);
-        if (input.stage) {
-          jobs = jobs.filter((j) => j.stage === (input.stage as AppliedJobStage));
-        }
-        const byStage: Record<string, typeof jobs> = {};
-        for (const job of jobs) {
-          if (!byStage[job.stage]) byStage[job.stage] = [];
-          byStage[job.stage]!.push(job);
-        }
-        return { count: jobs.length, byStage };
       }
 
       case "list_contacts": {
@@ -167,12 +161,14 @@ export async function executeTool(
 
       case "search_chat_logs": {
         const query = (input.query as string).toLowerCase();
-        const [contacts, allChats] = await Promise.all([
-          getContacts(userId),
-          getChatLogs(userId),
-        ]);
+        const [contacts, allChats] = await Promise.all([getContacts(userId), getChatLogs(userId)]);
         const contactMap = new Map(contacts.map((c) => [c.id, c]));
-        const hits: Array<{ chatId: string; contactId: string; contactName: string; snippet: string }> = [];
+        const hits: Array<{
+          chatId: string;
+          contactId: string;
+          contactName: string;
+          snippet: string;
+        }> = [];
 
         for (const chat of allChats) {
           const searchText = [
@@ -199,6 +195,37 @@ export async function executeTool(
         return { count: hits.length, hits };
       }
 
+      case "get_applied_jobs": {
+        // Validate the optional stage filter at the boundary.
+        const stage =
+          typeof input.stage === "string" &&
+          (APPLIED_JOB_STAGES as readonly string[]).includes(input.stage)
+            ? (input.stage as AppliedJobStage)
+            : undefined;
+
+        const applications = await withUser({ sub: userId, role: "authenticated" }, (tx) =>
+          getApplications(tx, userId, stage ? { stage } : {}),
+        );
+
+        // Group by stage for the chatbot's summary view.
+        const byStage: Record<
+          string,
+          Array<{ id: string; firm: string; role: string; deadline?: string; notes?: string }>
+        > = {};
+        for (const app of applications) {
+          if (!byStage[app.stage]) byStage[app.stage] = [];
+          byStage[app.stage]!.push({
+            id: app.id,
+            firm: app.firm,
+            role: app.role,
+            deadline: app.deadline,
+            notes: app.notes,
+          });
+        }
+
+        return { count: applications.length, byStage };
+      }
+
       case "web_search": {
         return { results: [], note: "Web search not available in this context." };
       }
@@ -210,4 +237,3 @@ export async function executeTool(
     return { error: err instanceof Error ? err.message : "Tool execution failed" };
   }
 }
-

@@ -18,7 +18,7 @@ const weakAreas = [
     subtopic: "STAR structure — Situation too long",
     mastery: 0.42,
     signal: "Only 1 conflict story in your Story Bank",
-    drillHref: "/story-framer",
+    drillHref: "/tools/story-framer",
   },
   {
     topic: "GS TMT firm-specific fit",
@@ -47,53 +47,47 @@ const streakDays = Array.from({ length: 28 }, (_, i) => {
 
 export default function ProgressPage() {
   return (
-    <div className="max-w-5xl mx-auto px-6 md:px-8 py-8">
+    <div className="mx-auto max-w-5xl px-6 py-8 md:px-8">
       <header className="mb-6">
-        <div className="flex items-center gap-2 text-primary text-sm font-medium mb-2">
+        <div className="text-primary mb-2 flex items-center gap-2 text-sm font-medium">
           <BarChart3 className="size-4" /> Progress
         </div>
-        <h1 className="text-3xl font-semibold tracking-tight">
-          What you need to work on
-        </h1>
+        <h1 className="text-3xl font-semibold tracking-tight">What you need to work on</h1>
         <p className="text-muted-foreground mt-2 max-w-2xl">
-          Not what you've done — what to do next. Mock scores, flashcard
-          accuracy, and reading signals all feed this.
+          Not what you&apos;ve done — what to do next. Mock scores, flashcard accuracy, and reading
+          signals all feed this.
         </p>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
         <Card className="p-5">
-          <div className="flex items-center gap-2 mb-2">
+          <div className="mb-2 flex items-center gap-2">
             <Flame className="size-4 text-orange-500" />
             <p className="text-sm font-medium">Streak</p>
           </div>
           <p className="text-3xl font-semibold">12 days</p>
-          <p className="text-xs text-muted-foreground mt-1">Longest: 21 days</p>
+          <p className="text-muted-foreground mt-1 text-xs">Longest: 21 days</p>
         </Card>
         <Card className="p-5">
-          <p className="text-sm font-medium mb-2">Overall mastery</p>
+          <p className="mb-2 text-sm font-medium">Overall mastery</p>
           <p className="text-3xl font-semibold">61%</p>
-          <p className="text-xs text-muted-foreground mt-1">
-            +4% in the last 7 days
-          </p>
+          <p className="text-muted-foreground mt-1 text-xs">+4% in the last 7 days</p>
         </Card>
         <Card className="p-5">
-          <p className="text-sm font-medium mb-2">This week</p>
+          <p className="mb-2 text-sm font-medium">This week</p>
           <p className="text-3xl font-semibold">23</p>
-          <p className="text-xs text-muted-foreground mt-1">
-            flashcards · 2 mocks · 4 chats
-          </p>
+          <p className="text-muted-foreground mt-1 text-xs">flashcards · 2 mocks · 4 chats</p>
         </Card>
       </div>
 
       <section className="mb-10">
-        <div className="flex items-end justify-between mb-4">
+        <div className="mb-4 flex items-end justify-between">
           <div>
-            <h2 className="text-xl font-semibold tracking-tight flex items-center gap-2">
-              <TrendingDown className="size-4 text-primary" /> Focus today
+            <h2 className="flex items-center gap-2 text-xl font-semibold tracking-tight">
+              <TrendingDown className="text-primary size-4" /> Focus today
             </h2>
-            <p className="text-sm text-muted-foreground">
-              Ranked by how much they're holding you back.
+            <p className="text-muted-foreground text-sm">
+              Ranked by how much they&apos;re holding you back.
             </p>
           </div>
         </div>
@@ -102,34 +96,27 @@ export default function ProgressPage() {
             <Card key={w.topic} className="p-4">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="size-6 rounded-full bg-accent grid place-items-center text-xs font-semibold">
+                  <div className="mb-1 flex items-center gap-2">
+                    <span className="bg-accent grid size-6 place-items-center rounded-full text-xs font-semibold">
                       {i + 1}
                     </span>
-                    <p className="font-semibold text-sm">{w.topic}</p>
+                    <p className="text-sm font-semibold">{w.topic}</p>
                   </div>
-                  <p className="text-xs text-muted-foreground ml-8">
-                    {w.subtopic}
-                  </p>
-                  <p className="text-xs text-muted-foreground ml-8 mt-1">
-                    {w.signal}
-                  </p>
+                  <p className="text-muted-foreground ml-8 text-xs">{w.subtopic}</p>
+                  <p className="text-muted-foreground mt-1 ml-8 text-xs">{w.signal}</p>
                 </div>
-                <div className="flex items-center gap-3 shrink-0">
+                <div className="flex shrink-0 items-center gap-3">
                   <div className="w-20">
-                    <div className="h-1.5 rounded-full bg-muted overflow-hidden">
-                      <div
-                        className="h-full bg-primary"
-                        style={{ width: `${w.mastery * 100}%` }}
-                      />
+                    <div className="bg-muted h-1.5 overflow-hidden rounded-full">
+                      <div className="bg-primary h-full" style={{ width: `${w.mastery * 100}%` }} />
                     </div>
-                    <p className="text-[10px] text-muted-foreground mt-1 text-right">
+                    <p className="text-muted-foreground mt-1 text-right text-[10px]">
                       {Math.round(w.mastery * 100)}% mastered
                     </p>
                   </div>
                   <Button asChild size="sm" variant="outline">
                     <Link href={w.drillHref}>
-                      Drill <ArrowRight className="size-3 ml-1" />
+                      Drill <ArrowRight className="ml-1 size-3" />
                     </Link>
                   </Button>
                 </div>
@@ -140,15 +127,13 @@ export default function ProgressPage() {
       </section>
 
       <section className="mb-10">
-        <h2 className="text-xl font-semibold tracking-tight mb-4">
-          Mastery by topic
-        </h2>
+        <h2 className="mb-4 text-xl font-semibold tracking-tight">Mastery by topic</h2>
         <Card className="p-5">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {masteryByTopic.map((t) => (
               <div key={t.topic}>
-                <p className="text-xs font-medium mb-1">{t.topic}</p>
-                <div className="h-2 rounded-full bg-muted overflow-hidden">
+                <p className="mb-1 text-xs font-medium">{t.topic}</p>
+                <div className="bg-muted h-2 overflow-hidden rounded-full">
                   <div
                     className={cn(
                       "h-full transition-all",
@@ -161,7 +146,7 @@ export default function ProgressPage() {
                     style={{ width: `${t.mastery * 100}%` }}
                   />
                 </div>
-                <p className="text-[10px] text-muted-foreground mt-1">
+                <p className="text-muted-foreground mt-1 text-[10px]">
                   {Math.round(t.mastery * 100)}%
                 </p>
               </div>
@@ -171,18 +156,13 @@ export default function ProgressPage() {
       </section>
 
       <section>
-        <h2 className="text-xl font-semibold tracking-tight mb-4">
-          Last 4 weeks
-        </h2>
+        <h2 className="mb-4 text-xl font-semibold tracking-tight">Last 4 weeks</h2>
         <Card className="p-5">
           <div className="grid grid-cols-14 gap-1">
             {streakDays.map((d) => (
               <div
                 key={d.day}
-                className={cn(
-                  "aspect-square rounded-sm",
-                  d.active ? "bg-primary/80" : "bg-muted",
-                )}
+                className={cn("aspect-square rounded-sm", d.active ? "bg-primary/80" : "bg-muted")}
               />
             ))}
           </div>
