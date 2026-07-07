@@ -1,6 +1,17 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { HeroDesk } from "@/components/marketing/hero-desk";
+import { FirmTicker } from "@/components/marketing/firm-ticker";
+import { LensDemo } from "@/components/marketing/lens-demo";
+import { CountUp } from "@/components/marketing/count-up";
+import { Reveal } from "@/components/marketing/reveal";
+
+const FIGURES: { value: number; label: string }[] = [
+  { value: 16, label: "chapters in the spine" },
+  { value: 5, label: "tools live today" },
+  { value: 1, label: "desk for the whole cycle" },
+];
 
 const CHAPTERS = [
   "The recruiting cycle & timeline",
@@ -114,8 +125,9 @@ export default function LandingPage() {
 
       <main className="flex-1">
         {/* ── Hero ────────────────────────────────────────────────── */}
-        <section className="border-b">
-          <div className="mx-auto max-w-5xl px-6 py-20 md:py-28">
+        <section className="relative border-b">
+          <HeroDesk />
+          <div className="relative mx-auto max-w-5xl px-6 py-20 md:py-28">
             <p className="eyebrow">Investment banking recruiting, prepared properly</p>
             <h1 className="font-display mt-5 max-w-3xl text-4xl leading-[1.08] md:text-6xl">
               Prep for the job like it&apos;s already the job.
@@ -139,12 +151,23 @@ export default function LandingPage() {
             <p className="text-muted-foreground mt-6 font-mono text-xs">
               A working prototype — every AI feature runs live.
             </p>
+            <div className="bg-card mt-14 grid max-w-2xl grid-cols-3 divide-x rounded-md border">
+              {FIGURES.map((figure) => (
+                <div key={figure.label} className="px-4 py-4 md:px-5">
+                  <CountUp target={figure.value} className="tabular text-2xl" />
+                  <p className="eyebrow mt-1.5">{figure.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
+        {/* ── Firm ticker ────────────────────────────────────────── */}
+        <FirmTicker />
+
         {/* ── Contents (the spine as a prospectus TOC) ───────────── */}
         <section id="contents" className="border-b">
-          <div className="mx-auto max-w-5xl px-6 py-16 md:py-20">
+          <Reveal className="mx-auto max-w-5xl px-6 py-16 md:py-20">
             <div className="flex items-baseline justify-between gap-4">
               <h2 className="font-display text-3xl">Contents</h2>
               <p className="eyebrow">16 chapters · weighted toward technicals</p>
@@ -153,9 +176,9 @@ export default function LandingPage() {
               {CHAPTERS.map((title, i) => (
                 <li
                   key={title}
-                  className="flex items-baseline gap-4 border-b py-3 last:border-b-0 md:nth-[8]:border-b-0"
+                  className="group flex items-baseline gap-4 border-b py-3 last:border-b-0 md:nth-[8]:border-b-0"
                 >
-                  <span className="text-muted-foreground w-6 shrink-0 font-mono text-xs">
+                  <span className="text-muted-foreground group-hover:text-primary w-6 shrink-0 font-mono text-xs transition-colors">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="text-sm">{title}</span>
@@ -166,44 +189,22 @@ export default function LandingPage() {
               Reading is active: highlight any passage and the Lens explains it in the margin.
               Beginner mode rewrites a section with analogies when the jargon gets ahead of you.
             </p>
-          </div>
+          </Reveal>
         </section>
 
-        {/* ── Lens demo (static excerpt) ─────────────────────────── */}
+        {/* ── Lens demo (interactive excerpt) ────────────────────── */}
         <section className="bg-muted/50 border-b">
-          <div className="mx-auto max-w-5xl px-6 py-16 md:py-20">
+          <Reveal className="mx-auto max-w-5xl px-6 py-16 md:py-20">
             <p className="eyebrow">The Reading Lens</p>
-            <div className="mt-6 grid gap-6 md:grid-cols-[1fr_minmax(240px,320px)]">
-              <figure className="bg-card rounded-md border p-6 md:p-8">
-                <p className="eyebrow mb-4">Chapter 11 · DCF</p>
-                <p className="font-serif text-[17px] leading-[1.7]">
-                  A DCF values a company as the sum of its future free cash flows,{" "}
-                  <mark className="lens-highlight">
-                    discounted back to today at a rate that reflects the riskiness of those cash
-                    flows
-                  </mark>
-                  . The discount rate for unlevered free cash flow is WACC — the blended cost of the
-                  company&apos;s debt and equity.
-                </p>
-              </figure>
-              <aside
-                className="bg-card h-fit rounded-md border p-5"
-                aria-label="Lens explanation example"
-              >
-                <p className="eyebrow mb-3">In plain English</p>
-                <p className="text-sm leading-relaxed">
-                  A dollar arriving in 2030 is worth less than a dollar today — and the less certain
-                  that dollar is, the less you pay for it now. &ldquo;Discounting&rdquo; is just
-                  pricing in that wait and that risk.
-                </p>
-              </aside>
+            <div className="mt-6">
+              <LensDemo />
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* ── Tools index ────────────────────────────────────────── */}
         <section id="tools" className="border-b">
-          <div className="mx-auto max-w-5xl px-6 py-16 md:py-20">
+          <Reveal className="mx-auto max-w-5xl px-6 py-16 md:py-20">
             <h2 className="font-display text-3xl">The tools on the desk</h2>
             <ol className="mt-8">
               {TOOLS.map((tool, i) => (
@@ -228,12 +229,12 @@ export default function LandingPage() {
                 </li>
               ))}
             </ol>
-          </div>
+          </Reveal>
         </section>
 
         {/* ── How it works ───────────────────────────────────────── */}
         <section id="how" className="border-b">
-          <div className="mx-auto max-w-5xl px-6 py-16 md:py-20">
+          <Reveal className="mx-auto max-w-5xl px-6 py-16 md:py-20">
             <h2 className="font-display text-3xl">How it works</h2>
             <div className="mt-8 grid gap-px overflow-hidden rounded-md border md:grid-cols-3">
               {STEPS.map((step, i) => (
@@ -250,12 +251,12 @@ export default function LandingPage() {
               The AI lifts friction — it never does the thinking for you. Your stories stay yours;
               the work stays yours. That&apos;s the point.
             </p>
-          </div>
+          </Reveal>
         </section>
 
         {/* ── CTA ────────────────────────────────────────────────── */}
         <section>
-          <div className="mx-auto max-w-5xl px-6 py-20 text-center md:py-24">
+          <Reveal className="mx-auto max-w-5xl px-6 py-20 text-center md:py-24">
             <h2 className="font-display mx-auto max-w-2xl text-3xl text-balance md:text-4xl">
               The cycle moved up a year. Start where you are.
             </h2>
@@ -267,7 +268,7 @@ export default function LandingPage() {
                 </Link>
               </Button>
             </div>
-          </div>
+          </Reveal>
         </section>
       </main>
 
