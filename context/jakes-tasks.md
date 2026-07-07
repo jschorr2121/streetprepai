@@ -30,17 +30,26 @@ needs action it can't perform itself.
 
 ---
 
-## 🟠 Repo health (decide soon — blocks pushing to GitHub)
+## 🟠 Repo health
 
-- [ ] **Decide how to squash unpushed history** — ~13 git objects inside the 12
-  unpushed master commits were permanently destroyed by iCloud eviction (repaired
-  enough to work day-to-day on 2026-07-06, but `git push` and `git gc` will fail
-  until the unpushed range is squashed into one commit on top of origin's
-  `1a06923`). Claude can do the squash — just say go; granularity of those 12
-  commit messages is what gets lost. (UI revamp session)
 - [ ] **Move the repo out of iCloud-synced `~/Documents`** (or turn off macOS
   "Optimize Mac Storage") so evicted-file corruption can't recur. Suggested:
-  `~/dev/InterviewPrep`. (UI revamp session)
+  `~/dev/InterviewPrep`. Safe procedure (order matters — don't plain `mv`):
+  1. Quit anything holding the repo (dev servers, editors, Claude sessions).
+  2. Force-download everything first: `brctl download ~/Documents/InterviewPrep`
+     then verify nothing is still evicted:
+     `find ~/Documents/InterviewPrep -type f -flags dataless 2>/dev/null | head`
+     (empty output = fully local; if `-flags dataless` is unsupported, use
+     `ls -lO` spot checks).
+  3. Copy, don't move: `mkdir -p ~/dev && cp -Rc ~/Documents/InterviewPrep ~/dev/`
+     (`-c` = APFS clone, instant). A `mv` can strand still-evicted files with no
+     way to restore them.
+  4. Verify the copy: `cd ~/dev/InterviewPrep && git fsck --full && git status`.
+  5. Fix worktree paths (they store absolute paths):
+     `git worktree repair && git worktree repair .claude/worktrees/ui-overhaul`.
+  6. Only then delete the original `~/Documents/InterviewPrep`.
+  Everything is pushed to GitHub as of 2026-07-07, so worst case is recoverable.
+  (UI revamp session)
 
 ## 🟡 Before launch (not blocking dev, but don't ship without it)
 
@@ -50,6 +59,12 @@ needs action it can't perform itself.
 ---
 
 ## ✅ Done
+
+- [x] **Unpushed history squashed + repo fully repaired** (2026-07-07) — the 12
+  unpushed master commits were squashed into `15a4866` on origin's `1a06923`
+  (tree identical to the old tip), `design/ui-overhaul` rebased on top, both
+  branches pushed to GitHub. Broken `archive/ink-design` tag and a superseded
+  May-19 stash deleted (Jake approved); `git gc` + `git fsck --full` pass clean.
 
 - [x] **Migrations 0004 + 0005 applied** — confirmed live 2026-06-13 via direct
   DB connection: `profiles.current_semester` + `onboarded_at` present;

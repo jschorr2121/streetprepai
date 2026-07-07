@@ -34,8 +34,19 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
   caused by 41 iCloud-evicted (`dataless`) files in `.git/objects` + ~12 evicted
   source files. Quarantined dead objects, imported the GitHub pack, rebuilt master
   tip trees via temp-index `write-tree` (SHA-verified), restored working files.
-  Residual: ~13 historical objects are gone for good → `git push`/`git gc` fail
-  until unpushed history is squashed (see jakes-tasks.md).
+- **Repo repair completed 2026-07-07:** the 12 unpushed master commits (whose
+  intermediates referenced ~13 permanently-lost objects) were squashed into
+  `15a4866` on top of origin `1a06923`; `design/ui-overhaul` rebased on top; both
+  branches pushed to GitHub. Broken `archive/ink-design` tag + a superseded May-19
+  stash deleted (approved); `git gc --prune=now` and `git fsck --full` pass clean.
+- **Landing interactivity (2026-07-07, `2b0d8bf`):** new `components/marketing/`
+  client components — `HeroDesk` (graph-paper grid, cursor crosshair with
+  spreadsheet cell-ref readout, drifting ledger chips with mouse parallax; desktop
+  pointer only), `LensDemo` (three hoverable highlights swap the plain-English
+  margin card, auto-cycles until first interaction), `FirmTicker` (mono firm
+  ticker, pauses on hover), `CountUp` hero ledger strip (16/05/01 — honest
+  figures), `Reveal` (fade-up on first scroll into view). All motion inert under
+  `prefers-reduced-motion`. New `ticker`/`chip-drift` keyframes in globals.css.
 
 ### Spec authoring (multi-session workflow)
 - `project-overview.md` — product definition, 12 goals, core user flow, 16-chapter learning flow, six AI tools, scope cuts (jobs/community/mentors/flashcards), 14 success criteria.
