@@ -1,5 +1,4 @@
-import { UserCircle } from "lucide-react";
-
+import { PageHeader } from "@/components/page-header";
 import { ProfileEditForm } from "@/components/profile/profile-edit-form";
 import { requireUser } from "@/lib/auth/server";
 import { withUser } from "@/lib/db/client";
@@ -19,22 +18,17 @@ export default async function ProfilePage() {
   );
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-8 md:px-8">
-      {/* Header */}
-      <div className="mb-8 flex items-start gap-3">
-        <div className="bg-accent mt-0.5 grid size-9 shrink-0 place-items-center rounded-md">
-          <UserCircle className="text-accent-foreground size-4" aria-hidden />
-        </div>
-        <div>
-          <h1 className="text-foreground text-xl font-semibold">Profile</h1>
-          <p className="text-muted-foreground mt-0.5 text-sm">
-            Your background, targets, and bio — read by the chatbot, prep sheets, and story framer.
-          </p>
-        </div>
-      </div>
+    <div className="mx-auto max-w-3xl px-6 py-8 md:px-10">
+      <PageHeader
+        eyebrow="You"
+        title="Profile"
+        description="Your background, targets, and bio — read by the chatbot, prep sheets, and story framer."
+      />
 
       {/* Edit form (client component — needs hooks for RHF + toasts) */}
-      <ProfileEditForm profile={profile} />
+      <div className="mt-8">
+        <ProfileEditForm profile={profile} />
+      </div>
     </div>
   );
 }

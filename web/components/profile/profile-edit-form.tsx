@@ -156,10 +156,8 @@ export function ProfileEditForm({ profile }: Props) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
       {/* ── Basics ──────────────────────────────────────────────────────── */}
-      <section className="bg-card rounded-xl border p-5">
-        <h2 className="text-foreground mb-4 text-sm font-semibold tracking-wide uppercase opacity-60">
-          Basics
-        </h2>
+      <section className="bg-card rounded-md border p-5">
+        <h2 className="eyebrow mb-4">Basics</h2>
         <div className="space-y-4">
           <div className="space-y-1.5">
             <Label htmlFor="fullName">Full name</Label>
@@ -209,10 +207,8 @@ export function ProfileEditForm({ profile }: Props) {
       </section>
 
       {/* ── Bio & Background ─────────────────────────────────────────────── */}
-      <section className="bg-card rounded-xl border p-5">
-        <h2 className="text-foreground mb-4 text-sm font-semibold tracking-wide uppercase opacity-60">
-          Bio &amp; Background
-        </h2>
+      <section className="bg-card rounded-md border p-5">
+        <h2 className="eyebrow mb-4">Bio &amp; Background</h2>
         <div className="space-y-1.5">
           <Label htmlFor="bioSummary">Short bio</Label>
           <Textarea
@@ -230,10 +226,8 @@ export function ProfileEditForm({ profile }: Props) {
       </section>
 
       {/* ── Recruiting targets ───────────────────────────────────────────── */}
-      <section className="bg-card rounded-xl border p-5">
-        <h2 className="text-foreground mb-4 text-sm font-semibold tracking-wide uppercase opacity-60">
-          Recruiting Targets
-        </h2>
+      <section className="bg-card rounded-md border p-5">
+        <h2 className="eyebrow mb-4">Recruiting Targets</h2>
 
         <div className="space-y-4">
           {/* Target firms */}
@@ -243,12 +237,12 @@ export function ProfileEditForm({ profile }: Props) {
               <ul className="mb-1.5 flex flex-wrap gap-1.5">
                 {firms.map((firm) => (
                   <li key={firm}>
-                    <span className="bg-accent text-accent-foreground inline-flex items-center gap-1 rounded-full py-1 pr-1 pl-3 text-sm">
+                    <span className="bg-secondary text-secondary-foreground inline-flex items-center gap-1 rounded-sm py-1 pr-1 pl-2.5 text-sm">
                       {firm}
                       <button
                         type="button"
                         onClick={() => removeFirm(firm)}
-                        className="hover:bg-accent-foreground/10 grid size-5 place-items-center rounded-full"
+                        className="hover:bg-foreground/10 grid size-5 place-items-center rounded-sm"
                         aria-label={`Remove ${firm}`}
                       >
                         <X className="size-3" aria-hidden />
@@ -273,7 +267,7 @@ export function ProfileEditForm({ profile }: Props) {
                   key={s}
                   type="button"
                   onClick={() => addFirm(s)}
-                  className="border-border text-muted-foreground hover:border-primary/40 hover:text-foreground rounded-full border px-3 py-1 text-xs transition-colors"
+                  className="border-border text-muted-foreground hover:border-primary/40 hover:text-foreground rounded-sm border px-2.5 py-1 text-xs transition-colors"
                 >
                   + {s}
                 </button>
@@ -291,12 +285,12 @@ export function ProfileEditForm({ profile }: Props) {
               <ul className="mb-1.5 flex flex-wrap gap-1.5">
                 {roles.map((role) => (
                   <li key={role}>
-                    <span className="bg-accent text-accent-foreground inline-flex items-center gap-1 rounded-full py-1 pr-1 pl-3 text-sm">
+                    <span className="bg-secondary text-secondary-foreground inline-flex items-center gap-1 rounded-sm py-1 pr-1 pl-2.5 text-sm">
                       {role}
                       <button
                         type="button"
                         onClick={() => removeRole(role)}
-                        className="hover:bg-accent-foreground/10 grid size-5 place-items-center rounded-full"
+                        className="hover:bg-foreground/10 grid size-5 place-items-center rounded-sm"
                         aria-label={`Remove ${role}`}
                       >
                         <X className="size-3" aria-hidden />
@@ -321,7 +315,7 @@ export function ProfileEditForm({ profile }: Props) {
                   key={s}
                   type="button"
                   onClick={() => addRole(s)}
-                  className="border-border text-muted-foreground hover:border-primary/40 hover:text-foreground rounded-full border px-3 py-1 text-xs transition-colors"
+                  className="border-border text-muted-foreground hover:border-primary/40 hover:text-foreground rounded-sm border px-2.5 py-1 text-xs transition-colors"
                 >
                   + {s}
                 </button>

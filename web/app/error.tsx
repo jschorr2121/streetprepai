@@ -22,7 +22,8 @@ export default function ErrorBoundary({
   return (
     <div className="flex min-h-[60vh] items-center justify-center p-8">
       <div className="max-w-md space-y-4 text-center">
-        <h1 className="text-2xl font-semibold">Something went wrong</h1>
+        <p className="eyebrow">Something broke</p>
+        <h1 className="font-display text-2xl">Something went wrong</h1>
         <p className="text-muted-foreground text-sm">
           We hit an unexpected error. The team has been notified.
           {error.digest ? (

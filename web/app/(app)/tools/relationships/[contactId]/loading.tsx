@@ -1,21 +1,25 @@
+import { Skeleton } from "@/components/ui/skeleton";
+
 export default function ContactDetailLoading() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-8 md:px-8">
-      <div className="mb-6">
-        <div className="bg-muted mb-2 h-8 w-48 animate-pulse rounded" />
-        <div className="bg-muted h-4 w-64 animate-pulse rounded" />
+      <div className="space-y-2">
+        <Skeleton className="h-8 w-48" />
+        <Skeleton className="h-4 w-64" />
       </div>
-      <div className="mb-6 flex gap-2">
+
+      <div className="mt-6 flex gap-2">
         {[0, 1, 2].map((i) => (
-          <div key={i} className="bg-muted h-9 w-24 animate-pulse rounded-md" />
+          <Skeleton key={i} className="h-9 w-24" />
         ))}
       </div>
-      <div className="space-y-4">
+
+      <div className="mt-4 space-y-3">
         {[0, 1, 2].map((i) => (
-          <div key={i} className="bg-card rounded-xl border p-5">
-            <div className="bg-muted mb-3 h-4 w-32 animate-pulse rounded" />
-            <div className="bg-muted mb-2 h-3 w-full animate-pulse rounded" />
-            <div className="bg-muted h-3 w-4/5 animate-pulse rounded" />
+          <div key={i} className="rounded-md border p-5">
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="mt-3 h-3 w-full" />
+            <Skeleton className="mt-2 h-3 w-4/5" />
           </div>
         ))}
       </div>

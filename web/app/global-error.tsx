@@ -21,11 +21,15 @@ export default function GlobalError({ error }: { error: Error & { digest?: strin
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          background: "#f7f6f2",
+          color: "#262a35",
         }}
       >
         <div style={{ maxWidth: 400 }}>
           <h1 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Application error</h1>
-          <p style={{ color: "#666", fontSize: "0.95rem", marginBottom: "1.5rem" }}>
+          <p
+            style={{ color: "#262a35", opacity: 0.65, fontSize: "0.95rem", marginBottom: "1.5rem" }}
+          >
             A critical error occurred. Please reload the page.
             {error.digest ? (
               <span
@@ -44,9 +48,10 @@ export default function GlobalError({ error }: { error: Error & { digest?: strin
             onClick={() => window.location.reload()}
             style={{
               padding: "0.5rem 1.5rem",
-              borderRadius: "0.5rem",
-              border: "1px solid currentColor",
+              borderRadius: "0.375rem",
+              border: "1px solid #33418f",
               background: "transparent",
+              color: "#33418f",
               cursor: "pointer",
               fontSize: "0.9rem",
             }}

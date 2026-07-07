@@ -19,6 +19,18 @@ _Nothing blocking right now — all current items resolved (see Done below)._
 
 ---
 
+## 🟠 Repo health (decide soon — blocks pushing to GitHub)
+
+- [ ] **Decide how to squash unpushed history** — ~13 git objects inside the 12
+  unpushed master commits were permanently destroyed by iCloud eviction (repaired
+  enough to work day-to-day on 2026-07-06, but `git push` and `git gc` will fail
+  until the unpushed range is squashed into one commit on top of origin's
+  `1a06923`). Claude can do the squash — just say go; granularity of those 12
+  commit messages is what gets lost. (UI revamp session)
+- [ ] **Move the repo out of iCloud-synced `~/Documents`** (or turn off macOS
+  "Optimize Mac Storage") so evicted-file corruption can't recur. Suggested:
+  `~/dev/InterviewPrep`. (UI revamp session)
+
 ## 🟡 Before launch (not blocking dev, but don't ship without it)
 
 - [ ] **Re-enable "Confirm email" in Supabase** before production so real

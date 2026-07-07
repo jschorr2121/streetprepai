@@ -12,20 +12,10 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import {
-  Loader2,
-  Sparkles,
-  Mail,
-  Copy,
-  Check,
-  CalendarClock,
-} from "lucide-react";
+import { Loader2, Copy, Check } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import type {
-  OutreachDraft,
-  OutreachFollowup,
-} from "@/app/api/relationships/draft-outreach/route";
+import type { OutreachDraft, OutreachFollowup } from "@/app/api/relationships/draft-outreach/route";
 import type { Contact } from "@/lib/types";
 
 export function OutreachDrawer({
@@ -37,9 +27,7 @@ export function OutreachDrawer({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
-  const [linkedInContext, setLinkedInContext] = useState(
-    contact.linkedinBio ?? "",
-  );
+  const [linkedInContext, setLinkedInContext] = useState(contact.linkedinBio ?? "");
   const [studentGoal, setStudentGoal] = useState(
     "Sophomore targeting IB Summer Analyst recruiting. Looking for a 15-min call to learn about their group and path.",
   );
@@ -92,24 +80,19 @@ export function OutreachDrawer({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent
-        side="right"
-        className="w-full sm:max-w-xl flex flex-col gap-0 overflow-y-auto"
-      >
+      <SheetContent side="right" className="flex w-full flex-col gap-0 overflow-y-auto sm:max-w-xl">
         <SheetHeader className="border-b">
-          <SheetTitle className="flex items-center gap-2">
-            <Mail className="size-4 text-primary" />
-            Draft cold outreach to {contact.name}
-          </SheetTitle>
+          <p className="eyebrow">Outreach</p>
+          <SheetTitle className="font-display">Draft cold outreach to {contact.name}</SheetTitle>
           <SheetDescription>
-            Claude writes a warm, specific opener you can send today. You stay
-            in the loop on the actual words.
+            Claude writes a warm, specific opener you can send today. You stay in the loop on the
+            actual words.
           </SheetDescription>
         </SheetHeader>
 
-        <div className="flex-1 p-4 space-y-5">
+        <div className="flex-1 space-y-5 p-4">
           <div className="space-y-2">
-            <Label htmlFor="linkedin-context">
+            <Label htmlFor="linkedin-context" className="eyebrow">
               LinkedIn / background context
             </Label>
             <Textarea
@@ -120,14 +103,16 @@ export function OutreachDrawer({
               placeholder="Paste their LinkedIn About section, recent posts, or anything you know about them…"
               className="resize-none text-sm"
             />
-            <p className="text-xs text-muted-foreground">
-              The more specific the context, the more specific the email. Vague
-              context gets a vague email.
+            <p className="text-muted-foreground text-xs">
+              The more specific the context, the more specific the email. Vague context gets a vague
+              email.
             </p>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="student-goal">Your goal for this outreach</Label>
+            <Label htmlFor="student-goal" className="eyebrow">
+              Your goal for this outreach
+            </Label>
             <Textarea
               id="student-goal"
               value={studentGoal}
@@ -145,21 +130,20 @@ export function OutreachDrawer({
           >
             {loading ? (
               <>
-                <Loader2 className="size-4 mr-1.5 animate-spin" />
+                <Loader2 className="mr-1.5 size-4 animate-spin" aria-hidden />
                 Drafting…
               </>
+            ) : draft ? (
+              "Regenerate"
             ) : (
-              <>
-                <Sparkles className="size-4 mr-1.5" />
-                {draft ? "Regenerate" : "Generate draft"}
-              </>
+              "Generate draft"
             )}
           </Button>
 
           {draft && (
-            <div className="space-y-5 pt-2 border-t">
+            <div className="space-y-5 border-t pt-2">
               <div className="space-y-2 pt-4">
-                <Label>Subject (pick one)</Label>
+                <Label className="eyebrow">Subject (pick one)</Label>
                 <div className="space-y-2">
                   {draft.subjects.map((s, i) => (
                     <button
@@ -167,7 +151,7 @@ export function OutreachDrawer({
                       type="button"
                       onClick={() => setSelectedSubject(i)}
                       className={cn(
-                        "w-full text-left rounded-lg border px-3 py-2.5 text-sm transition-colors flex items-start gap-2.5",
+                        "flex w-full items-start gap-2.5 rounded-sm border px-3 py-2.5 text-left text-sm transition-colors duration-150",
                         selectedSubject === i
                           ? "border-primary bg-primary/5"
                           : "border-border bg-background hover:bg-accent/30",
@@ -175,19 +159,17 @@ export function OutreachDrawer({
                     >
                       <span
                         className={cn(
-                          "mt-0.5 size-4 rounded-full border-2 shrink-0 flex items-center justify-center",
-                          selectedSubject === i
-                            ? "border-primary"
-                            : "border-muted-foreground",
+                          "mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full border-2",
+                          selectedSubject === i ? "border-primary" : "border-muted-foreground",
                         )}
                       >
                         {selectedSubject === i && (
-                          <span className="size-2 rounded-full bg-primary" />
+                          <span className="bg-primary size-2 rounded-full" />
                         )}
                       </span>
                       <span className="flex-1">
                         <span className="block font-medium">{s}</span>
-                        <span className="block text-[11px] text-muted-foreground mt-0.5">
+                        <span className="text-muted-foreground mt-0.5 block font-mono text-[11px] tracking-[0.08em] uppercase">
                           {i === 0 ? "Direct" : "Curious / warm"}
                         </span>
                       </span>
@@ -197,31 +179,28 @@ export function OutreachDrawer({
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email-body">Body (editable)</Label>
+                <Label htmlFor="email-body" className="eyebrow">
+                  Body (editable)
+                </Label>
                 <Textarea
                   id="email-body"
                   value={editedBody}
                   onChange={(e) => setEditedBody(e.target.value)}
                   rows={10}
-                  className="text-sm font-sans leading-relaxed"
+                  className="font-sans text-sm leading-relaxed"
                 />
-                <div className="flex items-center justify-between text-xs text-muted-foreground">
-                  <span>
+                <div className="text-muted-foreground flex items-center justify-between text-xs">
+                  <span className="font-mono text-[11px]">
                     {editedBody.split(/\s+/).filter(Boolean).length} words
                   </span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={copyEmail}
-                    className="h-7 px-2"
-                  >
+                  <Button variant="ghost" size="sm" onClick={copyEmail} className="h-7 px-2">
                     {copied ? (
                       <>
-                        <Check className="size-3 mr-1" /> Copied
+                        <Check className="mr-1 size-3" aria-hidden /> Copied
                       </>
                     ) : (
                       <>
-                        <Copy className="size-3 mr-1" /> Copy email
+                        <Copy className="mr-1 size-3" aria-hidden /> Copy email
                       </>
                     )}
                   </Button>
@@ -230,24 +209,17 @@ export function OutreachDrawer({
 
               {draft.followups.length > 0 && (
                 <div className="space-y-2">
-                  <Label className="flex items-center gap-1.5">
-                    <CalendarClock className="size-3.5" />
-                    Suggested follow-up cadence
-                  </Label>
+                  <Label className="eyebrow">Suggested follow-up cadence</Label>
                   <div className="flex flex-wrap gap-2">
                     {draft.followups.map((f: OutreachFollowup, i) => (
-                      <Badge
-                        key={i}
-                        variant="secondary"
-                        className="text-xs gap-1.5 py-1"
-                      >
-                        <span className="font-mono text-[11px]">{f.when}</span>
+                      <Badge key={i} variant="secondary" className="gap-1.5">
+                        <span>{f.when}</span>
                         <span className="text-muted-foreground">·</span>
                         <span>{f.kind}</span>
                       </Badge>
                     ))}
                   </div>
-                  <p className="text-[11px] text-muted-foreground">
+                  <p className="text-muted-foreground text-[11px]">
                     {/* TODO (needs Supabase + auth): one-click "schedule these"
                         to persist into the followups table. */}
                     Light cadence — only nudge if they don&apos;t reply.

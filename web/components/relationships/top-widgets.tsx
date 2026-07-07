@@ -3,9 +3,8 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Bell, Mail, CalendarClock, ArrowRight } from "lucide-react";
+import { Mail, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Contact } from "@/lib/types";
 import type { Followup } from "@/lib/data/followups";
@@ -19,10 +18,7 @@ function weeksAgo(iso: string, now: number): number {
   return Math.floor((now - then) / (1000 * 60 * 60 * 24 * 7));
 }
 
-function relativeDue(
-  iso: string,
-  now: number,
-): { label: string; overdue: boolean } {
+function relativeDue(iso: string, now: number): { label: string; overdue: boolean } {
   const due = Date.parse(iso);
   if (Number.isNaN(due)) return { label: iso, overdue: false };
   const diffMs = due - now;
@@ -58,80 +54,68 @@ export function RelationshipsTopWidgets({
         if (Number.isNaN(t)) return false;
         return now - t > SIX_WEEKS_MS;
       })
-      .sort((a, b) =>
-        (a.lastContactAt ?? "").localeCompare(b.lastContactAt ?? ""),
-      )
+      .sort((a, b) => (a.lastContactAt ?? "").localeCompare(b.lastContactAt ?? ""))
       .slice(0, 3);
   }, [contacts, now]);
 
   const sortedFollowups = useMemo(
-    () =>
-      [...followups].sort((a, b) => a.dueAt.localeCompare(b.dueAt)),
+    () => [...followups].sort((a, b) => a.dueAt.localeCompare(b.dueAt)),
     [followups],
   );
 
   if (staleContacts.length === 0 && sortedFollowups.length === 0) return null;
 
   return (
-    <div className="max-w-6xl mx-auto px-6 md:px-8 pt-8 space-y-6">
+    <div className="mx-auto max-w-6xl space-y-6 px-6 pt-8 md:px-8">
       {staleContacts.length > 0 && (
         <section>
-          <h2 className="flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-3">
-            <Bell className="size-3.5" />
-            Gentle nudges
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <p className="eyebrow mb-3">Gentle nudges</p>
+          <div className="bg-card divide-y rounded-md border">
             {staleContacts.map((c) => {
               const w = weeksAgo(c.lastContactAt!, now);
               return (
-                <Card
+                <div
                   key={c.id}
-                  className="p-4 hover:border-primary/40 transition-colors"
+                  className="hover:bg-accent/30 flex items-start justify-between gap-4 p-4 transition-colors duration-150"
                 >
-                  <div className="flex items-start justify-between gap-2 mb-1">
-                    <Link
-                      href={`/relationships/${c.id}`}
-                      className="font-semibold text-sm hover:text-primary transition-colors"
-                    >
-                      {c.name}
-                    </Link>
-                    <Badge
-                      variant="outline"
-                      className="text-[10px] shrink-0 text-amber-700 border-amber-300"
-                    >
-                      {w}w cold
-                    </Badge>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Link
+                        href={`/relationships/${c.id}`}
+                        className="hover:text-primary text-sm font-medium transition-colors"
+                      >
+                        {c.name}
+                      </Link>
+                      <Badge variant="warning" className="shrink-0">
+                        {w}w cold
+                      </Badge>
+                    </div>
+                    <p className="text-muted-foreground mt-1 text-xs">
+                      {c.firm}
+                      {c.group ? ` · ${c.group}` : ""}
+                    </p>
+                    <p className="text-muted-foreground mt-1 font-mono text-[11px]">
+                      Last spoke {w} {w === 1 ? "week" : "weeks"} ago
+                    </p>
                   </div>
-                  <p className="text-xs text-muted-foreground">
-                    {c.firm}
-                    {c.group ? ` · ${c.group}` : ""}
-                  </p>
-                  <p className="text-[11px] text-muted-foreground mt-1">
-                    Last spoke {w} {w === 1 ? "week" : "weeks"} ago
-                  </p>
-                  <div className="flex items-center gap-2 mt-3">
+                  <div className="flex shrink-0 items-center gap-2">
                     <Button
                       size="sm"
                       variant="outline"
-                      className="h-7 text-xs gap-1.5"
+                      className="h-7 gap-1.5 text-xs"
                       onClick={() => setOutreachContact(c)}
                     >
-                      <Mail className="size-3" />
+                      <Mail className="size-3" aria-hidden />
                       Draft check-in
                     </Button>
-                    <Button
-                      asChild
-                      size="sm"
-                      variant="ghost"
-                      className="h-7 text-xs gap-1"
-                    >
+                    <Button asChild size="sm" variant="ghost" className="h-7 gap-1 text-xs">
                       <Link href={`/relationships/${c.id}`}>
                         Open
-                        <ArrowRight className="size-3" />
+                        <ArrowRight className="size-3" aria-hidden />
                       </Link>
                     </Button>
                   </div>
-                </Card>
+                </div>
               );
             })}
           </div>
@@ -140,11 +124,8 @@ export function RelationshipsTopWidgets({
 
       {sortedFollowups.length > 0 && (
         <section>
-          <h2 className="flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-3">
-            <CalendarClock className="size-3.5" />
-            Upcoming follow-ups
-          </h2>
-          <Card className="divide-y">
+          <p className="eyebrow mb-3">Upcoming follow-ups</p>
+          <div className="bg-card divide-y rounded-md border">
             {sortedFollowups.map((f) => {
               const contact = contacts.find((c) => c.id === f.contactId);
               if (!contact) return null;
@@ -153,41 +134,34 @@ export function RelationshipsTopWidgets({
                 <Link
                   key={f.id}
                   href={`/relationships/${contact.id}`}
-                  className="flex items-center gap-3 px-4 py-3 hover:bg-accent/30 transition-colors first:rounded-t-xl last:rounded-b-xl"
+                  className="hover:bg-accent/30 flex items-center gap-3 px-4 py-3 transition-colors duration-150 first:rounded-t-md last:rounded-b-md"
                 >
                   <div
                     className={cn(
-                      "shrink-0 w-20 text-xs font-medium tabular-nums",
-                      due.overdue
-                        ? "text-red-600"
-                        : "text-muted-foreground",
+                      "w-20 shrink-0 font-mono text-[11px]",
+                      due.overdue ? "text-destructive" : "text-muted-foreground",
                     )}
                   >
                     {due.label}
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-medium">
                       {contact.name}
                       <span className="text-muted-foreground font-normal">
                         {" · "}
                         {contact.firm}
                       </span>
                     </p>
-                    <p className="text-xs text-muted-foreground truncate">
-                      {f.note}
-                    </p>
+                    <p className="text-muted-foreground truncate text-xs">{f.note}</p>
                   </div>
-                  <Badge
-                    variant="secondary"
-                    className="text-[10px] capitalize shrink-0"
-                  >
+                  <Badge variant="secondary" className="shrink-0">
                     {f.kind === "post-chat" ? "post-chat" : "outreach"}
                   </Badge>
-                  <ArrowRight className="size-3.5 text-muted-foreground shrink-0" />
+                  <ArrowRight className="text-muted-foreground size-3.5 shrink-0" aria-hidden />
                 </Link>
               );
             })}
-          </Card>
+          </div>
         </section>
       )}
 

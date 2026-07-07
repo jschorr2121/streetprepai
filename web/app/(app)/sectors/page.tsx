@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Layers } from "lucide-react";
+import { PageHeader } from "@/components/page-header";
 
 const SECTORS = [
   { slug: "tmt", label: "TMT" },
@@ -14,30 +14,34 @@ const SECTORS = [
 
 export default function SectorsPage() {
   return (
-    <div className="mx-auto max-w-5xl px-6 py-10">
-      <div className="mb-8 flex items-center gap-3">
-        <div className="bg-accent text-accent-foreground grid size-10 place-items-center rounded-md">
-          <Layers className="size-5" />
-        </div>
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Sectors</h1>
-          <p className="text-muted-foreground text-sm">
-            Coverage area, recent deals, top firms, and key terminology per sector.
-          </p>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
-        {SECTORS.map((s) => (
-          <Link
-            key={s.slug}
-            href={`/sectors/${s.slug}`}
-            className="bg-card hover:border-primary/30 rounded-lg border p-4 transition-colors"
-          >
-            <p className="font-semibold">{s.label}</p>
-            <p className="text-muted-foreground mt-1 text-sm">Coming soon</p>
-          </Link>
+    <div className="mx-auto max-w-3xl px-6 py-8 md:px-10">
+      <PageHeader
+        eyebrow="Reference"
+        title="Sectors"
+        description="Coverage area, recent deals, top firms, and key terminology per sector."
+      />
+      <ul className="mt-8">
+        {SECTORS.map((s, i) => (
+          <li key={s.slug}>
+            <Link
+              href={`/sectors/${s.slug}`}
+              className="group hover:bg-accent/40 -mx-3 flex items-center justify-between gap-4 rounded-sm border-b px-3 py-3.5 transition-colors duration-150"
+            >
+              <span className="flex items-baseline gap-3">
+                <span className="text-muted-foreground font-mono text-xs">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="group-hover:text-primary font-medium transition-colors">
+                  {s.label}
+                </span>
+              </span>
+              <span className="text-muted-foreground font-mono text-[11px] tracking-[0.08em] uppercase">
+                Soon
+              </span>
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }

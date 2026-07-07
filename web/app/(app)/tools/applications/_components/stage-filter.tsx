@@ -42,7 +42,7 @@ export function StageFilter() {
       <Link
         href={buildHref(null)}
         className={cn(
-          "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+          "rounded-sm border px-2.5 py-1 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors",
           !activeStage
             ? "border-primary bg-primary text-primary-foreground"
             : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground",
@@ -59,7 +59,7 @@ export function StageFilter() {
             key={stage}
             href={buildHref(stage)}
             className={cn(
-              "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+              "rounded-sm border px-2.5 py-1 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors",
               isActive
                 ? "border-primary bg-primary text-primary-foreground"
                 : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground",
