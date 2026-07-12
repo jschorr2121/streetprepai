@@ -12,6 +12,19 @@ needs action it can't perform itself.
 
 ## 🔴 Needed now (blocks the current unit from working end-to-end)
 
+- [ ] **Fix the Vercel Root Directory → `web`** (blocks ALL production deploys, pre-existing).
+  Every git-triggered deploy since commit `f8e1dc1` has failed with *"No Next.js version
+  detected… check your Root Directory setting"* — the Next.js app is in `web/`, but the
+  Vercel project's Root Directory is the repo root (no `package.json` there). The last
+  *successful* production build (`f8e1dc1`, still what's live) was a direct `vercel` CLI
+  deploy from inside `web/`; every GitHub-integration deploy since — including the Unit 1–7
+  squash `15a4866` and the Unit 11 curriculum push `e806c19` — errored at the "detect
+  framework" step and never built the code. Fix: Vercel dashboard → Project `web` → Settings
+  → Build & Deployment → **Root Directory = `web`** → redeploy. (My push did NOT break prod —
+  Vercel deploys are atomic, so the failed build left the old deployment serving.)
+- [ ] **Unpause the Supabase project** — per the UI-overhaul notes the project is paused, so
+  every DB-backed page (dashboard, learn, question-bank, profile) 500s regardless of the
+  Vercel fix. Resume it in the Supabase dashboard before promoting anything to production.
 - [ ] **Apply migrations `0006_curriculum.sql` + `0007_qbank_seed.sql`** (Unit 11 —
   curriculum/Question Bank) — creates the qbank/progress/mastery tables + `profiles.advanced_track`,
   then seeds **532 questions + 1,199 follow-ups**. Without this the learn gates, section drills,
