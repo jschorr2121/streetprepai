@@ -1,0 +1,424 @@
+[
+  {
+    "id": "recruiting-medium-001-group-types",
+    "topic": "recruiting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "Explain the difference between a generalist placement model and an industry-specific placement model for incoming analysts, and how that affects what a candidate should expect during recruiting.",
+    "keyPoints": [
+      {"point": "Generalist model: analysts join the bank broadly and are assigned to a specific group after joining, sometimes through a bidding process", "weight": 3},
+      {"point": "Industry-specific model: candidates apply and interview directly for a named group (e.g., Healthcare, TMT) from the start", "weight": 3},
+      {"point": "Generalist model gives more flexibility and time to discover fit, but placement can go to less-preferred groups depending on performance/demand", "weight": 2},
+      {"point": "Industry-specific model requires earlier certainty and more targeted interview prep, but guarantees the group if hired", "weight": 2}
+    ],
+    "misconceptions": [
+      "That all bulge bracket banks use the same placement model",
+      "That generalist programs mean an analyst never ends up in a specialized group"
+    ],
+    "modelAnswer": "In a generalist model, a candidate interviews for and joins the bank's investment banking division as a whole, not a specific group, and group assignments happen later, often through some combination of stated preferences, a bidding or lottery process, and performance during an initial training period. In an industry-specific model, the candidate applies directly to a named group, like Technology or Healthcare, interviews specifically with bankers from that group, and if hired knows exactly where they'll sit from day one. The generalist model gives a candidate more time to explore before committing, and it can be useful if someone genuinely isn't sure yet which sector interests them, but it comes with real risk: popular groups get oversubscribed, and placement can depend on stack ranking or seniority in the program rather than pure preference, so someone could end up somewhere they didn't want. The industry-specific model removes that uncertainty since acceptance means the group is locked in, but it requires the candidate to already have a reasonably informed reason for wanting that specific sector by the time they interview, since interviewers in a specific group will expect sector-relevant motivation and preparation rather than general banking interest.",
+    "followups": [
+      {
+        "prompt": "If a candidate genuinely isn't sure which sector they want, is a generalist program always the safer choice?",
+        "modelAnswer": "It's safer in the sense of avoiding a premature commitment, but it's not risk-free — placement processes at generalist programs are often competitive, and a candidate with no strong preference can end up deprioritized relative to peers who lobbied hard for a specific group, landing somewhere undesirable by default. A better approach is often to use the exploration time before or during the program to develop informed preferences quickly, rather than assuming the generalist structure alone protects against a bad outcome."
+      },
+      {
+        "prompt": "How should interview preparation differ for a generalist program interview versus an industry-specific group interview?",
+        "modelAnswer": "For a generalist interview, preparation should focus on broad technical fundamentals and a compelling, firm-level 'why banking' and 'why this firm' story, since interviewers aren't assessing sector-specific fit. For an industry-specific interview, the candidate needs all of that plus a credible, sector-specific narrative — recent deals in that space, relevant coursework or projects, and a clear answer to 'why this sector' that goes beyond generic interest, because the interviewer is specifically testing whether the candidate will still be motivated after two years focused only on that industry."
+      },
+      {
+        "prompt": "Why might a bank prefer a generalist model even though it seems less efficient than hiring directly into groups?",
+        "modelAnswer": "It gives the bank flexibility to balance headcount across groups based on real-time deal flow and business needs rather than being locked into whatever mix candidates happened to apply for, and it lets the firm evaluate analysts on real early performance before finalizing placement, which can produce better matches than a decision made purely at the interview stage. It also smooths out situations where one group has a hot recruiting year and another doesn't, since the bank can allocate the incoming class to wherever the actual staffing need is."
+      }
+    ],
+    "chapterSlug": "recruiting-cycle",
+    "sectionSlug": "group-types-explained",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-medium-002-recruiting-plan",
+    "topic": "recruiting",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "You're a sophomore who just decided you want to recruit for investment banking. Walk me through how you'd build a recruiting plan for the next 12 months.",
+    "keyPoints": [
+      {"point": "Start with self-assessment: GPA, relevant coursework, and realistic target list of firm tiers given current profile", "weight": 2},
+      {"point": "Build technical foundation early: accounting, valuation, and modeling basics before networking conversations require them", "weight": 2},
+      {"point": "Begin networking outreach months ahead of application windows, tracking contacts and firm-specific deadlines", "weight": 3},
+      {"point": "Target sophomore-year programs where eligible as a fast-track into junior-year recruiting", "weight": 2},
+      {"point": "Build in checkpoints to reassess target list and technical readiness as the year progresses, not a single static plan", "weight": 2}
+    ],
+    "misconceptions": [
+      "That recruiting prep can start right before applications open with no lead time",
+      "That a plan is just a list of firms to apply to rather than a sequenced set of actions over time"
+    ],
+    "modelAnswer": "I'd start by being honest about my current profile — GPA, major, and any existing finance exposure — to build a realistic target list spanning a mix of bulge bracket, elite boutique, and middle-market firms rather than only aiming at the most selective names. Early on, I'd prioritize building the technical foundation: basic accounting, the three financial statements, and simple valuation concepts, since networking conversations and later interviews both assume that baseline. In parallel, I'd start reaching out to alumni and bankers for informational calls well before any application opens, since relationships take time to build and a last-minute outreach a week before a deadline reads as transactional. I'd specifically research which firms run sophomore-year programs I might be eligible for, since getting into one can meaningfully shorten the path to a junior-year offer. Throughout the year I'd keep a simple tracker of contacts, firm deadlines, and technical topics still to cover, and I'd revisit the target list periodically — if early conversations reveal a sector or firm type I like more than expected, I'd adjust rather than sticking rigidly to my original list. The plan isn't a single static document, it's a sequence of networking, technical prep, and application actions that gets refined as I learn more.",
+    "followups": [
+      {
+        "prompt": "How would you prioritize your time if you only have a few hours a week to dedicate to recruiting on top of classes?",
+        "modelAnswer": "Early on I'd weight time toward technical foundations, since without that baseline, networking conversations are less productive and interviews aren't passable regardless of how many contacts I've made. Once I have that foundation, I'd shift more time toward networking, since relationships and referrals compound over months and can't be crammed the week before an application opens, while technical review can still be sharpened closer to interviews."
+      },
+      {
+        "prompt": "How would you decide which firms belong on your target list versus which to skip?",
+        "modelAnswer": "I'd weigh realistic fit against my current profile and interests — looking at each firm's typical hiring class, deal focus, and culture, and being honest about where I'm competitive versus a stretch. I'd include a mix of stretch, realistic, and safer options rather than only applying to the most prestigious names, since a target list that's all reach firms risks ending the cycle with no offers at all."
+      },
+      {
+        "prompt": "What would make you revise your plan mid-year rather than sticking to the original list?",
+        "modelAnswer": "If networking conversations revealed a firm or sector was a much better or worse fit than I expected, or if I learned a firm's timeline had shifted earlier than planned, I'd adjust immediately rather than waiting for a scheduled check-in, since recruiting windows don't wait for a candidate's original plan. I'd treat any new, credible information about deadlines or fit as a trigger to update the list on the spot."
+      }
+    ],
+    "chapterSlug": "recruiting-cycle",
+    "sectionSlug": "build-your-recruiting-plan",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-medium-003-target-list",
+    "topic": "recruiting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "How would you go about building a target list of firms to apply to, and what factors should actually drive that list beyond just brand prestige?",
+    "keyPoints": [
+      {"point": "Consider fit across firm tier (BB/EB/MM) given realistic competitiveness of the candidate's profile", "weight": 2},
+      {"point": "Weigh sector or group focus against candidate's stated interests and prior exposure", "weight": 2},
+      {"point": "Factor in where the candidate actually has or can build networking connections, since that materially affects odds", "weight": 2},
+      {"point": "Balance the list across reach, realistic, and safer options rather than concentrating only on top-prestige names", "weight": 2},
+      {"point": "Consider timeline/deadline overlap and whether applying to too many firms dilutes networking quality per firm", "weight": 1}
+    ],
+    "misconceptions": [
+      "That the target list should just be the most prestigious firms regardless of realistic fit",
+      "That applying to as many firms as possible always maximizes the odds of an offer"
+    ],
+    "modelAnswer": "A good target list starts with an honest assessment of where a candidate is realistically competitive, factoring in GPA, school, prior experience, and existing network, and then spans a mix of reach firms, realistic firms, and a few safer options rather than clustering entirely at the top of the prestige ladder. Beyond tier, I'd weigh sector fit: if a candidate has genuine interest or background in healthcare or technology, prioritizing groups in that space both improves interview performance and makes the eventual job better fit. Networking reach matters a lot too — a firm where the candidate already has an alumni connection or a warm introduction is meaningfully higher-probability than a cold application to an unfamiliar firm, so existing or buildable relationships should pull certain firms up the list. It's also worth being disciplined about list size: applying to thirty firms sounds safer than applying to twelve, but it can dilute the depth of networking and preparation per firm, and since strong applications are often what actually convert, a smaller, well-prepared list can outperform a scattershot approach. Finally, checking deadline overlap matters practically, since several superdays landing in the same week can force a candidate to choose which to prioritize.",
+    "followups": [
+      {
+        "prompt": "Why might spreading effort across too many firms actually hurt a candidate's odds rather than help them?",
+        "modelAnswer": "Networking and interview prep both take real time per firm — learning a group's recent deals, building relationships with bankers there, tailoring materials — and spreading that effort across too many firms means doing a shallow version of all of it rather than a strong version of most of it. Recruiters and interviewers can usually tell when a candidate's interest and preparation feel generic versus firm-specific, so a smaller list with deeper preparation per firm often converts better than a maximalist approach."
+      },
+      {
+        "prompt": "How should a candidate weigh a firm they have a strong personal network connection to against a more prestigious firm where they have no connections?",
+        "modelAnswer": "A strong existing connection is genuinely valuable — referrals materially increase the odds a resume gets a real look, so it shouldn't be dismissed just because the firm is less prestigious. That said, it shouldn't be the only factor either; if the less-connected firm is a meaningfully better fit for the candidate's interests or career goals, it's usually worth investing time to build a network there rather than defaulting only to firms with pre-existing warm paths in."
+      },
+      {
+        "prompt": "How would you decide whether to include a middle-market firm on a target list dominated mostly by bulge brackets and elite boutiques?",
+        "modelAnswer": "I'd include at least a couple of strong middle-market names as a realistic anchor, since MM firms are often less oversubscribed relative to candidate quality, offer earlier and more hands-on deal experience, and can still lead to strong buy-side or lateral outcomes later. Treating the list as strictly tiered by prestige, with MM only as a fallback, ignores that some candidates are genuinely better served by the deal exposure a smaller platform offers."
+      }
+    ],
+    "chapterSlug": "applications",
+    "sectionSlug": "building-your-target-list",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-medium-004-hirevue",
+    "topic": "recruiting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "What is a HireVue-style assessment, and how should a candidate prepare differently for it compared to a live phone or video interview?",
+    "keyPoints": [
+      {"point": "HireVue is a recorded, one-way video interview where the candidate answers fixed prompts within a time limit, no live interviewer present", "weight": 3},
+      {"point": "Often paired with or replaced by an online numeric/logic assessment used purely as a volume screen", "weight": 2},
+      {"point": "Preparation should include practicing concise, structured answers within the time limit since there's no chance to clarify or read the interviewer", "weight": 2},
+      {"point": "Environment and delivery matter more than in a live call: lighting, eye contact with camera, no back-and-forth to recover from a stumble", "weight": 2}
+    ],
+    "misconceptions": [
+      "That a recorded video interview is graded less rigorously than a live one because no human is present in real time",
+      "That the same loosely conversational answers used in a live call work equally well in a one-way recorded format"
+    ],
+    "modelAnswer": "A HireVue-style interview is a recorded, one-way video interview: the candidate is shown a prompt, given a short prep window, and then records an answer within a fixed time limit, often for several questions in a row, with no live interviewer to react to or ask follow-ups from. Some firms pair this with a separate online assessment testing numeric reasoning or logic, and both function primarily as high-volume, low-cost screens that cut the applicant pool before any human interviewer time is spent. Preparing for this format is different from prepping for a live call because there's no room to read the interviewer's reaction or recover mid-answer the way you might in conversation — since it's recorded, a rambling or unfocused answer just runs the clock out rather than getting redirected by a follow-up question. That means practicing tight, structured responses that hit the key point early is more important than in a live setting. Delivery details also matter more: looking at the camera rather than the screen to simulate eye contact, having clean lighting and a quiet background, and rehearsing enough that pauses and filler words are minimized, since none of that can be smoothed over by a real-time rapport the way it might with a live interviewer.",
+    "followups": [
+      {
+        "prompt": "Why might a firm use a recorded one-way video interview instead of just a live phone screen for the same volume-screening purpose?",
+        "modelAnswer": "It's far more scalable — recruiters can review recorded answers on their own schedule and often at higher speed, rather than coordinating live call slots with thousands of candidates, and it standardizes the questions asked so every candidate answers the exact same prompt under the exact same conditions. It also removes some scheduling friction across time zones, which matters when a firm is recruiting from a large, geographically spread applicant pool."
+      },
+      {
+        "prompt": "If a candidate stumbles badly on one answer in a recorded interview, what's the best way to handle it given there's no way to explain the mistake to a live interviewer?",
+        "modelAnswer": "Most platforms give a short prep window and sometimes allow a limited number of retakes, so the first move is checking whether a retake is available and using it rather than assuming the flawed take is final. If no retake is possible, the best approach is to keep the remaining answers as strong as possible rather than dwelling on the one weak response, since reviewers are typically evaluating the overall pattern across all the answers, not eliminating a candidate over a single imperfect response."
+      },
+      {
+        "prompt": "How should preparation for the technical content differ, if at all, between a HireVue-style interview and a live interview?",
+        "modelAnswer": "The technical content itself — accounting, valuation, deal knowledge — doesn't change, but the delivery has to be tighter since there's a hard time limit per answer with no interviewer prompting for more or less detail. Practicing answers out loud with a timer, rather than just reviewing notes silently, is especially useful here because it trains the candidate to naturally hit the important points within the allotted window instead of running out of time mid-explanation."
+      }
+    ],
+    "chapterSlug": "applications",
+    "sectionSlug": "hirevue-and-online-assessments",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-medium-005-off-cycle",
+    "topic": "recruiting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "If a candidate strikes out during on-cycle recruiting, what realistic paths remain to still land an investment banking role?",
+    "keyPoints": [
+      {"point": "Off-cycle recruiting: smaller firms and some larger banks continue hiring on a rolling basis after on-cycle closes", "weight": 3},
+      {"point": "Middle-market and boutique firms often recruit later and less rigidly than bulge brackets/elite boutiques", "weight": 2},
+      {"point": "Lateral or full-time recruiting later (e.g., after a different internship, or post-grad) remains an option, not just internship-stage recruiting", "weight": 2},
+      {"point": "Networking becomes even more important off-cycle since fewer structured pipelines exist to surface candidates", "weight": 2}
+    ],
+    "misconceptions": [
+      "That missing on-cycle means the door to investment banking is permanently closed",
+      "That off-cycle roles are meaningfully lower quality or 'lesser' by definition"
+    ],
+    "modelAnswer": "Missing on-cycle isn't the end of the road, though it does mean shifting strategy. Off-cycle recruiting continues throughout the year, often driven by specific staffing needs rather than a fixed calendar, and middle-market and boutique firms in particular tend to hire on a rolling basis rather than compressing everything into one on-cycle window the way the largest banks do. That means a candidate who missed the big fall or winter push can still land interviews in the spring, summer, or even the following year by continuing to network and apply to firms still actively hiring. Another path is targeting full-time recruiting directly, either after a different type of internship that builds a relevant story, or after graduating and gaining some other experience first, then lateraling into banking a year or two later — this is a well-worn path, not an exotic one. Since off-cycle roles don't have the same structured, high-visibility application pipelines that on-cycle recruiting does, networking becomes even more essential: a candidate has to actively find out where openings exist rather than relying on a portal listing to surface them. The roles themselves aren't inherently lower quality, though the process to find them requires more initiative.",
+    "followups": [
+      {
+        "prompt": "Why does networking become even more important for off-cycle recruiting than it already is for on-cycle?",
+        "modelAnswer": "On-cycle recruiting has visible, structured application windows advertised through campus channels, so a candidate at least knows where and when to apply even without a network. Off-cycle openings are often driven by unpredictable staffing needs and aren't broadly advertised, so without an existing relationship or referral, a candidate may never even learn a role exists — the network essentially replaces the structured pipeline as the way openings get discovered."
+      },
+      {
+        "prompt": "Is a first-year analyst role landed off-cycle viewed differently by future employers than one landed on-cycle?",
+        "modelAnswer": "Generally no — once someone is a working analyst with real deal experience, how they landed the seat matters far less than the quality of the work they did once there. Future employers, including buy-side recruiters, are mostly evaluating the deals on the resume and the strength of references, not the recruiting calendar the candidate entered through."
+      },
+      {
+        "prompt": "What should a candidate do differently in their pitch when reaching out for off-cycle opportunities compared to on-cycle networking?",
+        "modelAnswer": "Off-cycle outreach should be more direct about timeline and availability, since the firm is likely responding to an immediate staffing gap rather than running a scheduled program, so signaling readiness to start soon can be a real advantage. It also helps to be upfront and matter-of-fact about having missed on-cycle rather than over-explaining it, and instead pivot quickly to what the candidate can contribute now, since dwelling on the miss reads as less confident than simply moving the conversation forward."
+      }
+    ],
+    "chapterSlug": "applications",
+    "sectionSlug": "off-cycle-and-recovery-paths",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-medium-006-goldman-structure",
+    "topic": "recruiting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "What distinguishes Goldman Sachs's Investment Banking Division from other bulge brackets in terms of structure and reputation, and what should a candidate know before interviewing there?",
+    "keyPoints": [
+      {"point": "Broad full-service platform with strong M&A, capital markets, and financing capabilities across sectors", "weight": 2},
+      {"point": "Historically strong brand for producing candidates who move on to top private equity and hedge fund roles", "weight": 2},
+      {"point": "Known for a demanding, competitive internal culture, including rigorous training and long hours expectations", "weight": 2},
+      {"point": "Candidates should be able to speak to specific groups within IBD (sector or product coverage) rather than only the firm brand", "weight": 2}
+    ],
+    "misconceptions": [
+      "That 'Goldman Sachs' as a name is enough preparation without understanding the specific group being interviewed for",
+      "That the firm's brand prestige means interviews are less technically rigorous than other bulge brackets"
+    ],
+    "modelAnswer": "Goldman Sachs's IBD is a broad, full-service platform covering both sector coverage groups and product groups like M&A and financing, and it has a long-standing reputation as one of the most competitive analyst programs to get into, partly because of the brand's historical strength in exits to top private equity funds and hedge funds. That reputation cuts both ways for a candidate: it means the credential carries real weight later in a career, but it also means the internal culture is demanding, with structured but intense training programs and hours expectations that are on the higher end even relative to other bulge brackets. Because the firm is organized into distinct sector and product groups, a candidate preparing to interview shouldn't treat 'Goldman Sachs' as a single monolithic target — they need to know which specific group they're interviewing with, what that group's recent deal activity looks like, and be ready to explain why that particular team, not just the firm's overall brand, is the right fit. Interviewers there tend to expect polish: technical fluency, a clear personal narrative, and specific, well-researched reasons for interest rather than generic enthusiasm about the firm's name recognition.",
+    "followups": [
+      {
+        "prompt": "Why does a strong brand name like Goldman Sachs's actually raise the bar for interview preparation rather than lower it?",
+        "modelAnswer": "Because the brand attracts such a large and highly qualified applicant pool, the firm can afford to be extremely selective, so competition for each seat is more intense than at a lesser-known firm with a smaller applicant pool. Candidates also tend to assume the process will be harder given the reputation, which paradoxically means the average applicant shows up more prepared, pushing everyone else to prepare even more to stand out."
+      },
+      {
+        "prompt": "How should a candidate answer 'why Goldman Sachs specifically' without sounding like they're just reciting brand prestige?",
+        "modelAnswer": "A strong answer avoids leading with reputation or name recognition and instead references something specific and personal — a conversation with a current or former analyst, a particular deal the group worked on that resonated with the candidate's interests, or a specific aspect of the group's culture or training approach learned through networking. The goal is to demonstrate the candidate did real research into that specific team rather than defaulting to the firm's general prestige as the whole answer."
+      },
+      {
+        "prompt": "What's a realistic way for a candidate to learn which specific group within Goldman's IBD they'd actually want to join before applying?",
+        "modelAnswer": "Networking conversations with current or former analysts across a few different groups are the most reliable way, since public materials rarely explain the day-to-day differences between groups in useful detail. Comparing notes from a handful of calls across, say, a sector coverage group and a product group like leveraged finance often reveals meaningfully different cultures and deal paces, which helps a candidate form a genuine, defensible preference rather than guessing."
+      }
+    ],
+    "chapterSlug": "firms",
+    "sectionSlug": "goldman-sachs-guide",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-medium-007-goldman-groups",
+    "topic": "recruiting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "How is Goldman Sachs's Investment Banking Division typically organized between sector coverage groups and product groups, and why does that distinction matter for a candidate?",
+    "keyPoints": [
+      {"point": "Sector coverage groups (e.g., healthcare, TMT, industrials) own client relationships within an industry", "weight": 2},
+      {"point": "Product groups (e.g., M&A, leveraged finance, equity capital markets) provide specialized deal execution expertise across sectors", "weight": 2},
+      {"point": "Coverage bankers often pull in product specialists for specific deal types rather than executing every deal type alone", "weight": 2},
+      {"point": "Candidates should understand whether they're interviewing for a coverage seat or a product seat since day-to-day work differs", "weight": 2}
+    ],
+    "misconceptions": [
+      "That all groups within IBD do essentially the same work regardless of whether they're labeled coverage or product",
+      "That product group experience is less valuable or prestigious than sector coverage experience"
+    ],
+    "modelAnswer": "Like most large banks, Goldman's IBD is generally organized into sector coverage groups, such as healthcare, technology, or industrials, which own the day-to-day relationship with client companies in that industry, and product groups, such as M&A or leveraged finance, which bring specialized execution expertise that gets pulled in across many different sectors. In practice, a coverage banker might maintain the primary relationship with a client and then loop in an M&A specialist to help structure and negotiate a specific transaction, or a leveraged finance banker to help arrange the debt financing for a deal, rather than the coverage team executing every technical aspect alone. This matters for a candidate because the day-to-day experience differs meaningfully: a coverage seat tends to involve broader exposure to a given industry's dynamics and client relationships over time, while a product seat tends to involve deeper, more specialized technical execution across a wider variety of client industries. Neither is inherently better, but a candidate should understand which type of seat they're actually interviewing for, since the skills built and the eventual exit opportunities can differ — for example, product groups like M&A are often viewed favorably by private equity recruiters specifically because of the depth of deal execution experience.",
+    "followups": [
+      {
+        "prompt": "Why might a private equity recruiter view M&A product group experience favorably compared to a general sector coverage seat?",
+        "modelAnswer": "M&A product groups tend to spend more time on the technical mechanics of deal structuring, negotiation, and valuation across a variety of transactions, which maps closely to the skill set private equity associates need day one. A coverage analyst might have broader industry knowledge but potentially less concentrated hands-on deal execution reps, depending on how much of the technical work the coverage team handles directly versus delegates to product specialists."
+      },
+      {
+        "prompt": "If a candidate isn't sure whether they'd prefer a coverage seat or a product seat, how should they figure that out before committing to an application?",
+        "modelAnswer": "Talking to analysts currently in both types of seats is the most direct way, asking specifically about a typical week, how much client-facing exposure versus technical execution work they do, and how staffing and hours differ. A candidate who finds themselves more drawn to understanding a specific industry deeply over time is probably better suited to coverage, while someone who prefers varied technical challenges across many industries might prefer a product seat."
+      },
+      {
+        "prompt": "Does the coverage-versus-product distinction apply the same way across all bulge bracket banks, or does it vary firm to firm?",
+        "modelAnswer": "The general concept of sector coverage plus specialized product groups is common across most large banks, but the specific groups, how work is split between them, and how much autonomy coverage teams have to execute deals without product specialists can vary meaningfully firm to firm. That's exactly why networking with people at the specific firm matters — the org chart concept transfers, but the practical day-to-day details don't automatically generalize from one bank to another."
+      }
+    ],
+    "chapterSlug": "firms",
+    "sectionSlug": "goldman-sachs-guide",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-medium-008-jpm-platform",
+    "topic": "recruiting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "What advantage does J.P. Morgan's scale and balance sheet give it competitively, and how should that shape a candidate's understanding of the firm before an interview?",
+    "keyPoints": [
+      {"point": "Large balance sheet and lending capability lets JPM win advisory mandates partly through financing relationships, not just advice alone", "weight": 3},
+      {"point": "Broad platform spans IBD, commercial banking, asset management, and markets, creating cross-referral opportunities for deals", "weight": 2},
+      {"point": "Scale supports one of the largest analyst classes, meaning more structured, standardized training but also more internal competition for top group placements", "weight": 2},
+      {"point": "Candidates should be able to speak to how the platform's breadth (not just advisory brand) creates client relationships", "weight": 2}
+    ],
+    "misconceptions": [
+      "That J.P. Morgan competes purely on advisory quality with no reference to its lending or balance sheet capabilities",
+      "That being one of the largest banks means the analyst experience is uniformly less rigorous than at a smaller platform"
+    ],
+    "modelAnswer": "J.P. Morgan's key structural advantage is its balance sheet: because it can lend directly to clients at scale, it often wins advisory mandates as part of a broader relationship that includes financing, which pure advisory boutiques can't offer. That means client relationships at J.P. Morgan are frequently built through multiple products at once — commercial banking, lending, and markets access alongside M&A advice — rather than advisory work standing alone, which is a meaningfully different value proposition than an elite boutique competing purely on deal judgment. This scale also shows up in recruiting: J.P. Morgan runs one of the largest analyst classes of any bank, which means training tends to be highly structured and standardized across a big cohort, but it also means there's real internal competition for placement into the most sought-after groups, since so many analysts are competing for a similar set of top seats. A candidate preparing to interview should be ready to discuss how the platform's breadth, not just its advisory brand, creates its competitive edge, and should understand that group placement dynamics at a firm this size can differ from a smaller platform where every seat is effectively equally visible.",
+    "followups": [
+      {
+        "prompt": "Why would a client sometimes choose a bank with lending capability over a pure advisory boutique for the same deal, even if the boutique has a stronger advisory reputation?",
+        "modelAnswer": "If the deal requires financing, like a leveraged buyout or a large acquisition needing debt, a bank that can commit its own balance sheet to help fund the transaction offers something a pure advisory shop structurally cannot, which can be decisive in a competitive pitch. Clients also sometimes value consolidating multiple banking needs, financing, cash management, advisory, into fewer relationships, which favors a full-service platform even if the advisory quality between the two options is comparable."
+      },
+      {
+        "prompt": "How does having one of the largest analyst classes in the industry affect the day-to-day experience of a first-year analyst compared to a smaller bank?",
+        "modelAnswer": "A larger class typically means more standardized, formal training programs with more resources built specifically for onboarding at scale, which can be a real advantage for someone who wants a structured ramp-up. It can also mean less individual visibility early on and more competition for staffing on the most desirable deals or into the most sought-after groups, compared to a smaller bank where a first-year might get noticed and staffed on marquee work faster simply because there are fewer peers competing for the same opportunities."
+      },
+      {
+        "prompt": "How should a candidate's 'why this firm' answer for J.P. Morgan differ from the same answer for a pure advisory boutique?",
+        "modelAnswer": "For J.P. Morgan, a strong answer can reasonably reference the value of being at a full-service platform, exposure to financing and capital markets alongside advisory, and the scale of client relationships the balance sheet enables, since that's a genuine and firm-specific reason distinct from what a boutique offers. Using that same reasoning for a boutique interview would actually undercut the answer, since boutiques deliberately don't have that platform and instead compete on independence and pure advisory focus, so the reasoning needs to match what each specific firm is actually selling."
+      }
+    ],
+    "chapterSlug": "firms",
+    "sectionSlug": "jpmorgan-guide",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-medium-009-morgan-stanley",
+    "topic": "recruiting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "What is Morgan Stanley generally known for competitively among bulge brackets, and how should a candidate frame their interest in the firm?",
+    "keyPoints": [
+      {"point": "Strong historical reputation in select sectors and in wealth management/institutional securities complementing IBD", "weight": 2},
+      {"point": "Known for a polished, prestige-conscious culture with competitive selectivity similar to top peers", "weight": 2},
+      {"point": "Candidates should tie interest to specific group strengths rather than generic bulge bracket appeal", "weight": 2},
+      {"point": "Like peers, group and deal-team culture can vary meaningfully within the firm, so research should go beyond firm-level reputation", "weight": 2}
+    ],
+    "misconceptions": [
+      "That every group at Morgan Stanley has an identical culture and reputation",
+      "That firm-wide prestige alone is a sufficient answer for 'why this firm' in an interview"
+    ],
+    "modelAnswer": "Morgan Stanley is generally regarded as one of the top-tier bulge brackets, with a strong historical reputation both in specific investment banking sectors and in its broader institutional securities and wealth management businesses, which gives it a somewhat different overall platform mix than a pure IBD-and-trading-focused peer. Like other top bulge brackets, its recruiting process is highly selective and its culture has a reputation for being polished and prestige-conscious, which can be a strong fit for candidates who value that kind of environment, but a candidate should be careful not to treat firm-wide reputation as a complete answer for why they want to work there. Just as with any large bank, culture and day-to-day experience can vary meaningfully by group, so a well-prepared candidate researches the specific team they're interviewing with, not just the firm's overall brand, and ties their interest to something concrete about that group's recent work or the people they've spoken with. Coming in only with 'Morgan Stanley is a top bank' as the pitch reads as generic and interchangeable with any other top-tier firm, which undercuts the whole point of showing genuine, specific interest.",
+    "followups": [
+      {
+        "prompt": "Why is it risky for a candidate to rely on firm-wide prestige as their main answer to 'why Morgan Stanley' in an interview?",
+        "modelAnswer": "Because that same reasoning could apply almost word-for-word to any other top bulge bracket, it signals the candidate hasn't done specific research into this firm or group, and interviewers who hear dozens of similar generic answers each cycle can spot it immediately. A prestige-only answer also fails to demonstrate the kind of genuine curiosity and initiative the firm is trying to select for, since it doesn't show the candidate has actually engaged with what makes this specific team or firm distinct."
+      },
+      {
+        "prompt": "How would a candidate research culture differences between groups within the same firm rather than assuming firm-wide reputation applies uniformly?",
+        "modelAnswer": "Networking conversations with multiple analysts across different groups at the same firm is the most reliable way, asking specific questions about hours, staffing style, and how much client interaction juniors get, since these things can vary a lot even under one firm's overall brand. Comparing notes across two or three groups often reveals real differences that firm-wide reputation or public materials wouldn't capture."
+      },
+      {
+        "prompt": "If a candidate hasn't been able to network extensively with people specifically at Morgan Stanley before an interview, what's a reasonable fallback way to prepare a credible 'why this firm' answer?",
+        "modelAnswer": "Researching recent deals the specific group has advised on, along with any public statements or interviews from senior bankers about the group's strategy or focus, can substitute reasonably well for direct networking if time is limited. It's a weaker substitute than a real conversation, so the candidate should be upfront and specific about what they found rather than vaguely gesturing at the firm's reputation, and should try to line up at least one or two calls before the actual interview if at all possible."
+      }
+    ],
+    "chapterSlug": "firms",
+    "sectionSlug": "morgan-stanley-guide",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-medium-010-evercore",
+    "topic": "recruiting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "What distinguishes Evercore as an elite boutique, and why might a candidate choose it over a bulge bracket offer covering the same industry?",
+    "keyPoints": [
+      {"point": "Pure advisory model: no balance sheet, no trading, no conflicts from proprietary financing interests, positioned as independent advice", "weight": 3},
+      {"point": "Leaner staffing typically means more direct deal exposure and client interaction per junior banker", "weight": 2},
+      {"point": "Strong reputation particularly in large-cap M&A advisory, competing directly with bulge brackets for marquee mandates", "weight": 2},
+      {"point": "Tradeoff: narrower product exposure (no capital markets/underwriting experience) compared to a full-service platform", "weight": 2}
+    ],
+    "misconceptions": [
+      "That elite boutiques like Evercore are lower prestige simply because they're smaller than bulge brackets",
+      "That choosing a boutique means giving up on large, high-profile deal exposure"
+    ],
+    "modelAnswer": "Evercore is a pure advisory firm — it has no trading desk and doesn't lend from a balance sheet, so its entire business model is being hired purely for M&A and restructuring judgment, which the firm and its clients often frame as an advantage since there's no potential conflict from also wanting to sell financing or underwriting services on the same deal. It has built a strong reputation particularly in large-cap M&A, regularly advising on deals of comparable size and profile to what bulge brackets work on, so choosing Evercore doesn't necessarily mean smaller or less prestigious deal exposure. Because it doesn't have a trading or lending business competing for headcount and staffing, junior bankers there often get leaner deal team structures, meaning more direct exposure to live deal work and client interaction per analyst than at a larger, more staffed-up platform. The real tradeoff a candidate should weigh is product breadth: choosing Evercore means giving up exposure to capital markets work like debt and equity underwriting that a bulge bracket offers, so it suits a candidate who's confident they want to specialize in pure advisory work rather than staying open to a broader set of banking products early in their career.",
+    "followups": [
+      {
+        "prompt": "Why does having no balance sheet or trading business actually function as a selling point for Evercore with clients, rather than a limitation?",
+        "modelAnswer": "Clients can trust the advice is purely about what's best for their transaction, since the bank has no competing incentive to steer a deal toward a structure that would also generate lucrative financing or underwriting fees for itself. That independence is a genuine differentiator in pitches against full-service banks, especially for clients wary of potential conflicts of interest in how a deal gets recommended or structured."
+      },
+      {
+        "prompt": "How would you describe the tradeoff a first-year analyst faces choosing Evercore over a bulge bracket in terms of skill development?",
+        "modelAnswer": "At Evercore, an analyst likely develops deeper, more concentrated M&A modeling and process skills faster, since that's the entirety of the work and staffing is leaner. At a bulge bracket, the analyst gets broader exposure across products, including underwriting and capital markets work, which can be valuable if they're not yet sure they want to specialize purely in M&A, but that breadth can come at the cost of less concentrated deal reps in any one area."
+      },
+      {
+        "prompt": "Does the lack of a balance sheet limit the size of deals Evercore can be hired for?",
+        "modelAnswer": "No — advisory mandates don't require the advisor to provide financing, so Evercore can and regularly does advise on very large transactions purely in an advisory capacity, with financing arranged separately by other banks if the deal requires it. The firm's deal size is driven by its advisory reputation and relationships, not by balance sheet capacity, which is exactly the point of the pure-advisory model."
+      }
+    ],
+    "chapterSlug": "firms",
+    "sectionSlug": "evercore-guide",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-medium-011-healthcare-subsectors",
+    "topic": "recruiting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "What are the major sub-sectors within a typical healthcare investment banking group, and why does the sector attract such heavy deal activity?",
+    "keyPoints": [
+      {"point": "Sub-sectors typically include pharmaceuticals/biotech, medical devices, healthcare services/providers, and managed care/payers", "weight": 3},
+      {"point": "Deal drivers include M&A consolidation among providers, biotech licensing and buyouts, and financing needs for R&D-heavy companies", "weight": 2},
+      {"point": "Valuation approaches differ meaningfully across sub-sectors (e.g., pipeline/NPV-driven for biotech vs. EBITDA-driven for services)", "weight": 2},
+      {"point": "Regulatory dynamics (FDA approval, reimbursement policy) create sector-specific deal risk and timing considerations", "weight": 2}
+    ],
+    "misconceptions": [
+      "That healthcare banking is a single homogeneous sector with one valuation approach",
+      "That deal activity in healthcare is driven purely by company financial performance with no regulatory dimension"
+    ],
+    "modelAnswer": "Healthcare groups usually break down into several distinct sub-sectors: pharmaceuticals and biotech, medical devices, healthcare services and providers, like hospital systems or outpatient clinics, and managed care or payers, like insurance companies. Each sub-sector has quite different deal drivers and valuation approaches, which is part of why healthcare bankers often specialize within one or two of these areas rather than treating the whole sector as uniform. Pharma and biotech deals are heavily influenced by drug pipelines, licensing agreements, and buyouts of promising but often pre-revenue companies, so valuation there frequently leans on probability-weighted, NPV-style modeling of future drug approvals rather than current earnings. Services and provider companies, by contrast, tend to be valued more like traditional businesses using EBITDA multiples, with deal activity driven heavily by consolidation as larger systems acquire smaller practices or facilities. Across all the sub-sectors, regulatory dynamics like FDA approval timelines or changes to reimbursement policy create sector-specific risks and can drive or delay deal timing in a way that's less common in less-regulated industries, which makes healthcare bankers need real fluency in regulatory context, not just financial modeling.",
+    "followups": [
+      {
+        "prompt": "Why does a biotech company with no current revenue still get a meaningful valuation in an M&A or licensing deal?",
+        "modelAnswer": "The valuation is typically built around the expected future cash flows if the drug in development succeeds, weighted by the probability of clinical trial and regulatory success at each stage, and discounted back to present value. Even with no current revenue, a promising drug candidate targeting a large market can justify a substantial valuation based on that risk-adjusted future potential, which is why this kind of probability-weighted NPV approach is central to biotech dealmaking."
+      },
+      {
+        "prompt": "Why does consolidation happen so frequently among healthcare services and provider companies specifically?",
+        "modelAnswer": "Smaller providers often face rising costs, administrative burden, and pricing pressure from insurers, and joining a larger system can offer better negotiating leverage with payers, shared administrative infrastructure, and access to capital for facility upgrades or technology. Larger acquirers, meanwhile, gain scale, referral networks, and geographic coverage, which together create a steady structural incentive for consolidation across fragmented provider markets."
+      },
+      {
+        "prompt": "How does a change in government reimbursement policy affect deal activity in the managed care or provider sub-sectors?",
+        "modelAnswer": "A change in reimbursement rates directly affects the revenue and margin assumptions in any valuation model for a payer or provider, so companies and investors often accelerate or pause deal activity around anticipated policy changes depending on whether the change looks favorable or unfavorable. This regulatory sensitivity is one reason healthcare bankers need to track policy developments closely, since a deal that looked attractive under one reimbursement regime can look very different after a policy shift."
+      }
+    ],
+    "chapterSlug": "sectors",
+    "sectionSlug": "sector-overview-healthcare",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-medium-012-energy-ad",
+    "topic": "recruiting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "What makes deal activity in the energy sector distinctive, particularly around acquisitions and divestitures (A&D), and how does that shape the work of an energy-focused analyst?",
+    "keyPoints": [
+      {"point": "A&D deals involve buying or selling specific assets (e.g., an oil field or set of wells) rather than whole companies", "weight": 3},
+      {"point": "Valuation is heavily reserve- and commodity-price-driven, using specialized metrics like proved reserves and production curves", "weight": 2},
+      {"point": "Deal activity is highly cyclical, tracking commodity price swings more directly than many other sectors", "weight": 2},
+      {"point": "Energy analysts often need familiarity with specialized technical/engineering inputs (reserve reports) alongside standard financial modeling", "weight": 2}
+    ],
+    "misconceptions": [
+      "That energy deals always involve buying or selling entire companies rather than discrete assets",
+      "That energy valuation follows the same standard EBITDA-multiple approach used across most other sectors with no adjustment"
+    ],
+    "modelAnswer": "A distinctive feature of energy dealmaking, especially in oil and gas, is the prevalence of acquisitions and divestitures, or A&D, where companies buy or sell specific assets, like a particular field or set of producing wells, rather than acquiring an entire company outright. That's different from a typical corporate M&A deal and requires valuation approaches built around the physical assets themselves — how much oil or gas is proven to be recoverable, what the expected production curve looks like over time, and what commodity price assumptions are used to translate that production into future cash flows. Because commodity prices swing significantly and unpredictably, energy deal activity tends to be highly cyclical, picking up when prices are strong and asset owners want to monetize value, and slowing sharply when prices fall and buyers become cautious, more directly tied to a single external variable than most other sectors. This means an energy-focused analyst needs to get comfortable working with specialized inputs like third-party reserve reports and production forecasts alongside standard financial modeling, essentially blending engineering-style technical inputs with valuation work in a way that's less common in sectors like consumer or technology.",
+    "followups": [
+      {
+        "prompt": "Why would a company choose to sell a specific asset through an A&D deal rather than sell the entire company?",
+        "modelAnswer": "A company might want to divest a non-core or underperforming asset to raise cash or focus capital on higher-return properties elsewhere in its portfolio, without giving up the rest of its business. It could also be responding to a buyer's specific interest in one asset's geology or location, allowing the seller to monetize that particular value while retaining ownership and control over everything else."
+      },
+      {
+        "prompt": "How does commodity price volatility specifically affect the timing of energy deal activity compared to a less cyclical sector like consumer staples?",
+        "modelAnswer": "When commodity prices rise, asset values and expected cash flows increase, which encourages sellers to bring assets to market to capture strong pricing and encourages buyers who are optimistic about continued strength to compete for deals, driving a surge in activity. When prices fall, sellers often hold back rather than sell at depressed valuations, and buyers become more cautious about paying for assets whose future cash flows are now less certain, which can cause deal volume to drop sharply in a way a steadier, less commodity-exposed sector like consumer staples wouldn't experience to the same degree."
+      },
+      {
+        "prompt": "What's a reserve report, and why does an energy analyst need to understand it even though it's produced by engineers rather than bankers?",
+        "modelAnswer": "A reserve report is a third-party engineering assessment estimating how much oil or gas a given asset can economically recover, along with expected production rates over time, and it's typically produced by independent petroleum engineers rather than the bank itself. An energy analyst needs to understand and translate its outputs into the financial model, since the reserve and production estimates directly drive the projected cash flows used to value the asset, making the technical report a foundational input the analyst has to interpret correctly even without being an engineer themselves."
+      }
+    ],
+    "chapterSlug": "sectors",
+    "sectionSlug": "sector-overview-energy",
+    "advanced": false
+  }
+]

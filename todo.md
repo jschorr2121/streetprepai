@@ -1,0 +1,5 @@
+- fix the long loading times
+- add ai chat back
+- add application tracker
+- add ai chatbot
+- add onboarding flow thats kinda like a quiz, what role you want, what you have done so far, etc. make this ai chat kinda flow that fills in for you 

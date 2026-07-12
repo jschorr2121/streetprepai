@@ -58,11 +58,13 @@ export function ProfileEditForm({ profile }: Props) {
       targetFirms: profile.targetFirms ?? [],
       bioSummary: profile.bioSummary ?? "",
       skills: profile.skills ?? [],
+      advancedTrack: profile.advancedTrack ?? false,
     },
   });
 
   const firms = watch("targetFirms") ?? [];
   const roles = watch("targetRoles") ?? [];
+  const advancedTrack = watch("advancedTrack") ?? false;
 
   // ─── Firm chip helpers ────────────────────────────────────────────────────
   function addFirm(raw: string) {
@@ -332,6 +334,33 @@ export function ProfileEditForm({ profile }: Props) {
             ) : null}
           </div>
         </div>
+      </section>
+
+      {/* ── Study preferences ────────────────────────────────────────────── */}
+      <section className="bg-card rounded-xl border p-5">
+        <h2 className="text-foreground mb-4 text-sm font-semibold tracking-wide uppercase opacity-60">
+          Study Preferences
+        </h2>
+        <button
+          type="button"
+          onClick={() => setValue("advancedTrack", !advancedTrack, { shouldValidate: true })}
+          className="border-border hover:border-primary/40 flex w-full items-start gap-3 rounded-lg border p-3 text-left transition-colors"
+        >
+          <span
+            className={`mt-0.5 grid size-5 shrink-0 place-items-center rounded-md border text-xs ${
+              advancedTrack ? "border-primary bg-primary text-primary-foreground" : "border-border"
+            }`}
+          >
+            {advancedTrack ? "✓" : ""}
+          </span>
+          <span>
+            <span className="text-sm font-medium">Advanced track</span>
+            <span className="text-muted-foreground block text-xs">
+              Show ⭐ elective sections and harder questions (deferred taxes, leases, waterfalls,
+              338(h)(10)…). For PE-track or prior-experience candidates.
+            </span>
+          </span>
+        </button>
       </section>
 
       {/* ── Save ─────────────────────────────────────────────────────────── */}

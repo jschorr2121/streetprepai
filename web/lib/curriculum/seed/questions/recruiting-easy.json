@@ -1,0 +1,344 @@
+[
+  {
+    "id": "recruiting-easy-001-how-recruiting-works",
+    "topic": "recruiting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Walk me through how investment banking recruiting actually works, from the first time a student engages with a firm to receiving an offer.",
+    "keyPoints": [
+      {"point": "Networking / informational calls with bankers happen before or alongside applying, and often drive referrals", "weight": 3},
+      {"point": "Formal application submitted through the firm's campus portal, usually with resume, transcript, and sometimes a cover letter", "weight": 2},
+      {"point": "Online assessment or HireVue-style video interview screens candidates before live interviews", "weight": 2},
+      {"point": "First-round interviews (often on-campus or via video) lead to a superday of multiple back-to-back interviews", "weight": 3},
+      {"point": "Offers are frequently extended same-day or within days, sometimes with short acceptance windows", "weight": 2}
+    ],
+    "misconceptions": [
+      "That submitting an online application alone is enough to get noticed without any networking",
+      "That the process is a single interview rather than a multi-stage funnel"
+    ],
+    "modelAnswer": "Recruiting is really a funnel. It typically starts with networking months before applications open — coffee chats and calls with analysts or associates that help a candidate learn about the group and, ideally, get a referral that puts their resume in front of a recruiter. Once the firm's application portal opens, the candidate submits a resume, transcript, and sometimes a short cover letter or set of essay questions. Many firms then run every applicant through an online assessment or a recorded HireVue-style video interview to screen the pool down before committing human time. Candidates who pass move to first-round interviews, which might be one or two calls, and then to a superday — a compressed set of three to five back-to-back interviews with different bankers, often in person. Because superdays are so front-loaded, firms usually decide quickly: offers can go out that same evening or within a few days, sometimes with a short deadline to accept given how many other processes are running in parallel. The whole cycle, from first networking call to offer, often spans several months but compresses into a very fast final week.",
+    "followups": [
+      {
+        "prompt": "Why do so many firms use an online assessment or HireVue before a live interview?",
+        "modelAnswer": "Volume. A single analyst posting can draw thousands of applicants, and HR teams can't staff live interviews for all of them. An automated screen — logic/numeracy tests or a recorded video where the candidate answers fit and technical questions into a webcam — lets the firm cut the pool by 70-90% cheaply before spending banker time. It also standardizes the first cut so every candidate answers the same prompts, which is useful for comparing across a huge and geographically dispersed applicant pool."
+      },
+      {
+        "prompt": "Why do superdays compress into a single day instead of spreading interviews out over weeks?",
+        "modelAnswer": "Speed protects yield. If a bank spreads interviews over weeks, top candidates often accept a competing offer from a bank that moved faster. Compressing to one day lets the firm see a candidate from multiple angles quickly, debrief while impressions are fresh, and extend an offer before a competitor does — which is also why offers often come with tight decision deadlines."
+      }
+    ],
+    "chapterSlug": "recruiting-cycle",
+    "sectionSlug": "how-recruiting-works",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-easy-002-superday",
+    "topic": "recruiting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is a superday, and how is it different from a first-round interview?",
+    "keyPoints": [
+      {"point": "First round is usually one or two interviews, often shorter or over video, used to narrow the pool", "weight": 2},
+      {"point": "Superday is a compressed, in-person round of multiple back-to-back interviews in one day", "weight": 3},
+      {"point": "Superday interviewers are typically a mix of analysts, associates, VPs, and sometimes MDs across the group", "weight": 2},
+      {"point": "Superday is usually the final stage before an offer decision", "weight": 2}
+    ],
+    "misconceptions": [
+      "That a superday is just one long interview rather than several distinct ones with different people",
+      "That performing well with one interviewer guarantees the offer regardless of the others"
+    ],
+    "modelAnswer": "A first round is the initial screen — usually one or two interviews, often shorter, sometimes over video, meant to filter a large pool down to a manageable group. A superday is the final stage: the firm flies candidates in, or brings them on-site, for a single day packed with three to five separate interviews back-to-back with different people across the group — typically a mix of analysts, associates, VPs, and occasionally a managing director. Each interviewer usually evaluates independently and then the group debriefs together, often that same evening, to decide who gets an offer. Because everyone compares notes right after, consistency matters: giving a strong technical answer to one interviewer doesn't offset seeming disengaged or rehearsed with another. Superdays are also where fit gets weighted more heavily than in the first round, since the firm has already confirmed baseline technical competence and is now assessing who they'd want to work with at 1am on a live deal.",
+    "followups": [
+      {
+        "prompt": "Why does fit tend to matter more at the superday stage than in the first round?",
+        "modelAnswer": "By superday, the firm has already technically vetted candidates through the first round and assessment, so the remaining question is more about team chemistry and stamina — would this person work well on a desk during a crunch, ask good questions, take direction well. Since technical ability was already confirmed as sufficient, the marginal signal that differentiates similarly qualified candidates in a debrief is usually fit and energy."
+      },
+      {
+        "prompt": "Why do interviewers debrief together right after a superday instead of scoring candidates independently and later?",
+        "modelAnswer": "Fast group debriefs surface disagreement while memory is fresh and let interviewers calibrate against each other — one person's 'quiet' read might be another's 'thoughtful,' and talking it through in the room resolves that immediately rather than losing nuance in a written scorecard days later. It also lets the group move fast on offers before a competing bank locks in the same candidate."
+      }
+    ],
+    "chapterSlug": "recruiting-cycle",
+    "sectionSlug": "how-recruiting-works",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-easy-003-calendar-by-class-year",
+    "topic": "recruiting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "How does the investment banking recruiting timeline differ between sophomore year and junior year for a student targeting a summer analyst role?",
+    "keyPoints": [
+      {"point": "Sophomore year centers on landing a sophomore-year 'diversity' or spring insight program that acts as a fast-track to the junior-year process", "weight": 3},
+      {"point": "Junior year on-cycle recruiting for full-time-track summer analyst roles at large banks now often kicks off remarkably early, sometimes in the fall of junior year or even before", "weight": 3},
+      {"point": "Networking and coffee chats typically need to start well before applications open in either year", "weight": 2},
+      {"point": "Missing a given track doesn't end the process — off-cycle and later-cycle opportunities still exist", "weight": 2}
+    ],
+    "misconceptions": [
+      "That recruiting only happens once, senior year, before graduation",
+      "That sophomore-year programs are unrelated to junior-year outcomes"
+    ],
+    "modelAnswer": "Sophomore year is mostly about getting into a bank's sophomore program — often branded as a diversity, insight, or 'discover' program — which typically runs for a few days over winter or spring break and gives strong performers a fast-tracked or even direct path into the following summer's junior internship, skipping much of the competitive junior-year process. To get into that sophomore program, a student usually needs to start networking with bankers and building a resume as early as freshman year. Junior year is where the marquee 'on-cycle' recruiting happens for the summer analyst internship that converts into the full-time offer — and at the largest banks this has been pulled earlier and earlier, sometimes starting as early as the fall of junior year rather than the traditional winter or spring timeline. That means networking for junior year recruiting often needs to begin the summer before junior year even starts. Because timing varies bank to bank, a student has to track each firm's specific calendar rather than assuming one universal date, and missing on-cycle isn't fatal since off-cycle and rolling opportunities continue afterward.",
+    "followups": [
+      {
+        "prompt": "Why have junior-year on-cycle timelines moved so much earlier in recent years?",
+        "modelAnswer": "It's a competitive arms race: once one large bank started locking in candidates earlier to beat rivals to the best talent, other banks had to move earlier too or risk losing candidates to firms that had already extended offers. Once a few top banks moved their timeline up, it created pressure on the rest of the market to follow, compressing the whole process earlier each cycle."
+      },
+      {
+        "prompt": "What's the practical risk of only preparing for the 'standard' junior-year timeline and ignoring sophomore-year programs?",
+        "modelAnswer": "A student who waits until junior year to start may find some banks have effectively already filled a meaningful share of their class through sophomore-program conversions and early on-cycle offers, leaving fewer open seats by the time they're ready to apply. Preparing only for one timeline also means missing the networking runway needed before that timeline opens, since outreach has to start well in advance of any application deadline."
+      }
+    ],
+    "chapterSlug": "recruiting-cycle",
+    "sectionSlug": "recruiting-calendar-by-class-year",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-easy-004-firm-tiers",
+    "topic": "recruiting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What's the difference between a bulge bracket, an elite boutique, and a middle-market bank, and why does it matter for a candidate deciding where to apply?",
+    "keyPoints": [
+      {"point": "Bulge brackets (e.g., large global banks) offer full-service platforms: M&A plus underwriting, sales & trading, lending, and balance sheet", "weight": 2},
+      {"point": "Elite boutiques are pure advisory shops focused on M&A and restructuring, no balance sheet or trading", "weight": 2},
+      {"point": "Middle-market banks focus on smaller deal sizes and often specific sectors or regions, with more hands-on junior experience", "weight": 2},
+      {"point": "Differences affect deal size, deal type exposure, hours culture, brand recognition, and later exit opportunities", "weight": 2}
+    ],
+    "misconceptions": [
+      "That 'bigger bank' always means 'better analyst experience'",
+      "That elite boutiques are lower prestige than bulge brackets because they're smaller"
+    ],
+    "modelAnswer": "Bulge bracket banks are the large global full-service platforms — they do M&A advisory but also underwrite debt and equity, run sales and trading, and can lend from their own balance sheet, which lets them win mandates partly through financing relationships. Elite boutiques are pure advisory firms with no balance sheet or trading desk; they're hired purely for M&A and restructuring judgment, tend to be leaner, and because there's no financing arm competing for headcount, junior bankers there often get more direct deal exposure per person. Middle-market banks sit below both in deal size, typically advising on transactions in the tens to low hundreds of millions rather than billions, often specializing in a sector or region, and juniors there tend to touch every part of a smaller number of deals rather than a narrow slice of a mega-deal. For a candidate, the choice affects what kind of deals you'll work on, how much responsibility you get as an analyst, the brand name on a resume, and which buy-side or later banking doors open most easily — none of which is strictly 'better,' it depends on what the candidate is optimizing for.",
+    "followups": [
+      {
+        "prompt": "Why might a candidate deliberately choose an elite boutique over a bulge bracket if both extend an offer?",
+        "modelAnswer": "At a boutique with no trading or lending business competing for staffing, analysts are often allocated across fewer, higher-quality M&A mandates, meaning more hands-on modeling and client exposure per person and less time on ancillary financing work. Some candidates also value the leaner culture, direct partner access, and the pure-advisory brand for private equity recruiting, since PE and hedge fund recruiters often view boutique M&A reps as a strong signal of deal skill."
+      },
+      {
+        "prompt": "What's a real tradeoff a candidate gives up by choosing a boutique over a bulge bracket?",
+        "modelAnswer": "They give up exposure to capital markets work like debt and equity underwriting, and to the broader platform relationships and brand recognition that come with a bulge bracket, which can matter for name recognition outside finance or for candidates unsure yet whether they want to specialize in pure M&A versus a broader set of products."
+      }
+    ],
+    "chapterSlug": "recruiting-cycle",
+    "sectionSlug": "firm-tiers-bb-eb-mm",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-easy-005-application-mechanics",
+    "topic": "recruiting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What actually goes into submitting a strong investment banking application, and what mechanical mistakes trip up candidates?",
+    "keyPoints": [
+      {"point": "Core materials: resume, unofficial transcript, and often a cover letter or short essay responses tailored to the firm", "weight": 2},
+      {"point": "Applications are usually submitted through a firm-specific portal (or campus career system) with fixed windows/deadlines", "weight": 2},
+      {"point": "Referrals from a banker inside the firm often route a resume for priority review", "weight": 2},
+      {"point": "Common mechanical mistakes: missing deadlines, generic/unedited materials, wrong firm name in a cover letter, incomplete portal fields", "weight": 2}
+    ],
+    "misconceptions": [
+      "That one resume and cover letter can be copy-pasted across every firm without changes",
+      "That the application portal is just a formality once you've networked with someone at the firm"
+    ],
+    "modelAnswer": "A standard application has three parts: a one-page resume, an unofficial transcript, and often a cover letter or a few short written responses about why that firm and why banking. These get submitted through each firm's own portal or a shared campus recruiting system, and each firm sets its own deadline, so a candidate is usually tracking several different windows at once. A referral from a banker at the firm doesn't replace the application — it typically just flags the resume for a recruiter to look at more closely once it's submitted, so the actual portal submission still has to happen and happen correctly. The mechanical mistakes that hurt candidates are avoidable ones: missing a deadline because windows differ firm to firm, submitting a cover letter that still says a different bank's name from a template, leaving optional-but-actually-read fields blank, or using a resume that hasn't been tailored to highlight the most relevant experience for that specific group. None of these mistakes reflect ability, but they're often enough for an overloaded recruiter to move on to the next resume.",
+    "followups": [
+      {
+        "prompt": "Why does a referral not guarantee an application even gets a closer look?",
+        "modelAnswer": "A referral usually just means a banker forwarded a name or flagged a resume internally — it signals interest but recruiters still screen against baseline criteria like GPA cutoffs, relevant coursework, or prior experience, especially at a firm receiving thousands of applications. A referral can move a resume from 'unseen' to 'seen,' but it rarely overrides a portal submission that's late, incomplete, or clearly generic."
+      },
+      {
+        "prompt": "What's the highest-leverage thing a candidate can do to avoid mechanical mistakes across multiple applications?",
+        "modelAnswer": "Keep a simple tracker of every firm's deadline, portal link, and required materials, and build one strong resume base that gets lightly customized per firm rather than rewritten each time from scratch. Proofreading specifically for leftover firm names or role titles from a previous application is a cheap final check that catches the most embarrassing and avoidable errors."
+      }
+    ],
+    "chapterSlug": "applications",
+    "sectionSlug": "application-mechanics",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-easy-006-resume-drops",
+    "topic": "recruiting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is a 'resume drop' and how does it differ from applying cold through a firm's website?",
+    "keyPoints": [
+      {"point": "A resume drop is a campus/career-center-facilitated batch submission window tied to a specific recruiting cycle", "weight": 2},
+      {"point": "Cold applying means submitting directly through a firm's own careers site without going through a school's system", "weight": 2},
+      {"point": "Resume drops are often the primary or only channel firms use at target schools, making them effectively mandatory there", "weight": 2},
+      {"point": "Missing a resume drop window can mean missing that firm's cycle entirely at that school, unlike some rolling cold applications", "weight": 2}
+    ],
+    "misconceptions": [
+      "That a resume drop and a cold application achieve the same thing through different websites",
+      "That resume drops are optional extra steps rather than the primary application channel at many schools"
+    ],
+    "modelAnswer": "A resume drop is when a firm partners with a university's career center or a recruiting platform to collect applications from that school's students in one batch window, usually tied to a set opening and closing date announced through the school. Cold applying is submitting directly on the firm's own external careers website, without going through any school-specific channel, which is more common for students at non-target schools or for firms that don't have a dedicated pipeline with a particular university. The distinction matters because at target schools, many firms only recruit through the resume drop — there's no separate 'apply on our website' path that gets equal consideration, so missing that window can mean missing the firm's process at that school for the entire cycle. A student needs to know which channel actually reaches recruiters for each firm they're targeting rather than assuming a generic online application submitted anytime will be seen the same way.",
+    "followups": [
+      {
+        "prompt": "Why would a firm prefer routing applications through a school's career center instead of just accepting them on its own website?",
+        "modelAnswer": "It lets the firm target specific schools it wants to build a pipeline with, control volume by school, and sometimes get pre-filtering support (like GPA verification) from the career center. It also signals commitment to that campus relationship, which can help with brand and yield in future cycles, and keeps the applicant pool more manageable than a fully open, unlimited online application."
+      },
+      {
+        "prompt": "If a student's school doesn't have a resume drop relationship with a target firm, what should they do instead?",
+        "modelAnswer": "They should apply directly through the firm's website, and lean more heavily on networking to get a referral, since without a school pipeline they don't have that structural signal working in their favor. Reaching out to alumni or bankers at the firm to request their resume be forwarded internally becomes more important as a substitute for the built-in visibility a resume drop provides."
+      }
+    ],
+    "chapterSlug": "applications",
+    "sectionSlug": "application-mechanics",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-easy-007-cover-letters",
+    "topic": "recruiting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What should a strong investment banking cover letter actually include, and what makes most cover letters weak?",
+    "keyPoints": [
+      {"point": "Should be specific to the firm: something concrete about the group, a recent deal, or a person the candidate spoke with", "weight": 3},
+      {"point": "Should connect the candidate's actual experience to why they'd be useful on a deal team, not just state generic interest", "weight": 2},
+      {"point": "Should be short, roughly half a page to a page, and free of clichés like 'passion for finance'", "weight": 2},
+      {"point": "Weak letters are template-driven, generic enough to apply to any bank, and focus on what the candidate wants rather than what they offer", "weight": 2}
+    ],
+    "misconceptions": [
+      "That cover letters need to summarize the entire resume in paragraph form",
+      "That every bank reads cover letters closely and weighs them heavily regardless of firm"
+    ],
+    "modelAnswer": "A strong cover letter is specific and short. It names something real about the firm — a recent deal the group closed, a conversation with a specific banker, or a detail about the group's focus — rather than vague language about 'passion for finance' that could be copy-pasted into any application. It should draw a direct line between something the candidate has actually done, whether that's a finance internship, a modeling course, or relevant coursework, and why that makes them useful on a deal team, rather than just restating the resume in sentence form. Length matters too: half a page to a page is plenty: recruiters skim, they don't read essays. What makes most cover letters weak is genericness — the same three paragraphs could be sent to any bank with the name swapped, which recruiters can spot instantly and which undercuts the whole point of writing one, since the letter's job is to prove the candidate did the work to understand this specific firm rather than mass-applying everywhere.",
+    "followups": [
+      {
+        "prompt": "How much does a cover letter actually move the needle compared to a resume or a referral?",
+        "modelAnswer": "It varies a lot by firm — some banks barely glance at cover letters and weigh the resume and referral far more heavily, while others, especially smaller or more relationship-driven boutiques, read them closely as a signal of genuine interest and writing ability. Because it's hard to know in advance how much weight a given firm puts on it, the safe approach is to make it good enough that it never becomes a reason to be screened out, without expecting it to be the deciding factor."
+      },
+      {
+        "prompt": "What's a concrete way to make a cover letter's opening line specific rather than generic?",
+        "modelAnswer": "Instead of opening with 'I am writing to express my interest in the Analyst position,' a stronger opening references something specific, like a deal the group recently advised on and why it caught the candidate's attention, or a point from a conversation with someone at the firm. That immediately signals the letter was written for this firm rather than lightly edited from a template, which is the main thing a recruiter is trying to detect in the first few seconds."
+      }
+    ],
+    "chapterSlug": "applications",
+    "sectionSlug": "cover-letters",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-easy-008-research-a-firm",
+    "topic": "recruiting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "How would you research a firm before an interview, and what specifically should you be able to speak to?",
+    "keyPoints": [
+      {"point": "Recent deals the group or firm has advised on, ideally within the last 6-12 months", "weight": 3},
+      {"point": "The group's specific focus (sector, product, region) versus the firm's overall platform", "weight": 2},
+      {"point": "General firm facts: size, culture, notable strengths, and how it's positioned relative to peers", "weight": 2},
+      {"point": "Something learned from talking to people at the firm, not just public information", "weight": 2}
+    ],
+    "misconceptions": [
+      "That reading the firm's 'About Us' page is sufficient preparation",
+      "That the same generic research applies to every group at a firm rather than the specific desk being interviewed for"
+    ],
+    "modelAnswer": "Good preparation starts with the firm's recent deal activity — being able to name one or two transactions the group has advised on in the last several months, and ideally saying something specific about why one was interesting, not just that it happened. It also means understanding what that specific group does, since a firm's overall platform and an individual group's focus, whether that's a sector like healthcare or a product like restructuring, can be quite different, and interviewers can tell when a candidate has only researched the firm broadly rather than the actual desk they're interviewing with. Beyond deals, it helps to know basic positioning: how big the group or firm is, what it's generally known for relative to competitors, and any recent news like a merger or a notable hire. The most valuable research usually comes from actual conversations with people at the firm during networking, since that gives a candidate something no other applicant reading the same website will have — a specific, personal reason for interest that's hard to fake.",
+    "followups": [
+      {
+        "prompt": "Why do interviewers care whether a candidate can speak to a specific recent deal rather than just general firm reputation?",
+        "modelAnswer": "It's a fast way to test genuine interest versus applying everywhere without discrimination — a candidate who can discuss a specific deal has clearly gone past the surface level and probably has a real reason for wanting that seat. It also previews how the candidate might sound describing deal work later, since summarizing a transaction clearly and explaining why it's interesting is close to what an analyst does when briefing a senior banker."
+      },
+      {
+        "prompt": "How would you find out what a specific group focuses on if it's not clearly listed on the firm's website?",
+        "modelAnswer": "Networking calls are the best source, since bankers can describe a group's real focus far better than a marketing page can. Failing that, searching news coverage or deal databases for the group's recent transactions, or looking at what sector or product a specific banker's public bio and past deals cluster around, gives a reasonable proxy for the group's actual specialization."
+      }
+    ],
+    "chapterSlug": "firms",
+    "sectionSlug": "how-to-research-a-firm",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-easy-009-sector-lock-in",
+    "topic": "recruiting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "If you apply to a specific sector or industry group as an analyst, are you locked into that sector for your entire career?",
+    "keyPoints": [
+      {"point": "Group placement at the analyst level shapes early experience but isn't a permanent career sentence", "weight": 3},
+      {"point": "Some firms use generalist programs where sector assignment happens after joining rather than at application", "weight": 2},
+      {"point": "Moving sectors later (associate level, buy-side, or lateral) is common but easiest early and gets harder with more years of specialization", "weight": 2},
+      {"point": "Sector choice does meaningfully shape resume narrative and which buy-side recruiters see the candidate as a fit", "weight": 2}
+    ],
+    "misconceptions": [
+      "That picking a sector group at the analyst level permanently determines your entire career path",
+      "That sector choice at application time is irrelevant because you can always switch later at no cost"
+    ],
+    "modelAnswer": "No, it's not permanent, but it's not free to change either. Group placement as an analyst shapes what deals you work on and what story your resume tells for the next couple of years, and some firms decide sector placement only after you join through a generalist or lateral bidding process rather than locking it in at the application stage. Switching sectors is genuinely easiest early in a career — moving groups internally, or moving firms, is far more common and accepted for someone with one or two years of experience than for someone eight years deep with a highly specialized reputation in one industry. That said, sector choice does matter in the near term: it shapes the deal experience you can speak to in interviews, and buy-side recruiters, especially at sector-focused private equity funds, often specifically look for candidates from a matching industry group. So the honest answer is that a sector choice is meaningfully influential in the short run but reversible in the long run, and the cost of switching grows the longer you stay in a given lane.",
+    "followups": [
+      {
+        "prompt": "Why would a sector-focused private equity fund prefer a candidate with matching group experience over someone from a generalist group?",
+        "modelAnswer": "They're betting that industry-specific experience translates into faster ramp-up on due diligence, familiarity with the sector's key metrics and comparable companies, and existing relationships or credibility with management teams in that space. A generalist candidate might be just as capable, but the sector-experienced hire needs less onboarding time, which matters more at a lean investment team than at a large bank."
+      },
+      {
+        "prompt": "What's a realistic way a first-year analyst in one sector group could pivot toward a different sector for their next role?",
+        "modelAnswer": "The cleanest path is usually lateral recruiting to a different firm or group after a year or two, positioning transferable skills like modeling and deal process rather than sector-specific knowledge, and being upfront in interviews about wanting to build exposure to the new sector. It's also worth trying to get staffed on a cross-sector deal internally if the current group occasionally works with the target sector, which builds a credible bridge on the resume before making a full switch."
+      }
+    ],
+    "chapterSlug": "sectors",
+    "sectionSlug": "how-sector-choice-affects-recruiting",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-easy-010-tmt-overview",
+    "topic": "recruiting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is TMT coverage, and what kinds of companies and deals does a TMT group typically work on?",
+    "keyPoints": [
+      {"point": "TMT stands for Technology, Media, and Telecommunications, sometimes split into sub-groups", "weight": 2},
+      {"point": "Covers companies from early-growth software and internet businesses to large legacy telecom and media companies", "weight": 2},
+      {"point": "Deal mix includes M&A, IPOs and growth equity, and debt financing, often with high deal volume given sector activity", "weight": 2},
+      {"point": "Valuation and metrics can differ meaningfully across the sub-sectors (e.g., ARR/subscriber multiples for software vs. EBITDA for legacy telecom)", "weight": 2}
+    ],
+    "misconceptions": [
+      "That TMT only covers software startups and doesn't include large legacy companies like telecom carriers",
+      "That every TMT deal uses the same valuation approach regardless of sub-sector"
+    ],
+    "modelAnswer": "TMT stands for Technology, Media, and Telecommunications, and it's one of the busiest coverage groups at most banks because the sector spans such a wide range of companies — from early-stage or high-growth software and internet businesses, to established media and entertainment companies, to large legacy telecom carriers with heavy infrastructure and debt. Because of that breadth, some banks split TMT into sub-teams, like software versus telecom, since the deal types and valuation approaches can look quite different. A high-growth software company might get valued more on revenue multiples or metrics like annual recurring revenue, while a mature telecom company is usually valued more traditionally on EBITDA multiples given its stable, capital-intensive cash flows. Deal activity in TMT tends to be high volume and varied: M&A between strategics, IPOs and growth equity rounds for younger companies, and debt financing for larger, more capital-intensive players. That variety is part of why TMT is often one of the most competitive groups to recruit into — analysts get exposure to a wide range of deal types and company profiles rather than one narrow niche.",
+    "followups": [
+      {
+        "prompt": "Why might a bank split its TMT group into separate software and telecom sub-teams rather than keeping it as one group?",
+        "modelAnswer": "The client relationships, deal cadence, and valuation frameworks are different enough that specialization helps bankers build deeper expertise and credibility with each type of client. A banker who spends all their time with high-growth software founders develops a different skill set and network than one who works with telecom infrastructure executives, so splitting lets each team go deeper rather than staying generalist across a very broad sector."
+      },
+      {
+        "prompt": "Why does TMT tend to have unusually high deal volume compared to some other sectors?",
+        "modelAnswer": "Technology and media businesses change fast — new products, consolidation among competitors, and rapid growth or decline cycles create frequent reasons to raise capital, sell, or acquire. Combined with the sheer size of the sector across both mature and emerging companies, that constant change generates a steady stream of M&A, financing, and capital markets activity relative to more stable, slower-moving industries."
+      }
+    ],
+    "chapterSlug": "sectors",
+    "sectionSlug": "sector-overview-tmt",
+    "advanced": false
+  },
+  {
+    "id": "recruiting-easy-011-consumer-retail-overview",
+    "topic": "recruiting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What does a Consumer & Retail investment banking group typically cover, and what makes its deal work distinctive?",
+    "keyPoints": [
+      {"point": "Covers companies selling directly or indirectly to consumers: retail, apparel, food & beverage, restaurants, consumer products", "weight": 2},
+      {"point": "Deal work includes M&A (strategic consolidation and private equity-backed buyouts), IPOs, and financing", "weight": 2},
+      {"point": "Brand strength, same-store sales, and unit economics matter more here than in many other sectors", "weight": 2},
+      {"point": "Sector is sensitive to consumer spending cycles and shifting channels (e.g., e-commerce vs. brick-and-mortar)", "weight": 2}
+    ],
+    "misconceptions": [
+      "That Consumer & Retail only covers physical retail stores and excludes food, beverage, or consumer products companies",
+      "That valuation in this sector ignores brand and customer loyalty and relies purely on standard financial multiples"
+    ],
+    "modelAnswer": "Consumer & Retail covers any company that ultimately sells to individual consumers, which is a broad umbrella spanning traditional retail chains, apparel and footwear brands, food and beverage companies, restaurants, and consumer products more generally. Deal activity is a mix of strategic M&A, where larger companies acquire smaller brands to add to a portfolio, private equity-backed buyouts, since consumer brands with steady cash flow are attractive leveraged buyout targets, and IPOs for younger, high-growth brands looking to raise capital publicly. What makes analysis in this sector distinctive is that financial metrics alone don't tell the whole story — things like brand strength, customer loyalty, and same-store sales growth (how existing locations are performing versus new ones) matter a lot to how a company or business is valued. The sector is also unusually sensitive to consumer spending cycles and to shifts in how people shop, like the ongoing move from brick-and-mortar toward e-commerce, which means bankers in this group need to understand not just the numbers but also brand and consumer behavior trends.",
+    "followups": [
+      {
+        "prompt": "Why is same-store sales growth such an important metric specifically for retail companies, more than a generic revenue growth figure?",
+        "modelAnswer": "Same-store sales strips out growth that comes purely from opening new locations, isolating whether existing stores are actually getting more productive or losing traffic. A retailer could show strong total revenue growth just by opening dozens of new stores while each individual store is actually declining, which would be a warning sign that same-store sales growth exposes but a top-line revenue number would mask."
+      },
+      {
+        "prompt": "How does private equity interest in consumer brands typically differ from strategic acquirer interest in the same deal?",
+        "modelAnswer": "Private equity is usually focused on the brand's ability to generate stable, predictable cash flow to support leverage, plus a credible path to grow margins or expand distribution before an eventual resale or IPO. A strategic acquirer, by contrast, is often more focused on synergies, like folding the brand into existing distribution, manufacturing, or retail infrastructure, which can let them justify paying a higher price than a financial buyer working off standalone cash flow alone."
+      }
+    ],
+    "chapterSlug": "sectors",
+    "sectionSlug": "sector-overview-consumer-retail",
+    "advanced": false
+  }
+]

@@ -22,6 +22,7 @@ function mapRow(r: typeof profiles.$inferSelect): Profile {
     experiences: (r.experiences as unknown[] | null) ?? [],
     education: (r.education as unknown[] | null) ?? [],
     skills: r.skills ?? [],
+    advancedTrack: r.advancedTrack,
     onboardedAt: r.onboardedAt ?? undefined,
     updatedAt: r.updatedAt ?? undefined,
   };
@@ -60,6 +61,7 @@ export type UpdateProfileFields = {
   experiences?: unknown[];
   education?: unknown[];
   skills?: string[];
+  advancedTrack?: boolean;
 };
 
 /**
@@ -91,6 +93,7 @@ export async function updateProfile(
     ...(fields.experiences !== undefined && { experiences: fields.experiences }),
     ...(fields.education !== undefined && { education: fields.education }),
     ...(fields.skills !== undefined && { skills: fields.skills }),
+    ...(fields.advancedTrack !== undefined && { advancedTrack: fields.advancedTrack }),
     updatedAt: now,
   };
 
@@ -110,6 +113,7 @@ export async function updateProfile(
         ...(fields.experiences !== undefined && { experiences: values.experiences }),
         ...(fields.education !== undefined && { education: values.education }),
         ...(fields.skills !== undefined && { skills: values.skills }),
+        ...(fields.advancedTrack !== undefined && { advancedTrack: values.advancedTrack }),
         updatedAt: values.updatedAt,
       },
     })
@@ -124,6 +128,7 @@ export type SetOnboardedFields = {
   graduationYear: number;
   currentSemester: string;
   targetFirms: string[];
+  advancedTrack: boolean;
 };
 
 // First user-facing write through Drizzle (Unit 4). Upserts the onboarding
@@ -141,6 +146,7 @@ export async function setOnboarded(
     graduationYear: fields.graduationYear,
     currentSemester: fields.currentSemester,
     targetFirms: fields.targetFirms,
+    advancedTrack: fields.advancedTrack,
     onboardedAt: now,
     updatedAt: now,
   };
@@ -155,6 +161,7 @@ export async function setOnboarded(
         graduationYear: values.graduationYear,
         currentSemester: values.currentSemester,
         targetFirms: values.targetFirms,
+        advancedTrack: values.advancedTrack,
         onboardedAt: values.onboardedAt,
         updatedAt: values.updatedAt,
       },

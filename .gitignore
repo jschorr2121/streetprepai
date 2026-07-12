@@ -52,3 +52,10 @@ Thumbs.db
 
 # claude
 .claude/
+.gstack/
+
+# friends' copyrighted prep PDFs — source material only, never publish
+extra_content/
+
+# scratch
+.scratch/

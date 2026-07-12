@@ -1,102 +1,116 @@
 import Link from "next/link";
-import { getAllGuides, categoryLabels } from "@/lib/data/guides";
+import { ArrowRight, BookOpenText, CheckCircle2, GraduationCap, Lock } from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, BookOpenText } from "lucide-react";
-import type { GuideCategory } from "@/lib/types";
+import { requireUser } from "@/lib/auth/server";
+import { withUser } from "@/lib/db/client";
+import { getProfile } from "@/lib/db/queries/profile";
+import { listChapterProgress, listSectionProgress } from "@/lib/db/queries/curriculum";
+import { chapters } from "@/lib/curriculum/chapters";
+import { computeFlow } from "@/lib/curriculum/progress";
+import { cn } from "@/lib/utils";
 
-const allCategories: GuideCategory[] = [
-  "technicals",
-  "behavioral",
-  "firm-guides",
-  "networking",
-  "resume",
-  "modeling",
-  "superday",
-  "market-news",
-];
+export const metadata = { title: "Learn — Street Prep AI" };
 
-const placeholderCounts: Record<GuideCategory, number> = {
-  technicals: 24,
-  behavioral: 18,
-  "firm-guides": 32,
-  networking: 9,
-  resume: 6,
-  modeling: 12,
-  superday: 7,
-  "market-news": 15,
-};
+export default async function LearnPage() {
+  const user = await requireUser();
+  const { sections, chapterRows, profile } = await withUser(
+    { sub: user.id, role: "authenticated" },
+    async (tx) => ({
+      sections: await listSectionProgress(tx, user.id),
+      chapterRows: await listChapterProgress(tx, user.id),
+      profile: await getProfile(tx, user.id),
+    }),
+  );
 
-export default function LibraryPage() {
-  const guides = getAllGuides();
-  const byCategory = new Map<GuideCategory, typeof guides>();
-  for (const g of guides) {
-    const list = byCategory.get(g.category) ?? [];
-    list.push(g);
-    byCategory.set(g.category, list);
-  }
+  const flow = computeFlow(sections, chapterRows);
+  const statusBySlug = new Map(flow.statuses.map((s) => [s.chapter.slug, s]));
+  const spineDone = flow.statuses.filter((s) => s.chapter.kind === "spine" && s.completed).length;
+  const spineTotal = chapters.filter((c) => c.kind === "spine").length;
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-8 md:px-8">
+    <div className="mx-auto max-w-5xl px-6 py-8 md:px-8">
       <header className="mb-8">
         <div className="text-primary mb-2 flex items-center gap-2 text-sm font-medium">
-          <BookOpenText className="size-4" /> Content Library
+          <GraduationCap className="size-4" /> Learning Flow
         </div>
         <h1 className="text-3xl font-semibold tracking-tight">
-          Everything you&apos;ll be asked in an IB interview
+          Your complete IB recruiting prep, in order
         </h1>
         <p className="text-muted-foreground mt-2 max-w-2xl">
-          Guides built for how bankers actually interview. Every guide opens in the Reading Lens —
-          highlight any passage for a plain-English explanation from Claude.
+          Sixteen chapters from the recruiting timeline through the technical core to superday.
+          Read each section, drill it, then clear the chapter. {spineDone} of {spineTotal} chapters
+          complete.
         </p>
       </header>
 
-      <div className="space-y-10">
-        {allCategories.map((cat) => {
-          const list = byCategory.get(cat) ?? [];
-          const hasContent = list.length > 0;
+      {flow.nextUp && (
+        <Link
+          href={`/learn/${flow.nextUp.chapter.slug}`}
+          className="group border-primary/30 bg-primary/5 mb-8 flex items-center justify-between rounded-xl border p-5 transition-all hover:shadow-sm"
+        >
+          <div>
+            <div className="text-primary text-xs font-medium">Pick up where you left off</div>
+            <div className="mt-1 font-semibold">
+              {flow.nextUp.chapter.title} · {flow.nextUp.sectionTitle}
+            </div>
+          </div>
+          <ArrowRight className="text-primary size-5 transition-transform group-hover:translate-x-1" />
+        </Link>
+      )}
+
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        {chapters.map((chapter) => {
+          const st = statusBySlug.get(chapter.slug);
+          const readFraction = st?.readFraction ?? 0;
+          const advancedHidden =
+            !profile?.advancedTrack && chapter.sections.some((s) => s.advanced);
           return (
-            <section key={cat}>
-              <div className="mb-4 flex items-end justify-between">
-                <div>
-                  <h2 className="text-xl font-semibold tracking-tight">{categoryLabels[cat]}</h2>
-                  <p className="text-muted-foreground mt-0.5 text-xs">
-                    {hasContent
-                      ? `${list.length} live · ${placeholderCounts[cat] - list.length}+ coming`
-                      : `${placeholderCounts[cat]}+ guides coming`}
-                  </p>
+            <Link
+              key={chapter.slug}
+              href={`/learn/${chapter.slug}`}
+              className="group bg-card hover:border-primary/40 flex flex-col rounded-xl border p-4 transition-all hover:shadow-sm"
+            >
+              <div className="mb-2 flex items-center justify-between">
+                <div className="text-muted-foreground flex items-center gap-2 text-xs">
+                  <span className="bg-muted grid size-6 place-items-center rounded-md font-medium">
+                    {chapter.number}
+                  </span>
+                  {chapter.kind === "reference" ? (
+                    <Badge variant="outline" className="rounded-full text-xs">
+                      Reference
+                    </Badge>
+                  ) : chapter.gated ? (
+                    <Badge variant="outline" className="gap-1 rounded-full text-xs">
+                      <Lock className="size-3" /> Gated
+                    </Badge>
+                  ) : null}
                 </div>
+                {st?.completed && <CheckCircle2 className="text-primary size-5" />}
               </div>
-              {hasContent ? (
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-                  {list.map((g) => (
-                    <Link
-                      key={g.slug}
-                      href={`/guide/${g.slug}`}
-                      className="group bg-card hover:border-primary/40 rounded-xl border p-4 transition-all hover:shadow-sm"
-                    >
-                      <div className="text-muted-foreground mb-2 flex items-center gap-2 text-xs">
-                        <span className="capitalize">{g.difficulty}</span>
-                        <span>·</span>
-                        <span>{g.readingMinutes} min</span>
-                      </div>
-                      <h3 className="group-hover:text-primary font-semibold transition-colors">
-                        {g.title}
-                      </h3>
-                      <p className="text-muted-foreground mt-1.5 line-clamp-2 text-xs leading-relaxed">
-                        {g.description}
-                      </p>
-                      <div className="text-primary mt-3 flex items-center gap-1 text-xs font-medium">
-                        Open with lens <ArrowRight className="size-3" />
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                <div className="bg-muted/30 text-muted-foreground rounded-lg border border-dashed px-4 py-6 text-center text-sm">
-                  Coming soon · content gap in {categoryLabels[cat].toLowerCase()}
+              <h3 className="group-hover:text-primary font-semibold transition-colors">
+                {chapter.title}
+              </h3>
+              <p className="text-muted-foreground mt-1 line-clamp-2 flex-1 text-xs leading-relaxed">
+                {chapter.description}
+              </p>
+              {chapter.kind === "spine" && (
+                <div className="mt-3 flex items-center gap-2">
+                  <div className="bg-muted h-1.5 flex-1 overflow-hidden rounded-full">
+                    <div
+                      className={cn("h-full rounded-full", st?.completed ? "bg-primary" : "bg-primary/60")}
+                      style={{ width: `${Math.round(readFraction * 100)}%` }}
+                    />
+                  </div>
+                  <span className="text-muted-foreground text-xs">
+                    {st?.sectionsRead ?? 0}/{st?.coreCount ?? chapter.sections.length}
+                  </span>
                 </div>
               )}
-            </section>
+              {advancedHidden && (
+                <p className="text-muted-foreground mt-2 text-xs">+ advanced sections available</p>
+              )}
+            </Link>
           );
         })}
       </div>

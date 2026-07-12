@@ -1,0 +1,179 @@
+[
+  {
+    "id": "resume-medium-001-cramming-fix",
+    "topic": "resume",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "A candidate's resume uses 0.5-inch margins, 9-point font, and single-spaced cramped lines to force everything onto one page. Is this the right way to satisfy the one-page rule? What should they do instead?",
+    "keyPoints": [
+      { "point": "Cramming via tiny margins/fonts hurts readability and looks unprofessional rather than efficient", "weight": 3 },
+      { "point": "The correct fix is cutting content, not shrinking the container", "weight": 3 },
+      { "point": "Standard convention is roughly 10-11pt body font and 0.5-0.75 inch margins", "weight": 2 },
+      { "point": "Prioritize the most recent and most relevant experience; cut older or tangential lines first", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Shrinking font size is an acceptable substitute for editing content",
+      "As long as it technically fits on one page, formatting choices don't matter"
+    ],
+    "modelAnswer": "That approach solves the wrong problem. The one-page rule isn't 'make it physically fit on one sheet by any means' — it's a proxy for the candidate's ability to prioritize and edit their own story. A resume with 9-point font and half-inch margins is hard to read, looks visually dense and unpolished, and actually undercuts the reader's willingness to engage with it at all, which defeats the purpose. The right fix is to cut content, not shrink it: go through every bullet and section, rank by relevance to banking and recency, and remove the weakest ones — an unremarkable freshman-year activity, a redundant bullet that repeats a skill already shown elsewhere, or an older role that's no longer differentiating. Standard convention holds font around 10 to 11 points for body text and margins around 0.5 to 0.75 inches, which keeps the page dense but still comfortably readable. If after trimming the weakest content the resume still doesn't fit, that's a signal there's more cutting to do, not more shrinking. The end goal is a page that a screener can skim in ten seconds and immediately grasp the strongest two or three signals about the candidate.",
+    "followups": [
+      {
+        "prompt": "How would you decide which of two similarly strong internship bullets to cut if only one can fit?",
+        "modelAnswer": "Favor the bullet with the more specific, quantified outcome and the more recent or more banking-relevant context — a deal-related bullet with a dollar figure typically beats a well-written but generic leadership bullet. If both are genuinely equal in strength, keep the one that adds a skill or theme not already represented elsewhere on the resume, since redundancy is itself a reason to cut."
+      },
+      {
+        "prompt": "Is there ever a legitimate reason to use a slightly smaller font, like 10 vs 11 point?",
+        "modelAnswer": "Yes, minor adjustments within the normal range — say 10.5 versus 11 point — are a reasonable last lever after content has already been trimmed as much as it reasonably can be, since it's a small, professional-looking compromise rather than a workaround for an uncut resume. The line to avoid is going below roughly 10 point or margins below half an inch, where readability visibly degrades."
+      },
+      {
+        "prompt": "What's a quick way to audit a resume for content that's safe to cut?",
+        "modelAnswer": "Read each bullet and ask whether removing it would lose a distinct piece of information a screener needs — if the answer is no because it repeats a skill, is vague, or is from an activity with low relevance to banking, it's a cut candidate. Doing this pass section by section, starting with the least relevant section (often 'Interests' or older activities), usually recovers enough space without touching font size at all."
+      }
+    ],
+    "chapterSlug": "resume",
+    "sectionSlug": "one-page-resume-conventions",
+    "advanced": false
+  },
+  {
+    "id": "resume-medium-002-bullet-rewrite",
+    "topic": "resume",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "Rewrite this weak bullet into a strong banker bullet, and walk me through each change and why you made it: 'Responsible for helping with financial models and presentations for client meetings.'",
+    "keyPoints": [
+      { "point": "Replace passive 'responsible for' opener with a strong past-tense action verb (e.g., 'Built' or 'Developed')", "weight": 2 },
+      { "point": "Name the specific deliverable instead of the vague category (e.g., a 3-statement model or DCF, not just 'financial models')", "weight": 3 },
+      { "point": "Add scope or context, such as the deal type and size the work supported", "weight": 2 },
+      { "point": "Add a quantified outcome or scale (number of models, deal size, number of meetings)", "weight": 3 },
+      { "point": "Remove the vague, duty-listing framing entirely rather than just swapping words", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Rewriting a bullet just means swapping 'responsible for' with a synonym like 'assisted with'",
+      "Adding any number at all, regardless of relevance, automatically makes a bullet strong"
+    ],
+    "modelAnswer": "The original bullet has three problems: it opens passively with 'responsible for,' it names a vague category — 'financial models' — instead of a specific deliverable, and it has no quantification, so a reader has no sense of scale or impact. I'd rewrite it as: 'Built a three-statement operating model and comparable companies analysis supporting a $220 million sell-side M&A engagement, presented across four client meetings.' Walking through the changes: I opened with 'Built,' an active verb that immediately signals ownership rather than assistance. I replaced 'financial models' with the actual deliverable type — a three-statement model and comps analysis — because specificity tells the reader you understand the technical work, not just that you were near it. I added the deal context and size, $220 million sell-side M&A, which gives scale and shows exposure to a real transaction. And I closed with a quantified detail, four client meetings, which reinforces that the work had real downstream use rather than being a training exercise. The overall effect is that the rewritten bullet reads as someone who did substantive analytical work with a tangible outcome, rather than someone who was peripherally present.",
+    "followups": [
+      {
+        "prompt": "What if the candidate genuinely only assisted a senior analyst rather than building the model themselves?",
+        "modelAnswer": "Honesty about the level of ownership matters, but 'assisted' can still be framed actively and specifically — for example, 'Supported build-out of a three-statement model by updating working capital and debt schedules for a $220 million sell-side engagement.' The verb changes to reflect the real scope of contribution, but the same discipline of naming the specific deliverable and adding context still applies; you're not exaggerating ownership, just being precise about what you actually did."
+      },
+      {
+        "prompt": "How would this bullet change if the candidate wanted to lead with the outcome instead of the task?",
+        "modelAnswer": "You could restructure to front-load the result: 'Presented comps and 3-statement model analysis across four client meetings supporting a $220 million sell-side M&A process.' This is a stylistic choice — leading with outcome can work well when the result is the most impressive part, but leading with the action verb and deliverable is usually preferred in banking bullets because it immediately establishes what technical skill was exercised."
+      },
+      {
+        "prompt": "Is it acceptable to use a range instead of an exact deal size if the candidate doesn't remember the precise figure?",
+        "modelAnswer": "Yes, an approximate or rounded figure like 'approximately $200 million' or '$200mm+' is acceptable and often preferable to guessing at false precision, as long as it's reasonably accurate and not misleading. What matters most is that some indicator of scale is present rather than omitted entirely."
+      }
+    ],
+    "chapterSlug": "resume",
+    "sectionSlug": "banker-bullet-structure",
+    "advanced": false
+  },
+  {
+    "id": "resume-medium-003-deal-sheet-format",
+    "topic": "resume",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "How should a deal sheet differ in format and content from a regular bullet-point experience section, and what deal details are appropriate versus inappropriate to disclose?",
+    "keyPoints": [
+      { "point": "Format as a compact table or list: transaction type, sector, size, your role, and status", "weight": 3 },
+      { "point": "Appropriate to include: publicly announced deal size/type, sector, general role description", "weight": 2 },
+      { "point": "Inappropriate to include: non-public client names under NDA, exact fee or commission figures, confidential deal terms", "weight": 3 },
+      { "point": "Use sanitized descriptors when a deal isn't public, e.g. '$150mm sell-side divestiture, consumer products sector'", "weight": 2 }
+    ],
+    "misconceptions": [
+      "As long as it's on a resume rather than shared publicly, any confidential deal detail is fine to include",
+      "A deal sheet should be written in full prose sentences just like regular experience bullets"
+    ],
+    "modelAnswer": "A deal sheet trades the narrative, prose-style bullets of a normal experience section for a dense, scannable table or list format — typically columns or short lines covering the transaction type (M&A, IPO, debt issuance), sector, approximate size, your specific role, and current status such as announced, closed, or pending. This is intentionally more clinical than a regular bullet, because the goal is fast pattern recognition by the reader, not storytelling. On disclosure, the line is confidentiality, not general secrecy: if a deal has been publicly announced — say, covered in the press or in a company's investor materials — its size, type, and sector are fair game. What's off-limits is anything still under NDA at the time of the internship: real client names, exact fee percentages, specific valuation multiples used internally, or details that weren't part of any public announcement. For deals that aren't public, the convention is to sanitize the entry while preserving the useful signal — something like '$150mm sell-side divestiture, consumer products sector' conveys scale and deal type without naming the client or breaching confidentiality. When in doubt about a specific deal, the safer default is to generalize further rather than risk disclosing something still under wraps.",
+    "followups": [
+      {
+        "prompt": "What should a candidate do if they're unsure whether a deal has been publicly announced yet?",
+        "modelAnswer": "Default to treating it as confidential and use a sanitized, generic description rather than risk disclosure — the downside of being slightly vague is minimal, while the downside of naming a non-public client or deal is serious and can raise real concerns about judgment and discretion in interviews. If unsure, it's also reasonable to check with a mentor or supervisor from that internship before finalizing the entry."
+      },
+      {
+        "prompt": "Should the deal sheet include deals the candidate barely touched, to make the list look longer?",
+        "modelAnswer": "No — padding the list with marginal involvement undermines credibility, since interviewers will often ask follow-up questions about specific deals listed, and a candidate who can't speak knowledgeably about an entry looks worse than if it had been omitted. Better to list fewer deals with real, describable contributions than a longer list that can't withstand a follow-up question."
+      },
+      {
+        "prompt": "How does status labeling (announced/closed/pending) affect how a deal sheet entry should be worded?",
+        "modelAnswer": "Status changes both what's safe to disclose and how confidently the outcome can be described — a closed, announced deal can reference final terms that are now public, while a pending or live deal should be described more conservatively, focusing on the process and analysis performed rather than an outcome that hasn't materialized yet, since terms could still change or the deal could fall through."
+      }
+    ],
+    "chapterSlug": "resume",
+    "sectionSlug": "deal-sheet-for-returning-interns",
+    "advanced": true
+  },
+  {
+    "id": "resume-medium-004-quantify-fix",
+    "topic": "resume",
+    "difficulty": "medium",
+    "questionType": "calculation",
+    "prompt": "A candidate's resume bullet reads: 'Improved efficiency of the monthly financial reporting process.' Using invented but plausible metrics, rewrite this as a quantified bullet, and walk through the arithmetic behind the improvement you cite.",
+    "keyPoints": [
+      { "point": "State a clear baseline metric before the improvement (e.g., prior turnaround time)", "weight": 3 },
+      { "point": "State the improved metric after the change", "weight": 2 },
+      { "point": "Correctly calculate and state the percentage improvement", "weight": 3 },
+      { "point": "Name the specific action/mechanism that drove the improvement (e.g., automating a step in Excel)", "weight": 2 },
+      { "point": "Avoid vague adjectives like 'efficient' or 'significant' without a number attached", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Any number added to a bullet counts as sufficient quantification, even without a clear before/after comparison",
+      "Percentage improvements don't need to be double-checked as long as the direction (improvement) is correct"
+    ],
+    "modelAnswer": "I'd rewrite it as: 'Automated variance analysis in the monthly close process using Excel macros, reducing reporting turnaround from 6 business days to 4 — a 33% reduction.' The math behind that: turnaround dropped from 6 days to 4 days, a decrease of 2 days. Two divided by the original baseline of 6 gives 0.333, or roughly 33%. That's the standard way to express an improvement — always divide the change by the original baseline, not the new figure, since the baseline is what you're comparing against. The bullet also names the specific mechanism, automating variance analysis with Excel macros, rather than leaving 'improved efficiency' as an unexplained black box — a reader should be able to picture exactly what was built or changed. This version replaces every vague word in the original with something concrete: 'improved' becomes '33% reduction,' 'efficiency' becomes 'reporting turnaround,' and 'the process' becomes the specific automated step within it. The result is a bullet that reads as a real, verifiable contribution rather than a generic claim, and it also gives the candidate a natural, well-rehearsed talking point if an interviewer asks them to walk through what they actually built.",
+    "followups": [
+      {
+        "prompt": "What if the candidate doesn't have exact numbers and is estimating the improvement from memory?",
+        "modelAnswer": "It's acceptable to use an approximate, conservative estimate — such as 'roughly 30%' or 'approximately 2 days' — as long as it's a reasonably honest representation of what happened and the candidate can defend it if pressed in an interview. What should be avoided is fabricating a precise-sounding number, like '33.4%,' that implies more rigor than actually exists behind it."
+      },
+      {
+        "prompt": "Is there a risk in quantifying a process-improvement bullet too aggressively?",
+        "modelAnswer": "Yes — if the claimed improvement seems implausibly large for an intern-level contribution, like claiming a 90% time reduction from a single automation script, it can read as exaggerated and invite skepticism in the interview. Numbers should be impressive but believable relative to the scope of the role and the time available during an internship."
+      },
+      {
+        "prompt": "How would you quantify a bullet for a task that reduced cost rather than time, using a dollar example?",
+        "modelAnswer": "The same before/after structure applies: state the prior cost, the new cost, and the percentage or dollar reduction, divided against the original baseline. For example, 'Renegotiated a vendor data subscription from $40,000 to $28,000 annually, a 30% cost reduction' — $12,000 saved divided by the $40,000 baseline equals 30%, calculated the same way as a time-based improvement."
+      }
+    ],
+    "chapterSlug": "resume",
+    "sectionSlug": "resume-red-flags",
+    "advanced": false
+  },
+  {
+    "id": "resume-medium-005-gpa-omission",
+    "topic": "resume",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "A candidate has a 3.4 GPA and has left GPA off their resume entirely. Is omitting GPA itself a red flag? How should the candidate handle this?",
+    "keyPoints": [
+      { "point": "Omitting GPA below a bank's informal cutoff is itself read as a signal that the number is weak", "weight": 3 },
+      { "point": "Including it is usually better than omitting when it's above common minor cutoffs (roughly 3.3-3.5), since honesty avoids suspicion", "weight": 2 },
+      { "point": "If the GPA is genuinely weak, offset with major GPA, an upward trend, or strong quantitative signals, and prepare to address it directly if asked", "weight": 3 },
+      { "point": "Never state a rounded or misleading GPA figure", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Leaving GPA off the resume entirely avoids the issue rather than drawing attention to it",
+      "Rounding a GPA up slightly (e.g., 3.4 to 3.5) is a harmless way to present it more favorably"
+    ],
+    "modelAnswer": "Omitting GPA is itself a red flag, because recruiters know that most competitive candidates are near or above the informal cutoffs banks use, so a blank space where GPA should be almost always gets read as 'this number is worse than what I'd want to show.' A 3.4 is right around the soft cutoff many banks use, so in most cases the candidate is better off including it rather than omitting it — the honesty avoids inviting worse assumptions, and 3.4 is defensible, not disqualifying, at most firms. If the candidate is genuinely concerned about it, the better move is to pair it with something that provides context or offsets it: a stronger major GPA if it's meaningfully higher, evidence of an upward trend across semesters, or other quantitative credentials like a strong SAT/ACT score or relevant coursework. What the candidate should never do is round the number up or present it ambiguously, since that's easily caught and reads as dishonest rather than just weak. The overall principle is that recruiters are more forgiving of an imperfect number stated plainly than of an omission that reads as evasive.",
+    "followups": [
+      {
+        "prompt": "At what point does a GPA become low enough that omitting it is the better strategy?",
+        "modelAnswer": "There's no universal number, but once a GPA falls meaningfully below the typical range recruiters expect — often cited informally as somewhere in the low 3.0s or below at many bulge-bracket and elite boutique firms — omission becomes a more defensible trade-off, since the number itself would likely disqualify the resume outright regardless of context. Even then, the candidate should expect the omission to be noticed and should have a ready, honest explanation if asked directly."
+      },
+      {
+        "prompt": "How should a candidate present a major GPA versus overall GPA if there's a meaningful gap between them?",
+        "modelAnswer": "It's standard and accepted to list both, formatted like 'GPA: 3.4 (Finance Major: 3.7),' as long as both figures are accurate. This gives the reader useful context — that the weaker overall number is diluted by non-major coursework — without hiding the overall figure, which keeps the presentation honest while still highlighting the more relevant number."
+      },
+      {
+        "prompt": "Does GPA matter as much for a candidate who already has strong, quantified deal experience on their resume?",
+        "modelAnswer": "GPA still matters as an initial screening filter at many firms, particularly for the first pass through a large applicant pool, even if it becomes less decisive once a candidate is being seriously considered. Strong deal experience can help offset a borderline GPA in the eyes of an interviewer, but it usually can't overcome an automated or policy-driven cutoff earlier in the process."
+      }
+    ],
+    "chapterSlug": "resume",
+    "sectionSlug": "resume-red-flags",
+    "advanced": false
+  }
+]

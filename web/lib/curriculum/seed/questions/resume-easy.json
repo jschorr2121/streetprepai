@@ -1,0 +1,127 @@
+[
+  {
+    "id": "resume-easy-001-one-page-rationale",
+    "topic": "resume",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Why do investment banking resumes stick to a strict one-page limit, and what's the risk if a candidate lets it spill onto a second page?",
+    "keyPoints": [
+      { "point": "One page is the near-universal norm for undergrad/MBA IB recruiting", "weight": 3 },
+      { "point": "Screeners spend only seconds per resume, so anything on page two is unlikely to be read", "weight": 2 },
+      { "point": "Going over a page signals poor prioritization and editing judgment, which mirrors how you'd handle a client deliverable", "weight": 3 },
+      { "point": "Exceptions are rare and generally limited to senior lateral hires with a decade-plus of experience", "weight": 1 }
+    ],
+    "misconceptions": [
+      "More experience automatically justifies more pages for any candidate, including undergrads",
+      "As long as the content is good, it doesn't matter how many pages it takes"
+    ],
+    "modelAnswer": "The one-page rule exists because of how resumes actually get read in banking recruiting, not because of some arbitrary tradition. An analyst or associate doing first-pass screening might look at a resume for ten to twenty seconds, and they're almost never going to flip to a second page — so anything you put there is effectively invisible. More importantly, the one-page constraint is a proxy test: can you take a huge amount of information about yourself and distill it down to what actually matters? That's exactly the skill you need when you're asked to boil a company down to one summary slide or condense a management presentation into a single page. If your resume runs long, the read isn't 'this person has a lot of experience,' it's 'this person can't prioritize or edit.' The one real exception is senior lateral candidates with ten-plus years of experience, where a tightly formatted second page listing deal experience is sometimes acceptable — but for undergrads and even most MBAs, one page is the hard line.",
+    "followups": [
+      {
+        "prompt": "If a candidate genuinely has too much strong content to fit on one page, what's your advice?",
+        "modelAnswer": "Cut ruthlessly rather than shrink the font. Rank every bullet and every section by relevance to banking and recency, then drop the weakest third — usually older, less quantified, or off-brand activities. Consolidate similar bullets, tighten wording, and remove entries that don't differentiate the candidate. The discipline of choosing what to leave out is itself a signal of judgment, so treat trimming as part of the exercise rather than a failure."
+      },
+      {
+        "prompt": "Does the one-page rule apply the same way to a cover letter or a networking resume sent informally?",
+        "modelAnswer": "Yes, the resume itself should still be one page regardless of the channel — whether it's attached to a formal application or sent informally to a contact for a coffee chat. A cover letter is a separate document and rarely gets read closely in banking recruiting, so it shouldn't be used as an overflow space for content that didn't fit on the resume."
+      }
+    ],
+    "chapterSlug": "resume",
+    "sectionSlug": "one-page-resume-conventions",
+    "advanced": false
+  },
+  {
+    "id": "resume-easy-002-bullet-anatomy",
+    "topic": "resume",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Walk me through the basic anatomy of a strong resume bullet for an internship experience in banking recruiting.",
+    "keyPoints": [
+      { "point": "Starts with a strong past-tense action verb (Built, Led, Analyzed)", "weight": 2 },
+      { "point": "Provides context — what the task or project actually was", "weight": 2 },
+      { "point": "Includes a quantified scope or result (dollar size, percentage, count)", "weight": 3 },
+      { "point": "Avoids passive, duty-listing language like 'responsible for'", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Just listing your job duties is enough to make a bullet strong",
+      "Quantification only matters for finance-specific tasks, not for other types of work"
+    ],
+    "modelAnswer": "A strong banker bullet has three parts working together. First, it opens with an active, specific verb — 'built,' 'led,' 'analyzed' — never 'responsible for' or 'helped with,' which reads as passive and vague. Second, it gives concrete context: what the deliverable actually was, for what purpose, in what setting — a three-statement model, a client pitch deck, a competitive landscape analysis. Third, and most important, it quantifies scope or impact wherever possible — the size of the deal, the number of comparable companies analyzed, the percentage improvement, the dollar value involved. A weak version might say 'Responsible for helping with financial models,' while a strong version says 'Built a three-statement operating model for a $180 million add-on acquisition, supporting a 12-company precedent transaction analysis.' The strong version tells the reader exactly what you did, at what scale, and implies the level of responsibility you had — all in one line. The goal is that a screener can read a single bullet and immediately understand your contribution without needing any additional context.",
+    "followups": [
+      {
+        "prompt": "What if the internship work genuinely had no numbers attached to it, like scheduling or research summaries?",
+        "modelAnswer": "You can still quantify scope even without a dollar figure — the number of client meetings coordinated, the number of companies researched, the number of stakeholders involved, or the time saved by a process improvement. If truly nothing is quantifiable, lean harder on specificity of the task and its downstream use, such as 'research findings that informed a partner-level go/no-go decision,' rather than leaving the bullet generic."
+      },
+      {
+        "prompt": "How many bullets should a typical internship entry have?",
+        "modelAnswer": "Two to four bullets is standard — enough to show range without diluting impact. Each bullet should cover a distinct type of contribution rather than restating the same skill in different words, and the strongest, most quantified bullet is usually placed first."
+      }
+    ],
+    "chapterSlug": "resume",
+    "sectionSlug": "banker-bullet-structure",
+    "advanced": false
+  },
+  {
+    "id": "resume-easy-003-deal-sheet-basics",
+    "topic": "resume",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "You're a returning summer intern updating your resume ahead of full-time recruiting. What is a deal sheet, and why would you consider adding one?",
+    "keyPoints": [
+      { "point": "A deal sheet lists the live or completed transactions worked on during the internship, with role, transaction size, and status", "weight": 3 },
+      { "point": "It demonstrates concrete deal exposure that generic bullets can't fully convey", "weight": 3 },
+      { "point": "It's typically formatted as a separate section, table, or attached addendum rather than mixed into the main bullets", "weight": 2 },
+      { "point": "Only deals with genuine, meaningful contribution should be included", "weight": 1 }
+    ],
+    "misconceptions": [
+      "You should list every deal your group worked on, regardless of your involvement",
+      "It's fine to include confidential dollar figures or non-public client names on a deal sheet"
+    ],
+    "modelAnswer": "A deal sheet is a supplementary list of the specific transactions you worked on during an internship, typically formatted as a short table with columns for deal type, sector, size, your role, and status — announced, closed, or still live. Returning interns add one because a single bullet point can't capture the breadth of real deal exposure a summer produced, and for full-time recruiting, showing that you touched three or four live transactions is a much stronger signal than a vague claim of 'supported M&A execution.' It also gives interviewers concrete material to ask you about, which plays to your advantage since you actually lived through those deals. The key discipline is only including transactions where you had a real, describable contribution — not every deal your group happened to be staffed on — and being careful about confidentiality, using generic descriptors like sector and size instead of non-public client names or exact fee figures when the deal hasn't been publicly announced.",
+    "followups": [
+      {
+        "prompt": "Where on the resume does a deal sheet typically go?",
+        "modelAnswer": "It's usually placed directly beneath the relevant internship entry, either as a compact sub-list or a small table, so it stays visually tied to that experience rather than floating as an unrelated section. If it doesn't fit within the one-page limit, it can be attached as a separate one-page addendum specifically for full-time interviews, clearly labeled as supplementary."
+      },
+      {
+        "prompt": "What should a candidate do if their internship group didn't close any deals during the summer?",
+        "modelAnswer": "A deal sheet doesn't require closed transactions — live, pending, or even terminated deals are legitimate to list as long as status is labeled honestly. What matters is showing genuine engagement: the analysis performed, the stage reached, and your role, not necessarily a signed transaction."
+      }
+    ],
+    "chapterSlug": "resume",
+    "sectionSlug": "deal-sheet-for-returning-interns",
+    "advanced": true
+  },
+  {
+    "id": "resume-easy-004-red-flags-top-three",
+    "topic": "resume",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Name three common red flags a banking recruiter looks for when scanning a resume in the first ten seconds, and briefly explain why each one raises concern.",
+    "keyPoints": [
+      { "point": "Unexplained gaps in the timeline (semesters, years, or roles missing)", "weight": 2 },
+      { "point": "A GPA that's either notably low or conspicuously omitted", "weight": 2 },
+      { "point": "Generic, unquantified bullets that read as duty lists rather than accomplishments", "weight": 2 },
+      { "point": "Typos, inconsistent formatting, or sloppy layout", "weight": 3 },
+      { "point": "Frequent short-tenure roles without context ('job hopping')", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Recruiters read every line carefully before forming an opinion, so small formatting issues don't really matter",
+      "A low GPA is only a problem if the recruiter happens to notice the specific number"
+    ],
+    "modelAnswer": "Three of the most common red flags are: formatting inconsistency, an omitted or low GPA, and generic bullets. Formatting issues — misaligned dates, mismatched fonts, a stray typo — are the fastest way to get flagged, because in a role built on precision and error-free deliverables, a sloppy resume implies sloppy work. A missing or low GPA gets noticed immediately because recruiters know most strong candidates are near or above the informal cutoffs banks use, so an absence reads as 'this number would hurt me if I showed it.' Generic bullets — 'responsible for assisting with various projects' — signal either a lack of real substance to the experience or an inability to articulate impact, both of which are concerning in a job that requires precise communication. Beyond these three, unexplained timeline gaps and very short, unexplained job tenures also raise questions, since recruiters are trained to look for patterns that suggest something is being hidden. The common thread across all of these is that recruiters aren't just evaluating what's on the page — they're using the resume as a proxy for how carefully and honestly you'll represent information on the job.",
+    "followups": [
+      {
+        "prompt": "Of these, which single red flag is most likely to get a resume rejected outright, and why?",
+        "modelAnswer": "Typos and formatting errors are usually the fastest outright rejection trigger, because they're binary and require zero judgment call from the screener — a misspelled word or misaligned bullet is undeniable evidence of carelessness, whereas a slightly low GPA or a generic bullet still leaves room for the candidate to be evaluated on other merits."
+      },
+      {
+        "prompt": "How should a candidate handle a genuine, defensible gap in their timeline, like a medical leave?",
+        "modelAnswer": "In most cases it's better left off the resume itself and prepared as a short, confident explanation for the interview, since resume space is scarce and a one-line explanation rarely does the situation justice. If the gap would otherwise look glaring or unexplained on the page, a brief neutral label like 'Leave of absence' with dates can preempt suspicion without inviting a lengthy discussion in writing."
+      }
+    ],
+    "chapterSlug": "resume",
+    "sectionSlug": "resume-red-flags",
+    "advanced": false
+  }
+]

@@ -6,7 +6,10 @@ export type GuideCategory =
   | "resume"
   | "modeling"
   | "superday"
-  | "market-news";
+  | "market-news"
+  | "recruiting"
+  | "sectors"
+  | "interviewing";
 
 export type Difficulty = "beginner" | "intermediate" | "advanced";
 
@@ -164,8 +167,77 @@ export type Profile = {
   experiences: unknown[];
   education: unknown[];
   skills: string[];
+  advancedTrack?: boolean;
   onboardedAt?: string;
   updatedAt?: string;
+};
+
+// ─── Question bank + curriculum progress ─────────────────────────────────────
+
+export type QbankDifficulty = "easy" | "medium" | "hard";
+
+export type QbankQuestionType =
+  | "conceptual"
+  | "single-step"
+  | "multi-step"
+  | "calculation"
+  | "verbal"
+  | "curveball";
+
+export type RubricKeyPoint = { point: string; weight: number };
+
+export type QbankQuestion = {
+  id: string;
+  topic: string;
+  difficulty: QbankDifficulty;
+  questionType: QbankQuestionType;
+  prompt: string;
+  keyPoints: RubricKeyPoint[];
+  misconceptions: string[];
+  modelAnswer: string;
+  chapterSlug?: string;
+  sectionSlug?: string;
+  advanced: boolean;
+};
+
+export type QbankFollowup = {
+  id: string;
+  questionId: string;
+  ordinal: number;
+  prompt: string;
+  modelAnswer: string;
+};
+
+/** The published rubric result — every dimension shown to the user. */
+export type GradedAnswer = {
+  score: number; // 0–100
+  correct: boolean;
+  keyPointResults: { point: string; hit: boolean; comment: string }[];
+  misconceptionsTriggered: string[];
+  depthComment: string;
+  overallFeedback: string;
+  modelAnswer: string;
+};
+
+export type SectionProgressEntry = {
+  chapterSlug: string;
+  sectionSlug: string;
+  readAt?: string;
+  drillScore?: number;
+  drillCompletedAt?: string;
+};
+
+export type ChapterProgressEntry = {
+  chapterSlug: string;
+  gateScore?: number;
+  gatePassedAt?: string;
+  completedAt?: string;
+};
+
+export type TopicMasteryEntry = {
+  topic: string;
+  score: number; // 0–1
+  attempts: number;
 };
 
 export type GuideProgressEntry = {

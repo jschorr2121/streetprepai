@@ -52,6 +52,7 @@ export async function completeOnboardingAction(
         graduationYear: parsed.data.graduationYear,
         currentSemester: parsed.data.currentSemester,
         targetFirms: parsed.data.targetFirms,
+        advancedTrack: parsed.data.advancedTrack,
       }),
     );
   } catch (err) {

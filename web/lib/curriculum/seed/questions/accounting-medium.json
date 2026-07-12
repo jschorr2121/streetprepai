@@ -1,0 +1,985 @@
+[
+  {
+    "id": "acct-medium-001-operating-vs-nonoperating-classification",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "How do you decide whether a line item belongs above or below the operating income line on an income statement, and why does that classification matter to an analyst?",
+    "keyPoints": [
+      {"point": "Operating items relate directly to the core recurring business (COGS, SG&A, R&D, D&A tied to operations)", "weight": 3},
+      {"point": "Non-operating items relate to financing, investing, or unusual/incidental activities (interest expense, interest income, gains/losses on asset sales, litigation)", "weight": 3},
+      {"point": "The distinction matters because operating margin and EBIT are used to compare core business performance across companies with different capital structures", "weight": 3},
+      {"point": "Misclassification can distort peer comparisons and valuation multiples", "weight": 1}
+    ],
+    "misconceptions": [
+      "Believing all recurring expenses are automatically operating expenses regardless of their nature",
+      "Treating interest expense as operating because it recurs every period"
+    ],
+    "modelAnswer": "The general rule is that operating items are the recurring costs and revenues directly tied to running the core business — cost of goods sold, SG&A, R&D, and depreciation tied to operating assets all sit above the operating income line. Non-operating items are things related to how the company is financed, one-time or unusual events, or activities outside its core operations — interest expense and income relate to the capital structure, not operations; gains or losses on asset sales are often incidental; litigation settlements are typically non-recurring. This distinction matters enormously to analysts because operating income, or EBIT, is meant to be a clean measure of how well the core business is performing, independent of financing decisions or one-off noise. If you're comparing two competitors, one heavily levered with debt and one all-equity financed, comparing net income would be misleading since interest expense would drag down the levered company's bottom line even if its underlying operations are just as strong. Comparing operating income or operating margin strips that out and lets you make an apples-to-apples comparison of core business quality, which is also why EBIT and EBITDA are the standard bases for valuation multiples like EV/EBITDA.",
+    "followups": [
+      {
+        "prompt": "Where does foreign currency translation gain or loss typically sit, and why?",
+        "modelAnswer": "FX translation gains and losses on the income statement — as opposed to the balance sheet's cumulative translation adjustment within OCI — are generally treated as non-operating, since they arise from currency movements affecting the value of foreign-denominated transactions or balances, not from the underlying operating performance of the business. They're often unpredictable and driven by macro factors outside management's operating control, so analysts typically exclude them when assessing core operating trends, even though they can be a real and recurring feature of a multinational company's reported results."
+      },
+      {
+        "prompt": "Is stock-based compensation operating or non-operating, and why is this contentious among analysts?",
+        "modelAnswer": "Stock-based compensation is almost always classified as an operating expense under GAAP, embedded within COGS, R&D, or SG&A depending on which employees received it, since it's genuine compensation for services rendered to run the business. It's contentious because it's non-cash, so many companies and some analysts prefer to exclude it in 'adjusted' metrics to better approximate cash operating profitability. Critics argue that excluding it overstates real economic profitability, since stock comp is a real cost — it dilutes existing shareholders — even if it doesn't consume cash directly, so most rigorous analysts keep it in when evaluating true operating performance and only separately track its dilutive effect."
+      },
+      {
+        "prompt": "How would you treat a restructuring charge related to closing an underperforming but recurring segment?",
+        "modelAnswer": "Restructuring charges are usually shown as a separate line within operating expenses, since they relate to the operating business, but they're typically flagged as non-recurring or one-time in nature. Analysts generally include them in GAAP operating income but exclude them from adjusted or normalized operating income when trying to assess the ongoing, steady-state earnings power of the business. The nuance is that if a company has a restructuring charge in nearly every period — sometimes derisively called 'recurring non-recurring charges' — that's a signal the charges should probably be treated as a real, ongoing cost of doing business rather than excluded entirely."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "income-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-002-net-income-calculation",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "calculation",
+    "prompt": "A company has revenue of $500 million, COGS of $300 million, SG&A of $80 million, interest expense of $20 million, and a 25% tax rate. Compute net income.",
+    "keyPoints": [
+      {"point": "Gross profit = $500M - $300M = $200M", "weight": 2},
+      {"point": "Operating income = $200M - $80M = $120M", "weight": 2},
+      {"point": "Pre-tax income = $120M - $20M interest = $100M", "weight": 3},
+      {"point": "Net income = $100M x (1 - 0.25) = $75M", "weight": 3}
+    ],
+    "misconceptions": [
+      "Applying the tax rate before subtracting interest expense",
+      "Forgetting to subtract interest expense entirely"
+    ],
+    "modelAnswer": "Starting from revenue of $500 million, subtract COGS of $300 million to get gross profit of $200 million. Then subtract SG&A of $80 million to get operating income of $120 million. Below the operating line, subtract interest expense of $20 million to arrive at pre-tax income of $100 million. Finally, apply the 25% tax rate: taxes owed are $100 million times 25%, or $25 million, leaving net income of $75 million. The key sequencing point is that interest expense must be subtracted before applying the tax rate, since taxes are calculated on pre-tax income, which already reflects the deduction for interest — this is also why interest expense creates a 'tax shield,' since it reduces the taxable income base and therefore the actual cash taxes owed.",
+    "followups": [
+      {
+        "prompt": "If interest expense instead rose to $40 million, what would net income be, and how much did the extra $20 million of interest actually cost the company after tax?",
+        "modelAnswer": "Pre-tax income would fall to $120 million minus $40 million, or $80 million. Taxes at 25% would be $20 million, leaving net income of $60 million. Compared to the original $75 million, net income fell by $15 million, even though interest expense rose by $20 million — the difference is the tax shield. The extra $20 million of interest reduced taxable income by $20 million, saving $5 million in taxes at the 25% rate, so the true after-tax cost of that incremental interest was $15 million, not the full $20 million. This is a core concept in leveraged finance: the after-tax cost of debt is always lower than the stated interest rate because of this tax deductibility."
+      },
+      {
+        "prompt": "How would the calculation change if the company also had a one-time $10 million litigation gain that was taxable at the same rate?",
+        "modelAnswer": "The one-time gain would be added into pre-tax income, typically below operating income as a non-operating item, bringing pre-tax income to $100 million plus $10 million, or $110 million. Taxes at 25% would be $27.5 million, leaving net income of $82.5 million. Analysts would likely flag this gain as non-recurring and exclude it when calculating adjusted or normalized net income and EPS, since including a one-time item would overstate the company's sustainable, ongoing earnings power and distort period-over-period comparisons."
+      },
+      {
+        "prompt": "What would diluted EPS look like if the company had 50 million diluted shares outstanding?",
+        "modelAnswer": "Using the original net income figure of $75 million and dividing by 50 million diluted shares gives diluted EPS of $1.50. Diluted shares include the dilutive impact of instruments like stock options, RSUs, and convertible securities using methods like the treasury stock method, so diluted EPS is always at or below basic EPS. Analysts and companies typically report diluted EPS as the headline per-share profitability metric precisely because it reflects the fully diluted ownership base and avoids overstating per-share earnings relative to what shareholders would actually experience if all dilutive securities were exercised or converted."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "income-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-003-ebit-vs-ebitda",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "calculation",
+    "prompt": "A company reports operating income (EBIT) of $45 million, depreciation of $10 million, and amortization of $5 million. What is EBITDA, and why might an analyst use EBITDA rather than EBIT when valuing this company?",
+    "keyPoints": [
+      {"point": "EBITDA = EBIT + D&A = $45M + $10M + $5M = $60M", "weight": 3},
+      {"point": "EBITDA strips out non-cash D&A to approximate cash operating profitability", "weight": 2},
+      {"point": "EBITDA allows comparison across companies with different capital intensity, depreciation policies, or asset ages", "weight": 3},
+      {"point": "Notes EBITDA has limitations — ignores real capex needs and working capital", "weight": 1}
+    ],
+    "misconceptions": [
+      "Forgetting to add both depreciation and amortization, only adding one",
+      "Treating EBITDA as equivalent to actual free cash flow"
+    ],
+    "modelAnswer": "EBITDA is EBIT plus depreciation and amortization: $45 million plus $10 million plus $5 million equals $60 million. Analysts favor EBITDA in many valuation contexts because it strips out a non-cash expense, giving a rough approximation of cash operating profitability before accounting for capital intensity differences. This is particularly useful when comparing companies with very different asset bases or depreciation policies — for example, a company that owns its factories outright versus one that leases them, or a company with older, mostly depreciated assets versus one with newer assets still being heavily depreciated. EBITDA levels the playing field for these differences, which is why EV/EBITDA is such a common valuation multiple in M&A and comparable company analysis. That said, EBITDA has real limitations: it ignores the actual cash the company needs to spend on capex to maintain or replace those assets, and it ignores working capital swings, so a capital-intensive business can look deceptively profitable on an EBITDA basis while actually consuming significant cash to sustain its operations. Good analysts always pair EBITDA with a look at capex and free cash flow before drawing conclusions.",
+    "followups": [
+      {
+        "prompt": "Why might two companies with identical EBITDA have very different free cash flow?",
+        "modelAnswer": "Because EBITDA says nothing about capex intensity, working capital needs, interest expense, or taxes — all of which sit below the EBITDA line but directly affect free cash flow. A capital-intensive manufacturer might need to reinvest 15% of revenue in capex just to maintain its asset base, while an asset-light software company with the same EBITDA might need almost none. Similarly, one company might have heavy debt and high interest expense while the other is unlevered. Two companies can post the exact same EBITDA and end up with wildly different actual cash available to shareholders, which is exactly why EBITDA is a starting point for analysis, not an ending point."
+      },
+      {
+        "prompt": "Would you expect EBITDA margin to be more stable than EBIT margin over time for a growing, capital-intensive company? Why?",
+        "modelAnswer": "Generally yes, at least directionally, because EBITDA margin removes the effect of rising depreciation as the company invests in more fixed assets to support growth. A capital-intensive company ramping up capex will see accumulated depreciation grow, which drags down EBIT margin even if the underlying cash operating efficiency of the business is stable or improving. EBITDA margin filters that noise out and can better reflect the true trajectory of operating leverage and cost efficiency, though it's not a perfect substitute since it still masks the very real cash reinvestment burden that capex represents for that same capital-intensive business."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "income-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-004-one-time-charge-eps-impact",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "single-step",
+    "prompt": "A company has GAAP net income of $80 million and 40 million diluted shares. Included in net income is a one-time, after-tax impairment charge of $20 million. What is reported diluted EPS, and what would adjusted diluted EPS be excluding the one-time charge?",
+    "keyPoints": [
+      {"point": "Reported diluted EPS = $80M / 40M shares = $2.00", "weight": 2},
+      {"point": "Adjusted net income = $80M + $20M (add back the after-tax charge) = $100M", "weight": 3},
+      {"point": "Adjusted diluted EPS = $100M / 40M shares = $2.50", "weight": 3}
+    ],
+    "misconceptions": [
+      "Subtracting the charge again instead of adding it back to reverse its impact",
+      "Forgetting the $20 million charge is already stated on an after-tax basis, so no further tax adjustment is needed"
+    ],
+    "modelAnswer": "Reported GAAP diluted EPS is straightforward: $80 million of net income divided by 40 million diluted shares equals $2.00. To calculate adjusted EPS excluding the one-time impairment charge, we add the after-tax charge back to net income, since the charge is what pulled net income down in the first place — adjusted net income becomes $80 million plus $20 million, or $100 million. Dividing that by the same 40 million diluted shares gives adjusted diluted EPS of $2.50. The key mechanical point is that since the charge is already given on an after-tax basis, we simply add it back dollar-for-dollar without needing to gross it up or apply any further tax adjustment. Analysts do this kind of adjustment specifically to separate the company's sustainable, ongoing earnings power from a one-off event like an impairment, which doesn't reflect the recurring economics of the business and would otherwise distort valuation multiples like P/E if left in the reported figure.",
+    "followups": [
+      {
+        "prompt": "If the impairment charge were instead given on a pre-tax basis of $26.7 million with a 25% tax rate, how would you convert it to the after-tax figure used in the adjustment?",
+        "modelAnswer": "You'd multiply the pre-tax charge by one minus the tax rate: $26.7 million times (1 minus 0.25), or $26.7 million times 0.75, which equals roughly $20 million after-tax. That's because the impairment charge itself reduced taxable income, generating a tax benefit at the 25% rate — the company effectively only bore 75% of the charge's economic cost, with the remaining 25% offset by lower taxes owed. This after-tax figure is what you'd then add back to net income in the adjusted EPS calculation, which is why analysts always need to be careful about whether a disclosed one-time charge is stated pre-tax or after-tax before doing this kind of adjustment."
+      },
+      {
+        "prompt": "Why might a company prefer to highlight adjusted EPS rather than GAAP EPS in its earnings release?",
+        "modelAnswer": "Companies often argue that adjusted EPS better reflects the ongoing, sustainable earnings power of the business by stripping out unusual, non-recurring, or non-cash items that don't represent the normal course of operations, making period-over-period comparisons and guidance more meaningful for investors. Critics counter that this can be used opportunistically — some companies exclude recurring items like stock-based compensation or 'recurring restructuring charges' every single period, which inflates adjusted earnings well above the true GAAP economic reality. A disciplined analyst reviews the actual adjustments management is making, checks whether they recur period after period despite being labeled 'one-time,' and always keeps an eye on the unadjusted GAAP numbers as a sanity check."
+      },
+      {
+        "prompt": "How would a large one-time gain, rather than a charge, be treated in this same adjustment framework?",
+        "modelAnswer": "The adjustment would work in the opposite direction: since a one-time gain increased reported net income, you'd subtract the after-tax gain from net income to arrive at adjusted net income that better reflects ongoing operations. For example, if the $80 million of net income instead included a $15 million after-tax one-time gain on an asset sale, adjusted net income would be $80 million minus $15 million, or $65 million, and adjusted diluted EPS would fall to $65 million divided by 40 million shares, or $1.625. This is the same logic in reverse — you always want to remove the non-recurring item's impact, whether it inflated or deflated the reported number, to isolate the recurring earnings picture."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "income-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-005-goodwill-definition",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "What is goodwill, where does it come from, and where does it sit on the balance sheet?",
+    "keyPoints": [
+      {"point": "Goodwill arises in an acquisition when the purchase price exceeds the fair value of identifiable net assets acquired", "weight": 3},
+      {"point": "It represents intangible value like brand, customer relationships, synergies, and workforce that can't be separately identified and valued", "weight": 2},
+      {"point": "Sits on the balance sheet as a non-current, indefinite-lived intangible asset", "weight": 2},
+      {"point": "Not amortized under current GAAP; instead tested annually for impairment", "weight": 2}
+    ],
+    "misconceptions": [
+      "Believing goodwill is amortized like other intangibles",
+      "Thinking goodwill represents a tangible, sellable asset with independent market value"
+    ],
+    "modelAnswer": "Goodwill arises when a company acquires another business for more than the fair value of its identifiable net assets — meaning the tangible and identifiable intangible assets acquired, minus liabilities assumed. The excess purchase price is booked as goodwill, and it represents value the acquirer is paying for things that can't be separately identified and valued on the balance sheet, like brand reputation, customer relationships, an assembled workforce, or expected synergies from combining the businesses. Goodwill sits on the balance sheet as a non-current asset, typically its own line item separate from other intangible assets like patents or trademarks. Under current U.S. GAAP, goodwill is not amortized on a schedule the way most finite-lived intangibles are; instead, it's tested for impairment at least annually, or more frequently if a triggering event occurs, like a significant decline in the acquired business's performance. If the fair value of the reporting unit falls below its carrying value, including goodwill, the company records an impairment charge that reduces both goodwill on the balance sheet and net income on the income statement.",
+    "followups": [
+      {
+        "prompt": "How does goodwill differ from other identifiable intangible assets acquired in a deal, like a customer list or a patent?",
+        "modelAnswer": "Identifiable intangible assets like customer lists, patents, or trademarks can be separately valued and have a determinable useful life, so they're recorded individually at their fair value at acquisition and typically amortized over that useful life, reducing income statement earnings gradually over time. Goodwill, by contrast, is the residual — it's specifically defined as the portion of the purchase price that can't be attributed to any identifiable asset, tangible or intangible. Because it doesn't have a determinable useful life or a way to reliably estimate how it depletes over time, accounting standards instead require periodic impairment testing rather than scheduled amortization, which is the key mechanical difference in how the two categories flow through the financial statements."
+      },
+      {
+        "prompt": "What triggers a goodwill impairment, and how does it flow through the financial statements?",
+        "modelAnswer": "A goodwill impairment is typically triggered when the fair value of the reporting unit that goodwill was assigned to falls below its carrying value on the books, often due to declining financial performance, a lower stock price signaling market skepticism, loss of a major customer, or broader industry deterioration. When impairment occurs, the company writes down goodwill on the balance sheet and records an impairment charge on the income statement, which reduces operating income and net income for that period, though it's a non-cash charge. On the cash flow statement, it gets added back within cash flow from operations since no cash actually left the business. It's often viewed as a lagging indicator, essentially an accounting acknowledgment that a prior acquisition was overpaid for or hasn't performed as expected."
+      },
+      {
+        "prompt": "Why do some analysts exclude goodwill impairment charges when evaluating a company's operating performance?",
+        "modelAnswer": "Because a goodwill impairment is a non-cash charge that reflects a re-assessment of a past acquisition's value, not the current period's actual operating performance — the cash was spent years earlier when the acquisition closed. Including a large impairment charge in a given period's operating metrics can make an otherwise healthy, stable business look like it had a terrible year, when in reality it's simply catching up on an accounting valuation of a prior deal. That said, analysts shouldn't ignore impairments entirely — a pattern of repeated impairments can be a legitimate signal of poor capital allocation and overpaying for acquisitions, which is relevant information about management's judgment even if the specific charge itself is non-cash and backward-looking."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "balance-sheet-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-006-retained-earnings-calc",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "calculation",
+    "prompt": "Beginning retained earnings is $150 million. The company generates net income of $40 million during the year and pays $12 million of dividends. What is ending retained earnings?",
+    "keyPoints": [
+      {"point": "Ending RE = Beginning RE + Net income - Dividends", "weight": 3},
+      {"point": "$150M + $40M - $12M = $178M", "weight": 3},
+      {"point": "Notes retained earnings reflects cumulative reinvested earnings, not a cash balance", "weight": 1}
+    ],
+    "misconceptions": [
+      "Adding dividends instead of subtracting them",
+      "Confusing retained earnings with the company's cash balance"
+    ],
+    "modelAnswer": "Retained earnings is a roll-forward account: ending retained earnings equals beginning retained earnings, plus net income earned during the period, minus dividends declared during the period. Here, that's $150 million plus $40 million of net income, minus $12 million of dividends paid out, which equals $178 million of ending retained earnings. It's worth emphasizing that retained earnings is not a pool of cash sitting somewhere — it's an equity account that represents the cumulative earnings the company has reinvested in the business over its life rather than distributed to shareholders. The actual cash generated by the business flows through the cash flow statement and ultimately affects the cash line on the balance sheet, which is a completely separate calculation from the retained earnings roll-forward, even though both are influenced by net income.",
+    "followups": [
+      {
+        "prompt": "If the company also repurchased $8 million of stock during the year, would that affect retained earnings?",
+        "modelAnswer": "No, a share repurchase doesn't flow through retained earnings — it hits a separate equity account called treasury stock, which is a contra-equity line that reduces total shareholders' equity directly. Retained earnings specifically tracks cumulative net income minus dividends; buybacks are a distinct mechanism for returning capital to shareholders and are accounted for separately, even though both dividends and buybacks reduce total equity and both represent cash returned to shareholders. So ending retained earnings would still be $178 million, but total shareholders' equity would additionally be reduced by the $8 million of treasury stock."
+      },
+      {
+        "prompt": "Could retained earnings ever go negative, and what would that mean?",
+        "modelAnswer": "Yes, retained earnings can go negative — this is often called an 'accumulated deficit.' It happens when a company has accumulated more net losses over its history than it has net income, or has paid out more dividends over time than it has earned. This is common for early-stage or growth-stage companies that have been unprofitable for an extended period, or for companies that took on debt to fund large dividends or buybacks in excess of their cumulative profitability. A negative retained earnings balance itself isn't necessarily alarming for a young growth company, but for a mature company it can be a signal of a long history of value destruction or aggressive capital returns relative to actual profitability."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "balance-sheet-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-007-ppe-rollforward-calc",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "calculation",
+    "prompt": "Beginning net PP&E is $300 million. During the year, the company spends $60 million on capex and records $45 million of depreciation, with no asset sales. What is ending net PP&E?",
+    "keyPoints": [
+      {"point": "Ending net PP&E = Beginning net PP&E + Capex - Depreciation", "weight": 3},
+      {"point": "$300M + $60M - $45M = $315M", "weight": 3},
+      {"point": "Notes capex exceeding depreciation grows the net PP&E base (expanding asset investment)", "weight": 1}
+    ],
+    "misconceptions": [
+      "Subtracting capex instead of adding it",
+      "Confusing gross PP&E with net PP&E in the roll-forward"
+    ],
+    "modelAnswer": "The PP&E roll-forward works similarly to the retained earnings roll-forward: ending net PP&E equals beginning net PP&E, plus capital expenditures made during the year, minus depreciation recorded during the year, assuming no asset sales, disposals, or impairments complicate the picture. Here that's $300 million plus $60 million of capex, minus $45 million of depreciation, which equals $315 million of ending net PP&E. Since capex of $60 million exceeded depreciation of $45 million, the net asset base grew by $15 million during the year, which tells you the company is in a phase of net investment — it's adding to its productive asset base faster than the existing assets are being used up. If depreciation had instead exceeded capex, that would signal the company is under-investing relative to the pace at which its existing assets are aging, which over time can be a red flag for future competitiveness or maintenance needs.",
+    "followups": [
+      {
+        "prompt": "If the company also sold an asset with a net book value of $5 million during the year, how would that change the roll-forward?",
+        "modelAnswer": "Selling an asset removes its net book value from the PP&E balance, regardless of what cash was actually received for it, since the disposal takes that specific asset off the books. The roll-forward becomes: $300 million beginning, plus $60 million capex, minus $45 million depreciation, minus $5 million for the net book value of the disposed asset, landing at $310 million of ending net PP&E. Separately, any gain or loss on the sale — the difference between the cash proceeds received and that $5 million net book value — would flow through the income statement as a non-operating item, and the cash flow statement would show the full cash proceeds within investing activities, not just the $5 million book value."
+      },
+      {
+        "prompt": "Why might an analyst compare capex to depreciation as a ratio when evaluating a company's investment pattern?",
+        "modelAnswer": "Comparing capex to depreciation gives a quick read on whether a company is investing to grow its asset base, simply maintaining it, or letting it run down. A capex-to-depreciation ratio meaningfully above 1.0x suggests the company is in growth or expansion mode, adding more to its asset base than it's using up. A ratio close to 1.0x suggests steady-state maintenance capex, replacing assets roughly as fast as they depreciate. A ratio persistently below 1.0x can signal underinvestment, which might boost near-term free cash flow but could erode competitiveness or require a large catch-up capex cycle down the road — this is a useful lens particularly in capital-intensive industries like telecom, utilities, or manufacturing."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "balance-sheet-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-008-deferred-revenue-explanation",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "What is deferred revenue, why is it recorded as a liability, and how does it get recognized as revenue over time?",
+    "keyPoints": [
+      {"point": "Deferred revenue arises when a company receives cash before it has delivered the corresponding goods or services", "weight": 3},
+      {"point": "It's a liability because the company owes the customer future delivery of goods/services (or a refund)", "weight": 3},
+      {"point": "As the obligation is fulfilled over time, deferred revenue is drawn down and revenue is recognized on the income statement", "weight": 2}
+    ],
+    "misconceptions": [
+      "Recording the cash received as revenue immediately upon receipt",
+      "Treating deferred revenue as an asset rather than a liability"
+    ],
+    "modelAnswer": "Deferred revenue, sometimes called unearned revenue, is recorded when a company collects cash from a customer before it has actually delivered the underlying good or performed the service — a classic example is an annual software subscription paid upfront, or a magazine subscription paid a year in advance. Even though cash has come in, the company hasn't yet earned that revenue under accrual accounting rules, since it still owes the customer future delivery of the service or product, or a refund if it fails to deliver. That obligation is exactly why it's recorded as a liability rather than revenue — the company has an outstanding performance obligation to the customer. As time passes and the company actually delivers on that obligation — say, one month of a twelve-month subscription — it recognizes a proportional slice of revenue on the income statement and simultaneously reduces the deferred revenue liability on the balance sheet by that same amount. This continues until the full obligation is fulfilled and the deferred revenue balance is drawn down to zero for that particular contract, at which point all of the cash originally collected has been fully recognized as revenue.",
+    "followups": [
+      {
+        "prompt": "How does a growing deferred revenue balance affect cash flow from operations, even though it doesn't touch net income directly when it's first collected?",
+        "modelAnswer": "When cash comes in but revenue hasn't been recognized yet, net income doesn't reflect that cash inflow at all — it sits as deferred revenue on the balance sheet instead. But cash flow from operations does capture it, because the indirect method starts with net income and then adjusts for changes in working capital and other balance sheet items, including deferred revenue. An increase in deferred revenue during the period is added back as a source of cash in CFO, since real cash came in that net income hasn't captured yet. This is actually one of the most attractive features of subscription-style businesses: growing deferred revenue balances mean cash collections are running ahead of recognized revenue, which is a strong sign of healthy cash generation even before it shows up in reported profitability."
+      },
+      {
+        "prompt": "In an acquisition, why is deferred revenue sometimes written down as part of purchase accounting, and what's the controversy around that?",
+        "modelAnswer": "In purchase accounting, the acquirer is required to record acquired deferred revenue at its fair value as of the acquisition date, which under certain fair value methodologies can be lower than the acquired company's book value of that liability, because the fair value is meant to reflect only the remaining cost to fulfill the obligation plus a normal profit margin, not the full original contract value. This 'deferred revenue haircut' means that in the periods right after an acquisition, the combined company can report lower revenue from acquired subscription contracts than the target company would have recognized on a standalone basis, purely due to this accounting adjustment rather than any change in the underlying business. This is a well-known distortion analysts watch for when evaluating post-acquisition revenue trends, since it can make reported revenue growth look artificially depressed in the near term."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "balance-sheet-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-009-capex-fcf-definition",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "How is capital expenditure classified on the cash flow statement, and how does it factor into the definition of free cash flow?",
+    "keyPoints": [
+      {"point": "Capex is recorded as a cash outflow within cash flow from investing", "weight": 3},
+      {"point": "Free cash flow to the firm is typically CFO minus capex (unlevered version may add back after-tax interest)", "weight": 3},
+      {"point": "Free cash flow represents cash available to all capital providers or to reinvest/return to shareholders after maintaining/growing the asset base", "weight": 2}
+    ],
+    "misconceptions": [
+      "Classifying capex within financing activities",
+      "Equating EBITDA with free cash flow, ignoring the capex deduction"
+    ],
+    "modelAnswer": "Capital expenditure is recorded as a cash outflow within the investing section of the cash flow statement, since it reflects cash spent to acquire or improve long-term productive assets like property, plant, and equipment — it's an investment in the company's future operating capacity, distinct from day-to-day operating spend or financing activities. Free cash flow builds directly off of this: the most common definition, free cash flow to the firm, is cash flow from operations minus capex, which represents the cash the business generated from its operations after reinvesting what's needed to maintain and grow its asset base. This is the cash that's actually available to be distributed to all capital providers — both debt holders and equity holders — or reinvested further into the business beyond maintenance needs. Free cash flow is considered a purer measure of value creation than net income or even EBITDA, because it captures the real cash reinvestment burden of the business; a company can post strong net income and EBITDA while still being a poor cash generator if it requires heavy ongoing capex just to sustain its current level of operations.",
+    "followups": [
+      {
+        "prompt": "What's the difference between free cash flow to the firm and free cash flow to equity?",
+        "modelAnswer": "Free cash flow to the firm represents cash available to all capital providers before any financing costs — it's calculated before interest expense and debt principal payments, since it reflects the cash generating power of the operating assets regardless of how the company is financed. Free cash flow to equity, by contrast, is what's left specifically for equity holders after also subtracting after-tax interest expense and net debt repayments, reflecting the actual cash available to be distributed to shareholders through dividends or buybacks, or reinvested on their behalf. FCFF is typically used with a weighted average cost of capital in a DCF to value the entire enterprise, while FCFE is discounted at the cost of equity to value equity directly."
+      },
+      {
+        "prompt": "Why might a company with strong FCFF still have weak FCFE?",
+        "modelAnswer": "Because FCFE additionally accounts for the company's financing burden — a highly leveraged company can generate strong cash flow from its core operations at the enterprise level, but if it's carrying heavy debt, substantial interest expense and mandatory principal repayments eat into that cash before it ever reaches equity holders. A company could have robust FCFF that looks attractive on an unlevered basis, but if most of that cash is consumed servicing debt, FCFE — the cash actually available to shareholders — could be thin or even negative. This distinction is especially important in leveraged buyout analysis, where FCFE availability directly determines how quickly debt can be paid down or dividends distributed to equity sponsors."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "cash-flow-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-010-cfi-build-calc",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "calculation",
+    "prompt": "During the year, a company spends $40 million on capex, spends $15 million to acquire a small business, and receives $8 million from selling an old piece of equipment. What is cash flow from investing?",
+    "keyPoints": [
+      {"point": "Capex and the acquisition are cash outflows: -$40M and -$15M", "weight": 3},
+      {"point": "The equipment sale is a cash inflow: +$8M", "weight": 2},
+      {"point": "CFI = -$40M - $15M + $8M = -$47M", "weight": 3}
+    ],
+    "misconceptions": [
+      "Treating the acquisition as an operating or financing activity instead of investing",
+      "Forgetting to add the proceeds from the equipment sale as an inflow"
+    ],
+    "modelAnswer": "All three of these items belong in cash flow from investing, since they all relate to acquiring or disposing of long-term assets rather than day-to-day operations or capital structure decisions. Capex of $40 million is a cash outflow, the acquisition of the small business for $15 million is also a cash outflow — acquisitions of other businesses are classified as investing activities — and the $8 million received from selling old equipment is a cash inflow. Adding these together: negative $40 million, minus $15 million, plus $8 million, gives a net cash flow from investing of negative $47 million. This tells you the company spent significantly more on investing activities than it generated from asset sales during the period, which is typical for a company in growth or expansion mode, whether through organic capex or inorganic acquisitions, and this net outflow would need to be funded either by cash flow from operations, financing activities, or a drawdown of existing cash reserves.",
+    "followups": [
+      {
+        "prompt": "If the company financed the $15 million acquisition partly with $10 million of newly issued debt, would that debt issuance also appear in CFI?",
+        "modelAnswer": "No — the $15 million purchase price of the acquisition itself stays in cash flow from investing regardless of how it was funded, since CFI captures the use of cash to acquire the asset or business. The $10 million of debt issued to help fund that acquisition would instead show up as a separate cash inflow within cash flow from financing, since raising debt is a financing activity. The two are tracked independently: CFI shows what was bought, and CFF shows how the company raised the capital to pay for it, even though economically they're connected as part of the same transaction."
+      },
+      {
+        "prompt": "Would purchasing $20 million of marketable securities as a short-term investment also belong in CFI?",
+        "modelAnswer": "Yes, purchases and sales of investment securities, whether short-term marketable securities or longer-term investments, are generally classified within cash flow from investing, since they represent the company deploying cash into financial assets rather than spending it on operations or returning it to capital providers. If the company purchased $20 million of marketable securities, that would show up as an additional $20 million outflow in CFI, bringing the total net cash flow from investing to negative $67 million for the period. This is a common area of confusion since some might think of buying securities as similar to holding cash, but from a cash flow statement perspective it's treated as an investing use of cash just like a capex purchase or acquisition."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "cash-flow-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-011-cff-build-calc",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "calculation",
+    "prompt": "During the year, a company issues $50 million of new debt, repays $20 million of existing debt, pays $10 million of dividends, and repurchases $15 million of its own stock. What is cash flow from financing?",
+    "keyPoints": [
+      {"point": "Debt issuance is a cash inflow: +$50M; debt repayment is an outflow: -$20M", "weight": 3},
+      {"point": "Dividends and buybacks are both cash outflows: -$10M and -$15M", "weight": 3},
+      {"point": "CFF = $50M - $20M - $10M - $15M = $5M", "weight": 2}
+    ],
+    "misconceptions": [
+      "Treating dividend payments as an operating cash flow instead of financing",
+      "Netting debt issuance and repayment incorrectly or with the wrong signs"
+    ],
+    "modelAnswer": "All four items sit within cash flow from financing, since they all relate to the company's capital structure and how it raises capital from, or returns capital to, its debt and equity investors. Issuing $50 million of new debt is a cash inflow. Repaying $20 million of existing debt is a cash outflow. Paying $10 million of dividends to shareholders is a cash outflow. Repurchasing $15 million of the company's own stock is also a cash outflow. Netting these together: positive $50 million, minus $20 million, minus $10 million, minus $15 million, equals positive $5 million of net cash flow from financing. In this case, the company raised slightly more cash through net financing activities — largely because it issued more new debt than it spent returning capital to shareholders and paying down its old debt — which is common for a company that's using new borrowing to partially fund shareholder returns or refinance existing obligations at more favorable terms.",
+    "followups": [
+      {
+        "prompt": "Why is it useful to look at the components of CFF separately rather than just the net figure?",
+        "modelAnswer": "Because a small or even positive net CFF figure can mask very different underlying stories — in this case, the positive $5 million net figure could hide the fact that the company is simultaneously taking on new debt while also returning a substantial amount of capital to shareholders through dividends and buybacks. Looking at the components separately tells you whether the company is deleveraging or releveraging, and whether shareholder returns are being funded by operating cash flow or by new borrowing, which is a very different risk profile. A company funding buybacks with new debt issuance, for example, is increasing financial leverage to boost EPS through a shrinking share count, which is a meaningfully more aggressive capital allocation strategy than funding the same buyback purely from organic free cash flow."
+      },
+      {
+        "prompt": "How would this $5 million net CFF figure tie into the overall change in the company's cash balance for the period?",
+        "modelAnswer": "The $5 million net cash flow from financing would be added together with net cash flow from operations and net cash flow from investing to arrive at the total net change in cash for the period. That total change in cash is then added to the beginning cash balance from the prior period's balance sheet to arrive at the ending cash balance, which becomes the cash line on the current period's balance sheet. This is the ultimate reconciling mechanism that ties the cash flow statement back to the balance sheet, and it's why all three sections of the cash flow statement need to be captured accurately — an error in any one section will flow through to an incorrect ending cash balance."
+      },
+      {
+        "prompt": "If the company had instead used $50 million of new debt to fully retire the $20 million of old debt and pay a $30 million special dividend, how would CFF change?",
+        "modelAnswer": "The mechanics wouldn't fundamentally change, just the numbers involved: debt issuance of $50 million as an inflow, debt repayment of $20 million as an outflow, and the special dividend of $30 million as an additional outflow alongside the regular $10 million dividend and $15 million buyback already mentioned, if those still occurred. Assuming the special dividend replaces rather than adds to the original scenario, CFF would be $50 million minus $20 million minus $30 million minus $15 million (buyback), equaling negative $15 million. The key insight is this scenario looks like a debt-funded recapitalization — using newly borrowed money to both refinance old debt and fund a large one-time payout to shareholders, which increases leverage without any corresponding increase in the company's productive asset base."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "cash-flow-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-012-stock-comp-cfs-treatment",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "How is stock-based compensation treated on the cash flow statement, and why do some investors view it skeptically as an 'adjustment' item?",
+    "keyPoints": [
+      {"point": "SBC is an operating expense on the income statement that reduces net income but is non-cash", "weight": 2},
+      {"point": "It's added back within cash flow from operations, similar to D&A", "weight": 3},
+      {"point": "Skepticism: SBC is a real economic cost via shareholder dilution, even though no cash leaves the business", "weight": 3}
+    ],
+    "misconceptions": [
+      "Believing SBC has zero real cost to shareholders since it's non-cash",
+      "Classifying SBC as a financing activity rather than an operating add-back"
+    ],
+    "modelAnswer": "Stock-based compensation is recorded as an operating expense on the income statement, embedded within COGS, R&D, or SG&A depending on which employees received the equity awards, and it reduces net income just like cash compensation would. However, since no actual cash leaves the company when the expense is recognized — the company is compensating employees with equity, not cash — it's added back to net income within cash flow from operations on the cash flow statement, similar to how depreciation and amortization are treated. Some investors and analysts are skeptical of how heavily companies lean on excluding SBC in their 'adjusted' non-GAAP metrics, because even though it's genuinely non-cash, it's not a free lunch — issuing new shares or vesting existing grants dilutes existing shareholders' ownership stake, which is a very real economic cost, just one that shows up through dilution rather than through the income statement or cash flow statement directly. A company that relies heavily on SBC to compensate employees while touting strong 'adjusted' cash flow or earnings that exclude SBC can be masking a meaningful ongoing cost of doing business, which is why sophisticated investors track both the reported SBC expense and the resulting share count dilution over time.",
+    "followups": [
+      {
+        "prompt": "How does heavy stock-based compensation eventually show up elsewhere in the financial statements even though it's added back in CFO?",
+        "modelAnswer": "The dilutive impact shows up in the diluted share count used to calculate EPS — as more options, RSUs, and other equity awards vest and are exercised or settled, diluted shares outstanding increase, which reduces earnings per share and free cash flow per share even if total net income and total free cash flow are unaffected. It can also show up on the balance sheet through increases in common stock and additional paid-in capital as new shares are issued, and if the company repurchases shares to offset the dilution, that shows up as an outflow in cash flow from financing. So while SBC doesn't touch CFO negatively, its true cost surfaces through a growing share count and, often, cash spent on buybacks specifically to offset that dilution."
+      },
+      {
+        "prompt": "Why might a young, high-growth company rely more heavily on stock-based compensation than an established, cash-generative company?",
+        "modelAnswer": "Young, high-growth companies often have limited cash on hand and want to preserve what cash they do have for growth investments like R&D, sales, and marketing, rather than spending it on employee cash salaries. Offering equity compensation lets them attract and retain talent — particularly in competitive fields like technology — without straining near-term cash resources, and it also aligns employee incentives with the company's long-term stock performance. Established, cash-generative companies have less need to rely on this mechanism since they can more comfortably fund competitive cash compensation from operating cash flow, though many still use SBC as part of a balanced compensation package, just typically at a lower proportion relative to revenue or total compensation."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "cash-flow-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-013-ar-increase-linkage",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "multi-step",
+    "prompt": "A company makes a $10 million credit sale that increases accounts receivable by $10 million, with no cash collected yet and ignoring COGS and taxes for simplicity. Walk through how this transaction flows through all three financial statements.",
+    "keyPoints": [
+      {"point": "Income statement: revenue increases by $10 million, flowing through to net income", "weight": 3},
+      {"point": "Balance sheet: accounts receivable increases by $10 million (asset); retained earnings increases by $10 million via net income (equity), keeping it balanced", "weight": 3},
+      {"point": "Cash flow statement: net income is up $10 million in CFO, but the $10 million AR increase is subtracted as a use of cash, netting CFO impact to zero", "weight": 3}
+    ],
+    "misconceptions": [
+      "Assuming the sale increases cash immediately since it's recorded as revenue",
+      "Forgetting to net the AR increase against the net income boost in the CFO calculation"
+    ],
+    "modelAnswer": "On the income statement, the $10 million credit sale is recognized immediately as revenue under accrual accounting, since the sale was made and the performance obligation satisfied, even though cash hasn't been collected yet — this flows straight through to a $10 million increase in net income, ignoring COGS and taxes as instructed. On the balance sheet, accounts receivable increases by $10 million on the asset side, since the customer now owes the company that amount; on the other side, retained earnings increases by $10 million through the net income flow-through, keeping assets equal to liabilities plus equity. On the cash flow statement, we start with net income, which is up $10 million, but then we have to adjust for the working capital change: the $10 million increase in accounts receivable is subtracted as a use of cash, since that revenue hasn't actually converted into cash yet. The net effect on cash flow from operations is exactly zero — the higher net income and the AR increase offset each other perfectly. This makes intuitive sense: the company recorded a sale but hasn't collected any cash, so there should be no actual cash impact yet, and indeed, the cash balance on the balance sheet is unchanged.",
+    "followups": [
+      {
+        "prompt": "What happens across all three statements once the customer actually pays the $10 million a month later?",
+        "modelAnswer": "When the cash is collected, there's no income statement impact at all — the revenue was already recognized when the sale was made, not when cash is received. On the balance sheet, cash increases by $10 million and accounts receivable decreases by $10 million, so total assets are unchanged, it's simply an asset-for-asset swap from AR into cash. On the cash flow statement, this shows up purely as a working capital adjustment: the $10 million decrease in accounts receivable is added as a source of cash within cash flow from operations, with no corresponding net income impact in that period since net income already reflected this revenue a month earlier. This completes the cash conversion cycle for this single transaction — the sale and the cash collection are recognized in different periods, but together they properly reflect both the accrual and cash realities of the transaction."
+      },
+      {
+        "prompt": "How would this differ if the $10 million sale were instead a cash sale, collected immediately?",
+        "modelAnswer": "If it were a cash sale, the income statement impact would be identical — revenue and net income still increase by $10 million immediately. But the balance sheet and cash flow statement would look different: on the balance sheet, cash increases by $10 million directly rather than accounts receivable, and there's no AR balance created. On the cash flow statement, net income is up $10 million in CFO, but there's no offsetting working capital adjustment needed since no receivable was created — the full $10 million flows through to cash flow from operations. So the total cash impact ends up being the same $10 million either way, once the credit sale is eventually collected, but the timing is very different: immediate for a cash sale versus deferred, with a temporary AR build-up, for a credit sale."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "accounting-linkages",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-014-stock-comp-three-statement-linkage",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "How does $5 million of stock-based compensation expense flow through all three financial statements?",
+    "keyPoints": [
+      {"point": "Income statement: recorded as an operating expense, reduces net income by $5 million (pre-tax; may have a smaller after-tax effect depending on tax deductibility)", "weight": 3},
+      {"point": "Cash flow statement: added back within CFO since it's non-cash, offsetting the net income reduction", "weight": 3},
+      {"point": "Balance sheet: additional paid-in capital (equity) increases by $5 million as shares/options vest, offsetting the retained earnings reduction from lower net income", "weight": 3}
+    ],
+    "misconceptions": [
+      "Believing SBC has no balance sheet impact at all",
+      "Forgetting the CFO add-back that offsets the net income hit"
+    ],
+    "modelAnswer": "On the income statement, stock-based compensation is recorded as an operating expense, reducing operating income and net income by $5 million, embedded within whichever expense category, like R&D or SG&A, the relevant employees belong to. On the cash flow statement, since SBC is non-cash, it's added back within cash flow from operations, similar to depreciation — so the $5 million reduction in net income is offset dollar-for-dollar by the $5 million add-back, meaning SBC has no net impact on cash flow from operations. On the balance sheet, two offsetting things happen to keep everything balanced: retained earnings falls by $5 million because of the lower net income flowing through, but additional paid-in capital, a separate equity account, increases by $5 million to reflect the value of the equity being granted to employees as compensation. So total shareholders' equity is actually unchanged in aggregate — it's really just an internal reclassification within equity, from retained earnings into APIC — and cash itself is completely untouched by the expense recognition. The real economic cost of SBC shows up later, through share count dilution as those awards vest and get exercised or settled.",
+    "followups": [
+      {
+        "prompt": "If the company then buys back shares specifically to offset the dilution from vested stock comp, how does that change the three-statement picture?",
+        "modelAnswer": "A buyback specifically hits the balance sheet and cash flow statement, not the income statement. On the cash flow statement, the cash spent on the buyback shows up as an outflow within cash flow from financing. On the balance sheet, cash decreases by the amount spent, and treasury stock, a contra-equity account, increases by the same amount, reducing total shareholders' equity. So while the original SBC grant didn't touch cash and left aggregate equity unchanged, a subsequent buyback to offset the resulting dilution does consume real cash and does reduce total equity — this is exactly why companies with heavy SBC often need meaningful ongoing buyback programs just to keep their share count roughly flat, which is a genuine cash cost tied indirectly back to the original 'non-cash' compensation expense."
+      },
+      {
+        "prompt": "Does SBC create any tax complications relative to cash compensation?",
+        "modelAnswer": "Yes — for tax purposes, companies typically get a tax deduction based on the intrinsic value of the equity award at the time it vests or is exercised, which is often different from the grant-date fair value expensed for book purposes under GAAP. If the stock price rises between grant and vesting, the tax deduction can end up larger than the book expense, creating an excess tax benefit that flows through the income statement as a reduction to the effective tax rate in the period of vesting, which is a source of some earnings volatility and complexity when comparing GAAP net income across periods with different stock price performance."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "accounting-linkages",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-015-debt-paydown-linkage",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "multi-step",
+    "prompt": "A company uses $30 million of existing cash to pay down $30 million of long-term debt. Walk through the effect on all three financial statements, including the following year's income statement if the debt carried a 6% interest rate.",
+    "keyPoints": [
+      {"point": "Balance sheet (at time of paydown): cash decreases $30M, long-term debt decreases $30M; total assets and liabilities both fall by $30M, equity unchanged", "weight": 3},
+      {"point": "Cash flow statement: $30M outflow within cash flow from financing", "weight": 3},
+      {"point": "No immediate income statement impact from the paydown itself", "weight": 1},
+      {"point": "Following year: interest expense falls by $30M x 6% = $1.8M, increasing net income (after tax) and reducing future interest expense", "weight": 3}
+    ],
+    "misconceptions": [
+      "Recording the debt paydown as an operating cash flow instead of financing",
+      "Forgetting the future interest expense savings implication"
+    ],
+    "modelAnswer": "At the moment of the paydown, on the balance sheet, cash decreases by $30 million and long-term debt decreases by $30 million — both entries are on opposite sides of the balance sheet equation, so total assets fall by $30 million and total liabilities also fall by $30 million, leaving shareholders' equity completely unaffected. On the cash flow statement, this is recorded as a $30 million outflow within cash flow from financing, since repaying debt principal is a financing activity. There's no immediate income statement impact from the principal repayment itself — repaying debt principal isn't an expense, it's simply settling a liability. However, looking forward, the following year's income statement would show lower interest expense, since the company no longer owes interest on the retired $30 million of debt: at a 6% rate, that's an interest expense reduction of $30 million times 6%, or $1.8 million. Lower interest expense increases pre-tax income and, after applying the tax rate, increases net income going forward, which then flows through to higher cash flow from operations and higher retained earnings in future periods — this is the classic trade-off of debt paydown: it consumes cash today but improves the income statement, and ultimately future cash flow, going forward through reduced interest costs.",
+    "followups": [
+      {
+        "prompt": "How would the picture differ if the company instead issued $30 million of new equity to raise the cash used for the debt paydown, rather than using existing cash?",
+        "modelAnswer": "If the company first issued $30 million of new equity, cash would increase by $30 million and common stock/APIC would increase by $30 million on the balance sheet, with a corresponding $30 million inflow in cash flow from financing. Then using that cash to pay down $30 million of debt would follow the same mechanics described earlier — cash down $30 million, debt down $30 million, another $30 million outflow in CFF. Netting both transactions together, cash ends up unchanged overall, but the balance sheet has shifted from $30 million of debt to $30 million of equity, meaningfully reducing leverage and, going forward, still saving that $1.8 million of annual interest expense, though now diluting existing shareholders through the new equity issuance rather than drawing down existing cash reserves."
+      },
+      {
+        "prompt": "Why might a company choose to pay down debt with excess cash rather than return that cash to shareholders via dividends or buybacks?",
+        "modelAnswer": "Paying down debt reduces financial risk and interest expense, improving the company's credit profile, potentially lowering its cost of future borrowing, and increasing financial flexibility during downturns since there's less fixed debt service burden. It can also be attractive if the after-tax cost of the debt being retired is high relative to the returns available from other uses of cash, or if the company wants to hit a specific leverage target, perhaps required by debt covenants or credit rating considerations. The trade-off is that paying down debt doesn't directly return cash to shareholders the way a dividend or buyback does, so management has to weigh the benefit of a stronger balance sheet against shareholders' preference for direct capital returns, which often depends on where the company sits in its growth cycle and how much financial risk it's currently carrying."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "accounting-linkages",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-016-dso-calculation",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "calculation",
+    "prompt": "A company has annual revenue of $365 million (assume all on credit) and ending accounts receivable of $40 million. What is DSO, using a 365-day year?",
+    "keyPoints": [
+      {"point": "DSO = (Accounts Receivable / Revenue) x 365", "weight": 3},
+      {"point": "($40M / $365M) x 365 = 40 days", "weight": 3},
+      {"point": "Interprets result: it takes the company roughly 40 days on average to collect cash after a sale", "weight": 2}
+    ],
+    "misconceptions": [
+      "Inverting the ratio (using revenue divided by AR)",
+      "Forgetting to multiply by the number of days in the period"
+    ],
+    "modelAnswer": "Days sales outstanding is calculated as accounts receivable divided by revenue, multiplied by the number of days in the period, here 365 for a full year. Plugging in the numbers: $40 million of accounts receivable divided by $365 million of revenue equals roughly 0.1096, and multiplying that by 365 days gives exactly 40 days. This tells us that, on average, it takes the company about 40 days from the point of a credit sale to actually collect the cash from its customers. A convenient shortcut here is that because revenue is exactly $365 million, dividing AR by revenue and multiplying by 365 simplifies neatly to just AR divided by average daily revenue, which is $40 million divided by $1 million per day, giving the same 40 days. DSO is a key metric for assessing how efficiently a company is managing its receivables and collections process, and it's often tracked over time or benchmarked against competitors to spot deteriorating collection practices or improving credit discipline.",
+    "followups": [
+      {
+        "prompt": "If DSO increased from 40 days to 55 days over the following year with the same revenue level, what would that imply, and how would it affect cash flow?",
+        "modelAnswer": "An increase in DSO from 40 to 55 days, holding revenue constant, means the company is taking longer on average to collect cash from customers, which implies accounts receivable has grown relative to revenue. This ties up more cash in the operating cycle — accounts receivable would rise, and that increase would show up as a use of cash within the working capital adjustment on the cash flow statement, reducing cash flow from operations relative to what it would have been if collections had stayed efficient. This kind of DSO deterioration can signal looser credit terms extended to customers, weakening collections discipline, or customers themselves facing financial stress and paying more slowly — all worth investigating further to understand the root cause."
+      },
+      {
+        "prompt": "Why might comparing DSO across companies in different industries be misleading?",
+        "modelAnswer": "Different industries have fundamentally different payment norms and business models — a B2B industrial equipment manufacturer might routinely offer 60 or 90-day payment terms to large corporate customers as standard practice, while a retail business collecting mostly via credit card at the point of sale might have a DSO close to zero. Comparing DSO directly across these industries without adjusting for typical payment terms would make the equipment manufacturer look inefficient by comparison, even though its DSO is entirely normal and healthy for its specific business model and customer base. DSO is much more meaningful when compared against direct industry peers with similar customer types and payment term norms, or tracked over time for the same company to spot trends."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "working-capital-and-operational-items",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-017-cash-conversion-cycle-calc",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "calculation",
+    "prompt": "A company has DIO of 45 days, DSO of 30 days, and DPO of 35 days. What is its cash conversion cycle, and what does that figure mean?",
+    "keyPoints": [
+      {"point": "Cash conversion cycle = DIO + DSO - DPO", "weight": 3},
+      {"point": "45 + 30 - 35 = 40 days", "weight": 3},
+      {"point": "Interprets the result as the number of days cash is tied up between paying for inventory and collecting cash from the eventual sale", "weight": 2}
+    ],
+    "misconceptions": [
+      "Adding DPO instead of subtracting it",
+      "Confusing the direction of the formula's impact (thinking a longer DPO makes the cycle longer rather than shorter)"
+    ],
+    "modelAnswer": "The cash conversion cycle is calculated as days inventory outstanding plus days sales outstanding, minus days payable outstanding. Plugging in the numbers: 45 days of DIO plus 30 days of DSO, minus 35 days of DPO, equals a cash conversion cycle of 40 days. This means that, on average, cash is tied up for 40 days between the point the company pays cash for inventory and the point it actually collects cash from the eventual sale of that inventory to a customer. The logic behind the formula is that DIO plus DSO represents the total time from acquiring inventory to collecting cash on the sale, while DPO represents how much of that period is effectively financed by suppliers rather than the company's own cash, since the company delays paying its suppliers. A shorter cash conversion cycle is generally more favorable, since it means less of the company's own cash is tied up funding the operating cycle, freeing that cash up for other uses like growth investment or shareholder returns.",
+    "followups": [
+      {
+        "prompt": "How could the company shorten its cash conversion cycle, and what are the trade-offs of each lever?",
+        "modelAnswer": "There are three levers, corresponding to each input. Reducing DIO — by managing inventory more efficiently or improving demand forecasting to hold less excess stock — frees up cash but risks stockouts if taken too far, potentially hurting sales or customer service. Reducing DSO — by tightening credit terms or improving collections — speeds up cash inflows but risks alienating customers who value longer payment terms, potentially hurting sales volume or competitiveness. Increasing DPO — by negotiating longer payment terms with suppliers — reduces the company's own cash burden but risks straining supplier relationships or losing early-payment discounts if pushed too aggressively. In practice, companies try to optimize all three levers simultaneously, balancing operational and relationship considerations against the pure cash flow benefit of a shorter cycle."
+      },
+      {
+        "prompt": "Is it possible for a company to have a negative cash conversion cycle, and what would that mean?",
+        "modelAnswer": "Yes — a negative cash conversion cycle happens when DPO exceeds the sum of DIO and DSO, meaning the company collects cash from customers and turns over inventory faster than it has to pay its own suppliers. This is common in certain retail and e-commerce business models where customers pay immediately or upfront, inventory turns over quickly, but suppliers are paid on extended terms. In effect, the company is being financed by its suppliers rather than needing to fund its own working capital, which is a very favorable cash flow dynamic — some well-known large retailers and consumer platforms have historically operated with negative cash conversion cycles, effectively using supplier financing to fund growth rather than needing external capital."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "working-capital-and-operational-items",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-018-extended-payment-terms-impact",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "If a company negotiates longer payment terms with its suppliers, extending DPO from 30 to 50 days, how does that affect its cash position and financial statements?",
+    "keyPoints": [
+      {"point": "Accounts payable balance increases as the company holds onto cash longer before paying suppliers", "weight": 3},
+      {"point": "The increase in AP shows up as a source of cash in cash flow from operations", "weight": 3},
+      {"point": "No income statement impact — it's a timing/working capital effect, not a change in the expense itself", "weight": 2},
+      {"point": "Mentions the risk: could strain supplier relationships or forfeit early-payment discounts", "weight": 1}
+    ],
+    "misconceptions": [
+      "Believing extended payment terms change the total amount owed to suppliers",
+      "Thinking this improves net income rather than just cash timing"
+    ],
+    "modelAnswer": "Extending DPO from 30 to 50 days means the company is holding onto its cash 20 days longer, on average, before paying its suppliers for goods or services already received. On the balance sheet, this results in a higher accounts payable balance at any given point in time, since more unpaid obligations are outstanding. On the cash flow statement, this shows up favorably as a source of cash within the working capital adjustment in cash flow from operations, since the company is deferring cash outflows relative to when the corresponding expenses were recognized. Critically, there's no income statement impact from this change — the total amount the company owes and eventually pays its suppliers doesn't change, it's purely a timing shift in when cash actually leaves the business. The benefit is a one-time boost to cash flow as DPO extends, plus an ongoing structural improvement in the company's cash conversion cycle. The risk is that pushing payment terms too aggressively can strain supplier relationships, potentially leading suppliers to demand less favorable pricing, tighter credit terms in the future, or in extreme cases refuse to extend further credit, and the company may also lose out on early-payment discounts that some suppliers offer.",
+    "followups": [
+      {
+        "prompt": "Why might a large, powerful retailer be able to negotiate much longer payment terms than a small business in the same industry?",
+        "modelAnswer": "Negotiating leverage in payment terms is heavily influenced by relative bargaining power between the buyer and supplier. A large retailer represents a huge, often indispensable volume of business for many of its suppliers, giving it significant leverage to dictate favorable payment terms, since suppliers are often more willing to accept extended terms rather than risk losing such a large customer relationship entirely. A small business, by contrast, typically represents a much smaller and more replaceable share of a supplier's revenue, giving it far less negotiating power to extend payment terms, and suppliers may even demand faster payment or upfront deposits from smaller, less established customers due to perceived higher credit risk."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "working-capital-and-operational-items",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-019-prepaid-vs-accrued-distinction",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "What's the difference between a prepaid expense and an accrued liability, and how does each affect the balance sheet?",
+    "keyPoints": [
+      {"point": "Prepaid expense: cash paid before the expense is incurred; recorded as a current asset", "weight": 3},
+      {"point": "Accrued liability: expense incurred/recognized before cash is paid; recorded as a current liability", "weight": 3},
+      {"point": "Both reflect timing mismatches between cash movement and expense recognition, just in opposite directions", "weight": 2}
+    ],
+    "misconceptions": [
+      "Believing both are liabilities, or both are assets",
+      "Confusing the direction of the cash-versus-recognition timing for each"
+    ],
+    "modelAnswer": "Both prepaid expenses and accrued liabilities arise from timing mismatches between when cash moves and when an expense is actually recognized under accrual accounting, but they run in opposite directions. A prepaid expense occurs when a company pays cash before it has actually incurred or consumed the related expense — like paying a year of insurance premiums upfront. Since the company has paid for a future economic benefit it hasn't used yet, it's recorded as a current asset on the balance sheet, and the expense is recognized gradually over time as the benefit is consumed, drawing down the prepaid asset. An accrued liability is the opposite: an expense has already been incurred and recognized on the income statement, but the cash hasn't been paid yet — a common example is accrued wages, where employees have worked and earned their pay by period-end, but the actual paycheck goes out a few days into the next period. Since the company owes that cash but hasn't paid it, it's recorded as a current liability. Understanding this distinction is important because both items affect the working capital adjustments on the cash flow statement, but in opposite directions relative to their balance sheet classification.",
+    "followups": [
+      {
+        "prompt": "How would an increase in accrued liabilities and an increase in prepaid expenses each affect cash flow from operations?",
+        "modelAnswer": "An increase in accrued liabilities is a source of cash within cash flow from operations, because it means the company recognized an expense on the income statement — reducing net income — without yet paying the associated cash, so that non-cash portion needs to be added back to reconcile net income to actual cash flow. An increase in prepaid expenses is a use of cash within cash flow from operations, because it means the company spent cash on something it hasn't yet expensed on the income statement, so that cash outflow needs to be subtracted since net income hasn't reflected it yet. This is exactly why both accrued liabilities and prepaid expenses show up as standard working capital line items on the indirect-method cash flow statement, each moving cash flow in a different direction depending on whether they're increasing or decreasing."
+      },
+      {
+        "prompt": "Can you give an example of both a prepaid expense and an accrued liability existing for essentially the same type of cost, like rent?",
+        "modelAnswer": "Absolutely — rent can create either a prepaid asset or an accrued liability depending on the payment timing relative to the lease period. If a company pays three months of rent upfront at the start of a quarter, it would record a prepaid rent asset that gets drawn down each month as the rent expense is recognized. Conversely, if a company occupies a space for a month but the rent invoice isn't due and paid until a few days into the following month, it would record accrued rent payable at month-end for the expense already incurred but not yet paid in cash. The same underlying cost, rent, can create either a prepaid asset or an accrued liability purely depending on whether cash is paid in advance of, or after, the period the expense actually relates to."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "working-capital-and-operational-items",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-020-depreciation-walkthrough-multistep",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "multi-step",
+    "prompt": "A company records an additional $50 million of depreciation expense in a period, with a 20% tax rate and no change to capex. Walk through the effect on all three financial statements.",
+    "keyPoints": [
+      {"point": "Income statement: pre-tax income falls $50M, taxes fall $50M x 20% = $10M, net income falls $40M", "weight": 3},
+      {"point": "Cash flow statement: CFO change = -$40M (lower NI) + $50M (D&A add-back) = +$10M increase", "weight": 3},
+      {"point": "Balance sheet: PP&E (net) falls by $50M via accumulated depreciation; cash rises by $10M (from the CFO increase); retained earnings falls by $40M (lower NI); net asset change = -$50M+$10M = -$40M, matching the equity change of -$40M", "weight": 3}
+    ],
+    "misconceptions": [
+      "Forgetting the tax shield when calculating the net income impact",
+      "Missing that cash actually increases due to the tax savings, even though depreciation itself is non-cash"
+    ],
+    "modelAnswer": "On the income statement, the extra $50 million of depreciation reduces pre-tax income by $50 million; at a 20% tax rate, taxes fall by $10 million, so net income falls by the after-tax amount of $40 million. On the cash flow statement, we start from the lower net income, down $40 million, and add back the full $50 million of additional depreciation since it's non-cash — netting to a positive $10 million increase in cash flow from operations, which represents exactly the tax savings generated by the additional depreciation. On the balance sheet, several things move together: net PP&E decreases by $50 million as accumulated depreciation increases; cash increases by $10 million, reflecting the improved CFO; and retained earnings decreases by $40 million, reflecting the lower net income. Checking that everything balances: total assets change by negative $50 million (PP&E) plus positive $10 million (cash), a net decrease of $40 million, which exactly matches the $40 million decrease in equity via retained earnings, with liabilities unaffected. This is a clean illustration of how a purely non-cash accounting entry ripples through all three statements and even generates a small real cash benefit purely through its tax-deductibility.",
+    "followups": [
+      {
+        "prompt": "How would this analysis change if the company had no taxable income and thus paid no cash taxes regardless of the extra depreciation?",
+        "modelAnswer": "If the company had no taxable income, there would be no tax shield benefit to capture — the extra $50 million of depreciation would still reduce pre-tax income and net income by $50 million on a book (GAAP) basis, since financial reporting doesn't depend on whether taxes are actually paid. However, the cash flow statement impact would change: CFO would fall by $50 million (lower net income) but be fully offset by the $50 million D&A add-back, netting to zero change in cash flow from operations, since there's no tax savings to generate an incremental cash benefit. On the balance sheet, net PP&E would still fall by $50 million and retained earnings would fall by the full $50 million, with cash unchanged in this case, since there was no tax benefit realized. This highlights that the CFO benefit from higher depreciation is entirely dependent on the company actually being in a taxable, cash-tax-paying position."
+      },
+      {
+        "prompt": "Would the answer change if this extra $50 million of depreciation instead reflected an accelerated tax depreciation method used only for tax purposes, not for book/GAAP purposes?",
+        "modelAnswer": "Yes, this introduces a book-tax difference and a deferred tax liability. On the GAAP income statement, depreciation expense and net income would be unaffected by the accelerated tax method, since GAAP books typically use straight-line depreciation regardless of the tax method chosen. But for cash tax purposes, the higher tax depreciation would reduce actual cash taxes paid by $10 million, generating a real cash benefit reflected on the cash flow statement even though GAAP net income and GAAP depreciation expense haven't changed. This creates a deferred tax liability on the balance sheet, representing the future tax obligation that will reverse once the tax depreciation catches down to the book depreciation in later years, and it's exactly the kind of scenario that requires reconciling the income tax provision, the cash taxes actually paid, and the resulting deferred tax balance sheet accounts."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "three-statement-walkthrough",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-021-debt-funded-capex-walkthrough",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "multi-step",
+    "prompt": "A company issues $200 million of new debt and immediately uses all of the proceeds to purchase $200 million of new equipment. Walk through the effect on all three financial statements at the moment of these transactions.",
+    "keyPoints": [
+      {"point": "Cash flow statement: $200M inflow in CFF (debt issuance) and $200M outflow in CFI (capex); net cash flow impact is zero", "weight": 3},
+      {"point": "Balance sheet: PP&E increases $200M, long-term debt increases $200M; cash is unchanged since it flows in and right back out; equity unaffected", "weight": 3},
+      {"point": "No income statement impact at the moment of the transactions themselves", "weight": 2},
+      {"point": "Notes forward-looking impact: future interest expense will now be higher, and future depreciation will begin on the new equipment", "weight": 1}
+    ],
+    "misconceptions": [
+      "Believing cash increases net because debt was issued, ignoring that it was immediately spent",
+      "Recording the equipment purchase as an operating expense rather than capitalizing it"
+    ],
+    "modelAnswer": "At the moment these two transactions occur, there's no income statement impact — issuing debt isn't revenue or an expense, and purchasing equipment is capitalized rather than expensed immediately. On the cash flow statement, the $200 million debt issuance shows up as an inflow within cash flow from financing, and the $200 million equipment purchase shows up as an outflow within cash flow from investing; netting these together, there's zero net change in the company's cash balance, since the cash raised was immediately redeployed into the equipment purchase. On the balance sheet, PP&E increases by $200 million on the asset side, and long-term debt increases by $200 million on the liability side; cash itself is unchanged, since it flowed in and right back out. Total assets increase by $200 million, exactly matched by the $200 million increase in liabilities, keeping the equation balanced with no impact on equity. Looking forward, though, this transaction sets up two future income statement effects: interest expense will rise going forward due to the new debt, and depreciation expense will begin accruing on the new equipment as it's put into service, both of which will reduce future net income relative to a scenario where this transaction never happened.",
+    "followups": [
+      {
+        "prompt": "If the new equipment has a 10-year useful life with no salvage value and the debt carries a 5% interest rate, what would the combined annual income statement impact look like in the following year, assuming straight-line depreciation and a 25% tax rate?",
+        "modelAnswer": "Annual straight-line depreciation on the $200 million of equipment would be $200 million divided by 10 years, or $20 million per year, reducing operating income by $20 million. Annual interest expense on the $200 million of new debt at 5% would be $10 million, reducing pre-tax income by an additional $10 million. Combined, pre-tax income falls by $30 million relative to a scenario without this transaction. At a 25% tax rate, taxes fall by $7.5 million, so net income falls by $22.5 million in that following year. This illustrates the ongoing earnings drag from a debt-funded capex program, even though the transaction itself was cash-neutral at inception — the real cost shows up gradually over time through both interest expense and depreciation."
+      },
+      {
+        "prompt": "How would the cash flow statement look different in that following year, compared to the year of the initial transaction?",
+        "modelAnswer": "In the following year, cash flow from operations would reflect the lower net income of negative $22.5 million relative to the baseline, but $20 million of that would be added back as non-cash depreciation, so the net CFO impact would only be negative $2.5 million — essentially the after-tax cost of the interest expense, since depreciation's income statement impact is fully offset by the add-back while interest expense's after-tax cost is a real cash cost via lower net income not otherwise offset. Cash flow from financing would show the ongoing cash interest payments if not already captured within operations under U.S. GAAP classification conventions, and cash flow from investing would be relatively quiet unless further capex occurs, in contrast to the large one-time $200 million outflow recorded in the initial year of the equipment purchase."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "three-statement-walkthrough",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-022-buyback-walkthrough",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "multi-step",
+    "prompt": "A company uses $50 million of existing cash to repurchase its own shares in the open market. Walk through the immediate effect on all three financial statements, and explain the impact on EPS going forward.",
+    "keyPoints": [
+      {"point": "Balance sheet: cash decreases $50M, treasury stock (contra-equity) increases $50M, reducing total shareholders' equity by $50M", "weight": 3},
+      {"point": "Cash flow statement: $50M outflow within cash flow from financing", "weight": 3},
+      {"point": "No income statement impact from the buyback itself", "weight": 2},
+      {"point": "EPS impact: net income unchanged, but a smaller diluted share count going forward mechanically increases EPS (all else equal)", "weight": 2}
+    ],
+    "misconceptions": [
+      "Recording the buyback as an expense on the income statement",
+      "Thinking the buyback reduces net income or is recorded within cash flow from investing"
+    ],
+    "modelAnswer": "On the balance sheet, the $50 million share buyback reduces cash by $50 million, and increases treasury stock by $50 million — treasury stock is a contra-equity account, meaning it reduces total shareholders' equity rather than being recorded as an asset. Total assets fall by $50 million, matched by a $50 million fall in equity, with liabilities untouched, keeping the equation balanced. On the cash flow statement, the $50 million is recorded as an outflow within cash flow from financing, since buying back stock is a method of returning capital to shareholders through the company's capital structure activities. There's no income statement impact at all from the buyback itself — repurchasing shares isn't a revenue or expense event. Where the buyback does matter is for EPS: since net income is unaffected but the diluted share count outstanding shrinks as repurchased shares are retired or held as treasury shares and excluded from the share count, EPS mechanically increases going forward, all else equal, simply because the same total profit is now being divided among fewer shares. This is a key reason companies pursue buybacks — beyond returning capital to shareholders, a shrinking share count provides a mechanical tailwind to per-share metrics even without any underlying improvement in the business's actual earnings power.",
+    "followups": [
+      {
+        "prompt": "If the company had instead paid a $50 million dividend rather than doing a buyback, how would the balance sheet and cash flow statement differ?",
+        "modelAnswer": "The balance sheet and cash flow statement mechanics would look very similar in aggregate: cash would decrease by $50 million, and equity would decrease by $50 million, with a $50 million outflow within cash flow from financing. The difference is which equity account absorbs the reduction — a dividend reduces retained earnings directly, rather than increasing a separate treasury stock account, since a dividend is a direct distribution of accumulated earnings rather than a share repurchase. The more important practical difference is that a dividend doesn't change the share count at all, so unlike a buyback, it provides no mechanical boost to EPS going forward — the value returned to shareholders comes through the direct cash payment itself, not through a reduced denominator in per-share calculations."
+      },
+      {
+        "prompt": "Is it accurate to say a buyback 'increases the value of the company' the way earnings growth does?",
+        "modelAnswer": "Not really — a buyback is fundamentally a capital allocation decision, not a value creation event in the same sense as organic earnings growth. It transfers cash off the balance sheet to shareholders who sell their shares back, and it mechanically boosts remaining shareholders' proportional ownership and per-share metrics, but it doesn't create any new economic value on its own; the company's total enterprise value is unaffected by the buyback itself. Whether a buyback is a good use of capital depends on whether the shares were repurchased at an attractive price relative to intrinsic value, and whether that capital could have generated better returns if deployed elsewhere, like reinvesting in growth, paying down debt, or making an accretive acquisition — a buyback executed at an inflated share price can actually destroy value for remaining shareholders relative to those alternatives."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "three-statement-walkthrough",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-023-bad-debt-writeoff",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "single-step",
+    "prompt": "A company determines that $30 million of previously recognized accounts receivable is uncollectible and writes it off, having already maintained a sufficient allowance for doubtful accounts to cover this loss. What is the effect on the income statement, balance sheet, and cash flow statement at the time of the write-off?",
+    "keyPoints": [
+      {"point": "No new income statement impact at write-off, since the expense was already recognized earlier when the allowance was established (bad debt expense)", "weight": 3},
+      {"point": "Balance sheet: both accounts receivable and the allowance for doubtful accounts decrease by $30M, netting to no change in net AR or total assets", "weight": 3},
+      {"point": "No cash flow statement impact, since it's a non-cash reclassification with no new expense or cash movement", "weight": 2}
+    ],
+    "misconceptions": [
+      "Recording a new bad debt expense at the moment of write-off, double-counting the loss",
+      "Believing cash decreases when a receivable is written off"
+    ],
+    "modelAnswer": "Because the company had already established a sufficient allowance for doubtful accounts to cover this specific loss, the bad debt expense itself would have already been recognized on the income statement in an earlier period, when the allowance was set up or increased based on expected credit losses. At the actual moment of write-off, there's no new income statement impact — writing off the receivable doesn't create a new expense, it simply confirms that a previously anticipated loss has now actually occurred. On the balance sheet, both gross accounts receivable and the allowance for doubtful accounts, a contra-asset account, decrease by $30 million simultaneously, which nets to zero change in net accounts receivable and therefore zero change in total assets. There's also no cash flow statement impact, since no cash changes hands and net income isn't affected in the write-off period — this is purely a bookkeeping reclassification confirming that a receivable the company already expected to lose has now been formally removed from the books. This is a good example of the difference between when an economic loss is estimated and recognized, at the time the allowance is built up, versus when it's operationally confirmed and written off.",
+    "followups": [
+      {
+        "prompt": "What would have happened on the income statement and balance sheet back when the company originally established the allowance for doubtful accounts?",
+        "modelAnswer": "When the allowance was originally established or increased, the company would have recorded bad debt expense on the income statement, reducing operating income and net income by the estimated amount expected to be uncollectible, typically based on historical loss rates, aging of receivables, or specific known problem accounts. On the balance sheet, the allowance for doubtful accounts, a contra-asset, would increase, reducing net accounts receivable and total assets by that same estimated amount, even before any specific receivable was formally identified as uncollectible. This upfront recognition follows accrual accounting's matching principle and conservatism — companies are required to estimate and recognize expected credit losses in the period the related sales occurred, rather than waiting until a specific customer default actually happens, which could be well after the fact."
+      },
+      {
+        "prompt": "What if the company hadn't previously established an adequate allowance, and this $30 million write-off exceeded the existing allowance balance?",
+        "modelAnswer": "In that case, the excess amount beyond the existing allowance balance would need to be recognized as a new bad debt expense on the income statement at the time it's identified, reducing operating income and net income by that shortfall amount. On the balance sheet, the allowance and gross AR would still both decrease by the full $30 million, but since the allowance didn't have enough balance to fully absorb it, the company would need to record additional bad debt expense to true up the allowance before or simultaneously with the write-off, which flows through to lower retained earnings via the reduced net income. This scenario would also raise a flag for analysts about whether the company's historical loss estimation methodology has been too conservative or aggressive, prompting a closer look at the quality and reliability of its receivables reserving practices going forward."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "single-step-changes",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-024-equity-issuance-effect",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "single-step",
+    "prompt": "A company issues $100 million of new common stock for cash. What is the effect on the balance sheet and cash flow statement?",
+    "keyPoints": [
+      {"point": "Balance sheet: cash increases $100M; common stock/APIC increases $100M; total assets and equity both rise by $100M", "weight": 3},
+      {"point": "Cash flow statement: $100M inflow within cash flow from financing", "weight": 3},
+      {"point": "No income statement impact — issuing equity is not revenue", "weight": 2}
+    ],
+    "misconceptions": [
+      "Recording the proceeds as revenue on the income statement",
+      "Classifying the issuance as an investing activity instead of financing"
+    ],
+    "modelAnswer": "Issuing new common stock for cash is purely a financing and balance sheet event, with no income statement impact at all — raising capital from investors is never treated as revenue, regardless of how the proceeds are eventually used. On the balance sheet, cash increases by $100 million on the asset side, and common stock plus additional paid-in capital increases by $100 million on the equity side, keeping the balance sheet in balance with liabilities untouched. On the cash flow statement, the $100 million is recorded as an inflow within cash flow from financing, reflecting new capital raised from equity investors. This is the mirror image of a share buyback: while a buyback returns cash to shareholders and shrinks equity and share count, an equity issuance brings new cash in and expands both equity and the share count, which — all else equal — dilutes existing shareholders' proportional ownership and can reduce EPS if the newly raised capital hasn't yet generated additional earnings to offset the larger share base.",
+    "followups": [
+      {
+        "prompt": "Why might a company choose to raise capital through equity issuance rather than debt issuance?",
+        "modelAnswer": "Equity issuance doesn't create any fixed repayment obligation or interest expense burden, which reduces financial risk and preserves balance sheet flexibility, particularly attractive for companies that are early-stage, cash-flow negative, or operating in cyclical or uncertain industries where committing to fixed debt service could be risky. The trade-off is that equity issuance dilutes existing shareholders' ownership stakes and, since equity investors generally require a higher expected return than debt holders to compensate for their more residual and risky claim on the business, it's often considered a more expensive form of capital over the long run compared to debt, especially when a company has stable, predictable cash flows that could reliably support debt service without excessive risk."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "single-step-changes",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-025-deferred-revenue-increase-effect",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "single-step",
+    "prompt": "Deferred revenue increases by $15 million during a period, meaning the company collected $15 million more in customer prepayments than it recognized as revenue during that same period. What is the effect on the income statement, balance sheet, and cash flow statement?",
+    "keyPoints": [
+      {"point": "No income statement impact from the increase itself — revenue isn't recognized until earned", "weight": 3},
+      {"point": "Balance sheet: cash increases $15M (assuming the prepayment was in cash); deferred revenue (a liability) increases $15M", "weight": 3},
+      {"point": "Cash flow statement: the $15M increase in deferred revenue is added as a source of cash within CFO", "weight": 3}
+    ],
+    "misconceptions": [
+      "Recognizing the $15 million as revenue immediately",
+      "Treating deferred revenue as an asset rather than a liability, reversing the direction of the CFO adjustment"
+    ],
+    "modelAnswer": "An increase in deferred revenue reflects the company collecting cash from customers ahead of actually delivering the related goods or services, so there's no income statement impact from the increase itself — under accrual accounting, revenue can only be recognized once it's actually earned, regardless of when the cash was received. On the balance sheet, assuming the prepayment came in as cash, cash increases by $15 million, and deferred revenue, a liability representing the company's obligation to deliver future goods or services, also increases by $15 million, keeping the balance sheet in balance with no equity impact since net income wasn't touched. On the cash flow statement, since net income doesn't capture this $15 million of actual cash collected, the increase in deferred revenue is added back as a source of cash within the working capital adjustments in cash flow from operations. This is one of the more favorable working capital dynamics a business can have — collecting cash ahead of recognizing the associated revenue is a strong sign of healthy cash generation, common in subscription and prepaid business models, and it means reported net income is actually understating the real cash the business is bringing in during periods of strong bookings growth.",
+    "followups": [
+      {
+        "prompt": "How would a company with rapidly growing deferred revenue typically look different on a cash flow basis versus a GAAP net income basis?",
+        "modelAnswer": "A company with rapidly growing deferred revenue often shows cash flow from operations that's meaningfully stronger than GAAP net income would suggest, because cash collections from new prepaid contracts are running ahead of when the corresponding revenue, and often the associated costs, get recognized on the income statement. This is a hallmark of many fast-growing SaaS and subscription businesses — they can appear only modestly profitable or even unprofitable on a GAAP net income basis, especially early in their growth curve while sales and marketing spend to acquire new subscribers is heavy, while simultaneously generating strong or even positive operating cash flow, because customers are paying upfront for a full year of service that will only be recognized as revenue gradually over the following twelve months."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "single-step-changes",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-026-simple-eps-multistep-build",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "multi-step",
+    "prompt": "Revenue is $400 million, COGS is $220 million, SG&A is $70 million, interest expense is $10 million, the tax rate is 25%, and diluted shares outstanding are 30 million. Compute net income and diluted EPS.",
+    "keyPoints": [
+      {"point": "Gross profit = $400M - $220M = $180M", "weight": 2},
+      {"point": "Operating income = $180M - $70M = $110M", "weight": 2},
+      {"point": "Pre-tax income = $110M - $10M = $100M; Net income = $100M x 0.75 = $75M", "weight": 3},
+      {"point": "Diluted EPS = $75M / 30M = $2.50", "weight": 3}
+    ],
+    "misconceptions": [
+      "Skipping straight from revenue to net income without the intermediate subtotals",
+      "Applying the tax rate before subtracting interest expense"
+    ],
+    "modelAnswer": "Working step by step down the income statement: gross profit is revenue minus COGS, $400 million minus $220 million, equaling $180 million. Operating income is gross profit minus SG&A, $180 million minus $70 million, equaling $110 million. Pre-tax income is operating income minus interest expense, $110 million minus $10 million, equaling $100 million. Applying the 25% tax rate, taxes owed are $25 million, so net income equals $100 million minus $25 million, or $75 million. Finally, diluted EPS is net income divided by diluted shares outstanding: $75 million divided by 30 million shares equals $2.50 per share. Building the calculation in this stepwise order — rather than trying to jump directly to net income — keeps each subtotal, gross profit, operating income, and pre-tax income, clean and interpretable, and it mirrors exactly how a real income statement is laid out, which is useful both for checking your work and for being able to explain each step of your reasoning clearly in an interview setting.",
+    "followups": [
+      {
+        "prompt": "If the company also had $5 million of preferred stock dividends, how would diluted EPS change?",
+        "modelAnswer": "Preferred dividends need to be subtracted from net income before dividing by the share count, since that income belongs to preferred shareholders and isn't available to common shareholders. Net income available to common shareholders would be $75 million minus $5 million, or $70 million. Dividing that by the 30 million diluted shares gives diluted EPS of about $2.33 per share, noticeably lower than the $2.50 figure without the preferred dividend adjustment. This is a common step interviewees forget — EPS is specifically defined as earnings available to common shareholders per common share, so any claims senior to common equity, like preferred dividends, must be carved out first."
+      },
+      {
+        "prompt": "How would operating margin and net margin for this company compare, and what does the gap between them tell you?",
+        "modelAnswer": "Operating margin is operating income divided by revenue: $110 million divided by $400 million, or 27.5%. Net margin is net income divided by revenue: $75 million divided by $400 million, or 18.75%. The roughly 8.75 percentage point gap between the two margins reflects the combined drag of interest expense and taxes below the operating line. Comparing these two margins is useful because operating margin reflects the profitability of the core business independent of financing structure and tax situation, while net margin reflects what's actually left over for shareholders after all obligations — a large gap can highlight either a heavily levered capital structure with significant interest expense, a high effective tax rate, or both, which is important context when comparing this company's profitability to peers with different financing or tax profiles."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "multi-step-scenarios",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-027-acquisition-cash-and-debt-effect",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "multi-step",
+    "prompt": "A company acquires a target for $80 million, funded with $30 million of existing cash and $50 million of newly issued debt. The target's identifiable net assets have a fair value of $60 million. Walk through the balance sheet impact.",
+    "keyPoints": [
+      {"point": "Goodwill = Purchase price - fair value of identifiable net assets = $80M - $60M = $20M", "weight": 3},
+      {"point": "Cash decreases by $30M (portion funded with existing cash)", "weight": 2},
+      {"point": "Long-term debt increases by $50M (portion funded with new debt)", "weight": 2},
+      {"point": "Total assets increase: -$30M cash + $60M identifiable net assets + $20M goodwill = +$50M, matching the $50M increase in liabilities (debt), with equity unaffected", "weight": 3}
+    ],
+    "misconceptions": [
+      "Forgetting to record goodwill for the excess of purchase price over fair value of net assets acquired",
+      "Failing to check that the balance sheet still balances after combining all the moving pieces"
+    ],
+    "modelAnswer": "First, we calculate goodwill: the $80 million purchase price minus the $60 million fair value of the target's identifiable net assets equals $20 million of goodwill, representing the premium paid above the fair value of everything that can be separately identified and valued. Now for the balance sheet mechanics: cash decreases by $30 million, reflecting the portion of the deal funded with existing cash, and long-term debt increases by $50 million, reflecting the newly issued debt used to fund the rest of the purchase. On the asset side, the acquirer adds the target's identifiable net assets at their $60 million fair value, plus the $20 million of goodwill, while cash decreases by $30 million — netting to a total asset increase of $60 million plus $20 million minus $30 million, which equals $50 million. On the liability side, debt increases by exactly $50 million. Both sides increase by $50 million, so the balance sheet remains balanced with no change to shareholders' equity from the acquisition itself, which makes sense since this was funded entirely with cash and debt, not new equity issuance.",
+    "followups": [
+      {
+        "prompt": "How would cash flow statement classification handle the $30 million cash portion and the $50 million debt portion of this transaction?",
+        "modelAnswer": "The full $80 million purchase price of the acquisition would be recorded as a single outflow within cash flow from investing, since acquiring a business is classified as an investing activity, regardless of how it's funded. Separately, the $50 million of newly issued debt used to help fund the deal would show up as an inflow within cash flow from financing. So the $30 million and $50 million aren't split by classification within CFI itself — the entire $80 million purchase price sits in CFI, while the debt issuance that helped pay for it is tracked separately in CFF, reflecting that these are conceptually distinct activities: one is the use of cash to buy an asset, the other is how a portion of that cash was raised."
+      },
+      {
+        "prompt": "If the target's identifiable net assets had instead been valued at $90 million, more than the $80 million purchase price, how would that change the accounting?",
+        "modelAnswer": "If fair value of identifiable net assets exceeds the purchase price, that's called a 'bargain purchase,' and rather than recording negative goodwill, GAAP requires the acquirer to immediately recognize a gain on the income statement for the excess, in this case $90 million minus $80 million, or $10 million. This is a relatively unusual scenario, since it implies the seller sold the business for less than the fair value of its underlying assets, which might happen in a distressed sale or forced liquidation situation. The identifiable net assets would still be recorded at their full $90 million fair value on the balance sheet, but instead of goodwill, the acquirer would record a $10 million pre-tax gain, which would flow through to a one-time boost in net income in the period the acquisition closes."
+      },
+      {
+        "prompt": "Why do acquirers sometimes prefer to fund a large portion of a deal with debt rather than cash on hand, even when they have sufficient cash available?",
+        "modelAnswer": "Using debt rather than existing cash preserves the company's cash reserves for other purposes, like funding ongoing operations, future growth investments, or maintaining a liquidity cushion for unexpected needs. Debt financing can also be attractive if the after-tax cost of debt is relatively low, particularly in low interest rate environments, and if the company believes it can generate returns on the acquired business well above its cost of debt, using leverage can enhance returns on equity, sometimes referred to as using financial leverage to amplify equity returns. The trade-off is that debt financing increases financial risk and leverage, adds fixed interest expense obligations, and can constrain financial flexibility if the acquired business underperforms expectations or if market conditions tighten and refinancing becomes more difficult."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "multi-step-scenarios",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-028-dividend-and-buyback-combined-effect",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "multi-step",
+    "prompt": "A company pays a $20 million dividend and separately repurchases $35 million of its own stock in the same period, all funded from existing cash. Walk through the combined effect on shareholders' equity and cash.",
+    "keyPoints": [
+      {"point": "Cash decreases by $55M total ($20M dividend + $35M buyback)", "weight": 3},
+      {"point": "Retained earnings decreases by $20M (dividend)", "weight": 2},
+      {"point": "Treasury stock (contra-equity) increases by $35M, reducing equity by $35M (buyback)", "weight": 2},
+      {"point": "Total equity decreases by $55M combined, matching the $55M decrease in assets (cash)", "weight": 3}
+    ],
+    "misconceptions": [
+      "Recording both the dividend and buyback through retained earnings, ignoring that buybacks hit treasury stock instead",
+      "Forgetting to sum the two cash outflows for the total cash impact"
+    ],
+    "modelAnswer": "Both transactions reduce cash and reduce shareholders' equity, but they run through different equity accounts. The $20 million dividend reduces cash by $20 million and reduces retained earnings by $20 million, since a dividend is a direct distribution of accumulated earnings to shareholders. The $35 million buyback reduces cash by $35 million and increases treasury stock, a contra-equity account, by $35 million, which also reduces total shareholders' equity by $35 million. Combined, cash decreases by $20 million plus $35 million, or $55 million in total, and total shareholders' equity decreases by the same $55 million in total — $20 million through the retained earnings reduction and $35 million through the treasury stock increase. The balance sheet remains balanced since both the asset side (cash) and the equity side fall by exactly $55 million, with liabilities untouched. On the cash flow statement, both transactions would show up as outflows within cash flow from financing, combining for a $55 million total outflow in that section for the period, assuming no other financing activities occurred.",
+    "followups": [
+      {
+        "prompt": "If the company only had $40 million of cash available, how might it approach funding both of these capital return programs?",
+        "modelAnswer": "With only $40 million of available cash against a combined $55 million capital return commitment, the company would need to either scale back one or both programs, draw on additional sources of liquidity like an existing revolving credit facility or issue new debt to bridge the shortfall, or phase the buyback over a longer period rather than executing it all at once. Many companies structure buyback programs as ongoing, flexible authorizations precisely for this reason — unlike a dividend, which is typically a fixed, recurring commitment investors expect to be maintained, a buyback can be paused, slowed, or accelerated more easily based on available cash and prevailing share price, giving management more flexibility to manage liquidity constraints without the reputational and signaling risk associated with cutting a dividend."
+      },
+      {
+        "prompt": "Why do dividend cuts tend to be viewed much more negatively by the market than a pause in a share buyback program?",
+        "modelAnswer": "Dividends are generally viewed by investors as a firm commitment and a signal of confidence in stable, sustainable cash flow generation, so cutting a dividend is often interpreted as a strong negative signal that management believes future cash flows may not support the prior payout level, which can trigger a significant negative reaction in the stock price, particularly among income-focused investors who may be forced to sell if the stock no longer meets their yield requirements. A buyback, by contrast, is typically viewed as a more discretionary and flexible use of excess cash rather than a firm ongoing commitment, so pausing or reducing a buyback program is generally seen as a more routine capital allocation adjustment rather than a signal of financial distress, causing a much more muted market reaction in most cases."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "multi-step-scenarios",
+    "advanced": false
+  },
+  {
+    "id": "acct-medium-029-goodwill-impairment-testing-process",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "Walk me through, at a high level, how a company tests goodwill for impairment.",
+    "keyPoints": [
+      {"point": "Goodwill is tested at least annually, at the reporting unit level, and whenever a triggering event occurs", "weight": 3},
+      {"point": "The company compares the reporting unit's fair value to its carrying value (including allocated goodwill)", "weight": 3},
+      {"point": "If carrying value exceeds fair value, an impairment charge is recorded for the difference, limited to the amount of goodwill on the books", "weight": 3}
+    ],
+    "misconceptions": [
+      "Believing goodwill impairment testing happens at the total-company level rather than at the reporting-unit level",
+      "Thinking impairment testing involves scheduled amortization rather than a fair-value comparison"
+    ],
+    "modelAnswer": "Goodwill impairment testing is performed at least annually, and also whenever a triggering event suggests goodwill might be impaired sooner, like a significant decline in the acquired business's performance, a sustained drop in the company's stock price, loss of a major customer, or adverse changes in the broader industry or macroeconomic environment. The testing happens at the reporting unit level, not for the company as a whole — goodwill from an acquisition is allocated to the specific reporting unit or units expected to benefit from that acquisition, and impairment is assessed separately for each of those units. The core test compares the fair value of the reporting unit, often estimated using a discounted cash flow analysis or market-based valuation multiples, against its carrying value on the books, which includes the allocated goodwill along with all the unit's other net assets. If the carrying value exceeds the estimated fair value, the company records an impairment charge equal to that excess, though the charge can never exceed the amount of goodwill actually recorded for that reporting unit. This charge flows through the income statement as a non-cash expense, reducing operating income and net income, and reduces the goodwill balance on the balance sheet by the same amount.",
+    "followups": [
+      {
+        "prompt": "Why might companies sometimes delay taking an obviously warranted goodwill impairment?",
+        "modelAnswer": "Management may be reluctant to record a goodwill impairment because it's often an implicit admission that a past acquisition was overpaid for or hasn't performed as expected, which can be embarrassing and invite scrutiny from investors, boards, and analysts about capital allocation judgment. There can also be incentive misalignment if management compensation is tied to metrics like net income or EPS that would be hurt by a large impairment charge, even though the charge is non-cash and doesn't affect the company's actual cash position or future operations directly. Auditors and accounting standards are designed to push back against this kind of delay by requiring at least annual testing and mandatory testing upon clear triggering events, but there's still inherent judgment involved in the fair value estimates used, which can create room for companies to be optimistic about a reporting unit's prospects longer than the underlying business performance might justify."
+      },
+      {
+        "prompt": "How does a goodwill impairment affect valuation multiples like EV/EBITDA, given that it's a non-cash charge?",
+        "modelAnswer": "A goodwill impairment doesn't affect EBITDA at all, since EBITDA already excludes non-cash items and, more specifically, impairment charges are typically excluded or added back in EBITDA calculations precisely because they're non-operating and non-cash in nature. So EV/EBITDA as a multiple is essentially unaffected by an impairment charge. However, the impairment does reduce GAAP net income, which lowers earnings-based multiples like P/E, at least in the period the charge is recorded — though many analysts also adjust net income to exclude one-time impairment charges when calculating a normalized P/E multiple, similar to how they'd treat any other significant non-recurring item, since the charge reflects a backward-looking accounting catch-up rather than the company's current or future operating economics."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "advanced-accounting",
+    "advanced": true
+  },
+  {
+    "id": "acct-medium-030-equity-method-vs-consolidation",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "When does a company use the equity method to account for an investment in another company, versus fully consolidating that company's financials, and how do the two approaches differ?",
+    "keyPoints": [
+      {"point": "Equity method typically used for ownership stakes of roughly 20-50%, reflecting significant influence but not control", "weight": 3},
+      {"point": "Full consolidation used when ownership exceeds 50% (control), combining 100% of the subsidiary's financials with a minority interest adjustment", "weight": 3},
+      {"point": "Equity method: investment recorded as a single line on the balance sheet, adjusted for the investor's share of the investee's net income (and dividends received)", "weight": 3}
+    ],
+    "misconceptions": [
+      "Believing the equity method line-by-line combines the investee's full financial statements into the investor's",
+      "Confusing the ownership percentage thresholds for equity method versus consolidation"
+    ],
+    "modelAnswer": "The accounting treatment depends primarily on the level of influence or control the investor has over the investee. When a company owns roughly 20% to 50% of another company, it's generally presumed to have significant influence — the ability to affect the investee's operating and financial decisions — but not outright control, and it uses the equity method. Under the equity method, the investor doesn't combine the investee's individual revenue, expense, or balance sheet line items into its own financial statements; instead, it records a single line item, 'investment in affiliate' or similar, on its balance sheet, initially at cost. That investment balance is then adjusted each period by the investor's proportional share of the investee's net income, which is recorded as a single line of income on the investor's income statement, and reduced by any dividends received from the investee, since those represent a return of the investment. When ownership exceeds 50%, the investor is presumed to have control, and it fully consolidates — combining 100% of the subsidiary's revenue, expenses, assets, and liabilities into its own financial statements, line by line, even though it might only own, say, 70% of the subsidiary, and then backs out the portion it doesn't own through a 'non-controlling interest' or 'minority interest' line on both the income statement and balance sheet.",
+    "followups": [
+      {
+        "prompt": "Why does the equity method only record a single net income line rather than fully combining the investee's revenue and expenses?",
+        "modelAnswer": "Because the investor doesn't have control over the investee — it can influence decisions but can't unilaterally direct the investee's operations or dictate how its assets are used, so fully combining the investee's granular revenue and expense line items would misleadingly suggest the investor has more operational control than it actually does. The equity method strikes a middle ground: it recognizes the investor's proportional economic interest in the investee's profitability through a single net income pickup, without overstating the investor's actual operational involvement by consolidating every individual financial statement line item, which is reserved for situations of actual control under the consolidation model."
+      },
+      {
+        "prompt": "What is a non-controlling interest, and where does it appear on the financial statements of a company that consolidates a majority-owned but not wholly-owned subsidiary?",
+        "modelAnswer": "A non-controlling interest, sometimes called a minority interest, represents the portion of a consolidated subsidiary's net income and equity that belongs to outside shareholders who own the minority stake the parent company doesn't own. On the income statement, after fully consolidating 100% of the subsidiary's revenue and expenses, the parent subtracts a line for 'net income attributable to non-controlling interests,' representing the minority shareholders' proportional share of that subsidiary's profit, to arrive at 'net income attributable to the parent company,' which is the figure used for EPS calculations. On the balance sheet, non-controlling interest appears as a separate component within total equity, representing the minority shareholders' claim on the subsidiary's net assets, distinct from the parent company's own shareholders' equity."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "advanced-accounting",
+    "advanced": true
+  },
+  {
+    "id": "acct-medium-031-convertible-debt-basics",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "What is convertible debt, and at a basic level, how does it affect a company's balance sheet and diluted EPS calculation?",
+    "keyPoints": [
+      {"point": "Convertible debt is a bond that can be converted into a fixed number of common shares at the holder's option, typically at a specified conversion price", "weight": 3},
+      {"point": "It's initially recorded as a liability on the balance sheet, generally similar to regular debt (with some accounting nuances around embedded features)", "weight": 2},
+      {"point": "For diluted EPS, if the conversion would be dilutive, the shares from potential conversion are added to the diluted share count, and interest expense (after-tax) is added back to net income (the 'if-converted' method)", "weight": 3}
+    ],
+    "misconceptions": [
+      "Assuming convertible debt is always classified partly as equity on the balance sheet in every case",
+      "Forgetting to add back the after-tax interest expense when applying the if-converted method for diluted EPS"
+    ],
+    "modelAnswer": "Convertible debt is a bond that gives the holder the option to convert it into a fixed number of the issuing company's common shares, typically at a predetermined conversion price, instead of receiving cash repayment of principal at maturity. It's attractive to issuers because convertibility usually allows them to offer a lower interest rate than a comparable straight bond, since investors are compensated with the potential upside of converting into equity if the stock performs well. On the balance sheet, convertible debt is generally recorded as a liability, similar to regular debt, though certain accounting rules can require splitting out an equity component for the conversion feature in some structures, adding complexity. For diluted EPS purposes, if the conversion would be dilutive to shareholders — meaning it would reduce EPS — companies use what's called the 'if-converted' method: they add the shares that would result from full conversion to the diluted share count, and simultaneously add back the after-tax interest expense on the convertible debt to net income, since if the debt were actually converted, the company wouldn't be paying that interest anymore. This gives a conservative, fully diluted view of EPS that reflects the potential dilution if all convertible holders chose to convert.",
+    "followups": [
+      {
+        "prompt": "Why would a company add back the after-tax interest expense to net income specifically when applying the if-converted method?",
+        "modelAnswer": "The if-converted method is meant to simulate what net income and share count would look like if the convertible debt had actually been converted into equity at the start of the period. If it had been converted, the company would no longer have that debt outstanding, so it wouldn't have paid the associated interest expense during the period, meaning its net income would have been higher by the after-tax amount of that interest — pre-tax interest expense multiplied by one minus the tax rate. Adding that back to net income, while simultaneously adding the converted shares to the diluted share count, creates an internally consistent hypothetical scenario for calculating the resulting diluted EPS, which is why both adjustments have to happen together rather than just one or the other."
+      },
+      {
+        "prompt": "Under what circumstances would the conversion feature be considered antidilutive, and how would that affect the diluted EPS calculation?",
+        "modelAnswer": "The conversion is antidilutive if including the converted shares and adding back the after-tax interest expense would actually increase EPS rather than decrease it, which can happen if the interest expense saved per additional share issued is large relative to the company's baseline earnings per share. In that scenario, accounting rules require companies to exclude the antidilutive convertible security from the diluted EPS calculation entirely, since diluted EPS is meant to represent the most conservative, lowest possible EPS figure reflecting maximum potential dilution — companies aren't allowed to selectively include securities that would actually inflate EPS. This is why each potentially dilutive security, whether convertible debt, options, or other instruments, needs to be tested individually to determine whether including it in the diluted calculation actually reduces EPS before it's incorporated."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "advanced-accounting",
+    "advanced": true
+  },
+  {
+    "id": "acct-medium-032-cash-conversion-cycle-negative-wc-preview",
+    "topic": "accounting",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "What does it mean for a company to operate with 'negative working capital,' and why isn't that automatically a sign of financial distress?",
+    "keyPoints": [
+      {"point": "Negative working capital means current liabilities exceed current assets", "weight": 2},
+      {"point": "Some business models (fast inventory turnover, upfront cash collection, extended supplier terms) generate cash before they need to pay suppliers, structurally producing negative working capital", "weight": 3},
+      {"point": "In those models, negative working capital reflects an efficient, self-funding operating cycle rather than distress — growth can even generate cash rather than consume it", "weight": 3}
+    ],
+    "misconceptions": [
+      "Assuming negative working capital always signals a company can't pay its bills",
+      "Failing to distinguish structurally negative working capital business models from distressed companies with genuine liquidity problems"
+    ],
+    "modelAnswer": "Negative working capital simply means a company's current liabilities exceed its current assets on the balance sheet at a point in time. In many cases this is a warning sign, potentially indicating a company is struggling to meet near-term obligations. But for certain business models, it's actually a structural, healthy feature rather than a red flag. Think of a retailer or a restaurant chain that collects cash from customers immediately or very quickly, turns over inventory rapidly, but negotiates 30, 45, or even 60-day payment terms with its suppliers. That company collects cash from its sale well before it ever has to pay the supplier for the inventory that generated that sale, meaning growth actually generates cash rather than consuming it — the faster the company grows, the more this favorable timing gap works in its favor, effectively financing growth using supplier credit rather than needing external capital or equity. In these cases, negative working capital reflects a highly efficient cash conversion cycle rather than financial distress. The key is to distinguish this structural pattern, driven by fast inventory turns and quick customer cash collection relative to generous supplier payment terms, from a company that has negative working capital because it genuinely can't collect from customers or manage its inventory efficiently and is simply falling behind on paying its bills.",
+    "followups": [
+      {
+        "prompt": "How would you tell the difference, as an analyst, between a company with 'good' structurally negative working capital and one that's actually in financial distress?",
+        "modelAnswer": "You'd look at the trend and the components behind the negative working capital figure, not just the headline number. A healthy, structurally negative working capital business typically shows stable or improving DSO and DIO — fast, consistent customer collections and efficient inventory turnover — alongside a DPO that reflects negotiated, sustainable supplier terms consistent with industry norms and the company's bargaining power. A distressed company, by contrast, often shows deteriorating DSO or DIO trends alongside a rapidly rising DPO that reflects the company simply failing to pay suppliers on time out of necessity rather than negotiated terms, often accompanied by other distress signals like declining revenue, shrinking margins, covenant concerns, or supplier complaints and credit tightening. The overall cash flow trend also matters — a structurally negative working capital company should show consistently strong operating cash flow, while a distressed company is more likely to show deteriorating or volatile cash generation alongside the negative working capital position."
+      },
+      {
+        "prompt": "Give a concrete numerical example of how growth can generate cash in a negative working capital business.",
+        "modelAnswer": "Imagine a retailer with a cash conversion cycle of negative 20 days — meaning it collects cash from customers and turns over inventory about 20 days before it has to pay its own suppliers for that same inventory. If the retailer grows revenue by $10 million in a given period, and its cost of goods sold associated with that growth is, say, $6 million, the negative 20-day cash conversion cycle effectively means the retailer is holding onto roughly 20 days' worth of that $6 million of supplier obligations as free financing while it's already collected the related cash from customers. Rather than needing $6 million of external working capital financing to fund that growth in inventory purchases, the retailer's suppliers are effectively financing that growth for it, meaning the incremental $10 million of revenue growth actually improves the company's cash position in the near term rather than straining it, which is the exact opposite dynamic of a typical business that needs to fund working capital investment ahead of growth."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "advanced-accounting",
+    "advanced": true
+  }
+]

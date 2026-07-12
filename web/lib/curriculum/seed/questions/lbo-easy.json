@@ -1,0 +1,393 @@
+[
+  {
+    "id": "lbo-easy-001-leverage-return-amplification",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Walk me through, at a conceptual level, why using leverage amplifies equity returns in a leveraged buyout.",
+    "keyPoints": [
+      {"point": "Debt funds part of the purchase price, so the sponsor's equity check is smaller than the full enterprise value", "weight": 3},
+      {"point": "The same dollar of enterprise value growth accrues to that smaller equity base, boosting the percentage return", "weight": 3},
+      {"point": "Debt paydown from free cash flow transfers value from debt holders to equity holders over the hold", "weight": 2},
+      {"point": "Leverage cuts both ways — it magnifies losses just as much as gains if the business underperforms", "weight": 2}
+    ],
+    "misconceptions": ["Leverage itself creates enterprise value", "Leverage always increases returns regardless of operating performance"],
+    "modelAnswer": "Leverage amplifies returns because it changes the size of the equity base the return is measured against, not the underlying value of the business. If a sponsor buys a company for $100m of enterprise value using $60m of debt and $40m of equity instead of $100m of all equity, they only need to put up $40m of their own capital. If the business grows and is sold for more, or debt gets paid down with free cash flow, that dollar gain is divided by a much smaller equity base, so the percentage return is much higher than in the all-equity case. It's important to note leverage is a multiplier, not a source of value — it doesn't make the business worth more. It's a double-edged sword: if EBITDA declines instead of grows, the fixed debt balance doesn't shrink, so the equity — which is the residual claim after debt — absorbs a disproportionate share of the loss. That's why sponsors only lever up businesses with stable, predictable cash flow.",
+    "followups": [
+      {"prompt": "If leverage magnifies losses as much as gains, why do sponsors still use so much debt?", "modelAnswer": "Because they're targeting a specific risk-adjusted IRR and debt is cheaper capital than equity, so using it efficiently boosts expected returns on the deals that work. Sponsors manage the downside by only levering businesses with stable, predictable, cash-generative operations that lenders are comfortable underwriting, and by sizing leverage conservatively relative to that cash flow so a moderate downturn doesn't trigger default. The debt's tax-deductible interest also creates a modest tax shield that further improves the economics."},
+      {"prompt": "Does leverage change the enterprise value of the business itself?", "modelAnswer": "No. Enterprise value is set by the business's fundamentals — its cash flow, growth, and the multiple the market assigns to comparable companies — independent of how the deal is financed. Leverage only changes how that fixed enterprise value is split between debt holders and equity holders at any point in time, and how the value created over the hold flows disproportionately to equity because debt holders' claim is fixed."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "lbo-basics",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-002-unlevered-lbo-returns",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Suppose a sponsor did an all-equity LBO — no debt at all. Could they still generate a strong return? What would drive it?",
+    "keyPoints": [
+      {"point": "Yes — the return would be driven purely by EBITDA growth and multiple expansion", "weight": 3},
+      {"point": "With no leverage there's no amplification and no interest expense drag on cash flow", "weight": 2},
+      {"point": "MOIC would simply equal exit equity value divided by entry equity value, i.e. the growth in enterprise value itself", "weight": 2},
+      {"point": "This return profile looks more like growth equity than a traditional buyout", "weight": 1}
+    ],
+    "misconceptions": ["An all-equity deal can't be a 'real' LBO or can't be profitable", "Returns are impossible without debt"],
+    "modelAnswer": "Yes, an all-equity deal can still generate a good return, it just won't benefit from leverage amplification. Since there's no debt, exit equity value equals exit enterprise value, so the entire return comes from two of the three normal LBO levers: EBITDA growth and multiple expansion. If the sponsor buys at 10x EBITDA of $20m — $200m — and grows EBITDA to $30m while holding the multiple flat, the exit value is $300m, a 1.5x MOIC purely from operating improvement. There's no interest expense eating into free cash flow, and no risk of a covenant breach or forced sale from a debt overhang. This is closer to how a growth equity investor thinks about returns — betting on the business getting more valuable — rather than the classic buyout playbook of using cheap debt to shrink the equity check and accelerate deleveraging. It's a perfectly legitimate strategy, just a different risk and return profile than a typical levered buyout.",
+    "followups": [
+      {"prompt": "Would an all-equity deal be safer for the company than a levered one?", "modelAnswer": "Generally yes — without fixed debt service obligations, the company has no risk of default or covenant breach from a downturn, and management has full operating flexibility to reinvest cash flow rather than direct it toward debt paydown. The tradeoff is that the sponsor gives up the return amplification leverage would have provided if the deal performed well."},
+      {"prompt": "Would lenders find this company just as attractive to finance later on if the sponsor wanted to add leverage?", "modelAnswer": "Possibly more attractive — if the business has demonstrated stable or growing EBITDA with no existing debt, it has significant unused borrowing capacity, and lenders would view it as a clean, low-risk credit. The sponsor could later add leverage through a dividend recapitalization or refinancing to pull cash out without needing to sell the business."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "lbo-basics",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-003-leverage-numeric-example",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "single-step",
+    "prompt": "Two sponsors each look at the same company: $10m of EBITDA purchased for $100m (10x entry). Sponsor A pays with 100% equity. Sponsor B pays with $50m of debt and $50m of equity. Assume interest is paid entirely in cash with no principal paydown, EBITDA grows to $15m over 5 years, and the company is sold at the same 10x exit multiple. Debt stays flat at $50m for Sponsor B. What is each sponsor's MOIC?",
+    "keyPoints": [
+      {"point": "Exit enterprise value = $15m EBITDA x 10x = $150m for both scenarios", "weight": 3},
+      {"point": "Sponsor A (all equity): exit equity = $150m, entry equity = $100m, so MOIC = 1.5x", "weight": 3},
+      {"point": "Sponsor B (levered): exit equity = $150m - $50m debt = $100m, entry equity = $50m, so MOIC = 2.0x", "weight": 3},
+      {"point": "The smaller equity base is exactly why Sponsor B's multiple is higher despite identical operating performance", "weight": 2}
+    ],
+    "misconceptions": ["Subtracting debt from both the entry and exit sides, double counting it", "Confusing MOIC with IRR"],
+    "modelAnswer": "First, both scenarios exit at the same enterprise value: $15m of EBITDA times a 10x multiple is $150m. For Sponsor A, there's no debt, so exit equity value equals the full $150m; against a $100m entry equity check, that's a 1.5x MOIC. For Sponsor B, exit equity value is enterprise value minus the outstanding debt, so $150m minus the flat $50m debt balance equals $100m of exit equity; against only a $50m entry equity check, that's a 2.0x MOIC. Both sponsors captured the exact same $50m of enterprise value growth in dollar terms, but Sponsor B's smaller equity base means that same dollar gain represents a much larger percentage return. That's the leverage amplification effect in its simplest form — identical operating performance, very different equity outcomes, purely because of how much of the purchase price was funded with debt versus equity.",
+    "followups": [
+      {"prompt": "What would Sponsor B's MOIC be if $20m of that debt had also been paid down by exit, instead of staying flat at $50m?", "modelAnswer": "Exit equity would be $150m minus the now-$30m debt balance, or $120m. Against the same $50m entry equity check, that's a 2.4x MOIC — even higher, because debt paydown is adding a second value-creation lever on top of the EBITDA growth already captured in the 10x times $15m exit value."},
+      {"prompt": "Why did we hold the exit multiple constant at 10x in this example?", "modelAnswer": "To isolate the effect of leverage cleanly — by holding the multiple flat, all of the value creation comes from EBITDA growth (identical for both sponsors) and, in the debt-paydown follow-up, from deleveraging. If the multiple also changed, it would add a third variable and make it harder to see exactly how leverage alone is amplifying the return."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "lbo-basics",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-004-debt-paydown-lever",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Besides leverage itself amplifying returns, what is the other major mechanical lever — debt paydown — and how does it translate into equity value?",
+    "keyPoints": [
+      {"point": "Free cash flow after interest, taxes, and capex is used to repay outstanding debt principal", "weight": 3},
+      {"point": "As the debt balance shrinks with enterprise value held constant, equity value (EV minus debt) rises dollar for dollar", "weight": 3},
+      {"point": "Sponsors target cash-generative businesses partly to accelerate this deleveraging", "weight": 2},
+      {"point": "Paydown is a form of forced savings distinct from any operating improvement in the business", "weight": 1}
+    ],
+    "misconceptions": ["Debt paydown increases the enterprise value of the company", "Paying down debt has no effect on equity value if EBITDA doesn't grow"],
+    "modelAnswer": "Debt paydown works because equity value is defined as enterprise value minus net debt. Every dollar of free cash flow that gets swept to repay debt principal shrinks the debt balance by that same dollar, and since enterprise value doesn't change just because you repaid debt, equity value rises by exactly that dollar. It's essentially forced savings — the company is required to direct its excess cash toward debt service rather than distributing it, and that discipline steadily transfers value from debt holders to equity holders over the hold period, completely independent of whether EBITDA grows at all. That's why sponsors specifically look for businesses with strong, predictable free cash flow conversion — high EBITDA margins, low capex, and manageable working capital needs — because those businesses can delever quickly, adding a meaningful, low-risk component to total returns even in a scenario where operating performance is roughly flat.",
+    "followups": [
+      {"prompt": "If a business has high EBITDA but very high capex needs, does debt paydown still work the same way?", "modelAnswer": "Not as effectively — free cash flow, not EBITDA, is what funds debt paydown, and heavy capex eats directly into that free cash flow before any of it can be swept toward the debt schedule. A high-EBITDA but capital-intensive business will delever much more slowly than a similarly sized but capital-light one, which is exactly why capex intensity is one of the first things sponsors screen for."},
+      {"prompt": "Is debt paydown something a sponsor can influence, or is it purely a function of the business's cash generation?", "modelAnswer": "It's largely determined by the business's cash generation, but sponsors do influence it at the margin — through working capital initiatives, deferring discretionary capex, or negotiating a more aggressive cash flow sweep percentage in the credit agreement. Fundamentally, though, it's a much more mechanical and predictable lever than EBITDA growth or multiple expansion, which is part of its appeal."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "lbo-basics",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-005-good-candidate-traits",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What are the key characteristics that make a company an attractive leveraged buyout candidate?",
+    "keyPoints": [
+      {"point": "Stable, predictable, ideally recurring cash flows that can reliably service fixed debt obligations", "weight": 3},
+      {"point": "Low capex and working-capital intensity so more free cash flow converts into debt paydown", "weight": 3},
+      {"point": "A strong, defensible market position with limited cyclicality", "weight": 2},
+      {"point": "Manageable existing leverage or hard assets/contracts that can support new debt", "weight": 2},
+      {"point": "A clear path to value creation and a credible exit (operational improvement, multiple expansion, identifiable buyer universe)", "weight": 2}
+    ],
+    "misconceptions": ["High growth is the most important factor — that's growth equity, not buyout investing", "Any profitable company works as long as absolute EBITDA is large enough"],
+    "modelAnswer": "The defining trait is stable, predictable cash flow, because fixed debt service has to be paid regardless of how the quarter goes, so lenders and sponsors both need confidence the business can cover it in good times and bad. Beyond that, low capital intensity matters a lot — a business that converts a high percentage of EBITDA into free cash flow can delever quickly, which is one of the core value-creation levers in an LBO. A defensible competitive position and limited cyclicality reduce the risk of an earnings shock hitting right when leverage is highest. Sponsors also look at the existing balance sheet and asset base, since a company with little existing debt and tangible or contractual assets gives lenders more comfort and collateral to lend against. Finally, there needs to be a believable path to creating value over the hold — whether through operational improvements, margin expansion, or add-on acquisitions — and a realistic set of buyers (strategics, other sponsors, or an IPO) at exit.",
+    "followups": [
+      {"prompt": "Why do lenders care about cash flow stability more than the absolute size of the company?", "modelAnswer": "Because debt service is fixed and doesn't scale down in a bad quarter — a smaller but highly predictable business is often a safer credit than a larger business with volatile earnings, since the lender's downside risk is about whether cash flow covers interest and amortization in every period, not about total revenue or asset size."},
+      {"prompt": "Give an example of an industry that's historically been a difficult LBO candidate, and why.", "modelAnswer": "Early-stage biotech or semiconductor manufacturers are difficult candidates — biotech because there's often no revenue at all and outcomes are binary/regulatory-driven, and semiconductor manufacturing because it requires enormous, lumpy capex and is highly cyclical with demand, both of which make it very hard to reliably service fixed debt obligations."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "what-makes-a-good-lbo-candidate",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-006-why-stable-cashflow",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Why is predictable, recurring cash flow specifically so important for a leveraged buyout target?",
+    "keyPoints": [
+      {"point": "Debt service — interest plus mandatory amortization — is a fixed obligation regardless of how the business performs", "weight": 3},
+      {"point": "Volatile cash flow raises the risk of covenant breach or default in a downturn", "weight": 3},
+      {"point": "Lenders size and price debt off of a demonstrated, durable EBITDA/free cash flow base", "weight": 2},
+      {"point": "Predictability lets sponsors underwrite a debt paydown schedule with confidence", "weight": 2}
+    ],
+    "misconceptions": ["Debt payments automatically flex down if the business has a bad year", "Predictable revenue matters but cash conversion doesn't"],
+    "modelAnswer": "Debt is unforgiving in a way equity isn't — interest and mandatory amortization payments are contractually fixed, and missing one is an event of default regardless of why the company underperformed that quarter. A business with lumpy or unpredictable cash flow makes those fixed obligations much riskier to service, since there could easily be a period where operating cash flow simply isn't enough to cover them. That's exactly why lenders underwrite leverage multiples and pricing off of a company's demonstrated, durable EBITDA and free cash flow history rather than optimistic projections — they're pricing the risk that cash flow dips below what's needed to stay current on the debt. From the sponsor's side, predictable cash flow also means the debt paydown schedule that's central to the return thesis is more likely to actually play out as modeled, rather than being derailed by a bad year that forces the company to draw on the revolver instead of deleveraging.",
+    "followups": [
+      {"prompt": "What actually happens if a company can't make a scheduled interest payment?", "modelAnswer": "It's typically an immediate event of default under the credit agreement, which gives lenders the right to accelerate the debt, demand immediate repayment, or take other remedies — in practice this usually forces the company into a restructuring negotiation with lenders, and can result in the sponsor's equity being wiped out if the situation is severe enough."},
+      {"prompt": "How would a lender evaluate a company with strong revenue predictability but weak cash conversion (e.g. long receivable cycles)?", "modelAnswer": "They'd size leverage more conservatively, since what actually services debt is cash flow, not revenue or even EBITDA — a company that reports strong EBITDA but ties up a lot of that in growing receivables or inventory has less real cash available to make debt payments, and lenders would discount their comfort with leverage accordingly."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "what-makes-a-good-lbo-candidate",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-007-low-capex-attractive",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Why do private equity sponsors favor businesses with low capital expenditure requirements when evaluating LBO targets?",
+    "keyPoints": [
+      {"point": "Free cash flow = EBITDA minus capex minus interest minus taxes minus working capital changes, so low capex directly increases cash available for debt paydown", "weight": 3},
+      {"point": "Faster deleveraging increases equity value at exit without relying on EBITDA growth or multiple expansion", "weight": 3},
+      {"point": "Capital-light businesses are generally also easier to underwrite and carry less operational/execution risk", "weight": 2}
+    ],
+    "misconceptions": ["Capex doesn't matter as long as EBITDA is high", "Capex and leverage capacity are unrelated"],
+    "modelAnswer": "It comes down to the difference between EBITDA and actual free cash flow. EBITDA can look identical between two companies, but if one requires heavy ongoing capital spending to maintain or grow its asset base, a much larger chunk of that EBITDA gets consumed before any cash is left over to service debt or sweep toward principal paydown. A capital-light business converts a much higher percentage of its EBITDA into free cash flow, which directly accelerates the debt paydown lever of returns — one of the three core ways LBOs create value, independent of any operating improvement. It also makes the business easier and safer to lever up in the first place, since lenders can be more confident that cash flow will actually be available to service debt even in a slower year, rather than being absorbed by capex the company can't defer. That combination — faster deleveraging and lower underwriting risk — is exactly why capital intensity is one of the first screens sponsors apply to a target.",
+    "followups": [
+      {"prompt": "Would you rather buy a business with $50m of EBITDA and $5m of maintenance capex, or one with $50m of EBITDA and $20m of maintenance capex, all else equal?", "modelAnswer": "The first one, decisively — it converts $45m of EBITDA to pre-interest free cash flow versus only $30m for the second, which means significantly more cash available each year for debt paydown, materially accelerating the deleveraging lever of returns even though both businesses report the same EBITDA."},
+      {"prompt": "Is there a scenario where a sponsor would still want to buy a capital-intensive business?", "modelAnswer": "Yes — if the business has a dominant, defensible market position, highly predictable long-term contracts (e.g. infrastructure or regulated utilities), or if the capex itself is largely growth-driven and discretionary rather than a maintenance requirement, sponsors can still find it attractive, typically with lower leverage to compensate for the reduced cash flow conversion."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "what-makes-a-good-lbo-candidate",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-008-growth-not-required",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Does a company need to be high-growth to be a good LBO candidate? How does that differ from what a growth-equity investor looks for?",
+    "keyPoints": [
+      {"point": "No — LBO returns can be generated through leverage/deleveraging and multiple dynamics even with flat or modest growth", "weight": 3},
+      {"point": "Growth-equity investors are underwriting revenue growth itself and typically use little to no debt", "weight": 3},
+      {"point": "Heavy reinvestment needs to sustain fast growth can actually be a red flag for LBOs since it consumes free cash flow needed for debt service", "weight": 2},
+      {"point": "Stable, mature, cash-generative businesses are often ideal precisely because they support meaningful leverage", "weight": 2}
+    ],
+    "misconceptions": ["LBO targets must be high-growth to be attractive", "Growth equity and buyout investing use the same underwriting approach"],
+    "modelAnswer": "No — a mature, low-growth business can still be an excellent LBO candidate, because leverage and debt paydown provide a return engine that doesn't depend on top-line growth at all. A sponsor can generate a strong MOIC purely from shrinking the debt balance with free cash flow over the hold, even if EBITDA barely moves. That's fundamentally different from growth equity, where the investor is putting in mostly or entirely equity capital and is explicitly underwriting the company's ability to grow revenue and eventually EBITDA — there's usually little to no debt involved, since a fast-growing but not-yet-profitable business often can't service fixed obligations anyway. In fact, very high growth can be a mixed blessing for an LBO target, because it usually requires heavy reinvestment in working capital, headcount, or capex that eats into the free cash flow a sponsor would otherwise want available for debt service. That's why mature, cash-generative, modestly growing businesses are often the sweet spot for a classic buyout.",
+    "followups": [
+      {"prompt": "Could a sponsor still do a leveraged deal on a fast-growing company?", "modelAnswer": "Yes, but typically with much lower leverage than a mature cash-generative business would support, since the company needs to retain more of its cash flow to fund growth rather than debt service — this is sometimes called a 'growth buyout' or structured as a mix of debt and structured/preferred equity rather than a heavily levered classic buyout."},
+      {"prompt": "If growth isn't required, why do sponsors still often push for EBITDA growth during the hold?", "modelAnswer": "Because it's simply an additional, valuable lever on top of deleveraging — even modest EBITDA growth compounds with the debt paydown and can meaningfully lift the MOIC, and it also improves the credit profile, making the exit process and any potential refinancing or dividend recap easier to execute."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "what-makes-a-good-lbo-candidate",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-009-uses-side",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "In a sources and uses table for an LBO, what typically shows up on the 'uses' side?",
+    "keyPoints": [
+      {"point": "Purchase of the target's equity (the equity purchase price paid to sellers)", "weight": 3},
+      {"point": "Repayment or refinancing of the target's existing debt", "weight": 3},
+      {"point": "Transaction fees — financing fees, advisory and legal fees", "weight": 2},
+      {"point": "Sometimes a minimum cash balance requirement funded onto the balance sheet at close", "weight": 1}
+    ],
+    "misconceptions": ["Uses only include the purchase price, ignoring fees and debt refinancing", "New debt raised is a use rather than a source"],
+    "modelAnswer": "The 'uses' side lists everything the deal has to pay for at closing. The biggest item is almost always the purchase price paid to acquire the target's equity. Right behind that is repaying or refinancing any existing debt on the target's balance sheet, since a buyer typically wants a clean capital structure post-close rather than inheriting the seller's old lenders. Then there are transaction costs — financing fees paid to the banks arranging the new debt, plus advisory, legal, and other closing costs, which for a mid-sized deal might run a few percent of the total. Occasionally there's also a line item for funding a minimum cash balance onto the new balance sheet, since the company needs some working capital cushion on day one. Adding all of these up gives you total uses, which by definition must be exactly matched by total sources — that's the balancing check every sources and uses table has to satisfy.",
+    "followups": [
+      {"prompt": "Why does existing debt need to be refinanced rather than just left in place?", "modelAnswer": "Existing lenders often have change-of-control provisions that require repayment upon a sale, and even where that's not the case, sponsors generally want a fresh capital structure they've negotiated the terms of, rather than inheriting covenants and terms set for the prior owner."},
+      {"prompt": "Is the equity purchase price the same thing as enterprise value?", "modelAnswer": "Not exactly — enterprise value represents the value of the whole business, while equity purchase price is what's paid directly to shareholders; the difference is essentially the target's net debt, which is why that debt has to be separately repaid as its own use of funds even though it's conceptually embedded in the enterprise value being paid for."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "sources-and-uses",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-010-sources-side",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What typically shows up on the 'sources' side of an LBO sources and uses table?",
+    "keyPoints": [
+      {"point": "New debt tranches raised (revolver, term loans, and sometimes subordinated debt or bonds)", "weight": 3},
+      {"point": "Sponsor equity contribution — the equity check the private equity fund is writing", "weight": 3},
+      {"point": "Sometimes rollover equity from existing management or owners", "weight": 2},
+      {"point": "Cash already on the target's balance sheet, if it's being used to help fund the deal", "weight": 2}
+    ],
+    "misconceptions": ["Only the sponsor's equity check appears on sources", "Cash on the balance sheet is never used as a funding source"],
+    "modelAnswer": "The 'sources' side is where the money to pay for all the uses comes from. The core building blocks are the new debt raised to finance the acquisition — this could be a revolver, one or more term loans, and sometimes a subordinated or mezzanine tranche or high-yield bonds — plus the sponsor's own equity contribution, which is essentially whatever's left after all the debt is layered in. In many deals there's also rollover equity, where existing management or founders reinvest a portion of their proceeds into the new capital structure rather than cashing out entirely, which reduces how much cash the sponsor needs to put in. And if the target has excess cash sitting on its balance sheet that isn't needed for ongoing operations, sponsors will often sweep that cash in as a source too, further reducing the required equity check. Total sources always has to reconcile exactly to total uses.",
+    "followups": [
+      {"prompt": "If a sponsor raises more debt, what happens to the equity check, all else equal?", "modelAnswer": "It goes down dollar for dollar, since total sources must always equal total uses — every additional dollar of debt raised is one less dollar of equity the sponsor needs to contribute, which is exactly the mechanism that amplifies equity returns."},
+      {"prompt": "Why would a sponsor prefer to include rollover equity from management rather than fund the whole deal with cash?", "modelAnswer": "It reduces the sponsor's own cash equity check while also aligning management's incentives with the new ownership structure, since management now has meaningful skin in the game for the upcoming hold period rather than having fully cashed out at close."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "sources-and-uses",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-011-simple-su-calc",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "single-step",
+    "prompt": "A company is being acquired for a $400m enterprise value. The deal also requires $20m to refinance existing debt and $10m of transaction fees, bringing total uses to $430m. The financing package includes $250m of new debt. Assuming no rollover equity and no cash is used, how large is the required sponsor equity check?",
+    "keyPoints": [
+      {"point": "Total uses correctly restated as $400m purchase price + $20m debt refi + $10m fees = $430m", "weight": 3},
+      {"point": "Sponsor equity = total uses minus new debt = $430m - $250m = $180m", "weight": 3},
+      {"point": "Sources ($180m equity + $250m debt = $430m) reconcile exactly to uses", "weight": 2}
+    ],
+    "misconceptions": ["Subtracting only the $400m EV from debt and ignoring fees/refinancing", "Treating fees as a source instead of a use"],
+    "modelAnswer": "Total uses here are given as $430m — the $400m purchase price plus $20m to refinance existing debt plus $10m of transaction fees. Since $250m of that is being funded with new debt, the remaining balance has to come from the sponsor's equity check: $430m minus $250m equals $180m. It's worth double-checking that sources and uses actually balance: $250m of debt plus $180m of equity is $430m, which matches total uses exactly, so the math is internally consistent. The key discipline here is making sure you're using the full total uses figure — including fees and debt refinancing, not just the headline enterprise value — when backing into the required equity check, since it's a very common mistake to only subtract debt from the purchase price and understate how much equity is actually needed.",
+    "followups": [
+      {"prompt": "If the sponsor also required a $5m minimum cash balance to be funded at close, how would that change the equity check?", "modelAnswer": "Total uses would rise to $435m, and with debt still at $250m, the equity check would increase to $185m — every incremental use that isn't funded by additional debt flows straight through to a larger required equity contribution."},
+      {"prompt": "If the sponsor instead raised $260m of new debt rather than $250m, how would that affect the equity check?", "modelAnswer": "The equity check would fall dollar for dollar with the extra debt raised — total uses of $430m minus $260m of debt leaves $170m of required equity, $10m less than the base case, since sources always have to reconcile exactly to uses."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "sources-and-uses",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-012-tranche-seniority",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Rank a revolving credit facility, a senior secured term loan, and subordinated (mezzanine) debt by seniority and typical interest rate, and explain the relationship between the two.",
+    "keyPoints": [
+      {"point": "Seniority order: the revolver and term loan sit senior secured (often pari passu, with the revolver getting priority in a payment waterfall); subordinated/mezzanine debt ranks below them", "weight": 3},
+      {"point": "Interest rate rises as seniority/security falls — mezzanine carries the highest rate to compensate for greater risk of loss", "weight": 3},
+      {"point": "The revolver is typically used for working-capital swings while the term loan is the core acquisition financing", "weight": 2}
+    ],
+    "misconceptions": ["Subordinated debt is cheaper because the tranche size is smaller", "All tranches get repaid pro rata regardless of seniority in a default"],
+    "modelAnswer": "These three tranches sit in a clear pecking order in a default or liquidation. The senior secured term loan and the revolver are both first in line, usually secured by a lien on the company's assets, and often pari passu with each other, though the revolver typically gets priority in the cash flow waterfall since it's meant to be drawn and repaid for working capital needs. Below that sits subordinated or mezzanine debt, which is unsecured or secured only by a junior lien and gets repaid only after the senior tranches are made whole. That risk ordering drives pricing directly: mezzanine debt carries the highest interest rate of the three, often well into double digits, because investors are taking on materially more risk of loss if the company underperforms, while the senior term loan prices much tighter given its security and priority claim. The revolver typically prices similarly to or slightly tighter than the term loan, reflecting its senior, short-term, and often undrawn nature.",
+    "followups": [
+      {"prompt": "Why would a sponsor use mezzanine debt at all if it's so much more expensive than senior debt?", "modelAnswer": "Because senior lenders will only lend up to a certain leverage multiple they're comfortable underwriting against the company's cash flow; mezzanine debt lets the sponsor add incremental leverage beyond that senior capacity, filling the gap between what senior lenders will provide and what equity would otherwise need to fund, even at a higher cost of capital."},
+      {"prompt": "What does 'secured' actually mean in this context?", "modelAnswer": "It means the lender has a legal claim (a lien) on specific company assets that can be seized and sold to recover the loan if the company defaults, giving secured lenders a much stronger recovery position than unsecured creditors, who only have a general claim against whatever assets remain."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "debt-tranches-and-the-debt-schedule",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-013-cash-flow-sweep",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is a cash flow sweep in an LBO debt schedule, and why do lenders require it?",
+    "keyPoints": [
+      {"point": "A cash flow sweep requires some or all excess free cash flow — after mandatory obligations — to be used to prepay debt principal, typically the most senior tranche", "weight": 3},
+      {"point": "It accelerates deleveraging and reduces lender risk faster than scheduled amortization alone would", "weight": 3},
+      {"point": "It directly benefits equity holders too, by shrinking debt and growing equity value ahead of schedule", "weight": 2},
+      {"point": "Sweep percentages often step down as leverage falls (e.g. 100% above a leverage threshold, 50% below it)", "weight": 1}
+    ],
+    "misconceptions": ["A cash flow sweep is optional and rarely enforced", "The sweep applies to EBITDA rather than free cash flow after all mandatory obligations"],
+    "modelAnswer": "A cash flow sweep is a covenant in the credit agreement that requires the company to use its excess free cash flow — whatever's left after interest, taxes, capex, working capital needs, and mandatory amortization — to prepay outstanding debt principal ahead of its scheduled maturity, rather than letting the company hold that cash or distribute it. Lenders require it because it materially de-risks their position: instead of waiting years for scheduled amortization to slowly reduce the balance, the debt gets paid down as fast as the business generates spare cash, which shrinks the lender's exposure much faster and reduces the odds of default later in the hold. It's a genuinely mandatory mechanical feature, not a suggestion — it's baked directly into the debt schedule. It also happens to be great for the sponsor's equity returns, since every dollar swept to pay down debt increases equity value dollar for dollar, which is exactly the debt-paydown return lever. Sweep percentages are often structured to step down as the company delevers, giving it more discretionary cash flow once leverage reaches a safer level.",
+    "followups": [
+      {"prompt": "Which tranche typically gets swept first, and why?", "modelAnswer": "The most senior tranche, usually the term loan, since it's the lender with first priority and the credit agreement is structured to reduce the most senior, most protected claim's balance first before any excess cash could flow to junior tranches or the sponsor."},
+      {"prompt": "Does a cash flow sweep apply even in a year the company generates very little free cash flow?", "modelAnswer": "Yes, but the sweep is a percentage of whatever excess free cash flow actually exists that period, so in a weak year with little or no excess cash, little or nothing gets swept — the mechanism scales with actual cash generation rather than being a fixed dollar requirement."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "debt-tranches-and-the-debt-schedule",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-014-covenant-types",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What's the difference between a maintenance covenant and an incurrence covenant in a leveraged loan?",
+    "keyPoints": [
+      {"point": "Maintenance covenants are tested every period (e.g. quarterly) regardless of company actions — for example, a maximum leverage ratio the borrower must stay under at all times", "weight": 3},
+      {"point": "Incurrence covenants are only tested when the company takes a specific action, like issuing more debt or paying a dividend", "weight": 3},
+      {"point": "Maintenance covenants are more common in bank term loans and revolvers; incurrence covenants are typical in high-yield bonds and covenant-lite loans", "weight": 2}
+    ],
+    "misconceptions": ["Covenants are only about interest rates", "Incurrence covenants apply automatically every quarter like maintenance covenants"],
+    "modelAnswer": "A maintenance covenant is tested on a regular, ongoing schedule — usually quarterly — regardless of whether the company is doing anything unusual. The classic example is a maximum total leverage ratio: every quarter, the company has to demonstrate its debt-to-EBITDA is below a specified threshold, and if it isn't, that's a covenant breach even if the company hasn't taken any new action. An incurrence covenant, by contrast, is only tested at the moment the company wants to do something specific — like raise additional debt, make a large acquisition, or pay a dividend — and it simply restricts whether that action is permitted given the company's current financial metrics. Traditional bank facilities like revolvers and Term Loan A tranches typically carry maintenance covenants because banks want ongoing visibility and an early warning system, while institutional term loans and high-yield bonds are often covenant-lite or incurrence-only, giving the company more flexibility as long as it's not actively trying to lever up further or return cash to shareholders.",
+    "followups": [
+      {"prompt": "Which type of covenant gives lenders an earlier warning of trouble?", "modelAnswer": "Maintenance covenants — because they're tested every quarter regardless of company actions, they give lenders a regular checkpoint to catch deteriorating performance early and start a dialogue with the borrower, whereas incurrence covenants might never be triggered even as the company's credit quality quietly worsens, since the company simply isn't trying to take on more debt or pay a dividend."},
+      {"prompt": "Why might a sponsor prefer a covenant-lite (incurrence-only) structure?", "modelAnswer": "It gives the company far more operating flexibility during a rough patch — it can miss a leverage target without automatically triggering a default or renegotiation with lenders, as long as it isn't actively trying to incur new debt or make a restricted payment, which reduces the risk of losing control of the business during a temporary downturn."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "debt-tranches-and-the-debt-schedule",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-015-three-levers",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What are the three main levers that drive equity returns in an LBO, from entry to exit?",
+    "keyPoints": [
+      {"point": "EBITDA growth — revenue growth and/or margin expansion — which increases exit enterprise value at a given multiple", "weight": 3},
+      {"point": "Debt paydown / deleveraging from free cash flow, which shifts value from debt holders to equity holders", "weight": 3},
+      {"point": "Multiple expansion or contraction — selling at a higher or lower EV/EBITDA multiple than at entry", "weight": 3},
+      {"point": "Leverage amplifies all three by shrinking the equity base the return is measured against", "weight": 1}
+    ],
+    "misconceptions": ["Only EBITDA growth matters for returns", "Multiple expansion is guaranteed if you hold long enough"],
+    "modelAnswer": "The three classic value-creation levers are EBITDA growth, debt paydown, and multiple expansion or contraction. EBITDA growth, whether from revenue growth or margin improvement, directly increases exit enterprise value since exit EV is EBITDA times the exit multiple — grow EBITDA and, holding the multiple constant, EV grows proportionally. Debt paydown is entirely mechanical: as free cash flow retires debt principal over the hold, equity value — which is enterprise value minus debt — rises dollar for dollar even if nothing else changes. Multiple expansion or contraction reflects whether the business is sold for a higher or lower EV/EBITDA multiple than it was purchased for, which is driven by market conditions, sector sentiment, and how much the company's growth or quality profile has improved. Sponsors generally want a return thesis that doesn't rely too heavily on multiple expansion, since that's largely outside their control, and instead prioritize EBITDA growth and debt paydown, which are more directly influenced by operational execution.",
+    "followups": [
+      {"prompt": "Which of the three levers is most within a sponsor's direct control?", "modelAnswer": "EBITDA growth through operational improvements — cost cuts, pricing, cross-selling, add-on acquisitions — and debt paydown, which follows mechanically from cash flow generation and the negotiated sweep terms, are both largely within the sponsor's influence. Multiple expansion is the least controllable, since it depends on broader market conditions and buyer sentiment at the time of exit."},
+      {"prompt": "Can these three levers work against each other in the same deal?", "modelAnswer": "Yes — for example a business could grow EBITDA and pay down debt nicely, but if the sector falls out of favor and the exit multiple compresses meaningfully, that multiple contraction can partially or fully offset the gains from the other two levers, which is exactly why sponsors try not to rely on multiple expansion as their primary return thesis."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "exit-and-returns",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-016-moic-vs-irr",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What's the difference between MOIC and IRR, and why do private equity investors look at both?",
+    "keyPoints": [
+      {"point": "MOIC (multiple of invested capital) = total cash returned / total cash invested, a simple multiple with no time dimension", "weight": 3},
+      {"point": "IRR is the annualized rate of return that accounts for the timing of cash flows and the length of the holding period", "weight": 3},
+      {"point": "A high MOIC over a very long hold can produce a mediocre IRR, and vice versa, so both metrics are needed to judge a deal's quality", "weight": 2}
+    ],
+    "misconceptions": ["MOIC and IRR always move in the same direction — higher MOIC always means higher IRR", "IRR is just MOIC divided by the number of years"],
+    "modelAnswer": "MOIC is the simplest possible return metric — total cash returned to the investor divided by total cash invested — and it tells you the absolute multiple on capital, but it says nothing about how long it took to get there. IRR is the annualized, compounded rate of return that explicitly accounts for the timing of cash flows, so it captures the time value of money in a way MOIC doesn't. Both matter because they can tell very different stories: a 3.0x MOIC achieved over ten years is a mediocre roughly 11.6% IRR, while the same 3.0x achieved in four years is an excellent roughly 32% IRR. Sponsors and their LPs care about IRR because capital has an opportunity cost — money tied up longer for the same multiple is a worse use of that capital — but they also care about MOIC because it's the headline absolute return figure that matters for track record and because IRR alone can be misleading on very short holds with unusually high annualized returns on small dollar amounts.",
+    "followups": [
+      {"prompt": "If you had to pick just one metric to evaluate a deal, which would you choose and why?", "modelAnswer": "IRR, generally, since it properly accounts for the time value of capital and the opportunity cost of tying up money for longer — but a strong answer would note that in practice you'd never actually pick just one, since IRR alone can be distorted by very short holds or unusual interim cash flow timing, so sponsors always look at both together alongside the absolute dollar amount of profit."},
+      {"prompt": "Can a deal have a great IRR but a disappointing MOIC?", "modelAnswer": "Yes — a very short hold with a modest absolute gain can produce a high annualized IRR purely because it compounds over so little time, even though the total dollar profit and multiple on capital were fairly small; that's exactly why sponsors and LPs look at both metrics together rather than relying on IRR alone."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "exit-and-returns",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-017-mental-math-shortcuts",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What are some quick mental-math shortcuts you'd use to estimate IRR in a timed paper LBO, without a calculator?",
+    "keyPoints": [
+      {"point": "Memorized MOIC-to-IRR anchor points for common hold periods — e.g. over 5 years, roughly 2.0x is ~15% IRR, 2.5x is ~20% IRR, 3.0x is ~25% IRR", "weight": 3},
+      {"point": "The rule of 72 (dividing 72 by the IRR estimates years to double) is a useful sanity check", "weight": 3},
+      {"point": "Round numbers aggressively during the exercise, since the interviewer is testing process and directional accuracy, not precision", "weight": 2},
+      {"point": "Sanity-check the final answer against a known anchor point rather than trying to compute an exact exponent by hand", "weight": 1}
+    ],
+    "misconceptions": ["You need to compute an exact exponential by hand under time pressure", "These are precise formulas rather than rounded heuristics"],
+    "modelAnswer": "The most useful tool is memorizing a handful of MOIC-to-IRR anchor points for a standard 5-year hold, since that's the most common paper LBO horizon: roughly a 2.0x MOIC corresponds to about a 15% IRR, 2.5x to about 20%, and 3.0x to about 25%. Once you have those benchmarks memorized, you can quickly triangulate any MOIC you calculate to a rough IRR range without doing any actual exponent math. The rule of 72 is another handy shortcut — dividing 72 by an IRR percentage estimates how many years it takes to double your money, and you can run it in reverse to sanity-check whether a computed IRR is directionally sensible given the hold period and MOIC. The broader mindset that matters here is rounding numbers aggressively throughout the exercise — treating $37m of EBITDA as $40m, for example — since interviewers are testing whether you understand the mechanics and can reason quickly under pressure, not whether you can compute a precise exponential by hand.",
+    "followups": [
+      {"prompt": "What's the anchor for a 2.0x MOIC over 3 years instead of 5?", "modelAnswer": "Roughly 26% — since 2.0x over a shorter hold period has to be achieved through a higher annualized rate, and 2 to the power of one-third is approximately 1.26, meaning roughly a 26% annual return compounds to double your money in 3 years."},
+      {"prompt": "Why is rounding aggressively during a paper LBO actually a good habit rather than sloppy?", "modelAnswer": "Because the exercise is testing your grasp of the mechanics and your ability to reason quickly under time pressure, not your ability to do precise arithmetic — chasing exact decimals wastes time that's better spent making sure the structure of the calculation (entry equity, exit equity, MOIC, IRR) is actually correct."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "lbo-paper-math",
+    "advanced": false
+  },
+  {
+    "id": "lbo-easy-018-rule-of-72-mental",
+    "topic": "lbo",
+    "difficulty": "easy",
+    "questionType": "single-step",
+    "prompt": "Using the rule of 72, roughly how many years would it take to double your money (a 2.0x MOIC) at a 24% annual IRR? And roughly what IRR would be needed to double your money in 3 years?",
+    "keyPoints": [
+      {"point": "72 divided by 24 is approximately 3 years to double at a 24% IRR", "weight": 3},
+      {"point": "72 divided by 3 is approximately 24% IRR needed to double in 3 years — recognizing this is the same relationship inverted", "weight": 3},
+      {"point": "Understands the rule of 72 is an approximation, most accurate roughly in the 6%-25% IRR range", "weight": 2}
+    ],
+    "misconceptions": ["Using rule of 72 as an exact formula rather than an approximation", "Confusing 'doubling' with a fixed dollar amount rather than a 2.0x multiple regardless of deal size"],
+    "modelAnswer": "The rule of 72 says the number of years to double an investment is approximately 72 divided by the annual growth rate expressed as a whole number. At a 24% IRR, that's 72 divided by 24, which is exactly 3 years — so a 24% annualized return roughly doubles your money in about 3 years. Running the exact same relationship the other direction: if you know you want to double your money in 3 years, you divide 72 by 3 to get 24%, the approximate IRR needed to hit that target. It's important to remember this is a rounded approximation, not an exact formula — it tends to be most accurate for rates roughly between 6% and 25%, which conveniently covers most of the IRR range sponsors actually target, which is exactly why it's such a useful quick mental-math tool in a paper LBO setting.",
+    "followups": [
+      {"prompt": "How would you use the rule of 72 to estimate the IRR of a 4.0x MOIC over 6 years?", "modelAnswer": "A 4.0x MOIC is two doublings (2x, then 2x again), so over 6 years that's one doubling roughly every 3 years, which by the rule of 72 corresponds to about a 24% IRR — a quick way to estimate returns for MOICs that are clean multiples of 2 without doing any exponent math."},
+      {"prompt": "Is the rule of 72 reliable at very high IRRs, like 50%?", "modelAnswer": "It gets noticeably less accurate at higher rates — the rule of 72 is really a linear approximation to a compounding process, so it works best in the roughly 6% to 25% range and starts to meaningfully overstate the true doubling time at rates much higher than that, which is worth keeping in mind if a paper LBO produces an unusually high IRR."}
+    ],
+    "chapterSlug": "lbo",
+    "sectionSlug": "lbo-paper-math",
+    "advanced": false
+  }
+]

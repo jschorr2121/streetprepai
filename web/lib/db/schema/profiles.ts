@@ -1,4 +1,4 @@
-import { integer, jsonb, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, integer, jsonb, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 export const profiles = pgTable("profiles", {
   userId: uuid("user_id").notNull().primaryKey(),
@@ -13,6 +13,7 @@ export const profiles = pgTable("profiles", {
   education: jsonb("education"),
   skills: text("skills").array(),
   currentSemester: text("current_semester"),
+  advancedTrack: boolean("advanced_track").notNull().default(false),
   onboardedAt: timestamp("onboarded_at", { withTimezone: true, mode: "string" }),
   updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" }).defaultNow(),
 });

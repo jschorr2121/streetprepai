@@ -68,6 +68,9 @@ export const onboardingSchema = z.object({
     .max(MAX_GRAD_YEAR, `Year must be ${MAX_GRAD_YEAR} or earlier`),
   currentSemester: z.enum(SEMESTERS, { message: "Select your current semester" }),
   targetFirms: z.array(z.string().trim().min(1)).min(1, "Add at least one target firm"),
+  // Advanced track surfaces ⭐ elective sections + advanced questions. Off by
+  // default — most undergrads target IB, not PE/experienced-hire depth.
+  advancedTrack: z.boolean().default(false),
 });
 export type OnboardingInput = z.infer<typeof onboardingSchema>;
 

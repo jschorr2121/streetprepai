@@ -1,0 +1,176 @@
+[
+  {
+    "id": "netw-medium-001-alumni-targeting",
+    "topic": "networking",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "You have a list of 40 alumni working across the banks you're targeting, but limited time before recruiting kicks off. How do you decide who to prioritize reaching out to first?",
+    "keyPoints": [
+      { "point": "Prioritize by responsiveness likelihood: junior analysts/associates over senior bankers", "weight": 2 },
+      { "point": "Weight by strength of shared affinity (major, club, recent grad, mutual connection)", "weight": 2 },
+      { "point": "Prioritize target banks/groups where recruiting timeline is earliest or most competitive", "weight": 3 },
+      { "point": "Balance across banks rather than over-concentrating on one to keep options open", "weight": 2 },
+      { "point": "Reach out in batches rather than all 40 at once, to manage follow-through and avoid appearing spammy", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Reaching out to only the most senior, prestigious-sounding contacts first",
+      "Emailing all 40 at once instead of pacing outreach in manageable batches"
+    ],
+    "modelAnswer": "I'd sort the list along a few dimensions rather than just going alphabetically or by seniority. First, responsiveness: analysts and associates one to three years out of school reply far more often than VPs and above, and they're closer to the actual staffing decisions for the incoming class, so I'd weight them heavily. Second, affinity: contacts who share my major, were in the same club, or graduated recently get bumped up because that connection makes the first email warmer and more likely to convert into a real conversation. Third, urgency: I'd check which banks in my list run the earliest or most competitive recruiting timelines and prioritize building relationships there first, since those doors can close fastest. I'd also deliberately spread my early outreach across multiple banks rather than concentrating on just one or two, because I don't yet know where I'll get traction, and I want optionality. Practically, I'd reach out in batches of maybe eight to ten a week rather than blasting all 40 at once, both because I can't have quality conversations with 40 people simultaneously and because a staggered approach lets me learn from early conversations -- refining my pitch and questions -- before reaching the contacts I care most about.",
+    "followups": [
+      {
+        "prompt": "How do you avoid a contact feeling like just a name on a spreadsheet when you're managing 40 relationships?",
+        "modelAnswer": "I'd keep detailed notes after every conversation -- specifics about their background, advice they gave, anything personal that came up -- and refer back to those notes before any future touchpoint so I'm not starting from zero. I'd also make sure my outreach volume doesn't outpace my ability to actually engage thoughtfully with each person; if I can't remember who someone is without checking my notes, I'm probably moving too fast. Quality of each relationship matters more than the total count."
+      },
+      {
+        "prompt": "What if two of your target banks have overlapping alumni contacts who know each other?",
+        "modelAnswer": "I'd be consistent in what I tell each of them, since bankers at competing firms sometimes do talk, especially if they know each other from school. I wouldn't badmouth one bank to another's employee or claim a different top choice to each person. Being straightforward that I'm exploring several banks is generally fine and expected during recruiting; it's inconsistency or perceived dishonesty that damages credibility if it gets back to someone."
+      },
+      {
+        "prompt": "Is there a point where you've networked 'enough' at a given bank and further outreach has diminishing returns?",
+        "modelAnswer": "Once I have two or three solid relationships at a bank -- people who know me, would vouch for me, and ideally sit in different groups -- additional cold contacts at that same bank add less marginal value than spending that time on a bank where I have zero connections yet. I'd shift effort toward breadth once a given bank has a baseline of coverage, rather than chasing diminishing returns on a single firm."
+      }
+    ],
+    "chapterSlug": "networking",
+    "sectionSlug": "alumni-networking",
+    "advanced": false
+  },
+  {
+    "id": "netw-medium-002-alumni-second-degree",
+    "topic": "networking",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "Your direct alumni network at your top target bank is thin, but a friend from a club mentions their older sibling works there. How would you use that kind of second-degree connection, and how is that different from a pure cold email?",
+    "keyPoints": [
+      { "point": "Ask the mutual connection (the friend) for a warm introduction rather than reaching out cold yourself first", "weight": 3 },
+      { "point": "A warm intro dramatically raises response and conversion rates versus cold outreach", "weight": 2 },
+      { "point": "Give the friend context/a short blurb to make the intro easy for them to make", "weight": 2 },
+      { "point": "If no intro is possible, reference the mutual connection by name (with permission) in a cold email as a bridge", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Emailing the sibling cold without ever asking the friend for an introduction first",
+      "Name-dropping the mutual connection without getting their permission first"
+    ],
+    "modelAnswer": "I'd go to my friend directly and ask if they'd be willing to introduce me to their sibling, rather than emailing the sibling cold. A warm introduction changes the entire dynamic of the outreach -- instead of being one of dozens of unsolicited emails in someone's inbox, I arrive vouched for by someone they already trust, which massively increases the odds of a real, substantive conversation. To make it easy for my friend to say yes, I'd give them a short blurb they could forward with minimal effort on their part -- who I am, what I'm interested in, and what I'm hoping to learn -- rather than putting the burden on them to write something from scratch. If for some reason a direct introduction isn't possible, maybe the siblings aren't that close or my friend feels awkward asking, I'd ask permission to mention the connection myself: something like 'your sister and I are in the same club at school, and she suggested I reach out.' That's still meaningfully warmer than a pure cold email because it gives the recipient a reason to trust the outreach isn't random, even without a direct hand-off. The key discipline either way is never invoking someone's name without their explicit okay first.",
+    "followups": [
+      {
+        "prompt": "What if your friend seems hesitant to make the introduction?",
+        "modelAnswer": "I'd back off gracefully and not push, since making an introduction is a favor that reflects on my friend's judgment to their sibling, and hesitancy might mean they're not comfortable vouching for me yet or the relationship isn't close enough. I'd thank them regardless and either ask if there's a lower-commitment way to connect, like just being mentioned, or drop it entirely and pursue the bank through other channels instead."
+      },
+      {
+        "prompt": "Once you get the warm introduction, how does your first message to the sibling differ from a cold outreach email?",
+        "modelAnswer": "I'd still keep it concise and make a clear, low-friction ask for a short call, but I could skip a lot of the credibility-building work a cold email needs to do, since the introduction already established that. I'd open by referencing the mutual connection and expressing genuine appreciation, then get to the ask more quickly than I would cold, because the relationship context has already done the work of explaining why I'm reaching out."
+      }
+    ],
+    "chapterSlug": "networking",
+    "sectionSlug": "alumni-networking",
+    "advanced": false
+  },
+  {
+    "id": "netw-medium-003-cold-email-content",
+    "topic": "networking",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "A friend shows you a cold email they wrote: it's 300 words, opens with 'My name is John and I am a rising sophomore passionate about finance,' and ends by asking if the analyst can refer them for an internship. What's wrong with it, and how would you rewrite it?",
+    "keyPoints": [
+      { "point": "Length is a problem -- should be cut to roughly 100-150 words", "weight": 2 },
+      { "point": "'Passionate about finance' is a generic, unspecific opener that doesn't differentiate the sender", "weight": 2 },
+      { "point": "Asking directly for a referral in the first contact is too big an ask and premature", "weight": 3 },
+      { "point": "Rewrite should include a specific personalized reason for reaching out to this person", "weight": 2 },
+      { "point": "Rewrite should replace the referral ask with a request for a short call", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Believing a longer, more detailed email demonstrates more effort and is therefore more persuasive",
+      "Thinking a referral ask is fine as long as it's phrased politely"
+    ],
+    "modelAnswer": "There are two core problems. First, it's too long and too generic -- 300 words is a lot to ask a busy analyst to read, and 'passionate about finance' is the kind of phrase that appears in nearly every cold email a banker gets, so it doesn't tell them anything real about John or give them a reason to respond over the fifty other emails in their inbox. Second, and more importantly, asking directly for a referral in the very first message skips several steps. A referral means the analyst is putting their own name and credibility behind John without ever having spoken to him, which is a big ask from a stranger and puts the recipient in an uncomfortable spot -- easier to just not respond than to say no. I'd rewrite it to cut the length roughly in half, replace the generic opener with something specific -- why banking, why this bank or group in particular, and ideally a real point of connection like shared school or background -- and change the ask from a referral to a short 15-20 minute call. That reframes the email as relationship-building rather than an immediate ask for a favor, which is both more appropriate for a first contact and, ultimately, more likely to lead to a referral down the line once there's an actual relationship to base it on.",
+    "followups": [
+      {
+        "prompt": "At what point in the relationship does asking for a referral become appropriate?",
+        "modelAnswer": "Generally after at least one substantive conversation where the person has gotten to know me a bit and, ideally, offered to help in some way on their own. If they've said something like 'let me know if I can do anything' at the end of a call, that's a natural opening. I'd also wait until an actual application window is open, since asking too early, before there's even a role to refer me into, wastes the ask."
+      },
+      {
+        "prompt": "How would you phrase the referral ask itself once the timing is right?",
+        "modelAnswer": "I'd make it specific and easy to act on -- naming the exact role or program I'm applying to, and asking directly but politely whether they'd be comfortable referring me, while giving them an easy out by saying I completely understand if it's not something they're able to do. I'd also offer to send my resume and any details they'd need, so I'm minimizing the effort required on their end."
+      },
+      {
+        "prompt": "What should John do if he sends this rewritten email and gets no response after a week?",
+        "modelAnswer": "One polite follow-up after about a week is reasonable -- short, referencing the original email, and reiterating the same low-friction ask. If there's still no response after that, I'd move on without a third follow-up, since repeated unanswered outreach starts to read as pestering rather than persistence, and there are usually better uses of that time among the rest of the target list."
+      }
+    ],
+    "chapterSlug": "networking",
+    "sectionSlug": "cold-outreach-email-template",
+    "advanced": false
+  },
+  {
+    "id": "netw-medium-004-coffee-chat-questions",
+    "topic": "networking",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "You have 20 minutes on the phone with a first-year analyst. Walk me through how you'd structure the conversation and what kinds of questions you'd ask.",
+    "keyPoints": [
+      { "point": "Open with light rapport-building before jumping into questions", "weight": 1 },
+      { "point": "Ask about their personal path/story into the group -- genuine, open-ended questions", "weight": 3 },
+      { "point": "Ask about day-to-day, group culture, and what they wish they'd known before joining", "weight": 2 },
+      { "point": "Avoid questions easily answered by the firm's website or public info", "weight": 2 },
+      { "point": "Leave time near the end to briefly mention your own background if asked, and to ask about next steps", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Asking questions that are easily googleable, like 'what does your bank do?'",
+      "Turning the call into a one-sided pitch about yourself rather than a conversation"
+    ],
+    "modelAnswer": "I'd open with a minute of light rapport -- thanking them for their time, maybe a quick genuine comment tied to something we have in common -- before moving into questions, since jumping straight into an interrogation feels transactional. From there I'd focus most of the conversation on their personal story: how they ended up in this group specifically, what their recruiting process looked like, and what surprised them once they started. Those questions tend to generate the most natural, detailed answers because people like talking about their own path. I'd follow with questions about day-to-day life and culture -- what a typical week looks like, how the group treats junior staff, what they wish they'd known before joining -- since that's the kind of texture I genuinely can't get from a website and it helps me figure out real fit, not just say the right things. I'd deliberately avoid anything I could answer myself with two minutes of research, since asking it signals I didn't bother to prepare. Toward the last few minutes, I'd let the conversation naturally turn to my own background if they ask, keep that part concise, and close by asking if there's anyone else at the firm they'd suggest I talk to, which is a natural, low-pressure way to keep expanding my network without asking for a referral outright.",
+    "followups": [
+      {
+        "prompt": "What do you do if the analyst is giving short, one-word answers and the conversation feels stilted?",
+        "modelAnswer": "I'd shift from broad questions to more specific, story-prompting ones -- instead of 'how do you like the group,' something like 'what was the hardest deal you worked on so far and what made it hard.' Specific questions are easier to answer at length than open-ended ones for someone who isn't naturally chatty. I'd also just accept that not every call will have great chemistry, and not force it -- a shorter but respectful call is better than dragging out an awkward one."
+      },
+      {
+        "prompt": "Should you take notes during the call, and does that come across as awkward on the phone?",
+        "modelAnswer": "I'd jot down quick notes, but I'd mention it upfront -- something like 'do you mind if I take a couple notes' -- so it doesn't create silence or feel like I've gone distracted. Detailed notes matter more for what happens after the call, since I'll want specifics to reference in my thank-you note and to remember for future conversations, so a little friction during the call is worth it."
+      },
+      {
+        "prompt": "How do you handle it if the analyst asks you a question you don't have a great answer to, like why you want banking specifically over other career paths?",
+        "modelAnswer": "I'd answer honestly rather than giving a canned response, even if the answer is still a work in progress -- something like explaining what's drawn me in so far and what I'm still trying to learn through conversations like this one. Coffee chats aren't graded interviews, so an honest, still-forming answer generally lands better than an obviously rehearsed one that doesn't sound like me."
+      }
+    ],
+    "chapterSlug": "networking",
+    "sectionSlug": "coffee-chat-framework",
+    "advanced": false
+  },
+  {
+    "id": "netw-medium-005-referral-etiquette",
+    "topic": "networking",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "An analyst you've spoken with twice offers to refer you for their bank's summer analyst program. What do you need to do to make that referral go smoothly, and what should you avoid doing?",
+    "keyPoints": [
+      { "point": "Promptly send exactly what they need -- resume, application link/details, correct role name", "weight": 3 },
+      { "point": "Make it as low-effort as possible for the referrer (don't require them to chase you for info)", "weight": 2 },
+      { "point": "Follow up on your own application status rather than repeatedly pestering the referrer for updates", "weight": 2 },
+      { "point": "Thank them regardless of the outcome, and update them once you hear back", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Assuming a referral guarantees an interview or offer",
+      "Repeatedly emailing the referrer for status updates, putting them in an awkward position with their own recruiting team"
+    ],
+    "modelAnswer": "The moment someone offers to refer me, I'd treat it as a small window I need to move through cleanly. I'd send them my resume and any specific details they need -- the exact role name, req number, or application link -- within a day, formatted and proofread, so I'm not making them chase me or guess what I'm applying to. I'd keep my message short and make the ask as easy as possible to act on, since a referral is a favor that costs them a bit of internal credibility, and the least I can do is not waste their effort. Once it's submitted, I wouldn't treat the referral as a guarantee of anything -- it typically just gets a resume flagged or moved to the top of a pile, not an automatic interview -- so I'd go ahead and apply through the normal channel too if that's separately required, and I'd track my own application status rather than repeatedly emailing the analyst asking if they've heard anything, since that puts them in an awkward spot with their own recruiting team. Regardless of outcome, I'd thank them again once I hear back and let them know how it went, since that closes the loop respectfully and keeps the relationship intact for the future, win or lose.",
+    "followups": [
+      {
+        "prompt": "How long should you wait before checking in if you haven't heard anything after being referred?",
+        "modelAnswer": "I'd give it a couple of weeks and check the application portal or HR contact directly first rather than going straight to the referrer, since recruiting timelines are often just slow and out of the analyst's hands. If I do reach out to the analyst, I'd frame it as a light check-in, not a demand for an update, and make clear I understand they may not have visibility into the process either."
+      },
+      {
+        "prompt": "What if you get rejected after being referred -- how do you handle that with the analyst who vouched for you?",
+        "modelAnswer": "I'd send a short, gracious note thanking them for the referral regardless of the outcome, without making it awkward or asking them to intervene. I'd also keep the relationship alive for future cycles or roles rather than letting it go cold just because this particular attempt didn't work out, since one rejection doesn't mean the relationship or the analyst's willingness to help again is gone."
+      },
+      {
+        "prompt": "Is it appropriate to ask multiple people at the same bank for referrals to increase your odds?",
+        "modelAnswer": "Generally no, at least not to the same role -- most banks' systems flag duplicate referrals, and it can put both referrers in an odd position if they compare notes. If I have relationships with more than one person there, I'd pick the one I know best or who's most relevant to the group I'm applying to, and simply keep the other relationship warm without asking for a duplicate referral."
+      }
+    ],
+    "chapterSlug": "networking",
+    "sectionSlug": "follow-up-and-referrals",
+    "advanced": false
+  }
+]

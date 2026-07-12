@@ -1,0 +1,353 @@
+[
+  {
+    "id": "mm-medium-001-compound-growth",
+    "topic": "mental-math",
+    "difficulty": "medium",
+    "questionType": "multi-step",
+    "prompt": "A company has $50 million in revenue and grows 8% per year. Roughly what's revenue after 3 years, and roughly how many years does it take to double using the Rule of 72?",
+    "keyPoints": [
+      { "point": "Applies the Rule of 72 to estimate doubling time: 72 / 8 = 9 years", "weight": 3 },
+      { "point": "Compounds 8% growth year by year rather than multiplying 8% x 3 and adding it as simple growth", "weight": 3 },
+      { "point": "Approximates year-1 revenue at $54M, year-2 at roughly $58-58.3M, year-3 at roughly $63M", "weight": 3 },
+      { "point": "Flags that compounding is slightly higher than the simple 24% (3 x 8%) estimate", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Multiplying 8% by 3 years and adding that flat 24% to revenue, ignoring compounding",
+      "Misapplying the Rule of 72 by dividing 72 by the number of years instead of the growth rate"
+    ],
+    "modelAnswer": "Two separate quick tools here. For the doubling time, the Rule of 72 says divide 72 by the growth rate: 72 divided by 8 is 9, so revenue roughly doubles in 9 years at an 8% growth rate. For the 3-year revenue figure, I need to compound, not just multiply 8% by 3 — that would understate it since growth compounds on a growing base. Year 1: $50M times 1.08 is $54M. Year 2: $54M times 1.08 is about $58.3M — I'd get there by adding 8% of 54, which is roughly 4.3, to 54. Year 3: $58.3M times 1.08 is about $63M — 8% of 58.3 is roughly 4.7, so 58.3 plus 4.7 is 63. So revenue lands around $63 million after 3 years, compared to the naive simple-growth estimate of $50M times 1.24, which would give $62M — close, but compounding pulls it slightly higher, and that gap widens a lot over longer horizons or higher growth rates.",
+    "followups": [
+      {
+        "prompt": "Why does the Rule of 72 work as an approximation?",
+        "modelAnswer": "It comes from the natural log approximation of compound growth: the exact doubling time is ln(2) divided by the growth rate, and ln(2) is about 0.693. Multiplying that by 100 to work in percentage terms gives roughly 69.3, and 72 is used instead because it has more small factors — 2, 3, 4, 6, 8, 9, 12 — making the mental division cleaner across common growth rates, at the cost of a small amount of accuracy at very low or very high rates."
+      },
+      {
+        "prompt": "How would you sanity-check the compounded $63M figure without doing the full year-by-year math?",
+        "modelAnswer": "I'd use the rule of thumb that for growth rates under about 10%, compounding over n years is roughly n times the rate plus a small convexity adjustment. Here 3 times 8% is 24%, and compounding typically adds a percentage point or two on top for a 3-year horizon at this rate, landing around 26%, consistent with $50M growing to about $63M."
+      },
+      {
+        "prompt": "If growth were 24% per year instead, would the Rule of 72 still be reasonably accurate?",
+        "modelAnswer": "It gets less accurate at higher growth rates — 72 divided by 24 gives 3 years, but the true doubling time at 24% is closer to 3.2 years, since the approximation was tuned around more moderate rates. It's still useful as a fast mental anchor, but I'd flag that the error grows as the growth rate gets further from the 6-10% range where it's most accurate."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "mental-math-that-transfers",
+    "advanced": false
+  },
+  {
+    "id": "mm-medium-002-sequential-percent-change",
+    "topic": "mental-math",
+    "difficulty": "medium",
+    "questionType": "multi-step",
+    "prompt": "A stock goes up 20% one year, then down 10% the next year. What's the net percentage change over the two years?",
+    "keyPoints": [
+      { "point": "Recognizes sequential percentage changes multiply rather than add", "weight": 3 },
+      { "point": "Computes 1.20 x 0.90 = 1.08", "weight": 3 },
+      { "point": "States the net change is +8%, not the naive +10% from simply adding 20% and -10%", "weight": 2 },
+      { "point": "Optionally illustrates with concrete dollar figures to verify", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Adding 20% and -10% directly to get a net +10%, ignoring that the second change applies to a larger base",
+      "Applying both percentages to the original starting value instead of compounding sequentially"
+    ],
+    "modelAnswer": "The trap here is adding 20% and negative 10% to get +10% — that's wrong because the second percentage change applies to the new, larger base after the first move, not the original value. The correct way is to multiply the growth factors: a 20% increase is a factor of 1.20, and a 10% decrease is a factor of 0.90. Multiply those: 1.20 times 0.90. I'd do that as 1.2 times 0.9, which is 1.08. So the net change is plus 8%, not plus 10%. To sanity check with real numbers: start at $100. Up 20% takes it to $120. Down 10% from $120 is $12, so it drops to $108 — that's an 8% net gain from the original $100, confirming the multiplicative approach. This sequential-percentage trap comes up constantly in finance — year-over-year growth rates, margin changes, or up-and-down market moves — so multiplying growth factors rather than adding percentages is a habit worth having automatic.",
+    "followups": [
+      {
+        "prompt": "What if the order were reversed — down 10% first, then up 20%?",
+        "modelAnswer": "Multiplication is commutative, so the order doesn't matter for the net result: 0.90 times 1.20 is still 1.08, an 8% net gain. Starting at $100, down 10% gives $90, then up 20% from $90 is $18, landing at $108 — same final answer either way, even though the intermediate values differ."
+      },
+      {
+        "prompt": "What single percentage change, applied once, would get you back to breakeven after a 20% loss?",
+        "modelAnswer": "This is the classic asymmetry trap — you need more than 20% to recover from a 20% loss, because the loss is applied to a larger base than the recovery. If you lose 20%, you're at 0.80 of the original. To get back to 1.0, you need to multiply 0.80 by some factor X where 0.80X equals 1.0, so X equals 1.25, meaning a 25% gain, not 20%."
+      },
+      {
+        "prompt": "Generalize: is there a quick approximation for combining two percentage changes without doing the full multiplication?",
+        "modelAnswer": "For two changes a% and b%, a fast approximation is a + b + (a x b)/100, which comes from expanding (1+a/100)(1+b/100) and keeping the cross term. Here that's 20 + (-10) + (20 x -10)/100, which is 10 minus 2, giving 8% — matching the exact answer. This shortcut is handy when the two percentages are small, since the cross term stays negligible enough to estimate quickly."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "mental-math-that-transfers",
+    "advanced": false
+  },
+  {
+    "id": "mm-medium-003-blended-multiple",
+    "topic": "mental-math",
+    "difficulty": "medium",
+    "questionType": "calculation",
+    "prompt": "A company has two segments. Segment A does $60 million in revenue and trades at a 3.0x revenue multiple. Segment B does $40 million in revenue and trades at a 5.0x revenue multiple. What's the implied blended (weighted average) revenue multiple for the whole company?",
+    "keyPoints": [
+      { "point": "Recognizes the blended multiple is a revenue-weighted average, not a simple average of 3.0x and 5.0x", "weight": 3 },
+      { "point": "Computes implied value of each segment: $180M and $200M", "weight": 2 },
+      { "point": "Sums total implied value ($380M) and total revenue ($100M)", "weight": 2 },
+      { "point": "Divides to get the blended multiple, 3.8x", "weight": 3 }
+    ],
+    "misconceptions": [
+      "Simply averaging 3.0x and 5.0x to get 4.0x, ignoring that the segments have different revenue weights",
+      "Forgetting to sum implied dollar values first and instead trying to average the multiples with ad hoc weights"
+    ],
+    "modelAnswer": "The wrong shortcut here is just averaging 3.0x and 5.0x to get 4.0x — that's only correct if both segments were the same size, which they're not. This is a sum-of-the-parts problem: I need the dollar value each segment contributes, then divide total value by total revenue. Segment A: $60 million times 3.0x is $180 million. Segment B: $40 million times 5.0x is $200 million. Total implied enterprise value is $180M plus $200M, which is $380 million. Total revenue across both segments is $60M plus $40M, which is $100 million. The blended multiple is total value over total revenue: $380M divided by $100M is 3.8x. Notice it's pulled closer to 3.0x than a simple average would suggest, because Segment A, the lower multiple, has a larger 60% revenue weight versus Segment B's 40% weight — weighted averages always sit closer to the value with more weight behind it.",
+    "followups": [
+      {
+        "prompt": "Sanity check that 3.8x makes sense given the 60/40 revenue split.",
+        "modelAnswer": "A simple average of 3.0x and 5.0x would be 4.0x, right in the middle. Since Segment A is 60% of revenue and has the lower multiple, the blended figure should be pulled below the midpoint toward 3.0x — and 3.8x is indeed below 4.0x, consistent with the heavier weight on the lower-multiple segment. That directional check confirms the answer without redoing the arithmetic."
+      },
+      {
+        "prompt": "If Segment B grew to $60M of revenue and Segment A shrank to $40M, what would the new blended multiple be?",
+        "modelAnswer": "Now Segment A contributes $40M times 3.0x, which is $120M, and Segment B contributes $60M times 5.0x, which is $300M. Total value is $420M over total revenue of $100M, giving a blended multiple of 4.2x — higher than before, and now above the 4.0x simple average, since the higher-multiple segment now carries more weight."
+      },
+      {
+        "prompt": "Why would an analyst care about the blended multiple rather than just quoting the two segment multiples separately?",
+        "modelAnswer": "The blended multiple is what you'd apply to consolidated company-level revenue when you don't want to build out a full segment-by-segment valuation, or when comparing the company's overall trading multiple to peers that don't break out segments. It's a quick single number for cross-company comparison, even though the underlying sum-of-the-parts view is more precise."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "mental-math-that-transfers",
+    "advanced": false
+  },
+  {
+    "id": "mm-medium-004-ev-backsolve",
+    "topic": "mental-math",
+    "difficulty": "medium",
+    "questionType": "multi-step",
+    "prompt": "A company has $80 million in EBITDA and trades at 7.5x EV/EBITDA. It has $150 million of net debt and 50 million shares outstanding. Walk me through, out loud, how you get to the implied share price.",
+    "keyPoints": [
+      { "point": "Computes EV = EBITDA x multiple = $80M x 7.5 = $600M", "weight": 3 },
+      { "point": "States equity value = EV - net debt = $600M - $150M = $450M", "weight": 3 },
+      { "point": "Divides equity value by share count: $450M / 50M = $9.00", "weight": 3 },
+      { "point": "Narrates the EV-to-equity bridge order explicitly rather than jumping to a number", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Adding net debt instead of subtracting it when bridging from EV to equity value",
+      "Dividing EBITDA directly by share count without first building the EV-to-equity bridge"
+    ],
+    "modelAnswer": "I'd narrate this as a three-step bridge, since that's the structure interviewers expect: multiple to EV, EV to equity value, equity value to share price. Step one: EV equals EBITDA times the multiple, so $80 million times 7.5. I'd compute that as 80 times 7, which is 560, plus 80 times 0.5, which is 40 — so 560 plus 40 is 600. EV is $600 million. Step two: bridge from EV down to equity value by subtracting net debt, since equity holders only get what's left after debt claims. $600 million minus $150 million is $450 million of equity value. Step three: divide equity value by shares outstanding to get price per share. $450 million divided by 50 million shares — I can cancel a zero from both, so it's 45 divided by 5, which is 9. Implied share price is $9.00. Saying each bridge step out loud, in that order, is exactly what shows the interviewer I understand the EV-to-equity mechanics, not just that I can multiply.",
+    "followups": [
+      {
+        "prompt": "What if the company also had $30 million of cash on the balance sheet, separate from the $150M net debt figure — would that change anything?",
+        "modelAnswer": "No — net debt already nets cash against gross debt by definition, so if $150 million is stated as net debt, cash has already been subtracted out. If instead I'd been given gross debt of $180M and cash of $30M separately, I'd need to compute net debt myself as $180M minus $30M, which is $150M, before running the same bridge."
+      },
+      {
+        "prompt": "If the multiple were instead based on trading comps showing a range of 6.5x to 8.5x, what's the implied share price range?",
+        "modelAnswer": "At 6.5x, EV is 80 times 6.5, which is 520. Equity value is 520 minus 150, or 370, and 370 divided by 50 is $7.40. At 8.5x, EV is 80 times 8.5, which is 680. Equity value is 680 minus 150, or 530, and 530 divided by 50 is $10.60. So the implied share price range is roughly $7.40 to $10.60."
+      },
+      {
+        "prompt": "Why do you subtract net debt when going from EV to equity value rather than the other way around?",
+        "modelAnswer": "Enterprise value represents the value of the whole operating business, available to all capital providers — both debt and equity holders. Debt holders have a senior claim, so their portion has to be paid out or subtracted first before what's left over belongs to equity. That's why the bridge always subtracts net debt to isolate the residual value that accrues to shareholders."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "thinking-out-loud-under-pressure",
+    "advanced": false
+  },
+  {
+    "id": "mm-medium-005-mental-division",
+    "topic": "mental-math",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "Talk me through dividing 840 by 35 in your head.",
+    "keyPoints": [
+      { "point": "Recognizes 35 x 20 = 700 as a useful starting anchor", "weight": 2 },
+      { "point": "Notes the remainder after that anchor: 840 - 700 = 140", "weight": 2 },
+      { "point": "Recognizes 140 / 35 = 4 (since 35 x 4 = 140)", "weight": 2 },
+      { "point": "Combines to state the final answer, 24", "weight": 3 },
+      { "point": "Narrates the process rather than presenting only the final number", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Attempting standard long division digit-by-digit in your head and losing track of the running remainder",
+      "Guessing an answer that 'feels right' (e.g., 22 or 25) without verifying by multiplying back"
+    ],
+    "modelAnswer": "For an awkward division like this, I like to build up to the total using multiples of the divisor that I know instantly. 35 times 20 is 700 — that's a clean anchor since I'm just doing 35 times 2 and adding a zero. 840 minus 700 leaves 140 still to account for. Now, how many 35s are in 140? I know 35 times 4 is 140, since 35 times 4 is the same as 35 times 2 doubled — 70 doubled is 140. So I've used up 20 lots of 35 plus 4 more lots of 35, which is 24 lots total. So 840 divided by 35 is 24. I'd verify quickly: 35 times 24 — 35 times 20 is 700, plus 35 times 4 is 140, and 700 plus 140 is 840, which matches. Building up in chunks of an easy multiple, rather than trying to do long division mentally, keeps the working memory load low and gives me a natural checkpoint to verify against.",
+    "followups": [
+      {
+        "prompt": "Use the same chunking approach for 972 divided by 27.",
+        "modelAnswer": "27 times 30 is 810. 972 minus 810 is 162. How many 27s in 162? 27 times 6 is 162, since 27 times 3 is 81 and doubling that is 162. So total lots of 27 are 30 plus 6, which is 36. Check: 27 times 36 — 27 times 30 is 810, plus 27 times 6 is 162, and 810 plus 162 is 972. Confirmed, the answer is 36."
+      },
+      {
+        "prompt": "What do you do if the division doesn't come out to a clean whole number?",
+        "modelAnswer": "I'd get as close as I can with a whole-number multiple, note the remainder, and either express the answer as a mixed number or convert the remainder to a decimal by continuing to divide. For example, 850 divided by 35: 35 times 24 is 840, leaving a remainder of 10, so the answer is 24 and 10/35, or roughly 24.29 — in an interview I'd usually just say 'about 24.3' unless precision was explicitly required."
+      },
+      {
+        "prompt": "Why is this chunking method generally faster than memorized long division for mental math?",
+        "modelAnswer": "Long division requires tracking multiple digits and borrow operations simultaneously, which strains working memory when done without paper. Chunking with round multiples like 10x, 20x, or 30x the divisor lets me do each step as a simple multiplication I already know, and I only need to hold one running total in my head at a time, which is much more sustainable under interview pressure."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "thinking-out-loud-under-pressure",
+    "advanced": false
+  },
+  {
+    "id": "mm-medium-006-pe-implied-price",
+    "topic": "mental-math",
+    "difficulty": "medium",
+    "questionType": "calculation",
+    "prompt": "A stock trades at $60 with EPS of $4.00, so a 15x P/E. A close public comp with similar growth and margins trades at 18x P/E. If the stock re-rated to that comp's multiple, what would the implied share price be?",
+    "keyPoints": [
+      { "point": "Confirms the current multiple checks out: $60 / $4 = 15x", "weight": 2 },
+      { "point": "Applies the new multiple directly to EPS rather than to the old price", "weight": 3 },
+      { "point": "Computes 18 x $4 = $72", "weight": 3 },
+      { "point": "States the implied upside is $12, or 20%, versus the current $60 price", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Scaling the old price by the ratio of multiples incorrectly, e.g., adding the multiple difference (3) directly to the price",
+      "Forgetting EPS is the base and instead trying to re-derive price from revenue or some other unrelated figure"
+    ],
+    "modelAnswer": "P/E re-rating questions are really just 'multiply the new multiple by the same EPS.' First I'd confirm the starting point: $60 price divided by $4 EPS is indeed 15x, so that's consistent. To find the implied price at the comp's 18x multiple, I apply that new multiple to the same $4.00 EPS — the underlying earnings don't change, only the multiple the market assigns. 18 times 4 is 72. So the implied share price at an 18x re-rating is $72.00. That's $12 higher than the current $60, and as a percentage, $12 over $60 is 20% — I'd get that quickly by noting 20% of 60 is 12, matching exactly. So this stock would need to re-rate by 3 turns of P/E, from 15x to 18x, to justify a 20% price appreciation with no change in earnings — that's the kind of multiple-expansion versus earnings-growth distinction interviewers want candidates to be fluent in.",
+    "followups": [
+      {
+        "prompt": "What if EPS also grew 10% at the same time as the re-rating to 18x — what's the new implied price?",
+        "modelAnswer": "New EPS would be $4.00 times 1.10, which is $4.40. Apply the 18x multiple: 18 times 4.40. I'd compute that as 18 times 4, which is 72, plus 18 times 0.4, which is 7.2, giving $79.20. So combining multiple expansion and earnings growth compounds the price impact — from $60 to $79.20, a roughly 32% gain, versus 20% from re-rating alone."
+      },
+      {
+        "prompt": "What's a plausible reason the market would re-rate this stock from 15x to 18x with no change in fundamentals?",
+        "modelAnswer": "Multiple expansion typically reflects a shift in investor sentiment or perceived risk rather than the business itself changing — lower interest rates reducing the discount rate applied to future earnings, increased confidence in the durability of growth, a sector-wide re-rating as peers get bid up, or resolution of some overhang like litigation or management uncertainty that had been suppressing the multiple."
+      },
+      {
+        "prompt": "If instead the stock's multiple compressed from 15x to 12x, what would the new implied price be, and what's the percentage move?",
+        "modelAnswer": "12 times $4.00 EPS is $48.00. That's a $12 drop from $60, and $12 over $60 is 20% — so a 3-turn compression from 15x to 12x produces the same 20% magnitude of move as the 3-turn expansion to 18x did, just in the opposite direction, since the multiple change is the same absolute size relative to the same starting EPS."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "market-awareness-quick-hits",
+    "advanced": false
+  },
+  {
+    "id": "mm-medium-007-cagr-estimate",
+    "topic": "mental-math",
+    "difficulty": "medium",
+    "questionType": "calculation",
+    "prompt": "A company's revenue grew from $100 million to $133.1 million over 3 years. Estimate the compound annual growth rate (CAGR).",
+    "keyPoints": [
+      { "point": "Recognizes CAGR requires finding the growth rate whose 3-year compounding gives the total multiple", "weight": 3 },
+      { "point": "Computes total growth multiple: $133.1M / $100M = 1.331", "weight": 2 },
+      { "point": "Recognizes 1.331 as 1.1 cubed (or estimates via trial: 1.1^3 = 1.331) to back into CAGR = 10%", "weight": 3 },
+      { "point": "States CAGR is meaningfully different from simply dividing total growth by 3 years", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Computing total growth of 33.1% and dividing by 3 to get an 11.03% 'CAGR', which is the wrong (simple average) approach",
+      "Confusing the growth multiple (1.331x) with the growth rate (33.1%) and using the wrong one in the cube-root step"
+    ],
+    "modelAnswer": "CAGR isn't total growth divided by the number of years — that's a simple average and overstates the true compounding rate. The correct definition is the constant annual rate that, compounded over the period, produces the actual ending value. First, find the total growth multiple: $133.1 million over $100 million is 1.331x. Now I need the cube root of 1.331, since that's 3 years of compounding. I recognize 1.331 as a clean number — 1.1 cubed is 1.1 times 1.1 times 1.1. 1.1 times 1.1 is 1.21, and 1.21 times 1.1 is 1.331. That matches exactly, so the CAGR is 10%. I'd flag explicitly that the naive shortcut — take the total 33.1% growth and divide by 3 to get roughly 11% — is wrong, because it ignores compounding; the true 10% annual rate compounds to more than 30% over three years precisely because growth builds on a growing base each year.",
+    "followups": [
+      {
+        "prompt": "What if the ending value weren't such a clean number — say revenue grew from $100M to $140M over 3 years? Estimate the CAGR without a calculator.",
+        "modelAnswer": "The growth multiple is 1.40x. I know 1.1 cubed is 1.331 and 1.15 cubed is roughly 1.52, so 1.40 sits between a 10% and 15% CAGR, closer to the middle-low end. A reasonable mental estimate is around 12%, since the relationship between CAGR and total multiple isn't linear — I'd flag this as an approximation and, if precision mattered, note it would need to be solved more precisely with logs or a calculator."
+      },
+      {
+        "prompt": "Why does the naive 'divide by years' method overstate or understate the true CAGR?",
+        "modelAnswer": "It depends on direction, but for growth, dividing total percentage growth by years understates how much less than that simple rate is actually needed, because compounding means each year's growth applies to an already-larger base — so a lower constant rate, compounded, can produce the same total growth as a higher simple rate. In this example, 10% compounded beats 11% simple only because compounding is the correct mechanism; the simple method just isn't measuring the same thing as CAGR is defined to measure."
+      },
+      {
+        "prompt": "How would you quickly sanity check a CAGR answer using the Rule of 72?",
+        "modelAnswer": "At a 10% CAGR, the Rule of 72 says doubling takes about 7.2 years. Over 3 years at that rate, I'd expect growth to be somewhat less than half the value, which is consistent with the 33% growth we calculated — a bit less than the roughly 50% you'd see at the halfway point to doubling, which lines up directionally with 3 years being under half of the 7.2-year doubling horizon."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "market-awareness-quick-hits",
+    "advanced": false
+  },
+  {
+    "id": "mm-medium-008-leverage-ratio",
+    "topic": "mental-math",
+    "difficulty": "medium",
+    "questionType": "calculation",
+    "prompt": "A company has $450 million of total debt and $90 million of EBITDA. What's its Debt/EBITDA leverage ratio, and is that a high or low level of leverage for a typical corporate borrower?",
+    "keyPoints": [
+      { "point": "Computes 450 / 90 = 5.0x", "weight": 3 },
+      { "point": "Simplifies the division (e.g., 45/9 = 5) rather than doing it the hard way", "weight": 2 },
+      { "point": "Contextualizes 5.0x as elevated/highly levered relative to a typical investment-grade range of roughly 1-3x", "weight": 3 },
+      { "point": "Notes that 'high' is sector- and credit-quality dependent, not an absolute universal threshold", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Inverting the ratio and computing EBITDA/Debt instead of Debt/EBITDA",
+      "Treating any leverage level as automatically 'bad' without acknowledging sector and business-model context (e.g., stable-cash-flow businesses can support more leverage)"
+    ],
+    "modelAnswer": "Debt/EBITDA is $450 million over $90 million. I'd simplify by dropping a zero from both: 45 over 9, and 45 divided by 9 is 5. So leverage is 5.0x. Contextually, that's elevated — investment-grade companies typically run leverage in the 1x to 3x range, while 4x to 6x is more typical of leveraged buyouts or high-yield credits, and above 6x starts to look aggressive even by private equity standards. So 5.0x sits in a zone I'd call meaningfully levered — consistent with a company that's either been through an LBO, is funding growth or M&A with debt, or is in a more cyclical or capital-intensive sector willing to carry more leverage. I'd caveat that 'high' is relative to the business: a stable, recurring-revenue company like a utility or software business with predictable cash flows can safely support more leverage than a cyclical industrial with volatile EBITDA, so 5.0x should be judged against the specific sector and cash flow durability, not treated as a universal red flag on its own.",
+    "followups": [
+      {
+        "prompt": "If the company also has $60 million of cash, what's its net leverage instead of gross leverage?",
+        "modelAnswer": "Net debt is $450 million minus $60 million of cash, which is $390 million. Net leverage is $390 million over $90 million EBITDA — I'd simplify to 39 over 9, which is roughly 4.33x. Net leverage is the more meaningful figure for credit analysis since cash on hand could be used to pay down debt immediately if needed."
+      },
+      {
+        "prompt": "How would an interest coverage ratio complement the leverage ratio in assessing credit risk?",
+        "modelAnswer": "Leverage tells you the size of the debt burden relative to cash flow, but interest coverage — typically EBITDA divided by interest expense — tells you whether the company can actually service that debt given current interest costs. A company could carry moderate leverage but still be in trouble if rates are high and coverage is thin, so lenders look at both metrics together rather than leverage alone."
+      },
+      {
+        "prompt": "Why might a private equity sponsor be comfortable putting 5.0x leverage on this business even though it looks aggressive by investment-grade standards?",
+        "modelAnswer": "Sponsors optimize for equity returns, and using more debt reduces the equity check needed to fund an acquisition, which amplifies returns if the business performs and grows into the leverage over the hold period. They typically underwrite this against a specific plan to pay down debt using free cash flow and grow EBITDA, aiming to delever from something like 5.0x closer to 3x by exit, which both improves the credit profile and can support a higher exit multiple."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "market-awareness-quick-hits",
+    "advanced": false
+  },
+  {
+    "id": "mm-medium-009-three-switches",
+    "topic": "mental-math",
+    "difficulty": "medium",
+    "questionType": "curveball",
+    "prompt": "You're in a hallway with three light switches, each connected to one of three light bulbs in a room you can't see into. You can flip the switches as much as you want, but you may only enter the room one time. How do you determine which switch controls which bulb?",
+    "keyPoints": [
+      { "point": "Recognizes that on/off alone (binary state) can't distinguish 3 possibilities across one room visit, so a third signal channel — heat — is needed", "weight": 3 },
+      { "point": "Turns switch 1 on and leaves it on for a few minutes", "weight": 2 },
+      { "point": "Turns switch 1 off, then immediately turns switch 2 on, then enters the room", "weight": 3 },
+      { "point": "Identifies bulbs: on and lit = switch 2; off but warm = switch 1; off and cold = switch 3", "weight": 3 }
+    ],
+    "misconceptions": [
+      "Trying to solve it purely with on/off states and concluding it's impossible with only one entry",
+      "Forgetting to leave the first switch on long enough for the bulb to actually heat up before switching it off"
+    ],
+    "modelAnswer": "With only two states — on or off — and one visit to the room, I can distinguish at most two switches by sight alone, which isn't enough for three. I need a third piece of information, and heat is the natural extra signal a bulb gives off beyond just light. So here's the sequence: flip switch 1 on and leave it on for several minutes, long enough for that bulb to physically warm up if it's incandescent. Then turn switch 1 off, and immediately turn switch 2 on. Now walk into the room. The bulb that's currently lit is controlled by switch 2, since that's the only one left on. Of the two bulbs that are off, touch them — the one that's warm was controlled by switch 1, since it was on long enough to heat up before I switched it off. The remaining bulb, off and cold, was never turned on at all, so it's controlled by switch 3. That gives me all three mappings from a single visit.",
+    "followups": [
+      {
+        "prompt": "Why does this specific puzzle assume incandescent bulbs rather than LEDs?",
+        "modelAnswer": "The trick relies on the bulb generating and retaining detectable heat after being powered, which is a defining trait of incandescent bulbs since they work by heating a filament. LED bulbs run much cooler and dissipate heat faster, so the temperature difference might not be reliably detectable by touch after even a short delay, which is why this puzzle is implicitly set in an older-bulb context — it's testing the logic structure, not literal bulb engineering."
+      },
+      {
+        "prompt": "Could you solve this with two entries into the room instead of one, and would that change the strategy?",
+        "modelAnswer": "Yes, with two entries it's much simpler and doesn't need the heat trick: turn on switch 1, enter the room, note which bulb is lit — that's switch 1. Then turn off switch 1, turn on switch 2, enter again, and see which bulb is now lit — that's switch 2, leaving the third bulb as switch 3 by elimination. The one-entry version is harder specifically because it forces you to find an extra channel of information beyond simple binary state."
+      },
+      {
+        "prompt": "What's the general lesson this kind of puzzle is testing for in an interview context?",
+        "modelAnswer": "It's testing whether a candidate gets stuck reasoning within an assumed constraint set — here, treating 'on or off' as the only available information — versus stepping back and asking what other physical properties or side effects could be exploited. In deal work, that maps to the habit of looking beyond the obvious inputs of a problem for additional signal, like using auxiliary data sources or indirect indicators when the direct answer isn't available."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "classic-brain-teasers",
+    "advanced": true
+  },
+  {
+    "id": "mm-medium-010-jug-puzzle",
+    "topic": "mental-math",
+    "difficulty": "medium",
+    "questionType": "curveball",
+    "prompt": "You have a 3-gallon jug and a 5-gallon jug, no markings on either, and an unlimited water supply. How do you measure out exactly 4 gallons?",
+    "keyPoints": [
+      { "point": "Fills the 5-gallon jug and pours into the 3-gallon jug, leaving 2 gallons in the 5-gallon jug", "weight": 3 },
+      { "point": "Empties the 3-gallon jug, then pours the remaining 2 gallons from the 5-gallon jug into it", "weight": 2 },
+      { "point": "Refills the 5-gallon jug completely", "weight": 1 },
+      { "point": "Pours from the 5-gallon jug into the 3-gallon jug (which already has 2 gallons, so it only takes 1 more) until the 3-gallon jug is full, leaving exactly 4 gallons in the 5-gallon jug", "weight": 3 }
+    ],
+    "misconceptions": [
+      "Trying to reach 4 gallons by only using the 3-gallon jug's capacity repeatedly, without leveraging the 5-gallon jug's larger capacity and the leftover-amount trick",
+      "Losing track of how much water is in each jug partway through the sequence and guessing rather than tracking state precisely"
+    ],
+    "modelAnswer": "The key idea is using the two jugs' capacities to create an intermediate amount — specifically 2 gallons — that I can then use to build up to 4. Step one: fill the 5-gallon jug completely. Step two: pour from the 5-gallon jug into the empty 3-gallon jug until the 3-gallon jug is full. Since the 3-gallon jug can only hold 3, that leaves exactly 5 minus 3, or 2 gallons, remaining in the 5-gallon jug. Step three: empty the 3-gallon jug completely, discarding that water. Step four: pour the 2 gallons that are sitting in the 5-gallon jug into the now-empty 3-gallon jug — so the 3-gallon jug now holds 2 gallons, with 1 gallon of capacity left. Step five: refill the 5-gallon jug completely again. Step six: pour from the full 5-gallon jug into the 3-gallon jug, which only needs 1 more gallon to reach its 3-gallon capacity. That transfers exactly 1 gallon out of the 5-gallon jug, leaving 5 minus 1, which is exactly 4 gallons remaining in the 5-gallon jug. Done — 4 gallons, precisely.",
+    "followups": [
+      {
+        "prompt": "Could you get to 1 gallon using the same two jugs, and if so, how?",
+        "modelAnswer": "Yes — fill the 3-gallon jug, pour it into the 5-gallon jug. Fill the 3-gallon jug again, and pour into the 5-gallon jug until it's full; the 5-gallon jug only needs 2 more gallons to fill up, so that leaves exactly 3 minus 2, or 1 gallon, remaining in the 3-gallon jug. That's a mirror-image version of the 4-gallon solution, just swapping which jug ends up holding the target amount."
+      },
+      {
+        "prompt": "What's the general principle behind which target amounts are even achievable with two jugs of given sizes?",
+        "modelAnswer": "With jugs of capacity a and b, you can measure any amount that's an integer combination of a and b — mathematically, any multiple of the greatest common divisor of a and b, up to the larger jug's capacity. Here, gcd(3,5) is 1, since 3 and 5 are coprime, so every whole-gallon amount from 1 to 5 is reachable, which is why this pairing is a popular puzzle choice — it has full flexibility."
+      },
+      {
+        "prompt": "Why do interviewers still ask logic puzzles like this even though they don't reflect actual on-the-job finance tasks?",
+        "modelAnswer": "They're testing structured, systematic thinking under a novel and slightly stressful situation — whether a candidate can break an unfamiliar problem into discrete states and track them methodically rather than flailing, and whether they stay calm and keep working rather than freezing. It's a proxy for how someone might approach an unfamiliar modeling problem or live diligence question where the direct answer isn't obvious and they need to construct a path to it step by step."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "classic-brain-teasers",
+    "advanced": true
+  }
+]

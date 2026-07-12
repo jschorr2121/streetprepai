@@ -1,0 +1,117 @@
+[
+  {
+    "id": "resume-hard-001-triage-one-page",
+    "topic": "resume",
+    "difficulty": "hard",
+    "questionType": "multi-step",
+    "prompt": "You're advising a candidate with two internships, a study-abroad leadership role, and three club involvements — all competing for space on a single page. Walk me through how you'd triage what stays, what gets cut, and how you'd order the sections to fit banking conventions.",
+    "keyPoints": [
+      { "point": "Order sections by convention: Education at top, Experience next (reverse chronological, most relevant/recent first), then Leadership/Activities, then Skills/Interests last", "weight": 3 },
+      { "point": "Triage criteria for what stays: relevance to IB (deal/quant exposure) first, recency second, prestige/impact of the role third", "weight": 3 },
+      { "point": "Cut or consolidate redundant club bullets that don't add a distinct skill beyond what's already shown", "weight": 2 },
+      { "point": "Keep leadership entries only if genuinely differentiated (e.g., president role, managed a budget, led a team of a specific size)", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Every extracurricular should get at least one line to show well-roundedness",
+      "Sections should be ordered by how impressive each one is rather than by standard convention"
+    ],
+    "modelAnswer": "First, I'd lock in the standard structure: Education at the top with GPA and relevant coursework, then Experience in reverse chronological order, then Leadership and Activities, then a short Skills and Interests line at the bottom. That ordering itself isn't up for debate — it's what recruiters expect to scan quickly. Within that structure, the triage question becomes what earns space. The two internships almost certainly stay, since direct experience is the highest-value real estate, and I'd allocate three to four strong, quantified bullets to the most recent or most relevant one and two to three to the other. The study-abroad leadership role gets evaluated on differentiation: if it involved something concrete — organizing a specific event, managing a budget, leading a defined group of people — it earns a single strong line in Leadership; if it's generic 'participated in program,' it's a cut candidate. For the three club involvements, I'd resist giving each its own line. Instead, I'd keep the one with genuine leadership or quantifiable impact as its own bullet, and either cut the other two entirely or fold them into a single consolidated line if they still add distinct value, like 'Member, Finance Club and Investment Society.' The overarching rule is that every line has to earn its place by adding something the reader doesn't already know about the candidate.",
+    "followups": [
+      {
+        "prompt": "How would you handle a case where the study-abroad leadership role happened more recently than one of the internships?",
+        "modelAnswer": "Section ordering follows category, not pure chronology — Experience stays grouped together and ordered by recency within itself, and Leadership stays in its own section below, even if a leadership entry is more recent in calendar time. Mixing internships and extracurricular leadership into one chronological list would blur the distinction recruiters rely on between paid, deal-relevant work and other activities, so the category structure takes priority over strict date ordering across sections."
+      },
+      {
+        "prompt": "What if cutting weak content still doesn't get the resume down to one page — what's the next lever?",
+        "modelAnswer": "At that point, look at bullet-level compression rather than cutting whole entries: tighten wording, remove redundant modifiers, and combine two related bullets into one denser line where the combined version doesn't lose meaningful information. If it still doesn't fit, revisit the triage decisions again more aggressively rather than resorting to font or margin tricks, since a slightly thinner but well-edited resume beats a crammed complete one."
+      },
+      {
+        "prompt": "Should the candidate include a 'Skills and Interests' line at all if space is this tight?",
+        "modelAnswer": "Yes, but keep it to a single line — it's a low-cost way to add personality and talking points for an interview, such as language proficiency, relevant certifications, or a specific interest that can open a rapport-building question. It should be the last thing trimmed for space, but also the first thing cut entirely if the page still doesn't fit after everything else has been tightened."
+      },
+      {
+        "prompt": "How do you decide between two internships when only one can get the majority of the bullet allocation?",
+        "modelAnswer": "Weight recency and relevance to the target role most heavily — a more recent, directly finance-related internship typically wins even over an earlier one with a more prestigious brand name, because recruiters care most about demonstrated, current readiness for the specific role. If both internships are similarly recent and relevant, the one with more quantifiable, differentiated outcomes gets the larger allocation."
+      }
+    ],
+    "chapterSlug": "resume",
+    "sectionSlug": "one-page-resume-conventions",
+    "advanced": false
+  },
+  {
+    "id": "resume-hard-002-comps-bullet-math",
+    "topic": "resume",
+    "difficulty": "hard",
+    "questionType": "calculation",
+    "prompt": "A candidate built a comparable companies analysis covering 12 companies and found that the target traded at a 15% discount to the peer median EV/EBITDA of 9.0x, implying the target traded at 7.65x. First, check whether that discount math is actually correct. Then turn the finding into a properly structured resume bullet.",
+    "keyPoints": [
+      { "point": "Verify the math: 9.0x times (1 minus 0.15) equals 7.65x, so the stated discount is correct", "weight": 2 },
+      { "point": "Bullet opens with a strong action verb tied to the specific deliverable (e.g., 'Built' a comps analysis)", "weight": 2 },
+      { "point": "Bullet includes scope (12 comparable companies) and the quantified finding (15% discount, 9.0x vs 7.65x)", "weight": 3 },
+      { "point": "Bullet conveys an analytical conclusion or insight, not just that a task was completed", "weight": 2 },
+      { "point": "Bullet stays concise, ideally one line", "weight": 1 }
+    ],
+    "misconceptions": [
+      "A discount percentage should be applied by dividing rather than multiplying the peer median by (1 - discount)",
+      "It's sufficient for a bullet to state that a comps analysis was done without including the actual quantified finding"
+    ],
+    "modelAnswer": "First, checking the math: a 15% discount to a peer median of 9.0x means the target trades at 85% of that median, since a discount reduces the base by that percentage. 9.0 times 0.85 equals 7.65, which matches the stated figure exactly, so the discount calculation is correct. Now for the bullet: 'Built a 12-company comparable companies analysis, identifying the target trading at 7.65x EV/EBITDA — a 15% discount to the 9.0x peer median.' This opens with 'Built,' an active verb tied to a specific, named deliverable — the comps analysis — rather than a vague description. It states the scope, 12 comparable companies, which signals the breadth of the screening and data-gathering work behind the analysis. Critically, it doesn't stop at describing the task; it states the actual analytical finding, the 15% discount and both multiples, which shows the reader that the candidate didn't just build a spreadsheet but derived and understood a meaningful conclusion from it. That's the difference between a task-completion bullet and an insight bullet, and insight bullets are consistently stronger in banking resumes because they demonstrate judgment, not just mechanical execution.",
+    "followups": [
+      {
+        "prompt": "How would the bullet change if the candidate also had to explain why the target traded at a discount?",
+        "modelAnswer": "If space allowed, you could append a brief driver, such as '...attributable to below-peer margin profile,' but this needs to be genuinely accurate and concise — a half-line addition at most, since the resume bullet isn't the place for a full explanation. The deeper reasoning is better saved as a natural interview talking point, where the candidate can walk through the driver in more depth than a resume line permits."
+      },
+      {
+        "prompt": "Is EV/EBITDA the right multiple to lead with here, or should the candidate consider other multiples like P/E?",
+        "modelAnswer": "EV/EBITDA is generally the standard, capital-structure-neutral multiple for comps work and is the reasonable default to lead with in a resume bullet, since it's the multiple most universally understood across sectors. If the analysis also used other multiples like P/E or EV/Revenue and they added meaningfully different insight, that could be mentioned, but leading with one primary, well-understood multiple keeps the bullet focused rather than cluttered."
+      },
+      {
+        "prompt": "What if the peer set actually had a wide range of multiples, say from 6.0x to 13.0x — does citing just the median oversimplify the finding?",
+        "modelAnswer": "For a resume bullet, citing the median is the right level of simplification, since the bullet's job is to convey the headline finding concisely, not the full distribution. The wide range is exactly the kind of nuance that's better reserved for a follow-up conversation in an interview, where the candidate can discuss how outliers were handled or why the range was wide, rather than trying to cram that detail into a single line."
+      }
+    ],
+    "chapterSlug": "resume",
+    "sectionSlug": "banker-bullet-structure",
+    "advanced": false
+  },
+  {
+    "id": "resume-hard-003-gap-disclosure-strategy",
+    "topic": "resume",
+    "difficulty": "hard",
+    "questionType": "conceptual",
+    "prompt": "A candidate switched majors twice and has an unexplained semester gap visible in the resume's dates. As their coach, how do you decide whether to address this on the resume itself, save it for the interview, or use the cover letter — and what's the risk of each approach?",
+    "keyPoints": [
+      { "point": "Unexplained visible gaps invite negative assumptions, so silence is risky specifically when the gap is obvious from the dates themselves", "weight": 3 },
+      { "point": "Minor gaps are usually best left off the resume and prepared as a crisp, confident interview answer rather than using scarce page space", "weight": 2 },
+      { "point": "Resume space should only be used for an explanation if it actually strengthens the candidacy (e.g., a fellowship or documented reason), not as a generic disclaimer", "weight": 2 },
+      { "point": "The cover letter is rarely read closely in IB recruiting, so it shouldn't be relied on as the primary fix for a resume-level concern", "weight": 2 },
+      { "point": "The overall goal is to preempt suspicion without wasting the resume's limited real estate on defensive content", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Any gap or inconsistency should be explained directly on the resume to avoid looking like it's being hidden",
+      "A well-written cover letter can reliably compensate for an unaddressed resume red flag"
+    ],
+    "modelAnswer": "The first question is whether the gap is actually visible from the dates on the page — if the timeline has a clear hole, for example a full semester or year with nothing listed, silence becomes its own red flag because the reader will notice the gap and fill it in with their own, likely worse, assumption. If it's genuinely invisible or minor, like a summer with no listed activity, I generally wouldn't spend page space explaining it, since that space is scarce and best used for high-value content. Where I would use resume space is if the explanation itself adds a positive signal — for example, if the gap was actually a documented research fellowship or a structured program, a short one-line label like 'Research Fellow, [Program]' both fills the gap and adds credibility. For a genuinely awkward gap with no positive spin, I'd steer the candidate toward preparing a short, calm, well-rehearsed verbal explanation for the interview rather than writing anything defensive on the resume. I'd specifically avoid relying on the cover letter as the fix, because in IB recruiting cover letters are rarely read closely or at all in the initial screen — by the time anyone reads a cover letter, the resume has usually already been screened, so any resume-level red flag needs to be handled either on the resume itself or verbally, not deferred to a document that may never be opened.",
+    "followups": [
+      {
+        "prompt": "How would your advice change if the gap was due to something sensitive, like a mental health leave?",
+        "modelAnswer": "The resume is almost never the right place for sensitive personal disclosures — I'd advise a neutral, non-specific label if anything is needed at all, such as 'Personal leave,' and reserve any deeper explanation for the interview, only if the candidate chooses to share it and only to the extent they're comfortable with. The candidate should never feel pressured to over-disclose on a document with no room for nuance or context."
+      },
+      {
+        "prompt": "What if the two major switches themselves, not the gap, are the bigger concern to a recruiter?",
+        "modelAnswer": "Major switches read differently than an unexplained gap — they don't necessarily need direct addressing on the resume since the Education section already implicitly shows the final major and the dates, but the candidate should have a clear, confident narrative ready for why they switched, framed as growing clarity about their interests rather than indecision. This is a case where a coherent verbal story does more work than any resume-level fix could."
+      },
+      {
+        "prompt": "Could listing an interim activity, even a minor one, be a better fix than either explaining or staying silent about the gap?",
+        "modelAnswer": "Yes, if there's any legitimate activity from that period — a part-time job, an online certification, independent coursework — listing it, even briefly, is often the strongest fix, because it fills the visible timeline gap with real content rather than an explanation or a blank space. This avoids the gap being noticed at all while still being fully honest, which is generally preferable to either silence or an explicit callout."
+      },
+      {
+        "prompt": "Is there a risk in over-preparing an explanation to the point that it sounds rehearsed or defensive in the interview?",
+        "modelAnswer": "Yes — an explanation that's too polished or lengthy can read as overly rehearsed or as though the candidate is still anxious about the topic, which can draw more attention to it than necessary. The better approach is a short, matter-of-fact answer, two or three sentences, delivered calmly, so the interviewer gets a clear answer and the conversation naturally moves on rather than lingering on it."
+      }
+    ],
+    "chapterSlug": "resume",
+    "sectionSlug": "resume-red-flags",
+    "advanced": false
+  }
+]

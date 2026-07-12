@@ -1,0 +1,246 @@
+[
+  {
+    "id": "mm-easy-001-fraction-to-percent",
+    "topic": "mental-math",
+    "difficulty": "easy",
+    "questionType": "single-step",
+    "prompt": "Quickly: what is 3/8 expressed as a percentage?",
+    "keyPoints": [
+      { "point": "Recognizes 1/8 = 12.5% as an anchor fraction", "weight": 3 },
+      { "point": "Multiplies 12.5% by 3 to get 37.5%", "weight": 3 },
+      { "point": "States the answer confidently without a calculator", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Rounding 3/8 to 'about a third' (33%) instead of computing precisely",
+      "Confusing 3/8 with 3/10 and answering 30%"
+    ],
+    "modelAnswer": "I keep a small set of fraction-to-percent anchors memorized, and eighths are one of them: 1/8 is 12.5%. So 3/8 is just 3 times 12.5%, which is 37.5%. I'd say it out loud as '12.5, 25, 37.5' — doubling first to get 2/8 = 25%, then adding one more 12.5% on top. That's faster than long division and it's exact, not an approximation. In interviews, eighths, quarters, and sixteenths show up constantly in quick ratio questions, so having 1/8 = 12.5% memorized alongside 1/16 = 6.25% saves real time versus dividing 3 by 8 from scratch under pressure.",
+    "followups": [
+      {
+        "prompt": "What's 7/8 as a percent, using the same anchor?",
+        "modelAnswer": "7/8 is one 1/8 short of a whole, so it's 100% minus 12.5%, which is 87.5%. Working from the complement is usually faster than adding up seven 12.5% chunks."
+      },
+      {
+        "prompt": "What's 5/16 as a percent?",
+        "modelAnswer": "1/16 is half of 1/8, so it's 6.25%. Five of those is 5 times 6.25%, which is 31.25%. I'd get there by doing 4/16 = 25% (that's just 1/4) plus one more 6.25%, landing on 31.25%."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "mental-math-that-transfers",
+    "advanced": false
+  },
+  {
+    "id": "mm-easy-002-percent-of-number",
+    "topic": "mental-math",
+    "difficulty": "easy",
+    "questionType": "single-step",
+    "prompt": "What is 15% of 240?",
+    "keyPoints": [
+      { "point": "Breaks 15% into 10% + 5%", "weight": 3 },
+      { "point": "Computes 10% of 240 = 24 and 5% of 240 = 12", "weight": 2 },
+      { "point": "Adds to get 36", "weight": 3 }
+    ],
+    "misconceptions": [
+      "Multiplying 240 by 15 and then guessing where the decimal goes, introducing errors",
+      "Treating 15% as 'roughly a sixth' and rounding to 40"
+    ],
+    "modelAnswer": "The fastest path here is to split 15% into pieces I can do instantly: 10% and 5%. 10% of 240 is just moving the decimal, so that's 24. 5% is half of 10%, so that's 12. Add those together and I get 36. I'd say this out loud step by step — '10% is 24, 5% is 12, so 15% is 36' — rather than trying to multiply 240 by 0.15 directly, because breaking into 10% and 5% chunks is something I can do without holding extra digits in my head. This 10%-plus-5% trick generalizes to any percentage that's a multiple of 5, which covers most quick estimates interviewers ask for.",
+    "followups": [
+      {
+        "prompt": "Now do 35% of 240 the same way.",
+        "modelAnswer": "35% is 30% plus 5%. 10% of 240 is 24, so 30% is 3 times that, or 72. 5% is 12. Add them: 72 plus 12 is 84. Same building-block approach, just combining more 10%-chunks."
+      },
+      {
+        "prompt": "What if the number weren't a clean multiple of 10, say 15% of 246?",
+        "modelAnswer": "I'd still use 15% of 240 as an anchor (36) and then handle the remaining 6 separately: 15% of 6 is 0.9. So 15% of 246 is roughly 36.9. Anchoring to a nearby round number and adjusting for the difference is faster than computing the exact product from scratch."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "mental-math-that-transfers",
+    "advanced": false
+  },
+  {
+    "id": "mm-easy-003-large-multiplication",
+    "topic": "mental-math",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Talk me through how you'd multiply 23 by 19 in your head, without writing anything down.",
+    "keyPoints": [
+      { "point": "Rounds 19 up to 20 to simplify the multiplication", "weight": 3 },
+      { "point": "Computes 23 x 20 = 460", "weight": 2 },
+      { "point": "Subtracts the extra 23 (one group of 20 became one group of 19) to get 437", "weight": 3 },
+      { "point": "States the final answer clearly", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Trying to do long multiplication digit-by-digit in your head and losing track of carries",
+      "Rounding both numbers and never correcting back to the exact answer"
+    ],
+    "modelAnswer": "I never multiply two awkward numbers directly if I can round one of them to something clean first. Here, 19 is one away from 20, so I'll compute 23 times 20 instead — that's just 23 times 2 with a zero on the end, so 460. But I've now multiplied by one extra 23, since 20 is one more than 19, so I subtract that back out: 460 minus 23 is 437. I'd narrate it exactly that way out loud: 'round 19 up to 20, that's 460, then take away the extra 23 for 437.' This round-and-adjust technique is the single most useful mental math habit for interviews, because almost any multiplication involving a number ending in 8 or 9 can be turned into an easy multiple of 10 and a small correction.",
+    "followups": [
+      {
+        "prompt": "Use the same trick for 34 x 21.",
+        "modelAnswer": "21 is one more than 20, so I'd compute 34 times 20 first, which is 680, then add back one extra 34 since I undercounted by rounding down. 680 plus 34 is 714."
+      },
+      {
+        "prompt": "What about 48 x 47? Both numbers are awkward.",
+        "modelAnswer": "I'd round 48 up to 50 and adjust: 50 times 47 is 2,350. Then subtract two extra 47s, since I added two more groups of 47 by using 50 instead of 48. Two times 47 is 94, so 2,350 minus 94 is 2,256."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "thinking-out-loud-under-pressure",
+    "advanced": false
+  },
+  {
+    "id": "mm-easy-004-percent-narration",
+    "topic": "mental-math",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "What is 8% of 350? Walk me through your reasoning out loud as you go, not just the final number.",
+    "keyPoints": [
+      { "point": "States 10% of 350 = 35 as the starting anchor", "weight": 3 },
+      { "point": "Computes 1% of 350 = 3.5", "weight": 2 },
+      { "point": "Subtracts two of those 1% units from the 10% figure (35 - 7 = 28)", "weight": 3 },
+      { "point": "Narrates each step rather than jumping straight to the answer", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Silently computing in your head and only announcing a final number, which gives the interviewer nothing to follow if it's wrong",
+      "Trying to compute 8% directly by multiplying 350 by 0.08 without breaking it into pieces"
+    ],
+    "modelAnswer": "Out loud, I'd walk through it like this: '10% of 350 is 35 — that's my anchor. 8% is 2 percentage points less than 10%, so I need to subtract 2% from that 35. 1% of 350 is 3.5, so 2% is 7. 35 minus 7 is 28.' Narrating this way matters as much as the arithmetic itself — interviewers are grading whether they can follow my logic, not just whether I land on the right number. If I make an error, saying each step aloud lets them catch it and redirect me rather than me silently going down a wrong path. The core technique is always the same: find a nearby round percentage I can compute instantly, then adjust up or down with 1% increments.",
+    "followups": [
+      {
+        "prompt": "What's 12% of 350 using the same method?",
+        "modelAnswer": "12% is 10% plus 2%. 10% of 350 is 35, and 2% is two lots of 3.5, which is 7. Add them: 35 plus 7 is 42."
+      },
+      {
+        "prompt": "Why does narrating each step matter in an interview, beyond just getting the right answer?",
+        "modelAnswer": "Interviewers are evaluating process, not just the final digit — it's a proxy for how I'd communicate on a live deal call where someone needs to follow my logic in real time. Narrating also lets me self-correct: if I say a step aloud and it sounds wrong, I catch it before committing to a bad final answer, and the interviewer can nudge me back on track instead of just marking the answer wrong."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "thinking-out-loud-under-pressure",
+    "advanced": false
+  },
+  {
+    "id": "mm-easy-005-market-cap",
+    "topic": "mental-math",
+    "difficulty": "easy",
+    "questionType": "calculation",
+    "prompt": "A company has 250 million shares outstanding and trades at $40 per share. What's its market capitalization?",
+    "keyPoints": [
+      { "point": "States market cap = shares outstanding x share price", "weight": 3 },
+      { "point": "Computes 250 million x 40 = 10,000 million", "weight": 3 },
+      { "point": "Converts to the more natural unit, $10 billion", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Forgetting to convert millions into billions and stating the answer as '$10,000' without units",
+      "Confusing market capitalization with enterprise value and subtracting debt unprompted"
+    ],
+    "modelAnswer": "Market cap is just shares outstanding times share price, so it's 250 million times $40. I'd simplify by dropping zeros: 25 times 4 is 100, and I have one more zero from the 250 and one more from the 40, so that's 100 with two extra zeros of scale, giving 10,000 million. Since a billion is 1,000 million, 10,000 million converts cleanly to $10 billion. I'd state the final answer in billions rather than millions because that's the more natural unit at this size, and interviewers notice when candidates leave an answer in an awkward unit like '10,000 million' instead of converting to '$10 billion.' This is a pure market-cap question — no debt or cash involved, so there's no reason to touch enterprise value here.",
+    "followups": [
+      {
+        "prompt": "If the stock drops 20% the next day, what's the new market cap?",
+        "modelAnswer": "20% of $40 is $8, so the new price is $32. Market cap is 250 million times $32. Using the same zero-dropping trick, 25 times 32 is 800, plus the extra zeros gives 8,000 million, or $8 billion. Alternatively, since market cap scales linearly with price, I could just take 80% of the original $10 billion, which is also $8 billion."
+      },
+      {
+        "prompt": "How is market cap different from enterprise value?",
+        "modelAnswer": "Market cap only reflects the equity value — what shareholders' claim is worth on the market. Enterprise value adds debt and subtracts cash, because EV represents the value of the whole business regardless of how it's financed, which is what an acquirer would effectively be paying for if they took on the company's debt and got to keep its cash."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "market-awareness-quick-hits",
+    "advanced": false
+  },
+  {
+    "id": "mm-easy-006-eps",
+    "topic": "mental-math",
+    "difficulty": "easy",
+    "questionType": "calculation",
+    "prompt": "A company earns $500 million in net income on 200 million shares outstanding. What's its earnings per share?",
+    "keyPoints": [
+      { "point": "States EPS = net income / shares outstanding", "weight": 3 },
+      { "point": "Simplifies 500/200 to 5/2 before dividing", "weight": 2 },
+      { "point": "Computes the correct value, $2.50", "weight": 3 }
+    ],
+    "misconceptions": [
+      "Dividing shares by net income instead of net income by shares, inverting the ratio",
+      "Losing track of the millions and stating an answer off by orders of magnitude"
+    ],
+    "modelAnswer": "EPS is net income divided by shares outstanding, so $500 million divided by 200 million. The millions cancel out, leaving 500 divided by 200. I'd simplify that fraction before dividing: 500 over 200 reduces to 5 over 2, and 5 divided by 2 is 2.5. So EPS is $2.50 per share. Simplifying the fraction first is faster and safer than trying to do long division on 500 by 200 directly, and canceling the shared 'millions' unit early keeps me from accidentally dropping a zero somewhere in the calculation, which is the most common way candidates get order-of-magnitude errors on EPS questions.",
+    "followups": [
+      {
+        "prompt": "If the stock trades at $37.50, what's the P/E ratio?",
+        "modelAnswer": "P/E is price divided by EPS, so $37.50 divided by $2.50. That's the same as 3,750 divided by 250, or more simply, 37.5 divided by 2.5, which is 15. So the stock trades at a 15x P/E multiple."
+      },
+      {
+        "prompt": "The company issues 40 million new shares. What happens to EPS, holding net income constant?",
+        "modelAnswer": "Shares outstanding go from 200 million to 240 million, so EPS becomes 500 divided by 240, which is roughly 2.08. That's a meaningful drop from 2.50 — this is dilution, since the same earnings are now split across more shares. It's the same mechanic tested in accretion/dilution questions on stock-financed acquisitions."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "market-awareness-quick-hits",
+    "advanced": false
+  },
+  {
+    "id": "mm-easy-007-bat-and-ball",
+    "topic": "mental-math",
+    "difficulty": "easy",
+    "questionType": "curveball",
+    "prompt": "A bat and a ball together cost $1.10. The bat costs $1.00 more than the ball. How much does the ball cost?",
+    "keyPoints": [
+      { "point": "Sets up an equation rather than trusting the intuitive answer of $0.10", "weight": 3 },
+      { "point": "Lets ball = x and bat = x + 1.00", "weight": 2 },
+      { "point": "Solves 2x + 1.00 = 1.10 to get x = 0.05", "weight": 3 },
+      { "point": "Verifies by checking $0.05 + $1.05 = $1.10", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Answering $0.10 instinctively, since $1.10 minus $1.00 looks like it should give the ball's price",
+      "Forgetting to verify the answer against both original conditions before stating it"
+    ],
+    "modelAnswer": "The instinctive answer everyone jumps to is $0.10, but that's wrong, and this question is really testing whether I catch that or not. If the ball were $0.10, the bat would need to be $1.00 more, so $1.10 — and together that's $1.20, not $1.10. So I need to actually set it up algebraically. Let the ball cost x; the bat costs x plus $1.00. Together: x plus (x plus 1.00) equals 1.10, so 2x plus 1.00 equals 1.10, meaning 2x equals 0.10, so x equals $0.05. Let me verify: ball is $0.05, bat is $1.05, and $0.05 plus $1.05 is $1.10 — that checks out, and the bat is exactly $1.00 more than the ball. So the ball costs five cents. The lesson here is to slow down on any question that has an obvious-looking answer, because interviewers often use exactly that trap to see if a candidate verifies their work.",
+    "followups": [
+      {
+        "prompt": "Why do most people get this wrong on the first try?",
+        "modelAnswer": "System 1 thinking pattern-matches '$1.10 minus $1.00' to the answer because it superficially resembles the numbers in the problem, and most people don't pause to check the second condition — that the bat is exactly $1.00 more than the ball, not that the ball is $0.10 flat. It's a classic illustration of why verifying an answer against all stated conditions matters more than how confident the first instinct feels."
+      },
+      {
+        "prompt": "Generalize this: if the total were $1.50 and the bat still costs $1.00 more, what's the ball's price?",
+        "modelAnswer": "Same setup: 2x plus 1.00 equals 1.50, so 2x equals 0.50, and x equals $0.25. Ball is $0.25, bat is $1.25, and together that's $1.50, which checks out."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "classic-brain-teasers",
+    "advanced": true
+  },
+  {
+    "id": "mm-easy-008-coin-flip-probability",
+    "topic": "mental-math",
+    "difficulty": "easy",
+    "questionType": "curveball",
+    "prompt": "You flip a fair coin 3 times. What's the probability of getting at least one heads?",
+    "keyPoints": [
+      { "point": "Recognizes the complement approach is faster than enumerating all 'at least one' cases", "weight": 3 },
+      { "point": "Computes the probability of zero heads (all tails) as (1/2)^3 = 1/8", "weight": 3 },
+      { "point": "Subtracts from 1 to get 7/8", "weight": 2 },
+      { "point": "Converts to a percentage, 87.5%, for a clean spoken answer", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Trying to directly add up the probabilities of exactly 1, exactly 2, and exactly 3 heads, which is slower and more error-prone",
+      "Assuming the answer is simply 3 times 1/2, which double-counts overlapping outcomes"
+    ],
+    "modelAnswer": "Whenever a question asks for 'at least one' of something, the fastest route is almost always the complement: find the probability of the opposite event and subtract from 1. Here, the opposite of 'at least one heads' is 'zero heads,' meaning all three flips are tails. Each flip has a 1/2 chance of tails, and the flips are independent, so three tails in a row is 1/2 times 1/2 times 1/2, which is 1/8. So the probability of at least one heads is 1 minus 1/8, which is 7/8. As a percentage, that's 87.5%. I'd explicitly flag that I'm using the complement trick, because directly summing the probabilities of exactly one, exactly two, and exactly three heads works too but takes longer and is easier to mess up under time pressure — the complement is the efficient path here.",
+    "followups": [
+      {
+        "prompt": "What's the probability of at least one heads in 5 flips?",
+        "modelAnswer": "Same complement trick: probability of all tails is (1/2)^5, which is 1/32. So at least one heads is 1 minus 1/32, which is 31/32, or about 96.9%. Notice how fast this probability approaches 100% as the number of flips grows."
+      },
+      {
+        "prompt": "What's the probability of exactly one heads in 3 flips, as opposed to at least one?",
+        "modelAnswer": "There are 3 equally likely ways to get exactly one heads out of three flips — heads on the first, second, or third flip only — each with probability (1/2)^3 = 1/8. So exactly one heads is 3 times 1/8, which is 3/8, or 37.5%."
+      }
+    ],
+    "chapterSlug": "mental-math",
+    "sectionSlug": "classic-brain-teasers",
+    "advanced": true
+  }
+]

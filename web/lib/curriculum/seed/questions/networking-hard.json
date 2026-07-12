@@ -1,0 +1,109 @@
+[
+  {
+    "id": "netw-hard-001-no-response-cadence",
+    "topic": "networking",
+    "difficulty": "hard",
+    "questionType": "verbal",
+    "prompt": "You've sent cold emails to 15 alumni at your top-choice bank over the past month. Three responded and had good calls; the other 12 never replied, including several you followed up with once. Recruiting season opens in three weeks. Walk me through how you'd handle the remaining 12 and structure your outreach cadence going forward.",
+    "keyPoints": [
+      { "point": "Distinguish between a single follow-up already sent vs. contacts never followed up with yet -- only escalate the latter", "weight": 2 },
+      { "point": "Cap follow-ups at roughly two touches total per contact; stop after that without response", "weight": 3 },
+      { "point": "Space follow-ups appropriately (roughly 7-10 days), don't re-contact too soon", "weight": 2 },
+      { "point": "Reallocate time toward the 3 responsive contacts (deepen those relationships) and toward new names rather than over-indexing on unresponsive ones", "weight": 3 },
+      { "point": "Recognize non-response is usually about the recipient's bandwidth, not a signal to take personally or escalate aggressively", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Sending a third or fourth follow-up to contacts who've already ignored two messages",
+      "Treating the 12 non-responses as a personal rejection requiring a different, more aggressive approach"
+    ],
+    "modelAnswer": "I'd split the 12 into two groups: those I've already sent one follow-up to and heard nothing back from, and any I haven't followed up with yet. For the ones I haven't followed up with, I'd send a single, brief follow-up -- referencing the original email, still short, still a low-friction ask -- spaced about a week to ten days after the first message so it doesn't feel like pestering. For the ones who've already had two touches with no response, I'd stop there. A third message rarely converts and starts to read as pressure rather than genuine interest, which isn't the impression I want circulating before recruiting even opens. With three weeks until recruiting starts, I'd redirect the bulk of my remaining time in two directions: deepening the three relationships that did respond, since those are now my strongest assets at this bank, and adding new names to my list rather than continuing to chase the unresponsive twelve. I'd remind myself that non-response is almost never personal; bankers get flooded with cold emails during recruiting season, and busy periods, deal timing, or simply an overflowing inbox explain most silence far better than any judgment about me specifically. My time is better spent where there's already signal of engagement than trying to force a response from people who've shown none.",
+    "followups": [
+      {
+        "prompt": "Two weeks later, one of the three responsive contacts mentions their group is actually not hiring this cycle. How does that change your strategy?",
+        "modelAnswer": "I'd still keep the relationship warm, since group staffing needs shift and this person remains a useful connection for insight and potential referrals to other groups at the same bank. But I'd shift my active outreach effort toward finding contacts in groups that are actually hiring, and I might directly ask this contact if they know anyone in a group that is, turning a dead end into another warm introduction rather than a wasted relationship."
+      },
+      {
+        "prompt": "Should the follow-up message be identical to the first email, or should it say something different?",
+        "modelAnswer": "It should be different, not a resend of the same content. I'd keep it very short, reference that I'd reached out previously, restate the ask briefly, and ideally add one small new element, like a relevant update on my end, so it doesn't read as a nagging repeat of the exact same email sitting unanswered in their inbox."
+      },
+      {
+        "prompt": "How would you handle a contact who responds positively but keeps rescheduling the actual call multiple times?",
+        "modelAnswer": "I'd stay flexible and accommodating for the first reschedule or two, since people genuinely get busy, but I'd also keep my own effort proportional -- not chasing too aggressively or making it my top priority contact. If it happens three or more times, I'd take it as a soft signal that this isn't a priority for them right now and quietly deprioritize it in favor of contacts who are actually following through, without burning the relationship by pushing too hard."
+      }
+    ],
+    "chapterSlug": "networking",
+    "sectionSlug": "cold-outreach-email-template",
+    "advanced": false
+  },
+  {
+    "id": "netw-hard-002-senior-banker-redirect",
+    "topic": "networking",
+    "difficulty": "hard",
+    "questionType": "curveball",
+    "prompt": "You're 10 minutes into a coffee chat with a Managing Director. Instead of answering your questions about his path into banking, he starts grilling you on why interest rates affect DCF valuations and seems to be testing you. How do you handle this?",
+    "keyPoints": [
+      { "point": "Stay composed and answer the technical question genuinely rather than deflecting or looking flustered", "weight": 3 },
+      { "point": "Recognize this may be a deliberate, informal test of poise and preparedness, not hostility", "weight": 2 },
+      { "point": "Give a concise, correct answer rather than rambling to fill time", "weight": 2 },
+      { "point": "After answering, look for a natural opening to redirect back toward conversation rather than staying purely in technical Q&A mode", "weight": 2 },
+      { "point": "Don't fake confidence on something you don't know -- acknowledge gaps honestly if it happens", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Getting visibly rattled or refusing to engage because 'this is supposed to be a coffee chat, not an interview'",
+      "Bluffing through a technical answer with confident-sounding but wrong content rather than admitting uncertainty"
+    ],
+    "modelAnswer": "I'd treat it as exactly what it likely is -- an informal test of how I handle pressure and whether I have real substance, which is fairly common from senior bankers who talk to a lot of students and can spot rehearsed small talk from a mile away. I wouldn't get flustered or push back on the shift in tone; I'd just answer the question as best I could, staying concise. On the actual content, higher interest rates raise the discount rate used in a DCF, which lowers the present value of future cash flows, and they also affect the assumptions feeding into WACC through the cost of debt and often the risk-free rate component of cost of equity, so the entire valuation compresses when rates rise, all else equal. I'd keep that answer tight rather than rambling to sound like I know more than I do. Once I'd answered, I'd look for a natural moment to steer back toward the conversational format I'd originally hoped for -- maybe connecting the technical point back to something in his own work, like whether rising rates had affected deal activity he's seen -- which shows I can hold my own technically while still being a good conversational partner, not just someone reciting textbook definitions.",
+    "followups": [
+      {
+        "prompt": "What if he then asks a much harder technical question you genuinely don't know the answer to?",
+        "modelAnswer": "I'd be honest rather than guessing confidently and risking a wrong answer stated with false certainty, which reads worse than admitting a gap. I'd say something like, 'I haven't gotten to that yet, but here's how I'd think about it,' and reason through it out loud as far as I could. Most senior bankers respect an honest 'I don't know, but here's my logic' far more than a bluffed answer that falls apart under one follow-up question."
+      },
+      {
+        "prompt": "After this exchange, should you bring technical prep into future coffee chats with other bankers, or was this MD an outlier?",
+        "modelAnswer": "I'd treat it as a useful data point rather than the new norm -- most coffee chats stay conversational, but I now know it's possible, especially with senior people, so I'd make sure I'm not walking into any chat completely cold on fundamentals even if I don't expect to need them. I wouldn't over-rotate into interview-prep mode for every future chat, since that risks making me stiff and overly formal in conversations that don't call for it."
+      },
+      {
+        "prompt": "Should you mention this experience to other bankers at the same firm, and could it help or hurt you?",
+        "modelAnswer": "I'd only bring it up if it came up naturally and I could frame it positively, like mentioning I had a great, substantive conversation with that MD, rather than complaining that I got grilled unexpectedly. Framing it as a positive, memorable interaction rather than an ambush protects the relationship and avoids any appearance that I'm airing a minor grievance about someone at the firm I'm trying to join."
+      }
+    ],
+    "chapterSlug": "networking",
+    "sectionSlug": "coffee-chat-framework",
+    "advanced": false
+  },
+  {
+    "id": "netw-hard-003-referral-conflict",
+    "topic": "networking",
+    "difficulty": "hard",
+    "questionType": "curveball",
+    "prompt": "Two analysts at the same bank -- one you've talked to twice and like a lot, another you barely know but who is more senior and in the group you actually want -- both independently offer to refer you for the same summer analyst role. How do you handle this?",
+    "keyPoints": [
+      { "point": "Recognize most banks' referral systems only accept/credit one referral per candidate per role -- can't accept both", "weight": 3 },
+      { "point": "Decide based on relevance to target group and/or relationship strength, not just seniority or whoever asked first", "weight": 3 },
+      { "point": "Communicate honestly and gracefully with the person not chosen, thanking them without burning the relationship", "weight": 2 },
+      { "point": "Avoid letting both people believe they are the one referring, which risks an awkward or embarrassing overlap internally", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Trying to accept both referrals to hedge, assuming there's no downside",
+      "Picking the more senior contact automatically without weighing group fit or relationship depth"
+    ],
+    "modelAnswer": "First, I'd recognize the practical constraint: most bank referral systems only log one active referral per candidate per role, so trying to accept both isn't really an option, and even if a system technically allowed it, having two people submit referrals for the same application can look disorganized or, worse, get noticed internally in a way that reflects poorly on me. I'd decide based on genuine fit rather than pure seniority: since the role is in the group I actually want and the senior analyst is in that group, their referral likely carries more direct relevance and credibility for that specific seat, even though the relationship is newer. But if the two analysts know each other or are likely to compare notes, I'd also weigh the relationship I've built with the first analyst and not want that to feel discarded. In practice, I'd go with the referral most relevant to the actual group, accept it clearly, and then reach out to the other person promptly and honestly -- thanking them sincerely for the offer, explaining that another contact in the specific group already offered to refer me for this role, and asking if they'd be open to helping with other opportunities down the line. Being transparent and quick about it, rather than letting it linger or hoping they don't notice, is what protects both relationships.",
+    "followups": [
+      {
+        "prompt": "What if the two analysts do know each other and there's a real risk of an awkward conversation between them?",
+        "modelAnswer": "I'd move even faster to close the loop with the one I'm not going with, ideally before they'd have any reason to compare notes, so I'm the one delivering that news rather than them discovering it from each other. I'd keep my explanation simple and consistent regardless of who I'm speaking to, since any inconsistency between what I told each of them is far more damaging than the fact that I chose one referral over the other."
+      },
+      {
+        "prompt": "Would your answer change if the less senior analyst was the one in the target group and the more senior one wasn't?",
+        "modelAnswer": "Yes -- group relevance would still be my primary factor over seniority, so I'd lean toward the referral from whoever is actually in or closest to the group I'm targeting, even if that person is more junior. A referral from someone embedded in the specific team is generally more meaningful to that team's staffing decision than one from someone senior but disconnected from that particular group's hiring."
+      },
+      {
+        "prompt": "Is there a version of this where accepting both referrals actually is fine?",
+        "modelAnswer": "If the two people are referring me for genuinely different postings, say different groups or a summer role versus a full-time role, then there's no real conflict since each referral is tied to a distinct application. The problem only arises when both are pointed at the exact same role, which is the scenario where I'd need to choose rather than risk a duplicate or an awkward internal overlap."
+      }
+    ],
+    "chapterSlug": "networking",
+    "sectionSlug": "follow-up-and-referrals",
+    "advanced": false
+  }
+]

@@ -1,0 +1,127 @@
+[
+  {
+    "id": "netw-easy-001-find-alumni",
+    "topic": "networking",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "You don't know anyone at the banks you're targeting. How do you actually find alumni from your school working in investment banking?",
+    "keyPoints": [
+      { "point": "Use LinkedIn's alumni tool filtered by school, then filter by industry/employer", "weight": 3 },
+      { "point": "Check school career center database and finance/investment club rosters", "weight": 2 },
+      { "point": "Look at bank-specific recruiting lists or prior years' incoming analyst classes if available", "weight": 2 },
+      { "point": "Prioritize closer affinity (same major, same clubs, recent grads) over random alumni", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Assuming you need a personal introduction before reaching out to any alumnus",
+      "Only looking at senior bankers (VP+) instead of analysts/associates who are more responsive and have fresher memories of recruiting"
+    ],
+    "modelAnswer": "I'd start with LinkedIn's alumni search tool, filter by my school, then narrow by industry to investment banking and by specific employer if I'm targeting particular banks. I'd pay attention to overlap beyond just the school -- same major, same clubs, same hometown -- because that extra connection makes the first email land better. I'd also check my school's career center, which usually has a database of alumni who've opted in to being contacted by current students, and any finance or investment banking club rosters, since upperclassmen who recruited in prior cycles often keep a running list of contacts who were helpful. I'd prioritize junior people -- analysts and associates -- over senior bankers, both because they're more likely to actually respond and because they went through recruiting recently enough to remember what it's like and to know who's staffing the current class. Once I have a list, I'd sort it by strength of connection so I'm reaching out to the warmest contacts first and saving the coldest ones for once I've built confidence and a track record of good conversations.",
+    "followups": [
+      {
+        "prompt": "What if your school has almost no alumni at your target banks?",
+        "modelAnswer": "I'd widen the definition of a warm connection -- people from my clubs, fraternity/sorority, sports team, or even hometown who work in finance anywhere, and ask them for introductions further into banking. I'd also look at second-degree connections on LinkedIn: people my existing contacts already know. And I'd lean more heavily on cold outreach with a well-researched, specific email, since with fewer warm paths available, cold outreach has to carry more of the weight."
+      },
+      {
+        "prompt": "How many alumni contacts should you realistically try to build before recruiting season?",
+        "modelAnswer": "I'd aim for a working list of 20-30 names across my target banks, understanding that maybe half will respond and a third of those will lead to an actual conversation. That funnel means I need real volume, not just two or three contacts, especially since some conversations won't lead anywhere useful regardless of how well I execute the outreach."
+      }
+    ],
+    "chapterSlug": "networking",
+    "sectionSlug": "alumni-networking",
+    "advanced": false
+  },
+  {
+    "id": "netw-easy-002-cold-email-structure",
+    "topic": "networking",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Walk me through the basic structure of a cold outreach email to a banker you've never met.",
+    "keyPoints": [
+      { "point": "Clear, specific subject line identifying who you are and why you're writing", "weight": 3 },
+      { "point": "Brief personal introduction: name, school, year, area of interest", "weight": 2 },
+      { "point": "A specific, genuine reason for reaching out to this person (shared background or their work)", "weight": 2 },
+      { "point": "A low-friction ask: a short call, not a job or referral", "weight": 3 },
+      { "point": "Concise overall -- under 150 words with a clear close", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Asking directly for a job or a referral in the first email",
+      "Writing a long email that recaps the sender's entire resume"
+    ],
+    "modelAnswer": "I'd keep it short and structured in four parts. First, a subject line that's specific and easy to scan, like 'Cornell Sophomore Interested in [Bank]'s TMT Group' -- something that tells the reader exactly who I am and why I'm in their inbox before they even open it. Second, a two-sentence introduction: my name, school, year, and area of interest. Third, the reason I'm reaching out to this specific person rather than a form email -- maybe we share a school, or I read something about a deal they worked on and want to learn more about their path into the group. That specificity is what separates a real email from a mail-merge. Fourth, a low-friction ask: not a job, not a referral, just 15 minutes of their time for a call at their convenience. I'd close by making it easy for them to say yes -- offering a couple of time windows rather than making them do the scheduling work. The whole thing should be under 150 words, because bankers are busy and a long email signals I don't respect that.",
+    "followups": [
+      {
+        "prompt": "Should you attach your resume to a first cold email?",
+        "modelAnswer": "No, I wouldn't attach it on the first email. The ask at this stage is a conversation, not a job application, and attaching a resume signals I'm angling for a referral immediately, which can feel presumptuous and make the recipient less likely to respond. I'd wait until after we've had a good conversation and they've offered to help, at which point sending a resume is a natural next step they've essentially invited."
+      },
+      {
+        "prompt": "How do you personalize an email to someone whose background you know almost nothing about?",
+        "modelAnswer": "I'd do five minutes of research first -- their LinkedIn for school, prior roles, and any deals or press mentions tied to their name, and the bank's website for recent transactions their group worked on. Even one specific detail, like referencing a deal they're listed on or a shared extracurricular, turns a generic template into something that reads as intentional and makes the recipient feel like I actually looked them up rather than blasting the same email to fifty people."
+      }
+    ],
+    "chapterSlug": "networking",
+    "sectionSlug": "cold-outreach-email-template",
+    "advanced": false
+  },
+  {
+    "id": "netw-easy-003-coffee-chat-purpose",
+    "topic": "networking",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is the actual goal of a coffee chat, and how is that different from a job interview?",
+    "keyPoints": [
+      { "point": "Goal is building a relationship and gathering information, not being evaluated on technical skill", "weight": 3 },
+      { "point": "It's a two-way conversation -- you're also assessing fit for the group/bank", "weight": 2 },
+      { "point": "Success is measured by the banker remembering you positively and being willing to help further, not by a hire/no-hire decision", "weight": 2 },
+      { "point": "Should feel conversational, not scripted or interrogative", "weight": 2 }
+    ],
+    "misconceptions": [
+      "Treating a coffee chat like a mock technical interview and firing off questions like a checklist",
+      "Believing the coffee chat has no real stakes and going in unprepared"
+    ],
+    "modelAnswer": "A coffee chat is fundamentally a relationship-building conversation, not an evaluation. Nobody is grading me on technical knowledge or asking me to walk through an LBO. The goal is to learn about the person's path into banking, their day-to-day, and their group's culture, while also giving them a genuine, likeable impression of me -- someone thoughtful, curious, and easy to talk to. It's also a two-way information exchange: I'm using it to figure out whether this bank or group is actually a place I'd want to work, not just collecting contacts. The measure of a successful coffee chat isn't whether I answered every question perfectly, because there usually aren't hard technical questions at all -- it's whether the person walks away remembering me positively and would be willing to keep talking to me, forward my resume, or connect me with someone else on their team. That said, I don't treat it as low-stakes either. First impressions carry weight informally, and a bad coffee chat -- coming across as entitled, unprepared, or purely transactional -- can close a door just as fast as a good one opens it.",
+    "followups": [
+      {
+        "prompt": "Is it ever appropriate for the banker to ask you a technical question during a coffee chat?",
+        "modelAnswer": "It happens occasionally, especially with more senior bankers or later in the recruiting cycle, but it's the exception rather than the norm. If it comes up, I'd answer it honestly and concisely and then steer back to conversation rather than turning the chat into a drill session. I wouldn't walk in expecting it, but I also wouldn't be caught totally flat-footed if someone asked something basic like why I want banking or what I understand about their group's focus."
+      },
+      {
+        "prompt": "How long should a coffee chat typically last, and who should end it?",
+        "modelAnswer": "I'd aim for 20-30 minutes unless the other person clearly wants to keep going. I'd watch for their cues -- checking the time, a natural lull -- and be the one to offer to wrap up first, thanking them for their time. Ending it slightly early and leaving them wanting more is better than overstaying and having them have to cut me off, which can leave a worse final impression than the conversation itself deserved."
+      }
+    ],
+    "chapterSlug": "networking",
+    "sectionSlug": "coffee-chat-framework",
+    "advanced": false
+  },
+  {
+    "id": "netw-easy-004-followup-timing",
+    "topic": "networking",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "You just finished a 20-minute call with a second-year analyst. When and how should you follow up?",
+    "keyPoints": [
+      { "point": "Send a thank-you note within 24 hours of the call", "weight": 3 },
+      { "point": "Reference something specific from the conversation to show genuine engagement", "weight": 2 },
+      { "point": "Keep it short and don't ask for anything new in the same message", "weight": 2 },
+      { "point": "Note the contact and conversation details for future reference before ongoing periodic check-ins", "weight": 1 }
+    ],
+    "misconceptions": [
+      "Waiting a week or more to send a thank-you, by which point the conversation isn't fresh anymore",
+      "Using the thank-you note to immediately ask for a referral or another favor"
+    ],
+    "modelAnswer": "I'd send a thank-you email within 24 hours, ideally the same day while the conversation is still fresh for both of us. I'd keep it short -- three or four sentences -- and reference something specific we talked about, like advice they gave on breaking into their group or a detail about their path I found genuinely interesting, rather than a generic 'thanks for your time.' That specificity is what makes it memorable instead of forgettable. I wouldn't use the note to ask for anything new; the point is to close the loop graciously, not to extract another favor immediately after they already gave me their time. After sending it, I'd log the contact's name, firm, group, and a couple of notes from the conversation somewhere I can find them later, because I'll want to follow up again in a few weeks or months with an update on my recruiting progress, and I don't want to be scrambling to remember what we discussed or repeating myself.",
+    "followups": [
+      {
+        "prompt": "What should you do if the analyst doesn't respond to your thank-you note?",
+        "modelAnswer": "I wouldn't read much into it -- analysts are busy and a thank-you note doesn't always need or get a reply. I wouldn't send a follow-up chasing a response to the thank-you itself. Instead, I'd just note the contact and plan to re-engage naturally in a few weeks with a genuine update, like an interview result or a relevant question, rather than treating the silence as a signal to escalate."
+      },
+      {
+        "prompt": "Should the follow-up channel be email or LinkedIn?",
+        "modelAnswer": "I'd default to whichever channel we used to set up the call in the first place, since that's already an established thread and switching platforms can feel slightly odd. If we connected over email, I'd reply in that same thread; if it was LinkedIn, I'd send the thank-you there. Consistency matters more than the specific platform."
+      }
+    ],
+    "chapterSlug": "networking",
+    "sectionSlug": "follow-up-and-referrals",
+    "advanced": false
+  }
+]

@@ -68,6 +68,7 @@ export const saveProfileSchema = z
     experiences: z.array(ExperienceSchema).max(50).optional(),
     education: z.array(EducationSchema).max(20).optional(),
     skills: z.array(z.string().trim().max(120)).max(100).optional(),
+    advancedTrack: z.boolean().optional(),
   })
   .strict();
 

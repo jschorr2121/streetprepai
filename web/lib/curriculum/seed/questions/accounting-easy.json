@@ -1,0 +1,715 @@
+[
+  {
+    "id": "acct-easy-001-income-statement-components",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Walk me through the major line items on an income statement, from revenue down to net income.",
+    "keyPoints": [
+      {"point": "Starts with revenue, subtracts COGS to get gross profit", "weight": 3},
+      {"point": "Subtracts operating expenses (SG&A, R&D) from gross profit to get operating income", "weight": 3},
+      {"point": "Adds/subtracts non-operating items like interest expense and other income to get pre-tax income", "weight": 2},
+      {"point": "Subtracts taxes to arrive at net income", "weight": 3},
+      {"point": "Mentions EPS as a derived figure at the very bottom", "weight": 1}
+    ],
+    "misconceptions": [
+      "Treating gross profit and operating income as the same line",
+      "Forgetting that interest expense and taxes sit below operating income, not above it"
+    ],
+    "modelAnswer": "The income statement starts with revenue, the top line, which is what the company earned from selling goods or services during the period. Subtract cost of goods sold — the direct costs of producing what was sold — and you get gross profit, which shows how profitable the core product is before overhead. From there, subtract operating expenses like SG&A, R&D, and marketing to get operating income, sometimes called EBIT, which reflects the profitability of the core business operations. Below that, you layer in non-operating items — interest expense on debt, interest income, and any one-time gains or losses — to arrive at pre-tax income. Apply the tax rate and you get net income, the bottom line, which belongs to shareholders. Finally, net income is often divided by shares outstanding to get EPS. Each step strips away a different layer of cost, so you can see exactly where profitability is being built or eroded as you move down the statement.",
+    "followups": [
+      {
+        "prompt": "What's the difference between operating income and EBITDA?",
+        "modelAnswer": "Operating income already deducts depreciation and amortization as part of operating expenses or COGS, whereas EBITDA adds D&A back on top of operating income. EBITDA is meant to approximate cash operating profitability by stripping out a non-cash expense, which makes it useful for comparing companies with different capital intensity or depreciation policies. Operating income is a GAAP-consistent measure that still reflects the economic cost of using up fixed assets over time. Analysts use EBITDA as a rough cash-flow proxy and valuation multiple base, but it can overstate the health of a capital-intensive business since it ignores the real cash capex needed to sustain the asset base."
+      },
+      {
+        "prompt": "Where would a one-time litigation settlement expense show up?",
+        "modelAnswer": "It would typically appear below operating income, either as a separate non-operating line item or embedded within 'other expenses,' precisely because it's not part of the core recurring business. Some companies disclose it within operating expenses but call it out as non-recurring in the footnotes or MD&A. Either way, analysts usually strip it out when calculating normalized or adjusted EPS and operating margins, since including a one-off legal charge would distort the trend in the company's ongoing operating performance and make period-over-period comparisons misleading."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "income-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-002-gross-profit-vs-operating-income",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What's the difference between gross profit and operating income, and why does the distinction matter?",
+    "keyPoints": [
+      {"point": "Gross profit = revenue minus COGS only", "weight": 3},
+      {"point": "Operating income = gross profit minus operating expenses (SG&A, R&D, marketing)", "weight": 3},
+      {"point": "Gross margin isolates production/direct cost efficiency; operating margin captures the full cost structure including overhead", "weight": 2}
+    ],
+    "misconceptions": [
+      "Using the two terms interchangeably",
+      "Assuming a high gross margin automatically means a profitable company at the operating level"
+    ],
+    "modelAnswer": "Gross profit only nets revenue against the direct cost of producing what was sold — cost of goods sold. It tells you how efficient the company is at making or sourcing its product before any corporate overhead is layered in. Operating income goes a step further and subtracts operating expenses like SG&A, R&D, and marketing, which are the costs of running the business day to day. The distinction matters because a company can have a beautiful gross margin — say a software company at 80% — but still lose money at the operating level if sales and R&D spend is bloated relative to revenue. Conversely, a low-gross-margin retailer can still be operating-profitable if it runs a lean overhead structure. Investors look at both margins together: gross margin tells you about pricing power and cost of production, while operating margin tells you about overall business efficiency and management discipline on fixed and semi-fixed costs.",
+    "followups": [
+      {
+        "prompt": "If a company's gross margin is stable but operating margin is declining, what does that tell you?",
+        "modelAnswer": "It points to the problem being below the gross profit line — the cost of the product itself hasn't changed, but the company is spending more on SG&A, R&D, or marketing relative to revenue. That could mean the company is over-investing in growth, losing operating leverage as it scales headcount faster than revenue, or facing rising overhead costs like rent or corporate salaries. It's a useful diagnostic because it isolates whether the issue is with the product economics or with how the business is being run above the factory floor."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "income-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-003-revenue-recognition-basics",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "In plain terms, when does a company recognize revenue under accrual accounting?",
+    "keyPoints": [
+      {"point": "Revenue is recognized when it is earned — goods delivered or services performed — not necessarily when cash is received", "weight": 3},
+      {"point": "This follows the matching principle underlying accrual accounting", "weight": 2},
+      {"point": "Example: cash received in advance creates deferred revenue (a liability) until earned", "weight": 2}
+    ],
+    "misconceptions": [
+      "Believing revenue equals cash collected in the period",
+      "Thinking a signed contract alone triggers revenue recognition regardless of delivery"
+    ],
+    "modelAnswer": "Under accrual accounting, revenue is recognized when the company has actually delivered the good or performed the service — when it has satisfied its obligation to the customer — regardless of when cash physically changes hands. This is the core idea behind the matching principle: revenue should be recorded in the period the underlying economic activity occurred, matched against the costs incurred to generate it. So if a customer pays upfront for a one-year subscription, the company doesn't recognize all of that cash as revenue immediately; instead it books deferred revenue, a liability, and recognizes revenue ratably as it delivers the service each month. Conversely, if a company delivers a product on credit terms, it recognizes revenue immediately and records an account receivable, even though the cash hasn't been collected yet. This is why net income and cash flow can diverge significantly, and why analysts always check the cash flow statement alongside the income statement to understand the real cash picture.",
+    "followups": [
+      {
+        "prompt": "How does this differ from cash-basis accounting?",
+        "modelAnswer": "Cash-basis accounting recognizes revenue and expenses only when cash actually changes hands — collect cash, record revenue; pay cash, record expense — with no concept of receivables, payables, or deferred revenue. It's simple but can be misleading for evaluating a business's true operating performance, since timing of cash receipts and disbursements can be erratic and unrelated to when value was actually delivered. Almost all public companies and larger private companies use accrual accounting because it gives a more accurate picture of profitability and matches revenue to the period the related work was done, which is why GAAP and IFRS both require it."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "income-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-004-basic-eps-calculation",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "single-step",
+    "prompt": "A company has net income of $40 million and 20 million basic weighted-average shares outstanding, with no preferred dividends. What is basic EPS?",
+    "keyPoints": [
+      {"point": "EPS = net income available to common shareholders / weighted-average shares outstanding", "weight": 3},
+      {"point": "Correctly divides $40 million by 20 million shares", "weight": 3},
+      {"point": "Arrives at $2.00 per share", "weight": 2},
+      {"point": "Notes this is basic EPS, distinct from diluted EPS which would use a higher share count", "weight": 1}
+    ],
+    "misconceptions": [
+      "Multiplying instead of dividing net income by share count",
+      "Forgetting to subtract preferred dividends when they exist (not applicable here, but worth flagging)"
+    ],
+    "modelAnswer": "Basic EPS is simply net income available to common shareholders divided by the weighted-average number of basic shares outstanding during the period. Here there are no preferred dividends to subtract, so the full $40 million of net income is available to common shareholders. Dividing $40 million by 20 million shares gives $2.00 of basic EPS. It's worth noting this is the basic figure — diluted EPS would use a larger share count that includes the dilutive effect of options, warrants, and convertible securities, so diluted EPS would typically come in at or below $2.00. Basic EPS is a useful quick metric, but analysts usually focus more on diluted EPS since it reflects the fully diluted ownership base and avoids overstating per-share profitability.",
+    "followups": [
+      {
+        "prompt": "If the company also had $2 million of preferred dividends, how would that change the calculation?",
+        "modelAnswer": "You'd subtract the $2 million of preferred dividends from net income first, since that income belongs to preferred shareholders, not common shareholders. That leaves $38 million available to common shareholders. Dividing $38 million by 20 million shares gives $1.90 of basic EPS. This is a common trap in interviews — forgetting that EPS is specifically 'earnings per common share,' so any income earmarked for preferred holders has to be carved out before doing the per-share math."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "income-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-005-accounting-equation",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is the fundamental accounting equation, and why must a balance sheet always balance?",
+    "keyPoints": [
+      {"point": "States Assets = Liabilities + Shareholders' Equity", "weight": 3},
+      {"point": "Explains double-entry bookkeeping: every transaction affects at least two accounts", "weight": 3},
+      {"point": "Equity is the residual claim after liabilities are subtracted from assets", "weight": 2}
+    ],
+    "misconceptions": [
+      "Thinking the balance sheet 'balances' by coincidence rather than by construction of double-entry accounting",
+      "Confusing equity with cash"
+    ],
+    "modelAnswer": "The fundamental accounting equation is Assets equal Liabilities plus Shareholders' Equity. Assets are everything the company owns or controls that has future economic value — cash, receivables, inventory, PP&E. Liabilities are what the company owes to outside parties — accounts payable, debt, accrued expenses. Equity is the residual claim the owners have on the business once all liabilities are settled; it's built up from capital contributed by shareholders plus retained earnings accumulated over time. The balance sheet always balances by construction, because of double-entry bookkeeping: every transaction the company records hits at least two accounts, and those entries are designed so the equation stays true. For example, if a company borrows $10 million in cash, assets go up by $10 million (cash) and liabilities go up by $10 million (debt) — equity is untouched, and the equation still holds. That built-in symmetry is why the balance sheet is a powerful check on the internal consistency of a company's books.",
+    "followups": [
+      {
+        "prompt": "Give an example of a transaction that only affects one side of the balance sheet.",
+        "modelAnswer": "Collecting an account receivable in cash is a good example — cash goes up and accounts receivable goes down, both on the asset side, so total assets are unchanged and liabilities and equity aren't touched at all. Another example is using cash to buy inventory: cash decreases and inventory increases, again both assets, netting to zero change in total assets. These 'asset-for-asset swap' transactions are common and show that not every transaction needs to touch both sides of the equation — it just needs to keep the equation balanced overall."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "balance-sheet-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-006-current-vs-noncurrent",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What distinguishes a current asset or liability from a non-current one?",
+    "keyPoints": [
+      {"point": "Current items are expected to be converted to cash or settled within 12 months (or one operating cycle)", "weight": 3},
+      {"point": "Non-current items extend beyond that horizon", "weight": 2},
+      {"point": "Gives examples: cash, AR, inventory as current assets; PP&E, goodwill, long-term debt as non-current", "weight": 2}
+    ],
+    "misconceptions": [
+      "Assuming all debt is non-current, ignoring that the current portion of long-term debt is reclassified as current",
+      "Confusing inventory turnover speed with its balance sheet classification"
+    ],
+    "modelAnswer": "The dividing line is time horizon: current assets and liabilities are those expected to be converted into cash, consumed, or settled within twelve months, or within the company's normal operating cycle if that's longer. Current assets include cash, short-term investments, accounts receivable, and inventory — things that will turn into cash relatively quickly. Current liabilities include accounts payable, accrued expenses, and the current portion of long-term debt due within the year. Non-current items sit on longer time horizons: property, plant and equipment, goodwill, and long-term investments on the asset side; long-term debt, deferred tax liabilities, and pension obligations on the liability side. This classification matters because it lets analysts assess short-term liquidity — comparing current assets to current liabilities via the current ratio — separately from the company's longer-term capital structure and asset base. A useful nuance is that a portion of long-term debt maturing within the next year gets reclassified as a current liability, even though the debt itself is long-term in nature.",
+    "followups": [
+      {
+        "prompt": "Why does it matter to separate current from non-current for analyzing a company?",
+        "modelAnswer": "It lets you assess near-term liquidity risk separately from long-term solvency. If current liabilities significantly exceed current assets, the company might struggle to meet its obligations over the next year even if it's healthy on a long-term basis, which is a red flag for working capital or refinancing risk. Conversely, a strong current ratio doesn't guarantee long-term health if the non-current liabilities, like a mountain of long-term debt, are unsustainable relative to the asset base or cash generation. Separating the two horizons gives a cleaner read on both short-term cash management and long-term capital structure."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "balance-sheet-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-007-shareholders-equity-components",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What makes up the shareholders' equity section of the balance sheet?",
+    "keyPoints": [
+      {"point": "Common stock and additional paid-in capital (APIC) from shares issued", "weight": 2},
+      {"point": "Retained earnings — cumulative net income less dividends paid over time", "weight": 3},
+      {"point": "Treasury stock — a contra-equity account for repurchased shares", "weight": 2},
+      {"point": "Accumulated other comprehensive income (AOCI) for items like FX translation or unrealized gains/losses", "weight": 1}
+    ],
+    "misconceptions": [
+      "Believing equity is simply cash the company has on hand",
+      "Forgetting treasury stock reduces equity rather than being an asset"
+    ],
+    "modelAnswer": "Shareholders' equity is made up of several pieces that together represent the owners' residual claim on the business. Common stock and additional paid-in capital capture the money shareholders originally put into the company when shares were issued, at par value and above. Retained earnings is the cumulative net income the company has generated over its life, minus all dividends paid out — it's the internally generated capital that's been reinvested in the business rather than distributed. Treasury stock is a contra-equity account representing shares the company has repurchased from the market but not retired; it reduces total equity. Finally, accumulated other comprehensive income captures items that bypass the income statement but still affect equity, like foreign currency translation adjustments or unrealized gains and losses on certain securities. Together, these components explain why a profitable, long-running company with a share buyback program can have a very different equity structure than a young company that just IPO'd.",
+    "followups": [
+      {
+        "prompt": "Why does a large share buyback reduce equity rather than being recorded as an expense?",
+        "modelAnswer": "A buyback isn't a cost of doing business — it's a return of capital to shareholders, exchanging cash for previously issued shares. Since it doesn't consume resources to generate revenue, it never touches the income statement. Instead, cash goes down on the asset side, and treasury stock, a contra-equity account, increases by the same amount, which brings total equity down. This keeps the accounting equation balanced: assets fall by the cash spent, and equity falls by the same amount, with liabilities untouched. It's fundamentally a balance sheet transaction, not an operating one."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "balance-sheet-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-008-total-assets-from-liabilities-equity",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "single-step",
+    "prompt": "A company has total liabilities of $65 million and total shareholders' equity of $35 million. What are total assets?",
+    "keyPoints": [
+      {"point": "Applies Assets = Liabilities + Equity", "weight": 3},
+      {"point": "Adds $65 million and $35 million correctly", "weight": 3},
+      {"point": "Arrives at $100 million total assets", "weight": 2}
+    ],
+    "misconceptions": [
+      "Subtracting instead of adding liabilities and equity",
+      "Confusing equity with total assets directly"
+    ],
+    "modelAnswer": "This is a direct application of the accounting equation: Assets equal Liabilities plus Shareholders' Equity. Adding total liabilities of $65 million and total shareholders' equity of $35 million gives total assets of $100 million. Conceptually, this makes sense because the balance sheet is simply showing two different views of the same $100 million of resources: the left side shows what the company owns, and the right side shows who has a claim on it — creditors get $65 million of priority claim, and shareholders hold the $35 million residual. Any time you're given two of the three variables in this equation, you can solve for the third with simple addition or subtraction.",
+    "followups": [
+      {
+        "prompt": "If total assets stayed at $100 million but the company took on $10 million of new debt to fund a dividend, what happens to equity?",
+        "modelAnswer": "If the company borrows $10 million and pays it straight out as a dividend, cash comes in from the debt issuance and immediately goes back out to shareholders, so total assets end up unchanged at $100 million. But liabilities rise by $10 million from the new debt, and since assets didn't move, equity must fall by $10 million to keep the equation balanced — retained earnings drops because of the dividend payment. This is exactly the mechanic behind a debt-funded dividend recapitalization: it levers up the balance sheet and shrinks the equity cushion without changing the asset base."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "balance-sheet-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-009-cfs-three-sections",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What are the three sections of the cash flow statement, and what does each capture?",
+    "keyPoints": [
+      {"point": "Cash flow from operations (CFO): cash generated from core business activities", "weight": 3},
+      {"point": "Cash flow from investing (CFI): capex, acquisitions, purchases/sales of investments", "weight": 3},
+      {"point": "Cash flow from financing (CFF): debt issuance/repayment, equity issuance, dividends, buybacks", "weight": 3}
+    ],
+    "misconceptions": [
+      "Putting capex in the financing section instead of investing",
+      "Putting dividends paid in the operating section"
+    ],
+    "modelAnswer": "The cash flow statement is broken into three sections, each capturing a different source or use of cash. Cash flow from operations reflects the cash generated or consumed by the company's core, day-to-day business — it starts from net income and adjusts for non-cash items like depreciation and changes in working capital accounts like receivables, inventory, and payables. Cash flow from investing captures cash spent on or received from long-term assets and investments — capital expenditures, acquisitions, and purchases or sales of securities or other investments. Cash flow from financing captures cash flows related to the company's capital structure — issuing or repaying debt, issuing or repurchasing stock, and paying dividends. Adding the net cash flow from these three sections to the beginning cash balance gets you to the ending cash balance on the balance sheet, which is the ultimate tie-out that makes the cash flow statement reconcile with the other two statements.",
+    "followups": [
+      {
+        "prompt": "Why is it useful to separate CFO from CFI and CFF rather than just looking at total cash generated?",
+        "modelAnswer": "Because the source of cash tells you a very different story about the business. Strong CFO means the core operations are self-funding, which is the healthiest signal. Negative CFI is often good news if it reflects reinvestment in growth capex, but negative CFO funded by financing activities like new debt or equity issuance is a warning sign that the business itself isn't generating cash and is relying on outside capital to survive. Looking at total cash flow alone would mask whether a company is thriving organically or being propped up by borrowing or dilutive equity raises."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "cash-flow-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-010-indirect-method-starting-point",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "The indirect method cash flow statement starts with what line item, and why?",
+    "keyPoints": [
+      {"point": "Starts with net income from the income statement", "weight": 3},
+      {"point": "Purpose is to reconcile accrual-based net income to actual cash generated", "weight": 3},
+      {"point": "Adjusts for non-cash items (D&A, stock comp) and changes in working capital", "weight": 2}
+    ],
+    "misconceptions": [
+      "Believing the indirect method starts with revenue or cash receipts directly",
+      "Not understanding why an adjustment process is even necessary"
+    ],
+    "modelAnswer": "The indirect method starts with net income, the bottom line of the income statement. It does this because net income is computed on an accrual basis, meaning it includes non-cash items and reflects revenue and expenses when earned or incurred rather than when cash actually moves. The whole purpose of the indirect cash flow statement is to reconcile that accrual-based number back to actual cash generated during the period. So starting from net income, you add back non-cash expenses like depreciation, amortization, and stock-based compensation, since those reduced net income but didn't consume any cash. Then you adjust for changes in working capital accounts — an increase in receivables is a use of cash even though it was already counted as revenue, while an increase in payables is a source of cash even though the expense was already recognized. After all these adjustments, you arrive at cash flow from operations, which is a much cleaner measure of the cash the core business actually threw off during the period.",
+    "followups": [
+      {
+        "prompt": "Why not just track cash flow directly instead of reconciling from net income?",
+        "modelAnswer": "That's actually what the direct method does — it lists actual cash receipts from customers and cash payments to suppliers and employees directly, without starting from net income. It's arguably more intuitive, but it requires tracking gross cash inflows and outflows in a way most accounting systems aren't set up to easily produce, since books are kept on an accrual basis. The indirect method is far more common in practice because it can be built directly off the income statement and balance sheet without needing a parallel cash-tracking system, and it has the added benefit of explicitly showing the reconciliation between net income and cash, which is useful information in its own right."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "cash-flow-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-011-depreciation-add-back",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Why is depreciation added back to net income on the cash flow statement even though it reduced net income?",
+    "keyPoints": [
+      {"point": "Depreciation is a non-cash expense — no cash actually leaves the business when it's recorded", "weight": 3},
+      {"point": "It already reduced net income on the income statement via COGS/opex", "weight": 2},
+      {"point": "Adding it back in CFO removes the non-cash distortion to reflect true cash generated", "weight": 3}
+    ],
+    "misconceptions": [
+      "Thinking the add-back means depreciation 'doesn't matter'",
+      "Believing cash actually flows back into the company when it's added back"
+    ],
+    "modelAnswer": "Depreciation represents the allocation of a past capital expenditure's cost over the useful life of the asset — it's an accounting mechanism to match the cost of a long-lived asset against the revenue it helps generate over time. But the actual cash for that asset was spent years earlier, when the asset was purchased, and shows up in cash flow from investing at that time. So when depreciation is recorded in the current period, it reduces net income on the income statement, but no cash actually leaves the business in that period. On the cash flow statement, we start with net income and add depreciation back specifically to remove that non-cash distortion, so cash flow from operations reflects the real cash the business generated. It's not that depreciation doesn't matter — it very much matters for measuring true economic profitability and for tax purposes — it's just that it's a timing and allocation concept rather than an actual cash movement in the period it's recorded.",
+    "followups": [
+      {
+        "prompt": "Does depreciation have any actual cash impact at all?",
+        "modelAnswer": "Yes, indirectly through taxes. Depreciation is deductible for tax purposes, so it reduces taxable income and therefore reduces the actual cash taxes paid in that period. That's a real cash benefit, often called a 'tax shield.' So while depreciation itself isn't a cash outflow, the tax savings it generates absolutely are a cash inflow relative to a world with no depreciation deduction. This is one reason companies often prefer accelerated depreciation methods for tax purposes — pulling the tax shield forward improves near-term cash flow, even though total depreciation over the asset's life is the same either way."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "cash-flow-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-012-cfo-single-step-calc",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "single-step",
+    "prompt": "Net income is $50 million, D&A is $12 million, and there is a $3 million net increase in working capital (a use of cash), with a 25% tax rate already reflected in net income. What is cash flow from operations?",
+    "keyPoints": [
+      {"point": "Starts from net income of $50 million", "weight": 2},
+      {"point": "Adds back D&A of $12 million as a non-cash expense", "weight": 3},
+      {"point": "Subtracts the $3 million increase in working capital since it's a use of cash", "weight": 3},
+      {"point": "Arrives at CFO of $59 million", "weight": 2}
+    ],
+    "misconceptions": [
+      "Adding the working capital increase instead of subtracting it",
+      "Forgetting to add back D&A"
+    ],
+    "modelAnswer": "Starting with net income of $50 million, we add back depreciation and amortization of $12 million since it's a non-cash expense that reduced net income but didn't use any actual cash. That brings us to $62 million. Then we account for the change in working capital: an increase in net working capital of $3 million means cash got tied up in things like additional receivables or inventory net of payables, so that's a use of cash and gets subtracted. That leaves cash flow from operations of $59 million. This is the standard indirect-method build: start with the accrual-based net income figure, strip out non-cash items, and adjust for the timing differences captured in working capital changes to arrive at the actual cash the operating business generated during the period.",
+    "followups": [
+      {
+        "prompt": "If the working capital change had instead been a $3 million decrease, how would CFO change?",
+        "modelAnswer": "A decrease in working capital is a source of cash rather than a use, so instead of subtracting $3 million, you'd add it. Starting from net income of $50 million plus D&A of $12 million gets you to $62 million, and then adding the $3 million working capital release brings CFO to $65 million. A working capital decrease typically means the company collected receivables faster, drew down inventory, or stretched payables — all of which free up cash that was previously tied up in the operating cycle."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "cash-flow-statement-anatomy",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-013-net-income-flows-to-three-statements",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "How does net income connect the income statement to the balance sheet and cash flow statement?",
+    "keyPoints": [
+      {"point": "Net income is the bottom line of the income statement", "weight": 2},
+      {"point": "It's the starting point for cash flow from operations in the indirect method", "weight": 3},
+      {"point": "It flows into retained earnings on the balance sheet, net of any dividends paid", "weight": 3}
+    ],
+    "misconceptions": [
+      "Thinking net income flows directly into cash on the balance sheet",
+      "Forgetting dividends reduce the amount that flows into retained earnings"
+    ],
+    "modelAnswer": "Net income is the single number that ties all three statements together. It's calculated at the bottom of the income statement as revenue minus all expenses, including taxes. That same net income figure becomes the starting point of the cash flow statement under the indirect method, where it gets adjusted for non-cash items and working capital changes to arrive at cash flow from operations. Separately, net income also flows into the balance sheet through retained earnings: ending retained earnings equals beginning retained earnings plus net income, minus any dividends declared during the period. It's important to note net income doesn't flow directly into the cash balance on the balance sheet — that only happens after the full cash flow statement is built out, since net income includes non-cash items and hasn't yet accounted for capex, financing activities, or working capital timing. The ending cash balance from the cash flow statement is what actually updates the cash line on the balance sheet.",
+    "followups": [
+      {
+        "prompt": "What happens to retained earnings if the company pays a dividend equal to exactly its net income?",
+        "modelAnswer": "If dividends paid exactly equal net income for the period, retained earnings stays flat — beginning retained earnings plus net income minus an equal dividend nets to zero change. This is common for mature, cash-generative companies with a stable payout policy, sometimes even a 100% payout ratio. It doesn't mean the company isn't creating value; it just means all of the current period's earnings are being distributed to shareholders rather than reinvested and retained inside the equity account."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "accounting-linkages",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-014-depreciation-links-three-statements",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Trace how a single depreciation expense touches all three financial statements.",
+    "keyPoints": [
+      {"point": "Income statement: reduces operating income and therefore net income", "weight": 3},
+      {"point": "Cash flow statement: added back in CFO since it's non-cash", "weight": 3},
+      {"point": "Balance sheet: reduces net PP&E via accumulated depreciation; retained earnings falls by the after-tax impact through net income", "weight": 3}
+    ],
+    "misconceptions": [
+      "Believing depreciation only affects the income statement",
+      "Forgetting the balance sheet impact runs through both the asset side (PP&E) and the equity side (retained earnings)"
+    ],
+    "modelAnswer": "Depreciation is a great example question because it hits all three statements simultaneously. On the income statement, it's recorded as an expense, embedded in COGS or operating expenses, which reduces operating income, pre-tax income, and ultimately net income — and since it also creates a tax shield, taxes paid go down too. On the cash flow statement, because it's a non-cash charge, it gets added back to net income within cash flow from operations, so the actual cash impact of depreciation itself is just the tax savings it generates. On the balance sheet, two things happen: net PP&E goes down, because accumulated depreciation increases and is netted against gross PP&E; and equity goes down slightly, because the lower net income (after the tax benefit) flows through to retained earnings. Cash on the balance sheet actually goes up slightly relative to a no-depreciation scenario, purely because of the tax savings. This full trace — IS impact, CFS add-back, BS asset reduction and equity reduction — is exactly the kind of answer interviewers are listening for.",
+    "followups": [
+      {
+        "prompt": "Does depreciation ever affect cash flow from investing?",
+        "modelAnswer": "No — the cash impact of the underlying asset purchase already happened in cash flow from investing when the asset was originally bought, as a capital expenditure. Depreciation itself, in the period it's recorded, is purely an income statement and balance sheet allocation mechanism with no fresh cash outlay, so it never touches CFI. The only place it shows up on the cash flow statement is as a non-cash add-back within cash flow from operations."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "accounting-linkages",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-015-capex-links-bs-cfs",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "How does a capital expenditure show up on the balance sheet and cash flow statement, assuming it doesn't hit the income statement directly?",
+    "keyPoints": [
+      {"point": "Cash flow statement: recorded as an outflow in cash flow from investing", "weight": 3},
+      {"point": "Balance sheet: increases gross PP&E, decreases cash by the same amount", "weight": 3},
+      {"point": "No immediate income statement impact — the cost is expensed gradually over time via depreciation", "weight": 2}
+    ],
+    "misconceptions": [
+      "Thinking capex is expensed immediately on the income statement like an operating cost",
+      "Recording capex in the financing section instead of investing"
+    ],
+    "modelAnswer": "When a company spends cash to buy a long-lived asset — machinery, a building, equipment — that spend is classified as a capital expenditure. On the cash flow statement, it shows up as a cash outflow within cash flow from investing, since it's an investment in the company's long-term productive capacity rather than a day-to-day operating cost. On the balance sheet, cash goes down by the amount spent, and PP&E goes up by the same amount, so total assets are unchanged — it's simply a swap from one asset (cash) into another (a fixed asset). Critically, the income statement isn't touched at the moment of purchase; capex isn't expensed immediately. Instead, its cost gets recognized gradually over the asset's useful life through depreciation, which flows through the income statement period by period. This is the key distinction between capex and an operating expense like a maintenance cost — an operating expense hits the income statement immediately, while capex is capitalized on the balance sheet and expensed over time.",
+    "followups": [
+      {
+        "prompt": "How would the accounting differ if the company leased the equipment instead of buying it outright?",
+        "modelAnswer": "Under current lease accounting rules, most leases — both operating and finance leases — are capitalized on the balance sheet as a right-of-use asset with a corresponding lease liability, so the mechanics look somewhat similar to owning the asset. The key difference from a straight capex purchase is that instead of one large upfront cash outflow in investing, the lease liability builds up on the balance sheet and cash payments are made over time, generally split between operating and financing cash flow depending on the lease type. There's no single large negative CFI hit at inception the way there is with an outright purchase, since the company isn't paying cash upfront for the full asset value."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "accounting-linkages",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-016-define-working-capital",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is working capital, and what does it measure?",
+    "keyPoints": [
+      {"point": "Working capital = current assets minus current liabilities", "weight": 3},
+      {"point": "Measures short-term liquidity — the company's ability to meet near-term obligations", "weight": 3},
+      {"point": "Operating working capital typically excludes cash and short-term debt to focus on the core operating cycle", "weight": 2}
+    ],
+    "misconceptions": [
+      "Confusing working capital with total cash on hand",
+      "Believing more working capital is always better regardless of business model"
+    ],
+    "modelAnswer": "Working capital is defined as current assets minus current liabilities. It's a measure of a company's short-term liquidity — essentially, whether it has enough near-term resources to cover its near-term obligations as they come due. A positive working capital balance suggests the company can comfortably meet its short-term liabilities from its short-term assets, while negative working capital can signal liquidity stress, though not always — some business models are structured to run with negative working capital intentionally. When analysts talk about 'operating working capital' or 'net working capital' in a modeling context, they usually strip out cash and short-term debt from the calculation, focusing instead on the core operating accounts like receivables, inventory, and payables, since cash and debt are more related to the company's financing and liquidity management than its actual operating cycle. Changes in working capital period to period are what drive the working capital adjustment on the cash flow statement.",
+    "followups": [
+      {
+        "prompt": "Why would an analyst exclude cash and debt from the working capital calculation used in a model?",
+        "modelAnswer": "Because cash and short-term debt are financing and treasury decisions, not operational ones — a company's cash balance depends on how much it chooses to hold versus distribute or invest, and short-term debt is a financing choice, not something that arises naturally from running the operating business. If you included them, working capital swings would be driven by capital structure decisions rather than the actual dynamics of receivables, inventory, and payables tied to running the business day to day. Stripping them out isolates the true operating cash conversion cycle, which is what you want to forecast and analyze when projecting a company's cash flow from operations."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "working-capital-and-operational-items",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-017-dso-dio-dpo-concepts",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What do DSO, DIO, and DPO each measure, in plain English?",
+    "keyPoints": [
+      {"point": "DSO (days sales outstanding): average number of days it takes to collect cash from customers after a sale", "weight": 3},
+      {"point": "DIO (days inventory outstanding): average number of days inventory sits before being sold", "weight": 3},
+      {"point": "DPO (days payable outstanding): average number of days the company takes to pay its suppliers", "weight": 3}
+    ],
+    "misconceptions": [
+      "Mixing up which metric measures collection speed versus payment speed",
+      "Thinking a higher DSO is always good (it's actually a sign of slower collections)"
+    ],
+    "modelAnswer": "These three metrics measure how quickly cash moves through a company's operating cycle. Days sales outstanding, or DSO, measures on average how many days it takes the company to collect cash after making a credit sale — a lower DSO means customers are paying faster, which is good for cash flow. Days inventory outstanding, or DIO, measures how many days on average inventory sits in the warehouse or on shelves before it's sold — a lower DIO means inventory is turning over faster and less cash is tied up sitting on a shelf. Days payable outstanding, or DPO, measures how many days on average the company takes to pay its own suppliers — here, a higher DPO is actually good for the company's cash position, since it means they're holding onto cash longer before paying vendors, effectively getting free financing from suppliers. Together, these three metrics roll up into the cash conversion cycle, which tells you how long cash is tied up in the operating cycle from paying for inventory to collecting cash from the eventual sale.",
+    "followups": [
+      {
+        "prompt": "Why might a supplier be uncomfortable if a customer's DPO is increasing rapidly?",
+        "modelAnswer": "A rapidly rising DPO can mean the customer is deliberately stretching payment terms to conserve its own cash, which shifts working capital burden onto the supplier. If it's a negotiated, mutually agreed extension it's usually fine, but if it happens unilaterally or accelerates suddenly, it can be an early warning sign that the customer is under cash flow stress and delaying payments because it's struggling to pay bills on time. Suppliers often watch DPO trends of key customers closely as a leading indicator of counterparty credit risk before it shows up in more obvious signs of financial distress."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "working-capital-and-operational-items",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-018-nwc-single-step-calc",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "single-step",
+    "prompt": "A company has current assets of $80 million (including $10 million of cash) and current liabilities of $50 million. What is net working capital, and what is operating working capital excluding cash?",
+    "keyPoints": [
+      {"point": "Net working capital = current assets minus current liabilities = $80M - $50M = $30M", "weight": 3},
+      {"point": "Operating working capital excludes cash: ($80M - $10M) - $50M = $20M", "weight": 3},
+      {"point": "Explains why cash is often excluded when analyzing operating working capital", "weight": 2}
+    ],
+    "misconceptions": [
+      "Forgetting to subtract cash out when computing operating working capital",
+      "Subtracting current assets from current liabilities instead of the reverse"
+    ],
+    "modelAnswer": "Net working capital is current assets minus current liabilities, so here that's $80 million minus $50 million, which equals $30 million. That's the standard textbook definition. But when analysts talk about operating working capital, they typically strip cash out of current assets first, since cash is more of a treasury and financing item than a core operating one. Doing that, current assets excluding cash are $80 million minus $10 million, or $70 million, and subtracting current liabilities of $50 million gives operating working capital of $20 million. The $10 million gap between the two figures is simply the cash sitting on the balance sheet. This distinction matters in modeling contexts, because you generally want to forecast and analyze the operating working capital cycle — receivables, inventory, payables — separately from the company's cash management or financing decisions.",
+    "followups": [
+      {
+        "prompt": "If current liabilities also included $5 million of short-term debt, how would that affect the operating working capital figure?",
+        "modelAnswer": "Short-term debt is also typically excluded from operating working capital calculations for the same reason cash is — it's a financing item, not an operational one. So you'd subtract that $5 million from current liabilities before doing the calculation: current liabilities excluding debt would be $50 million minus $5 million, or $45 million. Operating working capital would then be $70 million (current assets excluding cash) minus $45 million (current liabilities excluding debt), which equals $25 million. Isolating both cash and short-term debt from the calculation gives the cleanest read on the true operating cycle, uncontaminated by treasury and capital structure decisions."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "working-capital-and-operational-items",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-019-three-statement-order",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "If you were building a three-statement model from scratch, in what order would you build the statements, and why?",
+    "keyPoints": [
+      {"point": "Build the income statement first, since it drives net income", "weight": 3},
+      {"point": "Then build the cash flow statement, which uses net income plus balance sheet changes (D&A, working capital, capex, financing)", "weight": 3},
+      {"point": "The balance sheet is completed last, since it needs both net income (for retained earnings) and the ending cash balance from the cash flow statement", "weight": 3}
+    ],
+    "misconceptions": [
+      "Believing the balance sheet can be built independently first without inputs from the other two statements",
+      "Thinking the cash flow statement is built before the income statement"
+    ],
+    "modelAnswer": "You'd typically start with the income statement, since it's largely driven by operating assumptions like revenue growth and margins, and its bottom line, net income, is the key input the other two statements depend on. Next you'd build the cash flow statement, because it starts with net income and layers on non-cash adjustments like depreciation and stock comp, changes in working capital pulled from the balance sheet, capital expenditures, and financing activities like debt issuance or dividends. Finally, you complete the balance sheet, because several of its lines depend on outputs from the other two statements — retained earnings updates from net income and dividends off the income statement, PP&E updates from capex and depreciation off the cash flow statement, and the cash balance itself is the ending cash figure calculated at the bottom of the cash flow statement. In practice, it's actually a bit circular and iterative — you need some balance sheet assumptions like the current period's ending receivables or payables to calculate the cash flow statement's working capital changes — but conceptually, income statement first, cash flow statement second, balance sheet completed last is the right mental model.",
+    "followups": [
+      {
+        "prompt": "Why is the balance sheet described as circular in a model, rather than strictly last in a linear sequence?",
+        "modelAnswer": "Because some balance sheet items, like ending accounts receivable or accounts payable for the current period, are themselves inputs into the working capital section of the cash flow statement, which in turn feeds into the ending cash balance that populates the balance sheet. So you actually need certain balance sheet projections — often driven by ratios like DSO or DPO applied to income statement figures — before you can finish the cash flow statement, and then the cash flow statement's output completes the balance sheet. This back-and-forth dependency is why fully built financial models often have circularity, sometimes requiring iterative calculation settings in Excel, particularly when interest expense depends on a revolver balance that itself depends on the cash flow being modeled."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "three-statement-walkthrough",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-020-net-income-as-hinge",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Why is net income often described as the 'hinge' connecting the three financial statements?",
+    "keyPoints": [
+      {"point": "It's the final line of the income statement", "weight": 2},
+      {"point": "It's the starting point for cash flow from operations on the cash flow statement", "weight": 3},
+      {"point": "It flows into retained earnings on the balance sheet, net of dividends", "weight": 3}
+    ],
+    "misconceptions": [
+      "Thinking net income is only relevant to the income statement",
+      "Overlooking the dividend adjustment when net income moves to retained earnings"
+    ],
+    "modelAnswer": "Net income is called the hinge because it's the single figure that physically connects all three statements together — it's not just a summary number, it's an active input into the other two. It's the last line of the income statement, summarizing all revenue and expenses for the period. From there, it becomes the very first line of the indirect-method cash flow statement, where it gets reconciled to actual cash generated through non-cash add-backs and working capital adjustments. And separately, net income flows into the balance sheet through the retained earnings roll-forward: beginning retained earnings plus net income minus dividends paid equals ending retained earnings, which is one of the components of shareholders' equity. So if you change an income statement assumption — say, a higher tax rate reducing net income — you can trace the ripple effect through cash flow from operations and ultimately into the equity section of the balance sheet, all because net income sits at that central hinge point linking the statements together.",
+    "followups": [
+      {
+        "prompt": "Is net income the only line item that connects across all three statements, or are there others?",
+        "modelAnswer": "Net income is the clearest and most direct connector, but it's not the only one. Depreciation, for example, touches the income statement as an expense, gets added back on the cash flow statement, and reduces PP&E on the balance sheet. Capital expenditures show up in cash flow from investing and increase PP&E on the balance sheet. Debt issuances and repayments show up in cash flow from financing and change the debt balance on the balance sheet, while also affecting future interest expense on the income statement. So while net income is the primary hinge because it summarizes the whole income statement into one figure, many individual line items create their own linkages across statements as well."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "three-statement-walkthrough",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-021-ap-increase-effect",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "single-step",
+    "prompt": "Accounts payable increases by $10 million during the year, holding everything else constant. What is the effect on cash flow from operations?",
+    "keyPoints": [
+      {"point": "An increase in accounts payable is a source of cash", "weight": 3},
+      {"point": "CFO increases by $10 million", "weight": 3},
+      {"point": "No direct income statement impact — the related expense was already recognized when incurred, regardless of payment timing", "weight": 2}
+    ],
+    "misconceptions": [
+      "Treating an AP increase as a use of cash rather than a source",
+      "Believing AP changes affect the income statement directly"
+    ],
+    "modelAnswer": "An increase in accounts payable means the company is delaying cash payments to its suppliers relative to when the related expenses were recognized — it has effectively received short-term financing from its vendors. On the cash flow statement, this is treated as a source of cash: cash flow from operations increases by $10 million, because that $10 million of expense was already recognized on the income statement but the cash hasn't actually left the business yet. There's no direct income statement impact from the AP increase itself; the expense was recorded when the goods or services were received, independent of when the cash is actually paid. This is a classic working capital adjustment on the indirect-method cash flow statement — payables increasing frees up cash in the near term, though eventually that cash does need to go out the door when the payable is settled.",
+    "followups": [
+      {
+        "prompt": "Is a rising AP balance always a good sign for a company?",
+        "modelAnswer": "Not necessarily. It can reflect healthy, negotiated payment terms with suppliers, or growth in the underlying business generating more purchases. But it can also signal that a company is intentionally or unintentionally slowing down payments because it's under cash stress, which risks straining supplier relationships or losing favorable terms and discounts. Analysts typically look at DPO trends over multiple periods and against industry norms to judge whether a rising AP balance is a sign of operational leverage over suppliers or a red flag for liquidity problems."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "single-step-changes",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-022-prepaid-insurance-effect",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "single-step",
+    "prompt": "A company pays $5 million cash upfront for a one-year insurance policy. What's the immediate effect on the balance sheet and cash flow statement?",
+    "keyPoints": [
+      {"point": "Balance sheet: cash decreases by $5 million, prepaid expense (an asset) increases by $5 million", "weight": 3},
+      {"point": "Total assets are unchanged — it's an asset-for-asset swap", "weight": 2},
+      {"point": "Cash flow statement: recorded as a $5 million use of cash within cash flow from operations", "weight": 3},
+      {"point": "No income statement impact yet — the expense is recognized over the year as the insurance coverage is used up", "weight": 2}
+    ],
+    "misconceptions": [
+      "Recording the full $5 million as an immediate expense on the income statement",
+      "Treating the payment as a financing or investing cash flow rather than operating"
+    ],
+    "modelAnswer": "Paying $5 million upfront for insurance coverage that extends over the year doesn't create an immediate expense — the company hasn't consumed the benefit yet, it's simply prepaid for it. On the balance sheet, cash decreases by $5 million and a new asset, prepaid insurance, increases by $5 million, so total assets are unchanged; it's purely an asset-for-asset swap. There's no income statement impact at the moment of payment. On the cash flow statement, this shows up as a $5 million use of cash within cash flow from operations, typically reflected as an increase in prepaid expenses within the working capital adjustments. As the year progresses, the company will recognize insurance expense on the income statement each month or quarter as the coverage is used up, drawing down the prepaid asset balance on the balance sheet accordingly, with no further cash flow statement impact at that point since the cash already went out the door at the time of payment.",
+    "followups": [
+      {
+        "prompt": "How does the accounting change once one month of the insurance coverage has passed?",
+        "modelAnswer": "After one month, the company recognizes one-twelfth of the $5 million, or roughly $417,000, as insurance expense on the income statement, which reduces net income for that month. On the balance sheet, the prepaid insurance asset is reduced by that same $417,000, since a portion of the prepaid benefit has now been used up. There's no further cash flow statement impact at this point, since the cash already went out in the original payment — this later step is purely a non-cash reclassification from a prepaid asset into an expense, reflecting the matching principle recognizing the cost in the period the benefit is actually consumed."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "single-step-changes",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-023-depreciation-increase-effect",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "single-step",
+    "prompt": "Depreciation expense increases by $20 million with a 25% tax rate, all else equal. What's the effect on net income and on cash flow from operations?",
+    "keyPoints": [
+      {"point": "Pre-tax income falls by $20 million", "weight": 2},
+      {"point": "Taxes fall by $20M x 25% = $5 million, so net income falls by $15 million", "weight": 3},
+      {"point": "CFO change = -$15 million (lower NI) + $20 million (D&A add-back) = +$5 million increase", "weight": 3}
+    ],
+    "misconceptions": [
+      "Assuming depreciation is cash-neutral to net income (ignoring the tax shield)",
+      "Forgetting to add the higher D&A back when computing the CFO impact"
+    ],
+    "modelAnswer": "An extra $20 million of depreciation reduces pre-tax income by $20 million. At a 25% tax rate, taxes fall by $20 million times 25%, or $5 million, so net income falls by the after-tax amount of $15 million. Now for cash flow from operations: starting from the lower net income, which fell by $15 million, we add back the full $20 million of additional depreciation since it's non-cash. The net effect on CFO is negative $15 million plus positive $20 million, which equals a positive $5 million — cash flow from operations actually increases by $5 million. This might seem counterintuitive at first, but it makes sense: depreciation itself isn't a cash expense, so the only real cash effect of higher depreciation is the tax savings it generates, which here is exactly $5 million. This is a classic interview trap question because people instinctively think more depreciation must hurt cash flow, when in fact it helps it, purely through the tax shield.",
+    "followups": [
+      {
+        "prompt": "Why do companies sometimes prefer accelerated depreciation methods for tax purposes given this effect?",
+        "modelAnswer": "Accelerated depreciation front-loads the depreciation expense into the earlier years of an asset's life, which front-loads the associated tax savings as well. Since a dollar of tax savings today is worth more than the same dollar of savings several years from now due to the time value of money, companies generally prefer to accelerate that tax shield even though total depreciation, and thus total tax savings, over the full life of the asset is identical regardless of the method used. This is purely a timing benefit — it improves near-term cash flow at the expense of higher taxable income, and correspondingly higher depreciation deductions, in later years."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "single-step-changes",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-024-simple-income-statement-build",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "multi-step",
+    "prompt": "Revenue is $200 million, COGS is $120 million, and operating expenses (SG&A) are $50 million. Compute gross profit and operating income.",
+    "keyPoints": [
+      {"point": "Gross profit = Revenue - COGS = $200M - $120M = $80M", "weight": 3},
+      {"point": "Operating income = Gross profit - SG&A = $80M - $50M = $30M", "weight": 3},
+      {"point": "Correctly sequences the two subtractions in order", "weight": 2}
+    ],
+    "misconceptions": [
+      "Subtracting SG&A directly from revenue and skipping the gross profit step",
+      "Adding COGS and SG&A together incorrectly before subtracting"
+    ],
+    "modelAnswer": "First, gross profit is revenue minus cost of goods sold: $200 million minus $120 million equals $80 million. That represents a 40% gross margin, showing how much profit is left after covering the direct cost of producing what was sold. Next, operating income is gross profit minus operating expenses, in this case SG&A: $80 million minus $50 million equals $30 million of operating income, a 15% operating margin. Building the statement in this stepwise fashion — revenue, then COGS to get gross profit, then operating expenses to get operating income — mirrors how the real income statement is structured, and it's important to keep each subtotal distinct rather than jumping straight from revenue to operating income, since gross margin and operating margin tell you different things about the business.",
+    "followups": [
+      {
+        "prompt": "If SG&A were $70 million instead of $50 million, what would operating income be, and what would that imply about the company's cost structure?",
+        "modelAnswer": "Gross profit stays the same at $80 million since COGS hasn't changed, but operating income would fall to $80 million minus $70 million, or $10 million, a much thinner 5% operating margin. That would imply the company has a heavy overhead burden relative to its gross profit — possibly a large sales and marketing spend, bloated corporate costs, or heavy R&D investment relative to its current revenue base. It's a useful signal that while the core product economics, reflected in gross margin, are healthy, the company isn't yet converting that into strong bottom-line operating profitability, which could be a scale issue if the business is still growing into its cost base."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "multi-step-scenarios",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-025-simple-fcf-calc",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "multi-step",
+    "prompt": "Net income is $60 million, D&A is $15 million, capital expenditures are $25 million, and the increase in net working capital is $5 million. What is free cash flow (defined here as NI + D&A - Capex - increase in NWC)?",
+    "keyPoints": [
+      {"point": "Start with net income of $60 million and add back D&A of $15 million to get $75 million", "weight": 2},
+      {"point": "Subtract capex of $25 million to get $50 million", "weight": 2},
+      {"point": "Subtract the $5 million increase in NWC to arrive at FCF of $45 million", "weight": 3},
+      {"point": "Understands this approximates cash flow from operations minus capex", "weight": 1}
+    ],
+    "misconceptions": [
+      "Adding capex instead of subtracting it",
+      "Forgetting to subtract the increase in working capital"
+    ],
+    "modelAnswer": "Start with net income of $60 million and add back the non-cash depreciation and amortization of $15 million, which gets you to $75 million — this is effectively an approximation of cash flow from operations before working capital changes. Then subtract capital expenditures of $25 million, since that's cash the company had to reinvest into the business to maintain or grow its asset base, bringing the total to $50 million. Finally, subtract the $5 million increase in net working capital, since that's cash tied up in the operating cycle rather than available to the company, landing at a final free cash flow figure of $45 million. Free cash flow is a key metric because it represents the cash the business generated that's actually available to be returned to shareholders, used to pay down debt, or reinvested in growth beyond maintenance capex, after accounting for both the reinvestment needs of the fixed asset base and the working capital needs of the operating cycle.",
+    "followups": [
+      {
+        "prompt": "Why is free cash flow often considered a more reliable metric than net income alone?",
+        "modelAnswer": "Because net income includes non-cash items and accrual-based timing effects that can make a company look more or less profitable than its actual cash generation would suggest. A company can report solid net income while still consuming huge amounts of cash for capex or working capital, leaving little or nothing actually available to shareholders or for debt paydown. Free cash flow strips out those distortions and focuses on the real cash a business generates and retains after reinvesting in itself, which is why it's a central input for valuation methods like discounted cash flow analysis and for assessing a company's ability to service debt or fund dividends and buybacks."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "multi-step-scenarios",
+    "advanced": false
+  },
+  {
+    "id": "acct-easy-026-dta-vs-dtl",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What's the difference between a deferred tax asset and a deferred tax liability, at a basic level?",
+    "keyPoints": [
+      {"point": "Deferred tax asset arises when a company has paid or will pay more tax now than book expense implies, creating a future tax benefit (e.g. from NOLs or reserves)", "weight": 3},
+      {"point": "Deferred tax liability arises when a company pays less tax now than book expense implies, creating a future tax obligation (e.g. accelerated tax depreciation)", "weight": 3},
+      {"point": "Both stem from timing differences between book (GAAP) accounting and tax accounting", "weight": 2}
+    ],
+    "misconceptions": [
+      "Thinking deferred taxes represent actual cash sitting somewhere",
+      "Confusing which direction (asset vs liability) corresponds to paying more or less tax currently"
+    ],
+    "modelAnswer": "Both deferred tax assets and deferred tax liabilities arise because tax accounting rules and GAAP book accounting rules often recognize revenue and expenses at different times, even though they'll eventually converge over the life of the item. A deferred tax asset shows up when a company has effectively paid more cash tax today than its book tax expense would suggest, creating a future tax benefit it expects to use later — a classic example is net operating loss carryforwards, where a company had tax losses in prior years that it can use to offset taxable income in future profitable years. A deferred tax liability is the opposite: the company has paid less cash tax today than its book tax expense implies, creating a future obligation to pay more tax later — the most common example is accelerated depreciation for tax purposes versus straight-line depreciation for book purposes, which lets a company defer tax payments into later years when the tax depreciation shield runs out ahead of the book depreciation. Neither is real cash sitting anywhere; they're both balance sheet placeholders reflecting the timing mismatch between two different accounting frameworks.",
+    "followups": [
+      {
+        "prompt": "Why would a company use different depreciation methods for book versus tax purposes in the first place?",
+        "modelAnswer": "For book (GAAP) purposes, companies generally want to show smooth, steady earnings that reflect an economically reasonable allocation of an asset's cost, which is why straight-line depreciation is common. For tax purposes, however, companies want to minimize taxable income and defer cash tax payments as long as legally possible, so they often use accelerated depreciation methods allowed by the tax code, which front-load larger deductions into the earlier years of an asset's life. This divergence is completely legal and common — it's simply optimizing two different objectives, smooth reported earnings versus minimized near-term cash taxes — and the deferred tax liability is the balance sheet mechanism that tracks and eventually reverses that timing gap."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "advanced-accounting",
+    "advanced": true
+  },
+  {
+    "id": "acct-easy-027-operating-vs-finance-lease-basics",
+    "topic": "accounting",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Under current lease accounting rules, how do operating leases and finance leases differ in how they hit the balance sheet and income statement?",
+    "keyPoints": [
+      {"point": "Both are now recorded on the balance sheet as a right-of-use asset and a corresponding lease liability", "weight": 3},
+      {"point": "Operating lease: single, straight-line lease expense on the income statement combining interest and amortization", "weight": 3},
+      {"point": "Finance lease: expense is split into separate interest expense and amortization expense, typically front-loaded (higher expense early, lower later)", "weight": 2}
+    ],
+    "misconceptions": [
+      "Believing operating leases are still kept entirely off the balance sheet",
+      "Thinking there's no income statement difference at all between the two lease types"
+    ],
+    "modelAnswer": "Under current lease accounting standards, both operating and finance leases are capitalized on the balance sheet, meaning the lessee records a right-of-use asset representing its right to use the leased item, along with a corresponding lease liability representing its obligation to make future lease payments. This was a major change from older rules, where operating leases were often kept entirely off-balance-sheet. The real difference between the two lease types now shows up on the income statement. For an operating lease, the company records a single, straight-line lease expense each period that combines the effective interest cost and the amortization of the right-of-use asset into one smooth number. For a finance lease, the expense is split into two separate pieces — interest expense on the lease liability, calculated using the effective interest method, and amortization expense on the right-of-use asset, typically on a straight-line basis — and because interest expense declines over time as the liability is paid down, the total expense recognized is front-loaded, higher in early years and lower in later years, compared to the flatter expense pattern of an operating lease.",
+    "followups": [
+      {
+        "prompt": "Why does this distinction matter for a company's reported EBITDA?",
+        "modelAnswer": "For an operating lease, the entire lease expense is typically recorded as a single operating expense line, which reduces EBITDA. For a finance lease, only the amortization portion of the expense sits above the operating income line as an operating expense, while the interest portion sits below, alongside other interest expense, and doesn't reduce EBITDA. So structurally, a company that classifies more of its leases as finance leases will tend to show a higher reported EBITDA than an economically similar company that classifies the same leases as operating leases, purely because of where the interest component lands on the income statement — which is an important nuance when comparing companies with different lease classification mixes."
+      }
+    ],
+    "chapterSlug": "accounting",
+    "sectionSlug": "advanced-accounting",
+    "advanced": true
+  }
+]

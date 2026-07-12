@@ -95,4 +95,7 @@ export const categoryLabels: Record<GuideCategory, string> = {
   modeling: "Modeling Tests",
   superday: "Superday & Logistics",
   "market-news": "Market & Deal News",
+  recruiting: "Recruiting Process",
+  sectors: "Sector Deep-Dives",
+  interviewing: "Interview Skills",
 };

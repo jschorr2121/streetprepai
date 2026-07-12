@@ -1,0 +1,841 @@
+[
+  {
+    "id": "behavioral-medium-001-resume-gap",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "curveball",
+    "prompt": "I notice a six-month gap on your resume between your last internship and now. Walk me through it.",
+    "keyPoints": [
+      {"point": "Addresses the gap directly and factually without excessive apology", "weight": 3},
+      {"point": "Explains what was actually done during the gap, showing productive use of time", "weight": 3},
+      {"point": "Reframes the gap as relevant to the current candidacy where honestly possible", "weight": 2},
+      {"point": "Keeps the explanation brief and moves the conversation forward", "weight": 1}
+    ],
+    "misconceptions": [
+      "Being evasive or vague about the gap, which raises more suspicion than the gap itself",
+      "Over-explaining with unnecessary personal detail beyond what's relevant"
+    ],
+    "modelAnswer": "That period was when a family health situation required me to be closer to home for a few months, so I took a step back from a planned internship search to help manage that. Once things stabilized, I didn't want the time to be purely idle, so I used it to work through a structured financial modeling course on my own, build out a personal stock pitch portfolio, and stay in touch with a couple of banking contacts I'd met through networking, one of whom later connected me to the opportunity that led to this interview. I know a gap on paper can raise questions, so I wanted to be upfront that it was a real circumstance, not a lack of direction, and that I came out of it having kept my technical skills sharp rather than losing momentum. I'd also say the experience of managing a family situation while still pursuing my own goals taught me something about prioritization under stress that I don't think I'd have learned otherwise, and I'm glad to talk through the modeling work I did during that time if it's useful.",
+    "followups": [
+      {
+        "prompt": "How do you know your technical skills didn't atrophy during that time?",
+        "modelAnswer": "I kept building models on real companies throughout, not just doing passive coursework, and I tracked my accuracy by comparing my valuation outputs against actual trading multiples once new data came out. I'd be glad to walk through one of those models here to show the skills held up."
+      },
+      {
+        "prompt": "What would you say if an interviewer seemed skeptical that the gap was really about family circumstances?",
+        "modelAnswer": "I'd calmly reiterate the facts and offer to provide more context privately if that would help, but I wouldn't over-argue the point — if someone doesn't take a good-faith explanation at face value, that's worth noting about the interaction, and I'd rather let my technical answers in the rest of the interview do the persuading."
+      },
+      {
+        "prompt": "Looking back, would you handle that period differently?",
+        "modelAnswer": "I might have reached out to more contacts during that time rather than mostly self-studying in isolation, since the one connection I did maintain ended up being valuable. I'd treat networking as something to keep doing consistently regardless of circumstances, not something that only happens during an active internship search."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "walk-me-through-your-resume",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-002-resume-career-transition",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "You spent two years working in a completely different field before deciding to pursue banking. Walk me through that transition.",
+    "keyPoints": [
+      {"point": "Explains the original career choice with genuine reasoning, not dismissively", "weight": 2},
+      {"point": "Identifies the specific realization or moment that triggered the pivot", "weight": 3},
+      {"point": "Describes concrete steps taken to close the skills gap for banking", "weight": 3},
+      {"point": "Frames the prior experience as an asset rather than wasted time", "weight": 2}
+    ],
+    "misconceptions": [
+      "Describing the prior career negatively, implying poor judgment in the original choice",
+      "Failing to show concrete preparation steps, leaving the pivot looking impulsive"
+    ],
+    "modelAnswer": "I spent two years as a data analyst at a healthcare technology company after graduating, work I chose because I liked the analytical problem-solving and the mission mattered to me. Over time, though, I noticed the parts of the job I liked most were the moments when I was modeling out the financial impact of a product decision for leadership — building the business case, essentially — rather than the day-to-day data engineering work that made up most of my role. That realization pushed me to look more seriously at finance roles where that kind of financial analysis was the core job rather than a side project. I spent nights and weekends over about six months completing a financial modeling certification, building full models on public companies to build a portfolio I could speak to, and networking with people in banking to make sure I understood what the job actually involved before committing to the switch. I don't view the two years as a detour — they gave me real experience translating ambiguous business problems into structured analysis, and a level of professional maturity I don't think I'd have had straight out of school, both of which I think will make me a better analyst, not a slower starter.",
+    "followups": [
+      {
+        "prompt": "What's a specific skill from your prior role that you think gives you an edge over someone coming straight from school?",
+        "modelAnswer": "Stakeholder communication under ambiguity — in my prior role I regularly had to take a vague request from a business leader, figure out what they actually needed, and present findings in a way a non-technical audience could act on. That's closer to how client and senior-banker communication actually works than most classroom experience is, and I think it'll shorten my learning curve on that part of the job."
+      },
+      {
+        "prompt": "Why didn't you try to make the pivot within your existing company instead of starting over?",
+        "modelAnswer": "I did explore an internal transfer to a corporate finance role, but the opportunities there were limited and slow-moving, and I realized the type of transactional, client-facing work I wanted was specific to banking rather than corporate finance generally. I'd rather make a clean, deliberate move now than wait indefinitely for an internal opening that might not materialize."
+      },
+      {
+        "prompt": "How do you know this isn't just another pivot you'll want to make again in two years?",
+        "modelAnswer": "The first pivot came from realizing what part of my job energized me most and chasing more of it deliberately, not from being unhappy generally. I've done the work to confirm banking is that thing specifically — through internships, informational interviews, and building real modeling skills — rather than jumping toward it on a vague impression, which gives me much more confidence this is the right fit long-term."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "walk-me-through-your-resume",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-003-tellaboutyourself-tailored",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "Tell me about yourself, but focus specifically on why you'd be a strong fit for our healthcare investment banking group.",
+    "keyPoints": [
+      {"point": "Weaves in specific, relevant experience tied to healthcare rather than a generic pitch", "weight": 3},
+      {"point": "Demonstrates genuine industry interest or knowledge, not just interest in banking generally", "weight": 3},
+      {"point": "Still covers core narrative elements (background, motivation, fit) within the tailored frame", "weight": 2},
+      {"point": "Stays concise despite the added specificity", "weight": 1}
+    ],
+    "misconceptions": [
+      "Giving the same generic pitch and only tacking 'healthcare' onto the end",
+      "Overloading the answer with industry jargon to sound knowledgeable rather than genuinely informed"
+    ],
+    "modelAnswer": "My interest in healthcare specifically goes back to a summer working as a research assistant in a hospital's operations department, where I helped analyze the financial impact of a staffing model change across several departments. That's where I first saw how much financial pressure exists even in mission-driven healthcare organizations, and it made me curious about how healthcare companies raise capital and structure deals differently than other industries, given the regulatory complexity involved. Since then, I've made a point of following healthcare-specific deal activity — I track M&A in the specialty pharmacy and healthcare services space particularly closely, and I built a valuation model on a mid-cap healthcare services company as an independent project last semester, working through how reimbursement risk factors into projecting revenue. I studied economics with a focus on health policy, which gave me a working knowledge of how reimbursement structures and regulatory changes affect company economics, something I think is genuinely useful context for evaluating healthcare deals rather than just generic modeling skill. Combined with the internship exposure to how a healthcare organization actually thinks about financial trade-offs, I think I'd come into this group with a real head start on the industry context, not just the technical banking skills.",
+    "followups": [
+      {
+        "prompt": "What's a healthcare-specific risk factor you think about differently than in other industries?",
+        "modelAnswer": "Reimbursement risk — a healthcare services company's revenue can be heavily exposed to government or insurer reimbursement rate changes that are largely outside management's control, which makes projecting revenue growth riskier than for a typical industrial or consumer company where demand is more directly tied to the company's own execution."
+      },
+      {
+        "prompt": "Which sub-sector of healthcare do you find most interesting, and why?",
+        "modelAnswer": "Healthcare services, specifically outpatient and specialty care providers, because that space has seen a lot of consolidation activity as smaller practices get acquired by larger platforms, which creates interesting valuation and integration questions around how much of the value comes from scale efficiencies versus simply rolling up fragmented ownership."
+      },
+      {
+        "prompt": "What would concern you most about covering this specific industry as a junior banker?",
+        "modelAnswer": "Probably the pace of regulatory change — staying current on reimbursement policy or FDA developments requires ongoing effort beyond standard financial analysis, and I'd want to be deliberate about building that habit early rather than assuming general finance knowledge alone is sufficient in this sector."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "tell-me-about-yourself",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-004-tellaboutyourself-threads",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "Your background touches finance, a research role, and student government. How do those threads connect into one coherent story?",
+    "keyPoints": [
+      {"point": "Identifies a genuine common thread across the disparate experiences, not a forced connection", "weight": 3},
+      {"point": "Explains what each experience specifically contributed to that thread", "weight": 3},
+      {"point": "Concludes with how the combination makes the candidate a stronger, not scattered, fit for banking", "weight": 2}
+    ],
+    "misconceptions": [
+      "Presenting the experiences as unrelated, leaving the interviewer to do the connecting work",
+      "Forcing an artificial thread that doesn't genuinely hold up under a follow-up question"
+    ],
+    "modelAnswer": "The common thread across all three is that I'm drawn to situations where I have to build a persuasive, evidence-based case and then defend it to a skeptical audience. In my research role, that meant designing a study, defending the methodology to a faculty review board, and presenting findings that sometimes contradicted the hypothesis we started with. In student government, it meant building the budget case for a new campus initiative and defending it in front of a finance committee that controlled limited funds and had competing priorities to weigh. And in finance specifically, through internships and coursework, it's meant building a valuation and defending the assumptions behind it. Each experience is a different flavor of the same underlying skill: gathering evidence, forming a clear position, and holding up under scrutiny from people who have every incentive to challenge me. I think that combination is actually a strength rather than a scattered background, because it means I've practiced that skill in academic, political, and financial contexts, and banking is ultimately another arena where that exact skill — building a case and defending it under pressure — is what separates a good analyst from an average one.",
+    "followups": [
+      {
+        "prompt": "Which of those three experiences was hardest to defend your position in, and why?",
+        "modelAnswer": "The student government budget case, because unlike research or finance, the committee's decisions were influenced by competing political priorities, not just the merits of the evidence. I had to learn to anticipate objections that weren't purely analytical, which was a different and honestly harder kind of persuasion than defending a data-driven argument."
+      },
+      {
+        "prompt": "If a skeptical interviewer said this thread sounds constructed after the fact, how would you respond?",
+        "modelAnswer": "I'd acknowledge that I didn't consciously choose these experiences with this narrative in mind at the time — I chose them because they interested me in the moment. But looking back, the pattern of gravitating toward evidence-based persuasion under scrutiny is genuinely consistent, and I'd rather be honest that the thread was recognized in hindsight than pretend it was a deliberate plan from day one."
+      },
+      {
+        "prompt": "How does this thread specifically prepare you for the client-facing side of banking, not just the analytical side?",
+        "modelAnswer": "Presenting a budget case to a skeptical committee is close in spirit to presenting an analysis to a client who has their own priorities and isn't automatically going to accept your conclusions. It taught me to read the room, anticipate pushback, and adjust how I frame an argument depending on the audience, which is a skill client-facing bankers need beyond just having the right numbers."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "tell-me-about-yourself",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-005-tellaboutyourself-pivot-defense",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "curveball",
+    "prompt": "It sounds like you've changed direction a few times already — first pre-med, then engineering, now finance. Why should we believe banking sticks?",
+    "keyPoints": [
+      {"point": "Acknowledges the pattern honestly rather than denying or minimizing it", "weight": 2},
+      {"point": "Explains what was genuinely learned from each prior direction and why it didn't stick", "weight": 3},
+      {"point": "Articulates a specific, evidence-based reason banking is different from the prior attempts", "weight": 3},
+      {"point": "Points to sustained action (not just interest) as proof of commitment", "weight": 2}
+    ],
+    "misconceptions": [
+      "Getting defensive and dismissing the previous paths as mistakes with no value",
+      "Failing to explain what makes this decision more durable than the prior ones"
+    ],
+    "modelAnswer": "That's a fair pattern to notice, and I've thought about it myself. Pre-med and engineering were both choices I made early, partly influenced by what seemed like a safe, respectable path rather than a clear-eyed match with what I actually enjoyed day to day — I didn't have enough real exposure to either field yet to know if I'd like the actual work, only the idea of it. What's different this time is that I didn't just decide banking sounded appealing; I tested it directly through two internships and sustained self-study before committing, and both experiences confirmed rather than complicated my interest, which wasn't true of pre-med or engineering once I got real exposure to the actual day-to-day work in each. I also think there's a difference between exploring options as an eighteen-year-old with limited information and making a decision now with two internships, real technical preparation, and a clearer sense of my own strengths behind it. I'd point to the consistency of my actions over the past two years — not just interest, but internships, coursework, and independent modeling work — as the evidence that this decision is built on more solid ground than the earlier ones were.",
+    "followups": [
+      {
+        "prompt": "What specifically about engineering told you it wasn't the right fit, once you had real exposure?",
+        "modelAnswer": "I took an internship doing structural analysis and found I liked the problem-solving but was much less energized by the pace, which involved long stretches on a single project with feedback cycles measured in weeks or months rather than days. That contrast is actually what made me appreciate how much I enjoy the faster, more immediate feedback loop I've experienced in finance internships."
+      },
+      {
+        "prompt": "What would it take for you to walk away from banking the way you walked away from those earlier paths?",
+        "modelAnswer": "Realistically, if I got two or three years into the job and found I didn't enjoy the actual daily work despite having tested it thoroughly beforehand, I'd take that seriously rather than staying out of stubbornness. But I'd note that unlike the earlier decisions, this one has already survived direct exposure to the real work through two internships, which is exactly the kind of test the earlier choices hadn't been through yet."
+      },
+      {
+        "prompt": "How do you make sure you're not just telling us what we want to hear right now?",
+        "modelAnswer": "I'd point to actions that predate this interview and weren't performed for anyone's benefit — the modeling projects I built independently, the technical certification I completed on my own time, and the specific industries I've chosen to follow closely. Those are hard to fake and happened well before I was sitting in this room trying to make a good impression."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "tell-me-about-yourself",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-006-whyib-vs-other-paths",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "You have the analytical profile that would work well in corporate finance, equity research, or trading too. Why banking specifically over those?",
+    "keyPoints": [
+      {"point": "Distinguishes banking from each named alternative with a specific, accurate reason", "weight": 3},
+      {"point": "Explains what banking uniquely offers that the others don't (deal breadth, transaction-driven pace, exit optionality)", "weight": 3},
+      {"point": "Avoids dismissing the alternatives as inferior, just different fits", "weight": 2},
+      {"point": "Grounds the comparison in personal preference, not assumptions about pay alone", "weight": 2}
+    ],
+    "misconceptions": [
+      "Giving an answer that would apply equally to any of the paths, showing no real discrimination between them",
+      "Focusing the comparison entirely on compensation or prestige differences"
+    ],
+    "modelAnswer": "Each of those paths shares the analytical core I'm good at, but they diverge on what I care about most: variety, pace, and being close to the actual decision. Corporate finance is deep on one company, which appeals to some people, but I want broader exposure across industries and deal types early in my career rather than specializing in one company's internal finance function right away. Equity research is close to what I enjoy — building a thesis on a company — but it's fundamentally about forming and maintaining an outside opinion on public companies, whereas I'm more drawn to being inside the transaction itself, helping structure and negotiate an outcome rather than just calling it from the sidelines. Trading appeals to people who like the immediacy of market-driven decisions made in seconds, but I do my best work with slightly longer time horizons where I can build a thorough, considered analysis rather than react instantly to price movement. Banking sits at the intersection of what I want: constant variety across industries and deal types, direct involvement in shaping the outcome of a transaction, and a pace that rewards thorough analysis without being either as narrow as corporate finance or as instantaneous as trading.",
+    "followups": [
+      {
+        "prompt": "If equity research is close to what you enjoy, what specifically makes banking better for you rather than research?",
+        "modelAnswer": "Research is largely a one-way relationship — you form a view and publish it, but you don't typically shape what the company actually does. Banking puts me inside the actual decision-making process for a transaction, which appeals to me more because the analysis directly influences an outcome rather than existing as commentary on one."
+      },
+      {
+        "prompt": "How would you know if you were wrong, and actually preferred one of these other paths?",
+        "modelAnswer": "I'd expect to notice it in how I feel about the type of work itself once I'm doing it day to day — for example, if I found myself more energized by forming durable long-term views on a handful of companies than by the faster-moving grind of transaction execution, that would be a signal research might have been the better fit. I'd take that seriously rather than ignore it just because I'd already committed to banking."
+      },
+      {
+        "prompt": "Some people say banking is really just a stepping stone others use to get to those paths later. What's your view on that?",
+        "modelAnswer": "That's true for some people, and there's nothing wrong with using banking as a launchpad, but I'm not approaching it that way — I'm choosing it because I've compared it directly against those alternatives and prefer the actual day-to-day work, not because it's the fastest route somewhere else. If that changes down the road I'd be honest about it, but right now it's a first choice, not a stepping stone."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "why-investment-banking",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-007-whyib-hours-tradeoff",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "Given how demanding the hours are, why is this trade-off worth it to you?",
+    "keyPoints": [
+      {"point": "Shows genuine, realistic understanding of the hours (not minimizing or overstating them)", "weight": 3},
+      {"point": "Articulates specific personal reasons the trade-off is worth it, not a generic 'I'm willing to work hard'", "weight": 3},
+      {"point": "Mentions any personal experience already managing high workload as evidence", "weight": 2},
+      {"point": "Avoids implying the hours don't matter or won't be difficult", "weight": 2}
+    ],
+    "misconceptions": [
+      "Claiming the hours won't be a problem at all, which sounds naive to an interviewer who's lived it",
+      "Answering purely with 'I'm willing to work hard' without addressing what makes it worth it specifically"
+    ],
+    "modelAnswer": "I don't think the hours are a minor detail — I've talked to enough current and former analysts to know weeks can regularly run past seventy hours, especially during a live deal, and that unpredictability is part of the deal, not an exception to it. What makes it worth it to me is the density of learning packed into those years. I'd rather compress an intense two or three years of skill-building and deal exposure now, early in my career when I have fewer competing obligations, than spread a similar amount of learning over a much longer, slower timeline elsewhere. I also genuinely like being fully immersed in a problem rather than context-switching across a lot of lower-intensity work, and during my internship, weeks where I was heads-down on one demanding project were actually the weeks I enjoyed most, even though they were exhausting. I've also already tested my ability to sustain a heavy workload — balancing a part-time job with a full course load and extracurriculars taught me how to manage my energy over a demanding stretch rather than burning out halfway through. I'm not pretending the hours will be easy, but I think the trade-off is a genuinely good one for where I am in my career right now.",
+    "followups": [
+      {
+        "prompt": "How do you plan to manage your physical and mental health during a demanding stretch?",
+        "modelAnswer": "I try to protect the basics that are actually within my control even when hours are unpredictable — getting some form of exercise even if it's short, eating real meals instead of skipping them, and being disciplined about sleep on the nights I do have control over my schedule. I don't expect to maintain a normal routine during a live deal, but I've found that protecting even small pieces of it prevents things from spiraling."
+      },
+      {
+        "prompt": "What would you do if the hours turned out to be even more extreme than you expected?",
+        "modelAnswer": "I'd try to distinguish between a genuinely unsustainable pattern and a temporarily intense stretch tied to a specific live deal, since the latter is expected and the former is a real problem worth raising with my staffer or mentor. I'd rather have that conversation directly and early than silently burn out or let quality slip without saying anything."
+      },
+      {
+        "prompt": "Have you ever backed out of a demanding commitment because the hours weren't worth it? What happened?",
+        "modelAnswer": "I stepped back from a part-time research assistant position after one semester because the actual work turned out to be repetitive data entry rather than the analytical work I'd been told about, and the time commitment wasn't buying me anything valuable. That experience taught me it's not hours alone that make a trade-off worth it, it's what you're actually getting in return, which is why I've made sure banking's learning curve is real before committing to it."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "why-investment-banking",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-008-whyfirm-vs-peer",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "You're also interviewing at a peer firm with a similar reputation. What would make you choose us over them?",
+    "keyPoints": [
+      {"point": "Names specific, differentiated reasons rather than generic praise that could apply to either firm", "weight": 3},
+      {"point": "Handles the comparison diplomatically without disparaging the peer firm", "weight": 2},
+      {"point": "Shows evidence of having actually researched or spoken to people at both", "weight": 3},
+      {"point": "Answers honestly rather than claiming there's no real competition for the candidate's interest", "weight": 2}
+    ],
+    "misconceptions": [
+      "Denying interest in the other firm entirely, which can come across as insincere",
+      "Criticizing the peer firm to make this one look better by comparison"
+    ],
+    "modelAnswer": "I'll be honest, both firms have strong reputations and I'm genuinely evaluating both seriously, but a few specific things tilt me toward this firm. From conversations with current analysts at each, the staffing model here seems to give junior bankers more input into which industry groups they work with, whereas at the other firm staffing sounded more centralized with less individual input, and having a say in the type of deal work I do matters to me. I've also looked at recent deal activity from both groups in the sector I'm most interested in, and this firm's group has been more active on the sell-side for founder-led businesses specifically, which is the type of deal work I find most compelling because of the relationship-driven, less commoditized process involved. Finally, in my conversations with people here, there was a consistent theme of analysts being brought into client interactions earlier than I heard was typical at the other firm. None of that means the other firm is a worse choice in some absolute sense — it's a strong platform too — but on the specific things that matter most to me, staffing flexibility, deal type, and early client exposure, this firm is the better fit.",
+    "followups": [
+      {
+        "prompt": "If the other firm made you a stronger offer, would that change your answer?",
+        "modelAnswer": "Compensation would be a factor I'd have to weigh honestly, since it matters, but given how similar comp tends to be at this level between comparable firms, I don't think a modest difference would outweigh the fit factors I mentioned. If the gap were unusually large, I'd want to understand why before assuming it changes the underlying fit question."
+      },
+      {
+        "prompt": "What's something you genuinely respect about the peer firm that you don't want to see here?",
+        "modelAnswer": "From what I've heard, they run a more structured, formal training program in the first few months, which has real value for building a consistent technical foundation quickly. I'd be glad to see something similar here if it doesn't already exist, since I don't think structured training and early client exposure are mutually exclusive."
+      },
+      {
+        "prompt": "How would you feel if you didn't get an offer here but did get one there?",
+        "modelAnswer": "I'd take the offer seriously and evaluate it on its own merits rather than treating it as a consolation prize, since it's still a strong platform and a real opportunity. I'd want to revisit the same fit questions honestly rather than assume my earlier preference was automatically the right call in a different scenario."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "why-our-firm",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-009-whyfirm-recent-deal",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "Tell me about a recent deal our firm has advised on and what stood out to you about it.",
+    "keyPoints": [
+      {"point": "Names an accurate, specific deal the firm was actually involved in", "weight": 3},
+      {"point": "Describes the deal's basic structure or size correctly", "weight": 2},
+      {"point": "Identifies a specific, non-obvious detail that stood out, not just the headline outcome", "weight": 3},
+      {"point": "Connects the observation to why it makes the candidate want to work at the firm", "weight": 2}
+    ],
+    "misconceptions": [
+      "Naming a deal from a competitor firm by mistake, which signals shallow research",
+      "Only repeating the press release headline without any independent observation"
+    ],
+    "modelAnswer": "I read about your team's role advising a family-owned specialty foods company on its sale to a larger strategic acquirer earlier this year, a deal reported in the low hundreds of millions. What stood out to me wasn't the size, which was modest compared to some large-cap deals, but the process — the writeup mentioned that your team ran a targeted auction with a small number of strategic buyers rather than a broad process, which seems like a deliberate choice given it was a founder-led business where confidentiality and cultural fit with the eventual buyer likely mattered as much as maximizing the headline price. That detail told me something about how the group approaches deals for owner-operated businesses specifically, which is different from a large-cap sell-side process where a broad auction is more standard. It's the kind of nuanced, relationship-aware dealmaking that appeals to me more than a purely price-maximizing, high-volume approach, and it's part of why I think this firm's specific approach to mid-market, founder-led transactions is a better fit for the kind of banker I want to become.",
+    "followups": [
+      {
+        "prompt": "Why might a founder-owned company prefer a narrower, targeted process over a broad auction?",
+        "modelAnswer": "A founder selling a business they built often cares about more than just price — things like how employees will be treated post-close, whether the buyer will preserve the company's culture or brand, and keeping the process confidential to avoid unsettling employees or customers before a deal is certain. A narrower process with a small number of carefully chosen buyers can protect those priorities better than a broad auction that maximizes competitive tension but sacrifices control and discretion."
+      },
+      {
+        "prompt": "What's a potential downside of running a narrower process instead of a broad auction?",
+        "modelAnswer": "The obvious risk is leaving value on the table, since a broader auction generally creates more competitive tension and can drive up the final price. The seller and their advisors have to judge whether the benefits of discretion and buyer fit are worth accepting a potentially lower ceiling on price, which is a judgment call rather than a formula."
+      },
+      {
+        "prompt": "How would you find out more about a deal like this beyond the public press release?",
+        "modelAnswer": "I'd look for any trade publication coverage that sometimes includes more process detail than a company's own release, and I'd ask about it directly in conversations with current employees at the firm, since they can often share color on the general approach, even if they can't discuss confidential specifics."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "why-our-firm",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-010-whyfirm-culture-fit-specific",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "Our culture is known for being direct and sometimes blunt with feedback. How do you know that will work for you?",
+    "keyPoints": [
+      {"point": "Gives a specific past example of receiving and responding well to direct, blunt feedback", "weight": 3},
+      {"point": "Distinguishes between welcoming candor and merely tolerating it", "weight": 2},
+      {"point": "Shows self-awareness about what type of feedback style the candidate responds best to", "weight": 3},
+      {"point": "Avoids an answer that sounds rehearsed or unverified by real experience", "weight": 2}
+    ],
+    "misconceptions": [
+      "Claiming to love all criticism without any nuance or specific example",
+      "Describing a feedback style preference that actually contradicts what's being asked about (needing gentle framing)"
+    ],
+    "modelAnswer": "I actually prefer direct feedback over feedback that's softened to the point of being unclear, because I've found vague, overly cushioned feedback often leaves me unsure what to actually fix. During my internship, a senior associate told me bluntly in front of the team that a model I'd built had a structural error that would have embarrassed us in front of a client if it hadn't been caught, and while it stung in the moment, I appreciated that he didn't dress it up — he told me exactly what was wrong and what a fix should look like, which meant I could correct it immediately instead of guessing. I went back afterward and asked him a couple of follow-up questions about how to avoid the same mistake going forward, which he seemed to respect. I'd distinguish between tolerating blunt feedback and actually valuing it — I don't just accept it without reacting badly, I actively prefer it because it's efficient and respects my time, and I think that preference is a genuine fit for a culture like the one you're describing, not just something I'm claiming to say the right thing in this interview.",
+    "followups": [
+      {
+        "prompt": "Was there ever a time direct feedback felt unfair, and how did you handle that?",
+        "modelAnswer": "Once a professor gave sharply critical feedback on a group project that I felt unfairly blamed me for a section a teammate had actually written. I addressed it privately and factually, explaining the division of work without being defensive or dismissive of the broader critique, and the professor adjusted the individual grading once the facts were clear. I think handling that calmly rather than getting defensive is part of what makes direct feedback workable — you have to be able to push back on genuine inaccuracies without rejecting the feedback culture itself."
+      },
+      {
+        "prompt": "How would you personally deliver difficult feedback to someone more junior than you someday?",
+        "modelAnswer": "I'd aim to be specific and direct about what needs to change, similar to how I've appreciated it being delivered to me, while making clear the feedback is about the work, not the person's worth. I think the combination of directness and respect is what makes blunt feedback constructive rather than just harsh."
+      },
+      {
+        "prompt": "What's the difference between a culture that's direct and one that's simply harsh?",
+        "modelAnswer": "A direct culture gives specific, actionable feedback aimed at improving the work, even if delivered bluntly, whereas a harsh culture tends toward personal criticism or feedback with no clear path to improvement. I'd want to make sure the directness I'm signing up for is the former, which is part of why I asked current analysts here directly about how feedback is actually delivered before forming my impression."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "why-our-firm",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-011-star-conflict",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "Tell me about a time you had a disagreement with a teammate. How did you resolve it?",
+    "keyPoints": [
+      {"point": "Describes the disagreement specifically and fairly, without villainizing the other person", "weight": 3},
+      {"point": "Shows the candidate taking an active, constructive step to resolve it, not waiting it out", "weight": 3},
+      {"point": "States a concrete resolution and outcome", "weight": 2},
+      {"point": "Reflects a lesson learned about handling conflict professionally", "weight": 2}
+    ],
+    "misconceptions": [
+      "Describing the disagreement in a way that makes the candidate look blameless and the other person unreasonable",
+      "Ending the story without a clear resolution, leaving the conflict unresolved"
+    ],
+    "modelAnswer": "During a group project analyzing a company for a valuation class, a teammate and I disagreed sharply about which growth rate to use in our terminal value calculation — he wanted to use the company's recent three-year historical growth rate, while I thought that period included an unusual acquisition-driven spike that wasn't representative of sustainable organic growth going forward. The disagreement got a little tense because we were both confident and it was close to the deadline. Instead of just pushing my view harder, I suggested we pull the company's own investor commentary and analyst estimates to see what independent, external sources assumed for long-term growth, rather than relying on either of our gut instincts. That data supported a rate closer to what I'd proposed, but importantly, it also showed my teammate's instinct that the company had strong forward momentum wasn't wrong, just that the specific historical number he wanted to use overstated it. We settled on a rate slightly above my original estimate to reflect that. What I took from it is that disagreements resolve faster and with less friction when you can shift the conversation from opinions to external evidence, and it kept the relationship intact rather than leaving either of us feeling overruled.",
+    "followups": [
+      {
+        "prompt": "How did the disagreement affect your working relationship with that teammate afterward?",
+        "modelAnswer": "It actually improved it, since we both saw firsthand that pulling in outside data resolved the disagreement more effectively than either of us arguing from instinct. We ended up partnering again on a later assignment and defaulted to that same approach — find external evidence before assuming either person's initial view is correct — whenever we hit a disagreement."
+      },
+      {
+        "prompt": "What would you have done if the external data hadn't clearly supported either position?",
+        "modelAnswer": "I'd have proposed running the analysis with a sensitivity range spanning both our estimates rather than forcing a single number, since that's often the honest answer when there's genuine uncertainty. Showing a range would have let us present the disagreement transparently instead of pretending false precision existed where it didn't."
+      },
+      {
+        "prompt": "Have you ever had a disagreement that didn't resolve well? What happened?",
+        "modelAnswer": "In an earlier group project, I disagreed with a teammate over scope but let it go unresolved rather than raising it directly, assuming it wasn't worth the friction. That decision came back to hurt the final product because we never aligned on what we were actually solving for, and it taught me that avoiding a disagreement doesn't make it go away, it usually just costs you later when it surfaces in the output."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "star-framework",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-012-star-failure",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "Tell me about a time you failed at something important. What happened and what did you learn?",
+    "keyPoints": [
+      {"point": "Chooses a genuine failure with real, meaningful stakes, not a disguised success", "weight": 3},
+      {"point": "Takes clear personal ownership rather than blaming external factors", "weight": 3},
+      {"point": "Describes a specific, actionable lesson and how it was subsequently applied", "weight": 3},
+      {"point": "Maintains a composed, reflective tone rather than sounding defensive or overly self-critical", "weight": 1}
+    ],
+    "misconceptions": [
+      "Choosing a fake failure that is really a strength in disguise ('I failed because I cared too much')",
+      "Blaming teammates, professors, or circumstances instead of owning the personal mistake"
+    ],
+    "modelAnswer": "During a stock pitch competition my junior year, I was the lead analyst on our team's thesis for a mid-cap retailer, and I was overconfident in a same-store-sales growth assumption that turned out to be based on outdated data — I'd pulled comparable figures from an older investor presentation without checking whether a more recent quarterly update had changed the picture. A judge caught the discrepancy live during our presentation, which visibly rattled our team and undercut the credibility of the entire pitch, even though the rest of the analysis was solid. We finished near the bottom of the field, which stung given how much work we'd put in. The failure was mine specifically — I owned the model and should have double-checked the data's recency before we built the entire thesis on it. Since then, I've built a personal habit of explicitly dating every external data source I use in a model and doing a final pass specifically checking for anything more than a quarter old before treating a number as current. It was an uncomfortable, public way to learn the lesson, but it's made me meaningfully more disciplined about data hygiene, which I think is exactly the kind of habit that matters in a job where a stale number in front of a client has real consequences.",
+    "followups": [
+      {
+        "prompt": "How did your teammates react to the mistake, and how did you handle that conversation?",
+        "modelAnswer": "They were understandably frustrated in the moment, since it affected the whole team's result. I addressed it directly afterward rather than letting it go unspoken — I acknowledged the mistake was mine, explained what had gone wrong, and told them specifically what I was changing about my process going forward, which I think mattered more to rebuilding trust than an apology alone would have."
+      },
+      {
+        "prompt": "Has your new data-checking habit ever caught a similar mistake since then?",
+        "modelAnswer": "Yes, during my internship I caught a comp set that referenced a company's share count from before a stock split, which would have significantly understated its market cap and thrown off the resulting multiples. Catching it before it went into a client deliverable was a direct result of the habit I built after that competition."
+      },
+      {
+        "prompt": "Looking back, is there anything about the competition's format itself you'd have handled differently as a team?",
+        "modelAnswer": "We could have built in a dedicated fact-check pass before the final presentation, splitting up sourcing verification the way we split up the analysis itself, rather than assuming whoever owned a section had already fully verified it. That's a process change I've since carried into other group projects — dedicating explicit time to verification, not just analysis."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "star-framework",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-013-weakness-red-flag",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "curveball",
+    "prompt": "You mentioned you sometimes struggle to say no when you're already overloaded. Isn't that a real problem in a job where you're constantly being handed more work?",
+    "keyPoints": [
+      {"point": "Acknowledges the concern honestly rather than backpedaling from the original weakness", "weight": 3},
+      {"point": "Distinguishes between struggling to say no outright and having developed a specific management strategy", "weight": 3},
+      {"point": "Describes a concrete method for handling competing demands (prioritization conversation, flagging capacity)", "weight": 3},
+      {"point": "Reassures without overselling that the issue is fully solved", "weight": 1}
+    ],
+    "misconceptions": [
+      "Denying the weakness is actually a problem once challenged, contradicting the earlier answer",
+      "Claiming to have completely solved the issue, which sounds unbelievable given how recently it was raised as a live weakness"
+    ],
+    "modelAnswer": "That's a fair challenge, and I take it seriously rather than trying to explain it away. The honest distinction I'd draw is between outright refusing work, which I agree isn't realistic or advisable in this job, and communicating proactively when I'm at capacity so someone more senior can help prioritize, which is the specific skill I've been building. Concretely, when I'm juggling multiple deadlines now, I try to flag it early rather than silently taking on everything and letting quality slip — for example, during my internship, when I was handed a new urgent request while already mid-way through another deliverable, I went to my manager and asked which one should take priority rather than trying to do both at full speed and risking mistakes on either. That's different from saying no; it's putting the prioritization decision in the hands of someone with the visibility to make it well. I don't think this weakness disappears just because I've named a strategy for it, and I expect the instinct to overcommit will still show up under real pressure sometimes. But I'd rather manage it by communicating early and letting someone senior help me triage than pretend I can absorb unlimited work without a plan for what happens when I can't.",
+    "followups": [
+      {
+        "prompt": "Can you give a specific example where flagging capacity actually worked well?",
+        "modelAnswer": "During my internship, I was given a new client deck request the same afternoon I was finishing an urgent model revision. I told my manager both were live and asked which took priority rather than guessing, and she immediately said the deck could wait a few hours since the model was for an earlier client call. That took maybe thirty seconds and prevented me from rushing either deliverable."
+      },
+      {
+        "prompt": "What if your manager tells you both tasks are equally urgent and you have to figure it out yourself?",
+        "modelAnswer": "In that case I'd make my own judgment based on whatever information I have — deadline proximity, which stakeholder is more senior or time-sensitive — and communicate my plan back to whoever assigned the work so they have visibility into my reasoning, rather than silently guessing and hoping it's right."
+      },
+      {
+        "prompt": "Do you think this weakness could actually get worse under the real intensity of the job compared to your internship?",
+        "modelAnswer": "It's possible, since internship workloads, while real, don't fully replicate live-deal intensity. That's part of why I'm trying to build the habit of proactive communication now, before the stakes are as high, so it's already second nature rather than something I'm learning for the first time under maximum pressure."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "strengths-and-weaknesses",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-014-strength-with-evidence",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "You said resilience is one of your strengths. Give me a specific example that proves it, not just the claim.",
+    "keyPoints": [
+      {"point": "Provides a specific, verifiable story rather than restating the abstract claim", "weight": 3},
+      {"point": "Shows a genuine setback, not a manufactured or minor one", "weight": 2},
+      {"point": "Describes the specific actions taken to persist through the setback", "weight": 3},
+      {"point": "States a concrete outcome that demonstrates the resilience paid off", "weight": 2}
+    ],
+    "misconceptions": [
+      "Restating the claim in different words instead of providing a concrete example",
+      "Choosing an example where the outcome was simply lucky rather than a result of persistence"
+    ],
+    "modelAnswer": "During recruiting for a summer internship my sophomore year, I was rejected from the first eleven programs I applied to, several after final-round interviews where I thought I'd performed well. It would have been easy to conclude I just wasn't cut out for it and pivot to something else. Instead, after the fourth or fifth rejection, I asked for feedback from a couple of interviewers willing to give it, and a consistent theme emerged — my technical answers were fine, but I was struggling to concisely walk through my thought process out loud, which was making otherwise correct answers sound uncertain. I spent the next month deliberately practicing timed mock interviews with upperclassmen specifically focused on narrating my reasoning clearly, not just landing on the right answer. I also kept applying rather than pausing to wait for the feedback loop to fully play out. By the twelfth and thirteenth applications, I received two offers, and the interviewers at both specifically complimented how clearly I walked through my technical reasoning, which was the exact skill I'd been drilling. That experience is the clearest evidence I have of genuine resilience — not just tolerating repeated rejection, but using it as a specific, actionable signal to improve rather than letting it discourage me from continuing.",
+    "followups": [
+      {
+        "prompt": "How did you keep your motivation up through eleven consecutive rejections?",
+        "modelAnswer": "I tried to reframe each rejection as data rather than a verdict on my ability, which was easier once I actually started getting specific feedback rather than silence. Having a concrete thing to work on, rather than a vague sense of failure, made it feel like progress was happening even while the rejections continued."
+      },
+      {
+        "prompt": "At what point would you have stopped and reconsidered your approach entirely?",
+        "modelAnswer": "If I'd gotten through fifteen or twenty applications with no positive signal at all, not even encouraging feedback or a later-round interview, I'd have taken that as a sign to more fundamentally rethink my approach rather than just iterating on delivery. The fact that I was getting to final rounds told me the core substance was competitive, which is part of why I stayed the course rather than abandoning the strategy."
+      },
+      {
+        "prompt": "How do you distinguish healthy persistence from just being stubborn?",
+        "modelAnswer": "Healthy persistence involves actually changing your approach based on feedback each time, not just repeating the same effort and hoping for a different outcome. In my case, I wasn't just reapplying blindly — I was specifically adjusting how I communicated based on concrete feedback, which is what separates productive persistence from stubbornness."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "strengths-and-weaknesses",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-015-strength-analyst-application",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "You've described yourself as highly organized. How specifically would that strength show up in your first six months as an analyst?",
+    "keyPoints": [
+      {"point": "Translates the abstract strength into concrete analyst-relevant behaviors", "weight": 3},
+      {"point": "Names specific tasks or scenarios where organization matters (version control, deadline tracking, multi-deal juggling)", "weight": 3},
+      {"point": "Shows realistic understanding of the early-analyst workflow rather than a generic description", "weight": 2}
+    ],
+    "misconceptions": [
+      "Giving an abstract answer without connecting it to specific analyst tasks",
+      "Overpromising perfection rather than describing a realistic, concrete system"
+    ],
+    "modelAnswer": "Concretely, I think it would show up in a few specific ways. First, version control on models and decks — I already maintain a strict habit of naming file versions consistently and keeping a simple changelog of what changed between drafts, which matters a lot when multiple people are editing the same model under time pressure and a wrong version accidentally goes to a client. Second, deadline tracking across multiple live requests at once — I'd expect to be juggling asks from more than one deal team simultaneously as a new analyst, and I already use a simple running list with deadlines and priority flags for exactly that kind of situation, which I built and relied on during my internship when I had two managers giving me overlapping requests. Third, checklist discipline before anything goes out the door — treating a final review pass as a non-negotiable step rather than something to skip when tired, since that's exactly when organizational habits matter most, not when things are calm. None of that replaces technical skill, but I think it's the difference between someone who's technically capable but occasionally drops something under pressure, and someone who's reliable enough that a senior banker doesn't have to double-check their output as closely.",
+    "followups": [
+      {
+        "prompt": "Can you describe your actual system for tracking multiple deadlines during your internship?",
+        "modelAnswer": "I kept a single running spreadsheet with every open request, who assigned it, the deadline, and a priority flag I updated whenever something changed. I checked it first thing every morning and updated it in real time as new requests came in, which meant I never had to rely on memory for what was due when, even during weeks with five or six open items at once."
+      },
+      {
+        "prompt": "What happens when your organizational system breaks down under real pressure?",
+        "modelAnswer": "It's happened — during an especially chaotic week, I let my tracker fall a day out of date and nearly missed flagging a deadline conflict early enough to renegotiate it. What I learned is that the system only works if updating it becomes an automatic five-minute habit rather than something I do only when things are calm, so now I treat updating it as part of starting and ending each workday, not an optional extra step."
+      },
+      {
+        "prompt": "How would you build organizational systems for a whole deal team, not just yourself?",
+        "modelAnswer": "I'd suggest a shared, simple tracker everyone on the team updates rather than each person maintaining a private list, so nothing depends on one person's memory or availability, especially during a live deal when multiple people are juggling overlapping requests from the same client or senior banker."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "strengths-and-weaknesses",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-016-objection-career-switcher-older",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "curveball",
+    "prompt": "You'd be starting as an analyst a few years older than most of your peers. Won't that be awkward, and are you worried about it?",
+    "keyPoints": [
+      {"point": "Addresses the concern directly and confidently without defensiveness", "weight": 3},
+      {"point": "Reframes the age gap as an asset (maturity, prior work experience, perspective)", "weight": 3},
+      {"point": "Shows self-awareness about real adjustment challenges rather than dismissing them entirely", "weight": 2},
+      {"point": "Cites concrete evidence of having already navigated being 'different' in a group setting", "weight": 2}
+    ],
+    "misconceptions": [
+      "Denying there's any adjustment involved, which sounds unconvincing",
+      "Sounding insecure or overly focused on justifying the age difference rather than moving forward confidently"
+    ],
+    "modelAnswer": "I've thought about it, and honestly I see more upside than downside. Coming in with a few years of prior work experience means I've already learned some of the professional habits that a first-year straight out of school is often still figuring out — how to manage up, how to communicate efficiently with someone more senior and busier than me, how to handle a demanding schedule without letting my personal life fall apart. Those are things I don't think I'll need to learn on the job, which should let me focus more energy on the technical ramp-up instead. As for the social dynamic, I don't think it'll be as awkward as it might sound — I've been in other settings, like a graduate seminar with mostly younger classmates, where I was one of the more experienced people in the room, and I found it easy to build genuine relationships once people saw I wasn't trying to act like a senior figure just because of age, just another analyst putting in the same hours as everyone else. I'd rather be judged on how I perform and how I treat people than on the number on my ID, and I'm confident that once the work starts, the age gap stops mattering very quickly.",
+    "followups": [
+      {
+        "prompt": "What specifically from your prior work experience do you think will help you avoid rookie mistakes other first-years make?",
+        "modelAnswer": "Managing up — knowing how to flag a problem to a busy manager concisely instead of either staying silent or over-explaining, and reading when someone wants a quick status update versus a detailed one. That's a skill that usually takes new analysts a while to develop, and I've already had to build it in a professional setting."
+      },
+      {
+        "prompt": "Do you worry your peers might resent you for having an 'unfair' head start given your age and prior experience?",
+        "modelAnswer": "I haven't experienced that so far, but if it came up, I'd handle it the same way I would any team dynamic issue — by being genuinely helpful to peers rather than positioning myself as ahead of them, and letting my actions rather than my resume do the talking. I think resentment usually comes from someone acting superior, not from an age gap itself."
+      },
+      {
+        "prompt": "How would you feel reporting to an associate or VP who might be close to your own age or younger?",
+        "modelAnswer": "Completely fine with it — seniority in this job is earned through experience in the role, not age, and I'd extend the same respect to someone more senior regardless of the age gap between us. I'd actually expect that dynamic to be common in this industry and don't see it as an issue at all."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "objection-handling-by-background",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-017-objection-visa-international",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "curveball",
+    "prompt": "You'd need visa sponsorship to work here. How would you address concerns about that process for an early-career hire?",
+    "keyPoints": [
+      {"point": "Demonstrates informed understanding of the visa/sponsorship process rather than vagueness", "weight": 3},
+      {"point": "Reassures with facts, not just optimism, about the realistic timeline and requirements", "weight": 2},
+      {"point": "Emphasizes the value the candidate brings that justifies the sponsorship effort", "weight": 3},
+      {"point": "Stays calm and factual rather than defensive about being asked", "weight": 2}
+    ],
+    "misconceptions": [
+      "Being vague or uninformed about how the sponsorship process actually works",
+      "Getting defensive about the question instead of engaging with it practically"
+    ],
+    "modelAnswer": "I understand the concern, and I've done my own research so I can speak to it directly rather than leave it as an open question. As a candidate on a student visa, I'd typically be eligible to work initially under practical training authorization tied to my degree, which gives an employer a runway of at least a year, often longer for STEM-eligible fields, before a longer-term visa sponsorship like an H-1B would need to be pursued through the annual lottery process. I know that lottery timing and outcome aren't guaranteed, and I don't want to understate that uncertainty. What I'd say is that the firm has presumably sponsored analysts in a similar position before, and I'd make sure to have every document and deadline on my end handled well ahead of any filing window so there's no risk of my own preparation being the bottleneck. I'd also add that I think the value I'd bring, particularly given my background and language skills that could be useful on any deals with cross-border components, is worth the administrative step involved, and I'm happy to speak with HR or immigration counsel early in the process to make sure everyone has full visibility into the timeline well before it becomes time-sensitive.",
+    "followups": [
+      {
+        "prompt": "What would you do if the visa lottery didn't work out in your favor?",
+        "modelAnswer": "I'd want to understand the firm's contingency options in advance, such as whether an international transfer to an overseas office is a possibility, since some firms have used that route successfully for analysts in that exact situation. I'd rather have that conversation proactively rather than be caught off guard if the lottery outcome doesn't go my way."
+      },
+      {
+        "prompt": "How does your international background specifically add value beyond meeting the general job requirements?",
+        "modelAnswer": "I'm fluent in a second language and have direct cultural familiarity with a market that I know this firm has done cross-border deal work in before, which could be genuinely useful on a transaction involving counterparties from that region, beyond just being a nice biographical detail."
+      },
+      {
+        "prompt": "Is there anything you'd want from the firm to make the sponsorship process go smoothly on their end?",
+        "modelAnswer": "Mainly clear early communication about internal deadlines for filing paperwork, since the biggest risk in these processes is usually a missed internal deadline rather than the process itself failing. I'd want to proactively check in on those dates rather than assume everything is being tracked without my involvement."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "objection-handling-by-background",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-018-deal-strategic-rationale",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "multi-step",
+    "prompt": "Pick a real deal you've studied and walk me through its strategic rationale, the structure used, and one risk you'd flag if you were advising the buyer.",
+    "keyPoints": [
+      {"point": "States the deal's core facts accurately (parties, approximate size, structure)", "weight": 2},
+      {"point": "Articulates the strategic rationale specifically, not just 'growth' or 'synergies' in the abstract", "weight": 3},
+      {"point": "Describes the financing or structural mechanics of the deal correctly", "weight": 3},
+      {"point": "Identifies one specific, credible risk relevant to that particular deal", "weight": 3},
+      {"point": "Organizes the answer clearly across the three requested parts", "weight": 1}
+    ],
+    "misconceptions": [
+      "Giving a generic risk (integration risk, market risk) with no connection to the specific deal's facts",
+      "Skipping the financing/structure component entirely and only discussing rationale"
+    ],
+    "modelAnswer": "I'll use a mid-sized packaging company's acquisition of a smaller specialty packaging competitor for around $600 million that I followed a few months ago. Strategically, the rationale was about product-line expansion into a higher-margin niche — the acquirer's core business was commoditized packaging with thinner margins, while the target specialized in custom packaging solutions for a premium consumer segment with meaningfully higher margins, so the deal was framed as a way to shift the combined company's product mix upmarket rather than just adding scale in the existing commodity business. Structurally, the deal was financed with roughly sixty percent cash on hand and existing credit facilities and forty percent new debt, keeping it modest in leverage relative to the combined company's cash flow, which suggested management wanted to preserve balance sheet flexibility for future deals rather than stretching for this one. If I were advising the buyer, the risk I'd flag is customer concentration — specialty packaging businesses like the target often serve a small number of premium consumer brand customers, and if even one or two of those relationships didn't transfer smoothly post-acquisition, whether due to a change-of-control clause or simple customer discomfort with new ownership, a meaningful chunk of the target's revenue base could be at risk, which would undermine the entire margin-mix rationale behind the deal.",
+    "followups": [
+      {
+        "prompt": "How would you actually diligence the customer concentration risk before recommending the deal proceed?",
+        "modelAnswer": "I'd want to see the target's revenue broken out by top customers, including what percentage the largest five or ten represent, along with contract terms and any change-of-control provisions that could let a customer walk away post-close. I'd also want management's read on how likely those key relationships are to stay intact, cross-checked against any direct conversations the buyer's team can have with the largest customers before signing, if confidentiality allows."
+      },
+      {
+        "prompt": "If the concentration risk turned out to be severe, how might the deal structure be adjusted to address it?",
+        "modelAnswer": "The buyer could push for an earnout structure that ties part of the purchase price to retained revenue from the largest customers over a defined post-close period, shifting some of that risk back to the seller rather than paying full price upfront for revenue that might not persist. Alternatively, they could negotiate specific customer consent or retention agreements as a condition to closing."
+      },
+      {
+        "prompt": "Why might the acquirer have chosen a conservative capital structure rather than maximizing leverage to boost returns?",
+        "modelAnswer": "A more conservative structure preserves flexibility for future opportunistic acquisitions and reduces the risk of financial distress if the anticipated margin improvement from the product mix shift takes longer than expected to materialize. It suggests management prioritized balance sheet resilience over maximizing near-term equity returns on this particular deal."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "tell-me-about-a-deal",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-019-deal-would-have-done-differently",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "Tell me about a deal you followed where, if you'd been advising, you think a different approach would have worked better.",
+    "keyPoints": [
+      {"point": "Names a specific real deal with accurate basic facts", "weight": 3},
+      {"point": "Identifies a specific, defensible critique rather than vague second-guessing", "weight": 3},
+      {"point": "Proposes a concrete alternative approach and explains the reasoning", "weight": 3},
+      {"point": "Shows appropriate humility about not having full information available to the actual deal team", "weight": 2}
+    ],
+    "misconceptions": [
+      "Criticizing a deal outcome purely with the benefit of hindsight without a defensible reasoning process",
+      "Failing to acknowledge the limits of judging a deal from outside information"
+    ],
+    "modelAnswer": "I followed a mid-cap retailer's acquisition of an e-commerce platform for roughly $300 million, structured entirely with cash and new debt. The stated rationale was to accelerate the retailer's online capabilities rather than building them in-house. Within about a year, the retailer had written down a meaningful portion of the deal's value, citing slower-than-expected integration and customer overlap that made the anticipated growth synergies harder to realize than projected. With the caveat that I only have public information and the deal team obviously had far more diligence access than I do, my critique is that an all-cash, all-debt structure left no room to share downside risk with the seller if the integration didn't go as planned. Had I been advising, I'd have pushed harder for an earnout structure tying a portion of the purchase price to the platform hitting specific post-close revenue or integration milestones, which would have better aligned the seller's incentives with a successful integration and reduced the buyer's exposure if things went sideways, as they ultimately did. I recognize hindsight makes this critique easier to make than it would have been in real time, and there may have been seller-side constraints I'm not aware of that ruled out an earnout, but based on what became public, the all-cash structure looks like it took on more integration risk than was necessary.",
+    "followups": [
+      {
+        "prompt": "Why might the seller have refused an earnout structure even if the buyer wanted one?",
+        "modelAnswer": "Sellers often prefer certainty of proceeds at closing, especially if they don't expect to remain involved post-close to influence whether the earnout targets are hit, since an earnout puts some of their payment at risk based on factors they may no longer control. A seller in a strong negotiating position, perhaps with competing bidders, would have leverage to reject an earnout structure the buyer proposed."
+      },
+      {
+        "prompt": "What information would you want that you don't currently have to fully validate your critique?",
+        "modelAnswer": "I'd want to know whether an earnout was actually proposed and rejected during negotiations, what the competitive dynamics of the sale process were, and what specific integration risks the buyer's diligence team identified and how they were underwritten, since it's possible the buyer considered and consciously accepted this risk for reasons not visible from the outside."
+      },
+      {
+        "prompt": "Besides deal structure, what else might have reduced the integration risk that materialized?",
+        "modelAnswer": "A more detailed pre-close integration plan with named leadership for the combined function and clear milestones in the first six months might have surfaced the customer overlap issue earlier, before it became a full write-down. That's more of an execution issue than a structuring issue, but it's another lever besides the deal terms themselves that could have mitigated the outcome."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "tell-me-about-a-deal",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-020-market-rate-move-impact",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "How would a meaningful rise in interest rates affect M&A activity, in your view?",
+    "keyPoints": [
+      {"point": "Explains the mechanism connecting rates to deal financing costs", "weight": 3},
+      {"point": "Discusses the effect on valuations and buyer/seller price expectations", "weight": 3},
+      {"point": "Distinguishes impact across buyer types (strategic vs. financial sponsor)", "weight": 3},
+      {"point": "Offers a nuanced view rather than a blanket 'M&A slows down' claim", "weight": 2}
+    ],
+    "misconceptions": [
+      "Claiming rates only matter to leveraged buyers and have no effect on strategic acquirers",
+      "Giving an answer with no explanation of the underlying mechanism connecting rates to deal activity"
+    ],
+    "modelAnswer": "Rising rates tend to slow M&A activity overall, but the effect isn't uniform across buyer types. For financial sponsors, higher rates directly increase the cost of the debt used to finance a leveraged buyout, which mechanically lowers the price a sponsor can pay while still hitting their target returns, so sponsor-driven deal volume and average purchase multiples both tend to come under pressure. For strategic acquirers, the effect is less direct since many can finance deals partly with cash or equity, but higher rates still raise their cost of capital and tend to coincide with more caution generally, since a higher discount rate lowers the present value of projected synergies, making marginal deals look less attractive. There's also a valuation expectation gap that tends to widen in a rising-rate environment — sellers often anchor to recent, pre-rate-hike valuation levels, while buyers adjust their offers downward more quickly to reflect the new cost of capital, and that gap can cause deal volume to drop simply because buyers and sellers can't agree on price even when both sides still want to transact. Historically, that gap tends to narrow over time as sellers adjust expectations to the new environment, which is often why deal activity picks back up with a lag rather than immediately once rates stabilize.",
+    "followups": [
+      {
+        "prompt": "Why might strategic buyers actually become more active, not less, in a higher-rate environment?",
+        "modelAnswer": "A strategic buyer that's well-capitalized with strong existing cash flow can use a rising-rate environment to acquire distressed or cash-constrained competitors who overleveraged during the low-rate period, effectively buying market share at a lower price than would have been available in a hotter market. Rate cycles can create relative opportunities for the strongest balance sheets even while overall deal volume declines."
+      },
+      {
+        "prompt": "How would you expect purchase price multiples to behave specifically as rates rise, and why?",
+        "modelAnswer": "Multiples generally compress, since a higher cost of capital raises the discount rate applied to future cash flows, lowering their present value and therefore the price a rational buyer is willing to pay for the same projected cash flow stream. Sectors with longer-duration cash flows, like high-growth companies where more of the value sits further in the future, tend to see sharper multiple compression than steadier, shorter-duration cash flow businesses."
+      },
+      {
+        "prompt": "What would you expect to happen to the mix of stock versus cash deals in a rising-rate environment?",
+        "modelAnswer": "I'd expect a shift toward relatively more stock-financed deals, since debt becomes more expensive, making equity a comparatively cheaper source of financing for buyers with a strong or growing stock price, though this is more true for well-capitalized strategics than for financial sponsors, who don't have a public currency to offer."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "how-to-follow-the-market",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-021-market-ma-volume-trend",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "What's your view on the current trend in overall M&A deal volume, and what's driving it?",
+    "keyPoints": [
+      {"point": "States a specific, plausible directional view rather than a vague 'it's mixed'", "weight": 2},
+      {"point": "Names at least two distinct drivers behind the trend (macro, regulatory, sector-specific)", "weight": 3},
+      {"point": "Distinguishes trends across deal size or sector where relevant", "weight": 3},
+      {"point": "Shows this is an informed, current view rather than outdated or generic commentary", "weight": 2}
+    ],
+    "misconceptions": [
+      "Giving a purely macro answer with no connection to actual observed deal activity",
+      "Treating all M&A activity as monolithic without distinguishing large-cap from mid-market or by sector"
+    ],
+    "modelAnswer": "My sense is that overall large-cap M&A volume has been relatively subdued compared to peak years, largely due to a combination of higher financing costs making leveraged deals less attractive and a valuation expectation gap between buyers and sellers that's been slow to close. At the same time, I've noticed mid-market activity, particularly smaller strategic bolt-on acquisitions, has held up comparatively better, likely because those deals rely less on large debt packages and are often financed with a mix of cash and modest leverage, making them less sensitive to the rate environment than a large leveraged buyout would be. Regulatory scrutiny has also played a role at the larger end of the market, with antitrust review taking longer and creating more deal uncertainty for large, high-profile combinations, which I think has pushed some strategic acquirers toward smaller, less scrutinized deals instead of pursuing transformational, headline-grabbing acquisitions. Sector-wise, I've noticed continued consolidation activity in healthcare services and business services specifically, sectors with a lot of founder-owned, fragmented companies that are natural roll-up candidates regardless of the broader rate environment, since those deals are often driven more by succession planning on the seller side than by financing conditions.",
+    "followups": [
+      {
+        "prompt": "Why might smaller bolt-on deals be less sensitive to the rate environment than large leveraged buyouts?",
+        "modelAnswer": "Bolt-on acquisitions are more often financed with cash on hand or modest incremental leverage relative to a company's existing balance sheet, rather than the highly levered structures typical of a large private equity buyout, so a rise in borrowing costs has a smaller proportional effect on the deal's overall economics."
+      },
+      {
+        "prompt": "How does increased antitrust scrutiny specifically change deal structuring, not just volume?",
+        "modelAnswer": "It tends to push buyers toward including longer outside dates and sometimes reverse termination fees in merger agreements to compensate sellers for the added regulatory risk and delay, and it can lead parties to proactively offer divestitures of overlapping businesses upfront to reduce the odds of a prolonged review."
+      },
+      {
+        "prompt": "What would need to happen for large-cap M&A volume to meaningfully recover?",
+        "modelAnswer": "I'd expect it to require either a sustained decline in financing costs that narrows the buyer-seller valuation gap, or enough time for seller price expectations to adjust downward to the new environment even without rates falling. A more predictable antitrust posture would also likely help by reducing the deal uncertainty that's discouraged some large, ambitious combinations."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "how-to-follow-the-market",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-022-market-industry-trend-view",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "conceptual",
+    "prompt": "Pick an industry you follow and tell me about a trend you think will meaningfully affect deal activity in that sector over the next couple of years.",
+    "keyPoints": [
+      {"point": "Names a specific industry and a specific, non-obvious trend within it", "weight": 3},
+      {"point": "Explains the mechanism by which the trend would affect deal activity specifically", "weight": 3},
+      {"point": "Distinguishes winners and losers or different implications across sub-segments", "weight": 2},
+      {"point": "Shows independent reasoning rather than repeating a headline without analysis", "weight": 2}
+    ],
+    "misconceptions": [
+      "Naming a trend so broad it applies to every industry equally, showing no sector-specific insight",
+      "Describing the trend without connecting it to any actual deal implication"
+    ],
+    "modelAnswer": "I follow the specialty industrial equipment space, and one trend I think will meaningfully shape deal activity there is the push toward automation driven by persistent labor shortages in manufacturing. Companies that make automation and robotics components for manufacturing lines have seen steady demand growth as manufacturers try to reduce dependence on labor they've struggled to hire and retain, and I think that's going to make automation-focused equipment makers increasingly attractive acquisition targets for larger industrial conglomerates looking to add that capability rather than build it internally, which tends to be slower and riskier. On the flip side, I'd expect more traditional, labor-intensive equipment makers that haven't invested in automating their own product lines to become relatively less attractive targets, or to see private equity interest shift toward buying them cheaply with a thesis of funding an automation retrofit post-acquisition rather than paying a premium for organic growth. I think this creates a bifurcation within the sector — a premium tier of automation-forward companies commanding higher multiples in strategic acquisitions, and a value tier of legacy equipment makers that become targets for a more operationally intensive private equity turnaround thesis instead.",
+    "followups": [
+      {
+        "prompt": "What data or signals would you look for to confirm this trend is actually playing out in deal activity?",
+        "modelAnswer": "I'd track announced acquisition multiples paid for automation-focused equipment companies versus more traditional equipment makers over time, looking for a widening gap, and I'd also watch for an increase in private equity buyouts of legacy equipment companies explicitly citing an automation or digitization thesis in their deal announcements."
+      },
+      {
+        "prompt": "What could disrupt or slow this trend from playing out as you expect?",
+        "modelAnswer": "A significant improvement in labor availability, whether from immigration policy changes or a broader economic slowdown that eased hiring pressure, could reduce the urgency manufacturers feel to automate, which would slow the premium being placed on automation-capable equipment makers relative to my base case."
+      },
+      {
+        "prompt": "How would this trend specifically change how you'd value an automation-focused target compared to a traditional peer?",
+        "modelAnswer": "I'd expect to apply a higher forward growth rate and potentially a premium multiple to reflect both the structural demand tailwind and strategic scarcity value, while being careful to distinguish genuine automation capability from companies simply using the term as marketing without a real product differentiation to back it up."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "how-to-follow-the-market",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-023-hardest-project",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "Tell me about the hardest project or assignment you've worked on. What made it difficult, and how did you get through it?",
+    "keyPoints": [
+      {"point": "Describes a genuinely challenging project with specific, concrete difficulty, not a vague hardship", "weight": 3},
+      {"point": "Explains the specific obstacles faced, whether technical, interpersonal, or time-related", "weight": 2},
+      {"point": "Describes concrete actions taken to work through the difficulty", "weight": 3},
+      {"point": "States a clear outcome and a lesson that would apply to banking work", "weight": 2}
+    ],
+    "misconceptions": [
+      "Choosing a project that wasn't actually difficult, undermining the credibility of the story",
+      "Focusing entirely on how hard the project was without explaining the actions taken to overcome it"
+    ],
+    "modelAnswer": "The hardest project I've worked on was an independent research project analyzing a company undergoing financial distress, which I took on for an advanced finance seminar. The difficulty wasn't the concept, it was the data — the company had stopped providing detailed segment reporting a couple years before its troubles became public, so I had to reconstruct a reasonable estimate of its segment-level performance using indirect sources: industry reports, competitor disclosures, and patterns in the limited data the company still filed. It took nearly three weeks of trial and error before I had an approach I trusted, including two full restarts after I realized my initial assumptions about how to allocate shared costs across segments were producing implausible results when I sanity-checked them against known industry margins. What got me through it was breaking the problem down and validating each piece against an independent source before building on it, rather than continuing to build on assumptions I hadn't yet confirmed were reasonable, which is what had caused the earlier restarts. My final analysis correctly anticipated which segment was driving the company's distress, which my professor confirmed aligned with what later became public in the company's own disclosures. The experience taught me real patience with ambiguous, incomplete data, and a discipline around validating assumptions incrementally rather than building a large analysis on an unverified foundation, which I think is directly applicable to banking work where data is rarely as clean as a textbook case.",
+    "followups": [
+      {
+        "prompt": "What specifically made you realize your first two approaches were producing implausible results?",
+        "modelAnswer": "I compared the implied segment margins my allocation method produced against publicly known margins for pure-play competitors in each segment, and the numbers were wildly out of line — one segment was showing margins nearly double what any comparable standalone company in that space reported, which was an obvious signal my cost allocation assumptions were flawed."
+      },
+      {
+        "prompt": "How did you decide when to stop iterating and settle on a final approach?",
+        "modelAnswer": "I set a rule for myself that once my segment margin estimates fell within a reasonable range of comparable public companies and were internally consistent with the total company figures I could verify, I'd stop refining further, since I recognized I could keep tweaking indefinitely without a clean way to fully validate the exact numbers given the data limitations."
+      },
+      {
+        "prompt": "If you had unlimited time, what would you have done differently to make the analysis more rigorous?",
+        "modelAnswer": "I'd have tried to reach out directly to industry analysts or former employees who might have had informal knowledge of the company's actual segment economics, which could have given me a real data point to validate against rather than relying entirely on indirect competitor comparisons."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "discussing-your-own-experience",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-medium-024-tough-feedback",
+    "topic": "behavioral",
+    "difficulty": "medium",
+    "questionType": "verbal",
+    "prompt": "Tell me about a time you received tough feedback that was hard to hear. How did you respond?",
+    "keyPoints": [
+      {"point": "Describes specific, genuinely difficult feedback, not a mild or softened critique", "weight": 3},
+      {"point": "Shows an honest initial reaction before describing how it was processed constructively", "weight": 2},
+      {"point": "Describes a concrete change in behavior made as a result", "weight": 3},
+      {"point": "Reflects genuine growth rather than simply agreeing the feedback was correct without evidence of change", "weight": 2}
+    ],
+    "misconceptions": [
+      "Claiming the feedback didn't bother the candidate at all, which can read as inauthentic",
+      "Describing feedback received but no actual behavior change that followed from it"
+    ],
+    "modelAnswer": "During my internship, my manager told me directly that my communication style in meetings came across as overly hedging — I was prefacing almost everything with phrases like 'I could be wrong, but' even when I actually had a well-supported view, and she said it was making people discount my input before they'd even heard it. That was hard to hear, honestly, because I thought I was being appropriately humble rather than undermining myself, and my first reaction was a little defensive. I sat with it overnight rather than responding right away, and when I revisited a few recent meetings in my head, I realized she was right — I had real analysis behind most of what I was saying, but I was framing it as uncertain out of habit rather than genuine doubt. I made a deliberate change after that: before speaking up in a meeting, I started asking myself whether I actually believed what I was about to say, and if I did, saying it directly instead of hedging, reserving qualifiers for situations where real uncertainty existed. Within a few weeks, my manager mentioned she'd noticed the shift, and I noticed it myself in how people responded to my input, engaging with the substance rather than my tone. It was uncomfortable feedback to receive, but it changed a habit I don't think I'd have caught on my own.",
+    "followups": [
+      {
+        "prompt": "Why do you think you'd developed the habit of hedging in the first place?",
+        "modelAnswer": "I think it came from being one of the younger or less experienced people in most rooms I'd been in up to that point, and hedging felt like a way to avoid overstepping. The problem was I kept doing it even once I actually had well-supported analysis behind what I was saying, which is where it stopped being appropriate humility and started being a habit that undercut me."
+      },
+      {
+        "prompt": "How do you make sure you don't overcorrect into sounding overconfident instead?",
+        "modelAnswer": "I try to keep the qualifier when there's genuine uncertainty in the underlying analysis, since that's actually useful information for the listener, but drop it when I've done the work and am confident in the conclusion. The distinction I aim for is being honest about my actual confidence level rather than defaulting to either extreme regardless of the substance."
+      },
+      {
+        "prompt": "Has anyone given you similar feedback since then, or has the change held?",
+        "modelAnswer": "It's held reasonably well, though I've noticed the old habit can creep back in when I'm in an unfamiliar setting with more senior people than I'm used to, which tells me it's something I still have to consciously monitor rather than something that's fully automatic yet."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "discussing-your-own-experience",
+    "advanced": false
+  }
+]

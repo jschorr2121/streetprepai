@@ -1,0 +1,298 @@
+[
+  {
+    "id": "interviewing-easy-001-formats-what-they-score-on",
+    "topic": "interviewing",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "In an investment banking interview, what are the two broad categories interviewers are actually scoring you on, and why does a candidate with a weaker technical answer sometimes still get the offer?",
+    "keyPoints": [
+      {"point": "Names fit/motivation (story, why banking, why this group/firm) as one bucket", "weight": 3},
+      {"point": "Names technical competence (accounting, valuation, deal mechanics) as the second bucket", "weight": 3},
+      {"point": "Explains that fit determines whether people want to work with you 100-hour weeks alongside you", "weight": 2},
+      {"point": "Notes technical mistakes are coachable pre-desk but a bad personality fit is not", "weight": 2},
+      {"point": "Mentions interviewers are effectively asking 'would I want to be stuck in an all-nighter with this person'", "weight": 1}
+    ],
+    "misconceptions": [
+      "Believing that acing every technical question guarantees an offer regardless of how the conversation felt",
+      "Thinking fit questions are just small talk with no bearing on the actual decision",
+      "Assuming all interviewers weight technical and fit equally when in practice junior-level screens often lean fit-heavy"
+    ],
+    "modelAnswer": "Interviewers are really scoring two things: fit and technical competence. Fit covers whether my story is coherent, whether my interest in banking and this specific group sounds genuine rather than recycled, and whether I'd be someone a team wants sitting next to them at 2am on a live deal. Technical competence covers the baseline accounting, valuation, and deal mechanics knowledge that shows I've done the work to be useful on day one. In practice, fit often carries more weight at the first-round stage because technical gaps can be patched during training, but a candidate who comes across as arrogant, checked-out, or dishonest about their motivations is a much harder problem to fix. Analysts work extremely long hours in small teams, so staffers are consciously screening for people who are low-maintenance, coachable, and pleasant under pressure. That's why a candidate who fumbles one technical question but tells a tight, honest story and reacts well to being corrected often beats a candidate who nails every technical question but seems difficult or disengaged. Both buckets matter, but likability and genuine motivation are what get you into the room for the next round when the technical answer isn't perfect.",
+    "followups": [
+      {
+        "prompt": "If fit matters that much, why do firms still ask hard technical questions in first rounds at all?",
+        "modelAnswer": "Technical questions serve as a floor, not a ceiling. Firms need to filter out candidates who genuinely haven't done any preparation or don't understand what the job involves, because that signals low seriousness regardless of how personable someone is. It's also efficient: a 30-minute screen can't fully assess someone's judgment, so a few technical questions act as a proxy for work ethic and preparation. But once a candidate clears that bar, marginal technical polish matters much less than whether the interviewer would want to staff them."
+      },
+      {
+        "prompt": "How would you demonstrate fit in the first 60 seconds of an interview, before any questions are even asked?",
+        "modelAnswer": "Tone, energy, and body language set the frame before a word of substance is said. Walking in with a firm handshake, genuine eye contact, and a relaxed but attentive posture signals confidence without arrogance. Matching the interviewer's energy rather than being either flat or overly performative reads as self-aware. Small things like remembering the interviewer's name and referencing something specific about their background if known also show preparation and genuine interest before the first question lands."
+      }
+    ],
+    "chapterSlug": "mock-interviews",
+    "sectionSlug": "interview-formats-and-what-scorers-reward",
+    "advanced": false
+  },
+  {
+    "id": "interviewing-easy-002-formats-behavioral-vs-technical-time-split",
+    "topic": "interviewing",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "In a typical 30-minute first-round investment banking interview, roughly how is the time usually split between behavioral and technical questions, and what does that imply about how you should prepare?",
+    "keyPoints": [
+      {"point": "States behavioral/fit questions usually dominate early first rounds, often more than half the time", "weight": 3},
+      {"point": "Notes technical depth increases in later rounds and at the superday relative to first rounds", "weight": 2},
+      {"point": "Implies candidates should over-invest in story polish relative to how much they'd naturally want to", "weight": 2},
+      {"point": "Mentions the split varies by bank and by interviewer seniority (senior bankers ask fewer technicals)", "weight": 2},
+      {"point": "Notes technical prep still needs to be complete even if it's a smaller share of time, since a single wrong answer can be disqualifying", "weight": 1}
+    ],
+    "misconceptions": [
+      "Assuming a 30-minute interview is mostly technical because that's what's hardest to study",
+      "Believing senior interviewers ask more technical questions than junior ones, when it's usually the reverse",
+      "Thinking behavioral prep can be improvised since it's 'just talking about yourself'"
+    ],
+    "modelAnswer": "In a typical first-round screen, behavioral and fit questions usually take up more than half the time, often the first 15 to 20 minutes, before the interviewer pivots to three or four technical questions to check the box on competence. That split shifts as the process progresses: superday rounds and interviews with more senior bankers tend to lean even more heavily on fit and judgment, while interviews with junior staff or on technical-screen calls skew more technical. The practical implication is that candidates often under-prepare for the behavioral portion because it feels less objectively gradable than a DCF walkthrough, but it's actually consuming more interview time and carrying comparable weight in the final decision. I make sure my story, my 'why this bank' answer, and two or three specific deal or market anecdotes are as tightly rehearsed as my technical formulas. At the same time, I don't let the shorter technical window lower my prep bar, because a single blown technical answer in that compressed window can be disqualifying even if the rest of the conversation went well. Both halves need to be interview-ready, not just the one that feels harder to fake.",
+    "followups": [
+      {
+        "prompt": "How would you adjust your prep time allocation differently for a superday versus a first-round phone screen?",
+        "modelAnswer": "For a first-round screen I'd weight prep roughly evenly between story polish and core technicals, since I don't know the interviewer's seniority or focus. For a superday, I'd shift more prep time toward market awareness, deal-specific talking points, and behavioral depth, because superday interviewers are often senior and are testing judgment and cultural fit across four or five back-to-back conversations rather than re-testing basic technicals that the first round already screened for."
+      },
+      {
+        "prompt": "Why might a junior analyst interviewer ask harder technicals than the group head interviewing you later that same day?",
+        "modelAnswer": "Junior analysts and associates are closer to the day-to-day modeling work and are often explicitly tasked with technical vetting because they'll be the ones training and relying on the new hire. Group heads and MDs are further from the spreadsheet and are usually more focused on judgment, poise under pressure, and whether they'd trust the candidate in front of a client, so they tend to ask fewer rote technical questions and more open-ended or market-view questions."
+      }
+    ],
+    "chapterSlug": "mock-interviews",
+    "sectionSlug": "interview-formats-and-what-scorers-reward",
+    "advanced": false
+  },
+  {
+    "id": "interviewing-easy-003-hirevue-what-it-is",
+    "topic": "interviewing",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is a HireVue-style one-way video interview, and at what stage of the recruiting process does it typically appear?",
+    "keyPoints": [
+      {"point": "Defines it as a recorded, one-way interview: candidate answers pre-set questions on camera with no live interviewer", "weight": 3},
+      {"point": "Notes it typically appears early, often as the first filter after resume/cover letter screening", "weight": 2},
+      {"point": "Mentions answers are usually time-limited per question with limited or no retakes", "weight": 2},
+      {"point": "Notes it's often reviewed later by recruiters or an algorithm-assisted flag before a human watches", "weight": 2},
+      {"point": "States the purpose is to filter volume efficiently before investing live interviewer time", "weight": 1}
+    ],
+    "misconceptions": [
+      "Assuming a real person is watching and reacting live, the way they would in a phone call",
+      "Believing there's no time pressure because it's recorded and can be 'redone' freely",
+      "Thinking HireVue rounds are purely a formality with no real filtering power"
+    ],
+    "modelAnswer": "A HireVue-style interview is a one-way, asynchronous video interview: I'm shown a written prompt, given a short prep window, and then record my answer within a fixed time limit, usually with no live person on the other end and often only one or two attempts per question. It typically shows up early in the process, right after resume and cover letter screening and before any live phone or superday round, because it lets the firm efficiently process thousands of applicants without tying up banker time. The questions are usually a mix of standard fit questions like 'why banking' and 'why this firm,' plus one or two behavioral prompts, and sometimes a market or technical question depending on the bank. Because there's no interviewer to read the room, warm up to, or redirect if I go off track, I have to hit the structure and the key points cleanly within the time limit on essentially the first take. It's a real filter, not a formality, since recruiters or automated screening tools use these recordings to cut a large applicant pool down to the group that gets a live interview, so treating it casually is a mistake many candidates make.",
+    "followups": [
+      {
+        "prompt": "Why do firms use one-way video instead of just reading written responses to the same questions?",
+        "modelAnswer": "Video captures things text can't: tone, poise, eye contact, energy, and whether someone can think and speak clearly under mild pressure without editing. Since so much of banking is client-facing and requires composure in live meetings, firms want a cheap early signal on presentation and communication style before committing a banker's time to a live call. It's also harder to have someone else write the answer for you compared to a written application."
+      },
+      {
+        "prompt": "If you mess up your first attempt and only get one retake, how should you decide whether to use it?",
+        "modelAnswer": "I'd only burn the retake if the first attempt had a real structural problem, like forgetting a key point, running out of time mid-sentence, or a factual error, not just because I could word something more elegantly. A slightly imperfect but complete and confident answer usually reads better than a second attempt that feels over-rehearsed or hesitant. I'd also use any prep time before recording to jot a one-line outline so I'm less likely to need the retake at all."
+      }
+    ],
+    "chapterSlug": "mock-interviews",
+    "sectionSlug": "hirevue-simulation-guide",
+    "advanced": false
+  },
+  {
+    "id": "interviewing-easy-004-first-round-15-minute-goal",
+    "topic": "interviewing",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "A first-round phone interview is often only 15 to 20 minutes long. What is the single most important goal for a candidate in that short window, and how should that shape how you spend the time?",
+    "keyPoints": [
+      {"point": "States the primary goal is to avoid disqualification and earn the next round, not to prove overall greatness", "weight": 3},
+      {"point": "Notes this means prioritizing a clean, no-red-flag answer over a maximally impressive but risky one", "weight": 2},
+      {"point": "Mentions keeping answers concise so more ground can be covered given the short window", "weight": 2},
+      {"point": "Notes the interviewer likely has a checklist and is looking for reasons to screen out, not just reasons to be impressed", "weight": 2},
+      {"point": "Implies over-preparing the story and 2-3 technical basics is higher leverage than breadth of knowledge", "weight": 1}
+    ],
+    "misconceptions": [
+      "Trying to showcase every accomplishment and piece of technical knowledge in the limited time",
+      "Treating the first round like the final decision-making interview rather than a filtering step",
+      "Rambling in answers because the time limit isn't top of mind"
+    ],
+    "modelAnswer": "In a 15-to-20-minute first round, my main goal isn't to dazzle the interviewer, it's to give them zero reasons to screen me out and a clear reason to move me forward. These early calls are often run against a checklist: is the story coherent, is the motivation genuine, can this person answer basic technicals cleanly, are there any obvious red flags like inconsistency or unpreparedness. Given that framing, I keep every answer concise and structured rather than exhaustive, because with so little time, rambling on one question steals time from proving competence on the next. I'd rather give a tight 60-to-90-second answer to 'walk me through your resume' that hits the key beats clearly than a five-minute answer that's more impressive in isolation but eats a third of the call. I also prioritize having my story and two or three bread-and-butter technical answers, like why investment banking or how the three financial statements link, absolutely airtight, since those are almost guaranteed to come up and a wobble there is disproportionately costly in a short screen. The goal is a clean, efficient, no-surprises conversation that earns the next round.",
+    "followups": [
+      {
+        "prompt": "How would you handle it if the interviewer spends 10 of the 15 minutes on one open-ended question?",
+        "modelAnswer": "I'd try to keep my own answer efficient even if the interviewer is expansive, since I can't control their pacing but I can control mine. If it becomes clear time is running short, I might briefly and politely note that I have a couple of technical points I'd love to cover if there's time, which shows self-awareness about the clock without seeming like I'm cutting the interviewer off. Ultimately I'd follow their lead, since a rapport-heavy call that runs long is often a good sign anyway."
+      },
+      {
+        "prompt": "Why might over-preparing to sound impressive actually hurt you in this format?",
+        "modelAnswer": "Answers that are built to impress tend to run long, use jargon defensively, or drift into name-dropping, all of which read as trying too hard in a short, efficiency-focused call. Interviewers running a tight schedule often penalize candidates who don't respect the format, since it signals poor judgment about what the moment calls for. A candidate who reads the room, answers precisely, and lets substance speak for itself usually comes across as more senior and more coachable than one who's visibly performing."
+      }
+    ],
+    "chapterSlug": "mock-interviews",
+    "sectionSlug": "first-round-strategy",
+    "advanced": false
+  },
+  {
+    "id": "interviewing-easy-005-logistics-what-to-bring",
+    "topic": "interviewing",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What should you physically bring with you to an in-person superday, and why does bringing extra printed resumes matter even though the firm already has your application on file?",
+    "keyPoints": [
+      {"point": "Lists core items: multiple printed resume copies, a notepad and pen, a portfolio folder or padfolio, valid ID", "weight": 3},
+      {"point": "Notes extra resumes matter because not every interviewer will have pulled or printed the application copy", "weight": 2},
+      {"point": "Mentions bringing a printed schedule or interviewer list if provided, to track names and roles", "weight": 2},
+      {"point": "Notes having a professional bag/folder rather than a backpack, and a phone silenced and put away", "weight": 1},
+      {"point": "Mentions water/snack for energy during a multi-hour day if breaks allow", "weight": 1}
+    ],
+    "misconceptions": [
+      "Assuming the firm's HR team will have printed copies ready for every interviewer",
+      "Bringing a laptop or tablet to reference notes during the interview itself",
+      "Thinking a single resume copy is enough since 'they already have it'"
+    ],
+    "modelAnswer": "I bring five to six clean printed copies of my resume even though the firm technically has it on file, because in practice not every interviewer on a superday has pulled or printed a copy before walking in, and handing one over smoothly avoids an awkward pause or making them scramble. Beyond that, I bring a slim padfolio or portfolio with a notepad and pen for jotting names, questions, or anything I want to follow up on in a thank-you note, a valid photo ID since many buildings require security check-in, and a printed copy of my interview schedule if the firm sent one, so I can track who I'm meeting and in what order. I keep it all in a professional bag rather than a backpack, and my phone stays fully silenced and out of sight for the entire day, not just during interviews. I'll usually also bring a small water bottle or snack for the gaps between rounds, since superdays can run three to five hours and low blood sugar is an easy, avoidable way to lose sharpness in a later interview. None of this is complicated, but showing up without it reads as under-prepared for a day where preparation is the whole point.",
+    "followups": [
+      {
+        "prompt": "What would you do if you showed up and realized you forgot printed resumes?",
+        "modelAnswer": "I'd let the front desk or HR contact know as soon as I arrive and politely ask if they're able to print a few copies, since most firms can accommodate that without it being a real issue. I wouldn't make a big deal of it in the interviews themselves. It's a minor logistical slip that's easily fixed early, and drawing more attention to it than necessary would be worse than just handling it quietly and moving on."
+      },
+      {
+        "prompt": "Why does bringing a notepad matter if you're not allowed to take detailed notes during the interview itself?",
+        "modelAnswer": "The notepad isn't primarily for note-taking mid-conversation, since heads-down writing during an interview can look disengaged. It's more useful in the gaps between interviews to jot down the name and group of each interviewer, a memorable detail from the conversation, or a question I want to ask the next person, so that by the end of the day I can write specific, accurate thank-you notes rather than generic ones."
+      }
+    ],
+    "chapterSlug": "superday",
+    "sectionSlug": "superday-day-of-logistics",
+    "advanced": false
+  },
+  {
+    "id": "interviewing-easy-006-consistency-why-story-consistency-matters",
+    "topic": "interviewing",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "During a superday you might tell your 'why banking' story to five different interviewers back to back. Why does it matter if the story sounds slightly different each time, and how do interviewers usually catch inconsistencies?",
+    "keyPoints": [
+      {"point": "Notes interviewers frequently compare notes with each other after a superday", "weight": 3},
+      {"point": "States inconsistency reads as either dishonesty or a poorly thought-through narrative, both damaging", "weight": 3},
+      {"point": "Recommends keeping core facts and timeline fixed while varying phrasing/emphasis naturally", "weight": 2},
+      {"point": "Notes minor tonal variation across retellings is fine and even expected; factual drift is not", "weight": 1}
+    ],
+    "misconceptions": [
+      "Believing each interviewer is an isolated data point who will never compare notes with colleagues",
+      "Thinking sounding identical word-for-word each time is necessary, versus just being factually consistent",
+      "Assuming interviewers won't notice small discrepancies because they're each only hearing it once"
+    ],
+    "modelAnswer": "It matters a lot, because superday interviewers routinely huddle after the rounds finish, or a recruiter cross-checks written notes, and comparing stories is one of the easiest ways to catch a candidate who's exaggerating or hasn't actually thought their narrative through. If I tell one interviewer my interest in banking started after a specific internship and tell another it started because of a class in sophomore year, that discrepancy either reads as dishonesty or as a story I never actually settled on, and both conclusions hurt me. My approach is to lock in the core facts, the actual chronology of what happened and when, and let the phrasing and which details I emphasize shift naturally based on who's asking and how much time I have. That kind of variation is normal and even expected, since repeating something verbatim five times in a row can sound robotic. What I don't let vary are the underlying facts: dates, names of firms or people involved, and the actual reasoning that led me to banking. Getting that foundation consistent before the superday, not improvising it fresh each time, is what keeps the story credible across five different conversations.",
+    "followups": [
+      {
+        "prompt": "How would you prepare so your story stays factually consistent without sounding memorized?",
+        "modelAnswer": "I'd write out the actual timeline of events and my honest reasoning once, then practice explaining it out loud multiple times in different orders and lengths rather than memorizing a fixed script. Practicing a 30-second, 60-second, and 90-second version of the same true story helps me stay flexible on delivery while keeping the underlying facts locked. Recording myself or doing mock interviews with different people helps expose any spots where my own phrasing accidentally shifts a fact rather than just the wording."
+      },
+      {
+        "prompt": "What should you do if an interviewer directly points out that something you said contradicts what you told a colleague of theirs?",
+        "modelAnswer": "I'd stay calm, avoid getting defensive, and clarify honestly rather than doubling down on either version. Often it's a genuine miscommunication or an interviewer's imprecise paraphrase rather than an actual contradiction, so I'd calmly explain the accurate version and, if I did misspeak earlier, acknowledge it plainly rather than trying to explain it away. Handling the correction gracefully matters more at that point than the original slip."
+      }
+    ],
+    "chapterSlug": "superday",
+    "sectionSlug": "consistency-and-energy",
+    "advanced": false
+  },
+  {
+    "id": "interviewing-easy-007-checklist-night-before-prep",
+    "topic": "interviewing",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Walk me through what you should actually do the night before a superday, in order, to make sure you show up ready.",
+    "keyPoints": [
+      {"point": "Confirm logistics: address, start time, dress code, who to check in with, transportation plan", "weight": 3},
+      {"point": "Do a light review of story and technicals rather than cramming new material", "weight": 3},
+      {"point": "Lay out or confirm the outfit and pack the bag (resumes, ID, notepad) ahead of time", "weight": 2},
+      {"point": "Set multiple alarms and plan to sleep enough hours rather than staying up late reviewing", "weight": 2},
+      {"point": "Avoid heavy drinking, unfamiliar food, or late-night socializing that risks a bad night's sleep", "weight": 1}
+    ],
+    "misconceptions": [
+      "Cramming new technical topics late at night instead of reinforcing what's already solid",
+      "Leaving outfit and bag prep for the morning of, adding avoidable stress",
+      "Underestimating sleep and staying up late 'getting one more review in'"
+    ],
+    "modelAnswer": "The night before, I start by confirming logistics: the exact address, start time, dress code, who I'm checking in with, and my transportation plan, including a buffer for delays, so there's zero ambiguity in the morning. Then I do a light review rather than a cram session: I skim my resume story, my two or three signature anecdotes, and a short list of core technical formulas, just enough to feel sharp without introducing new material I haven't practiced. After that I lay out my outfit completely, down to shoes and accessories, and pack my bag with printed resumes, ID, notepad, and anything else I need, so the morning is just waking up and walking out the door. I avoid alcohol, unfamiliar restaurants, or anything that risks an upset stomach or a bad night's sleep, and I set two or three alarms with real buffer time built in. The single biggest lever the night before is protecting sleep, since a tired candidate underperforms on both energy and recall far more than one extra hour of review would help. I'd rather walk in rested and slightly less polished than exhausted and slightly more rehearsed.",
+    "followups": [
+      {
+        "prompt": "What would you do if you're staying in an unfamiliar city the night before and can't sleep well due to nerves?",
+        "modelAnswer": "I'd focus on things within my control: a calming pre-sleep routine, avoiding screens and caffeine late, and reminding myself that some restlessness before a big day is normal and doesn't ruin performance the way people fear. Even a few hours of decent rest is far better than none, so I wouldn't panic-scroll prep materials at 2am, which only adds stress. If I genuinely can't sleep, resting quietly still helps more than anxious cramming."
+      },
+      {
+        "prompt": "Is it ever worth doing a real mock interview the night before, or is that too late?",
+        "modelAnswer": "A short, low-stakes run-through of my story out loud is fine and can actually settle nerves by making the material feel familiar again. A full, intense mock interview the night before is usually counterproductive, though, since it can spike anxiety right before I need to sleep and doesn't leave time to meaningfully act on feedback. Real mock interview practice should happen days earlier; the night before is for light reinforcement and rest, not new learning."
+      }
+    ],
+    "chapterSlug": "superday",
+    "sectionSlug": "pre-interview-checklist",
+    "advanced": false
+  },
+  {
+    "id": "interviewing-easy-008-checklist-research-the-firm",
+    "topic": "interviewing",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What specific pieces of firm research should be on your pre-interview checklist, and why is generic knowledge like 'they're a top bulge bracket bank' not enough?",
+    "keyPoints": [
+      {"point": "Lists specifics: recent notable deals the firm/group advised on, group structure, industry focus areas", "weight": 3},
+      {"point": "Notes generic praise sounds identical for every candidate and every firm, signaling no real research", "weight": 2},
+      {"point": "Mentions researching interviewers by name/background when known ahead of time", "weight": 2},
+      {"point": "Notes tying research to a personal reason for interest makes it credible rather than recited", "weight": 2},
+      {"point": "Mentions checking recent news or market moves relevant to the group being interviewed with", "weight": 1}
+    ],
+    "misconceptions": [
+      "Believing praising the firm's prestige or brand name counts as meaningful research",
+      "Only researching the firm broadly without looking at the specific group or desk being interviewed for",
+      "Assuming the same 'why this firm' answer can be reused unchanged across every bank"
+    ],
+    "modelAnswer": "My checklist includes a few concrete things: one or two recent, notable deals the firm or the specific group I'm interviewing with has advised on, the general structure of that group and how it differs from competitors, any sector focus or recent strategic moves the firm has made, and, if I know who's interviewing me, a quick look at their background and career path. The reason generic praise doesn't work is that 'you're a top bulge bracket with a great culture and smart people' could be said, unchanged, about any of the dozen banks I might be interviewing with, and interviewers hear that exact sentence constantly. It signals I copy-pasted my enthusiasm rather than actually forming a specific opinion. Instead, I try to connect something concrete, like a deal I found genuinely interesting or a market niche the group is known for, to my own reasoning for wanting to be there, so the answer sounds like it could only apply to this firm and this group. That specificity is what separates a candidate who clearly did the work from one who's reciting a template, and it's usually obvious to interviewers within the first sentence which type they're talking to.",
+    "followups": [
+      {
+        "prompt": "How would you research a specific group within a bank, like a healthcare or industrials coverage team, versus the firm as a whole?",
+        "modelAnswer": "I'd look at recent deal announcements or league table rankings specific to that sector coverage team, read a few of the group's recent deal press releases for the kind of transactions they run, and check if any senior bankers on that desk have given interviews or written commentary on the sector. I'd also try to understand what differentiates that group's positioning, like whether they're known for a particular sub-sector or deal size range, so I can speak to it specifically rather than describing the bank generically."
+      },
+      {
+        "prompt": "What would you do if you can't find much public information about a smaller boutique firm?",
+        "modelAnswer": "I'd lean more heavily on any deals I can find through public filings or press releases, LinkedIn profiles of current employees to understand the team's background and focus, and any interviews or panels the founders or senior bankers have participated in. If information is genuinely scarce, I'd also be upfront in the interview that I found limited public information and instead ask a specific, informed question about their focus, which itself signals initiative rather than trying to fake depth I don't have."
+      }
+    ],
+    "chapterSlug": "superday",
+    "sectionSlug": "pre-interview-checklist",
+    "advanced": false
+  },
+  {
+    "id": "interviewing-easy-009-thankyou-timing",
+    "topic": "interviewing",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "How soon after an interview should you send a thank-you note, and what's the risk of sending it either too fast or too slow?",
+    "keyPoints": [
+      {"point": "States the general window is within 24 hours, ideally same day", "weight": 3},
+      {"point": "Notes sending instantly (within minutes) can look templated or pre-written rather than genuine", "weight": 2},
+      {"point": "Notes waiting multiple days can signal low enthusiasm or read as an afterthought", "weight": 2},
+      {"point": "Mentions each note should be personalized to the specific conversation, not identical across interviewers", "weight": 2},
+      {"point": "Notes checking recruiter guidance since some firms specify a preferred timeline or format", "weight": 1}
+    ],
+    "misconceptions": [
+      "Believing there's no real downside to sending a thank-you note as fast as technologically possible",
+      "Thinking a single templated note copy-pasted to every interviewer is fine as long as it's sent",
+      "Assuming thank-you notes don't matter much and can be skipped or delayed indefinitely"
+    ],
+    "modelAnswer": "I aim to send thank-you notes within 24 hours, ideally the same evening while the conversation is still fresh in my memory, but not within minutes of walking out of the room. Sending it instantly can actually look bad, since it suggests the note was pre-written or generic rather than something I thoughtfully put together based on how the actual conversation went. On the other end, waiting two or three days risks looking like an afterthought or signaling lukewarm interest, especially since decisions can move quickly after a superday and a late note might arrive after the firm has already made calls. My approach is to jot quick notes on something specific from each conversation right after the interviews finish, then spend a bit of focused time that evening writing individualized notes to each interviewer that reference those specific details rather than sending one identical message to everyone. I also check whether the recruiter gave any specific guidance on timing or format, since some firms have a preferred process, and following that instruction is itself a small signal of attentiveness.",
+    "followups": [
+      {
+        "prompt": "What should you do if you don't have an interviewer's email address after the superday ends?",
+        "modelAnswer": "I'd reach out to the recruiting coordinator or HR contact and politely ask if they can forward my thank-you note or share the interviewers' emails, since firms generally expect and accommodate this request. If that's not possible, I'd ask the coordinator to pass along a brief message of thanks on my behalf. I wouldn't try to guess email addresses or use unofficial channels like personal social media to reach an interviewer directly."
+      },
+      {
+        "prompt": "Does it matter if you send a thank-you note by email versus a handwritten card for a fast-moving recruiting process?",
+        "modelAnswer": "For fast-moving processes like most banking recruiting, email is almost always the right choice because decisions can happen within a day or two and a mailed card simply won't arrive in time to matter. A handwritten note can be a nice supplementary gesture for a slower process or a particularly meaningful relationship, but it should never replace a timely email when speed is what the situation calls for."
+      }
+    ],
+    "chapterSlug": "superday",
+    "sectionSlug": "thank-yous-and-offers",
+    "advanced": false
+  }
+]

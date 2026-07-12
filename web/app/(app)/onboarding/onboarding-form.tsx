@@ -52,10 +52,12 @@ export function OnboardingForm() {
       graduationYear: undefined as unknown as number,
       currentSemester: undefined as unknown as OnboardingInput["currentSemester"],
       targetFirms: [],
+      advancedTrack: false,
     },
   });
 
   const firms = watch("targetFirms");
+  const advancedTrack = watch("advancedTrack");
 
   function addFirm(raw: string) {
     const value = raw.trim();
@@ -216,6 +218,31 @@ export function OnboardingForm() {
         {errors.targetFirms ? (
           <p className="text-destructive text-sm">{errors.targetFirms.message}</p>
         ) : null}
+      </div>
+
+      <div className="space-y-1.5">
+        <Label>Study depth</Label>
+        <button
+          type="button"
+          onClick={() => setValue("advancedTrack", !advancedTrack)}
+          className="border-border hover:border-primary/40 flex w-full items-start gap-3 rounded-lg border p-3 text-left transition-colors"
+        >
+          <span
+            className={`mt-0.5 grid size-5 shrink-0 place-items-center rounded-md border ${
+              advancedTrack ? "border-primary bg-primary text-primary-foreground" : "border-border"
+            }`}
+          >
+            {advancedTrack ? "✓" : ""}
+          </span>
+          <span>
+            <span className="text-sm font-medium">Show advanced material</span>
+            <span className="text-muted-foreground block text-xs">
+              Turn on the ⭐ elective sections and harder questions (deferred taxes, leases,
+              waterfalls, 338(h)(10)…). Aimed at PE-track or prior-experience candidates. You can
+              change this anytime in your profile.
+            </span>
+          </span>
+        </button>
       </div>
 
       {formError ? (

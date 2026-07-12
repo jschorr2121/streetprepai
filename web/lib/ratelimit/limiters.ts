@@ -112,3 +112,16 @@ export const applicationsLimiter = makeSlidingWindow("rl:action:applications", 1
  * is safe because the store is currently unreachable and we must not break auth.
  */
 export const authActionLimiter = makeSlidingWindow("rl:action:auth", 10, 60);
+
+/**
+ * Limiter for AI answer grading (question bank, section drills, chapter gates).
+ * Every call is one Claude request, so the window is deliberately tight —
+ * 20/min is faster than any human can type real answers.
+ */
+export const qbankGradingLimiter = makeSlidingWindow("rl:action:qbank:grade", 20, 60);
+
+/**
+ * Limiter for cheap curriculum progress writes (mark read, record drill).
+ * No AI calls.
+ */
+export const curriculumProgressLimiter = makeSlidingWindow("rl:action:curriculum", 120, 60);

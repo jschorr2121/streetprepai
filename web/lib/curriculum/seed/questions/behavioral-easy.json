@@ -1,0 +1,649 @@
+[
+  {
+    "id": "behavioral-easy-001-resume-walkthrough",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Walk me through your resume.",
+    "keyPoints": [
+      {"point": "Opens with a brief anchor (school, major, current role) rather than restating the resume line by line", "weight": 3},
+      {"point": "Moves chronologically and connects each experience to the next with a clear thread", "weight": 3},
+      {"point": "Ends by tying the narrative to why investment banking is the logical next step", "weight": 3},
+      {"point": "Keeps it under roughly 90 seconds and avoids listing every bullet point", "weight": 2},
+      {"point": "Emphasizes transferable skills (analytical rigor, client exposure, teamwork) over job titles alone", "weight": 2}
+    ],
+    "misconceptions": [
+      "Reciting every resume bullet in order instead of telling a narrative",
+      "Ending on a generic note without connecting back to why banking",
+      "Treating this as identical to 'tell me about yourself' and going into personal background"
+    ],
+    "modelAnswer": "I grew up gravitating toward numbers and problem-solving, which led me to major in economics at State University. Freshman year I joined the investment club, where I pitched equities and got hooked on capital markets. That pushed me to seek out a summer analyst role at a regional broker-dealer, where I built comp sets and sat in on client calls. The following summer I interned in the corporate finance group at a mid-sized manufacturer, where I helped model a potential add-on acquisition and saw firsthand how deal teams think about valuation and financing. That experience confirmed I wanted the advisory side rather than the corporate side, so this past year I've been treasurer of our finance club, running weekly stock pitches, and I completed a financial modeling certification on my own time. Each step sharpened my technical toolkit and confirmed the same thing: I like being close to deals, working with numbers under pressure, and helping companies make big decisions. That's what brings me here today, and it's why I'm confident investment banking is the right fit for me.",
+    "followups": [
+      {
+        "prompt": "Which of those experiences was most relevant to this role, and why?",
+        "modelAnswer": "The corporate finance internship, because it was my closest exposure to actual deal work — I built a merger model, sat in on diligence calls, and saw how a deal team stress-tests assumptions before presenting to the board. It taught me that I enjoy the analytical intensity and the stakes of advisory work, which is exactly what pulled me toward banking rather than staying on the corporate side."
+      },
+      {
+        "prompt": "If you could redo one part of your background, what would you change?",
+        "modelAnswer": "I'd have sought out a markets-facing internship earlier so I built financial statement fluency sooner. I made up for it by self-studying modeling and following deal news closely, but starting that habit freshman year instead of sophomore year would have given me a head start on technicals."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "walk-me-through-your-resume",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-002-resume-why-major",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Why did you choose your major, and how does it connect to investment banking?",
+    "keyPoints": [
+      {"point": "Gives a genuine, specific reason for the choice rather than a generic 'I like business'", "weight": 3},
+      {"point": "Draws a direct line from coursework or skills to what analysts actually do", "weight": 3},
+      {"point": "Avoids implying the major itself guarantees banking skill (interviewer knows it doesn't)", "weight": 2},
+      {"point": "Keeps the answer to two or three sentences", "weight": 2}
+    ],
+    "misconceptions": [
+      "Claiming the major was chosen specifically to break into banking from day one, which often sounds inauthentic",
+      "Listing course names without explaining why they matter"
+    ],
+    "modelAnswer": "I chose economics because I liked how it forced me to think in terms of trade-offs and incentives rather than memorization — a statistics class sophomore year on regression analysis was the moment it clicked for me. That analytical habit translates directly to banking: reading a set of financials and figuring out what's really driving a company's performance is the same muscle as building an econometric model, just applied to a single business instead of an economy. I paired the major with an accounting minor once I realized I wanted to go into finance, specifically so I'd walk in with real statement literacy rather than picking it up cold on the job.",
+    "followups": [
+      {
+        "prompt": "What's one concept from your coursework you still use when you think about companies?",
+        "modelAnswer": "Opportunity cost. In an intro econ class we drilled the idea that every dollar a company spends has a next-best alternative use, and that framing is exactly what shows up in banking when you're comparing a dividend versus a buyback versus reinvesting in the business — it's the same trade-off, just dressed up in corporate finance language."
+      },
+      {
+        "prompt": "If your major had nothing to do with finance, how would you answer this?",
+        "modelAnswer": "I'd focus on the transferable skill rather than pretend a connection exists. For example, a history major can honestly say the degree trained them to build an argument from primary sources under a deadline, which is close to how an analyst builds a thesis from a filing — then point to the coursework or self-study that closed the technical gap."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "walk-me-through-your-resume",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-003-resume-proudest-line",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Which line on your resume are you most proud of, and why?",
+    "keyPoints": [
+      {"point": "Picks one specific line rather than hedging across several", "weight": 3},
+      {"point": "Explains the effort or obstacle behind it, not just the outcome", "weight": 3},
+      {"point": "Connects the achievement to a quality relevant to banking (rigor, initiative, resilience)", "weight": 2},
+      {"point": "Keeps the answer concrete with a number or detail rather than vague praise", "weight": 2}
+    ],
+    "misconceptions": [
+      "Picking the most prestigious-sounding line instead of the one with a genuine story",
+      "Giving an answer with no specifics that could apply to any candidate"
+    ],
+    "modelAnswer": "I'm proudest of leading our university's investment club to grow membership from about 20 to over 90 students in one year. When I took over as president, the club was mostly a lecture series people stopped attending. I restructured it around live stock pitches with real debate, brought in two alumni from local funds to judge a semesterly competition, and pushed members to defend their theses instead of just presenting them. It wasn't glamorous work — a lot of it was cold-emailing alumni and redesigning the meeting format from scratch — but watching the club become something people actually competed to join was rewarding. It's also the experience that taught me the most about pressure-testing an investment thesis, which is directly relevant to the kind of scrutiny deal work gets internally.",
+    "followups": [
+      {
+        "prompt": "What was the hardest part of that experience?",
+        "modelAnswer": "Getting buy-in from the existing officers, who were comfortable with the old format and skeptical that a more competitive structure would hold people's interest. I had to run a trial semester, show attendance data improving, and give the skeptics ownership over specific pieces of the new format before they came around."
+      },
+      {
+        "prompt": "How does that experience relate to the day-to-day of an analyst?",
+        "modelAnswer": "Analysts constantly build a case with numbers and then defend it to a more senior person who will poke holes in every assumption. Running a pitch competition where I had to defend valuation assumptions in front of skeptical judges was good practice for exactly that dynamic, even if the stakes were obviously smaller."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "walk-me-through-your-resume",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-004-tell-me-about-yourself",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Tell me about yourself.",
+    "keyPoints": [
+      {"point": "Delivers a tight narrative in roughly 60 to 90 seconds rather than a rambling life story", "weight": 3},
+      {"point": "Covers background, a defining experience, and current motivation for banking", "weight": 3},
+      {"point": "Sounds conversational and personal, distinct from a resume recitation", "weight": 2},
+      {"point": "Ends with a forward-looking statement about why this role", "weight": 2}
+    ],
+    "misconceptions": [
+      "Answering with a full chronological resume walkthrough instead of a personal story",
+      "Including irrelevant personal details unrelated to the professional narrative"
+    ],
+    "modelAnswer": "I grew up in a family that ran a small logistics business, so dinner table conversation was often about cash flow and whether we could afford a new truck that year — it gave me an early, practical sense of how financial decisions actually affect a business. That interest followed me to college, where I studied finance and gravitated toward the most numbers-heavy electives I could find. During a summer internship at a small investment firm, I got to sit in on a live financing negotiation, and I remember being struck by how much the advisors in the room actually shaped the outcome, not just executed a transaction. That's when banking specifically, not just finance broadly, became the goal. Since then I've focused on building the technical foundation — accounting, valuation, modeling — through coursework and self-study, while staying active in our student investment fund to keep applying it. What draws me to this seat specifically is the chance to do that work at a much higher level of intensity and consequence, on deals that actually move the companies involved.",
+    "followups": [
+      {
+        "prompt": "What's something about you that isn't on your resume?",
+        "modelAnswer": "I've run three marathons, which sounds unrelated but it's actually where I learned to work through a long, unglamorous grind toward a single outcome, which is a mindset I think transfers well to the sustained hours a deal process demands."
+      },
+      {
+        "prompt": "How would a close friend describe you in one sentence?",
+        "modelAnswer": "Probably that I'm the person who double-checks everyone else's math before a group project is due — friends have called it obsessive, but it's served me well anywhere precision matters, and I'd rather be known for that than for being sloppy and fast."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "tell-me-about-yourself",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-005-two-minute-pitch",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Give me your two-minute pitch on why we should hire you.",
+    "keyPoints": [
+      {"point": "Leads with two or three concrete strengths rather than a vague list of adjectives", "weight": 3},
+      {"point": "Backs each strength with a specific piece of evidence from experience", "weight": 3},
+      {"point": "Ties the pitch explicitly to what an analyst needs to do well (accuracy, stamina, teamwork)", "weight": 2},
+      {"point": "Closes with a confident, non-arrogant statement of fit", "weight": 2}
+    ],
+    "misconceptions": [
+      "Listing generic traits like 'hardworking' and 'team player' with no supporting evidence",
+      "Turning the pitch into a second resume walkthrough instead of a focused sales pitch"
+    ],
+    "modelAnswer": "Three things set me apart. First, I've already built real technical fluency — I've completed a modeling certification and built full three-statement models on my own for companies I follow, so I won't need months of hand-holding to be useful. Second, I have a track record of handling pressure without letting quality slip: last semester I balanced a 20-hour-a-week internship with a full course load and still finished our club's investment competition in the top three, because I know how to prioritize and stay organized under a heavy workload. Third, I genuinely enjoy the client-service side of this business — during my internship I was the one who volunteered to sit in on client calls and follow up with clean notes, and I got positive feedback for how I communicated with people more senior than me. Put together, that's someone who shows up technically ready, holds up under the hours, and can be trusted in front of a client early. That combination is what I think makes me a strong fit for this seat, and I'd bring the same intensity here that got me those results elsewhere.",
+    "followups": [
+      {
+        "prompt": "Which of those three strengths is most important for this specific role?",
+        "modelAnswer": "Handling pressure without letting quality slip, because the earliest feedback new analysts get is almost always about accuracy under a tight deadline. Technical skill can be taught quickly on the job, but the discipline to still catch your own errors during a stretch of long nights is harder to build from scratch, so I'd want that to be the first impression I make."
+      },
+      {
+        "prompt": "What would your internship supervisor say if I called them right now?",
+        "modelAnswer": "They'd probably say I was the intern who asked for more work rather than less, and that my drafts needed minimal correction by the second pass. They gave me exactly that feedback in my final review, specifically calling out that I caught a formula error in a comp set before it went to a client, which is the kind of thing that builds trust quickly."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "tell-me-about-yourself",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-006-why-ib",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Why do you want to go into investment banking?",
+    "keyPoints": [
+      {"point": "Names at least two specific reasons rather than one generic pull like 'money and prestige'", "weight": 3},
+      {"point": "Mentions the learning curve or skill-building aspect of the analyst seat", "weight": 3},
+      {"point": "Shows awareness of what the job actually entails (deal execution, client work, hours)", "weight": 2},
+      {"point": "Grounds the answer in a specific experience that sparked the interest", "weight": 2}
+    ],
+    "misconceptions": [
+      "Answering only with compensation, which sounds mercenary and gives the interviewer nothing to trust",
+      "Giving a purely abstract answer with no personal experience behind it"
+    ],
+    "modelAnswer": "Three things draw me to banking specifically. First, the learning curve — in two or three years as an analyst you get exposure to more live deals, industries, and technical skill-building than almost any other entry-level job, and I want to front-load that kind of intensive training early in my career. Second, I like being close to the decision, not just adjacent to it — during a summer internship I watched an advisor walk a client through a difficult financing choice, and I wanted to be the person doing that analysis, not just reading about it afterward. Third, I like working on a team where the standard for quality is genuinely high; I do my best work when the bar is set higher than I'd set it for myself. I understand the job also means long, unpredictable hours and a lot of formatting and modeling work that isn't glamorous, and I'm fine with that trade-off because I see it as the price of getting that much responsibility and exposure so early. That combination of steep learning, real client stakes, and a demanding team is what makes this the right path for me, not just this year but for the next several years.",
+    "followups": [
+      {
+        "prompt": "What part of the job do you think you'll find hardest?",
+        "modelAnswer": "Probably the unpredictability of the hours rather than the hours themselves — I can handle long days if I know the schedule, but adjusting on short notice when a deal timeline shifts will take some getting used to. I've tried to build habits, like batching personal errands and staying flexible with sleep schedule, that should help me adapt."
+      },
+      {
+        "prompt": "What's a common misconception people have about this job that you don't share?",
+        "modelAnswer": "That it's mostly about picking stocks or having strong market opinions. In reality, most of the value an analyst adds early on is precision and reliability — building a model that's error-free, formatting a presentation correctly, and turning around revisions fast. I don't go in expecting to be making investment calls; I go in expecting to earn trust through consistently clean execution first."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "why-investment-banking",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-007-why-not-consulting",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Why banking instead of management consulting?",
+    "keyPoints": [
+      {"point": "Draws a real distinction (financial/transactional focus vs. broad operational strategy) rather than dismissing consulting", "weight": 3},
+      {"point": "Explains a personal preference that maps to that distinction (numbers-driven work, deal orientation)", "weight": 3},
+      {"point": "Avoids badmouthing consulting or sounding like banking was a fallback choice", "weight": 2},
+      {"point": "Optionally notes any direct exposure that informed the comparison", "weight": 1}
+    ],
+    "misconceptions": [
+      "Claiming consulting work is easier or less rigorous, which sounds dismissive and uninformed",
+      "Giving an answer that could just as easily justify consulting, signaling no real preference"
+    ],
+    "modelAnswer": "Both paths attract sharp, hardworking people, but the day-to-day work is different in a way that matters to me. Consulting tends to center on broad operational or strategic questions — how should a company restructure its supply chain, or enter a new market — often over a multi-month engagement. Banking centers on the financial mechanics of a specific transaction: what is this company worth, how should it be financed, what terms make the deal work for both sides. I'm drawn to that narrower, more quantitative focus because it plays to what I'm actually good at and enjoy — building a model, stress-testing assumptions, and seeing a numeric answer translate directly into a negotiated outcome. I also like that a banking deal has a clear, often fast-moving endpoint — a signed transaction — versus a consulting engagement that can end in a recommendation that isn't always implemented. I got a taste of that difference during a case competition focused on a company's financing options rather than its strategy, and I found myself far more energized by the valuation and structuring questions than the market-entry questions other teams were tackling.",
+    "followups": [
+      {
+        "prompt": "If you had two competing offers today, one from each, how would you decide?",
+        "modelAnswer": "I'd weigh which offer had the deal team and industry group I found genuinely more interesting, since I'd already know by the offer stage that I preferred banking's type of work over consulting's. At that point the decision would come down to team fit and the specific group's deal flow rather than the industry-level choice, which I've already made."
+      },
+      {
+        "prompt": "What would make you reconsider and lean toward consulting instead?",
+        "modelAnswer": "If I discovered I was more energized by open-ended strategic problems with no single numeric answer than by valuation and deal mechanics, that would be a real signal to reconsider. So far every data point I have — coursework, internships, case competitions — points the other way, but I'd take that shift seriously if it happened."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "why-investment-banking",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-008-why-our-firm",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Why do you want to work at our firm specifically?",
+    "keyPoints": [
+      {"point": "Cites something specific to the firm (group strength, deal, culture trait) not generic praise", "weight": 3},
+      {"point": "Connects that specific reason to a personal interest or goal", "weight": 3},
+      {"point": "Avoids answers that would apply equally well to any bank on the street", "weight": 2},
+      {"point": "Shows evidence of research (a recent deal, a group's focus area)", "weight": 2}
+    ],
+    "misconceptions": [
+      "Giving an answer that is really just 'why banking' restated with the firm's name inserted",
+      "Praising the firm's prestige or brand alone without a substantive reason"
+    ],
+    "modelAnswer": "Two things stand out to me about this firm. First, I've followed a couple of the deals your industrials group has advised on over the past year, and what struck me was how often you're advising on the sell-side for founder-owned businesses rather than large-cap public companies — that mid-market, relationship-driven style of deal appeals to me more than the more commoditized large-cap process work at some bigger shops. Second, when I spoke with two current analysts here during a coffee chat, both independently mentioned that senior bankers regularly bring analysts into client meetings earlier than is typical, which matters to me because I want exposure to the client relationship side of the job early, not just three years in. Combine that with the firm's reputation for training analysts thoroughly rather than just throwing them into the deep end, and it's a place where I think I'd both learn quickly and actually enjoy the day-to-day. That's a more specific fit for me than a larger platform where I might be one of forty analysts on a single deal team.",
+    "followups": [
+      {
+        "prompt": "What's a deal we've worked on recently that caught your attention?",
+        "modelAnswer": "I read about the sale of a regional specialty manufacturer to a strategic buyer that your team advised on a few months ago — what caught my attention was the writeup describing how the process ran a competitive auction that pushed the final price meaningfully above the initial indications of interest, which is exactly the kind of value-add advisory work I'd want to be part of."
+      },
+      {
+        "prompt": "Have you spoken with anyone else here, and what did you learn?",
+        "modelAnswer": "Yes, I did a coffee chat with a second-year analyst in the group last month. The most useful thing I learned was how the staffing process works here — analysts can flag industry preferences and the staffer genuinely tries to accommodate them, which is different from what I'd heard about some larger platforms where staffing is more centralized and less flexible."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "why-our-firm",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-009-firm-culture-knowledge",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What do you know about our firm's culture, and why does it appeal to you?",
+    "keyPoints": [
+      {"point": "States a specific, researched cultural characteristic rather than assuming all banks are the same", "weight": 3},
+      {"point": "Explains why that characteristic personally matters, with a reason grounded in past experience", "weight": 3},
+      {"point": "Shows the research came from more than the firm's own marketing (alumni, current employees, press)", "weight": 2}
+    ],
+    "misconceptions": [
+      "Repeating marketing language from the firm's website verbatim without independent insight",
+      "Assuming culture is interchangeable across firms and giving a generic answer"
+    ],
+    "modelAnswer": "From talking to two alumni from my school who work here, the consistent theme was that the firm keeps deal teams smaller than average, so analysts get more direct responsibility on models and client materials rather than one narrow slice of a large team. That appeals to me because I learn fastest by being given real ownership rather than sitting on the sidelines watching someone more senior do the interesting work. I also noticed in a recent industry ranking writeup that the firm has one of the lower analyst turnover rates in its peer set after the first two years, which suggests people who join tend to actually want to stay, rather than treating it purely as a two-year credentialing stop before private equity. That combination — smaller teams with real ownership, and a culture people choose to stay in — is what makes this firm stand out to me over a larger platform where I might get less hands-on responsibility early in my career.",
+    "followups": [
+      {
+        "prompt": "What would concern you about that culture if it turned out to be different than expected?",
+        "modelAnswer": "If the smaller-team structure meant less structured training because there are fewer senior people to teach the fundamentals, that would concern me, since I'd want ownership paired with real mentorship. I'd want to ask current analysts specifically how new hires are onboarded to make sure that trade-off isn't happening."
+      },
+      {
+        "prompt": "How would you verify a firm's culture claims before accepting an offer?",
+        "modelAnswer": "I'd talk to as many current and recent analysts as I could reach, ideally people a year or two out who have enough perspective to be candid, and ask specific questions like typical weekly hours, how staffing decisions get made, and whether people who left did so for better opportunities or to escape a bad experience."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "why-our-firm",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-010-star-leadership",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Tell me about a time you demonstrated leadership.",
+    "keyPoints": [
+      {"point": "States the Situation and Task clearly and concisely before the action", "weight": 2},
+      {"point": "Describes specific Actions the candidate personally took, using 'I' rather than only 'we'", "weight": 3},
+      {"point": "States a concrete, ideally quantified Result", "weight": 3},
+      {"point": "Keeps the story under about 90 seconds when spoken aloud", "weight": 2}
+    ],
+    "misconceptions": [
+      "Describing what the team did without clarifying the candidate's individual contribution",
+      "Choosing a story where the candidate held a title but didn't actually lead any specific action"
+    ],
+    "modelAnswer": "During my sophomore year, our student-run consulting club had a project team of six that was falling behind schedule two weeks before a client presentation, with no one clearly coordinating the work. I wasn't the official team lead, but I raised the issue with the group and volunteered to take on coordination for the remaining two weeks. I built a shared task tracker breaking the final deliverable into owned pieces with deadlines, ran three short check-in calls that week to catch problems early, and personally took on rewriting the weakest section of the analysis myself when the original owner fell further behind. I also flagged to our faculty advisor early that we might need an extra day, which she granted. We delivered the final presentation on time, and the client sponsor rated it the strongest of the four teams that semester. What I took from it is that leadership often isn't about having the title — it's about noticing a gap and being willing to step in and organize people, even briefly, to get a group back on track.",
+    "followups": [
+      {
+        "prompt": "How did the actual team lead react to you stepping in?",
+        "modelAnswer": "She was relieved, honestly — she told me afterward she'd been overwhelmed and didn't know how to ask for help without it looking like she couldn't handle the role. I made a point of framing my involvement as supporting her rather than replacing her, which mattered for keeping the team dynamic healthy after the project ended."
+      },
+      {
+        "prompt": "What would you do differently if you faced the same situation again?",
+        "modelAnswer": "I'd raise the concern about the schedule slipping a week earlier than I did. I noticed things were behind but waited to say anything out of a reluctance to seem like I was overstepping, and that delay cost us time we didn't have to spare."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "star-framework",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-011-star-teamwork",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Tell me about a time you worked effectively as part of a team.",
+    "keyPoints": [
+      {"point": "Establishes the team's shared goal and the candidate's specific role in it", "weight": 2},
+      {"point": "Describes a concrete contribution the candidate made to the team's success", "weight": 3},
+      {"point": "Includes a specific, ideally measurable outcome", "weight": 3},
+      {"point": "Reflects genuine collaboration rather than the candidate working in isolation", "weight": 2}
+    ],
+    "misconceptions": [
+      "Describing an individual accomplishment and labeling it teamwork after the fact",
+      "Giving credit entirely to the team with no distinguishable personal contribution"
+    ],
+    "modelAnswer": "Last year, four of us entered a regional case competition analyzing whether a retail chain should divest an underperforming division. We had three days to prepare and each had different strengths — one teammate was strong on market research, another on the slide deck, and I was strongest on the financial modeling. Early on I proposed we split the work by strength but build in two full run-throughs where each of us presented a section we hadn't written, so everyone understood the full argument, not just their own piece. I built the divestiture valuation model, but I also spent an evening helping a teammate simplify her market-sizing slides after our first run-through showed the numbers weren't landing clearly with the mock judges. We ended up placing second out of eighteen teams, and the judges specifically complimented how well each of us could answer questions outside our own section, which came directly from those run-throughs. It reinforced for me that a team performs best not when everyone stays in their lane, but when everyone understands and can defend the whole argument.",
+    "followups": [
+      {
+        "prompt": "Was there any disagreement within the team, and how was it handled?",
+        "modelAnswer": "Yes — we disagreed on whether to recommend a full divestiture or a partial sale, and it came down to differing risk tolerance in our assumptions. We resolved it by building both scenarios into the model and letting the sensitivity analysis show which one held up better under conservative assumptions, which took the debate from opinion to evidence."
+      },
+      {
+        "prompt": "What role do you usually default to in a team setting?",
+        "modelAnswer": "I usually gravitate toward the analytical or modeling piece because it's my strength, but I try to stay involved enough in the rest of the work that I could defend any part of it, since in a real deal setting you can't afford to only understand your own slice."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "star-framework",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-012-greatest-strength",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "What is your greatest strength?",
+    "keyPoints": [
+      {"point": "Names one specific strength rather than a list", "weight": 2},
+      {"point": "Supports it with a concrete example, not just an assertion", "weight": 3},
+      {"point": "Connects the strength explicitly to what makes a strong analyst", "weight": 3},
+      {"point": "Avoids a generic strength with no differentiation (e.g., 'hard worker' with no story)", "weight": 2}
+    ],
+    "misconceptions": [
+      "Naming a strength with no supporting example, making it unverifiable and forgettable",
+      "Choosing a strength unrelated to anything the job actually requires"
+    ],
+    "modelAnswer": "My greatest strength is attention to detail under time pressure. During my internship, I was asked with about two hours' notice to update a comparable companies analysis before a client call after a competitor's earnings release changed the numbers. Rather than rushing and risking an error, I built a quick checklist of every figure that needed to update — share price, shares outstanding, net debt, and the resulting multiples — and worked through it methodically instead of jumping around the spreadsheet. I finished with twenty minutes to spare and caught a stale hardcoded cell that would have understated one comp's multiple by a meaningful margin. My manager specifically called that out afterward because it would have been an embarrassing error in front of the client. That habit of staying systematic rather than panicked when the clock is short is something I've built deliberately, and I think it's one of the more valuable traits for this job, since a single wrong number in a client-facing document can do real damage to the firm's credibility.",
+    "followups": [
+      {
+        "prompt": "How do you make sure attention to detail doesn't slow you down too much?",
+        "modelAnswer": "I try to separate the drafting phase from the checking phase rather than second-guessing every keystroke as I go, which lets me move quickly first and then run a focused, systematic review pass at the end. That keeps thoroughness from turning into paralysis."
+      },
+      {
+        "prompt": "Can you think of a time this strength wasn't enough, and something still went wrong?",
+        "modelAnswer": "Once I caught every numerical error in a model but missed that a footnote's formatting didn't match the rest of the document, which a colleague flagged before it went out. It taught me that being detail-oriented about numbers isn't the same as being detail-oriented about the whole deliverable, so I now do a final pass specifically for formatting and consistency, separate from the numbers check."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "strengths-and-weaknesses",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-013-greatest-weakness",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "What is your greatest weakness?",
+    "keyPoints": [
+      {"point": "Names a genuine, specific weakness rather than a disguised strength ('I work too hard')", "weight": 3},
+      {"point": "Gives a concrete example of the weakness showing up", "weight": 3},
+      {"point": "Describes a specific, ongoing action taken to manage or improve it", "weight": 3},
+      {"point": "Avoids naming a weakness that is disqualifying for the role (e.g., can't handle pressure)", "weight": 2}
+    ],
+    "misconceptions": [
+      "Using a humble-brag disguised as a weakness, which interviewers see through immediately",
+      "Naming a weakness so severe it raises doubt about fit for the role"
+    ],
+    "modelAnswer": "I tend to over-prepare for presentations, which can eat into time I should be spending elsewhere. During a group project last year, I spent an entire extra evening polishing slides that were already solid, when that time would have been better used stress-testing our numbers, which is where a professor's tough question actually caught us. It made me realize my instinct to keep refining something already good is really a form of avoiding the harder, less comfortable work of finding my own weak points. Since then, I've started setting a hard time budget for polish work specifically, and I force myself to spend the last chunk of prep time trying to poke holes in my own argument rather than making the slides prettier. It's still something I actively manage rather than something I've fully solved, but I've gotten noticeably better at catching myself when I start over-investing in the wrong part of a deliverable.",
+    "followups": [
+      {
+        "prompt": "Has anyone ever given you feedback about this weakness directly?",
+        "modelAnswer": "Yes, a team captain on a case competition team told me bluntly that our slides looked great but the numbers underneath them were shakier than they should have been, which was exactly the pattern I described. That direct feedback is actually what pushed me to start budgeting my prep time differently."
+      },
+      {
+        "prompt": "How would this weakness show up specifically in an analyst role, and how would you manage it there?",
+        "modelAnswer": "It could show up as spending too long perfecting the formatting of a page before confirming the underlying numbers are fully correct. I'd manage it the same way I do now — checking the substance first with a hard cutoff before I let myself touch formatting, so polish never happens before accuracy."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "strengths-and-weaknesses",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-014-objection-nontarget",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "curveball",
+    "prompt": "You go to a school we don't typically recruit from. Why should we consider you over candidates from target schools?",
+    "keyPoints": [
+      {"point": "Responds calmly and factually rather than defensively", "weight": 3},
+      {"point": "Points to concrete evidence of preparation that offsets the lack of a target-school pipeline", "weight": 3},
+      {"point": "Reframes the school as evidence of initiative for having found and pursued the opportunity", "weight": 2},
+      {"point": "Avoids disparaging target-school candidates", "weight": 2}
+    ],
+    "misconceptions": [
+      "Getting visibly defensive or apologetic about the school choice",
+      "Overcompensating by claiming to be better than target-school candidates without evidence"
+    ],
+    "modelAnswer": "I'd say judge me on preparation rather than pedigree. Not having an on-campus recruiting pipeline meant I had to build my own path — I reached out cold to alumni working in banking, did unpaid work on a small deal team over a winter break to get real exposure, and taught myself modeling through structured self-study rather than a built-in recruiting class. I'd argue that process actually selects for the traits this job needs: resourcefulness, persistence when the easy path isn't available, and genuine motivation rather than following a well-worn track. On the technical side, I've made sure I'm not behind — I can build a three-statement model and walk through a valuation as confidently as anyone, because I knew I'd need to prove that rather than assume it would be taken for granted. I understand the firm has limited target-school bandwidth for a reason, but I'd ask to be evaluated on what I can actually do in this room today, not on which name is on my transcript.",
+    "followups": [
+      {
+        "prompt": "How did you first learn about opportunities in this industry without a campus pipeline?",
+        "modelAnswer": "I started by researching alumni on LinkedIn who had gone into finance from my school, however few there were, and sent a round of cold outreach asking for fifteen-minute calls. About one in five responded, but those conversations were where I first learned how recruiting actually worked and what technical bar I needed to clear."
+      },
+      {
+        "prompt": "What would you say to someone who thinks target-school recruiting exists for good reason?",
+        "modelAnswer": "I'd agree it exists for efficiency, not malice — firms have limited time and a target list is a reasonable filter at scale. My argument isn't that the filter is wrong, it's that I've done the work to prove I'd have cleared it anyway, and I'd rather be evaluated directly than assumed out based on the filter alone."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "objection-handling-by-background",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-015-objection-gpa",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "curveball",
+    "prompt": "Your GPA is lower than we typically see. Can you explain that?",
+    "keyPoints": [
+      {"point": "Gives a brief, honest, non-defensive explanation without excessive excuse-making", "weight": 3},
+      {"point": "Provides evidence the GPA doesn't reflect current ability (upward trend, relevant course grades, other achievements)", "weight": 3},
+      {"point": "Takes ownership rather than blaming professors or circumstances entirely", "weight": 2},
+      {"point": "Keeps the answer brief and moves forward rather than dwelling", "weight": 1}
+    ],
+    "misconceptions": [
+      "Blaming professors, grading curves, or bad luck without acknowledging any personal factor",
+      "Over-apologizing to the point of undermining confidence for the rest of the interview"
+    ],
+    "modelAnswer": "That's fair, and I own it. My first three semesters I was juggling a part-time job to help cover tuition and hadn't yet figured out how to manage that alongside a full course load, and it showed in my grades during that stretch. Once I adjusted my schedule and got better at prioritizing, my GPA in my last four semesters was noticeably higher, and specifically in my finance and accounting coursework I was consistently near the top of the class. I'd also point to the modeling and technical work I've done outside the classroom as a better signal of where I actually stand today than the early transcript. I don't think the overall number tells the full story, but I understand why it raises a question, and I'd rather address it directly than have it sit unexplained.",
+    "followups": [
+      {
+        "prompt": "What specifically changed between your early semesters and later ones?",
+        "modelAnswer": "I stopped trying to do everything at full intensity simultaneously and started being deliberate about which classes needed my best effort each semester, while working ahead on lighter courses during less busy weeks. I also cut back my work hours once I qualified for a scholarship that reduced how much I needed to earn."
+      },
+      {
+        "prompt": "Do you worry this will hold you back later in the process?",
+        "modelAnswer": "I try not to dwell on it, since it's a fixed number I can't change, but I make sure I have a clear, honest explanation ready and then pivot the conversation to more recent, more relevant evidence, like my finance coursework performance and the technical work I've built independently."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "objection-handling-by-background",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-016-deal-you-followed",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Walk me through a deal you've followed recently.",
+    "keyPoints": [
+      {"point": "Names the specific deal, parties involved, and rough size or structure", "weight": 3},
+      {"point": "States the strategic rationale in the candidate's own words", "weight": 3},
+      {"point": "Offers a brief personal view or takeaway, not just a summary of the press release", "weight": 2},
+      {"point": "Keeps facts accurate and doesn't overstate confidence in details not actually known", "weight": 2}
+    ],
+    "misconceptions": [
+      "Reciting headline facts with no rationale or personal viewpoint attached",
+      "Picking a deal so old or minor it signals the candidate isn't actively following the market"
+    ],
+    "modelAnswer": "One deal I followed closely was a mid-sized industrial distributor's acquisition of a smaller regional competitor for roughly $450 million, announced a few months ago. The strategic logic was straightforward consolidation: the acquirer wanted to expand its geographic footprint into a region where the target had strong existing customer relationships, and management specifically cited expected cost synergies from combining warehouse and distribution networks. What I found interesting was that the deal was funded with a mix of cash on hand and a new term loan rather than equity, which signaled the acquirer's management was confident enough in near-term cash flow to take on additional leverage instead of diluting existing shareholders. My personal takeaway was that it's a good example of a disciplined, complementary tuck-in acquisition rather than a transformational deal — it didn't change the acquirer's strategy, it just extended an existing playbook into a new geography, which is often a lower-risk way to grow than a large, transformative acquisition into a new business line.",
+    "followups": [
+      {
+        "prompt": "What would you want to know to judge whether this was a good deal for the acquirer?",
+        "modelAnswer": "I'd want to see the purchase multiple relative to the target's historical growth and margins, and whether management's projected synergies were realistic given the two companies' overlapping footprint. I'd also want to know how much leverage the new debt added relative to the combined company's cash flow, since that determines how much execution risk the deal actually carries."
+      },
+      {
+        "prompt": "How do you stay on top of deal news like this?",
+        "modelAnswer": "I read financial news daily and specifically follow a couple of deal-tracking newsletters that summarize announced M&A activity, and when something in an industry I follow closely comes up, I'll dig into the actual press release or investor presentation rather than just reading the headline summary."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "tell-me-about-a-deal",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-017-deal-want-to-work-on",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "What's a deal you would want to work on, and why?",
+    "keyPoints": [
+      {"point": "Names a specific type of deal or hypothetical transaction, not a vague 'big deals'", "weight": 3},
+      {"point": "Explains why it's personally interesting, tied to industry knowledge or a skill the candidate wants to build", "weight": 3},
+      {"point": "Shows awareness of what makes that type of deal complex or interesting from a banker's perspective", "weight": 2}
+    ],
+    "misconceptions": [
+      "Naming a deal purely for its size or headline appeal with no substantive reasoning",
+      "Choosing something so generic it doesn't reveal any actual interest"
+    ],
+    "modelAnswer": "I'd be especially interested in a carve-out transaction, where a large company sells off a non-core division to a strategic buyer or a financial sponsor. I find those deals interesting because they're operationally more complicated than a straightforward acquisition — the division being sold often shares systems, real estate, or shared services with the parent, so part of the deal work is figuring out how to actually separate the business cleanly, not just agree on a price. That means the advisory work goes beyond valuation into structuring transition service agreements and thinking through what the standalone entity's cost structure will look like post-separation. I got a small taste of that complexity during a case competition where our team had to evaluate a hypothetical divestiture, and the operational separation questions ended up mattering as much as the valuation itself. I'd want to work on a deal like that early in my career because I think it teaches you more about how a business actually functions than a cleaner, more standard acquisition would.",
+    "followups": [
+      {
+        "prompt": "What industry would you most want that carve-out deal to be in, and why?",
+        "modelAnswer": "I'd lean toward industrials or consumer products, since those businesses tend to have physical assets and operational complexity that make the separation questions concrete and tangible rather than abstract, which I think would be the most instructive place to learn the mechanics."
+      },
+      {
+        "prompt": "What's the hardest part of a carve-out from the seller's side?",
+        "modelAnswer": "Probably untangling shared costs and systems fairly, so the divested unit isn't sold with an artificially inflated or deflated cost base that misrepresents its true standalone profitability. Getting that allocation wrong can lead to disputes or a mispriced deal, so it takes careful, detailed work to get right."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "tell-me-about-a-deal",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-018-follow-market-how",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "How do you stay current on financial markets?",
+    "keyPoints": [
+      {"point": "Names specific, credible sources (publications, newsletters, data providers)", "weight": 3},
+      {"point": "Describes a consistent routine or habit, not a one-off effort", "weight": 3},
+      {"point": "Mentions applying what's read (forming a view, discussing with others) rather than passive consumption", "weight": 2}
+    ],
+    "misconceptions": [
+      "Naming only social media or headline aggregators with no depth of engagement",
+      "Claiming to read everything without any specific, credible example"
+    ],
+    "modelAnswer": "I read a major financial paper every morning before anything else, and I follow two deal-focused newsletters that summarize announced M&A and capital markets activity, since those give me a faster pulse on transaction trends than general news coverage does. Beyond daily reading, I try to go deeper once a week — picking one story, usually a deal or an earnings release in an industry I'm interested in, and actually reading the underlying press release or investor presentation instead of just the news summary. I also discuss what I'm reading with a couple of friends in our investment club, which forces me to articulate an actual view rather than just passively absorbing headlines. That combination — a daily habit, a weekly deep dive, and regular discussion — is what keeps me not just informed but able to form and defend an opinion on what's happening, which I think is the more useful skill than simply knowing the headlines.",
+    "followups": [
+      {
+        "prompt": "What's a market trend you've noticed over the past few months?",
+        "modelAnswer": "I've noticed a pickup in take-private activity from financial sponsors targeting mid-cap companies whose valuations lagged the broader market recovery, which I think reflects sponsors seeing value gaps that public market investors haven't fully closed yet."
+      },
+      {
+        "prompt": "How do you decide which sources are actually credible versus noise?",
+        "modelAnswer": "I favor sources that cite primary documents like filings and press releases rather than ones that just aggregate other people's takes, and I'm skeptical of any source, including reputable ones, that states a number without attributing where it came from. When something matters to me, I try to trace the claim back to the original filing or release myself."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "how-to-follow-the-market",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-019-recent-ipo-or-ma",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Can you name a recent IPO or M&A deal that caught your attention, and explain why?",
+    "keyPoints": [
+      {"point": "Names a specific, real, reasonably recent transaction with accurate basic facts", "weight": 3},
+      {"point": "Explains the specific reason it stood out, beyond just its size", "weight": 3},
+      {"point": "Demonstrates the candidate actually understands the mechanics or context, not just the headline", "weight": 2}
+    ],
+    "misconceptions": [
+      "Naming a deal from years ago that no longer signals current market awareness",
+      "Getting basic facts about the deal noticeably wrong, which undermines credibility"
+    ],
+    "modelAnswer": "A recent transaction that stood out to me was a mid-sized software company's decision to go public via a traditional IPO rather than the direct listing route that had become more common among tech companies in recent years. What made it interesting was the pricing outcome — the company priced above its initial range and the stock traded up meaningfully on the first day, which suggested underwriters had actually left room for aftermarket demand rather than pricing right at fair value, a criticism that's been leveled at some prior tech IPOs. It stood out to me because it seemed like a deliberate, more conservative pricing strategy compared to some of the more aggressively priced offerings from a couple years earlier, and I read it as a sign that underwriters were being more cautious about upside for new investors given how volatile some recent debuts had been. I don't have visibility into the actual internal pricing discussions, but from the outside it read as a lesson learned from prior IPO pricing controversies in the same sector.",
+    "followups": [
+      {
+        "prompt": "What factors go into how underwriters set an IPO price range?",
+        "modelAnswer": "Underwriters typically look at comparable public companies' trading multiples, investor demand gathered during the roadshow through book-building, and the company's own growth and profitability profile, then balance pricing high enough to raise adequate capital against leaving enough room for aftermarket demand so the stock doesn't fall below the offer price."
+      },
+      {
+        "prompt": "Why might a company choose a traditional IPO over a direct listing?",
+        "modelAnswer": "A traditional IPO raises new primary capital for the company and gives underwriters a formal role in building demand and stabilizing the stock after listing, which can be valuable for a company that needs the capital or wants price support in early trading, whereas a direct listing works better for companies that don't need new capital and want to avoid underwriting fees and dilution."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "how-to-follow-the-market",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-020-internship-experience",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Tell me about your most recent internship and what you learned from it.",
+    "keyPoints": [
+      {"point": "Describes concrete responsibilities and tasks, not just the company name and title", "weight": 3},
+      {"point": "Names a specific, substantive lesson learned, not a generic 'I learned a lot'", "weight": 3},
+      {"point": "Connects the lesson to how it will make the candidate a better analyst", "weight": 2}
+    ],
+    "misconceptions": [
+      "Describing the internship only in terms of the company's prestige rather than actual work done",
+      "Giving a vague takeaway that could apply to any job"
+    ],
+    "modelAnswer": "This past summer I interned in the corporate development group at a mid-sized manufacturing company, where I helped the team evaluate a potential bolt-on acquisition. My main responsibilities were building parts of the merger model, researching the target's competitive position, and preparing slides summarizing the deal's strategic rationale for an internal steering committee. The biggest lesson I took away was how much iteration goes into a model before it's presentation-ready — my first draft focused heavily on getting the formulas technically correct, but my manager pushed me to also think about how a reader who hadn't built the model would interpret it, which meant restructuring how assumptions were laid out and labeled so someone could follow the logic without me walking them through it. That taught me that a good model isn't just mathematically correct, it has to be legible to someone else under time pressure, which is a different and, I think, underrated skill. It's made me much more deliberate about how I structure any analysis now, not just for accuracy but for clarity to the reader.",
+    "followups": [
+      {
+        "prompt": "What was the most difficult task you were given, and how did you handle it?",
+        "modelAnswer": "I was asked to build a sensitivity table showing how the deal's projected returns changed across a range of purchase price and synergy assumptions, which I hadn't done before. I looked at a template from a prior deal file to understand the standard approach, built a first draft, and then walked through it with a senior associate to confirm the mechanics were sound before finalizing it, rather than guessing and risking an error going unnoticed."
+      },
+      {
+        "prompt": "What feedback did you receive, and how did you respond to it?",
+        "modelAnswer": "My manager told me my early models were technically accurate but hard for someone unfamiliar with them to follow, since my assumptions were buried in formulas rather than clearly labeled. I took that feedback and started building a dedicated assumptions section at the top of every model going forward, which made a noticeable difference in how quickly others could review my work."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "discussing-your-own-experience",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-easy-021-lesson-from-past-job",
+    "topic": "behavioral",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "What's the most important thing you learned from a past job, even if it wasn't in finance?",
+    "keyPoints": [
+      {"point": "Chooses a specific job and a specific lesson, not a generic reflection", "weight": 3},
+      {"point": "Explains the situation that produced the lesson", "weight": 3},
+      {"point": "Ties the lesson to a skill or habit relevant to banking", "weight": 2}
+    ],
+    "misconceptions": [
+      "Dismissing a non-finance job as irrelevant instead of extracting a genuine lesson from it",
+      "Giving a lesson so vague it reveals no real reflection ('I learned to work hard')"
+    ],
+    "modelAnswer": "I worked as a server at a busy restaurant for two summers during college, and the biggest lesson I took from it was how to stay composed and prioritize correctly when several things are urgent at once. On a busy Friday night I might have four tables needing different things simultaneously — one waiting on food, one needing the check, one with a complaint — and the job taught me to quickly triage what actually needed to happen first versus what could wait two minutes, rather than reacting to whoever was loudest. It also taught me a lot about reading people quickly and adjusting my approach, since an apologetic tone that worked for a mildly annoyed customer would have felt dismissive to someone genuinely upset about a mistake. Those might sound like soft skills, but I think they translate directly to banking, where you're often juggling requests from multiple people at once — an associate, a VP, sometimes a client — and need to figure out what's actually time-sensitive versus what can wait, without getting flustered or dropping something important in the process.",
+    "followups": [
+      {
+        "prompt": "Can you give a specific example of a time you had to prioritize under pressure at that job?",
+        "modelAnswer": "One night I had a table's food come up wrong at the same time another table asked for the check and a third flagged that they'd been waiting a while for drinks. I quickly delivered the check first since that customer was ready to leave and it took ten seconds, sent the wrong food back with an apology and a complimentary drink for the wait, and got the third table's order in immediately — resolving the smallest issue first bought me time to handle the bigger one properly."
+      },
+      {
+        "prompt": "How do you think that experience differs from working under pressure in a banking environment?",
+        "modelAnswer": "The stakes and time horizon are obviously different — a mistake at a restaurant is embarrassing and costs a tip, while a mistake in a client deliverable can affect a real transaction. But the underlying skill of staying calm, triaging competing demands, and communicating clearly under pressure is the same muscle, just applied to much higher-stakes situations."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "discussing-your-own-experience",
+    "advanced": false
+  }
+]

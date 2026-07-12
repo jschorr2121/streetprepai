@@ -296,3 +296,20 @@ Other notes:
 - **Introspected tables (15):** the DB still contains the cut `jobs` and `applied_jobs` tables (Unit 1 removed their app code, not the tables). They're introspected as-is; a cleanup migration to drop them can come later.
 - **Migrated call site:** the profile *read* in `app/api/chat/general/route.ts` now uses `withUser(...) → getProfile(tx, userId)` from `lib/db/queries/profile.ts`. `lib/data/profile.ts` and its other callers (`lib/ai/assistant-tools.ts`, the save route) are untouched — both paths coexist, per spec.
 - **Verification:** custom introspection determinism check (no diff on re-run), typecheck ✅, lint ✅, 3 Vitest unit tests for `getProfile` ✅, `pnpm build` (see progress-tracker).
+
+---
+
+## Unit 11 — Learning-flow curriculum + Question Bank (2026-07-12)
+
+Implemented the full curriculum and daily workflow so a new user is carried end-to-end (per `context/curriculum.md`).
+
+- **Curriculum manifest** (`lib/curriculum/chapters.ts`): the 16-chapter spine as static data — sections, slugs, spine-vs-reference kind, gated flag, per-chapter tool exercise, and ⭐ advanced sections. Single source of truth; section prose stays as flat MDX in `content/guides/` referenced by slug (reuses the existing `/guide/[slug]` Reading-Lens reader — no reader rewrite).
+- **Gates decision (Jake):** hard gate on the technical spine chapters (8–13) via an 85% mixed quiz, but **all content stays browsable to everyone** — gates control progression/completion, not access. Non-technical chapters are ungated.
+- **AI grading with a PUBLISHED rubric** (`lib/ai/grading.ts`): Claude (Sonnet) tool-use grades free-text answers on key points (weighted), misconceptions asserted, and **depth calibration** (answer at interview depth and stop) — the differentiator vs black-box graders. Shared by the Question Bank, section drills, chapter gates, and daily drill via `gradeAnswerAction`.
+- **Follow-up trees**: a correct main answer opens the question's deeper probes (`qbank_followups`), chained.
+- **Spaced re-surfacing + mastery** (`lib/mastery/`): pure functions. Weak/incorrect questions resurface in 2–3 days until answered correctly twice; per-topic EWMA mastery drives dashboard weak-areas. Computed at write/read time (no Inngest yet, matching the Unit-8 PRD decision).
+- **Parameterized drill generators** (`lib/curriculum/drills/`): 3-statement change, TSM, accretion/dilution, paper-LBO — random numbers each round (memorization-proof), checked locally (no LLM).
+- **Content generation:** ~63 new section MDX readings + ~500 rubric-graded questions authored by parallel Sonnet agents, grounded in the `extra_content/` PDFs (used for facts/coverage/sequencing per Jake) but written as **original prose** — no BIWS/M&I text, names, or worked-example numbers reused (copyright posture from `curriculum.md` §7).
+- **New surfaces:** `/learn` (chapter grid + continue-where-you-left-off), `/learn/[chapter]`, `/learn/[chapter]/drill/[section]`, `/learn/[chapter]/practice` (gate); Question Bank studio (daily interleaved drill + due queue, practice-by-topic, mental-math generators); dashboard rebuilt on real data (recruiting-cycle widget from profile semester, weak areas, due count, continue-flow).
+- **Advanced-track toggle**: onboarding + profile; persisted on `profiles.advanced_track`; gates the ⭐ sections and advanced questions.
+- **Schema:** migration `0006_curriculum.sql` (qbank_questions/followups/attempts/spaced_state, topic_mastery, section_progress, chapter_progress, profiles.advanced_track; RLS owner-scoped on user tables, read-only shared content). `0007_qbank_seed.sql` generated from the seed JSON by `scripts/build-qbank-seed.mjs`.

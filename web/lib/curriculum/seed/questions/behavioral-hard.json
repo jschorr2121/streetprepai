@@ -1,0 +1,540 @@
+[
+  {
+    "id": "behavioral-hard-001-resume-inconsistent-narrative",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "curveball",
+    "prompt": "Your resume says you left your last internship a month early. That's unusual — what actually happened?",
+    "keyPoints": [
+      {"point": "Answers honestly and directly without evasion or visible discomfort", "weight": 3},
+      {"point": "Takes ownership of the candidate's own role in the situation, if any, rather than only blaming the employer", "weight": 3},
+      {"point": "Provides a coherent, verifiable explanation with no contradictions", "weight": 3},
+      {"point": "Redirects constructively toward what was learned or how it's been addressed since", "weight": 2}
+    ],
+    "misconceptions": [
+      "Giving a vague, evasive non-answer that raises more suspicion than a straight answer would",
+      "Badmouthing the prior employer excessively rather than giving a balanced, professional account"
+    ],
+    "modelAnswer": "I appreciate you asking directly. The firm went through an unexpected round of cost cutting that quarter, and as an intern I was one of the positions affected when they reduced headcount earlier than planned — it wasn't performance-related, and I can provide a reference from my direct manager there who can confirm that. It was disappointing, since I'd been enjoying the work and had received positive informal feedback up to that point, but I understood the business reasons and didn't take it personally. Rather than treat the extra month as lost time, I used it to pick up a short-term project helping a professor build out a financial model for a research paper, which kept me engaged and productive rather than idle. I'd rather be upfront about exactly what happened than have it look like I'm hiding something, and I'm glad to have my former manager speak to my performance directly if that would be helpful in evaluating this.",
+    "followups": [
+      {
+        "prompt": "Can you have your former manager confirm this if we reach out?",
+        "modelAnswer": "Yes, absolutely — I'd actually encourage it, since a direct conversation with them will confirm both that the reduction was business-driven and give you a genuine read on my performance while I was there, which I think will speak for itself."
+      },
+      {
+        "prompt": "How did that experience affect your confidence going into this recruiting process?",
+        "modelAnswer": "It stung initially, and I won't pretend otherwise, but it didn't shake my confidence in my actual ability, since the feedback I'd received up to that point had been positive and the decision was clearly about the firm's headcount needs, not my performance. If anything, it made me more deliberate about asking pointed questions in this process about a firm's current stability and hiring plans."
+      },
+      {
+        "prompt": "What would you do if a similar situation happened here during your analyst tenure?",
+        "modelAnswer": "I'd handle it the same way — stay professional, ask for honest feedback about whether it reflected my performance, and use any transition time productively rather than letting it derail my momentum. I've already shown I can do that once, and I don't think it would be materially different the second time."
+      },
+      {
+        "prompt": "Is there anything about that experience that makes you hesitant about this firm's stability?",
+        "modelAnswer": "Not specifically about this firm, but it did make me more attentive to asking about hiring plans and recent headcount trends during this process, which is a fair question for any candidate to ask, and I'd encourage transparency on both sides given what I went through previously."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "walk-me-through-your-resume",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-002-tellaboutyourself-pushback",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "curveball",
+    "prompt": "Honestly, that pitch sounded rehearsed and generic. Give me a version of 'tell me about yourself' that's actually convincing.",
+    "keyPoints": [
+      {"point": "Stays composed rather than flustered by the direct criticism", "weight": 3},
+      {"point": "Delivers a genuinely more specific, differentiated version with a concrete anecdote", "weight": 3},
+      {"point": "Avoids becoming defensive about the critique itself", "weight": 2},
+      {"point": "Demonstrates the ability to adapt on the fly, which is itself a signal of composure under pressure", "weight": 2}
+    ],
+    "misconceptions": [
+      "Getting visibly rattled or apologetic in a way that undermines confidence for the rest of the interview",
+      "Simply repeating the same pitch with minor wording changes rather than genuinely adding specificity"
+    ],
+    "modelAnswer": "Fair, let me try that differently and get more specific. The moment that actually pulled me toward this, concretely, was during my internship when I sat in on a call where a client was deciding between two financing options for an acquisition, and I watched the senior banker on the call reframe the client's own question in a way that changed how they were thinking about the trade-off — not by pushing a predetermined answer, but by asking the right question at the right moment. I remember thinking that's the actual skill I want to build, not just modeling proficiency, but the judgment to know what matters in a given moment and say it clearly under real time pressure. That's different from a generic interest in finance — it's specifically about wanting to develop that kind of applied judgment, which you only get from being in the room on live deals repeatedly, not from a classroom. I've spent the time since then trying to build the technical foundation so that when I'm eventually in that kind of room, I'm not slowed down by the mechanics and can actually focus on developing that judgment. That's a more honest version of why I'm here than a rehearsed pitch would capture, and I appreciate you pushing me to give it.",
+    "followups": [
+      {
+        "prompt": "What specifically did the senior banker say that reframed the client's thinking?",
+        "modelAnswer": "The client was fixated on which option had the lower interest rate, and the banker asked what would happen to their covenant flexibility under each option if the business had a rough year, which shifted the conversation from a narrow cost comparison to a broader risk conversation the client hadn't been weighing as heavily. It was a small reframe, but it visibly changed the client's thinking in real time."
+      },
+      {
+        "prompt": "How do you plan to develop that same kind of judgment as a junior analyst, given you won't be leading client conversations early on?",
+        "modelAnswer": "Early on, I'd focus on paying close attention during any meeting I'm allowed to sit in on, specifically watching for moments like that one rather than just taking notes on decisions made, and asking senior people afterward why they made a particular call in the room. I think that kind of deliberate observation, even before I'm the one speaking, is how that judgment starts to build."
+      },
+      {
+        "prompt": "Do you think being pushed to redo an answer like this in a real interview would rattle most candidates? How did you stay composed?",
+        "modelAnswer": "I think it would rattle some candidates, honestly, but I tried to treat it as useful feedback rather than an attack — the critique was fair, and getting defensive about it wouldn't have helped me give a better answer. Staying focused on actually answering the underlying question, rather than on how the critique felt, is what let me redo it."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "tell-me-about-yourself",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-003-whyib-convince-me-you-stay",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "curveball",
+    "prompt": "Most analysts leave for private equity or a similar exit after two years. Convince me you're not just using us as a stepping stone.",
+    "keyPoints": [
+      {"point": "Responds honestly rather than making an implausible blanket promise of permanence", "weight": 3},
+      {"point": "Distinguishes between using the job instrumentally and genuinely valuing the analyst role itself", "weight": 3},
+      {"point": "Gives specific evidence for why the analyst work itself, not just the exit, is the goal", "weight": 3},
+      {"point": "Acknowledges the industry norm honestly rather than pretending it doesn't apply broadly", "weight": 1}
+    ],
+    "misconceptions": [
+      "Promising to stay for a specific long tenure in a way that sounds unrealistic and rehearsed",
+      "Denying the industry-wide exit pattern exists at all, which undermines credibility"
+    ],
+    "modelAnswer": "I won't pretend the industry-wide pattern doesn't exist, because it clearly does, and I'd rather be honest than make a promise I can't actually guarantee. What I can tell you is what's true for me specifically: I'm not approaching this as a two-year credentialing exercise before the 'real' job starts. I've thought seriously about what I want day to day, and the parts of banking I find most compelling — the variety across industries, the direct client exposure, the fast pace of live transaction work — aren't things I'm hoping to get through quickly on my way to something else. If anything, private equity's narrower focus on a smaller number of portfolio companies over longer holding periods is less appealing to me than the breadth banking offers. I'd also say that even if I can't promise a specific number of years with certainty, since none of us can fully predict how we'll feel three years from now, the honest signal I can give you is that I've evaluated the alternative paths directly, understand what they actually involve day to day, and still prefer this one on its own merits, not as a means to something else. I'd rather earn your confidence through how I perform in the seat than through a promise made in an interview that neither of us can fully verify today.",
+    "followups": [
+      {
+        "prompt": "If that's true, why do you think so many analysts who say similar things in interviews still leave after two years?",
+        "modelAnswer": "I'd guess it's a combination of genuine curiosity about the other side of the table once they've seen enough deals, and in some cases the reality of the job's pace not matching what they expected going in, even if they were sincere at the time of the interview. I can't speak for their motivations, only mine, but I'd take that pattern as a reason to be honest about uncertainty rather than overpromise permanence I can't actually guarantee."
+      },
+      {
+        "prompt": "What would it take for you to actually leave for private equity or elsewhere?",
+        "modelAnswer": "Realistically, if I found that the type of deal work I actually enjoyed most was better represented on the buy-side, or if a specific opportunity offered something meaningfully different that I couldn't get by staying, I'd take it seriously the same way anyone would evaluate any career opportunity. But that's different from planning for that outcome from day one, which I'm not doing."
+      },
+      {
+        "prompt": "How would you feel about the firm investing significant training resources in you if there's a real chance you leave in two years anyway?",
+        "modelAnswer": "I think that's a reasonable concern for any employer to have about any junior hire, and I'd say the honest answer is that the firm is taking some risk on every analyst it trains, not just me. What I can offer is genuine effort and engagement while I'm here, which I think is a fair trade regardless of how long any specific tenure ends up being."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "why-investment-banking",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-004-whyib-tech-pay-convergence",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "curveball",
+    "prompt": "Compensation at top tech companies has converged with banking in recent years, and the hours are much better. Why would anyone still choose banking over tech?",
+    "keyPoints": [
+      {"point": "Acknowledges the premise honestly rather than disputing accurate compensation trends", "weight": 2},
+      {"point": "Identifies specific, non-compensation reasons banking remains distinctly attractive", "weight": 3},
+      {"point": "Grounds the answer in personal preference rather than a generic industry defense", "weight": 3},
+      {"point": "Avoids disparaging tech careers as a category", "weight": 1}
+    ],
+    "misconceptions": [
+      "Disputing the compensation convergence outright rather than engaging with the premise honestly",
+      "Answering with only a defensive claim about banking prestige rather than substantive personal reasoning"
+    ],
+    "modelAnswer": "I'd agree the premise is largely accurate — compensation at the top of the tech industry has genuinely closed much of the gap, and the lifestyle trade-off is real, so I don't think dismissing that comparison would be honest. For me the choice comes down to the nature of the work itself, not just the pay. In a typical tech role, especially at a large company, an individual contributor's work often touches one product or one narrow piece of a much larger system over an extended period, and the connection between your work and a company-level financial outcome can feel somewhat indirect. Banking, especially at the analyst level, puts you directly inside a discrete transaction with a clear, visible outcome — you can point to a specific deal and say I built that model, this was my analysis, and it directly shaped what happened. I also value the built-in variety of banking, where you might work across several industries and transaction types within a couple of years, versus the tendency in tech to specialize more narrowly within one company's ecosystem. I recognize the hours trade-off is significant and I'm not minimizing it, but for the specific combination of variety, direct transactional impact, and pace that I want early in my career, I think banking is still the better fit for me personally, even accounting for the narrowing pay gap and the real lifestyle cost.",
+    "followups": [
+      {
+        "prompt": "If a tech company offered you a role with similar variety and direct impact, would that change your calculus?",
+        "modelAnswer": "It would be worth evaluating seriously, since the specific factors I care about, not the industry label itself, are what actually matter to my decision. But I haven't found that combination as consistently available in tech roles I've looked at, which is part of why banking still stands out as the stronger fit given what's actually on offer today."
+      },
+      {
+        "prompt": "How do you weigh the very real hours and lifestyle cost against those factors?",
+        "modelAnswer": "I take it seriously and don't pretend it's a minor trade-off, but I'd rather have an intense, high-learning few years now while I have fewer competing life obligations than optimize for lifestyle balance this early and potentially move slower on the skills and exposure I actually want to build. That calculus could look different for me later in my career, but it's the right one for where I am now."
+      },
+      {
+        "prompt": "Some would argue this compensation convergence signals banking is losing its competitive advantage for top talent. Do you agree?",
+        "modelAnswer": "I think it's a real competitive pressure the industry has to reckon with, and I'd expect it to keep pushing banks to think harder about hours and quality of life for junior staff, which would be a good thing. But I don't think it means banking loses talent entirely, since the specific type of work and variety I described will keep attracting people who value that over a marginally better lifestyle, which is the trade-off I'm consciously making."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "why-investment-banking",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-005-whyfirm-not-top-tier-pushback",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "curveball",
+    "prompt": "Let's be honest — we're not one of the largest, most prestigious banks on the street. Why would someone with your profile settle for us?",
+    "keyPoints": [
+      {"point": "Rejects the framing of 'settling' respectfully without dismissing the interviewer's point entirely", "weight": 3},
+      {"point": "Articulates specific, substantive advantages of a smaller or mid-tier platform over a bulge bracket", "weight": 3},
+      {"point": "Grounds the answer in personal priorities rather than a generic defense of smaller firms", "weight": 2},
+      {"point": "Maintains genuine enthusiasm and confidence rather than sounding like a consolation choice", "weight": 2}
+    ],
+    "misconceptions": [
+      "Agreeing with the framing that the firm is a lesser choice, undermining the candidate's own conviction",
+      "Giving generic praise about culture without substantively engaging with the prestige comparison"
+    ],
+    "modelAnswer": "I'd actually push back gently on the framing of 'settling,' because I don't see it that way. A larger platform offers scale and brand name, which matters to some candidates, but it typically also means larger deal teams, more layered hierarchy between an analyst and the actual client relationship, and less individual ownership early on. What I'm looking for specifically is the opposite of that — meaningful responsibility and direct client exposure sooner rather than later, and from what I've seen and heard from people here, that's exactly what a firm at this scale offers that a bulge bracket generally doesn't for a first or second-year analyst. I'd also point out that deal quality and learning don't scale linearly with firm size — a smaller team on a well-run mid-market deal can teach you more about the full mechanics of a transaction than being one of six analysts on a giant deal where your role is narrowly scoped. I understand the brand name on a resume carries some value for future opportunities, and I've weighed that honestly, but I don't think it outweighs what I think I'd actually gain here in terms of hands-on experience and ownership. So I wouldn't describe this as settling — I'd describe it as a deliberate trade-off I'm making in favor of what I think will make me a better banker faster.",
+    "followups": [
+      {
+        "prompt": "If brand name matters for exit opportunities, doesn't that put you at a real disadvantage down the road?",
+        "modelAnswer": "I think it can matter for some exits, particularly the most brand-conscious buy-side firms, and I'm not pretending that consideration doesn't exist. But I'd rather build genuinely strong technical skills and real deal experience here, which I believe ultimately matters more in interviews for what comes next than the name on a resume alone, especially once I actually have deals I can speak to in detail from firsthand ownership."
+      },
+      {
+        "prompt": "What would you say to someone who took the bulge bracket offer specifically for the brand name?",
+        "modelAnswer": "I wouldn't say they made the wrong choice — if brand name and scale genuinely matter most to someone, that's a legitimate priority and a reasonable platform to choose. I'd just say it's not my priority, and I'd rather optimize for the specific things I've described, which I think this platform offers better for what I personally want out of these first few years."
+      },
+      {
+        "prompt": "Is there anything about being at a smaller platform that genuinely worries you?",
+        "modelAnswer": "The main thing I'd want to understand is how deal flow volatility affects staffing and workload here compared to a larger platform with more diversified deal flow, since a smaller firm can see busier or quieter stretches more acutely. I'd want to ask current analysts directly how that's been managed, but it hasn't changed my overall view of the trade-off."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "why-our-firm",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-006-star-conflict-with-superior",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "verbal",
+    "prompt": "Tell me about a time you disagreed with someone more senior than you, someone whose authority you had to respect. How did you handle it?",
+    "keyPoints": [
+      {"point": "Describes a genuine disagreement with real stakes, not a trivial preference difference", "weight": 3},
+      {"point": "Shows appropriate deference to the power dynamic while still raising the concern", "weight": 3},
+      {"point": "Uses evidence or a low-friction approach to raise the disagreement rather than direct confrontation", "weight": 3},
+      {"point": "States a clear outcome, whether the candidate's view prevailed or not", "weight": 2}
+    ],
+    "misconceptions": [
+      "Describing a story where the candidate simply overrides the senior person's decision, which misreads the real power dynamics of a professional hierarchy",
+      "Choosing a story with a trivial disagreement that doesn't demonstrate real judgment under a genuine power imbalance"
+    ],
+    "modelAnswer": "During my internship, a senior associate directed me to use a particular set of comparable companies for a valuation exercise that I thought included one company that wasn't actually a good fit, since its business mix had shifted significantly after a recent divestiture and no longer closely matched our target's operations. I didn't want to simply flag the disagreement bluntly in a group setting, since I was the most junior person in the room and it wasn't my place to publicly second-guess a senior person's judgment without more context. Instead, I asked to speak with him briefly one-on-one afterward, framed it as a genuine question rather than a challenge — I asked whether he'd want me to note the divestiture's effect on comparability, since I wasn't sure if he already knew and had a reason to include it anyway that I wasn't aware of. It turned out he hadn't been aware of the recent divestiture, since it wasn't public knowledge at the time he'd built the original comp set months earlier, and he thanked me for catching it and asked me to rebuild the set excluding that company. What I took from it is that raising a disagreement with someone senior works best when it's framed as a genuine question that respects they might have information you don't, rather than an assertion that they're wrong, and doing it privately rather than in front of others.",
+    "followups": [
+      {
+        "prompt": "What would you have done if he'd said he was aware of the divestiture and still wanted to include the comp?",
+        "modelAnswer": "I'd have accepted that decision and moved forward, since at that point I'd have to assume he had context or a rationale I wasn't privy to, and it's not my place as an intern to keep pushing a technical disagreement past a clear, informed decision from someone senior. I might have asked briefly what the rationale was, mostly so I could understand and learn from it, but I wouldn't have continued arguing the point."
+      },
+      {
+        "prompt": "How do you decide when a disagreement with someone senior is worth raising versus when it's better to just follow instructions?",
+        "modelAnswer": "I think it depends on the stakes and the likelihood that the senior person is missing information versus simply having a different judgment call than I would make. If it's a material factual issue that could meaningfully affect the analysis, like the comp set example, I'd raise it privately. If it's more a matter of stylistic or judgment preference where reasonable people could differ, I'd generally defer rather than push."
+      },
+      {
+        "prompt": "Have you ever raised a concern with someone senior and had it go badly? What happened?",
+        "modelAnswer": "Once I raised a concern too publicly, in a group meeting rather than privately, about a timeline a manager had proposed, and even though the underlying concern was valid, the manager seemed to feel put on the spot in front of others, which made the conversation more defensive than it needed to be. That taught me the lesson I applied in the comp set situation — the same concern raised privately usually lands much better than the identical concern raised in front of a group."
+      },
+      {
+        "prompt": "Do you think being right about the comp set changed how that associate viewed you going forward?",
+        "modelAnswer": "I think it built some trust, since he started asking for my input on a couple of smaller things after that in a way he hadn't before, but I was also careful not to overplay it or become someone who was constantly flagging disagreements, since I think consistent reliability over time matters more than being right once in a memorable way."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "star-framework",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-007-star-ethical-dilemma",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "verbal",
+    "prompt": "Tell me about a time you faced an ethical dilemma, where the easy path and the right path weren't the same thing. What did you do?",
+    "keyPoints": [
+      {"point": "Describes a genuine ethical tension with real competing pressures, not a manufactured or trivial dilemma", "weight": 3},
+      {"point": "Shows the candidate reasoning through the trade-offs rather than reacting impulsively", "weight": 3},
+      {"point": "Takes the harder, more principled action despite some real cost or discomfort", "weight": 3},
+      {"point": "Reflects a mature understanding of professional integrity relevant to banking's high-trust environment", "weight": 2}
+    ],
+    "misconceptions": [
+      "Choosing a story with an obviously easy 'right answer,' undermining the credibility of it being a genuine dilemma",
+      "Describing an outcome where the candidate avoided the hard choice rather than actually making it"
+    ],
+    "modelAnswer": "During a group project in a finance class that counted for a meaningful part of our grade, I discovered close to the deadline that a teammate had used a data source with numbers that didn't reconcile with the company's actual public filings, and it appeared he'd either made an error or, more concerningly, adjusted a number to make our thesis look stronger without flagging it to the rest of the team. The easy path would have been to stay quiet, since we were under time pressure, the discrepancy wasn't obviously catastrophic, and raising it risked an uncomfortable confrontation and possibly damaging the grade right before submission. I decided I couldn't submit work I knew contained a number I believed was inaccurate, regardless of the deadline pressure, so I brought it to the team directly, showed the discrepancy against the actual filing, and asked him to walk me through where the number came from. He admitted he'd rounded in our favor without realizing how much it affected the output, not maliciously, but carelessly. We corrected it with about two hours before the deadline, which meant a rushed final review, and our grade may have been marginally lower than if we'd had more polish time, but I'd rather submit accurate work under time pressure than knowingly accurate-looking work I couldn't fully stand behind. That instinct — that accuracy and integrity take priority over convenience or deadline pressure, even when the stakes are only a class grade — is something I think matters enormously in banking, where a similar shortcut with real client money involved would be far more serious.",
+    "followups": [
+      {
+        "prompt": "How did your teammate react to being confronted about the discrepancy?",
+        "modelAnswer": "He was embarrassed but not defensive once I showed him the specific filing that didn't match, and he owned the mistake quickly, which made the conversation easier than I'd feared. I made a point of framing it as catching an error together rather than accusing him of something intentional, since I genuinely believed at that point it was more likely carelessness than deliberate manipulation."
+      },
+      {
+        "prompt": "What would you have done if he'd pushed back and insisted the number was correct?",
+        "modelAnswer": "I'd have asked him to walk me through his source in detail, and if I still believed the filing I'd checked was more authoritative, I'd have escalated it to the rest of the team or, if necessary, flagged the discrepancy to the professor before submission rather than let the team submit something I believed to be materially inaccurate, even at the cost of team friction."
+      },
+      {
+        "prompt": "How would you handle a similar situation in a real deal setting, where the stakes and relationships are much higher?",
+        "modelAnswer": "I'd apply the same core principle but escalate more formally and immediately, since inaccurate numbers in a real deal context could have serious client and firm consequences well beyond a grade. I'd raise it directly with whoever owns the analysis first, and if it weren't resolved satisfactorily, I'd escalate to a more senior person on the deal team rather than let it go into a client deliverable unaddressed."
+      },
+      {
+        "prompt": "Do you think there's ever a case where staying silent about a small discrepancy is the right call?",
+        "modelAnswer": "If a discrepancy were genuinely immaterial and had no real bearing on the conclusion, I could see raising it as more of a minor note than a full stop-everything moment, but I don't think staying fully silent is ever the right call once you've noticed something wrong — at minimum it should be mentioned, even if it doesn't rise to the level of a major intervention."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "star-framework",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-008-weakness-disqualifier-stress-test",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "curveball",
+    "prompt": "You told me your weakness is that you get anxious under public scrutiny. Frankly, that sounds disqualifying for a job where you'll be grilled by clients and senior bankers constantly. Convince me otherwise.",
+    "keyPoints": [
+      {"point": "Doesn't retract or minimize the original weakness dishonestly to escape the challenge", "weight": 3},
+      {"point": "Draws a precise distinction between the weakness as stated and what the job actually requires", "weight": 3},
+      {"point": "Provides concrete evidence of functioning effectively despite the anxiety, not proof it's gone", "weight": 3},
+      {"point": "Describes a specific coping mechanism or preparation habit that manages the anxiety in practice", "weight": 2}
+    ],
+    "misconceptions": [
+      "Backpedaling and claiming the weakness isn't really true once challenged, contradicting the earlier answer",
+      "Promising the anxiety is fully resolved, which is both unbelievable and unnecessary to answer the real question"
+    ],
+    "modelAnswer": "I'd push back gently on the idea that this is disqualifying, though I understand why it sounds that way on the surface, and I want to be precise about what I actually mean by it. The anxiety I described isn't a paralysis that stops me from performing — it's a physiological response, a racing heart or a slightly dry mouth before I speak, not something that has ever caused me to freeze or give a worse answer than I was capable of. I've been in genuinely high-scrutiny situations before, including presenting to skeptical judges in competitions and defending a thesis in front of a faculty panel, and in every case the anxiety showed up beforehand but didn't prevent me from performing clearly once I actually started speaking. What I've built is a specific preparation habit to manage it — I over-prepare for likely questions beforehand so that even if I feel nervous in the moment, I'm not improvising from a place of uncertainty, which is what actually causes people to visibly falter under scrutiny, not nervousness itself. I'd distinguish between someone who gets rattled and loses their train of thought under pressure, which would genuinely be a problem for this job, and someone who feels the physical symptoms of nervousness but has built a reliable process that keeps their actual performance solid regardless. I'm the latter, and I have a track record of evidence to back that up, not just a claim.",
+    "followups": [
+      {
+        "prompt": "Give me a specific example where the anxiety was present but your performance held up anyway.",
+        "modelAnswer": "During a stock pitch final round, I remember my hands were slightly shaking before I stood up, and a judge asked a sharp, unexpected question about my terminal growth assumption midway through. I felt the nerves spike in that moment, but because I'd over-prepared for exactly that kind of challenge beforehand, I was able to answer clearly and specifically, and the judges later told me it was one of the strongest defenses of the round, with no indication from the outside that I'd been nervous at all."
+      },
+      {
+        "prompt": "What happens on the rare occasion your preparation isn't enough and you're caught genuinely off guard?",
+        "modelAnswer": "In that case, I've trained myself to buy a few seconds by restating the question back to make sure I understood it correctly, which gives me a moment to organize my thoughts rather than blurting out an unprepared answer. It's not a perfect solution, but it's helped me avoid the kind of visible freeze that would actually be a problem in a client setting."
+      },
+      {
+        "prompt": "Do you think this anxiety could get worse, not better, under the sustained, repeated pressure of a live deal process?",
+        "modelAnswer": "It's possible the frequency of high-pressure moments increases the raw number of times I feel that physical response, but I'd expect the underlying skill — staying functional and clear despite it — to actually improve with more repetition, the same way it has every time I've been in a new high-scrutiny setting so far. I don't have direct evidence from a live deal yet, which I'll acknowledge honestly, but the pattern across every high-pressure situation I have faced points that direction."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "strengths-and-weaknesses",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-009-objection-liberal-arts-no-finance",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "curveball",
+    "prompt": "You majored in philosophy with no finance or accounting coursework at all. Why should we trust you can handle the technical demands of this job as quickly as someone with a finance background?",
+    "keyPoints": [
+      {"point": "Acknowledges the gap honestly rather than claiming equivalent preparation", "weight": 2},
+      {"point": "Provides specific, concrete evidence of self-taught technical competence, not just intent to learn", "weight": 3},
+      {"point": "Articulates a specific advantage the non-traditional background provides", "weight": 3},
+      {"point": "Offers to be tested or demonstrate the skill directly rather than only asserting it verbally", "weight": 2}
+    ],
+    "misconceptions": [
+      "Claiming the major doesn't matter at all, dismissing a legitimate concern",
+      "Overcompensating by disparaging finance majors as less rigorous thinkers"
+    ],
+    "modelAnswer": "It's a fair concern, and I won't pretend a philosophy degree gives me the same starting point as someone who's taken four years of finance and accounting coursework, because it doesn't. What I'd point to instead is what I've done to close that gap deliberately, not just claim I'm capable of closing it. I completed a rigorous, structured financial modeling program on my own over the past year, and I've built full three-statement models and a leveraged buyout model from scratch on real companies, which I'd genuinely welcome walking you through right now if that would be useful evidence rather than just a claim. I also taught myself accounting fundamentals through self-study and a community college course I took specifically to make sure I had that foundation solid, not assumed. As for what the philosophy degree does offer, I'd say it trained me rigorously in constructing and stress-testing an argument, identifying hidden assumptions, and following logical implications carefully to their conclusion, which is a different but genuinely relevant skill to the analytical judgment this job requires, beyond just the mechanical modeling skills that anyone can learn with enough repetition. I think the honest pitch is: yes, there's a real gap in formal coursework, and I've worked hard and deliberately to close it, and I'd rather be evaluated on a technical test right now than just take my word for it.",
+    "followups": [
+      {
+        "prompt": "Walk me through how you'd build a basic revenue build for a company, right now, to prove the modeling claim.",
+        "modelAnswer": "I'd start by identifying the company's revenue drivers — for a retailer, that might be store count and revenue per store, or for a subscription business, customer count and average revenue per customer — then project each driver forward based on historical trends and any known company guidance, multiply them together to get a top-line revenue forecast, and layer in a sanity check against analyst estimates or management's own guidance to make sure the output is reasonable before building the rest of the model on top of it."
+      },
+      {
+        "prompt": "How do you know your self-taught technical skills don't have gaps you're not even aware of?",
+        "modelAnswer": "I can't be fully certain they don't, which is exactly why I sought out feedback during my internship rather than assuming my self-study was sufficient — having someone experienced review my actual model output surfaced a few gaps I wasn't aware of, like inconsistent handling of working capital assumptions, which I then specifically went back and studied to fix. I'd expect that same process, exposing my work to experienced reviewers, to continue surfacing and closing any remaining gaps quickly once I'm actually in the role."
+      },
+      {
+        "prompt": "What's a specific instance where your philosophy training actually helped you catch something a purely technical approach might have missed?",
+        "modelAnswer": "While building a valuation model, I noticed an assumption baked into a comparable company set that implied a growth rate inconsistent with the company's own stated total addressable market, which a purely mechanical modeling approach might not have flagged since the formulas themselves were technically correct. Catching that inconsistency was really about noticing an unstated assumption didn't logically hold together with another fact I knew, which is exactly the kind of scrutiny philosophy training emphasizes."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "objection-handling-by-background",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-010-objection-layoff-explanation",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "curveball",
+    "prompt": "You were laid off from your last job. Walk me through what happened, honestly, and why we shouldn't see that as a red flag.",
+    "keyPoints": [
+      {"point": "Explains the circumstances factually and without excessive defensiveness", "weight": 3},
+      {"point": "Distinguishes clearly between a broad, business-driven layoff and individual performance issues, with evidence", "weight": 3},
+      {"point": "Describes constructive, verifiable use of the subsequent time", "weight": 3},
+      {"point": "Offers a path to independent verification (references) rather than asking to be taken purely at their word", "weight": 1}
+    ],
+    "misconceptions": [
+      "Being vague about whether the layoff was performance-related, leaving ambiguity that reads worse than a direct answer",
+      "Sounding bitter or resentful toward the former employer rather than professionally measured"
+    ],
+    "modelAnswer": "I'll be direct about it. The company went through a broader restructuring that eliminated roughly fifteen percent of headcount across multiple departments, including two other people on my specific team, and it wasn't tied to individual performance — my most recent formal review before the layoff had rated me as meeting or exceeding expectations across every category, and I'm glad to have my former manager confirm that directly if that's useful. I understand why any layoff can raise a question by default, so I want to be clear rather than vague about it: this was a business decision driven by the company's broader financial situation, not a reflection of my work. In the months since, I've used the time deliberately rather than treating it as a pause — I completed a technical certification relevant to this role, built out an independent modeling portfolio I can walk you through, and stayed actively engaged in networking and interview preparation rather than letting the search stretch out passively. I'd rather you verify this directly with my former manager than just take my characterization of it, since I think that's the strongest evidence I can offer that this was a business decision and not a performance one.",
+    "followups": [
+      {
+        "prompt": "How did you handle the emotional and financial stress of the layoff while continuing to prepare for interviews?",
+        "modelAnswer": "It was stressful, and I won't downplay that, but I found that having a structured daily plan — a mix of technical study, networking outreach, and interview practice — gave me a sense of forward momentum that made it easier to manage than if I'd been sitting idle. I also leaned on a small group of peers going through similar transitions to stay accountable and share leads, which helped both practically and emotionally."
+      },
+      {
+        "prompt": "Did the layoff make you reconsider whether this career path was right for you?",
+        "modelAnswer": "Not really, since the layoff was clearly about the company's broader financial situation rather than anything about the type of work or industry, so it didn't give me any new signal about whether the path itself was wrong for me. If anything, going through it reinforced how much I wanted to move toward a career where I felt more directly connected to a company's core value creation, which is part of why I've focused this search specifically on banking."
+      },
+      {
+        "prompt": "What would you do differently if you sensed a similar restructuring risk was building at a future employer?",
+        "modelAnswer": "I'd try to stay attentive to broader signals — client wins or losses, leadership changes, industry headwinds — rather than assuming stability by default, and I'd make sure my own skills and network stayed current on an ongoing basis rather than only investing in them reactively after a layoff happens, which is a habit I've carried forward from this experience."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "objection-handling-by-background",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-011-deal-critique-valuation-curveball",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "curveball",
+    "prompt": "You mentioned a deal you liked where a strategic acquirer paid what looked like a rich premium. Defend that price — why might paying up have actually been the disciplined choice?",
+    "keyPoints": [
+      {"point": "Engages seriously with the challenge rather than retreating to a vague defense", "weight": 2},
+      {"point": "Articulates specific reasons a premium can be justified (scarcity, strategic fit, synergy realization confidence)", "weight": 3},
+      {"point": "Acknowledges the genuine risk of overpaying rather than one-sidedly defending it", "weight": 3},
+      {"point": "Distinguishes disciplined premium-paying from simple overpayment with a clear standard", "weight": 3}
+    ],
+    "misconceptions": [
+      "Defending any premium reflexively as justified without a substantive standard for what makes it disciplined",
+      "Conceding the premium was simply overpayment without engaging with the counterargument requested"
+    ],
+    "modelAnswer": "Take a deal I followed where a strategic acquirer paid what looked like roughly a forty percent premium to the target's unaffected share price for a specialty component maker with a genuinely differentiated, hard-to-replicate technology. On its face that premium looks rich relative to typical deal premiums, which more often land in the twenty to thirty percent range. But I'd argue paying up can be disciplined, not reckless, when a few conditions hold. First, if the target has a scarce, defensible asset — in this case, patented technology that would take years and significant capital to replicate organically — a strategic buyer reasonably pays more to acquire that capability immediately rather than compete against the time and execution risk of building it themselves. Second, if the acquirer has strong visibility into achievable synergies, meaning cost or revenue synergies they can underwrite with real confidence rather than aspirational hope, a higher premium can still leave them value-accretive even after paying up for control. Where I'd draw the line between disciplined premium-paying and simple overpayment is whether the buyer's own published synergy estimates and standalone valuation, even under conservative assumptions, still clear the price paid — if the deal only makes sense under best-case synergy realization, that's a red flag the buyer is rationalizing overpayment rather than genuinely underwriting it. In this specific case, the buyer's investor materials laid out synergy assumptions that were disclosed with enough specificity that I found them credible rather than hand-wavy, which is what shifted my view from skeptical to genuinely persuaded the premium was disciplined.",
+    "followups": [
+      {
+        "prompt": "How would you know from the outside whether the disclosed synergy assumptions were actually credible or just optimistic marketing to justify the price?",
+        "modelAnswer": "I'd look at whether the synergies were broken down into specific, itemized categories like facility consolidation or procurement savings rather than one large, unexplained number, and whether management had a credible track record of hitting synergy targets on prior acquisitions. I'd also compare the synergy estimate as a percentage of the target's revenue against what's typical for similar deals in the industry, since an unusually high ratio relative to peers would be a warning sign of overpromising."
+      },
+      {
+        "prompt": "What would change your mind and make you conclude this deal actually was overpayment?",
+        "modelAnswer": "If, a year or two after close, the acquirer's actual reported synergies came in meaningfully below what was originally disclosed, or if they took a goodwill impairment tied to that acquisition, I'd take that as fairly direct evidence the premium wasn't as well-underwritten as it appeared at signing, regardless of how credible the original disclosure seemed."
+      },
+      {
+        "prompt": "Is there a scenario where paying a large premium is justified even without high-confidence synergies?",
+        "modelAnswer": "Yes, in a competitive auction where a buyer has a strategic reason the asset must be theirs rather than a rival's — for example, denying a direct competitor access to a scarce capability — the buyer might rationally pay a premium beyond what synergies alone would justify, treating part of the premium as a defensive strategic cost rather than a purely synergy-driven investment. That's a harder case to evaluate cleanly from the outside, since the value of denying a competitor isn't as easily quantified as a cost synergy."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "tell-me-about-a-deal",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-012-deal-rationale-risk-multistep",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "multi-step",
+    "prompt": "Take a real cross-border acquisition you've studied. Walk me through the strategic rationale, the biggest risk you'd flag to the buyer's board, and how you'd structure the deal to mitigate that specific risk.",
+    "keyPoints": [
+      {"point": "States accurate basic facts about a real cross-border deal", "weight": 2},
+      {"point": "Articulates a specific strategic rationale beyond generic 'international expansion'", "weight": 3},
+      {"point": "Identifies a cross-border-specific risk (regulatory, currency, integration, political) with real specificity", "weight": 3},
+      {"point": "Proposes a concrete structural or contractual mitigation tied directly to that risk", "weight": 3},
+      {"point": "Organizes the answer clearly across the three parts requested", "weight": 1}
+    ],
+    "misconceptions": [
+      "Naming a generic risk like 'integration risk' without any cross-border-specific reasoning",
+      "Proposing a mitigation unrelated to the specific risk identified"
+    ],
+    "modelAnswer": "I'll use a domestic consumer goods company's acquisition of a European manufacturer with an established distribution network across several EU countries, a deal in the range of $800 million. The strategic rationale was market entry — rather than build distribution relationships and regulatory familiarity from scratch across multiple European markets, the buyer acquired a company that already had those relationships and local regulatory approvals in place, which meaningfully shortened their time to market compared to organic expansion. The biggest risk I'd flag to the board is currency and repatriation risk combined with local regulatory complexity — the target's earnings would be generated in euros while the buyer's reporting and debt service obligations were in dollars, so currency fluctuations could meaningfully affect the deal's realized returns independent of the underlying business performing well, and on top of that, EU-specific labor and works council regulations can significantly slow post-close integration decisions like facility consolidation compared to what the buyer might be used to domestically. To mitigate the currency piece, I'd recommend structuring a portion of the acquisition financing in euro-denominated debt serviced by the target's own euro cash flows, creating a natural hedge rather than relying purely on the parent's dollar balance sheet and financial derivatives after the fact. For the regulatory and labor complexity, I'd push for an extended transition services arrangement with retained local management for a defined period post-close, so integration decisions requiring local regulatory navigation are handled by people who already understand that landscape rather than the buyer's domestic team learning it in real time under deal pressure.",
+    "followups": [
+      {
+        "prompt": "Why might euro-denominated debt be a better hedge than a financial derivative like a currency forward?",
+        "modelAnswer": "A natural hedge through local-currency debt reduces the underlying economic exposure directly and doesn't require ongoing rolling and monitoring the way a derivatives-based hedge does, and it avoids taking on counterparty risk with a derivatives provider or basis risk if the hedge doesn't perfectly match the timing and amount of actual cash flows. Derivatives can still play a role for shorter-term or more precisely timed exposures, but for a long-term structural exposure like this, a natural hedge through local financing is often the more durable solution."
+      },
+      {
+        "prompt": "How would you actually diligence the works council and labor regulation risk before signing, rather than after?",
+        "modelAnswer": "I'd engage local labor counsel early in diligence specifically to map out what approvals or consultation periods would be required for any post-close changes the buyer is likely to want to make, such as facility consolidation or headcount changes, and build realistic timelines for those into the integration plan and the deal's expected synergy realization schedule, rather than assuming domestic-market integration speed applies."
+      },
+      {
+        "prompt": "If the retained local management team turned out to be resistant to the buyer's integration plans, how would that change your recommendation?",
+        "modelAnswer": "I'd recommend building specific retention incentives tied to integration milestones into the local management team's compensation structure at signing, so their incentives are aligned with a smooth transition rather than simply preserving the status quo. If resistance persisted despite that, I'd flag it to the board as a signal that a longer, more gradual integration timeline may be necessary rather than pushing an aggressive consolidation plan against local management's active resistance."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "tell-me-about-a-deal",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-013-market-rates-financing-curveball",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "curveball",
+    "prompt": "If the Fed cut rates sharply and unexpectedly next month, walk me through the second-order effects on private equity deal activity specifically, not just the obvious first-order one.",
+    "keyPoints": [
+      {"point": "States the obvious first-order effect briefly before moving to second-order reasoning", "weight": 2},
+      {"point": "Identifies at least two distinct second-order effects with clear causal reasoning", "weight": 3},
+      {"point": "Considers competitive dynamics among sponsors, not just financing cost mechanics", "weight": 3},
+      {"point": "Shows awareness that sharp, unexpected moves carry distinct dynamics from gradual, anticipated ones", "weight": 2}
+    ],
+    "misconceptions": [
+      "Stopping at the obvious first-order point (cheaper debt, higher prices) without engaging with second-order effects as asked",
+      "Ignoring the 'sharp and unexpected' framing and answering as if it were a gradual, anticipated cut"
+    ],
+    "modelAnswer": "The obvious first-order effect is that cheaper debt lets sponsors support higher purchase prices while still hitting target leveraged returns, which would likely push private equity purchase multiples up. But since you're asking about second-order effects specifically, I'd focus on a few. First, a sharp, unexpected cut would likely trigger a rush of previously shelved processes back to market, since sponsors sitting on capital that had been waiting out the higher-rate environment would suddenly see a financing window open, which could create a temporary supply glut of deals competing for the same pool of available debt capital, potentially offsetting some of the pricing benefit from cheaper financing if too many processes launch simultaneously. Second, I'd expect increased competitive tension specifically among sponsors versus strategic buyers — strategics who'd been quietly picking off distressed or underleveraged targets during the high-rate period at more favorable prices would suddenly face renewed competition from sponsors who can now underwrite more aggressive leverage again, which could compress the window strategics had to acquire assets cheaply. Third, because the cut is unexpected rather than gradually telegraphed, I'd expect a lag before deal activity actually responds, since sponsors typically need several weeks to reprice financing assumptions and get updated debt commitments from lenders before launching or re-underwriting a process, so the actual pickup in signed deal volume would likely trail the rate cut itself by a quarter or more, even though the intent to transact shifts immediately.",
+    "followups": [
+      {
+        "prompt": "Why would a sudden supply glut of deals potentially offset the pricing benefit of cheaper financing?",
+        "modelAnswer": "If lenders face a sudden surge in financing requests all at once, they may become more selective or price individual deals slightly wider on a relative basis even as base rates fall, since underwriting capacity and risk appetite at any given bank or credit fund isn't infinitely elastic in the short term. That could partially offset the base-rate benefit for sponsors competing for the same limited pool of lender capacity during the surge."
+      },
+      {
+        "prompt": "How might this dynamic differ across different sponsor sizes, such as large mega-funds versus smaller middle-market funds?",
+        "modelAnswer": "Larger mega-funds with established, deep lending relationships and more negotiating leverage would likely be able to secure updated financing terms faster and more favorably than smaller middle-market funds, who might face more competition for lender attention during a surge in demand, potentially widening the competitive gap between fund sizes in the immediate aftermath of the cut."
+      },
+      {
+        "prompt": "What would make you revise this view if it turned out deal activity didn't pick up as quickly as you're predicting?",
+        "modelAnswer": "If sponsors expressed continued caution about the durability of the rate cut, worried it might reverse quickly given how unexpected and sharp it was, that would suggest they're discounting the cut's persistence and not fully repricing their return assumptions around it, which would be a reasonable explanation for slower-than-expected deal activity despite the lower rate environment."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "how-to-follow-the-market",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-014-discuss-real-consequence-failure",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "verbal",
+    "prompt": "Tell me about a time your mistake had a real consequence for someone else, not just for you. How did you handle it in the moment and afterward?",
+    "keyPoints": [
+      {"point": "Describes a genuine mistake with a real, specific impact on another person or the organization", "weight": 3},
+      {"point": "Shows immediate, proactive handling of the mistake rather than concealment or delay", "weight": 3},
+      {"point": "Describes taking direct responsibility with the affected party, not just internally", "weight": 3},
+      {"point": "Reflects a durable process change made afterward, not just an apology", "weight": 2}
+    ],
+    "misconceptions": [
+      "Describing a mistake whose consequence was minor or entirely self-contained, avoiding the real difficulty asked about",
+      "Focusing on the emotional discomfort of the moment without describing concrete corrective action taken"
+    ],
+    "modelAnswer": "During my internship, I was responsible for updating a set of trading comparables ahead of an early-morning client call, and I made an error copying a formula across the spreadsheet that caused one company's EBITDA multiple to be overstated by a meaningful margin. It went out in a deck to the client before I caught it, because I'd rushed the final check the night before to leave on time for a personal commitment I hadn't reprioritized correctly given how urgent the deliverable was. My manager caught the discrepancy the next morning right before the call, which meant we had less than twenty minutes to fix it and get a corrected version to the client before the meeting started, and it created a genuinely stressful, embarrassing scramble. I immediately owned the mistake directly with my manager rather than making excuses or implying it was a shared error, walked through exactly how it happened, fixed the specific formula issue, and helped triple-check every other number in the deck against source data before we resent it. Afterward, I went back to my manager on my own initiative, without being asked, and proposed a standing rule for myself: no client deliverable leaves my hands the night before a call without a dedicated, undistracted final review pass, done specifically at a point when I'm not rushing to leave for something else. I also apologized directly and specifically for putting her in that position with a client, not just generally for the error. It was one of the more uncomfortable moments of my internship, but it's the reason I now treat final-review discipline as completely non-negotiable, regardless of what else is competing for my time in the moment.",
+    "followups": [
+      {
+        "prompt": "How did your manager's trust in you change after that, and how did you rebuild it?",
+        "modelAnswer": "There was understandably a period where she double-checked my work more closely than before, which I didn't push back on since it was a reasonable response to what had happened. I rebuilt trust mainly through consistency — several weeks of clean, error-free work following the incident — rather than through any single gesture, since I think trust after a real mistake has to be earned back gradually through demonstrated reliability, not just an apology."
+      },
+      {
+        "prompt": "Looking back, was rushing the review the real root cause, or was there a deeper process issue?",
+        "modelAnswer": "The immediate cause was rushing, but the deeper issue was that I didn't have a firm personal rule yet distinguishing 'good enough to leave' from 'actually final,' so under time pressure I let those blur together. Building an explicit rule afterward, rather than just resolving to 'be more careful' in a vague sense, is what actually changed my behavior going forward, since vague resolutions rarely survive the next time-pressured situation."
+      },
+      {
+        "prompt": "Did you ever consider not telling your manager immediately and hoping the error wouldn't be caught?",
+        "modelAnswer": "No, and I don't think that was ever a real option in my mind — by the time I might have caught it myself, my manager had already found it, but even if I'd noticed it first, I'd have flagged it immediately, since letting an error like that go uncorrected in front of a client would have been a far worse outcome than the discomfort of admitting the mistake right away."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "discussing-your-own-experience",
+    "advanced": false
+  },
+  {
+    "id": "behavioral-hard-015-discuss-ethical-conflict-work",
+    "topic": "behavioral",
+    "difficulty": "hard",
+    "questionType": "verbal",
+    "prompt": "Tell me about a time at work or in an internship where you were asked to do something you weren't comfortable with. What did you do?",
+    "keyPoints": [
+      {"point": "Describes a genuine instance of discomfort with real stakes, not a trivial task dislike", "weight": 3},
+      {"point": "Shows the candidate handling it professionally rather than either silent compliance or open refusal", "weight": 3},
+      {"point": "Distinguishes clearly between a legitimate ethical concern and simple task avoidance", "weight": 2},
+      {"point": "States a concrete resolution and what was learned about navigating workplace authority responsibly", "weight": 2}
+    ],
+    "misconceptions": [
+      "Describing simple task discomfort (e.g., disliking formatting work) as though it were an ethical concern",
+      "Describing either blind compliance or dramatic public refusal, missing the professional middle ground"
+    ],
+    "modelAnswer": "During my internship, an associate once asked me to present a set of projections to an internal team as though they were management's own base case, when I knew from an earlier conversation that the numbers had actually been adjusted upward by our team beyond what management had originally provided, without that adjustment being clearly flagged in the materials. I wasn't comfortable presenting adjusted numbers as management's own case without that distinction being clear, since it felt like it could mislead whoever relied on the materials internally about whose assumptions they actually reflected. Rather than refuse outright in front of others or silently comply, I asked the associate privately beforehand whether the materials should note that the projections reflected our team's adjustments rather than presenting them as unmodified management figures, framing it as a clarification question rather than an accusation. He explained that the adjustment had actually been discussed and approved by the client's own management in a call I hadn't been part of, which resolved my concern entirely, but he agreed the labeling was ambiguous and had it updated to explicitly note the figures were management-approved projections incorporating our adjustments, which was a fair and easy fix once raised. What I took from that is that discomfort doesn't automatically mean something improper is happening — sometimes there's missing context — but the right response either way is to ask a direct, private, non-accusatory question rather than either silently complying with something that felt off or making an issue of it in a way that assumes bad intent before understanding the full picture.",
+    "followups": [
+      {
+        "prompt": "What would you have done if the associate had said the adjustment wasn't actually approved by management?",
+        "modelAnswer": "I'd have said directly that I wasn't comfortable presenting the numbers without that being clarified in the materials, and asked how he'd like to handle it, giving him the chance to fix the labeling himself first. If he'd insisted on presenting it exactly as originally framed despite my concern, I would have escalated to someone more senior on the deal team before participating in the presentation, since I wouldn't want to knowingly present something misleading even under direct instruction."
+      },
+      {
+        "prompt": "How do you distinguish between a legitimate ethical concern and simply being uncomfortable with a task you don't want to do?",
+        "modelAnswer": "I'd ask myself whether the discomfort is about the substance of what's being asked, like accuracy or transparency to someone who's relying on the information, versus discomfort that's really about the task being tedious, difficult, or outside my job description. The former is worth raising directly; the latter usually isn't a reason to push back, since plenty of legitimate work is simply unglamorous rather than ethically questionable."
+      },
+      {
+        "prompt": "Would you have handled this differently if the person asking had been much more senior, like a managing director rather than an associate?",
+        "modelAnswer": "I'd still raise the same clarifying question privately, though I'd probably be even more careful about framing it as a genuine question rather than anything that could read as a challenge, given the larger power gap. The core approach — ask privately, assume missing context first, escalate only if the concern remains unresolved after a direct conversation — would stay the same regardless of seniority, since I think that's the right process independent of who's asking."
+      }
+    ],
+    "chapterSlug": "behavioral",
+    "sectionSlug": "discussing-your-own-experience",
+    "advanced": false
+  }
+]

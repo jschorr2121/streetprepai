@@ -1,0 +1,513 @@
+[
+  {
+    "id": "ma-easy-001-why-acquire-vs-build",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Why might a company choose to grow through an acquisition instead of building the same capability organically?",
+    "keyPoints": [
+      {"point": "Speed to market — buying an existing operation is faster than building from scratch", "weight": 3},
+      {"point": "Buys existing customers, revenue, and market share immediately", "weight": 2},
+      {"point": "Acquires talent, technology, or IP that would take years to develop internally", "weight": 2},
+      {"point": "Removes a competitor from the market", "weight": 1},
+      {"point": "Organic build carries execution risk and no guarantee of success", "weight": 2}
+    ],
+    "misconceptions": [
+      "Acquisitions are always cheaper than building the same thing in-house",
+      "Growth strategy is either 'acquire' or 'build' with no in-between (partnerships, licensing, JVs exist too)"
+    ],
+    "modelAnswer": "Acquisitions let a company buy speed. Building a new product line, sales force, or geographic presence organically can take years and carries real execution risk — you might spend the money and still fail. Buying an existing business gets you an established customer base, revenue, trained employees, and often proprietary technology on day one. It's also a way to acquire scarce assets, like a strong engineering team or a patent portfolio, that would be very hard to replicate. Beyond capability, acquisitions can eliminate a competitor, consolidate a fragmented market, or grab a strategic asset before a rival does. The tradeoff is that you're paying a premium for that speed and certainty, and you take on integration risk — cultural clashes, redundant systems, and execution slip-ups can erode the value you thought you were buying. So the decision usually comes down to whether the premium and integration risk are worth the time saved versus building the capability yourself.",
+    "followups": [
+      {"prompt": "What's the main risk that offsets the speed advantage of an acquisition?", "modelAnswer": "Integration risk. Even a well-priced deal can destroy value if the two companies fail to combine systems, cultures, and teams effectively. Synergies assumed in the deal model may never materialize, key employees may leave post-close, and management distraction during integration can hurt the core business. That's why deal success is judged less on the purchase price and more on execution in the first 12-24 months."},
+      {"prompt": "In what situation would organic growth clearly be the better choice?", "modelAnswer": "When the capability is core to the company's competitive advantage and cheap to build relative to its value — for example, a tech company building its own core product feature rather than acquiring a smaller company for it. Organic growth is also preferable when there's no attractive target, when the company wants to avoid the premium and integration risk of a deal, or when antitrust concerns make an acquisition of a direct competitor unlikely to clear regulatory review."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "why-companies-buy",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-002-synergies-defined",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is a synergy in M&A, and how do cost synergies differ from revenue synergies?",
+    "keyPoints": [
+      {"point": "Synergy = value created by combining two companies that exceeds the sum of their standalone values", "weight": 3},
+      {"point": "Cost synergies: savings from eliminating duplicate functions, facilities, or overhead", "weight": 2},
+      {"point": "Revenue synergies: incremental sales from cross-selling, bundling, or expanded distribution", "weight": 2},
+      {"point": "Cost synergies are generally more predictable and faster to realize", "weight": 2},
+      {"point": "Revenue synergies are harder to quantify and often overestimated", "weight": 1}
+    ],
+    "misconceptions": [
+      "Revenue synergies are just as reliable and quick to achieve as cost synergies",
+      "All projected synergies get fully realized on schedule"
+    ],
+    "modelAnswer": "A synergy is the extra value created when two companies combine that neither could achieve alone — the classic '1 + 1 = 3' idea. Cost synergies come from eliminating duplication: closing redundant offices, consolidating back-office functions like HR and finance, combining procurement to get better vendor pricing, or cutting duplicate executive roles. These are usually the easier synergies to plan and execute because they're within management's direct control — you can identify the overlapping headcount or lease and act on it. Revenue synergies come from the combined company selling more than the two would have separately — cross-selling one company's product to the other's customer base, bundling products, or using a larger combined sales force to enter new markets. These are much harder to predict because they depend on customer behavior and sales execution, not just internal decisions. In practice, bankers and management teams are usually much more confident presenting cost synergies to investors, and skeptical analysts tend to discount revenue synergy estimates heavily, since research shows they're realized far less often and far more slowly than projected.",
+    "followups": [
+      {"prompt": "Why are cost synergies considered lower-risk than revenue synergies?", "modelAnswer": "Cost synergies are largely within management's control — if you decide to close a redundant facility or eliminate a duplicate department, you can execute that decision directly and see the savings show up on a defined timeline. Revenue synergies depend on external behavior: will customers actually buy the bundled product, will the combined sales force actually cross-sell effectively, will competitors react by cutting prices? That uncertainty is why cost synergies are typically valued at a higher percentage of their run-rate estimate than revenue synergies in deal models."},
+      {"prompt": "How do analysts typically treat synergy estimates when building a deal model?", "modelAnswer": "Analysts often show the accretion/dilution analysis both with and without synergies, and may apply a haircut — discounting management's synergy estimate by some percentage, or phasing it in gradually over two or three years rather than assuming full realization immediately, to reflect execution risk and historical realization rates."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "why-companies-buy",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-003-strategic-vs-financial-buyer",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "verbal",
+    "prompt": "Walk me through the difference between a strategic buyer and a financial buyer.",
+    "keyPoints": [
+      {"point": "Strategic buyer is an operating company acquiring to further its own business", "weight": 3},
+      {"point": "Strategic buyers can capture synergies (cost and/or revenue), so they can often justify paying more", "weight": 2},
+      {"point": "Financial buyer is typically a private equity firm buying purely for investment return", "weight": 3},
+      {"point": "Financial buyers generally can't realize synergies and rely on leverage, growth, and multiple expansion for returns", "weight": 2},
+      {"point": "Financial buyers usually keep existing management and run the business standalone rather than integrating it", "weight": 1}
+    ],
+    "misconceptions": [
+      "Financial buyers never pay competitive prices — in reality they can win auctions with cheap leverage or by paying up for a platform asset",
+      "Strategic and financial buyers use the same valuation approach"
+    ],
+    "modelAnswer": "A strategic buyer is an operating company — think one industry player buying another — that's acquiring the target to advance its own business strategy: gaining market share, new products, new geographies, or synergies with its existing operations. Because a strategic buyer can often cut costs by combining functions or grow revenue by cross-selling, it can justify paying a higher price and still create value, since those synergies effectively lower its true cost of the deal. A financial buyer, most commonly a private equity firm, is buying purely as an investment. It doesn't have an existing operating business to combine the target with, so it generally can't capture synergies the way a strategic can. Instead, a financial buyer's return comes from a combination of paying down debt used to fund the deal, growing the company's earnings over a multi-year hold period, and hopefully selling it later at the same or a higher multiple. Because financial buyers can't rely on synergies, they typically need to underwrite a target's standalone cash flows more conservatively, which can mean strategics outbid them in competitive processes — though cheap financing or a strong growth thesis can let a financial buyer win anyway.",
+    "followups": [
+      {"prompt": "Why might a financial buyer sometimes outbid a strategic buyer despite having no synergies to capture?", "modelAnswer": "Access to cheap leverage lets a PE firm fund a large portion of the purchase price with debt, boosting its equity returns even without synergies. A PE firm might also see a growth or multiple-expansion opportunity the strategic buyer doesn't value as highly, or may simply be under pressure to deploy committed capital. In some cases a PE firm buys a platform company specifically to pursue its own roll-up strategy, effectively creating its own version of synergies through future add-on acquisitions."},
+      {"prompt": "How does the post-close approach typically differ between the two buyer types?", "modelAnswer": "A strategic buyer usually integrates the target into its existing operations — combining systems, consolidating facilities, and folding in management — to realize synergies. A financial buyer more often keeps the target as a standalone platform with its existing management team in place, focusing on operational improvements, add-on acquisitions, and financial engineering rather than merging it into another business."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "why-companies-buy",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-004-vertical-integration",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What does 'vertical integration' mean in the context of M&A, and can you give an example?",
+    "keyPoints": [
+      {"point": "Vertical integration = acquiring a company at a different stage of the same value chain (supplier or customer)", "weight": 3},
+      {"point": "Backward integration = acquiring a supplier; forward integration = acquiring a distributor/customer-facing business", "weight": 2},
+      {"point": "Motivation: control input costs/supply, capture margin at another stage, reduce reliance on third parties", "weight": 2},
+      {"point": "Contrast with horizontal M&A (acquiring a direct competitor at the same stage)", "weight": 1},
+      {"point": "Concrete example provided", "weight": 1}
+    ],
+    "misconceptions": [
+      "Vertical integration and horizontal integration are the same thing",
+      "Vertical deals never raise antitrust concerns — they can, if they foreclose competitors' access to a key input"
+    ],
+    "modelAnswer": "Vertical integration is when a company acquires a business at a different stage of its own supply chain, rather than a direct competitor. Backward integration means acquiring a supplier — for example, a smartphone maker buying a semiconductor company to secure chip supply and control costs. Forward integration means acquiring a business closer to the end customer — for example, a manufacturer buying a retail chain to sell directly to consumers instead of going through third-party retailers. The motivation is usually to control a critical input or distribution channel, capture the margin that would otherwise go to that supplier or distributor, reduce dependence on outside parties who might raise prices or have their own competing priorities, and improve coordination across the value chain. This is different from horizontal M&A, where a company buys a direct competitor selling the same product at the same stage of the chain. Vertical deals are generally viewed as less likely to raise antitrust concerns than horizontal deals, since they don't directly reduce competition among sellers of the same product — though regulators can still object if the deal would let the combined company cut off competitors' access to a critical input.",
+    "followups": [
+      {"prompt": "Why might vertical integration reduce a company's operating flexibility even as it lowers costs?", "modelAnswer": "Owning a supplier or distributor locks the company into that asset's cost structure and capacity, even if better or cheaper third-party options emerge later. A company that used to shop around among multiple suppliers loses that competitive leverage once it owns one of them, and it now has fixed costs and headcount tied to that stage of the value chain rather than a flexible, variable-cost vendor relationship."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "why-companies-buy",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-005-accretive-dilutive-plain-terms",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "In plain terms, what does it mean for a deal to be 'accretive' versus 'dilutive'?",
+    "keyPoints": [
+      {"point": "Accretive = pro forma (combined) EPS is higher than the acquirer's standalone EPS", "weight": 3},
+      {"point": "Dilutive = pro forma EPS is lower than the acquirer's standalone EPS", "weight": 3},
+      {"point": "It's an EPS/accounting metric, not a direct measure of whether the deal creates economic value", "weight": 2},
+      {"point": "Driven by the combined net income relative to the combined share count (and any new debt/interest)", "weight": 1}
+    ],
+    "misconceptions": [
+      "Accretive automatically means the deal is a good idea / creates shareholder value",
+      "Accretion/dilution is only about the purchase price, ignoring financing structure"
+    ],
+    "modelAnswer": "Accretion and dilution describe what happens to the acquirer's earnings per share after a deal closes, compared to what its EPS would have been standalone. If pro forma EPS — the combined company's net income divided by the combined share count — comes out higher than the acquirer's EPS before the deal, the deal is accretive. If it comes out lower, the deal is dilutive. This depends on how the deal is financed: paying with cash or debt keeps the acquirer's share count the same, so the deal is accretive as long as the target adds more to net income than the after-tax cost of financing. Paying with stock adds new shares to the denominator, so the deal is only accretive if the earnings added by the target outweigh the dilution from those extra shares. It's important to remember accretion/dilution is purely an EPS mechanics test — it doesn't tell you whether the acquirer overpaid or whether the deal actually creates value relative to its cost of capital. A deal can be accretive to EPS and still be a bad use of capital, or dilutive in year one but a great long-term investment.",
+    "followups": [
+      {"prompt": "Why do investors and analysts pay so much attention to accretion/dilution if it doesn't measure value creation?", "modelAnswer": "EPS is one of the most closely watched metrics by public market investors, and management teams are often judged on it in the near term. A dilutive deal can spook the market and pressure the acquirer's stock price even if the deal is strategically sound, so management wants to understand and be able to explain the EPS impact. It's also a quick, standardized way to compare deal structures and financing choices before doing a full value-creation analysis."},
+      {"prompt": "What's a quick way to sanity-check whether an all-stock deal will be accretive or dilutive?", "modelAnswer": "Compare the acquirer's P/E multiple to the multiple it's effectively paying for the target's earnings. If the acquirer's P/E is higher than the multiple paid for the target, the deal is generally accretive in an all-stock transaction with no synergies, because the acquirer is 'buying' earnings more cheaply than its own stock is valued. If the acquirer's P/E is lower than the multiple paid, the deal is generally dilutive."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "m-and-a-accretion-dilution",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-006-pe-rule-of-thumb",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is the quick 'rule of thumb' for whether an all-stock deal is accretive or dilutive, based on P/E multiples?",
+    "keyPoints": [
+      {"point": "If acquirer's P/E > multiple paid for target's earnings, deal is accretive (all-stock, no synergies)", "weight": 3},
+      {"point": "If acquirer's P/E < multiple paid for target's earnings, deal is dilutive", "weight": 2},
+      {"point": "Intuition: a higher P/E means a lower earnings yield, so issuing 'expensive' stock to buy 'cheaper' earnings boosts EPS", "weight": 2},
+      {"point": "Rule of thumb ignores synergies and financing nuances — only a first-pass approximation", "weight": 1}
+    ],
+    "misconceptions": [
+      "The rule of thumb applies to cash or debt-funded deals too — it's specific to all-stock, no-synergy deals",
+      "A higher P/E always means the acquirer is overvalued rather than just reflecting the market's growth expectations"
+    ],
+    "modelAnswer": "For an all-stock deal with no assumed synergies, the quick rule of thumb is: if the acquirer's P/E multiple is higher than the P/E it's effectively paying for the target's earnings, the deal is accretive; if it's lower, the deal is dilutive. The intuition is about earnings yield, which is the inverse of the P/E multiple. A high P/E stock has a low earnings yield, meaning each dollar of the acquirer's own earnings is valued richly by the market. If the acquirer uses that richly-valued stock to buy a target's earnings at a lower multiple — i.e., a cheaper price per dollar of earnings — it's effectively acquiring more earnings per share issued than it's giving up, so EPS goes up. If the target trades at a higher multiple than the acquirer, the reverse happens: each new share issued brings in less earnings than it dilutes, and EPS falls. This rule of thumb is a useful sanity check before building a full model, but it ignores premium paid over the target's undisturbed price, transaction costs, financing mix, and synergies, all of which affect the actual outcome.",
+    "followups": [
+      {"prompt": "Does the rule of thumb use the target's current trading multiple or the multiple the acquirer is actually paying (including premium)?", "modelAnswer": "It should use the multiple the acquirer is actually paying — the deal price divided by the target's earnings — not just the target's pre-deal trading multiple, since acquirers almost always pay a premium to the undisturbed share price. Using the unaffected multiple without the premium will overstate how accretive the deal appears."},
+      {"prompt": "Why doesn't this rule of thumb apply directly to an all-cash deal?", "modelAnswer": "In an all-cash deal there's no new stock issued, so there's no dilution from additional shares — the accretion/dilution instead depends on comparing the after-tax cost of the cash or debt used to fund the deal against the after-tax earnings the target contributes, which is a completely different comparison than P/E multiples."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "m-and-a-accretion-dilution",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-007-simple-stock-deal-eps-calc",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "calculation",
+    "prompt": "Acquirer has net income of $200 million and 100 million shares outstanding, so its EPS is $2.00 and its stock trades at $40, putting it at a 20x P/E. It acquires a target for $600 million entirely in acquirer stock (no premium debate needed — that's the agreed deal value). The target has net income of $50 million. Assume no synergies and no incremental interest or D&A. What is pro forma EPS, and is the deal accretive or dilutive?",
+    "keyPoints": [
+      {"point": "New shares issued = $600M deal value / $40 acquirer stock price = 15 million shares", "weight": 3},
+      {"point": "Pro forma net income = $200M + $50M = $250M", "weight": 2},
+      {"point": "Pro forma shares = 100M + 15M = 115M", "weight": 2},
+      {"point": "Pro forma EPS = $250M / 115M ≈ $2.17, above the $2.00 standalone EPS, so the deal is accretive", "weight": 3}
+    ],
+    "misconceptions": [
+      "Forgetting to add the new shares issued to the acquirer's existing share count",
+      "Using the target's stock price instead of the acquirer's stock price to calculate the number of new shares issued"
+    ],
+    "modelAnswer": "First figure out how many new acquirer shares get issued: the $600 million deal value divided by the acquirer's $40 stock price gives 15 million new shares. Next, combine net income: the acquirer's $200 million plus the target's $50 million gives $250 million of pro forma net income, since we're told to ignore synergies, incremental interest, and incremental D&A. Then combine the share count: the acquirer's existing 100 million shares plus the 15 million newly issued shares gives 115 million pro forma shares. Dividing $250 million by 115 million shares gives pro forma EPS of about $2.17. That's higher than the acquirer's standalone EPS of $2.00, so the deal is accretive by roughly 8.7%. This lines up with the P/E rule of thumb: the acquirer is paying 12x for the target's earnings ($600M / $50M), well below its own 20x multiple, so buying cheaper earnings with richly-valued stock boosts EPS.",
+    "followups": [
+      {"prompt": "If the acquirer had instead paid $1,000 million for the same target, would the deal still be accretive?", "modelAnswer": "New shares issued would be $1,000M / $40 = 25 million shares, giving pro forma shares of 125 million. Pro forma net income stays at $250 million. Pro forma EPS = $250M / 125M = $2.00, exactly matching the standalone EPS — this is the breakeven price, since the implied 20x multiple paid ($1,000M / $50M) now equals the acquirer's own 20x P/E. Any price above $1,000 million would make the deal dilutive."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "m-and-a-accretion-dilution",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-008-consideration-types",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What are the three main forms of consideration a buyer can use to pay for a target in an M&A deal?",
+    "keyPoints": [
+      {"point": "Cash — funded from balance sheet cash, new debt, or a combination", "weight": 2},
+      {"point": "Stock — buyer issues new shares to target shareholders", "weight": 2},
+      {"point": "A mix of cash and stock in some agreed proportion", "weight": 2},
+      {"point": "Choice affects dilution, seller tax treatment, financing risk, and buyer balance sheet/leverage", "weight": 2}
+    ],
+    "misconceptions": [
+      "The consideration mix has no effect on the seller's tax treatment",
+      "Stock deals are always 'free' for the buyer since no cash changes hands"
+    ],
+    "modelAnswer": "Buyers can pay for a target with cash, with their own stock, or with some combination of the two. Cash consideration is typically funded from the acquirer's balance sheet cash, new debt raised for the deal, or both — it doesn't dilute existing shareholders but does use up liquidity or add leverage. Stock consideration means the acquirer issues new shares to target shareholders instead of paying cash; this preserves cash and avoids taking on new debt, but dilutes existing acquirer shareholders and exposes target shareholders to the acquirer's stock price risk between signing and closing. Many deals use a mix, blending cash and stock to balance these tradeoffs — for example, giving target shareholders some immediate cash certainty while letting them retain upside through stock. The choice matters a lot beyond just accretion/dilution mechanics: stock deals can often be structured to let sellers defer capital gains tax since they're rolling their investment into new shares rather than fully cashing out, while all-cash deals trigger an immediate taxable event for the seller. The mix also affects the combined company's post-deal leverage and credit profile.",
+    "followups": [
+      {"prompt": "Why might a buyer prefer to use stock even if it has plenty of cash available?", "modelAnswer": "Preserving cash and debt capacity for other priorities — future acquisitions, capex, or a downturn cushion — is one reason. A buyer might also believe its own stock is richly valued and want to use that 'currency' while it's expensive rather than spend real cash. Using stock can also help win over a seller who wants to participate in the upside of the combined company or who is seeking tax deferral."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "purchase-price-and-consideration",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-009-asset-vs-stock-purchase",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What's the difference between an asset purchase and a stock purchase?",
+    "keyPoints": [
+      {"point": "Asset purchase: buyer acquires specific assets and liabilities of the target directly, target entity/legal shell remains with seller", "weight": 3},
+      {"point": "Stock purchase: buyer acquires the target's equity/shares, taking the entire legal entity including all assets and liabilities", "weight": 3},
+      {"point": "Asset deals let the buyer cherry-pick assets and typically avoid unknown/unwanted liabilities", "weight": 2},
+      {"point": "Stock deals are generally simpler to execute (contracts/licenses transfer automatically) but the buyer inherits all liabilities, known and unknown", "weight": 2}
+    ],
+    "misconceptions": [
+      "Stock purchases avoid liabilities better than asset purchases (it's the reverse)",
+      "The structure choice has no tax consequences for either party"
+    ],
+    "modelAnswer": "In a stock purchase, the buyer acquires the target company's shares directly from its shareholders, which means the buyer takes ownership of the entire legal entity — all of its assets, contracts, and liabilities, including any that aren't fully known at the time of the deal, like pending lawsuits or environmental liabilities. Existing contracts, licenses, and permits generally transfer automatically since the legal entity itself doesn't change, which can make stock deals operationally simpler to close. In an asset purchase, the buyer instead acquires specific assets — and optionally assumes specific liabilities — that are listed out in the purchase agreement, while the target's original legal entity remains with the seller along with whatever wasn't picked up. This lets the buyer cherry-pick the assets it wants and generally shield itself from unknown or unwanted liabilities, which is why buyers often prefer asset deals when the target has litigation risk or messy liabilities. The tradeoff is that asset deals can require re-assigning contracts, licenses, and permits individually, which can be slower and may require third-party consents. Tax treatment also differs — asset deals can give the buyer a stepped-up tax basis in the assets, which is valuable, but that structure is often less attractive to a corporate seller due to double taxation.",
+    "followups": [
+      {"prompt": "Why might a seller resist an asset purchase structure even if the buyer prefers it?", "modelAnswer": "For a C-corporation seller, an asset sale can trigger tax at two levels: the corporation pays tax on the gain from selling the assets, and then shareholders pay tax again when the sale proceeds are distributed to them. A stock sale, by contrast, is typically taxed only once at the shareholder level. That double-taxation exposure often makes sellers push back on asset deal structures or demand a higher price to compensate."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "purchase-price-and-consideration",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-010-premium-calculation",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "calculation",
+    "prompt": "A target's shares currently trade at $40. The acquirer offers $52 per share in cash. What premium is the acquirer paying, and why do acquirers typically need to pay a premium over the unaffected share price?",
+    "keyPoints": [
+      {"point": "Premium = ($52 - $40) / $40 = 30%", "weight": 3},
+      {"point": "Premium compensates target shareholders for giving up control and future upside", "weight": 2},
+      {"point": "Premium is needed to incentivize the board/shareholders to accept and to beat other potential bidders", "weight": 2}
+    ],
+    "misconceptions": [
+      "Calculating premium off the deal price alone instead of relative to the unaffected price",
+      "Believing acquirers pay premiums purely out of generosity rather than to secure control and win a competitive process"
+    ],
+    "modelAnswer": "The premium is calculated as the percentage increase from the target's unaffected share price to the offer price: ($52 minus $40) divided by $40, which is 30%. Acquirers pay a premium for a few reasons. First, target shareholders need an incentive to sell — without a premium over the current market price, there's little reason to give up their shares rather than continue holding them and participating in the company's future as a standalone entity. Second, paying a premium compensates target shareholders for giving up control; whoever owns a majority stake gets to make the decisions, and that control right has value independent of just the cash flows. Third, in a competitive sale process, the acquirer often needs to outbid other potential buyers, which pushes the price above the unaffected market price. Finally, the premium is frequently justified by the synergies the acquirer expects to realize — a acquirer may be willing to share some portion of the value it expects to create through cost or revenue synergies with target shareholders in order to win the deal, while still keeping the rest for itself.",
+    "followups": [
+      {"prompt": "What's the typical range of control premiums seen in public company M&A?", "modelAnswer": "Historically, control premiums in public M&A have often clustered in the 20% to 40% range over the unaffected share price, though this varies widely by industry, deal competitiveness, and market conditions. Highly contested auctions or strategic 'must-have' assets can see premiums well above that range, while distressed or less competitive situations can see much lower premiums."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "purchase-price-and-consideration",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-011-exchange-ratio-defined",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is an exchange ratio in a stock-for-stock deal?",
+    "keyPoints": [
+      {"point": "Exchange ratio = number of acquirer shares given per one target share", "weight": 3},
+      {"point": "Can be fixed (ratio locked) or floating (ratio adjusts to deliver a fixed dollar value)", "weight": 2},
+      {"point": "Fixed ratio exposes target shareholders to acquirer stock price movement between signing and closing", "weight": 2}
+    ],
+    "misconceptions": [
+      "The exchange ratio is the same thing as the premium percentage",
+      "Exchange ratios are always fixed and never adjust"
+    ],
+    "modelAnswer": "In a stock-for-stock deal, the exchange ratio is the number of acquirer shares that each target shareholder receives for every one share of target stock they own. For example, an exchange ratio of 0.5 means a target shareholder gets half an acquirer share for each target share. Exchange ratios come in two main flavors. A fixed exchange ratio locks in that number of acquirer shares per target share regardless of how either stock price moves between signing and closing — this means the actual dollar value target shareholders receive can fluctuate with the acquirer's stock price, which introduces risk for the seller if the acquirer's stock falls before the deal closes. A floating exchange ratio instead adjusts the number of shares issued so that the target shareholders receive a fixed dollar value at closing, which shifts the price risk onto the acquirer instead, since it may have to issue more shares if its own stock price falls. Deals sometimes use a collar to combine features of both, letting the ratio float within a band but reverting to fixed at the edges.",
+    "followups": [
+      {"prompt": "Why do most public stock-for-stock deals use a fixed exchange ratio rather than a floating one?", "modelAnswer": "A fixed ratio gives the acquirer certainty about how much ownership dilution it's taking on and avoids issuing an unpredictable number of shares. It also gives both companies' shareholders a clear, stable sense of the deal's structure — everyone knows the ratio won't change — even though it means the deal's ultimate dollar value will move with the acquirer's stock price until closing. Floating ratios are more common when the seller wants certainty on deal value or when the acquirer's stock is especially volatile."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "purchase-price-and-consideration",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-012-goodwill-defined",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is goodwill, and why does it arise in an acquisition?",
+    "keyPoints": [
+      {"point": "Goodwill = purchase price minus the fair value of net identifiable assets acquired", "weight": 3},
+      {"point": "Represents value paid for things that can't be separately identified/valued: brand, workforce, expected synergies, control premium", "weight": 2},
+      {"point": "It's a balance sheet asset recorded on the acquirer's books post-close", "weight": 1},
+      {"point": "It arises because buyers almost always pay more than the fair value of a target's identifiable net assets", "weight": 2}
+    ],
+    "misconceptions": [
+      "Goodwill represents cash paid that just disappeared with nothing to show for it",
+      "Goodwill is the same thing as an identifiable intangible asset like a patent or customer list"
+    ],
+    "modelAnswer": "Goodwill is the plug that captures the difference between what an acquirer pays for a target and the fair value of everything it can specifically identify and value in that target — its tangible assets like property and equipment, and identifiable intangible assets like patents, trademarks, or customer relationships, net of liabilities assumed. In almost every acquisition, the purchase price exceeds that fair value of net identifiable assets, because the buyer is also paying for things that can't be separately valued and put on a line item: the target's assembled workforce, its reputation and brand recognition that isn't a registered trademark, expected synergies from combining the businesses, and simply the premium required to win control of the company. That excess gets recorded as goodwill, a separate intangible asset on the acquirer's post-deal balance sheet. Under current US GAAP, goodwill isn't amortized like most other intangible assets — instead it sits on the balance sheet and gets tested at least annually for impairment, meaning it only gets written down if the acquired business turns out to be worth less than originally paid for it.",
+    "followups": [
+      {"prompt": "Is a high goodwill balance a red flag on a company's balance sheet?", "modelAnswer": "Not necessarily — a large goodwill balance simply reflects that the company has made acquisitions and paid a premium over identifiable net asset value, which is normal, especially for asset-light or intangible-heavy businesses like software or services companies. What's more relevant is whether that goodwill is at risk of impairment, meaning the acquired business is underperforming relative to what was assumed when the deal was priced. Analysts watch for impairment charges or shrinking headroom between a reporting unit's fair value and carrying value as the real signal, not the goodwill balance itself."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "goodwill-and-purchase-price-allocation",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-013-goodwill-vs-intangibles",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What's the difference between goodwill and identifiable intangible assets in a purchase price allocation?",
+    "keyPoints": [
+      {"point": "Identifiable intangibles (customer relationships, trademarks, technology, non-compete agreements) can be separately valued and named", "weight": 3},
+      {"point": "Goodwill is the residual/plug after all identifiable assets and liabilities (tangible and intangible) are valued at fair value", "weight": 2},
+      {"point": "Identifiable intangibles with finite lives are amortized; goodwill is not amortized under current US GAAP", "weight": 2},
+      {"point": "Both can be tested for impairment, but the mechanics/level of testing differ", "weight": 1}
+    ],
+    "misconceptions": [
+      "All intangible assets acquired in a deal are lumped into goodwill",
+      "Identifiable intangibles are never amortized"
+    ],
+    "modelAnswer": "Identifiable intangible assets are specific, separable items acquired in a deal that can be individually valued — things like customer relationships, developed technology, trademarks, patents, or non-compete agreements. In a purchase price allocation, accountants specifically identify and estimate the fair value of each of these, usually with a valuation specialist's help, because they behave differently from goodwill for accounting purposes: intangibles with a finite useful life, like a customer relationship expected to last ten years, get amortized over that life, creating a recurring expense on the income statement. Goodwill, by contrast, is whatever is left over after every identifiable asset — both tangible, like property and equipment, and intangible, like the items above — has been assigned a fair value and netted against liabilities assumed. It represents value the acquirer paid for that can't be pinned to any specific identifiable item: things like assembled workforce or expected synergies. Under current US GAAP, goodwill is not amortized on a schedule the way finite-lived intangibles are; instead it's tested for impairment at least annually and written down only if the related reporting unit's value has fallen below its carrying value.",
+    "followups": [
+      {"prompt": "Why does it matter to an analyst whether an asset is classified as goodwill versus an amortizable intangible?", "modelAnswer": "The classification directly affects future reported earnings. An amortizable intangible creates a predictable, recurring non-cash expense that reduces net income and EPS over its useful life, while goodwill doesn't hit the income statement at all unless it's impaired, which is unpredictable and can create a large, one-time hit. Analysts often add back intangible amortization when assessing a company's underlying cash-generating ability, similar to how they treat depreciation, since it's a non-cash charge tied to the acquisition rather than ongoing operations."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "goodwill-and-purchase-price-allocation",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-014-simple-goodwill-calc",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "calculation",
+    "prompt": "An acquirer pays $500 million for a target. A purchase price allocation determines that the fair value of the target's identifiable net assets — all identifiable assets minus all liabilities assumed, everything already marked to fair value — is $350 million. How much goodwill is created, and what does it conceptually represent?",
+    "keyPoints": [
+      {"point": "Goodwill = purchase price − fair value of net identifiable assets = $500M − $350M = $150M", "weight": 3},
+      {"point": "Represents the portion of the price paid for non-identifiable value: workforce, brand, expected synergies, control premium", "weight": 2},
+      {"point": "Recorded as a separate non-amortized asset on the acquirer's post-close balance sheet", "weight": 2}
+    ],
+    "misconceptions": [
+      "Subtracting the wrong direction (net identifiable assets minus purchase price)",
+      "Treating goodwill as if it's a cash expense at close rather than a balance sheet asset"
+    ],
+    "modelAnswer": "Goodwill is simply the plug between what was paid and the fair value of what was specifically acquired: $500 million purchase price minus $350 million of fair value of net identifiable assets equals $150 million of goodwill. That $150 million represents everything the acquirer paid for that can't be individually identified and valued as a specific asset — the target's assembled and trained workforce, its brand reputation beyond any registered trademark, the expected synergies from combining operations, and the general control premium needed to win the deal. This $150 million gets recorded as a separate intangible asset called goodwill on the acquirer's consolidated balance sheet immediately after the deal closes. It isn't amortized on a set schedule the way a finite-lived intangible would be; instead, it stays on the books at that value unless and until the business it relates to is tested and found to be worth less than its carrying value, at which point an impairment charge would reduce it.",
+    "followups": [
+      {"prompt": "If the purchase price allocation had instead found the fair value of net identifiable assets to be $520 million, higher than the $500 million price paid, what would happen?", "modelAnswer": "That would produce negative goodwill, known as a bargain purchase — the buyer paid less than the fair value of what it acquired. Under US GAAP, rather than recording negative goodwill on the balance sheet, the buyer immediately recognizes the $20 million difference as a gain on its income statement. This is uncommon and usually prompts a re-check of the valuation work, since it's more often a sign of a valuation or purchase price allocation error than a genuine bargain, though it can happen legitimately in distressed sale situations."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "goodwill-and-purchase-price-allocation",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-015-goodwill-amortization-gaap",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "Is goodwill amortized under current US GAAP? If not, what happens to it instead?",
+    "keyPoints": [
+      {"point": "No — under current US GAAP, goodwill is not amortized on a set schedule", "weight": 3},
+      {"point": "Instead it is tested for impairment at least annually (and whenever a triggering event occurs)", "weight": 3},
+      {"point": "If a reporting unit's fair value falls below its carrying value, an impairment charge writes down goodwill through the income statement", "weight": 2},
+      {"point": "Impairment is a non-cash charge but can meaningfully hurt reported net income when it occurs", "weight": 1}
+    ],
+    "misconceptions": [
+      "Goodwill is amortized straight-line like a normal intangible asset",
+      "Private companies must follow the exact same goodwill accounting as public companies (many elect a private company alternative to amortize goodwill under US GAAP)"
+    ],
+    "modelAnswer": "Under current US GAAP, publicly traded companies do not amortize goodwill on a scheduled basis the way they would a finite-lived intangible asset. Instead, goodwill sits on the balance sheet at its recorded value and is tested for impairment at least once a year, and also whenever a triggering event occurs — for example, a significant decline in the acquired business's performance, loss of a major customer, or a broader industry downturn. The impairment test compares the fair value of the reporting unit that includes the goodwill to its carrying value; if fair value has fallen below carrying value, the company records an impairment charge that writes goodwill down, which flows through as a loss on the income statement. This is a non-cash charge, so it doesn't affect cash flow, but it can meaningfully reduce reported net income and signal to investors that a past acquisition isn't performing as expected. It's worth noting that private companies in the US have the option to elect a simplified alternative that does allow straight-line amortization of goodwill over a period of up to ten years, which reduces the complexity and cost of annual impairment testing.",
+    "followups": [
+      {"prompt": "Why did accounting standard-setters move away from amortizing goodwill?", "modelAnswer": "The prior approach, mandatory straight-line amortization, was criticized for not reflecting economic reality — goodwill from a successful acquisition doesn't necessarily decline in value on a predictable schedule the way a wasting asset like a patent does. Standard-setters moved to an impairment-only model so that goodwill is only written down when there's actual evidence the acquired business is worth less than expected, which was seen as giving investors more economically meaningful information, even though it introduces more judgment and potential for large, lumpy impairment charges."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "goodwill-and-purchase-price-allocation",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-016-merger-model-steps",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "At a high level, what are the major steps involved in building a merger model?",
+    "keyPoints": [
+      {"point": "Set purchase price and determine consideration mix (cash/stock/debt)", "weight": 2},
+      {"point": "Build sources & uses of funds to show how the deal is financed", "weight": 2},
+      {"point": "Perform purchase price allocation to determine goodwill and intangible step-ups", "weight": 2},
+      {"point": "Combine the two companies' income statements, adjusting for new D&A, interest, and synergies", "weight": 2},
+      {"point": "Calculate pro forma net income and shares to arrive at pro forma EPS, then compare to acquirer standalone EPS", "weight": 2}
+    ],
+    "misconceptions": [
+      "A merger model is the same thing as a DCF valuation model",
+      "Synergies and purchase accounting adjustments are optional steps that can be skipped"
+    ],
+    "modelAnswer": "At a high level, a merger model starts by establishing the purchase price and how it will be paid — some combination of cash, new debt, and stock. Next, you build a sources and uses schedule, which lays out where the money is coming from (cash on hand, new debt, new equity) and where it's going (paying target shareholders, transaction fees, refinancing existing debt), and these two sides need to balance. Then you work through the purchase price allocation, marking the target's assets and liabilities to fair value, which determines any new depreciation or amortization from step-ups and the resulting goodwill. After that, you combine the two companies' income statements, adding the acquirer's and target's revenue and expenses together, layering in the new D&A from the step-up, adding any incremental interest expense from new debt or lost interest income from cash used, and incorporating any assumed synergies. From there you apply the combined tax rate to get pro forma net income, divide by the pro forma share count — the acquirer's existing shares plus any new shares issued — to get pro forma EPS, and compare that against the acquirer's standalone EPS to determine accretion or dilution.",
+    "followups": [
+      {"prompt": "Why does the model need a sources and uses schedule before it can calculate pro forma EPS?", "modelAnswer": "The sources and uses schedule determines exactly how much new debt is raised and how many new shares are issued, which directly drives the interest expense and share count assumptions used to calculate pro forma net income and EPS later in the model. Without first nailing down the financing structure, you wouldn't know how much incremental interest expense to add or how many new shares dilute the share count."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "full-merger-model",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-017-pro-forma-eps-why-key",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is pro forma EPS, and why is it typically considered the key output of a merger model?",
+    "keyPoints": [
+      {"point": "Pro forma EPS = combined post-deal net income divided by combined post-deal share count", "weight": 3},
+      {"point": "It's the headline metric investors use to judge whether the deal is accretive or dilutive", "weight": 2},
+      {"point": "Public company management is often evaluated on near-term EPS impact, making it a focal point in deal announcements", "weight": 2},
+      {"point": "It's a summary number that reflects purchase price, financing structure, and synergy assumptions all at once", "weight": 1}
+    ],
+    "misconceptions": [
+      "Pro forma EPS by itself tells you whether the deal is a good use of capital",
+      "Pro forma EPS only reflects the purchase price and ignores how the deal is financed"
+    ],
+    "modelAnswer": "Pro forma EPS is the combined company's projected earnings per share after the deal closes — calculated as pro forma net income, which combines both companies' earnings plus or minus deal-related adjustments like new interest expense and incremental D&A, divided by the pro forma share count, which is the acquirer's existing shares plus any new shares issued to fund the deal. It's considered the key output of a merger model because it's the single number that captures the net effect of everything else in the model — the purchase price, how the deal is financed, the purchase accounting adjustments, and any assumed synergies — into one figure that's directly comparable to the acquirer's pre-deal EPS. Public market investors and analysts watch this closely because EPS is one of the most scrutinized metrics for public companies, and management teams are often judged in the near term on whether a deal helps or hurts it. That's why on deal announcement day, one of the first questions analysts ask management is whether the transaction is expected to be accretive or dilutive to EPS, and over what time frame.",
+    "followups": [
+      {"prompt": "Why might a management team still pursue a deal they know will be dilutive to EPS in year one?", "modelAnswer": "Management might believe the deal is strategically important enough — new technology, market entry, eliminating a competitor — that the long-term value creation outweighs near-term EPS dilution. They may also project that the deal becomes accretive within a defined timeframe, like two years, once synergies are fully realized or acquisition debt is paid down, and communicate that timeline to investors upfront to manage expectations."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "full-merger-model",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-018-simple-pro-forma-eps-calc",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "calculation",
+    "prompt": "Acquirer has net income of $300 million and 120 million shares outstanding, giving standalone EPS of $2.50. It acquires a target in an all-cash deal funded entirely with new debt. No new shares are issued. After accounting for the new interest expense and taxes on the target's earnings, the deal adds $20 million of incremental net income to the combined company. What is pro forma EPS, and is the deal accretive or dilutive?",
+    "keyPoints": [
+      {"point": "Pro forma net income = $300M + $20M = $320M", "weight": 2},
+      {"point": "Share count stays at 120M since no new shares are issued in an all-cash, debt-funded deal", "weight": 2},
+      {"point": "Pro forma EPS = $320M / 120M ≈ $2.67", "weight": 2},
+      {"point": "$2.67 is above the $2.50 standalone EPS, so the deal is accretive", "weight": 2}
+    ],
+    "misconceptions": [
+      "Assuming new shares must be issued even in an all-cash, debt-funded deal",
+      "Forgetting that the $20M figure given is already net of the new interest expense and taxes"
+    ],
+    "modelAnswer": "Since this is an all-cash deal funded entirely with new debt, no new acquirer shares are issued, so the pro forma share count stays at the acquirer's existing 120 million shares. The $20 million incremental net income figure is already stated as being after accounting for the new interest expense on the debt and taxes, so it can be added directly to the acquirer's standalone net income: $300 million plus $20 million equals $320 million of pro forma net income. Dividing that by the unchanged 120 million share count gives pro forma EPS of about $2.67. That's higher than the acquirer's standalone EPS of $2.50, so the deal is accretive, adding roughly $0.17 per share, an increase of about 6.7%. This illustrates a general pattern: debt-funded deals don't dilute the share count, so as long as the target's earnings contribution outweighs the after-tax cost of the new debt, the deal will be accretive.",
+    "followups": [
+      {"prompt": "If the deal had instead been funded 50% with new debt and 50% with new stock, what additional information would you need to determine accretion or dilution?", "modelAnswer": "You'd need the acquirer's stock price at the time of issuance to determine how many new shares are issued for the stock-funded half of the purchase price, since that directly increases the pro forma share count and changes the denominator in the EPS calculation. You'd also need to know how the $20 million incremental net income figure would change under this new financing mix, since less debt means less interest expense, which would increase the incremental net income contribution from the target."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "full-merger-model",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-019-merger-vs-lbo-model",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What's the difference between a merger model and an LBO model?",
+    "keyPoints": [
+      {"point": "Merger model: analyzes a strategic acquirer buying a target, focused on pro forma EPS accretion/dilution", "weight": 3},
+      {"point": "LBO model: analyzes a financial sponsor buying a company with heavy leverage, focused on equity IRR/MOIC at exit", "weight": 3},
+      {"point": "Merger model combines two operating companies' financials; LBO model typically analyzes one standalone company under new ownership/capital structure", "weight": 2},
+      {"point": "LBO model emphasizes debt paydown and cash flow over a multi-year hold period; merger model emphasizes near-term EPS impact", "weight": 1}
+    ],
+    "misconceptions": [
+      "The two models are interchangeable and produce the same output",
+      "LBO models don't involve any purchase accounting/goodwill concepts (they still do)"
+    ],
+    "modelAnswer": "A merger model analyzes a strategic acquirer buying a target company and combining the two businesses, with the key output being whether the deal is accretive or dilutive to the acquirer's pro forma EPS. It involves adding together two companies' income statements, layering in purchase accounting adjustments, and comparing the combined result to the acquirer's standalone earnings per share. An LBO model, by contrast, analyzes a financial sponsor — typically a private equity firm — acquiring a company using a large amount of debt relative to equity, with the target usually continuing to operate as a standalone entity rather than combining with another operating business. The key output of an LBO model is the equity return the sponsor earns over a multi-year hold period, usually measured as an internal rate of return and a multiple of invested capital, driven by paying down debt with the company's free cash flow, growing EBITDA, and ideally exiting at the same or higher valuation multiple. While a merger model is mostly concerned with the near-term accounting impact on EPS, an LBO model is concerned with the long-term cash-on-cash return to equity holders and the company's ability to service a heavy debt load.",
+    "followups": [
+      {"prompt": "Do LBO models involve purchase price allocation and goodwill the way merger models do?", "modelAnswer": "Yes — an LBO is still an acquisition, so the target's assets and liabilities are marked to fair value at close, creating goodwill and potentially step-ups in tangible and intangible assets, just like in a strategic merger. The difference is that an LBO model puts much more emphasis on the resulting capital structure, debt schedules, and cash flow available for debt paydown, whereas a merger model puts more emphasis on the combined income statement and EPS impact for the acquirer's existing shareholders."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "full-merger-model",
+    "advanced": false
+  },
+  {
+    "id": "ma-easy-020-reverse-merger",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is a reverse merger, and why is it used?",
+    "keyPoints": [
+      {"point": "A private company merges into an existing public shell company, effectively becoming public without a traditional IPO", "weight": 3},
+      {"point": "Private company's shareholders typically end up owning a majority of the combined public entity", "weight": 2},
+      {"point": "Used to go public faster and often more cheaply than a traditional IPO process", "weight": 2},
+      {"point": "Bypasses much of the IPO roadshow/underwriting process but still faces public reporting obligations after", "weight": 1}
+    ],
+    "misconceptions": [
+      "A reverse merger is the same thing as a traditional IPO, just with different paperwork",
+      "Reverse mergers guarantee the same investor scrutiny and capital raised as a traditional IPO (they often raise less and carry a stigma of weaker vetting)"
+    ],
+    "modelAnswer": "A reverse merger is a way for a private company to become publicly traded without going through a traditional IPO. Instead of filing for an IPO and going through an underwriting roadshow, the private company merges into an already-public company, often a small, largely inactive 'shell' company that still holds a public listing. Structurally, the private company's owners typically end up with a controlling majority stake in the combined public entity, effectively taking over the shell company even though technically the shell is the legal survivor. The main reason companies use this route is speed and cost — a reverse merger can be completed much faster and with fewer regulatory hurdles than a full IPO process, since the shell company is already registered and reporting. It also avoids some of the market timing risk of an IPO, where a company has to launch its roadshow when market conditions are favorable. The tradeoff is that reverse mergers historically carry something of a stigma, since they don't involve the same level of underwriter due diligence and investor vetting as a traditional IPO, and they typically don't raise significant new capital the way an IPO does — the company still needs to raise money separately if it needs cash.",
+    "followups": [
+      {"prompt": "What's a key risk for investors in a company that went public via reverse merger?", "modelAnswer": "Because reverse mergers skip the extensive due diligence and disclosure scrutiny that investment banks and regulators apply during a traditional IPO underwriting process, there's historically been a higher incidence of fraud, weak internal controls, or overstated financials among reverse-merger companies. Investors need to do more of their own diligence rather than relying on the vetting that normally accompanies an IPO."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "advanced-ma",
+    "advanced": true
+  },
+  {
+    "id": "ma-easy-021-hostile-takeover-defense",
+    "topic": "ma",
+    "difficulty": "easy",
+    "questionType": "conceptual",
+    "prompt": "What is a hostile takeover, and can you name one common defense tactic a target company might use against it?",
+    "keyPoints": [
+      {"point": "Hostile takeover = acquirer pursues the target without the approval/cooperation of its board of directors", "weight": 3},
+      {"point": "Often executed via a tender offer directly to shareholders, or a proxy fight to replace the board", "weight": 2},
+      {"point": "Defense tactic example given (e.g., poison pill, white knight, staggered board)", "weight": 2},
+      {"point": "Defense tactics generally aim to make the takeover more costly/difficult or buy time to negotiate", "weight": 1}
+    ],
+    "misconceptions": [
+      "A hostile takeover means the deal is illegal or improper — it's simply unsolicited/unwelcomed by the board",
+      "Target boards can reject any offer indefinitely without any fiduciary constraints"
+    ],
+    "modelAnswer": "A hostile takeover is an acquisition attempt where the would-be acquirer moves forward without the support or cooperation of the target company's board of directors — the board has rejected or hasn't endorsed the deal, so the acquirer bypasses them and goes directly to shareholders, either through a tender offer to buy shares directly from them at a premium, or through a proxy fight to replace enough of the board with directors who will approve the deal. One common defense tactic is a poison pill, formally called a shareholder rights plan, which gives existing shareholders — other than the hostile acquirer — the right to buy additional shares at a steep discount if the acquirer crosses a certain ownership threshold, massively diluting the acquirer's stake and making the takeover prohibitively expensive without board approval. This doesn't permanently block a deal, but it buys the target board time and leverage to negotiate a higher price, seek out a friendlier alternative buyer, or convince shareholders the current offer undervalues the company. Target boards are still bound by fiduciary duties to shareholders, so they can't use defenses purely to entrench management at the expense of shareholder value.",
+    "followups": [
+      {"prompt": "What is a 'white knight' defense, and how does it differ from a poison pill?", "modelAnswer": "A white knight defense involves the target company seeking out a friendlier alternative acquirer who's willing to offer better terms or preserve more of the existing management and culture, essentially using a competing bid to either force the hostile acquirer to raise its price or to have shareholders back the preferred buyer instead. Unlike a poison pill, which is a structural deterrent built into the company's governance ahead of time, a white knight defense is a reactive step taken specifically in response to a hostile bid already in progress."}
+    ],
+    "chapterSlug": "ma",
+    "sectionSlug": "advanced-ma",
+    "advanced": true
+  }
+]

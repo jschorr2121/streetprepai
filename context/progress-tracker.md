@@ -114,9 +114,53 @@ Addressed security and quality findings from the live security + engineering rev
 
 **Verification:** typecheck ✅, lint ✅ (0 errors, 9 pre-existing warnings), vitest 30 files / 239 tests ✅, build ✅.
 
+### Curriculum & learning workflow design (completed 2026-07-12)
+
+- **`context/curriculum.md`** authored — the full chapter-by-chapter curriculum: uniform chapter anatomy (sections → drills → interactive tutorial → ~85% mastery gate → interleaved review pool), section breakdowns for all 16 chapters, spine-vs-reference chapter split (Firms/Sectors are reference, no gate), AI-grading design (6 question types, 5 published rubric dimensions incl. depth calibration, follow-up trees, parameterized generators), three timeline entry paths (foundation / accelerated / interview mode), and the 32-MDX-guide → chapter mapping.
+- Grounded in: content inventories of the 30 PDFs in `extra_content/` (7 BIWS course modules, 8 BIWS/M&I topic guides ≈ 600+ Q&A taxonomy, 6 behavioral guides, M&I 400 Questions ×2, 4 personal docs incl. the Kozower prep binder) + web research on competitor curricula, the 2025–26 accelerated timeline, learning science (retrieval/spacing/interleaving/worked examples/mastery gates), and AI-grading competitors.
+- **Copyright posture set** (curriculum.md §7): commercial BIWS/M&I material = taxonomy/sequencing reference only, all shipped content authored originally; personal friend docs = design inputs pending permission (logged in jakes-tasks.md).
+- **Resolves the open question** on chapter-structure migration: keep guides as the reading unit, reorganize under chapters as section seeds, author the gap sections (biggest gaps: ch. 1–2, ch. 8 §5–8, ch. 14).
+
+### Unit 11 — Learning-flow curriculum + Question Bank (implemented 2026-07-12; verification owed)
+
+Full implementation of the curriculum + daily workflow so a new user is carried end-to-end. **Code + content complete; toolchain verification (typecheck/lint/test/build) is BLOCKED — see caveat at end.**
+
+**Curriculum spine (static):**
+- `lib/curriculum/chapters.ts` — 16-chapter manifest (sections, slugs, spine-vs-reference kind, gated flag, per-chapter tool exercise, ⭐ advanced sections). `GATE_PASS_THRESHOLD = 0.85`.
+- `lib/curriculum/progress.ts` — pure `computeFlow()` deriving next-up + per-chapter status from progress rows.
+- `lib/curriculum/cycle.ts` — recruiting-cycle widget logic (semester → foundation/accelerated/interview path + focus).
+- `lib/curriculum/drills/generators.ts` (+ test) — parameterized 3-statement / TSM / accretion-dilution / paper-LBO drills, random each round, locally checked.
+
+**Content generated (parallel Sonnet workflows):**
+- **~65 new section MDX readings** in `content/guides/` (all 97 manifest sections now have a file). Written as original prose from PDF facts/coverage/sequencing per Jake — no BIWS/M&I text, names, or worked numbers reused (curriculum.md §7). First workflow stalled on iCloud FS read-timeouts mid-run (killed the question phase, left 10 guides unwritten); recovered with a **write-only** workflow (all data embedded in prompts, zero source reads) — 22/22 agents succeeded.
+- **532 AI-graded questions + 1,199 follow-ups** in `lib/curriculum/seed/questions/*.json`, tagged with manifest chapter/section slugs, difficulty, rubric key points, misconceptions, model answers, follow-up trees. Gated technical chapters (8–13) have 40–71 non-advanced questions each; thin coverage only in ungated recruiting/firms/sectors reference chapters.
+
+**Data + queries:**
+- Migration `0006_curriculum.sql` — `qbank_questions`/`qbank_followups` (shared, read-only), `qbank_attempts`/`qbank_spaced_state`/`topic_mastery`/`section_progress`/`chapter_progress` (RLS owner-scoped), `profiles.advanced_track`.
+- `scripts/build-qbank-seed.mjs` → `0007_qbank_seed.sql` (generated; validates every question against the manifest, idempotent `on conflict do nothing`).
+- Drizzle schema `lib/db/schema/{qbank,curriculum-progress}.ts` + `profiles.advancedTrack`; queries `lib/db/queries/{qbank,curriculum}.ts` (pick/serve, section-drill/gate/interleaved selection, due-review, attempts, spaced state, mastery upsert).
+
+**AI grading (published rubric):**
+- `lib/ai/grading.ts` — Sonnet tool-use grades key points (weighted) + misconceptions + **depth calibration**; returns the full rubric to the user. `lib/mastery/mastery.ts` (+ test) — EWMA mastery + 2–3-day spaced re-surfacing until answered correct twice.
+- Server Actions (7-step skeleton, rate-limited, RLS-scoped): `tools/question-bank/actions.ts` (`gradeAnswerAction`, `serveQuestionAction`), `learn/actions.ts` (`markSectionReadAction`, `finishSittingAction`, `completeUngatedChapterAction`). New limiters: `qbankGradingLimiter`, `curriculumProgressLimiter`.
+
+**UI:**
+- `/learn` chapter grid (continue-where-you-left-off), `/learn/[chapter]`, `/learn/[chapter]/drill/[section]`, `/learn/[chapter]/practice` (gate). Question Bank studio (daily interleaved drill + due queue, practice-by-topic, mental-math generators). Dashboard rebuilt on real data (cycle widget, weak areas, due count, continue-flow). Advanced-track toggle in onboarding + profile (schema, action, `setOnboarded`/`updateProfile` all wired). Section reading reuses the existing `/guide/[slug]` Reading-Lens reader.
+
+**⚠️ Verification blocked (environment, not code):** `pnpm typecheck/lint/test/build` all die with `ETIMEDOUT` reading `node_modules` — the repo is in iCloud (`~/Documents`) and files get evicted. Static checks pass (all cross-module imports/exports resolve; the `"use server"` non-async-export pattern matches the Unit 6 canonical action that builds). A real toolchain pass + applying migrations `0006`/`0007` is owed — logged in `jakes-tasks.md` (🔴). Root fix: move the repo out of iCloud.
+
+### Chapter 10 (Valuation) gap sections authored (completed 2026-07-12)
+- Wrote 3 missing `content/guides/*.md` sections referenced in `lib/curriculum/chapters.ts`'s `valuation` chapter: `metrics-and-multiples.md` (EBIT/EBITDA/net income/FCF, multiples-as-Value=CF/(r-g)-shorthand, two-company margin worked example), `football-field-and-interpretation.md` (assembling comps+precedents+DCF into a range, valuation-hierarchy-by-context, worked football-field example), `other-methodologies-and-sector-multiples.md` (advanced/elective: SOTP, liquidation/NAV, M&A premiums analysis, LBO-as-floor, sector multiples survey — EBITDAR/EBITDAX/FFO/AFFO/P-TBV/per-subscriber).
+- Sourced from commercial prep-guide extracts for facts/sequencing only per sourcing rules in curriculum.md §7 — all prose and worked-example numbers original, no named case studies or vendor references carried over.
+- Chapter 10 (`valuation`) now has all 6 sections in `chapters.ts` present as guide files. Chapters 9 and 11 (`ev-equity-value`, `dcf`) remain fully covered from prior work; other chapters' gaps (ch. 1–2, ch. 8 §5–8, ch. 14) still open per curriculum.md §6.
+
 ## In Progress
 
-- Nothing active. Next: **Unit 8 (Q-Bank tracer-bullet)**.
+- Nothing active in code. **PRDs + tracer-bullet issues for Units 8–10 are written and ready** (2026-07-07) in the local-markdown tracker:
+  - `.scratch/unit-8-question-bank/` — PRD + 6 issues (schema/seed/browse → grading → follow-up tree → spaced re-surfacing → mastery → AI-generated questions [needs-triage]).
+  - `.scratch/unit-9-chatbot-rebuild/` — PRD + 5 issues (streaming chat w/ persistence → tool use → web search → firm-data + "why JPM" golden path → thread management).
+  - `.scratch/unit-10-calendar-sync/` — PRD + 4 issues (OAuth connect → event sync → contact auto-link → webhook + Inngest bootstrap).
+  - Each issue is a vertical slice with `Status:`/`Blocked by:` per `docs/agents/issue-tracker.md`. Implement each in a fresh session, per issue, in DAG order.
 
 ## Next Up
 
@@ -186,12 +230,12 @@ Full CRUD feature for personal job-application tracking, built on the patterns f
 **Verification:** typecheck ✅, lint ✅ (0 errors, 9 warnings — all pre-existing), vitest 30 files / 236 tests ✅, build ✅. Playwright e2e authored; requires `STREETPREP_E2E_AUTH=1` + storageState (skipped by default in CI).
 
 ### Unit 8+ — Remaining feature backlog
-Specs drafted as each comes up.
 
-- **Unit 8:** Q-Bank tracer-bullet — question → user answer → AI grade → store attempt → update mastery → spaced re-surface.
-- **Unit 9:** Chatbot rebuild with tool use.
-- **Unit 10:** Calendar OAuth + auto-link.
-- Subsequent units listed in chat backlog — drafted into specs as they come up.
+- **Unit 8:** Q-Bank tracer-bullet — **PRD + issues ready:** `.scratch/unit-8-question-bank/`.
+- **Unit 9:** Chatbot rebuild with tool use — **PRD + issues ready:** `.scratch/unit-9-chatbot-rebuild/`.
+- **Unit 10:** Calendar OAuth + auto-link — **PRD + issues ready:** `.scratch/unit-10-calendar-sync/`. Blocked on Jake's Google Cloud + Inngest setup (see `jakes-tasks.md`).
+- Migration numbering is coordinated across the three PRDs: `0006` qbank, `0007` chat threads, `0008` google calendar, `0009` contacts email. If units land out of order, renumber at implementation time.
+- Later candidates (not yet PRD'd): prep-sheet generation (depends on Unit 10), firm_data refresh pipeline, Reading Lens migration to `api/lens/*`, AI-quiz onboarding flow (from `todo.md`), dashboard weak-areas widget (reads Unit 8's `topic_mastery`), app-wide loading-time pass (from `todo.md`).
 
 ## Open Questions
 
@@ -200,7 +244,7 @@ Specs drafted as each comes up.
 - **Drop cut tables:** the `jobs` and `applied_jobs` tables still exist in the DB (Unit 1 only removed app code). Schedule a drop migration when Drizzle-managed migrations come online.
 - **Toolchain FS timeouts:** `drizzle-kit pull`, the 5432 session pooler, and `pnpm build`/`tsc` intermittently fail with `os error 60`/ETIMEDOUT filesystem timeouts in this environment. Transient — they pass on retry — but worth watching if they worsen.
 - **Inngest in production:** confirm sticking with hosted Inngest vs eventually self-hosted queue. (From CHANGES.md.)
-- **Chapter structure migration:** the 32 MDX guides in `content/guides/` don't map 1:1 to the 16 chapters in the spec. Do we (a) re-organize the existing guides into chapters, (b) keep guides and chapters as separate concepts, or (c) rewrite chapter content from scratch?
+- ~~**Chapter structure migration**~~ — RESOLVED 2026-07-12 in `context/curriculum.md` §6: keep guides as the reading unit, reorganize them under chapters as section seeds, author the missing sections (no from-scratch rewrite). Full mapping table in that doc.
 - **Drizzle introspection vs schema-first:** introspect existing Supabase tables and accept their current shapes, or write the full target schema in Drizzle and migrate the DB to match? Likely answer: introspect first to avoid downtime, then evolve.
 - **Embeddings migration:** how to handle existing chat embeddings (if any) when switching from OpenAI to Voyage. Backfill job via Inngest, or just re-embed lazily on next access?
 - **Existing Reading Lens UI nuances:** the 3-column layout fix is important (documented as an invariant). What other non-obvious lessons from the prototype should the migration preserve?
