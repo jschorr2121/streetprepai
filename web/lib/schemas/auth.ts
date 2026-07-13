@@ -70,7 +70,7 @@ export const onboardingSchema = z.object({
   targetFirms: z.array(z.string().trim().min(1)).min(1, "Add at least one target firm"),
   // Advanced track surfaces ⭐ elective sections + advanced questions. Off by
   // default — most undergrads target IB, not PE/experienced-hire depth.
-  advancedTrack: z.boolean().default(false),
+  advancedTrack: z.boolean(),
 });
 export type OnboardingInput = z.infer<typeof onboardingSchema>;
 

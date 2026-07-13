@@ -3,13 +3,9 @@ import { ListChecks } from "lucide-react";
 import { QuestionBankStudio } from "@/components/learn/question-bank-studio";
 import { requireUser } from "@/lib/auth/server";
 import { withUser } from "@/lib/db/client";
-import {
-  countDueReviews,
-  getInterleavedQuestions,
-  listDueReviews,
-} from "@/lib/db/queries/qbank";
+import { countDueReviews, getInterleavedQuestions, listDueReviews } from "@/lib/db/queries/qbank";
 import { listChapterProgress } from "@/lib/db/queries/curriculum";
-import { chapters } from "@/lib/curriculum/chapters";
+import { chapters, type CurriculumTopic } from "@/lib/curriculum/chapters";
 import type { QbankQuestion } from "@/lib/types";
 
 export const metadata = { title: "Question Bank — Street Prep AI" };
@@ -38,7 +34,7 @@ export default async function QuestionBankPage() {
     ...new Set(
       chapterRows
         .map((c) => chapters.find((ch) => ch.slug === c.chapterSlug)?.topic)
-        .filter((t): t is string => !!t),
+        .filter((t): t is CurriculumTopic => !!t),
     ),
   ];
   const poolTopics = startedTopics.length > 0 ? startedTopics : TOPIC_OPTIONS.map((t) => t.value);

@@ -30,7 +30,7 @@ import { weakestTopics } from "@/lib/mastery/mastery";
 
 export const metadata = { title: "Dashboard — Street Prep AI" };
 
-const TOPIC_LABEL = new Map(chapters.map((c) => [c.topic, c.shortTitle]));
+const TOPIC_LABEL = new Map<string, string>(chapters.map((c) => [c.topic, c.shortTitle]));
 
 export default async function DashboardPage() {
   const user = await requireUser();
@@ -187,8 +187,8 @@ export default async function DashboardPage() {
             <h3 className="font-semibold">Run a mock interview</h3>
           </div>
           <p className="text-muted-foreground mb-4 flex-1 text-sm leading-relaxed">
-            Voice or HireVue-style video. Claude scores content and delivery, cites the chapters
-            you should review, and probes with follow-ups.
+            Voice or HireVue-style video. Claude scores content and delivery, cites the chapters you
+            should review, and probes with follow-ups.
           </p>
           <div className="grid grid-cols-2 gap-2">
             <Button asChild variant="outline" size="sm">
