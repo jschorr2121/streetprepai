@@ -46,7 +46,9 @@ export async function createPgliteDb(): Promise<Executor> {
       education       jsonb,
       skills          text[],
       current_semester text,
+      advanced_track  boolean       not null default false,
       onboarded_at    timestamptz,
+      tour_completed_at timestamptz,
       updated_at      timestamptz default now()
     )
   `);

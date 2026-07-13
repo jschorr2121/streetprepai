@@ -26,6 +26,16 @@ export type SectionDef = {
   advanced?: boolean;
 };
 
+/** Groups chapters into the sections shown on /learn — a coarser split than
+ *  spine-vs-reference, so users can tell "how to get the interview" apart
+ *  from "the technical core" apart from "interview day" at a glance. */
+export type ChapterGroup =
+  | "getting-in"
+  | "behavioral"
+  | "technical"
+  | "interview-day"
+  | "reference";
+
 export type ChapterDef = {
   slug: string;
   number: number;
@@ -34,6 +44,7 @@ export type ChapterDef = {
   description: string;
   /** spine = ordered, part of the flow; reference = browsable anytime, no gate */
   kind: "spine" | "reference";
+  group: ChapterGroup;
   /** Mastery-model bucket; also the default qbank topic for this chapter's drills */
   topic: CurriculumTopic;
   /** Hard gate: chapter counts as complete only after passing the gate quiz (~85%).
@@ -46,6 +57,30 @@ export type ChapterDef = {
 
 export const GATE_PASS_THRESHOLD = 0.85;
 
+/** Display metadata for each group, in the order they render on /learn. */
+export const GROUP_META: Record<ChapterGroup, { label: string; description: string }> = {
+  "getting-in": {
+    label: "Getting the interview",
+    description: "The recruiting process itself — timeline, applications, resume, and networking.",
+  },
+  behavioral: {
+    label: "Behavioral & fit",
+    description: "Your story and fluent answers to every fit question.",
+  },
+  technical: {
+    label: "Technical core",
+    description: "Accounting through LBOs — the spine every technical interview draws from.",
+  },
+  "interview-day": {
+    label: "Interview day",
+    description: "Mock practice and everything to have ready before you walk in.",
+  },
+  reference: {
+    label: "Reference",
+    description: "Browse anytime — no gate, no order.",
+  },
+};
+
 export const chapters: ChapterDef[] = [
   {
     slug: "recruiting-cycle",
@@ -55,6 +90,7 @@ export const chapters: ChapterDef[] = [
     description:
       "How IB recruiting actually works, what happens each semester, and how to build your personal plan.",
     kind: "spine",
+    group: "getting-in",
     topic: "recruiting",
     gated: false,
     sections: [
@@ -73,9 +109,13 @@ export const chapters: ChapterDef[] = [
     description:
       "Application mechanics, target lists, cover letters, HireVue screens, and recovery paths.",
     kind: "spine",
+    group: "getting-in",
     topic: "recruiting",
     gated: false,
-    toolExercise: { label: "Start your target list in the Application Tracker", href: "/tools/applications" },
+    toolExercise: {
+      label: "Start your target list in the Application Tracker",
+      href: "/tools/applications",
+    },
     sections: [
       { slug: "application-mechanics", title: "Application mechanics" },
       { slug: "building-your-target-list", title: "Building your target list" },
@@ -92,6 +132,7 @@ export const chapters: ChapterDef[] = [
     description:
       "Reference chapter — research any firm just-in-time before networking calls and interviews.",
     kind: "reference",
+    group: "reference",
     topic: "recruiting",
     gated: false,
     sections: [
@@ -113,10 +154,14 @@ export const chapters: ChapterDef[] = [
     description:
       "Reference chapter — coverage areas, key multiples, and terminology by industry group.",
     kind: "reference",
+    group: "reference",
     topic: "recruiting",
     gated: false,
     sections: [
-      { slug: "how-sector-choice-affects-recruiting", title: "How sector choice affects recruiting" },
+      {
+        slug: "how-sector-choice-affects-recruiting",
+        title: "How sector choice affects recruiting",
+      },
       { slug: "sector-overview-tmt", title: "TMT" },
       { slug: "sector-overview-healthcare", title: "Healthcare" },
       { slug: "sector-overview-fig", title: "FIG" },
@@ -135,6 +180,7 @@ export const chapters: ChapterDef[] = [
     description:
       "One-page conventions, banker bullets, deal sheets, and the red flags that get resumes cut.",
     kind: "spine",
+    group: "getting-in",
     topic: "resume",
     gated: false,
     toolExercise: { label: "Run your resume through Resume Coach", href: "/tools/resume-coach" },
@@ -153,9 +199,13 @@ export const chapters: ChapterDef[] = [
     description:
       "Finding bankers, cold outreach, coffee chats, and converting conversations into referrals.",
     kind: "spine",
+    group: "getting-in",
     topic: "networking",
     gated: false,
-    toolExercise: { label: "Add your first contacts in Relationship Manager", href: "/tools/relationships" },
+    toolExercise: {
+      label: "Add your first contacts in Relationship Manager",
+      href: "/tools/relationships",
+    },
     sections: [
       { slug: "alumni-networking", title: "Who to reach & how to find them" },
       { slug: "cold-outreach-email-template", title: "Cold email anatomy" },
@@ -171,6 +221,7 @@ export const chapters: ChapterDef[] = [
     description:
       "Your story, your story bank, and fluent answers to every fit question — trained for adaptation, not memorization.",
     kind: "spine",
+    group: "behavioral",
     topic: "behavioral",
     gated: false,
     toolExercise: { label: "Build your story bank in Story Framer", href: "/tools/story-framer" },
@@ -195,6 +246,7 @@ export const chapters: ChapterDef[] = [
     description:
       "The foundation of every technical interview — the three statements, how they link, and statement-change drills.",
     kind: "spine",
+    group: "technical",
     topic: "accounting",
     gated: true,
     sections: [
@@ -202,7 +254,10 @@ export const chapters: ChapterDef[] = [
       { slug: "balance-sheet-anatomy", title: "The balance sheet" },
       { slug: "cash-flow-statement-anatomy", title: "The cash flow statement" },
       { slug: "accounting-linkages", title: "Linking the three statements" },
-      { slug: "working-capital-and-operational-items", title: "Working capital & operational items" },
+      {
+        slug: "working-capital-and-operational-items",
+        title: "Working capital & operational items",
+      },
       { slug: "three-statement-walkthrough", title: "The three-statement walkthrough" },
       { slug: "single-step-changes", title: "Single-step changes" },
       { slug: "multi-step-scenarios", title: "Multi-step scenarios" },
@@ -217,6 +272,7 @@ export const chapters: ChapterDef[] = [
     description:
       "What each measures, diluted share counts, the bridge, and the pairing rule behind every multiple.",
     kind: "spine",
+    group: "technical",
     topic: "ev-equity-value",
     gated: true,
     sections: [
@@ -236,6 +292,7 @@ export const chapters: ChapterDef[] = [
     description:
       "Relative valuation end to end — multiples, comp sets, precedents, and interpreting the football field.",
     kind: "spine",
+    group: "technical",
     topic: "valuation",
     gated: true,
     sections: [
@@ -244,7 +301,11 @@ export const chapters: ChapterDef[] = [
       { slug: "trading-comps", title: "Trading comps" },
       { slug: "precedent-transactions", title: "Precedent transactions" },
       { slug: "football-field-and-interpretation", title: "The football field" },
-      { slug: "other-methodologies-and-sector-multiples", title: "Other methodologies & sector multiples", advanced: true },
+      {
+        slug: "other-methodologies-and-sector-multiples",
+        title: "Other methodologies & sector multiples",
+        advanced: true,
+      },
     ],
   },
   {
@@ -255,6 +316,7 @@ export const chapters: ChapterDef[] = [
     description:
       "The single most-tested topic — unlevered FCF, WACC, terminal value, and what moves the answer.",
     kind: "spine",
+    group: "technical",
     topic: "dcf",
     gated: true,
     sections: [
@@ -274,13 +336,17 @@ export const chapters: ChapterDef[] = [
     description:
       "Deal rationale, accretion/dilution mechanics, purchase accounting, and the full merger model.",
     kind: "spine",
+    group: "technical",
     topic: "ma",
     gated: true,
     sections: [
       { slug: "why-companies-buy", title: "Why companies buy" },
       { slug: "m-and-a-accretion-dilution", title: "Accretion / dilution mechanics" },
       { slug: "purchase-price-and-consideration", title: "Purchase price & consideration" },
-      { slug: "goodwill-and-purchase-price-allocation", title: "Goodwill & purchase price allocation" },
+      {
+        slug: "goodwill-and-purchase-price-allocation",
+        title: "Goodwill & purchase price allocation",
+      },
       { slug: "full-merger-model", title: "The full merger model" },
       { slug: "advanced-ma", title: "Advanced M&A", advanced: true },
     ],
@@ -293,6 +359,7 @@ export const chapters: ChapterDef[] = [
     description:
       "Why leverage works, sources & uses, the debt schedule, returns, and paper-LBO mental math.",
     kind: "spine",
+    group: "technical",
     topic: "lbo",
     gated: true,
     sections: [
@@ -314,6 +381,7 @@ export const chapters: ChapterDef[] = [
     description:
       "The arithmetic that transfers, thinking out loud under pressure, and market awareness quick-hits.",
     kind: "spine",
+    group: "technical",
     topic: "mental-math",
     gated: false,
     sections: [
@@ -331,6 +399,7 @@ export const chapters: ChapterDef[] = [
     description:
       "Interview formats, what scorers reward, and full-fidelity practice in the Mock Interview Studio.",
     kind: "spine",
+    group: "interview-day",
     topic: "interviewing",
     gated: false,
     toolExercise: { label: "Take a mock in the Interview Studio", href: "/tools/mock-interview" },
@@ -348,6 +417,7 @@ export const chapters: ChapterDef[] = [
     description:
       "The full day, staying consistent across 5–10 interviews, the pre-interview checklist, and closing it out.",
     kind: "spine",
+    group: "interview-day",
     topic: "interviewing",
     gated: false,
     sections: [
