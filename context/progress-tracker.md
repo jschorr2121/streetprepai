@@ -16,6 +16,38 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### UI Revamp — "The Analyst's Desk" (2026-07-06, branch `design/ui-overhaul`)
+- Full-app redesign replacing the emerald/Geist "modern edtech" language and the
+  abandoned "ink" direction (old tip tagged `archive/ink-design`; branch was reset
+  to master baseline first). New language documented in `ui-context.md` (rewritten):
+  warm paper + blue-black ink + prospectus-blue accent, Newsreader/Schibsted
+  Grotesk/IBM Plex Mono, hairline rules over shadows, mono "ledger" badges/eyebrows,
+  6px radius, light-only (dead `.dark` token block + next-themes usage removed).
+- Surfaces rebuilt or restyled: landing (prospectus structure; fabricated
+  stats/testimonials/pricing removed), auth, onboarding, dashboard (real user name +
+  date, was hardcoded "Jake"/"April 18"), learn (ruled index), Reading Lens, all
+  tools, firms/sectors/profile/progress, loading skeletons, error pages. New shared
+  `components/page-header.tsx`; sidebar shows SOON tags on unbuilt tools.
+- Gate fix: `/` (marketing) is now public for signed-out users; signed-in users
+  hitting `/` or auth routes go to `/dashboard` (`lib/auth/middleware.ts`).
+- **Repo repair (same session):** the long-standing `git diff` mmap timeouts were
+  caused by 41 iCloud-evicted (`dataless`) files in `.git/objects` + ~12 evicted
+  source files. Quarantined dead objects, imported the GitHub pack, rebuilt master
+  tip trees via temp-index `write-tree` (SHA-verified), restored working files.
+- **Repo repair completed 2026-07-07:** the 12 unpushed master commits (whose
+  intermediates referenced ~13 permanently-lost objects) were squashed into
+  `15a4866` on top of origin `1a06923`; `design/ui-overhaul` rebased on top; both
+  branches pushed to GitHub. Broken `archive/ink-design` tag + a superseded May-19
+  stash deleted (approved); `git gc --prune=now` and `git fsck --full` pass clean.
+- **Landing interactivity (2026-07-07, `2b0d8bf`):** new `components/marketing/`
+  client components — `HeroDesk` (graph-paper grid, cursor crosshair with
+  spreadsheet cell-ref readout, drifting ledger chips with mouse parallax; desktop
+  pointer only), `LensDemo` (three hoverable highlights swap the plain-English
+  margin card, auto-cycles until first interaction), `FirmTicker` (mono firm
+  ticker, pauses on hover), `CountUp` hero ledger strip (16/05/01 — honest
+  figures), `Reveal` (fade-up on first scroll into view). All motion inert under
+  `prefers-reduced-motion`. New `ticker`/`chip-drift` keyframes in globals.css.
+
 ### Spec authoring (multi-session workflow)
 - `project-overview.md` — product definition, 12 goals, core user flow, 16-chapter learning flow, six AI tools, scope cuts (jobs/community/mentors/flashcards), 14 success criteria.
 - `architecture.md` — full stack table, system boundaries (learning flow spine + tools layered on top), storage model (Postgres + pgvector + Supabase Storage + Upstash Redis + MDX), auth and access (`user`/`admin`, RLS, profile-required/resume-optional onboarding, self-serve delete in phase 1), 10 architectural invariants.

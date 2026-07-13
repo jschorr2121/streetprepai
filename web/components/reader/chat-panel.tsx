@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Markdown } from "@/components/reader/markdown";
-import { ArrowUp, Loader2, Sparkles } from "lucide-react";
+import { ArrowUp, Loader2 } from "lucide-react";
 
 type Message = { role: "user" | "assistant"; content: string };
 
@@ -88,10 +88,7 @@ export function ChatPanel({
         <div className="space-y-4 py-4">
           {messages.length === 0 && (
             <div className="text-muted-foreground space-y-3 text-sm">
-              <div className="text-foreground flex items-center gap-1.5 font-medium">
-                <Sparkles className="text-primary size-3.5" />
-                Chat with this guide
-              </div>
+              <div className="text-foreground font-medium">Chat with this guide</div>
               <p className="leading-relaxed">
                 Ask anything about what you&apos;re reading. Answers are grounded in the guide and
                 reference specific sections.
@@ -114,8 +111,8 @@ export function ChatPanel({
               <div
                 className={
                   m.role === "user"
-                    ? "bg-primary text-primary-foreground max-w-[85%] rounded-2xl px-3 py-2 text-sm"
-                    : "bg-muted max-w-[95%] rounded-2xl px-3 py-2 text-sm"
+                    ? "bg-secondary max-w-[85%] rounded-md px-3 py-2 text-sm"
+                    : "max-w-[95%] text-sm"
                 }
               >
                 {m.role === "user" ? (

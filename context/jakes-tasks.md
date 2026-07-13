@@ -15,10 +15,11 @@ needs action it can't perform itself.
 - [ ] **Recreate the `design/ui-overhaul` git worktree in `~/Developer/InterviewPrep`** —
   the repo moved out of iCloud (see Done below) but that worktree still lives at the old
   `~/Documents/InterviewPrep/.claude/worktrees/ui-overhaul` path, since git won't let the
-  same branch be checked out in two worktrees at once. Once you're done using the old copy,
-  delete it, then run `git worktree add .claude/worktrees/ui-overhaul design/ui-overhaul`
-  from `~/Developer/InterviewPrep`. One uncommitted local-only change was dropped in the
-  move (`.gstack/browse-audit.jsonl`, a QA log, saved to
+  same branch be checked out in two worktrees at once. Now that `design/ui-overhaul` is
+  merged into `master` (see Done below), this worktree is likely no longer needed at all —
+  just delete `~/Documents/InterviewPrep` once you've confirmed `~/Developer/InterviewPrep`
+  has everything. One uncommitted local-only change was dropped in the move
+  (`.gstack/browse-audit.jsonl`, a QA log, saved to
   `/private/tmp/.../scratchpad/browse-audit.diff` — low value, safe to lose).
 - [ ] **Regenerate `web/.env.example`** — it was an unrecoverable dead iCloud placeholder
   (not tracked by git — `web/.gitignore`'s `.env*` pattern also catches the example file) and
@@ -69,6 +70,12 @@ needs action it can't perform itself.
 ---
 
 ## ✅ Done
+
+- [x] **Unpushed history squashed + repo fully repaired** (2026-07-07) — the 12
+  unpushed master commits were squashed into `15a4866` on origin's `1a06923`
+  (tree identical to the old tip), `design/ui-overhaul` rebased on top, both
+  branches pushed to GitHub. Broken `archive/ink-design` tag and a superseded
+  May-19 stash deleted (Jake approved); `git gc` + `git fsck --full` pass clean.
 
 - [x] **Migrations 0004 + 0005 applied** — confirmed live 2026-06-13 via direct
   DB connection: `profiles.current_semester` + `onboarded_at` present;

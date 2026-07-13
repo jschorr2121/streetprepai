@@ -111,7 +111,7 @@ export function OnboardingForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="border-border bg-card space-y-5 rounded-xl border p-6"
+      className="border-border bg-card space-y-5 rounded-md border p-6"
       noValidate
     >
       <div className="space-y-1.5">
@@ -179,12 +179,12 @@ export function OnboardingForm() {
           <ul className="flex flex-wrap gap-1.5">
             {firms.map((firm) => (
               <li key={firm}>
-                <span className="bg-accent text-accent-foreground inline-flex items-center gap-1 rounded-full py-1 pr-1 pl-3 text-sm">
+                <span className="bg-secondary text-secondary-foreground inline-flex items-center gap-1 rounded-sm py-1 pr-1 pl-2.5 text-sm">
                   {firm}
                   <button
                     type="button"
                     onClick={() => removeFirm(firm)}
-                    className="hover:bg-accent-foreground/10 grid size-5 place-items-center rounded-full"
+                    className="hover:bg-foreground/10 grid size-5 place-items-center rounded-sm"
                     aria-label={`Remove ${firm}`}
                   >
                     <X className="size-3" aria-hidden />
@@ -209,7 +209,7 @@ export function OnboardingForm() {
               key={s}
               type="button"
               onClick={() => addFirm(s)}
-              className="border-border text-muted-foreground hover:border-primary/40 hover:text-foreground rounded-full border px-3 py-1 text-xs transition-colors"
+              className="border-border text-muted-foreground hover:border-primary/40 hover:text-foreground rounded-sm border px-2.5 py-1 text-xs transition-colors"
             >
               + {s}
             </button>

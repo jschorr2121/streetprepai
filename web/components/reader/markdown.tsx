@@ -2,29 +2,31 @@ import { cn } from "@/lib/utils";
 
 function renderInline(text: string, key: number): React.ReactNode {
   const parts: React.ReactNode[] = [];
-  const regex =
-    /\*\*([^*]+)\*\*|\*([^*]+)\*|`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)/g;
+  const regex = /\*\*([^*]+)\*\*|\*([^*]+)\*|`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)/g;
   let last = 0;
   let match: RegExpExecArray | null;
   let idx = 0;
   while ((match = regex.exec(text)) !== null) {
     if (match.index > last) {
-      parts.push(
-        <span key={`${key}-t-${idx++}`}>{text.slice(last, match.index)}</span>,
-      );
+      parts.push(<span key={`${key}-t-${idx++}`}>{text.slice(last, match.index)}</span>);
     }
-    if (match[1])
-      parts.push(<strong key={`${key}-b-${idx++}`}>{match[1]}</strong>);
-    else if (match[2])
-      parts.push(<em key={`${key}-i-${idx++}`}>{match[2]}</em>);
+    if (match[1]) parts.push(<strong key={`${key}-b-${idx++}`}>{match[1]}</strong>);
+    else if (match[2]) parts.push(<em key={`${key}-i-${idx++}`}>{match[2]}</em>);
     else if (match[3])
-      parts.push(<code key={`${key}-c-${idx++}`}>{match[3]}</code>);
+      parts.push(
+        <code
+          key={`${key}-c-${idx++}`}
+          className="bg-muted rounded-[3px] px-[0.35em] py-[0.1em] font-mono text-[0.92em]"
+        >
+          {match[3]}
+        </code>,
+      );
     else if (match[4] && match[5])
       parts.push(
         <a
           key={`${key}-a-${idx++}`}
           href={match[5]}
-          className="underline underline-offset-2 text-primary"
+          className="text-primary underline underline-offset-4"
         >
           {match[4]}
         </a>,
@@ -37,13 +39,7 @@ function renderInline(text: string, key: number): React.ReactNode {
   return parts.length ? parts : text;
 }
 
-export function Markdown({
-  content,
-  className,
-}: {
-  content: string;
-  className?: string;
-}) {
+export function Markdown({ content, className }: { content: string; className?: string }) {
   const lines = content.split("\n");
   const blocks: React.ReactNode[] = [];
   let i = 0;
@@ -61,12 +57,20 @@ export function Markdown({
     const h2 = line.match(/^## (.+)$/);
     const h1 = line.match(/^# (.+)$/);
     if (h1) {
-      blocks.push(<h1 key={key++}>{h1[1]}</h1>);
+      blocks.push(
+        <h1 key={key++} className="font-display">
+          {h1[1]}
+        </h1>,
+      );
       i++;
       continue;
     }
     if (h2) {
-      blocks.push(<h2 key={key++}>{h2[1]}</h2>);
+      blocks.push(
+        <h2 key={key++} className="font-display">
+          {h2[1]}
+        </h2>,
+      );
       i++;
       continue;
     }
@@ -83,7 +87,10 @@ export function Markdown({
         i++;
       }
       blocks.push(
-        <blockquote key={key++}>
+        <blockquote
+          key={key++}
+          className="border-foreground text-muted-foreground border-l-2 pl-4 font-serif italic"
+        >
           {bqLines.map((l, idx) => (
             <p key={idx}>{renderInline(l, idx)}</p>
           ))}
@@ -136,9 +143,7 @@ export function Markdown({
       paragraph.push(lines[i]!);
       i++;
     }
-    blocks.push(
-      <p key={key++}>{renderInline(paragraph.join(" "), key)}</p>,
-    );
+    blocks.push(<p key={key++}>{renderInline(paragraph.join(" "), key)}</p>);
   }
 
   return <div className={cn("prose-guide", className)}>{blocks}</div>;

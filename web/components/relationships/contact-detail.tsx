@@ -10,7 +10,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Markdown } from "@/components/reader/markdown";
 import {
   ArrowLeft,
-  Sparkles,
+  FileText,
   Loader2,
   Mail,
   MessageSquare,
@@ -21,9 +21,22 @@ import {
   Square,
 } from "lucide-react";
 import { toast } from "sonner";
-import type { Contact, ChatLog, CalendarEvent } from "@/lib/types";
+import type { Contact, ChatLog, CalendarEvent, ContactStage } from "@/lib/types";
 import { OutreachDrawer } from "@/components/relationships/outreach-drawer";
 import { cn } from "@/lib/utils";
+
+// Ledger tag per stage — semantic Badge variants, no decorative color.
+const STAGE_BADGE: Record<
+  ContactStage,
+  "outline" | "secondary" | "default" | "warning" | "success" | "destructive"
+> = {
+  cold: "outline",
+  "outreach-sent": "secondary",
+  "coffee-chat": "default",
+  warm: "default",
+  interviewed: "warning",
+  offer: "success",
+};
 
 export function ContactDetail({
   contact,
@@ -237,36 +250,35 @@ export function ContactDetail({
     <div className="mx-auto max-w-5xl px-6 py-8 md:px-8">
       <Button asChild variant="ghost" size="sm" className="mb-4 -ml-2 gap-1">
         <Link href="/tools/relationships">
-          <ArrowLeft className="size-3.5" />
+          <ArrowLeft className="size-3.5" aria-hidden />
           Back to relationships
         </Link>
       </Button>
 
       <header className="mb-8 border-b pb-6">
-        <div className="flex flex-wrap items-start justify-between gap-4">
+        <p className="eyebrow">Contact</p>
+        <div className="mt-2 flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-semibold tracking-tight">{contact.name}</h1>
-            <p className="text-muted-foreground mt-1">
+            <h1 className="font-display text-3xl">{contact.name}</h1>
+            <p className="text-muted-foreground mt-1.5 font-mono text-xs">
               {contact.title} · {contact.firm}
               {contact.group ? ` · ${contact.group}` : ""}
             </p>
             {contact.school && (
-              <p className="text-muted-foreground mt-0.5 text-sm">
+              <p className="text-muted-foreground mt-0.5 font-mono text-xs">
                 {contact.school} &apos;{contact.gradYear?.toString().slice(-2)}
               </p>
             )}
           </div>
           <div className="flex items-center gap-2">
-            <Badge variant="outline" className="capitalize">
-              {contact.stage.replace("-", " ")}
-            </Badge>
+            <Badge variant={STAGE_BADGE[contact.stage]}>{contact.stage.replace("-", " ")}</Badge>
             <Button
               size="sm"
               variant="outline"
               onClick={() => setOutreachOpen(true)}
               className="gap-1.5"
             >
-              <Mail className="size-3.5" />
+              <Mail className="size-3.5" aria-hidden />
               Draft cold outreach
             </Button>
           </div>
@@ -281,13 +293,13 @@ export function ContactDetail({
       <Tabs defaultValue="prep" className="space-y-6">
         <TabsList>
           <TabsTrigger value="prep" className="gap-1.5">
-            <Sparkles className="size-3.5" /> Pre-chat prep
+            <FileText className="size-3.5" aria-hidden /> Pre-chat prep
           </TabsTrigger>
           <TabsTrigger value="log" className="gap-1.5">
-            <NotebookPen className="size-3.5" /> Log a chat
+            <NotebookPen className="size-3.5" aria-hidden /> Log a chat
           </TabsTrigger>
           <TabsTrigger value="history" className="gap-1.5">
-            <MessageSquare className="size-3.5" /> History
+            <MessageSquare className="size-3.5" aria-hidden /> History
           </TabsTrigger>
         </TabsList>
 
@@ -295,11 +307,8 @@ export function ContactDetail({
           <Card className="p-6">
             <div className="mb-4 flex items-start justify-between gap-3">
               <div>
-                <h2 className="flex items-center gap-1.5 text-lg font-semibold">
-                  <Sparkles className="text-primary size-4" />
-                  AI prep sheet
-                </h2>
-                <p className="text-muted-foreground mt-1 text-sm">
+                <h2 className="eyebrow">AI prep sheet</h2>
+                <p className="text-muted-foreground mt-2 text-sm">
                   Claude pulls signal from {contact.name}&apos;s background and suggests smart
                   questions, hooks, and things to avoid.
                 </p>
@@ -307,15 +316,13 @@ export function ContactDetail({
               <Button size="sm" onClick={generatePrepSheet} disabled={prepLoading}>
                 {prepLoading ? (
                   <>
-                    <Loader2 className="mr-1.5 size-3.5 animate-spin" />
+                    <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
                     Generating…
                   </>
                 ) : prepSheet ? (
                   "Regenerate"
                 ) : (
-                  <>
-                    <Sparkles className="mr-1.5 size-3.5" /> Generate
-                  </>
+                  "Generate"
                 )}
               </Button>
             </div>
@@ -330,11 +337,11 @@ export function ContactDetail({
               </details>
             )}
             {prepSheet ? (
-              <div className="bg-accent/30 rounded-lg border p-5">
+              <div className="bg-accent/30 rounded-md border p-5">
                 <Markdown content={prepSheet} />
               </div>
             ) : (
-              <div className="bg-muted/30 text-muted-foreground rounded-lg border border-dashed px-4 py-10 text-center text-sm">
+              <div className="bg-muted/30 text-muted-foreground rounded-md border border-dashed px-4 py-10 text-center text-sm">
                 Click Generate to have Claude build a prep sheet from {contact.name}&apos;s
                 background.
               </div>
@@ -344,7 +351,7 @@ export function ContactDetail({
 
         <TabsContent value="log" className="space-y-4">
           <Card className="p-6">
-            <h2 className="mb-1 text-lg font-semibold">Log a chat with {contact.name}</h2>
+            <h2 className="eyebrow mb-2">Log a chat with {contact.name}</h2>
             <p className="text-muted-foreground mb-4 text-sm">
               Type rough notes. Claude structures them into a memory record and drafts a
               personalized follow-up.
@@ -372,15 +379,15 @@ export function ContactDetail({
                 }
                 className={cn(
                   "absolute top-2 right-2 size-8 rounded-full",
-                  recording && "animate-pulse bg-red-500 text-white hover:bg-red-600",
+                  recording && "bg-destructive hover:bg-destructive/90 animate-pulse text-white",
                 )}
               >
                 {transcribing ? (
-                  <Loader2 className="size-3.5 animate-spin" />
+                  <Loader2 className="size-3.5 animate-spin" aria-hidden />
                 ) : recording ? (
-                  <Square className="size-3.5" />
+                  <Square className="size-3.5" aria-hidden />
                 ) : (
-                  <Mic className="size-3.5" />
+                  <Mic className="size-3.5" aria-hidden />
                 )}
                 <span className="sr-only">
                   {recording ? "Stop recording" : "Record voice memo"}
@@ -391,12 +398,12 @@ export function ContactDetail({
               <p className="text-muted-foreground mt-2 flex items-center gap-1.5 text-xs">
                 {recording ? (
                   <>
-                    <span className="size-1.5 animate-pulse rounded-full bg-red-500" />
+                    <span className="bg-destructive size-1.5 animate-pulse rounded-full" />
                     Recording — click the square to stop and transcribe.
                   </>
                 ) : (
                   <>
-                    <Loader2 className="size-3 animate-spin" />
+                    <Loader2 className="size-3 animate-spin" aria-hidden />
                     Transcribing your memo…
                   </>
                 )}
@@ -406,20 +413,17 @@ export function ContactDetail({
               <Button size="sm" onClick={structureNotes} disabled={!notes.trim() || structuring}>
                 {structuring ? (
                   <>
-                    <Loader2 className="mr-1.5 size-3.5 animate-spin" />
+                    <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
                     Structuring…
                   </>
                 ) : (
-                  <>
-                    <Sparkles className="mr-1.5 size-3.5" />
-                    Structure notes
-                  </>
+                  "Structure notes"
                 )}
               </Button>
             </div>
 
             {structured && (
-              <div className="bg-accent/30 mt-6 space-y-4 rounded-lg border p-5 text-sm">
+              <div className="bg-accent/30 mt-6 space-y-4 rounded-md border p-5 text-sm">
                 <StructuredSection label="Topics" items={structured.topics ?? []} />
                 <StructuredSection label="Advice given" items={structured.adviceGiven ?? []} />
                 <StructuredSection
@@ -431,9 +435,7 @@ export function ContactDetail({
                   items={structured.personalDetails ?? []}
                 />
                 <div>
-                  <p className="text-muted-foreground mb-2 text-xs font-medium tracking-wide uppercase">
-                    Follow-ups for you
-                  </p>
+                  <p className="eyebrow mb-2">Follow-ups for you</p>
                   <ul className="space-y-1">
                     {(structured.followUps ?? []).map((f, i) => (
                       <li key={i} className="flex items-start gap-2">
@@ -441,7 +443,10 @@ export function ContactDetail({
                         <span>
                           {f.description}
                           {f.dueBy && (
-                            <span className="text-muted-foreground"> (by {f.dueBy})</span>
+                            <span className="text-muted-foreground font-mono text-xs">
+                              {" "}
+                              (by {f.dueBy})
+                            </span>
                           )}
                         </span>
                       </li>
@@ -455,11 +460,8 @@ export function ContactDetail({
               <div className="mt-6 border-t pt-6">
                 <div className="mb-4 flex items-start justify-between gap-3">
                   <div>
-                    <h3 className="flex items-center gap-1.5 font-semibold">
-                      <Mail className="text-primary size-4" />
-                      Follow-up email
-                    </h3>
-                    <p className="text-muted-foreground mt-0.5 text-sm">
+                    <h3 className="eyebrow">Follow-up email</h3>
+                    <p className="text-muted-foreground mt-1.5 text-sm">
                       Drafted from the chat above. Edit before sending.
                     </p>
                   </div>
@@ -471,7 +473,7 @@ export function ContactDetail({
                   >
                     {draftingFollowUp ? (
                       <>
-                        <Loader2 className="mr-1.5 size-3.5 animate-spin" />
+                        <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
                         Drafting…
                       </>
                     ) : followUp ? (
@@ -484,9 +486,7 @@ export function ContactDetail({
                 {followUp ? (
                   <Card className="bg-background p-4">
                     <div className="mb-2 flex items-center justify-between gap-3">
-                      <p className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
-                        Subject
-                      </p>
+                      <p className="eyebrow">Subject</p>
                       <Button
                         size="sm"
                         variant="ghost"
@@ -495,25 +495,23 @@ export function ContactDetail({
                       >
                         {copied ? (
                           <>
-                            <Check className="mr-1 size-3" /> Copied
+                            <Check className="mr-1 size-3" aria-hidden /> Copied
                           </>
                         ) : (
                           <>
-                            <Copy className="mr-1 size-3" /> Copy
+                            <Copy className="mr-1 size-3" aria-hidden /> Copy
                           </>
                         )}
                       </Button>
                     </div>
                     <p className="mb-3 text-sm font-medium">{followUp.subject}</p>
-                    <p className="text-muted-foreground mb-2 text-xs font-semibold tracking-wide uppercase">
-                      Body
-                    </p>
+                    <p className="eyebrow mb-2">Body</p>
                     <pre className="font-sans text-sm leading-relaxed whitespace-pre-wrap">
                       {followUp.body}
                     </pre>
                   </Card>
                 ) : (
-                  <div className="bg-muted/30 text-muted-foreground rounded-lg border border-dashed px-4 py-6 text-center text-sm">
+                  <div className="bg-muted/30 text-muted-foreground rounded-md border border-dashed px-4 py-6 text-center text-sm">
                     Click &quot;Draft follow-up&quot; to generate a personalized email.
                   </div>
                 )}
@@ -524,35 +522,32 @@ export function ContactDetail({
 
         <TabsContent value="history" className="space-y-4">
           {relatedEvents.length === 0 && chatLogs.length === 0 ? (
-            <div className="text-muted-foreground rounded-lg border border-dashed py-12 text-center text-sm">
+            <div className="text-muted-foreground rounded-md border border-dashed py-12 text-center text-sm">
               No prior events logged with {contact.name}.
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="bg-card divide-y rounded-md border">
               {relatedEvents.map((e) => (
-                <Card key={e.id} className="p-4">
+                <div key={e.id} className="p-4">
                   <div className="mb-1 flex items-center justify-between gap-3">
-                    <p className="text-sm font-semibold">{e.title}</p>
-                    <Badge
-                      variant={e.status === "upcoming" ? "default" : "outline"}
-                      className="text-xs capitalize"
-                    >
+                    <p className="text-sm font-medium">{e.title}</p>
+                    <Badge variant={e.status === "upcoming" ? "default" : "outline"}>
                       {e.status}
                     </Badge>
                   </div>
-                  <p className="text-muted-foreground text-xs">
+                  <p className="text-muted-foreground font-mono text-[11px]">
                     {new Date(e.startsAt).toLocaleString()} · {e.durationMinutes} min{" "}
                     {e.location ? `· ${e.location}` : ""}
                   </p>
                   {e.notes && (
                     <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{e.notes}</p>
                   )}
-                </Card>
+                </div>
               ))}
               {chatLogs.map((log) => (
-                <Card key={log.id} className="bg-accent/30 p-4">
-                  <p className="text-muted-foreground mb-2 text-xs font-semibold tracking-wide uppercase">
-                    Chat notes · {log.happenedAt}
+                <div key={log.id} className="p-4">
+                  <p className="eyebrow mb-2">
+                    Chat notes · <span className="font-mono">{log.happenedAt}</span>
                   </p>
                   <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-wrap">
                     {log.rawNotes}
@@ -570,7 +565,7 @@ export function ContactDetail({
                       />
                     </div>
                   )}
-                </Card>
+                </div>
               ))}
             </div>
           )}
@@ -586,9 +581,7 @@ function StructuredSection({ label, items }: { label: string; items: string[] })
   if (!items?.length) return null;
   return (
     <div>
-      <p className="text-muted-foreground mb-2 text-xs font-medium tracking-wide uppercase">
-        {label}
-      </p>
+      <p className="eyebrow mb-2">{label}</p>
       <ul className="space-y-1">
         {items.map((t, i) => (
           <li key={i} className="flex items-start gap-2">

@@ -5,7 +5,6 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   DropdownMenu,
@@ -19,7 +18,6 @@ import {
   Calendar as CalendarIcon,
   Search,
   Users,
-  Plus,
   ArrowRight,
   Clock,
   KanbanSquare,
@@ -35,6 +33,19 @@ const stageLabels: Record<ContactStage, string> = {
   warm: "Warm",
   interviewed: "Interviewed",
   offer: "Offer",
+};
+
+// Ledger tag per stage — semantic Badge variants, no decorative color.
+const STAGE_BADGE: Record<
+  ContactStage,
+  "outline" | "secondary" | "default" | "warning" | "success" | "destructive"
+> = {
+  cold: "outline",
+  "outreach-sent": "secondary",
+  "coffee-chat": "default",
+  warm: "default",
+  interviewed: "warning",
+  offer: "success",
 };
 
 // Pipeline column order (left → right): cold → outreach → chat → warm → interviewed → offer.
@@ -141,40 +152,20 @@ export function ContactsView({
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-8 md:px-8">
-      <header className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-        <div>
-          <div className="text-primary mb-2 flex items-center gap-2 text-sm font-medium">
-            <Users className="size-4" /> Relationship Memory
-          </div>
-          <h1 className="text-3xl font-semibold tracking-tight">
-            Your recruiting funnel, remembered
-          </h1>
-          <p className="text-muted-foreground mt-2 max-w-2xl">
-            Every coffee chat and interview on a calendar. Per-person notes, follow-up drafts, and
-            search across everything you&apos;ve ever discussed.
-          </p>
-        </div>
-        <Button asChild size="sm">
-          <Link href="/tools/relationships/new">
-            <Plus className="mr-1.5 size-3.5" /> Add contact
-          </Link>
-        </Button>
-      </header>
-
       <Tabs value={tab} onValueChange={(v) => setTab(v as typeof tab)} className="space-y-6">
         <div className="flex flex-col justify-between gap-3 md:flex-row md:items-center">
           <TabsList>
             <TabsTrigger value="calendar" className="gap-1.5">
-              <CalendarIcon className="size-3.5" /> Calendar
+              <CalendarIcon className="size-3.5" aria-hidden /> Calendar
             </TabsTrigger>
             <TabsTrigger value="contacts" className="gap-1.5">
-              <Users className="size-3.5" /> Contacts
+              <Users className="size-3.5" aria-hidden /> Contacts
             </TabsTrigger>
             <TabsTrigger value="pipeline" className="gap-1.5">
-              <KanbanSquare className="size-3.5" /> Pipeline
+              <KanbanSquare className="size-3.5" aria-hidden /> Pipeline
             </TabsTrigger>
             <TabsTrigger value="search" className="gap-1.5">
-              <Search className="size-3.5" /> Search notes
+              <Search className="size-3.5" aria-hidden /> Search notes
             </TabsTrigger>
           </TabsList>
           <div className="relative md:w-80">
@@ -191,9 +182,7 @@ export function ContactsView({
 
         <TabsContent value="calendar" className="space-y-8">
           <section>
-            <h2 className="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">
-              Upcoming
-            </h2>
+            <p className="eyebrow mb-3">Upcoming</p>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {upcoming.map((e) => (
                 <CalendarCard
@@ -205,9 +194,7 @@ export function ContactsView({
             </div>
           </section>
           <section>
-            <h2 className="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">
-              Past
-            </h2>
+            <p className="eyebrow mb-3">Past</p>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {past.map((e) => (
                 <CalendarCard
@@ -227,7 +214,7 @@ export function ContactsView({
                 key={s}
                 onClick={() => setStageFilter(s)}
                 className={cn(
-                  "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+                  "rounded-sm border px-3 py-1 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors duration-150",
                   stageFilter === s
                     ? "bg-primary text-primary-foreground border-primary"
                     : "bg-background hover:bg-accent border-border text-muted-foreground",
@@ -237,52 +224,57 @@ export function ContactsView({
               </button>
             ))}
           </div>
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-            {filtered.map((c) => (
-              <Link
-                key={c.id}
-                href={`/relationships/${c.id}`}
-                className="group bg-card hover:border-primary/40 rounded-xl border p-4 transition-all hover:shadow-sm"
-              >
-                <div className="mb-2 flex items-center justify-between gap-3">
-                  <div>
-                    <p className="group-hover:text-primary font-semibold transition-colors">
-                      {c.name}
-                    </p>
-                    <p className="text-muted-foreground text-xs">
-                      {c.title} · {c.firm}
-                      {c.group ? ` · ${c.group}` : ""}
-                    </p>
-                  </div>
-                  <Badge variant="outline" className="text-xs">
-                    {stageLabels[c.stage]}
-                  </Badge>
-                </div>
-                {c.school && (
-                  <p className="text-muted-foreground text-xs">
-                    {c.school} &apos;{c.gradYear?.toString().slice(-2)}
-                  </p>
-                )}
-                <div className="mt-2 flex flex-wrap gap-1">
-                  {c.tags.map((t) => (
-                    <Badge key={t} variant="secondary" className="rounded-full text-[10px]">
-                      {t}
-                    </Badge>
-                  ))}
-                </div>
-                {c.lastInteractionAt && (
-                  <p className="text-muted-foreground mt-3 text-[11px]">
-                    Last touched: {c.lastInteractionAt}
-                  </p>
-                )}
-              </Link>
-            ))}
-            {filtered.length === 0 && (
-              <div className="text-muted-foreground col-span-full rounded-lg border border-dashed py-12 text-center text-sm">
+          {filtered.length === 0 ? (
+            <div className="rounded-md border border-dashed px-6 py-12 text-center">
+              <p className="eyebrow">Empty</p>
+              <p className="text-muted-foreground mt-2 text-sm">
                 No contacts matching those filters.
-              </div>
-            )}
-          </div>
+              </p>
+            </div>
+          ) : (
+            <ul className="bg-card divide-y rounded-md border" aria-label="Your contacts">
+              {filtered.map((c) => (
+                <li key={c.id}>
+                  <Link
+                    href={`/relationships/${c.id}`}
+                    className="group hover:bg-accent/30 flex items-start justify-between gap-4 p-4 transition-colors duration-150"
+                  >
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                        <span className="group-hover:text-primary font-medium transition-colors">
+                          {c.name}
+                        </span>
+                        <span className="text-muted-foreground text-xs">
+                          {c.title} · {c.firm}
+                          {c.group ? ` · ${c.group}` : ""}
+                        </span>
+                        <Badge variant={STAGE_BADGE[c.stage]}>{stageLabels[c.stage]}</Badge>
+                      </div>
+                      {c.school && (
+                        <p className="text-muted-foreground mt-1 text-xs">
+                          {c.school} &apos;{c.gradYear?.toString().slice(-2)}
+                        </p>
+                      )}
+                      {c.tags.length > 0 && (
+                        <div className="mt-2 flex flex-wrap gap-1">
+                          {c.tags.map((t) => (
+                            <Badge key={t} variant="outline">
+                              {t}
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    {c.lastInteractionAt && (
+                      <span className="text-muted-foreground shrink-0 font-mono text-[11px]">
+                        last {c.lastInteractionAt}
+                      </span>
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </TabsContent>
 
         <TabsContent value="pipeline" className="space-y-3">
@@ -296,15 +288,11 @@ export function ContactsView({
               return (
                 <div
                   key={stage}
-                  className="bg-muted/20 flex min-h-[160px] flex-col gap-2 rounded-xl border p-3"
+                  className="bg-muted/20 flex min-h-[160px] flex-col gap-2 rounded-md border p-3"
                 >
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
-                      {stageLabels[stage]}
-                    </h3>
-                    <Badge variant="secondary" className="h-5 rounded-full px-1.5 text-[10px]">
-                      {items.length}
-                    </Badge>
+                  <div className="flex items-baseline justify-between border-b pb-2">
+                    <h3 className="eyebrow">{stageLabels[stage]}</h3>
+                    <span className="text-muted-foreground font-mono text-xs">{items.length}</span>
                   </div>
                   <div className="flex flex-col gap-2">
                     {items.map((c) => (
@@ -315,7 +303,9 @@ export function ContactsView({
                       />
                     ))}
                     {items.length === 0 && (
-                      <p className="text-muted-foreground/70 px-1 py-2 text-[11px] italic">Empty</p>
+                      <p className="text-muted-foreground/70 px-1 py-2 font-mono text-[11px]">
+                        Empty
+                      </p>
                     )}
                   </div>
                 </div>
@@ -326,12 +316,12 @@ export function ContactsView({
 
         <TabsContent value="search" className="space-y-3">
           {query.trim() === "" ? (
-            <div className="text-muted-foreground rounded-lg border border-dashed py-12 text-center text-sm">
+            <div className="text-muted-foreground rounded-md border border-dashed py-12 text-center text-sm">
               Type to search across every chat note, commitment, and personal detail you&apos;ve
               ever recorded.
             </div>
           ) : searchResults.length === 0 ? (
-            <div className="text-muted-foreground rounded-lg border border-dashed py-12 text-center text-sm">
+            <div className="text-muted-foreground rounded-md border border-dashed py-12 text-center text-sm">
               No notes mention &quot;{query}&quot;. Try a different term.
             </div>
           ) : (
@@ -339,16 +329,17 @@ export function ContactsView({
               <Link
                 key={log.id}
                 href={`/relationships/${contact.id}`}
-                className="bg-card hover:border-primary/40 block rounded-xl border p-4 transition-all"
+                className="bg-card hover:border-primary/40 block rounded-md border p-4 transition-colors duration-150"
               >
                 <div className="mb-2 flex items-center justify-between gap-3">
                   <div>
-                    <p className="text-sm font-semibold">{contact.name}</p>
+                    <p className="text-sm font-medium">{contact.name}</p>
                     <p className="text-muted-foreground text-xs">
-                      {contact.firm} · {log.happenedAt}
+                      {contact.firm} ·{" "}
+                      <span className="font-mono text-[11px]">{log.happenedAt}</span>
                     </p>
                   </div>
-                  <ArrowRight className="text-muted-foreground size-4" />
+                  <ArrowRight className="text-muted-foreground size-4" aria-hidden />
                 </div>
                 <p className="text-muted-foreground line-clamp-3 text-xs leading-relaxed">
                   {log.rawNotes}
@@ -365,40 +356,29 @@ export function ContactsView({
 function CalendarCard({ event, contact }: { event: CalendarEvent; contact?: Contact }) {
   const d = new Date(event.startsAt);
   const dayName = d.toLocaleDateString("en-US", { weekday: "short" });
-  const date = d.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
   const time = d.toLocaleTimeString("en-US", {
     hour: "numeric",
     minute: "2-digit",
   });
 
   const content = (
-    <div className="bg-card hover:border-primary/40 flex h-full items-start gap-3 rounded-xl border p-4 transition-all hover:shadow-sm">
-      <div className="bg-accent/60 w-14 shrink-0 rounded-lg px-1 py-2 text-center">
-        <p className="text-muted-foreground text-[10px] font-semibold tracking-wide uppercase">
-          {dayName}
-        </p>
-        <p className="text-base font-semibold">
-          {d.toLocaleDateString("en-US", { day: "numeric" })}
-        </p>
-        <p className="text-muted-foreground text-[10px]">
+    <div className="bg-card hover:border-primary/40 flex h-full items-start gap-3 rounded-md border p-4 transition-colors duration-150">
+      <div className="bg-muted w-14 shrink-0 rounded-sm px-1 py-2 text-center font-mono">
+        <p className="text-muted-foreground text-[10px] tracking-[0.08em] uppercase">{dayName}</p>
+        <p className="text-base font-medium">{d.toLocaleDateString("en-US", { day: "numeric" })}</p>
+        <p className="text-muted-foreground text-[10px] tracking-[0.08em] uppercase">
           {d.toLocaleDateString("en-US", { month: "short" })}
         </p>
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-start justify-between gap-2">
-          <p className="truncate text-sm font-semibold">{event.title}</p>
-          <Badge
-            variant={event.kind === "interview" ? "default" : "outline"}
-            className="shrink-0 text-[10px] capitalize"
-          >
+          <p className="truncate text-sm font-medium">{event.title}</p>
+          <Badge variant={event.kind === "interview" ? "default" : "outline"} className="shrink-0">
             {event.kind.replace("-", " ")}
           </Badge>
         </div>
-        <p className="text-muted-foreground mt-1 flex items-center gap-1 text-xs">
-          <Clock className="size-3" />
+        <p className="text-muted-foreground mt-1 flex items-center gap-1 font-mono text-[11px]">
+          <Clock className="size-3" aria-hidden />
           {time} · {event.durationMinutes} min
           {event.location ? ` · ${event.location}` : ""}
         </p>
@@ -429,13 +409,13 @@ function PipelineCard({
   const router = useRouter();
 
   return (
-    <div className="bg-card hover:border-primary/40 rounded-lg border p-2.5 transition-all hover:shadow-sm">
+    <div className="bg-card hover:border-primary/40 rounded-md border p-2.5 transition-colors duration-150">
       <button
         type="button"
         onClick={() => router.push(`/relationships/${contact.id}`)}
         className="block w-full text-left"
       >
-        <p className="truncate text-sm leading-tight font-semibold">{contact.name}</p>
+        <p className="truncate text-sm leading-tight font-medium">{contact.name}</p>
         <p className="text-muted-foreground truncate text-[11px]">
           {contact.firm}
           {contact.group ? ` · ${contact.group}` : ""}
@@ -446,10 +426,10 @@ function PipelineCard({
           <DropdownMenuTrigger asChild>
             <button
               type="button"
-              className="bg-accent text-accent-foreground hover:bg-accent/70 inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-medium transition-colors"
+              className="bg-accent text-accent-foreground hover:bg-accent/70 inline-flex items-center gap-0.5 rounded-sm px-1.5 py-0.5 font-mono text-[10px] tracking-[0.08em] uppercase transition-colors duration-150"
             >
               {stageLabels[contact.stage]}
-              <ChevronDown className="size-2.5" />
+              <ChevronDown className="size-2.5" aria-hidden />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="min-w-[160px]">
@@ -469,7 +449,7 @@ function PipelineCard({
           </DropdownMenuContent>
         </DropdownMenu>
         {contact.lastContactAt && (
-          <span className="text-muted-foreground/80 text-[10px]">
+          <span className="text-muted-foreground/80 font-mono text-[10px]">
             {contact.lastContactAt.slice(5)}
           </span>
         )}

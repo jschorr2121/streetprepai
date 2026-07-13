@@ -4,7 +4,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
   Briefcase,
-  CheckCircle2,
   ChevronDown,
   ChevronUp,
   GraduationCap,
@@ -14,7 +13,6 @@ import {
   RefreshCw,
   RotateCcw,
   Save,
-  Sparkles,
   Square,
   Target,
 } from "lucide-react";
@@ -276,21 +274,10 @@ export function MockStudio() {
   const remaining = Math.max(0, MAX_RECORD_SECONDS - elapsed);
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6 px-6 py-8 md:px-8">
-      <header>
-        <div className="text-primary mb-2 flex items-center gap-2 text-sm font-medium">
-          <Mic className="size-4" /> Mock Interview Studio
-        </div>
-        <h1 className="text-3xl font-semibold tracking-tight">Voice-based interview practice</h1>
-        <p className="text-muted-foreground mt-2 max-w-2xl">
-          Pick a mode, record your answer, and Claude scores content and delivery — with the
-          questions a real interviewer would ask next.
-        </p>
-      </header>
-
+    <div className="space-y-6">
       {/* Mode picker */}
       <Card className="p-5">
-        <p className="mb-3 text-sm font-medium">Choose a mode</p>
+        <p className="eyebrow mb-3">Choose a mode</p>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {MODES.map((m) => {
             const Icon = m.icon;
@@ -300,12 +287,15 @@ export function MockStudio() {
                 key={m.id}
                 type="button"
                 onClick={() => pickMode(m.id)}
-                className={`rounded-lg border p-4 text-left transition-colors ${
-                  active ? "border-primary bg-primary/5" : "hover:bg-accent/50"
+                className={`rounded-md border p-4 text-left transition-colors duration-150 ${
+                  active ? "border-primary bg-accent/40" : "hover:bg-accent/30"
                 }`}
               >
                 <div className="mb-1.5 flex items-center gap-2">
-                  <Icon className="text-primary size-4" />
+                  <Icon
+                    className={`size-4 ${active ? "text-primary" : "text-muted-foreground"}`}
+                    aria-hidden
+                  />
                   <p className="text-sm font-medium">{m.label}</p>
                 </div>
                 <p className="text-muted-foreground text-xs leading-relaxed">{m.blurb}</p>
@@ -320,15 +310,9 @@ export function MockStudio() {
         <Card className="space-y-5 p-6">
           <div>
             <div className="mb-2 flex items-center gap-2">
-              <Badge variant="secondary" className="text-[10px] tracking-wider uppercase">
-                {question.mode}
-              </Badge>
-              <Badge variant="outline" className="text-[10px]">
-                {question.topic}
-              </Badge>
-              <Badge variant="outline" className="text-[10px]">
-                {question.difficulty}
-              </Badge>
+              <Badge variant="secondary">{question.mode}</Badge>
+              <Badge variant="outline">{question.topic}</Badge>
+              <Badge variant="outline">{question.difficulty}</Badge>
               <Button
                 variant="ghost"
                 size="sm"
@@ -359,14 +343,14 @@ export function MockStudio() {
           {phase === "recording" && (
             <div className="flex flex-col items-center gap-4 py-2">
               <RecordingIndicator elapsed={elapsed} />
-              <div className="font-mono text-3xl tabular-nums">
+              <div className="tabular text-3xl">
                 {formatTime(elapsed)}
                 <span className="text-muted-foreground text-base">
                   {" "}
                   / {formatTime(MAX_RECORD_SECONDS)}
                 </span>
               </div>
-              <p className="text-muted-foreground text-xs">{remaining}s remaining</p>
+              <p className="text-muted-foreground font-mono text-xs">{remaining}s remaining</p>
               <Button size="lg" variant="destructive" onClick={stopRecording}>
                 <Square className="size-4" /> Stop
               </Button>
@@ -376,16 +360,15 @@ export function MockStudio() {
           {phase === "review" && audioUrl && (
             <div className="space-y-3">
               <p className="text-muted-foreground text-sm">
-                Recorded {formatTime(elapsed)}. Play it back, or submit for scoring.
+                Recorded <span className="tabular">{formatTime(elapsed)}</span>. Play it back, or
+                submit for scoring.
               </p>
               <audio src={audioUrl} controls className="w-full" />
               <div className="flex flex-wrap justify-end gap-2">
                 <Button variant="outline" onClick={reRecord}>
                   <RotateCcw className="size-4" /> Re-record
                 </Button>
-                <Button onClick={submit}>
-                  <Sparkles className="size-4" /> Submit for scoring
-                </Button>
+                <Button onClick={submit}>Submit for scoring</Button>
               </div>
             </div>
           )}
@@ -405,10 +388,8 @@ export function MockStudio() {
       {transcript && (phase === "scoring" || phase === "scored") && (
         <Card className="space-y-2 p-5">
           <div className="flex items-center justify-between">
-            <p className="text-sm font-medium">Transcript</p>
-            <Badge variant="outline" className="text-[10px]">
-              Whisper
-            </Badge>
+            <p className="eyebrow">Transcript</p>
+            <Badge variant="outline">Whisper</Badge>
           </div>
           <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-wrap">
             {transcript}
@@ -429,9 +410,9 @@ function RecordingIndicator({ elapsed }: { elapsed: number }) {
   // mic is hot.
   return (
     <div className="relative grid size-16 place-items-center">
-      <span className="absolute inset-0 animate-ping rounded-full bg-red-500/20" aria-hidden />
-      <span className="relative grid size-8 place-items-center rounded-full bg-red-500">
-        <Mic className="size-4 text-white" />
+      <span className="bg-destructive/20 absolute inset-0 animate-ping rounded-full" aria-hidden />
+      <span className="bg-destructive relative grid size-8 place-items-center rounded-full">
+        <Mic className="text-destructive-foreground size-4" aria-hidden />
       </span>
       <span className="sr-only">Recording, {elapsed} seconds elapsed</span>
     </div>
@@ -471,7 +452,7 @@ function ScorecardView({
           onClick={() => setShowRubric((s) => !s)}
           className="flex w-full items-center justify-between text-left"
         >
-          <p className="text-sm font-medium">Rubric ({scorecard.rubric.length})</p>
+          <p className="eyebrow">Rubric · {scorecard.rubric.length}</p>
           {showRubric ? (
             <ChevronUp className="text-muted-foreground size-4" />
           ) : (
@@ -489,28 +470,22 @@ function ScorecardView({
 
       <div className="grid gap-5 md:grid-cols-2">
         <Card className="space-y-3 p-5">
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="text-primary size-4" />
-            <p className="text-sm font-medium">What worked</p>
-          </div>
+          <p className="eyebrow">What worked</p>
           <ul className="space-y-2 text-sm">
             {scorecard.strengths.map((s, i) => (
               <li key={i} className="flex gap-2">
-                <span className="text-primary">·</span>
+                <span className="text-success">·</span>
                 <span className="leading-relaxed">{s}</span>
               </li>
             ))}
           </ul>
         </Card>
         <Card className="space-y-3 p-5">
-          <div className="flex items-center gap-2">
-            <Target className="text-primary size-4" />
-            <p className="text-sm font-medium">Highest-leverage fixes</p>
-          </div>
+          <p className="eyebrow">Highest-leverage fixes</p>
           <ul className="space-y-2 text-sm">
             {scorecard.improvements.map((s, i) => (
               <li key={i} className="flex gap-2">
-                <span className="text-primary">·</span>
+                <span className="text-destructive">·</span>
                 <span className="leading-relaxed">{s}</span>
               </li>
             ))}
@@ -519,7 +494,7 @@ function ScorecardView({
       </div>
 
       <Card className="space-y-3 p-5">
-        <p className="text-sm font-medium">Follow-up questions a real interviewer would ask</p>
+        <p className="eyebrow">Follow-up questions a real interviewer would ask</p>
         <ol className="marker:text-muted-foreground list-inside list-decimal space-y-2 text-sm">
           {scorecard.follow_up_questions.map((q, i) => (
             <li key={i} className="leading-relaxed">
@@ -535,7 +510,7 @@ function ScorecardView({
           onClick={() => setShowModel((s) => !s)}
           className="flex w-full items-center justify-between text-left"
         >
-          <p className="text-sm font-medium">Model answer (banker-speak)</p>
+          <p className="eyebrow">Model answer · Banker-speak</p>
           {showModel ? (
             <ChevronUp className="text-muted-foreground size-4" />
           ) : (
@@ -571,16 +546,16 @@ function ScoreReadout({ label, score }: { label: string; score: number }) {
   const tone = useMemo(() => scoreTone(score), [score]);
   return (
     <div className="space-y-1.5">
-      <p className="text-muted-foreground text-xs tracking-wider uppercase">{label}</p>
+      <p className="eyebrow">{label}</p>
       <div className="flex items-baseline gap-2">
-        <p className={`text-5xl font-semibold tabular-nums ${tone.text}`}>{score}</p>
-        <p className="text-muted-foreground text-sm">/ 100</p>
-        <Badge variant="secondary" className={`ml-1 ${tone.badge}`}>
+        <p className={`tabular text-4xl font-medium ${tone.text}`}>{score}</p>
+        <p className="text-muted-foreground font-mono text-sm">/ 100</p>
+        <Badge variant={tone.badge} className="ml-1">
           {tone.label}
         </Badge>
       </div>
-      <div className="bg-muted h-2 w-full overflow-hidden rounded-full">
-        <div className={`h-full rounded-full ${tone.bar}`} style={{ width: `${score}%` }} />
+      <div className="bg-muted h-1.5 w-full overflow-hidden">
+        <div className={`h-full ${tone.bar}`} style={{ width: `${score}%` }} />
       </div>
     </div>
   );
@@ -593,7 +568,7 @@ function RubricRow({ item }: { item: RubricItem }) {
       <p className="text-sm leading-snug font-medium">{item.dimension}</p>
       <p className="text-muted-foreground text-sm leading-relaxed">{item.comment}</p>
       <div className="flex items-center gap-2">
-        <span className={`text-sm font-semibold tabular-nums ${tone.text}`}>{item.score}</span>
+        <span className={`tabular text-sm font-medium ${tone.text}`}>{item.score}</span>
       </div>
     </div>
   );
@@ -603,33 +578,33 @@ function scoreTone(score: number): {
   label: string;
   text: string;
   bar: string;
-  badge: string;
+  badge: "success" | "secondary" | "warning" | "destructive";
 } {
   if (score >= 85)
     return {
       label: "strong",
-      text: "text-emerald-700",
-      bar: "bg-emerald-500",
-      badge: "bg-emerald-100 text-emerald-800",
+      text: "text-success",
+      bar: "bg-success",
+      badge: "success",
     };
   if (score >= 70)
     return {
       label: "solid",
-      text: "text-emerald-700",
-      bar: "bg-emerald-400",
-      badge: "bg-emerald-50 text-emerald-700",
+      text: "text-success",
+      bar: "bg-success",
+      badge: "secondary",
     };
   if (score >= 55)
     return {
       label: "developing",
-      text: "text-amber-700",
-      bar: "bg-amber-400",
-      badge: "bg-amber-50 text-amber-800",
+      text: "text-warning",
+      bar: "bg-warning",
+      badge: "warning",
     };
   return {
     label: "needs work",
-    text: "text-red-700",
-    bar: "bg-red-400",
-    badge: "bg-red-50 text-red-700",
+    text: "text-destructive",
+    bar: "bg-destructive",
+    badge: "destructive",
   };
 }

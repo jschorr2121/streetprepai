@@ -13,7 +13,6 @@ import {
   FileText,
   HeartHandshake,
   Building2,
-  Sparkles,
   MessageSquare,
   Layers,
   Briefcase,
@@ -21,7 +20,12 @@ import {
   User,
 } from "lucide-react";
 
-type NavItem = { href: string; label: string; icon: typeof LayoutDashboard };
+type NavItem = {
+  href: string;
+  label: string;
+  icon: typeof LayoutDashboard;
+  soon?: boolean;
+};
 type NavSection =
   | { kind: "item"; item: NavItem }
   | { kind: "group"; label: string; items: NavItem[] };
@@ -33,19 +37,31 @@ const sections: NavSection[] = [
     kind: "group",
     label: "Tools",
     items: [
-      { href: "/tools/chatbot", label: "Chatbot", icon: MessageSquare },
-      { href: "/tools/story-framer", label: "Story Framer", icon: NotebookPen },
-      { href: "/tools/resume-coach", label: "Resume Coach", icon: FileText },
       { href: "/tools/mock-interview", label: "Mock Interview", icon: Mic },
-      { href: "/tools/question-bank", label: "Question Bank", icon: ListChecks },
+      { href: "/tools/resume-coach", label: "Resume Coach", icon: FileText },
       { href: "/tools/relationships", label: "Relationships", icon: HeartHandshake },
       { href: "/tools/applications", label: "Applications", icon: Briefcase },
+      { href: "/tools/chatbot", label: "Chatbot", icon: MessageSquare, soon: true },
+      { href: "/tools/story-framer", label: "Story Framer", icon: NotebookPen, soon: true },
+      { href: "/tools/question-bank", label: "Question Bank", icon: ListChecks, soon: true },
     ],
   },
-  { kind: "item", item: { href: "/firms", label: "Firms", icon: Building2 } },
-  { kind: "item", item: { href: "/sectors", label: "Sectors", icon: Layers } },
-  { kind: "item", item: { href: "/profile", label: "Profile", icon: User } },
-  { kind: "item", item: { href: "/progress", label: "Progress", icon: BarChart3 } },
+  {
+    kind: "group",
+    label: "Reference",
+    items: [
+      { href: "/firms", label: "Firms", icon: Building2 },
+      { href: "/sectors", label: "Sectors", icon: Layers, soon: true },
+    ],
+  },
+  {
+    kind: "group",
+    label: "You",
+    items: [
+      { href: "/profile", label: "Profile", icon: User },
+      { href: "/progress", label: "Progress", icon: BarChart3 },
+    ],
+  },
 ];
 
 function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
@@ -56,15 +72,21 @@ function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
     <li>
       <Link
         href={item.href}
+        aria-current={active ? "page" : undefined}
         className={cn(
-          "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+          "flex items-center gap-2.5 border-l-2 py-1.5 pr-2 pl-4 text-sm transition-colors duration-150",
           active
-            ? "bg-accent text-accent-foreground"
-            : "text-muted-foreground hover:bg-accent/50 hover:text-foreground",
+            ? "border-primary text-primary font-medium"
+            : "text-muted-foreground hover:border-border hover:text-foreground border-transparent",
         )}
       >
-        <Icon className="size-4" />
+        <Icon aria-hidden className="size-4" strokeWidth={1.75} />
         <span>{item.label}</span>
+        {item.soon && (
+          <span className="text-muted-foreground/70 ml-auto font-mono text-[10px] tracking-[0.14em]">
+            SOON
+          </span>
+        )}
       </Link>
     </li>
   );
@@ -73,29 +95,24 @@ function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
 export function AppNav({ email, fullName }: { email: string; fullName?: string | undefined }) {
   const pathname = usePathname();
   return (
-    <aside className="bg-background/40 hidden flex-col border-r backdrop-blur lg:flex lg:w-60 lg:shrink-0">
+    <aside className="bg-background hidden flex-col border-r lg:flex lg:w-60 lg:shrink-0">
       <div className="flex h-14 items-center border-b px-5">
-        <Link href="/dashboard" className="flex items-center gap-2 font-semibold tracking-tight">
-          <div className="bg-primary text-primary-foreground grid size-7 place-items-center rounded-md">
-            <Sparkles className="size-4" />
-          </div>
-          <div className="leading-tight">
-            <span className="text-sm">Street Prep</span>
-            <span className="text-primary ml-1 text-xs font-semibold">AI</span>
-          </div>
+        <Link href="/dashboard" className="flex items-baseline gap-1.5">
+          <span className="font-display text-[17px] leading-none">Street Prep</span>
+          <span className="text-primary font-mono text-[11px] font-medium tracking-[0.14em]">
+            AI
+          </span>
         </Link>
       </div>
-      <nav className="flex-1 overflow-y-auto px-3 py-4">
+      <nav className="flex-1 overflow-y-auto py-5">
         <ul className="space-y-0.5">
           {sections.map((section, i) => {
             if (section.kind === "item") {
               return <NavLink key={section.item.href} item={section.item} pathname={pathname} />;
             }
             return (
-              <li key={`group-${i}`} className="pt-3">
-                <p className="text-muted-foreground/70 mb-1 px-3 text-[10px] font-semibold tracking-wider uppercase">
-                  {section.label}
-                </p>
+              <li key={`group-${i}`} className="pt-5">
+                <p className="eyebrow mb-1.5 pl-4">{section.label}</p>
                 <ul className="space-y-0.5">
                   {section.items.map((item) => (
                     <NavLink key={item.href} item={item} pathname={pathname} />

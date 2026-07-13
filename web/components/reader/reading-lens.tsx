@@ -9,7 +9,6 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import type { Guide, Section } from "@/lib/types";
 import {
-  Sparkles,
   Highlighter,
   X,
   Loader2,
@@ -17,6 +16,8 @@ import {
   NotebookPen,
   BookOpen,
   ArrowLeft,
+  Glasses,
+  TextSearch,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -228,23 +229,24 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
             </Button>
           </div>
           <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
-            <p className="text-muted-foreground mb-3 text-xs font-medium tracking-wide uppercase">
-              Sections
-            </p>
+            <p className="eyebrow mb-3">Contents</p>
             <ul className="space-y-1 text-sm">
               {sections
                 .filter((s) => s.level === 2)
-                .map((s) => (
+                .map((s, i) => (
                   <li key={s.id}>
                     <a
                       href={`#${s.id}`}
                       className={cn(
-                        "-ml-0.5 block border-l-2 py-1.5 pl-3 transition-colors",
+                        "-ml-0.5 flex items-baseline gap-2 border-l-2 py-1.5 pl-3 transition-colors",
                         activeSection === s.id
-                          ? "text-foreground border-primary font-medium"
+                          ? "text-primary border-primary font-medium"
                           : "text-muted-foreground hover:text-foreground hover:border-muted-foreground/50 border-transparent",
                       )}
                     >
+                      <span className="font-mono text-[10px]">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
                       {s.heading}
                     </a>
                   </li>
@@ -259,7 +261,7 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
           <div className="flex min-w-0 items-center gap-3">
             <BookOpen className="text-muted-foreground size-4 shrink-0" />
             <p className="truncate text-sm font-medium">{guide.title}</p>
-            <Badge variant="secondary" className="shrink-0 rounded-full text-xs capitalize">
+            <Badge variant="secondary" className="shrink-0">
               {guide.difficulty}
             </Badge>
           </div>
@@ -269,20 +271,24 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
               size="sm"
               onClick={toggleBeginnerMode}
               className="gap-1.5"
+              aria-pressed={beginnerMode}
             >
-              <Sparkles className="size-3.5" />
-              {beginnerMode ? "Beginner Mode" : "Beginner Mode off"}
+              <Glasses aria-hidden className="size-3.5" />
+              Beginner mode
             </Button>
           </div>
         </div>
 
         <div ref={contentRef} className="mx-auto max-w-2xl px-6 py-10 pb-32">
           <div className="mb-8 border-b pb-6">
-            <h1 className="mb-2 text-3xl font-semibold tracking-tight">{guide.title}</h1>
+            <p className="eyebrow mb-3">
+              {guide.readingMinutes ? `${guide.readingMinutes} min read` : "Guide"}
+            </p>
+            <h1 className="font-display mb-2 text-3xl">{guide.title}</h1>
             <p className="text-muted-foreground">{guide.description}</p>
             <div className="mt-3 flex flex-wrap gap-1.5">
               {guide.tags.map((t) => (
-                <Badge key={t} variant="outline" className="rounded-full text-xs">
+                <Badge key={t} variant="outline">
                   {t}
                 </Badge>
               ))}
@@ -299,19 +305,16 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
             >
               {section.heading !== "Overview" &&
                 (section.level === 2 ? (
-                  <h2 className="mt-8 mb-3 text-2xl font-semibold tracking-tight">
-                    {section.heading}
-                  </h2>
+                  <h2 className="font-display mt-8 mb-3 text-2xl">{section.heading}</h2>
                 ) : (
                   <h3 className="mt-6 mb-2 text-lg font-semibold">{section.heading}</h3>
                 ))}
               {beginnerMode && rewrites[section.id] ? (
-                <div className="border-primary bg-accent/40 relative my-2 rounded-lg border-l-4 p-4">
-                  <div className="text-primary mb-2 flex items-center gap-1.5 text-xs font-medium">
-                    <Sparkles className="size-3" />
+                <div className="border-primary bg-accent/40 relative my-2 rounded-sm border-l-2 p-4">
+                  <div className="text-primary mb-2 flex items-center gap-1.5 font-mono text-[11px] tracking-[0.14em] uppercase">
                     Beginner rewrite
                     {rewrites[section.id]?.streaming && (
-                      <Loader2 className="ml-1 size-3 animate-spin" />
+                      <Loader2 aria-hidden className="ml-1 size-3 animate-spin" />
                     )}
                   </div>
                   <Markdown content={rewrites[section.id]?.content ?? ""} />
@@ -349,10 +352,10 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
             >
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="lens" className="gap-1.5">
-                  <Sparkles className="size-3.5" /> Lens
+                  <TextSearch aria-hidden className="size-3.5" /> Lens
                 </TabsTrigger>
                 <TabsTrigger value="chat" className="gap-1.5">
-                  <MessageSquare className="size-3.5" /> Chat
+                  <MessageSquare aria-hidden className="size-3.5" /> Chat
                 </TabsTrigger>
               </TabsList>
             </Tabs>
@@ -362,10 +365,7 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
               <div className="h-full space-y-4 overflow-y-auto p-4" ref={rightRailRef}>
                 {explanations.length === 0 ? (
                   <div className="text-muted-foreground space-y-3 text-sm">
-                    <div className="text-foreground flex items-center gap-1.5 font-medium">
-                      <Sparkles className="text-primary size-3.5" />
-                      The AI reads with you
-                    </div>
+                    <p className="eyebrow">The AI reads with you</p>
                     <p className="leading-relaxed">
                       Highlight any sentence or paragraph in the guide. Claude will explain it in
                       plain English right here — no jargon wall, no generic summary.
@@ -376,17 +376,19 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
                   </div>
                 ) : (
                   explanations.map((x) => (
-                    <div key={x.id} className="bg-card rounded-xl border p-4 shadow-sm">
+                    <div key={x.id} className="bg-card rounded-md border p-4">
                       <div className="mb-2 flex items-center justify-between gap-2">
-                        <div className="text-primary flex items-center gap-1.5 text-xs font-medium">
-                          <Sparkles className="size-3.5" />
+                        <p className="text-primary font-mono text-[11px] tracking-[0.14em] uppercase">
                           {x.sectionHeading ?? "Lens"}
-                        </div>
+                        </p>
                         {x.streaming && (
-                          <Loader2 className="text-muted-foreground size-3 animate-spin" />
+                          <Loader2
+                            aria-hidden
+                            className="text-muted-foreground size-3 animate-spin"
+                          />
                         )}
                       </div>
-                      <blockquote className="text-muted-foreground border-border mb-3 line-clamp-3 border-l-2 pl-2 text-xs italic">
+                      <blockquote className="text-muted-foreground border-border mb-3 line-clamp-3 border-l-2 pl-2 font-serif text-xs italic">
                         “{x.selection}”
                       </blockquote>
                       {x.answer ? (
@@ -413,43 +415,39 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
           className="fixed z-50 -translate-x-1/2 -translate-y-full"
           style={{ left: popover.x, top: popover.y }}
         >
-          <div className="bg-popover text-popover-foreground flex items-center gap-1 rounded-full border px-1 py-1 shadow-lg">
-            <Button
-              size="sm"
-              variant="ghost"
-              className="h-8 gap-1.5 rounded-full"
-              onClick={explainSelection}
-            >
-              <Sparkles className="text-primary size-3.5" />
+          <div className="bg-popover text-popover-foreground flex items-center gap-1 rounded-md border p-1 shadow-md">
+            <Button size="sm" variant="ghost" className="h-8 gap-1.5" onClick={explainSelection}>
+              <TextSearch aria-hidden className="text-primary size-3.5" />
               Explain
             </Button>
             <div className="bg-border h-5 w-px" />
             <Button
               size="sm"
               variant="ghost"
-              className="h-8 gap-1.5 rounded-full"
+              className="h-8 gap-1.5"
               onClick={() => setPopover(null)}
             >
-              <Highlighter className="size-3.5" />
+              <Highlighter aria-hidden className="size-3.5" />
               Highlight
             </Button>
             <div className="bg-border h-5 w-px" />
             <Button
               size="sm"
               variant="ghost"
-              className="h-8 gap-1.5 rounded-full"
+              className="h-8 gap-1.5"
               onClick={() => setPopover(null)}
             >
-              <NotebookPen className="size-3.5" />
+              <NotebookPen aria-hidden className="size-3.5" />
               Note
             </Button>
             <Button
               size="icon"
               variant="ghost"
-              className="h-8 w-8 rounded-full"
+              className="h-8 w-8"
               onClick={() => setPopover(null)}
+              aria-label="Dismiss"
             >
-              <X className="size-3.5" />
+              <X aria-hidden className="size-3.5" />
             </Button>
           </div>
         </div>

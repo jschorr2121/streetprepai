@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Markdown } from "@/components/reader/markdown";
-import { Sparkles, Loader2, Building2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import type { Firm } from "@/lib/types";
 
 export function FirmPrep({ firm }: { firm: Firm }) {
@@ -30,82 +30,70 @@ export function FirmPrep({ firm }: { firm: Firm }) {
         setPrep(acc);
       }
     } catch {
-      setPrep(
-        "Sorry, couldn't reach Claude. Make sure ANTHROPIC_API_KEY is set.",
-      );
+      setPrep("Sorry, couldn't reach Claude. Make sure ANTHROPIC_API_KEY is set.");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 md:px-8 py-8">
-      <header className="mb-6">
-        <div className="flex items-center gap-2 text-primary text-sm font-medium mb-2">
-          <Building2 className="size-4" /> Firm prep
-        </div>
-        <div className="flex items-start justify-between gap-4 flex-wrap">
+    <div className="mx-auto max-w-4xl px-6 py-8 md:px-10">
+      <header className="border-b pb-6">
+        <p className="eyebrow">Firm prep</p>
+        <div className="mt-2 flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-semibold tracking-tight">{firm.name}</h1>
-            <p className="text-sm text-muted-foreground mt-1">{firm.hq}</p>
+            <h1 className="font-display text-3xl">{firm.name}</h1>
+            <p className="text-muted-foreground mt-1 font-mono text-xs">{firm.hq}</p>
           </div>
-          <Badge variant="outline" className="capitalize">
-            {firm.tier.replace("-", " ")}
-          </Badge>
+          <Badge variant="outline">{firm.tier.replace("-", " ")}</Badge>
         </div>
-        <p className="mt-4 text-muted-foreground leading-relaxed max-w-3xl">
+        <p className="text-muted-foreground mt-4 max-w-3xl text-sm leading-relaxed">
           {firm.description}
         </p>
       </header>
 
-      <Card className="p-6">
-        <div className="flex items-start justify-between gap-3 mb-4">
+      <Card className="mt-8 gap-0 rounded-md p-6">
+        <div className="mb-4 flex items-start justify-between gap-3">
           <div>
-            <h2 className="text-lg font-semibold flex items-center gap-1.5">
-              <Sparkles className="size-4 text-primary" />
-              Pre-interview prep sheet
-            </h2>
-            <p className="text-sm text-muted-foreground mt-1">
-              Claude synthesizes the latest earnings, recent deals, and
-              interview-ready talking points.
+            <h2 className="eyebrow">Pre-interview prep sheet</h2>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Claude synthesizes the latest earnings, recent deals, and interview-ready talking
+              points.
             </p>
           </div>
           <Button size="sm" onClick={generate} disabled={loading}>
             {loading ? (
               <>
-                <Loader2 className="size-3.5 mr-1.5 animate-spin" />
+                <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
                 Generating…
               </>
             ) : prep ? (
               "Regenerate"
             ) : (
-              <>
-                <Sparkles className="size-3.5 mr-1.5" /> Generate
-              </>
+              "Generate"
             )}
           </Button>
         </div>
 
         {firm.latestEarningsRaw && (
           <details className="mb-4">
-            <summary className="cursor-pointer text-xs text-muted-foreground hover:text-foreground">
+            <summary className="text-muted-foreground hover:text-foreground cursor-pointer font-mono text-xs">
               Source data (latest earnings snapshot)
             </summary>
-            <p className="text-xs text-muted-foreground whitespace-pre-wrap leading-relaxed mt-2">
+            <p className="text-muted-foreground mt-2 text-xs leading-relaxed whitespace-pre-wrap">
               {firm.latestEarningsRaw}
             </p>
           </details>
         )}
 
         {prep ? (
-          <div className="rounded-lg border bg-accent/30 p-5">
+          <div className="bg-accent/30 rounded-md border p-5">
             <Markdown content={prep} />
           </div>
         ) : (
-          <div className="rounded-lg border border-dashed bg-muted/30 px-4 py-10 text-sm text-muted-foreground text-center">
-            Click Generate to have Claude build a custom prep sheet before your
-            {" "}
-            {firm.name} interview.
+          <div className="bg-muted/30 text-muted-foreground rounded-md border border-dashed px-4 py-10 text-center text-sm">
+            Click Generate to have Claude build a custom prep sheet before your {firm.name}{" "}
+            interview.
           </div>
         )}
       </Card>

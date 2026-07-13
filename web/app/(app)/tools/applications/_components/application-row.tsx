@@ -15,6 +15,7 @@ import {
   deleteApplicationAction,
   updateApplicationAction,
 } from "@/app/(app)/tools/applications/actions";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { AppliedJob, AppliedJobStage } from "@/lib/types";
 import { APPLIED_JOB_STAGES } from "@/lib/validation/schemas/applied-jobs";
@@ -28,14 +29,17 @@ const STAGE_LABELS: Record<AppliedJobStage, string> = {
   rejected: "Rejected",
 };
 
-// Colour tokens per stage (border-l accent only).
-const STAGE_ACCENT: Record<AppliedJobStage, string> = {
-  shortlist: "border-l-border",
-  applied: "border-l-primary/40",
-  interview: "border-l-primary",
-  superday: "border-l-primary",
-  offer: "border-l-primary",
-  rejected: "border-l-destructive/40",
+// Ledger tag per stage — semantic Badge variants, no decorative color.
+const STAGE_BADGE: Record<
+  AppliedJobStage,
+  "outline" | "secondary" | "default" | "warning" | "success" | "destructive"
+> = {
+  shortlist: "outline",
+  applied: "secondary",
+  interview: "default",
+  superday: "warning",
+  offer: "success",
+  rejected: "destructive",
 };
 
 type Props = {
@@ -71,25 +75,26 @@ export function ApplicationRow({ application }: Props) {
 
   return (
     <div
-      className={`bg-card border-border hover:border-primary/20 flex items-start gap-4 rounded-lg border border-l-4 p-4 transition-colors ${STAGE_ACCENT[application.stage]}`}
+      className="hover:bg-accent/30 flex items-start gap-4 p-4 transition-colors duration-150"
       data-testid="application-row"
       data-application-id={application.id}
     >
       {/* Main content */}
       <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-          <span className="text-foreground font-semibold">{application.firm}</span>
+        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+          <span className="text-foreground font-medium">{application.firm}</span>
           <span className="text-muted-foreground text-sm">·</span>
           <span className="text-foreground text-sm">{application.role}</span>
           {application.group && (
             <span className="text-muted-foreground text-xs">({application.group})</span>
           )}
+          <Badge variant={STAGE_BADGE[application.stage]}>{STAGE_LABELS[application.stage]}</Badge>
         </div>
 
         {/* Metadata row */}
-        <div className="text-muted-foreground mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs">
+        <div className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-0.5 font-mono text-[11px]">
           {application.deadline && (
-            <span>Deadline: {new Date(application.deadline).toLocaleDateString()}</span>
+            <span>due {new Date(application.deadline).toLocaleDateString()}</span>
           )}
           {application.url && (
             <a
@@ -98,12 +103,12 @@ export function ApplicationRow({ application }: Props) {
               rel="noreferrer"
               className="hover:text-foreground inline-flex items-center gap-0.5 underline underline-offset-2"
             >
-              Job link
+              job link
               <ExternalLink className="size-3" aria-hidden />
             </a>
           )}
           {application.addedAt && (
-            <span>Added: {new Date(application.addedAt).toLocaleDateString()}</span>
+            <span>added {new Date(application.addedAt).toLocaleDateString()}</span>
           )}
         </div>
 
@@ -120,7 +125,7 @@ export function ApplicationRow({ application }: Props) {
           value={application.stage}
           disabled={isPending}
           onChange={(e) => handleStageChange(e.target.value as AppliedJobStage)}
-          className="border-input bg-background text-foreground focus-visible:ring-ring h-7 rounded-md border px-2 py-0.5 text-xs shadow-sm focus-visible:ring-1 focus-visible:outline-none disabled:opacity-50"
+          className="border-input bg-card text-foreground focus-visible:ring-ring h-7 rounded-sm border px-2 py-0.5 text-xs focus-visible:ring-1 focus-visible:outline-none disabled:opacity-50"
         >
           {APPLIED_JOB_STAGES.map((s) => (
             <option key={s} value={s}>

@@ -63,14 +63,15 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
   // OAuth callback runs before a session exists — never gate or redirect it.
   if (isPassthrough(pathname)) return response;
 
-  // Unauthenticated: only auth routes are reachable; everything else → /login.
+  // Unauthenticated: the marketing landing and auth routes are reachable;
+  // everything else → /login.
   if (!user) {
-    if (isAuthRoute(pathname)) return response;
+    if (pathname === "/" || isAuthRoute(pathname)) return response;
     return redirectTo(request, DEFAULT_SIGNED_OUT_ROUTE);
   }
 
-  // Authenticated on an auth route → straight to the app.
-  if (isAuthRoute(pathname)) {
+  // Authenticated on the landing or an auth route → straight to the app.
+  if (pathname === "/" || isAuthRoute(pathname)) {
     return redirectTo(request, DEFAULT_SIGNED_IN_ROUTE);
   }
 

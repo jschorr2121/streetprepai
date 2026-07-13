@@ -2,16 +2,7 @@
 
 import { useCallback, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
-import {
-  AlertCircle,
-  ArrowRight,
-  CheckCircle2,
-  FileText,
-  Loader2,
-  RotateCcw,
-  Sparkles,
-  Upload,
-} from "lucide-react";
+import { AlertCircle, ArrowRight, CheckCircle2, Loader2, RotateCcw, Upload } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -119,18 +110,7 @@ export function ResumeCoach() {
   const appliedCount = useMemo(() => Object.values(applied).filter(Boolean).length, [applied]);
 
   return (
-    <div className="mx-auto max-w-6xl space-y-6 px-6 py-8 md:px-8">
-      <header>
-        <div className="text-primary mb-2 flex items-center gap-2 text-sm font-medium">
-          <FileText className="size-4" /> Resume Coach
-        </div>
-        <h1 className="text-3xl font-semibold tracking-tight">Banker-speak your resume</h1>
-        <p className="text-muted-foreground mt-2 max-w-2xl">
-          Drop a PDF or paste your resume. Claude rewrites each bullet in banker-style, flags weak
-          items, and lets you apply changes one by one.
-        </p>
-      </header>
-
+    <div className="space-y-6">
       {!hasResult && (
         <Card className="p-6">
           <Tabs defaultValue="upload">
@@ -149,7 +129,7 @@ export function ResumeCoach() {
                   const f = e.dataTransfer.files?.[0];
                   if (f) void onFile(f);
                 }}
-                className="hover:bg-accent/40 w-full rounded-lg border-2 border-dashed p-10 text-center transition-colors"
+                className="hover:bg-accent/30 w-full rounded-md border border-dashed p-10 text-center transition-colors duration-150"
               >
                 <Upload className="text-muted-foreground mx-auto size-6" />
                 <p className="mt-3 font-medium">
@@ -172,7 +152,8 @@ export function ResumeCoach() {
               {rawText && (
                 <div className="space-y-2">
                   <p className="text-muted-foreground text-sm">
-                    Extracted preview ({rawText.length.toLocaleString()} chars):
+                    Extracted preview (
+                    <span className="tabular">{rawText.length.toLocaleString()}</span> chars):
                   </p>
                   <Textarea
                     value={rawText}
@@ -181,11 +162,7 @@ export function ResumeCoach() {
                   />
                   <div className="flex justify-end">
                     <Button onClick={() => void runCritique(rawText)} disabled={critiquing}>
-                      {critiquing ? (
-                        <Loader2 className="size-4 animate-spin" />
-                      ) : (
-                        <Sparkles className="size-4" />
-                      )}
+                      {critiquing && <Loader2 className="size-4 animate-spin" />}
                       Critique &amp; rewrite
                     </Button>
                   </div>
@@ -205,11 +182,7 @@ export function ResumeCoach() {
                   onClick={() => void runCritique(pasteValue)}
                   disabled={critiquing || !pasteValue.trim()}
                 >
-                  {critiquing ? (
-                    <Loader2 className="size-4 animate-spin" />
-                  ) : (
-                    <Sparkles className="size-4" />
-                  )}
+                  {critiquing && <Loader2 className="size-4 animate-spin" />}
                   Critique &amp; rewrite
                 </Button>
               </div>
@@ -224,10 +197,10 @@ export function ResumeCoach() {
             <div className="flex items-center gap-4">
               <div>
                 <p className="text-2xl font-semibold">
-                  {weakBullets}
+                  <span className="tabular">{weakBullets}</span>
                   <span className="text-muted-foreground text-base font-normal">
                     {" "}
-                    / {totalBullets} bullets need work
+                    / <span className="tabular">{totalBullets}</span> bullets need work
                   </span>
                 </p>
                 {result.summary.top_issues.length > 0 && (
@@ -274,9 +247,7 @@ export function ResumeCoach() {
               ))}
             </div>
             <aside className="space-y-3">
-              <h2 className="text-muted-foreground text-sm font-medium tracking-wider uppercase">
-                Edited preview
-              </h2>
+              <h2 className="eyebrow">Edited preview</h2>
               <Card className="sticky top-6 max-h-[80vh] overflow-y-auto p-5">
                 <PreviewPane result={result} applied={applied} />
               </Card>
@@ -336,37 +307,30 @@ function BulletDiff({
     <Card className="space-y-3 p-4">
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
-          <div className="text-muted-foreground flex items-center gap-2 text-xs">
-            <span className="tracking-wider uppercase">Original</span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="eyebrow">Before</span>
             {bullet.weakness_flags.map((f) => (
-              <Badge key={f} variant="outline" className="h-5 py-0 text-[10px]">
+              <Badge key={f} variant="outline">
                 {FLAG_LABELS[f]}
               </Badge>
             ))}
           </div>
-          <p className="text-sm leading-relaxed">{bullet.original}</p>
+          <p className="bg-destructive/5 rounded-sm p-3 text-sm leading-relaxed">
+            {bullet.original}
+          </p>
         </div>
         <div className="space-y-2">
-          <div className="text-muted-foreground flex items-center gap-2 text-xs">
-            <span className="tracking-wider uppercase">
-              {lowConfidence ? "Guidance" : "Rewrite"}
-            </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="eyebrow">{lowConfidence ? "Guidance" : "After"}</span>
             {lowConfidence ? (
-              <Badge
-                variant="outline"
-                className="h-5 border-amber-300 py-0 text-[10px] text-amber-700"
-              >
-                low confidence
-              </Badge>
+              <Badge variant="warning">low confidence</Badge>
             ) : (
-              <Badge variant="secondary" className="h-5 py-0 text-[10px]">
-                {bullet.confidence}
-              </Badge>
+              <Badge variant="secondary">{bullet.confidence}</Badge>
             )}
           </div>
           <p
-            className={`text-sm leading-relaxed ${
-              lowConfidence ? "text-amber-900" : "font-medium"
+            className={`rounded-sm p-3 text-sm leading-relaxed ${
+              lowConfidence ? "bg-warning/5" : "bg-success/5 font-medium"
             }`}
           >
             {bullet.rewritten}
