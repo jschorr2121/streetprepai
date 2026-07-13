@@ -121,9 +121,9 @@ Addressed security and quality findings from the live security + engineering rev
 - **Copyright posture set** (curriculum.md §7): commercial BIWS/M&I material = taxonomy/sequencing reference only, all shipped content authored originally; personal friend docs = design inputs pending permission (logged in jakes-tasks.md).
 - **Resolves the open question** on chapter-structure migration: keep guides as the reading unit, reorganize under chapters as section seeds, author the gap sections (biggest gaps: ch. 1–2, ch. 8 §5–8, ch. 14).
 
-### Unit 11 — Learning-flow curriculum + Question Bank (implemented 2026-07-12; verification owed)
+### Unit 11 — Learning-flow curriculum + Question Bank (completed + verified live 2026-07-12)
 
-Full implementation of the curriculum + daily workflow so a new user is carried end-to-end. **Code + content complete; toolchain verification (typecheck/lint/test/build) is BLOCKED — see caveat at end.**
+Full implementation of the curriculum + daily workflow so a new user is carried end-to-end. Code + content complete, migrations applied live, toolchain verified, production deployed.
 
 **Curriculum spine (static):**
 - `lib/curriculum/chapters.ts` — 16-chapter manifest (sections, slugs, spine-vs-reference kind, gated flag, per-chapter tool exercise, ⭐ advanced sections). `GATE_PASS_THRESHOLD = 0.85`.
@@ -147,7 +147,7 @@ Full implementation of the curriculum + daily workflow so a new user is carried 
 **UI:**
 - `/learn` chapter grid (continue-where-you-left-off), `/learn/[chapter]`, `/learn/[chapter]/drill/[section]`, `/learn/[chapter]/practice` (gate). Question Bank studio (daily interleaved drill + due queue, practice-by-topic, mental-math generators). Dashboard rebuilt on real data (cycle widget, weak areas, due count, continue-flow). Advanced-track toggle in onboarding + profile (schema, action, `setOnboarded`/`updateProfile` all wired). Section reading reuses the existing `/guide/[slug]` Reading-Lens reader.
 
-**⚠️ Verification blocked (environment, not code):** `pnpm typecheck/lint/test/build` all die with `ETIMEDOUT` reading `node_modules` — the repo is in iCloud (`~/Documents`) and files get evicted. Static checks pass (all cross-module imports/exports resolve; the `"use server"` non-async-export pattern matches the Unit 6 canonical action that builds). A real toolchain pass + applying migrations `0006`/`0007` is owed — logged in `jakes-tasks.md` (🔴). Root fix: move the repo out of iCloud.
+**✅ Verified live (2026-07-12):** repo moved out of iCloud to `~/Developer/InterviewPrep` (root cause of the prior `ETIMEDOUT` toolchain failures — confirmed, `pnpm install`/`typecheck` now run clean). Migrations `0006`/`0007` applied via `supabase db query --linked` (dashboard SQL editor rejected 0007 as too large): `qbank_questions` = 532 rows, `qbank_followups` = 1,199 rows. `pnpm typecheck` caught 3 real type errors (dashboard weak-topics lookup, question-bank topic-predicate, onboarding `advancedTrack` zod `.default()` diverging resolver input/output types) — fixed in commit `18dabe3`. Vercel Root Directory was fixed to `web` by Jake; production deploy is green (`dpl_7CkHvXL2a55ZKnFJT7zBmDb79ims`).
 
 ### Chapter 10 (Valuation) gap sections authored (completed 2026-07-12)
 - Wrote 3 missing `content/guides/*.md` sections referenced in `lib/curriculum/chapters.ts`'s `valuation` chapter: `metrics-and-multiples.md` (EBIT/EBITDA/net income/FCF, multiples-as-Value=CF/(r-g)-shorthand, two-company margin worked example), `football-field-and-interpretation.md` (assembling comps+precedents+DCF into a range, valuation-hierarchy-by-context, worked football-field example), `other-methodologies-and-sector-multiples.md` (advanced/elective: SOTP, liquidation/NAV, M&A premiums analysis, LBO-as-floor, sector multiples survey — EBITDAR/EBITDAX/FFO/AFFO/P-TBV/per-subscriber).

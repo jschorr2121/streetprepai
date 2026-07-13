@@ -12,32 +12,19 @@ needs action it can't perform itself.
 
 ## 🔴 Needed now (blocks the current unit from working end-to-end)
 
-- [ ] **Fix the Vercel Root Directory → `web`** (blocks ALL production deploys, pre-existing).
-  Every git-triggered deploy since commit `f8e1dc1` has failed with *"No Next.js version
-  detected… check your Root Directory setting"* — the Next.js app is in `web/`, but the
-  Vercel project's Root Directory is the repo root (no `package.json` there). The last
-  *successful* production build (`f8e1dc1`, still what's live) was a direct `vercel` CLI
-  deploy from inside `web/`; every GitHub-integration deploy since — including the Unit 1–7
-  squash `15a4866` and the Unit 11 curriculum push `e806c19` — errored at the "detect
-  framework" step and never built the code. Fix: Vercel dashboard → Project `web` → Settings
-  → Build & Deployment → **Root Directory = `web`** → redeploy. (My push did NOT break prod —
-  Vercel deploys are atomic, so the failed build left the old deployment serving.)
-- [ ] **Unpause the Supabase project** — per the UI-overhaul notes the project is paused, so
-  every DB-backed page (dashboard, learn, question-bank, profile) 500s regardless of the
-  Vercel fix. Resume it in the Supabase dashboard before promoting anything to production.
-- [ ] **Apply migrations `0006_curriculum.sql` + `0007_qbank_seed.sql`** (Unit 11 —
-  curriculum/Question Bank) — creates the qbank/progress/mastery tables + `profiles.advanced_track`,
-  then seeds **532 questions + 1,199 follow-ups**. Without this the learn gates, section drills,
-  and Question Bank return "no questions available." Apply via the Supabase dashboard SQL editor
-  or `pnpm db:migrate` from an environment with DB access (remote instance was unreachable /
-  paused from this dev box). Regenerate the seed anytime with `node scripts/build-qbank-seed.mjs`.
-- [ ] **Run the verification gates from a LOCAL (non-iCloud) checkout** (Unit 11) — `pnpm typecheck`,
-  `pnpm lint`, `pnpm test`, `pnpm build` could **not** be run in this session: the repo lives in
-  `~/Documents` (iCloud) and every toolchain invocation died with `ETIMEDOUT` reading `node_modules`
-  (files evicted by iCloud — the known issue in project memory). The code was statically checked
-  (all imports/exports resolve; the `"use server"` export pattern mirrors the Unit 6 canonical
-  action that builds), but a real tsc/lint/test/build pass is still owed. **Fix: move the repo out
-  of iCloud** (e.g. `~/dev/InterviewPrep`) so the toolchain stops timing out — this keeps recurring.
+- [ ] **Recreate the `design/ui-overhaul` git worktree in `~/Developer/InterviewPrep`** —
+  the repo moved out of iCloud (see Done below) but that worktree still lives at the old
+  `~/Documents/InterviewPrep/.claude/worktrees/ui-overhaul` path, since git won't let the
+  same branch be checked out in two worktrees at once. Once you're done using the old copy,
+  delete it, then run `git worktree add .claude/worktrees/ui-overhaul design/ui-overhaul`
+  from `~/Developer/InterviewPrep`. One uncommitted local-only change was dropped in the
+  move (`.gstack/browse-audit.jsonl`, a QA log, saved to
+  `/private/tmp/.../scratchpad/browse-audit.diff` — low value, safe to lose).
+- [ ] **Regenerate `web/.env.example`** — it was an unrecoverable dead iCloud placeholder
+  (not tracked by git — `web/.gitignore`'s `.env*` pattern also catches the example file) and
+  was dropped during the move. Not blocking (it's just a template), but worth recreating from
+  the vars actually read across `lib/env.ts` / server actions so new setups have something to
+  copy from.
 
 > Reminder: when you deploy, make sure the **new Upstash creds + the Supabase
 > auth settings are also set in Vercel project env**, not just `web/.env.local`.
@@ -97,3 +84,21 @@ needs action it can't perform itself.
 - [x] **Disable "Confirm email" in Supabase** (dev) — done by Jake.
 - [x] **Configure Google OAuth** (Supabase provider + Google Cloud redirect URI) — done by Jake.
 - [x] **Set Auth URL configuration** (Site URL + Redirect URLs) — done by Jake.
+- [x] **Fix Vercel Root Directory → `web`** — done by Jake in the dashboard. Also required
+  deploying via CLI from the repo root (not from inside `web/`) since a CLI deploy run from
+  `web/` double-applies the project's Root Directory setting and can't find `app/`.
+- [x] **Supabase project reachable again** — confirmed live 2026-07-12 via `supabase db query
+  --linked` (no longer paused, or was resumed already).
+- [x] **Migrations 0006 + 0007 applied** — confirmed live 2026-07-12: `qbank_questions` = 532
+  rows, `qbank_followups` = 1,199 rows. Applied via `supabase db query --linked -f
+  supabase/migrations/0007_qbank_seed.sql` (the Supabase dashboard SQL editor rejected 0007 as
+  too large to paste).
+- [x] **Move the repo out of iCloud** — now at `~/Developer/InterviewPrep` (was
+  `~/Documents/InterviewPrep`, iCloud-synced). `pnpm install` + `pnpm typecheck` both ran clean
+  with zero `ETIMEDOUT` errors, confirming iCloud eviction was the root cause. The old copy is
+  still at `~/Documents/InterviewPrep` — delete it once you've confirmed everything works from
+  the new location (also recreates the `ui-overhaul` worktree, see 🔴 above).
+- [x] **Run the verification gates from a LOCAL checkout** — `pnpm typecheck` ran clean after
+  fixing 3 real type errors it caught (dashboard weak-topics lookup, question-bank topic
+  filter, onboarding `advancedTrack` zod default) — commit `18dabe3`. These were silently
+  failing every production build even after the Root Directory fix; production is now green.
