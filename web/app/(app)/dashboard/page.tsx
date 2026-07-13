@@ -14,6 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ProductTour, type TourStep } from "@/components/tour/product-tour";
 import { requireUser } from "@/lib/auth/server";
 import { withUser } from "@/lib/db/client";
 import { getProfile } from "@/lib/db/queries/profile";
@@ -31,6 +32,47 @@ import { weakestTopics } from "@/lib/mastery/mastery";
 export const metadata = { title: "Dashboard — Street Prep AI" };
 
 const TOPIC_LABEL = new Map<string, string>(chapters.map((c) => [c.topic, c.shortTitle]));
+
+const TOUR_STEPS: TourStep[] = [
+  {
+    selector: '[data-tour="/learn"]',
+    title: "The learning flow",
+    description:
+      "Sixteen chapters from recruiting timeline through technicals to superday. This is your spine — work through it in order.",
+  },
+  {
+    selector: '[data-tour="cycle-widget"]',
+    title: "Your recruiting cycle",
+    description: "Based on your semester, this tells you what to focus on right now.",
+  },
+  {
+    selector: '[data-tour="continue-flow"]',
+    title: "Pick up where you left off",
+    description: "Always shows your next section — one click to jump back in.",
+  },
+  {
+    selector: '[data-tour="due-reviews"]',
+    title: "Spaced review",
+    description:
+      "Questions you missed resurface here every few days until you've nailed them twice in a row.",
+  },
+  {
+    selector: '[data-tour="weak-areas"]',
+    title: "Your weakest areas",
+    description: "Mastery is tracked per topic — drill straight into whatever needs the most work.",
+  },
+  {
+    selector: '[data-tour="/tools/applications"]',
+    title: "Application Tracker",
+    description: "Log every firm you're applying to and track each one through the pipeline.",
+  },
+  {
+    selector: '[data-tour="/profile"]',
+    title: "Your profile",
+    description:
+      "Target firms, roles, and the advanced-track toggle for PE-style questions all live here.",
+  },
+];
 
 export default async function DashboardPage() {
   const user = await requireUser();
@@ -61,8 +103,10 @@ export default async function DashboardPage() {
         <p className="text-muted-foreground mt-1">Here&apos;s where to spend your time today.</p>
       </header>
 
+      <ProductTour steps={TOUR_STEPS} active={!profile.tourCompletedAt} />
+
       {/* Recruiting cycle widget */}
-      <Card className="border-primary/30 bg-primary/5 mb-6 p-5">
+      <Card data-tour="cycle-widget" className="border-primary/30 bg-primary/5 mb-6 p-5">
         <div className="flex items-start gap-3">
           <CompassIcon className="text-primary mt-0.5 size-5 shrink-0" />
           <div className="flex-1">
@@ -86,7 +130,7 @@ export default async function DashboardPage() {
 
       <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
         {/* Continue learning */}
-        <Card className="flex flex-col p-5 md:col-span-2">
+        <Card data-tour="continue-flow" className="flex flex-col p-5 md:col-span-2">
           <div className="mb-3 flex items-center gap-2">
             <BookOpenText className="text-primary size-4" />
             <p className="text-sm font-medium">Continue the flow</p>
@@ -125,7 +169,7 @@ export default async function DashboardPage() {
         </Card>
 
         {/* Due reviews */}
-        <Card className="flex flex-col p-5">
+        <Card data-tour="due-reviews" className="flex flex-col p-5">
           <div className="mb-3 flex items-center gap-2">
             <CalendarClock className="text-primary size-4" />
             <p className="text-sm font-medium">Due for review</p>
@@ -148,7 +192,7 @@ export default async function DashboardPage() {
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {/* Weak areas */}
-        <Card className="p-5">
+        <Card data-tour="weak-areas" className="p-5">
           <div className="mb-3 flex items-center gap-2">
             <TrendingDown className="text-primary size-4" />
             <h3 className="font-semibold">Your weakest areas</h3>

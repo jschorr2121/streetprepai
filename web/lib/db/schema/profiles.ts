@@ -15,5 +15,6 @@ export const profiles = pgTable("profiles", {
   currentSemester: text("current_semester"),
   advancedTrack: boolean("advanced_track").notNull().default(false),
   onboardedAt: timestamp("onboarded_at", { withTimezone: true, mode: "string" }),
+  tourCompletedAt: timestamp("tour_completed_at", { withTimezone: true, mode: "string" }),
   updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" }).defaultNow(),
 });

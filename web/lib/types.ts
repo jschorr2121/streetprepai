@@ -169,6 +169,7 @@ export type Profile = {
   skills: string[];
   advancedTrack?: boolean;
   onboardedAt?: string;
+  tourCompletedAt?: string;
   updatedAt?: string;
 };
 

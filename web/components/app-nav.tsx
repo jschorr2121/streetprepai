@@ -72,6 +72,7 @@ function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
     <li>
       <Link
         href={item.href}
+        data-tour={item.href}
         aria-current={active ? "page" : undefined}
         className={cn(
           "flex items-center gap-2.5 border-l-2 py-1.5 pr-2 pl-4 text-sm transition-colors duration-150",

@@ -24,6 +24,7 @@ function mapRow(r: typeof profiles.$inferSelect): Profile {
     skills: r.skills ?? [],
     advancedTrack: r.advancedTrack,
     onboardedAt: r.onboardedAt ?? undefined,
+    tourCompletedAt: r.tourCompletedAt ?? undefined,
     updatedAt: r.updatedAt ?? undefined,
   };
 }
@@ -121,6 +122,15 @@ export async function updateProfile(
 
   const row = rows[0];
   return row ? mapRow(row) : emptyProfile(userId);
+}
+
+// Stamps tour_completed_at so the first-time spotlight walkthrough shows once
+// and never again. Run inside `withUser` so RLS scopes the write.
+export async function markTourCompleted(db: Executor, userId: string): Promise<void> {
+  await db
+    .update(profiles)
+    .set({ tourCompletedAt: new Date().toISOString() })
+    .where(eq(profiles.userId, userId));
 }
 
 export type SetOnboardedFields = {
