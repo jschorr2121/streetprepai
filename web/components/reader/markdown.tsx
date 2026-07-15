@@ -1,5 +1,14 @@
 import { cn } from "@/lib/utils";
 
+// Much of what renders here is model output — treat link targets as untrusted
+// and only allow benign schemes (blocks javascript:/data:/vbscript: URIs).
+function safeHref(href: string): string | null {
+  const trimmed = href.trim();
+  if (/^(https?:|mailto:)/i.test(trimmed)) return trimmed;
+  if (trimmed.startsWith("/") || trimmed.startsWith("#")) return trimmed;
+  return null;
+}
+
 function renderInline(text: string, key: number): React.ReactNode {
   const parts: React.ReactNode[] = [];
   const regex = /\*\*([^*]+)\*\*|\*([^*]+)\*|`([^`]+)`|\[([^\]]+)\]\(([^)]+)\)/g;
@@ -21,16 +30,23 @@ function renderInline(text: string, key: number): React.ReactNode {
           {match[3]}
         </code>,
       );
-    else if (match[4] && match[5])
-      parts.push(
-        <a
-          key={`${key}-a-${idx++}`}
-          href={match[5]}
-          className="text-primary underline underline-offset-4"
-        >
-          {match[4]}
-        </a>,
-      );
+    else if (match[4] && match[5]) {
+      const href = safeHref(match[5]);
+      if (href) {
+        parts.push(
+          <a
+            key={`${key}-a-${idx++}`}
+            href={href}
+            className="text-primary underline underline-offset-4"
+          >
+            {match[4]}
+          </a>,
+        );
+      } else {
+        // Disallowed scheme: render the label as plain text, drop the link.
+        parts.push(<span key={`${key}-a-${idx++}`}>{match[4]}</span>);
+      }
+    }
     last = regex.lastIndex;
   }
   if (last < text.length) {
