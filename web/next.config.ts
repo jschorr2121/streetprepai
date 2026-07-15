@@ -1,3 +1,4 @@
+import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -86,4 +87,17 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// Sentry build plugin: uploads source maps + widens server instrumentation.
+// Source-map upload only activates when SENTRY_AUTH_TOKEN (+ org/project) are
+// set in the build environment; without them this wrapper is a no-op, so local
+// and CI builds work unchanged.
+export default withSentryConfig(nextConfig, {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  silent: true,
+  // Strip uploaded source maps from the client bundle so app code isn't
+  // exposed in production, while Sentry still gets readable stack traces.
+  sourcemaps: { deleteSourcemapsAfterUpload: true },
+  disableLogger: true,
+});
