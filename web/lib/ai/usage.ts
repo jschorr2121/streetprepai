@@ -17,6 +17,8 @@ export function logUsage(payload: UsagePayload): void {
 
   const costUsd = calculateCost(payload.model, payload.usage);
 
+  // Supabase query builders are lazy thenables — the request only fires once
+  // `.then()` is attached. A bare `void builder` never executes the insert.
   void admin
     .from("ai_usage")
     .insert({
@@ -28,6 +30,11 @@ export function logUsage(payload: UsagePayload): void {
       cache_read_tokens: payload.usage.cache_read_input_tokens ?? 0,
       cache_write_tokens: payload.usage.cache_creation_input_tokens ?? 0,
       cost_usd: costUsd,
+    })
+    .then(({ error }) => {
+      if (error) {
+        console.error("[ai/usage] logUsage insert failed:", error);
+      }
     });
 }
 

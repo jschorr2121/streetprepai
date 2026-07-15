@@ -86,6 +86,52 @@ describe("logUsage", () => {
     expect(warn).toHaveBeenCalled();
   });
 
+  it("subscribes to the lazy Supabase builder so the insert actually fires", async () => {
+    // Real supabase-js inserts are lazy thenables: the HTTP request only fires
+    // once `.then()` is attached. A bare `void builder` silently no-ops, so
+    // this test models the builder shape instead of an eager promise.
+    const then = vi.fn(
+      (onFulfilled: (v: { error: unknown }) => unknown) =>
+        Promise.resolve({ error: null }).then(onFulfilled),
+    );
+    const insert = vi.fn(() => ({ then }));
+    const from = vi.fn(() => ({ insert }));
+    vi.doMock("@/lib/supabase/admin", () => ({
+      getAdminClient: vi.fn(() => ({ from })),
+    }));
+
+    const { logUsage } = await import("@/lib/ai/usage");
+    logUsage({
+      model: "claude-sonnet-4-6",
+      usage: { input_tokens: 1, output_tokens: 1 },
+      endpoint: "lazy-builder",
+    });
+
+    await new Promise((r) => setTimeout(r, 0));
+    expect(then).toHaveBeenCalled();
+  });
+
+  it("logs an error when the insert fails", async () => {
+    const mocks = makeAdminMock({
+      insertResult: { data: null, error: { message: "insert boom" } },
+    });
+    vi.doMock("@/lib/supabase/admin", () => ({
+      getAdminClient: vi.fn(() => mocks.admin),
+    }));
+    const err = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    const { logUsage } = await import("@/lib/ai/usage");
+    logUsage({
+      model: "claude-sonnet-4-6",
+      usage: { input_tokens: 1, output_tokens: 1 },
+      endpoint: "err-insert",
+    });
+
+    await new Promise((r) => setTimeout(r, 0));
+    await new Promise((r) => setTimeout(r, 0));
+    expect(err).toHaveBeenCalled();
+  });
+
   it("uses null user_id when userId is omitted", async () => {
     const mocks = makeAdminMock();
     vi.doMock("@/lib/supabase/admin", () => ({
