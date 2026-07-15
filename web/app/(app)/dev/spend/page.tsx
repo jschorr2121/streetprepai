@@ -118,7 +118,7 @@ export default async function DevSpendPage() {
       {monthRows.length === 0 ? (
         <p className="text-muted-foreground mt-8 text-sm">
           No AI spend recorded yet this month. Grade an answer, run a mock interview, or use any AI
-          tool and it'll show up here.
+          tool and it&apos;ll show up here.
         </p>
       ) : (
         <>

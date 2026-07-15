@@ -53,10 +53,12 @@ export function ProductTour({ steps, active }: { steps: TourStep[]; active: bool
   }, [active, index, steps]);
 
   useEffect(() => {
-    recompute();
+    // Measure after paint (also keeps setState out of the synchronous effect body).
+    const raf = requestAnimationFrame(recompute);
     window.addEventListener("resize", recompute);
     window.addEventListener("scroll", recompute, true);
     return () => {
+      cancelAnimationFrame(raf);
       window.removeEventListener("resize", recompute);
       window.removeEventListener("scroll", recompute, true);
     };

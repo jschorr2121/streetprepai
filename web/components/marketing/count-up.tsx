@@ -22,11 +22,11 @@ export function CountUp({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setValue(target);
-      return;
-    }
     let raf = 0;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      raf = requestAnimationFrame(() => setValue(target));
+      return () => cancelAnimationFrame(raf);
+    }
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting || started.current) return;
