@@ -21,10 +21,10 @@
     "backfill:embeddings": "tsx scripts/backfill-embeddings.ts",
     "db:pull": "node --env-file=.env.local scripts/introspect.mjs",
     "db:generate": "node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs generate",
-    "db:migrate": "node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs migrate",
-    "db:push": "node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs push",
+    "db:migrate": "node scripts/db-guard.mjs && node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs migrate",
+    "db:push": "node scripts/db-guard.mjs && node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs push",
     "db:check": "node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs check",
-    "db:studio": "node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs studio"
+    "db:studio": "node scripts/db-guard.mjs && node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs studio"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.90.0",
