@@ -1,6 +1,64 @@
 import type { NextConfig } from "next";
 
+const isDev = process.env.NODE_ENV === "development";
+
+// Origins the browser legitimately talks to, derived from env so each
+// deployment allows exactly its own backing services. NEXT_PUBLIC_* vars are
+// inlined at build time, so these are static per deployment.
+const supabaseOrigin = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseWsOrigin = supabaseOrigin?.replace(/^https:/, "wss:");
+const posthogOrigin = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com";
+// posthog-js lazy-loads its session-recorder/surveys bundles from the assets CDN.
+const posthogAssetsOrigin = "https://us-assets.i.posthog.com";
+const sentryDsn = process.env.NEXT_PUBLIC_SENTRY_DSN;
+const sentryOrigin = sentryDsn ? new URL(sentryDsn).origin : undefined;
+
+function src(...parts: Array<string | undefined>): string {
+  return parts.filter((p): p is string => Boolean(p)).join(" ");
+}
+
+// Content-Security-Policy. `script-src 'unsafe-inline'` is required by Next.js
+// bootstrap inline scripts unless we move to a nonce-based CSP, which forces
+// every page to render dynamically (no static/ISR caching) — not worth the
+// perf cost today. Even so, this policy blocks all external script origins
+// except PostHog's asset CDN, plus clickjacking and form exfiltration.
+const csp = [
+  `default-src 'self'`,
+  src(`script-src 'self' 'unsafe-inline'`, isDev ? `'unsafe-eval'` : undefined, posthogAssetsOrigin),
+  `style-src 'self' 'unsafe-inline'`,
+  src(`img-src 'self' blob: data:`, supabaseOrigin),
+  `font-src 'self' data:`,
+  src(`media-src 'self' blob:`, supabaseOrigin),
+  src(
+    `connect-src 'self'`,
+    supabaseOrigin,
+    supabaseWsOrigin,
+    posthogOrigin,
+    posthogAssetsOrigin,
+    sentryOrigin,
+  ),
+  `worker-src 'self' blob:`,
+  `object-src 'none'`,
+  `base-uri 'self'`,
+  `form-action 'self'`,
+  `frame-ancestors 'none'`,
+  ...(isDev ? [] : ["upgrade-insecure-requests"]),
+].join("; ");
+
+const securityHeaders = [
+  { key: "Content-Security-Policy", value: csp },
+  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  // Mic is used for mock-interview + relationship voice notes; no camera use.
+  { key: "Permissions-Policy", value: "camera=(), microphone=(self), geolocation=(), payment=()" },
+];
+
 const nextConfig: NextConfig = {
+  async headers() {
+    return [{ source: "/(.*)", headers: securityHeaders }];
+  },
   // Permanent (301) redirects for legacy URLs replaced by the new spine + tools IA.
   // Per `context/feature-specs/unit-5-ia-refactor.md`: keep redirects for at least 90 days,
   // then evaluate whether to drop.
