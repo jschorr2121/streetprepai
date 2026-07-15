@@ -8,24 +8,35 @@ import * as schema from "./schema";
 // is required for the pooler's transaction mode (prepared statements aren't
 // supported there). Cached on globalThis so dev/HMR reloads don't open new
 // connections on every change.
-const connectionString = process.env.DATABASE_URL;
-if (!connectionString) {
-  throw new Error("DATABASE_URL is not set — see .env.example.");
-}
-
+//
+// Created lazily on first use (not at import) so that `next build`'s page-data
+// collection — which imports route modules — doesn't require DATABASE_URL.
+// Missing env still fails fast with a clear error on the first query.
 const globalForDb = globalThis as unknown as {
   _pgClient?: ReturnType<typeof postgres>;
 };
 
-const client = globalForDb._pgClient ?? postgres(connectionString, { prepare: false });
-if (process.env.NODE_ENV !== "production") globalForDb._pgClient = client;
+function createDb() {
+  const connectionString = process.env.DATABASE_URL;
+  if (!connectionString) {
+    throw new Error("DATABASE_URL is not set — see .env.example.");
+  }
+  const client = globalForDb._pgClient ?? postgres(connectionString, { prepare: false });
+  if (process.env.NODE_ENV !== "production") globalForDb._pgClient = client;
+  return drizzle(client, { schema });
+}
 
-// `db` connects as the pooler's privileged role, which bypasses RLS. Use it
-// directly only in background jobs / admin paths. For user-facing reads and
+export type Database = ReturnType<typeof createDb>;
+
+let _db: Database | undefined;
+
+// The client connects as the pooler's privileged role, which bypasses RLS. Use
+// it directly only in background jobs / admin paths. For user-facing reads and
 // writes, go through `withUser` so RLS policies are enforced.
-export const db = drizzle(client, { schema });
-
-export type Database = typeof db;
+export function getDb(): Database {
+  _db ??= createDb();
+  return _db;
+}
 // The transaction executor type, derived without importing Drizzle internals.
 // Query functions accept `Executor` so the same function works standalone or
 // inside a transaction (per code-standards: `fn(db, ...args)`).
@@ -48,7 +59,7 @@ export async function withUser<T>(
   fn: (tx: Transaction) => Promise<T>,
 ): Promise<T> {
   const role = token.role && ALLOWED_ROLES.has(token.role) ? token.role : "authenticated";
-  return db.transaction(async (tx) => {
+  return getDb().transaction(async (tx) => {
     try {
       await tx.execute(
         sql`select set_config('request.jwt.claims', ${JSON.stringify(token)}, true)`,
