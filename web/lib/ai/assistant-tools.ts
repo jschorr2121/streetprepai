@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 import { getProfile } from "@/lib/data/profile";
 import {
   getContacts,
@@ -97,6 +99,20 @@ export const ASSISTANT_TOOLS = [
   },
 ];
 
+// Tool arguments are model output — parse them like any other untrusted
+// boundary input before they touch the data layer (per architecture invariant:
+// never trust unvalidated LLM output).
+const listContactsInputSchema = z.object({
+  stage: z.string().optional(),
+  firm: z.string().optional(),
+});
+const getContactInputSchema = z.object({ contactId: z.string().min(1) });
+const upcomingEventsInputSchema = z.object({
+  daysAhead: z.number().min(1).max(365).optional(),
+});
+const searchChatLogsInputSchema = z.object({ query: z.string().min(1) });
+const appliedJobsInputSchema = z.object({ stage: z.enum(APPLIED_JOB_STAGES).optional() });
+
 export async function executeTool(
   userId: string,
   toolName: string,
@@ -121,12 +137,15 @@ export async function executeTool(
       }
 
       case "list_contacts": {
+        const args = listContactsInputSchema.safeParse(input);
+        if (!args.success) return { error: "Invalid arguments for list_contacts" };
         let contacts = await getContacts(userId);
-        if (input.stage) {
-          contacts = contacts.filter((c) => c.stage === input.stage);
+        if (args.data.stage) {
+          const stage = args.data.stage;
+          contacts = contacts.filter((c) => c.stage === stage);
         }
-        if (input.firm && typeof input.firm === "string") {
-          const firmLower = input.firm.toLowerCase();
+        if (args.data.firm) {
+          const firmLower = args.data.firm.toLowerCase();
           contacts = contacts.filter((c) => c.firm.toLowerCase().includes(firmLower));
         }
         return contacts.map((c) => ({
@@ -140,7 +159,9 @@ export async function executeTool(
       }
 
       case "get_contact": {
-        const contactId = input.contactId as string;
+        const args = getContactInputSchema.safeParse(input);
+        if (!args.success) return { error: "Invalid arguments for get_contact" };
+        const { contactId } = args.data;
         const contact = await getContactById(contactId, userId);
         if (!contact) return { error: `Contact ${contactId} not found` };
         const chats = await getChatLogsForContact(contactId, userId);
@@ -149,7 +170,9 @@ export async function executeTool(
       }
 
       case "get_upcoming_events": {
-        const daysAhead = typeof input.daysAhead === "number" ? input.daysAhead : 14;
+        const args = upcomingEventsInputSchema.safeParse(input);
+        if (!args.success) return { error: "Invalid arguments for get_upcoming_events" };
+        const daysAhead = args.data.daysAhead ?? 14;
         const events = await getCalendarEvents(userId);
         const cutoff = Date.now() + daysAhead * 24 * 60 * 60 * 1000;
         return events.filter((e) => {
@@ -160,7 +183,9 @@ export async function executeTool(
       }
 
       case "search_chat_logs": {
-        const query = (input.query as string).toLowerCase();
+        const args = searchChatLogsInputSchema.safeParse(input);
+        if (!args.success) return { error: "Invalid arguments for search_chat_logs" };
+        const query = args.data.query.toLowerCase();
         const [contacts, allChats] = await Promise.all([getContacts(userId), getChatLogs(userId)]);
         const contactMap = new Map(contacts.map((c) => [c.id, c]));
         const hits: Array<{
@@ -196,12 +221,9 @@ export async function executeTool(
       }
 
       case "get_applied_jobs": {
-        // Validate the optional stage filter at the boundary.
-        const stage =
-          typeof input.stage === "string" &&
-          (APPLIED_JOB_STAGES as readonly string[]).includes(input.stage)
-            ? (input.stage as AppliedJobStage)
-            : undefined;
+        const args = appliedJobsInputSchema.safeParse(input);
+        if (!args.success) return { error: "Invalid arguments for get_applied_jobs" };
+        const stage: AppliedJobStage | undefined = args.data.stage;
 
         const applications = await withUser({ sub: userId, role: "authenticated" }, (tx) =>
           getApplications(tx, userId, stage ? { stage } : {}),
@@ -234,6 +256,9 @@ export async function executeTool(
         return { error: `Unknown tool: ${toolName}` };
     }
   } catch (err) {
-    return { error: err instanceof Error ? err.message : "Tool execution failed" };
+    // Tool results flow back through the model into user-visible text — never
+    // surface raw error internals (SQL, hostnames, stack fragments) there.
+    console.error(`[assistant-tools] ${toolName} failed:`, err);
+    return { error: `Tool ${toolName} failed` };
   }
 }

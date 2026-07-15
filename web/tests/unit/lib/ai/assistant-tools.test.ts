@@ -190,11 +190,13 @@ describe("executeTool dispatch", () => {
     expect(out.error).toMatch(/Unknown tool/);
   });
 
-  it("returns {error} when an underlying data call throws", async () => {
+  it("returns a generic {error} when an underlying data call throws", async () => {
     profileMock.mockRejectedValue(new Error("db down"));
     const { executeTool } = await import("@/lib/ai/assistant-tools");
     const out = (await executeTool("u-1", "get_resume", {})) as { error?: string };
-    expect(out.error).toBe("db down");
+    // Raw error internals must not flow back through the model to the user.
+    expect(out.error).toBe("Tool get_resume failed");
+    expect(out.error).not.toContain("db down");
   });
 
   // ─── get_applied_jobs ───────────────────────────────────────────────────────
@@ -270,23 +272,14 @@ describe("executeTool dispatch", () => {
     expect(out.byStage).toEqual({});
   });
 
-  it("get_applied_jobs → ignores an invalid stage value and returns all", async () => {
-    getApplicationsMock.mockResolvedValue([
-      {
-        id: "a1",
-        firm: "GS",
-        role: "Analyst",
-        stage: "applied",
-        deadline: undefined,
-        notes: undefined,
-      },
-    ]);
+  it("get_applied_jobs → rejects an invalid stage value with a structured error", async () => {
     const { executeTool } = await import("@/lib/ai/assistant-tools");
     const out = (await executeTool("u-1", "get_applied_jobs", { stage: "bookmarked" })) as {
-      count: number;
+      error?: string;
     };
-    // "bookmarked" is not in APPLIED_JOB_STAGES — treated as no filter.
-    expect(out.count).toBe(1);
-    expect(getApplicationsMock).toHaveBeenCalledWith(null, "u-1", {});
+    // "bookmarked" is not in APPLIED_JOB_STAGES — the model gets an error it
+    // can correct rather than silently unfiltered results labeled as filtered.
+    expect(out.error).toMatch(/Invalid arguments/);
+    expect(getApplicationsMock).not.toHaveBeenCalled();
   });
 });
