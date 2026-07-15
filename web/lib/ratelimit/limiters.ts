@@ -13,14 +13,14 @@
  * `{ allowed: true }` so development is unblocked. Production must have
  * `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` set.
  *
- * DEGRADE-OPEN POLICY (R1/R3):
- * When the Upstash store is unreachable (network error, DNS failure, etc.) the
- * limiter returns `{ allowed: true }` instead of throwing. Rationale: a dead
- * store must NEVER crash a mutation or auth action. The tradeoff is that
- * throttling is temporarily disabled while the store is down. Operators are
- * alerted via Sentry + logger.error so the outage is observable. Fail-closed
- * (blocking all requests) is NOT the right default here because the store
- * may be dead while the app is still healthy.
+ * STORE-FAILURE POLICY (R1/R3, tightened for AI spend):
+ * - Non-AI limiters (auth, CRUD) degrade OPEN when the Upstash store is
+ *   unreachable: a dead store must never crash a mutation or lock users out
+ *   of sign-in. Operators are alerted via Sentry + logger.error.
+ * - AI-calling limiters ({ onStoreError: "deny" }) fail CLOSED: every allowed
+ *   call is real LLM spend, so an unreachable store denies with a retry hint
+ *   instead of granting unmetered usage (architecture invariant: AI rate
+ *   limits are fail-closed).
  */
 
 import * as Sentry from "@sentry/nextjs";
@@ -36,10 +36,13 @@ export type LimiterResult = { allowed: true } | { allowed: false; retryAfterSeco
 // than on every request.
 const warnedMisconfiguredPrefixes = new Set<string>();
 
+type StoreErrorMode = "allow" | "deny";
+
 function makeSlidingWindow(
   prefix: string,
   requests: number,
   windowSec: number,
+  opts: { onStoreError: StoreErrorMode } = { onStoreError: "allow" },
 ): (key: string) => Promise<LimiterResult> {
   const redis = getRedis();
 
@@ -56,6 +59,12 @@ function makeSlidingWindow(
       Sentry.captureMessage(`Rate limiting disabled — Upstash env not set (prefix: ${prefix})`, {
         level: "error",
       });
+    }
+
+    if (isProduction && opts.onStoreError === "deny") {
+      // AI limiter with no store in production: fail closed — unmetered LLM
+      // spend is worse than a blocked feature. Dev/preview stays open.
+      return async () => ({ allowed: false, retryAfterSeconds: 60 });
     }
 
     // Degrade open: allow all calls when env is missing.
@@ -78,11 +87,14 @@ function makeSlidingWindow(
         retryAfterSeconds: Math.max(1, Math.ceil((result.reset - Date.now()) / 1000)),
       };
     } catch (err) {
-      // Store unreachable (DNS failure, network timeout, etc.).
-      // Log + alert so operators know throttling is temporarily disabled,
-      // then degrade open so the action itself is never crashed by infra.
+      // Store unreachable (DNS failure, network timeout, etc.). Log + alert,
+      // then apply the limiter's store-failure policy: deny for AI spend,
+      // allow for auth/CRUD so infra outages never crash those actions.
       logger.error({ err, prefix }, "ratelimit_store_error");
       Sentry.captureException(err);
+      if (opts.onStoreError === "deny") {
+        return { allowed: false, retryAfterSeconds: 30 };
+      }
       return { allowed: true };
     }
   };
@@ -116,9 +128,13 @@ export const authActionLimiter = makeSlidingWindow("rl:action:auth", 10, 60);
 /**
  * Limiter for AI answer grading (question bank, section drills, chapter gates).
  * Every call is one Claude request, so the window is deliberately tight —
- * 20/min is faster than any human can type real answers.
+ * 20/min is faster than any human can type real answers. Fails closed on
+ * store errors: unmetered Claude spend is worse than a temporarily blocked
+ * grader.
  */
-export const qbankGradingLimiter = makeSlidingWindow("rl:action:qbank:grade", 20, 60);
+export const qbankGradingLimiter = makeSlidingWindow("rl:action:qbank:grade", 20, 60, {
+  onStoreError: "deny",
+});
 
 /**
  * Limiter for cheap curriculum progress writes (mark read, record drill).
