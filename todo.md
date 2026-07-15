@@ -1,5 +1,6 @@
 - fix the long loading times
+- work through code-review findings (2026-07-12) — full report is LOCAL ONLY in `.scratch/code-review-2026-07/findings.md` (don't commit it, repo is public and it details security issues). Fix first: the AI usage-logging bug in `web/lib/ai/usage.ts` (cost tracking silently no-ops), then the security-hardening items in the report
 - add ai chat back
 - add application tracker
 - add ai chatbot
-- add onboarding flow thats kinda like a quiz, what role you want, what you have done so far, etc. make this ai chat kinda flow that fills in for you 
+- add onboarding flow thats kinda like a quiz, what role you want, what you have done so far, etc. make this ai chat kinda flow that fills in for you
