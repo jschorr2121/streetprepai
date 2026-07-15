@@ -1,4 +1,5 @@
 import { requireUser } from "@/lib/security/require-user";
+import { clientSafeError } from "@/lib/security/client-error";
 import { parseJson } from "@/lib/validation/parse";
 import { ResumeCritiqueSchema } from "@/lib/validation/schemas/resume";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
@@ -195,9 +196,7 @@ export async function POST(req: Request): Promise<Response> {
   } catch (err) {
     return Response.json(
       {
-        error: `Claude call failed: ${
-          err instanceof Error ? err.message : "unknown error"
-        }`,
+        error: clientSafeError("resume/critique", err, "The AI request failed. Please try again."),
       },
       { status: 502 },
     );

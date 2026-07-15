@@ -78,9 +78,17 @@ export async function POST(req: Request): Promise<Response> {
             if (call.type !== "function") continue;
             let result: unknown;
             try {
-              result = await executeTool(gate.user.id, call.function.name, JSON.parse(call.function.arguments ?? "{}"));
+              // Arguments are model output: parse defensively; executeTool
+              // Zod-validates the shape per tool.
+              const rawArgs: unknown = JSON.parse(call.function.arguments ?? "{}");
+              const args =
+                rawArgs && typeof rawArgs === "object" && !Array.isArray(rawArgs)
+                  ? (rawArgs as Record<string, unknown>)
+                  : {};
+              result = await executeTool(gate.user.id, call.function.name, args);
             } catch (e) {
-              result = { error: e instanceof Error ? e.message : "tool error" };
+              console.error("[chat/general] tool call failed:", e);
+              result = { error: "Invalid tool arguments" };
             }
             messages.push({
               role: "tool",
@@ -100,7 +108,7 @@ export async function POST(req: Request): Promise<Response> {
         write({ type: "done" });
       } catch (err) {
         console.error("[chat/general]", err);
-        write({ type: "error", message: err instanceof Error ? err.message : "unknown error" });
+        write({ type: "error", message: "The response failed. Please try again." });
       } finally {
         controller.close();
       }

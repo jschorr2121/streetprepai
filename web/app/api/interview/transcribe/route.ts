@@ -1,4 +1,5 @@
 import { requireUser } from "@/lib/security/require-user";
+import { clientSafeError } from "@/lib/security/client-error";
 import type { TimestampedWord } from "@/lib/audio/analyze";
 
 export const runtime = "nodejs";
@@ -85,9 +86,7 @@ export async function POST(req: Request): Promise<Response> {
   } catch (err) {
     return Response.json(
       {
-        error: `Could not read audio upload: ${
-          err instanceof Error ? err.message : "unknown error"
-        }`,
+        error: clientSafeError("interview/transcribe", err, "Could not read the audio upload. Please try again."),
       },
       { status: 400 },
     );
@@ -121,9 +120,7 @@ export async function POST(req: Request): Promise<Response> {
   } catch (err) {
     return Response.json(
       {
-        error: `Whisper request failed: ${
-          err instanceof Error ? err.message : "unknown error"
-        }`,
+        error: clientSafeError("interview/transcribe", err, "Transcription failed. Please try again."),
       },
       { status: 502 },
     );

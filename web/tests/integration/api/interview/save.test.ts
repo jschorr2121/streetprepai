@@ -213,7 +213,8 @@ describe("POST /api/interview/save", () => {
     const res = await POST(makeReq(validBody()));
     expect(res.status).toBe(500);
     const json = await res.json();
-    expect(json.error).toBe("db down");
+    // Internal error text stays server-side; the client gets a safe message.
+    expect(json.error).toBe("Could not save the interview.");
   });
 
   it("returns 429 after exhausting cheap-tier per-user limit (31 requests)", async () => {

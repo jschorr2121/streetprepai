@@ -1,4 +1,5 @@
 import { requireUser } from "@/lib/security/require-user";
+import { clientSafeError } from "@/lib/security/client-error";
 import { PDFParse } from "pdf-parse";
 
 export const runtime = "nodejs";
@@ -54,9 +55,7 @@ export async function POST(req: Request): Promise<Response> {
   } catch (err) {
     return Response.json(
       {
-        error: `Could not read upload: ${
-          err instanceof Error ? err.message : "unknown error"
-        }`,
+        error: clientSafeError("resume/extract", err, "Could not read the upload. Please try again."),
       },
       { status: 400 },
     );
@@ -77,9 +76,7 @@ export async function POST(req: Request): Promise<Response> {
     await parser.destroy().catch(() => {});
     return Response.json(
       {
-        error: `Could not extract text from PDF: ${
-          err instanceof Error ? err.message : "parse failed"
-        }`,
+        error: clientSafeError("resume/extract", err, "Could not extract text from this PDF."),
       },
       { status: 422 },
     );

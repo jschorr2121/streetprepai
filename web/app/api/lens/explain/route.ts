@@ -1,4 +1,5 @@
 import { requireUser } from "@/lib/security/require-user";
+import { clientSafeError } from "@/lib/security/client-error";
 import { parseJson } from "@/lib/validation/parse";
 import { LensExplainSchema } from "@/lib/validation/schemas/lens";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
@@ -63,7 +64,7 @@ export async function POST(req: Request): Promise<Response> {
       } catch (err) {
         controller.enqueue(
           encoder.encode(
-            `\n\n[Error: ${err instanceof Error ? err.message : "stream failed"}]`,
+            `\n\n[Error: ${clientSafeError("lens/explain", err, "The response failed. Please try again.")}]`,
           ),
         );
       } finally {

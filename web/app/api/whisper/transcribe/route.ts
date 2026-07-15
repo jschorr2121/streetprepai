@@ -1,4 +1,5 @@
 import { requireUser } from "@/lib/security/require-user";
+import { clientSafeError } from "@/lib/security/client-error";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -69,9 +70,7 @@ export async function POST(req: Request): Promise<Response> {
   } catch (err) {
     return Response.json(
       {
-        error: `Whisper request failed: ${
-          err instanceof Error ? err.message : "network error"
-        }`,
+        error: clientSafeError("whisper/transcribe", err, "Transcription failed. Please try again."),
       },
       { status: 502 },
     );
