@@ -37,7 +37,14 @@ describe("onboardingSchema", () => {
     graduationYear: GRAD_YEAR_RANGE.min + 2,
     currentSemester: "Sophomore Fall",
     targetFirms: ["Evercore"],
+    advancedTrack: false,
   };
+
+  it("rejects a submission missing advancedTrack", () => {
+    const withoutTrack: Partial<typeof valid> = { ...valid };
+    delete withoutTrack.advancedTrack;
+    expect(onboardingSchema.safeParse(withoutTrack).success).toBe(false);
+  });
 
   it("accepts a valid submission", () => {
     expect(onboardingSchema.safeParse(valid).success).toBe(true);

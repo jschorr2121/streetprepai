@@ -14,26 +14,27 @@ vi.mock("@/lib/supabase/get-user", () => ({
   getUserOrNull: () => getUserMock().catch(() => null),
 }));
 
-vi.mock("@/lib/data/profile", () => ({
-  getProfile: vi.fn().mockResolvedValue(
-    Object.assign(
-      {},
-      {
-        userId: "u",
-        fullName: "Jane",
-        school: "Wharton",
-        graduationYear: 2027,
-        targetRoles: [],
-        targetFirms: [],
-        bioSummary: "",
-        resumeRawText: "",
-        experiences: [],
-        education: [],
-        skills: [],
-        updatedAt: "2026-01-01T00:00:00.000Z",
-      },
-    ),
-  ),
+// The route reads the profile through the Drizzle layer (withUser + queries/profile),
+// so mock the db client to avoid requiring DATABASE_URL at import time.
+vi.mock("@/lib/db/client", () => ({
+  withUser: vi.fn(async (_token: unknown, fn: (tx: unknown) => Promise<unknown>) => fn(null)),
+}));
+
+vi.mock("@/lib/db/queries/profile", () => ({
+  getProfile: vi.fn().mockResolvedValue({
+    userId: "u",
+    fullName: "Jane",
+    school: "Wharton",
+    graduationYear: 2027,
+    targetRoles: [],
+    targetFirms: [],
+    bioSummary: "",
+    resumeRawText: "",
+    experiences: [],
+    education: [],
+    skills: [],
+    updatedAt: "2026-01-01T00:00:00.000Z",
+  }),
 }));
 
 vi.mock("@/lib/ai/assistant-tools", () => ({
