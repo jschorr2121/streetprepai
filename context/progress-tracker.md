@@ -16,6 +16,32 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — session 1 (2026-07-15, cloud, branch `fable/prod-readiness`)
+
+Phase 1 (correctness & security hardening) of `context/RELAY-QUEUE.md` — most items done, all
+pushed to `fable/prod-readiness` (12 commits), every commit gated on typecheck + lint + full
+vitest (+ `pnpm build`). Highlights: the fix-first `lib/ai/usage.ts` lazy-thenable bug (cost
+tracking never wrote rows) is fixed with a regression test; security response headers
+(CSP/HSTS/XFO/nosniff/Referrer-Policy/Permissions-Policy) added; raw server error text no
+longer leaks to clients (12 routes, new `lib/security/client-error.ts`); LLM tool *arguments*
+and *outputs* are Zod-validated (chat/general tools, structure-chat, draft-outreach,
+resume/critique); the service-role `chat_embeddings` upsert now has an ownership check; AI
+rate limiters fail closed on store errors; the monthly per-user AI spend cap ($20 default,
+`AI_USER_MONTHLY_CAP_USD`) is enforced in `requireUser`; markdown renderer blocks
+javascript:/data: links; 12 unused deps removed; Sentry build plugin wired; CI push trigger
+fixed (`main`→`master`); Drizzle client made lazy so builds work without `DATABASE_URL`
+(unblocks CI build); 4 blocking lint errors + 5 pre-existing test failures repaired
+(suite: 325 passing, 0 failing). Details in `context/CHANGES.md`; state/baton in
+`context/relay/HANDOFF.md`; three env/dashboard items filed to `context/jakes-tasks.md`
+(Sentry env vars, CSP preview verification, spend-cap value).
+
+Remaining Phase 1 (next session): middleware `/api/*` auth backstop (finding #1),
+Next/React security patch bumps 16.2.6 / 19.2.6 (findings #6/#7 — also Phase 4),
+guard `db:*` scripts (#9), spoofable `x-forwarded-for` IP key (#11), forged assistant
+turns in chat schema (#13), `firm/prep` prompt isolation (#14), `ai_usage` null
+`user_id` tightening (#16). The local-only `.scratch/code-review-2026-07/findings.md`
+is NOT in the cloud clone — worked from `security-review-2026-06-01.md` instead.
+
 ### UI Revamp — "The Analyst's Desk" (2026-07-06, branch `design/ui-overhaul`)
 - Full-app redesign replacing the emerald/Geist "modern edtech" language and the
   abandoned "ink" direction (old tip tagged `archive/ink-design`; branch was reset

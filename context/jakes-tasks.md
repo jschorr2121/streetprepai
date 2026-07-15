@@ -66,6 +66,23 @@ needs action it can't perform itself.
 
 - [ ] **Re-enable "Confirm email" in Supabase** before production so real
   signups must verify their address (lowers spam/abuse). (Unit 4)
+- [ ] **Set Sentry build env vars in Vercel** — `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`,
+  `SENTRY_PROJECT` (Sentry → Settings → Auth Tokens, needs `project:releases` +
+  `org:read`). The build plugin is now wired (`web/next.config.ts`) and is a no-op
+  until these exist; with them, production builds upload + strip source maps so
+  Sentry stack traces are readable. Also confirm `NEXT_PUBLIC_SENTRY_DSN` /
+  `SENTRY_DSN` are set. (prod-readiness relay, 2026-07-15)
+- [ ] **Verify the new security headers on the first preview deploy** — the relay
+  added CSP/HSTS/X-Frame-Options/etc. in `web/next.config.ts`. Open the deployed
+  preview with devtools console and click through the app (esp. PostHog-enabled
+  pages and anything Supabase Storage serves); any CSP violation shows up as a
+  console error naming the blocked origin. If you use the EU PostHog region, set
+  `NEXT_PUBLIC_POSTHOG_HOST` in Vercel env — the CSP derives its allowed origins
+  from env at build time. (prod-readiness relay, 2026-07-15)
+- [ ] **Decide the monthly per-user AI spend cap** — the relay wired
+  `assertUnderQuota` into every AI route; default is **$20/user/month**, override
+  with `AI_USER_MONTHLY_CAP_USD` in Vercel env (`<=0` disables). Sanity-check the
+  default against expected usage/pricing. (prod-readiness relay, 2026-07-15)
 
 ---
 
