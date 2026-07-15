@@ -73,3 +73,32 @@ export const StructureChatSchema = z
   })
   .strict();
 export type StructureChatInput = z.infer<typeof StructureChatSchema>;
+
+// --- LLM tool-output schemas ---
+// Model tool calls are untrusted output: parse them before the result is
+// embedded, stored, or returned to the client (architecture invariant).
+
+/** structure-chat's `save_chat_summary` tool output. */
+export const ChatSummaryOutputSchema = z.object({
+  topics: z.array(z.string().max(2000)).max(100),
+  adviceGiven: z.array(z.string().max(2000)).max(100),
+  commitments: z.array(z.string().max(2000)).max(100),
+  personalDetails: z.array(z.string().max(2000)).max(100),
+  followUps: z
+    .array(z.object({ description: z.string().max(2000), dueBy: z.string().max(100).optional() }))
+    .max(100),
+});
+export type ChatSummaryOutput = z.infer<typeof ChatSummaryOutputSchema>;
+
+/** draft-outreach's `save_outreach_draft` tool output. Fields are optional —
+ * the route normalizes gaps (padding subjects, defaulting strings) so a
+ * slightly-off model response degrades instead of failing. */
+export const OutreachDraftOutputSchema = z.object({
+  subjects: z.array(z.string().max(2000)).max(10).optional(),
+  body: z.string().max(20000).optional(),
+  followups: z
+    .array(z.object({ when: z.string().max(500).optional(), kind: z.string().max(500).optional() }))
+    .max(20)
+    .optional(),
+});
+export type OutreachDraftOutput = z.infer<typeof OutreachDraftOutputSchema>;

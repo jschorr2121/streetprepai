@@ -24,10 +24,9 @@ vi.mock("@/lib/ai/anthropic", () => ({
             id: "tu_1",
             name: "critique_resume",
             input: {
+              // Extraneous key not in the tool schema — the route must strip
+              // it rather than echo unvalidated model output to the client.
               score: 65,
-              top_priorities: [
-                { original: "Built X", why_weak: "vague", rewrite: "Built X delivering Y" },
-              ],
               sections: [
                 {
                   heading: "Experience",
@@ -37,15 +36,13 @@ vi.mock("@/lib/ai/anthropic", () => ({
                       original: "Built X",
                       critique: "vague",
                       rewritten: "Built X delivering Y",
+                      weakness_flags: ["vague"],
                       confidence: "high",
                     },
                   ],
                 },
               ],
-              add: ["Skills section"],
-              cut: ["dated highschool stuff"],
-              overall: "Solid but vague.",
-              summary: { total_bullets: 1, weak_bullets: 1 },
+              summary: { total_bullets: 1, weak_bullets: 1, top_issues: ["vague bullets"] },
             },
           },
         ],
@@ -132,9 +129,11 @@ describe("POST /api/resume/critique", () => {
     );
     expect(res.status).toBe(200);
     const json = await res.json();
-    expect(json.score).toBe(65);
     expect(Array.isArray(json.sections)).toBe(true);
     expect(json.summary.total_bullets).toBe(1);
+    expect(json.summary.top_issues).toEqual(["vague bullets"]);
+    // Keys outside the validated tool-output schema are stripped.
+    expect(json.score).toBeUndefined();
   });
 
   it("returns 429 after exhausting per-user budget", async () => {

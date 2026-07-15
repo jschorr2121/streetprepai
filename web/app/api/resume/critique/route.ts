@@ -1,7 +1,10 @@
 import { requireUser } from "@/lib/security/require-user";
 import { clientSafeError } from "@/lib/security/client-error";
 import { parseJson } from "@/lib/validation/parse";
-import { ResumeCritiqueSchema } from "@/lib/validation/schemas/resume";
+import {
+  ResumeCritiqueOutputSchema,
+  ResumeCritiqueSchema,
+} from "@/lib/validation/schemas/resume";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { RESUME_CRITIQUE_SYSTEM } from "@/lib/ai/prompts";
 import { logUsage } from "@/lib/ai/usage";
@@ -222,5 +225,15 @@ export async function POST(req: Request): Promise<Response> {
     );
   }
 
-  return Response.json(toolUse.input);
+  // Tool output is untrusted model output — validate before returning.
+  const critique = ResumeCritiqueOutputSchema.safeParse(toolUse.input);
+  if (!critique.success) {
+    console.error("[resume/critique] invalid tool output:", critique.error.issues);
+    return Response.json(
+      { error: "The AI returned an invalid critique. Please try again." },
+      { status: 502 },
+    );
+  }
+
+  return Response.json(critique.data);
 }

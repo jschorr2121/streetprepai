@@ -1,6 +1,9 @@
 import { requireUser } from "@/lib/security/require-user";
 import { parseJson } from "@/lib/validation/parse";
-import { StructureChatSchema } from "@/lib/validation/schemas/relationships";
+import {
+  ChatSummaryOutputSchema,
+  StructureChatSchema,
+} from "@/lib/validation/schemas/relationships";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { STRUCTURE_CHAT_SYSTEM } from "@/lib/ai/prompts";
 import { logUsage } from "@/lib/ai/usage";
@@ -106,29 +109,60 @@ export async function POST(req: Request): Promise<Response> {
     return Response.json({ error: "no tool call" }, { status: 500 });
   }
 
+  // Tool output is untrusted model output — validate before embedding/returning.
+  const summary = ChatSummaryOutputSchema.safeParse(toolUse.input);
+  if (!summary.success) {
+    console.error("[relationships/structure-chat] invalid tool output:", summary.error.issues);
+    return Response.json(
+      { error: "The AI returned an invalid summary. Please try again." },
+      { status: 502 },
+    );
+  }
+
   // Fire-and-forget embedding when both contactId and chatId are present.
   if (contactId && chatId) {
     void (async () => {
       try {
         const { embedText, summaryEmbedText } = await import("@/lib/ai/embeddings");
         const { getAdminClient } = await import("@/lib/supabase/admin");
-        const text = summaryEmbedText(toolUse.input as Parameters<typeof summaryEmbedText>[0]);
-        const embedding = await embedText(text, { userId: gate.user.id, endpoint: "embed/structure-chat" });
         const admin = getAdminClient();
-        if (admin) {
-          await admin.from("chat_embeddings").upsert({
-            chat_id: chatId,
-            contact_id: contactId,
-            user_id: gate.user.id,
-            embedding,
-            summary_text: text,
-          });
+        if (!admin) return;
+
+        // Ownership check: the service-role client bypasses RLS, and chat_id is
+        // the table's PK — without this, a forged chatId could overwrite
+        // another user's embedding row.
+        const { data: chatRow } = await admin
+          .from("chats")
+          .select("id")
+          .eq("id", chatId)
+          .eq("user_id", gate.user.id)
+          .eq("contact_id", contactId)
+          .maybeSingle();
+        if (!chatRow) {
+          console.warn(
+            `[relationships/structure-chat] embedding skipped: chat ${chatId} not owned by user`,
+          );
+          return;
         }
-      } catch {
-        // swallow — embedding is best-effort
+
+        const text = summaryEmbedText(summary.data);
+        const embedding = await embedText(text, {
+          userId: gate.user.id,
+          endpoint: "embed/structure-chat",
+        });
+        await admin.from("chat_embeddings").upsert({
+          chat_id: chatId,
+          contact_id: contactId,
+          user_id: gate.user.id,
+          embedding,
+          summary_text: text,
+        });
+      } catch (err) {
+        // Embedding is best-effort; the structured summary already succeeded.
+        console.error("[relationships/structure-chat] embedding failed:", err);
       }
     })();
   }
 
-  return Response.json(toolUse.input);
+  return Response.json(summary.data);
 }

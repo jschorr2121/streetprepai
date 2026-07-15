@@ -1,7 +1,10 @@
 import { requireUser } from "@/lib/security/require-user";
 import { clientSafeError } from "@/lib/security/client-error";
 import { parseJson } from "@/lib/validation/parse";
-import { DraftOutreachSchema } from "@/lib/validation/schemas/relationships";
+import {
+  DraftOutreachSchema,
+  OutreachDraftOutputSchema,
+} from "@/lib/validation/schemas/relationships";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { OUTREACH_DRAFT_SYSTEM } from "@/lib/ai/prompts";
 import { logUsage } from "@/lib/ai/usage";
@@ -146,7 +149,17 @@ export async function POST(req: Request): Promise<Response> {
     );
   }
 
-  const input = toolUse.input as Partial<OutreachDraft>;
+  // Tool output is untrusted model output — validate before normalizing.
+  const parsedOutput = OutreachDraftOutputSchema.safeParse(toolUse.input);
+  if (!parsedOutput.success) {
+    console.error("[relationships/draft-outreach] invalid tool output:", parsedOutput.error.issues);
+    return Response.json(
+      { error: "The AI returned an invalid draft. Please try again." },
+      { status: 502 },
+    );
+  }
+
+  const input = parsedOutput.data;
   const result: OutreachDraft = {
     subjects: (input.subjects ?? []).slice(0, 2),
     body: input.body ?? "",
