@@ -22,7 +22,11 @@ const SYSTEM = `You are a resume parser. Extract structured data from the resume
 Only return JSON. No markdown, no explanation.`;
 
 export async function POST(req: Request): Promise<Response> {
-  const gate = await requireUser(req, { tier: "cheap", route: "profile/extract-resume" });
+  const gate = await requireUser(req, {
+    tier: "cheap",
+    route: "profile/extract-resume",
+    spendCap: true, // calls OpenAI despite the cheap rate tier
+  });
   if (!gate.ok) return gate.response;
 
   const parsed = await parseJson(req, ExtractResumeSchema);

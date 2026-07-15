@@ -76,7 +76,7 @@ export async function getUserUsageThisMonth(userId: string): Promise<UsageMonthR
     return { totalUsd: 0, rowCount: 0 };
   }
 
-  const rows = data as { cost_usd: number | string }[];
+  const rows: { cost_usd: number | string }[] = Array.isArray(data) ? data : [];
   const totalUsd = rows.reduce((sum, r) => sum + Number(r.cost_usd), 0);
   return { totalUsd, rowCount: rows.length };
 }
