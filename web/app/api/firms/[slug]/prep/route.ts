@@ -5,6 +5,7 @@ import { FirmSlugSchema } from "@/lib/validation/schemas/firms";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { PREP_FIRM_SYSTEM } from "@/lib/ai/prompts";
 import { trackStream } from "@/lib/ai/usage";
+import { wrapUserText } from "@/lib/ai/sanitize";
 import { getFirmBySlug } from "@/lib/data/firms";
 
 export const runtime = "nodejs";
@@ -35,7 +36,9 @@ export async function POST(
     `HQ: ${firm.hq}`,
     `Background:\n${firm.description}`,
     "",
-    `Latest public-disclosure content (earnings release / press):\n"""${firm.latestEarningsRaw ?? "(no recent earnings content available)"}"""`,
+    // Earnings text is third-party content (scraped releases/press) — isolate
+    // it like any untrusted input so it can't smuggle instructions.
+    `Latest public-disclosure content (earnings release / press):\n${wrapUserText(firm.latestEarningsRaw ?? "(no recent earnings content available)", "earnings_content", { maxChars: 40_000 })}`,
     "",
     `Produce the firm interview prep sheet.`,
   ].join("\n");
