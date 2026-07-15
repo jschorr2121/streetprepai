@@ -7,16 +7,22 @@
 
 ## Phase checklist
 
-- [~] Phase 1 — Correctness & security hardening — **mostly done** (session 1). Fix-first
+- [x] Phase 1 — Correctness & security hardening — **DONE** (session 1). Fix-first
   usage.ts bug ✅, security headers ✅, error-leak sweep ✅, LLM tool arg+output Zod ✅,
   service-role ownership check ✅, AI limiters fail-closed ✅, spend cap wired ✅, markdown
-  href guard ✅, unused deps ✅, Sentry plugin ✅. Remaining (pick up here):
-  - [ ] `/api/*` auth backstop in `web/proxy.ts` (its matcher currently excludes `api/`) — finding #1
-  - [ ] Next 16.2.6 + react/react-dom 19.2.6 security patch bumps, one at a time — findings #6/#7
-  - [ ] Guard `db:*` package scripts against the live DB — finding #9
-  - [ ] Low-sev: spoofable XFF IP key (#11), forged `assistant` turns allowed by chat schemas (#13),
-        `firm/prep` prompt text not `wrapUserText`-isolated (#14), `ai_usage.user_id` nullable (#16)
-- [ ] Phase 2 — Performance (the long loading times)
+  href guard ✅, unused deps ✅, Sentry plugin ✅, `/api/*` proxy auth backstop ✅ (#1),
+  next 16.2.10 + react 19.2.7 ✅ (#6/#7), `db:*` script guard ✅ (#9), earnings-text
+  prompt isolation ✅ (#14). Deferred Lows (accepted, revisit only if priorities change):
+  #13 client-supplied assistant turns — inherent to the stateless chat API; #11 XFF IP
+  key — platform-managed on Vercel; #16 `ai_usage.user_id` nullable — needs a
+  backfill-aware migration file.
+- [ ] Phase 2 — Performance (the long loading times) — **START HERE.** Measure first:
+  bundle analyzer isn't installed (`@next/bundle-analyzer` was never added); Turbopack
+  build output has no size table, so add the analyzer or use `--profile`. Check DB
+  indexes against `web/supabase/migrations/` + hot queries in `lib/db/queries/` and
+  `lib/data/`; look at the pgvector ivfflat index; audit prompt-caching coverage
+  (several routes already use `cache_control: ephemeral`); check `use cache`/ISR
+  opportunities on firms/sectors/learn metadata. Record baseline → after in CHANGES.md.
 - [ ] Phase 3 — UX fixes & bugs
 - [ ] Phase 4 — Production-readiness checklist (note: CI push trigger fixed; `pnpm build`
       now works without DATABASE_URL, so the CI build step is unblocked; `.env.example`
@@ -47,13 +53,14 @@
 
 - **2026-07-15 (setup, local)** — Branch + work order created. Relay routine scheduled
   (first run 1:10pm ET). No code work done yet; Phase 1 starts on the first cloud run.
-- **2026-07-15 (session 1, cloud)** — Phase 1 nearly complete; 12 commits pushed to
-  `fable/prod-readiness` (`3995243`…`ab4e222` + docs commit). Fixed: usage-logging lazy
+- **2026-07-15 (session 1, cloud)** — **Phase 1 COMPLETE**; 19 commits pushed to
+  `fable/prod-readiness` (`3995243`…`7bb03ff` + docs). Fixed: usage-logging lazy
   thenable (fix-first), 4 blocking lint errors, 5 pre-existing test failures (stale mocks),
   security headers, lazy Drizzle client (CI build unblocked), CI `main`→`master`,
   error-text leaks (12 routes), assistant tool-arg Zod validation, LLM tool-output Zod
   validation (structure-chat / draft-outreach / resume-critique), chat_embeddings ownership
   check, AI limiter fail-closed + tests, monthly spend cap in `requireUser` + tests,
-  markdown href scheme guard, 12 unused deps removed, Sentry build plugin. Docs updated
-  (CHANGES, progress-tracker, jakes-tasks). Next: remaining Phase 1 checklist above, then
-  Phase 2 (measure first).
+  markdown href scheme guard, 12 unused deps removed, Sentry build plugin, `/api/*` proxy
+  auth backstop, next 16.2.10 + react 19.2.7, `db:*` script guard, earnings-text prompt
+  isolation. Suite: 325 passing. Docs updated (CHANGES, progress-tracker, jakes-tasks).
+  Next session: Phase 2 — measure first (see Phase 2 notes above).

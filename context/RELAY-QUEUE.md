@@ -22,7 +22,13 @@
    - NEVER commit or quote `.scratch/code-review-2026-07/findings.md` — it is gitignored and details live security issues in a PUBLIC repo. Read it for guidance; keep every specific vuln detail out of commit messages, the PR, and any tracked file. Describe security fixes generically in public artifacts.
    - Skip human-in-the-loop items (product/pricing/consent/taste, live external side effects, missing credentials, third-party account setup) — file them to `context/jakes-tasks.md` and move on.
 
-## Phase 1 — Correctness & security hardening
+## Phase 1 — Correctness & security hardening — **DONE (2026-07-15, session 1)**
+
+> All items below are done except three consciously deferred Lows (see
+> `context/relay/HANDOFF.md`): #13 client-supplied assistant turns (inherent to the
+> stateless chat API design), #11 spoofable XFF (platform-managed on Vercel),
+> #16 `ai_usage.user_id` NOT NULL (needs a live-data-aware migration; author it
+> only with a backfill plan). Details in `context/CHANGES.md`.
 
 Start with the designated **fix-first** item in `todo.md`: the AI usage-logging bug in
 `web/lib/ai/usage.ts` (the insert is a lazy thenable that never fires, so cost tracking
