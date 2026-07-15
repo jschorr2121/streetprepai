@@ -9,10 +9,12 @@ export async function proxy(request: NextRequest) {
   return updateSession(request);
 }
 
-// Matcher: run on the signed-in app shell and the auth routes; skip Next static
-// assets, image optimizer, favicon, and API routes (those gate themselves).
+// Matcher: run on the signed-in app shell, the auth routes, AND /api/* (the
+// proxy is the defense-in-depth auth backstop for API routes — they still gate
+// themselves via requireUser). Skip Next static assets, image optimizer,
+// favicon, and static file extensions.
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|api/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
   ],
 };

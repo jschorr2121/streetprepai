@@ -60,6 +60,17 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
 
   const { pathname } = request.nextUrl;
 
+  // Defense-in-depth backstop for /api/*: every route also gates itself via
+  // requireUser, but a new route that forgets the gate fails closed here
+  // instead of shipping open. API clients get 401 JSON, never a redirect.
+  // No onboarding gate for APIs — routes decide their own data requirements.
+  if (pathname.startsWith("/api")) {
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    return response;
+  }
+
   // OAuth callback runs before a session exists — never gate or redirect it.
   if (isPassthrough(pathname)) return response;
 
