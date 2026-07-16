@@ -35,11 +35,14 @@ export default async function ChapterPage({
   const user = await requireUser();
   const { sections, chapterRows, profile } = await withUser(
     { sub: user.id, role: "authenticated" },
-    async (tx) => ({
-      sections: await listSectionProgress(tx, user.id),
-      chapterRows: await listChapterProgress(tx, user.id),
-      profile: await getProfile(tx, user.id),
-    }),
+    async (tx) => {
+      const [sections, chapterRows, profile] = await Promise.all([
+        listSectionProgress(tx, user.id),
+        listChapterProgress(tx, user.id),
+        getProfile(tx, user.id),
+      ]);
+      return { sections, chapterRows, profile };
+    },
   );
 
   const readMap = new Map(sections.map((s) => [`${s.chapterSlug}::${s.sectionSlug}`, s]));

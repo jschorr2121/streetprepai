@@ -76,15 +76,21 @@ const TOUR_STEPS: TourStep[] = [
 
 export default async function DashboardPage() {
   const user = await requireUser();
+  // Fire the independent reads together: postgres.js pipelines concurrent
+  // queries on the transaction's connection, so this costs ~1 round trip
+  // instead of 5 sequential ones.
   const { profile, sections, chapterRows, mastery, dueCount } = await withUser(
     { sub: user.id, role: "authenticated" },
-    async (tx) => ({
-      profile: await getProfile(tx, user.id),
-      sections: await listSectionProgress(tx, user.id),
-      chapterRows: await listChapterProgress(tx, user.id),
-      mastery: await listTopicMastery(tx, user.id),
-      dueCount: await countDueReviews(tx, user.id),
-    }),
+    async (tx) => {
+      const [profile, sections, chapterRows, mastery, dueCount] = await Promise.all([
+        getProfile(tx, user.id),
+        listSectionProgress(tx, user.id),
+        listChapterProgress(tx, user.id),
+        listTopicMastery(tx, user.id),
+        countDueReviews(tx, user.id),
+      ]);
+      return { profile, sections, chapterRows, mastery, dueCount };
+    },
   );
 
   const flow = computeFlow(sections, chapterRows);

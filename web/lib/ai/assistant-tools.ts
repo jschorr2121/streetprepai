@@ -162,9 +162,11 @@ export async function executeTool(
         const args = getContactInputSchema.safeParse(input);
         if (!args.success) return { error: "Invalid arguments for get_contact" };
         const { contactId } = args.data;
-        const contact = await getContactById(contactId, userId);
+        const [contact, chats] = await Promise.all([
+          getContactById(contactId, userId),
+          getChatLogsForContact(contactId, userId),
+        ]);
         if (!contact) return { error: `Contact ${contactId} not found` };
-        const chats = await getChatLogsForContact(contactId, userId);
 
         return { contact, chats };
       }

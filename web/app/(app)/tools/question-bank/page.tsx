@@ -22,11 +22,14 @@ export default async function QuestionBankPage() {
 
   const { dueCount, due, chapterRows } = await withUser(
     { sub: user.id, role: "authenticated" },
-    async (tx) => ({
-      dueCount: await countDueReviews(tx, user.id),
-      due: await listDueReviews(tx, user.id, DAILY_TARGET),
-      chapterRows: await listChapterProgress(tx, user.id),
-    }),
+    async (tx) => {
+      const [dueCount, due, chapterRows] = await Promise.all([
+        countDueReviews(tx, user.id),
+        listDueReviews(tx, user.id, DAILY_TARGET),
+        listChapterProgress(tx, user.id),
+      ]);
+      return { dueCount, due, chapterRows };
+    },
   );
 
   // Interleave: topics the user has engaged with (started chapters), else all.
