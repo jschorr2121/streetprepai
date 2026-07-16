@@ -1,15 +1,13 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { PageHeader } from "@/components/page-header";
 import { ArrowLeft } from "lucide-react";
 
-const PLANNED = [
-  "Paste a LinkedIn bio — Claude extracts role, firm, and group",
-  "Calendar integration suggests linking to upcoming events",
-  "Manual entry fallback for contacts without a LinkedIn profile",
-];
+import { NewContactForm } from "@/components/relationships/new-contact-form";
+import { PageHeader } from "@/components/page-header";
+import { Button } from "@/components/ui/button";
 
-export default function NewContactStubPage() {
+export const metadata = { title: "Add a contact — Street Prep AI" };
+
+export default function NewContactPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-8 md:px-10">
       <Button asChild variant="ghost" size="sm" className="mb-4 -ml-2 gap-1">
@@ -19,22 +17,12 @@ export default function NewContactStubPage() {
         </Link>
       </Button>
       <PageHeader
-        eyebrow="Tool · coming soon"
+        eyebrow="Tool · CRM"
         title="Add a contact"
-        description="Full add-contact flow: paste a LinkedIn bio and Claude extracts role, firm, and group — with calendar integration suggesting links to upcoming events."
+        description="Log the person once — every coffee chat, note, follow-up, and AI prep sheet hangs off them. Paste their LinkedIn bio for richer prep sheets."
       />
-      <div className="mt-8 rounded-md border border-dashed p-6">
-        <p className="eyebrow">Planned</p>
-        <ul className="mt-4 space-y-2.5">
-          {PLANNED.map((item, i) => (
-            <li key={item} className="flex gap-3 text-sm">
-              <span className="text-muted-foreground font-mono text-xs leading-5">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
+      <div className="bg-card border-border mt-8 rounded-md border p-5">
+        <NewContactForm />
       </div>
     </div>
   );

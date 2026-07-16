@@ -115,6 +115,12 @@ export const profileMutationLimiter = makeSlidingWindow("rl:action:profile:save"
 export const applicationsLimiter = makeSlidingWindow("rl:action:applications", 120, 60);
 
 /**
+ * Limiter for Relationship Manager contact mutations (create / stage change).
+ * No AI calls; cheap CRUD — same budget as the application tracker.
+ */
+export const contactsLimiter = makeSlidingWindow("rl:action:contacts", 120, 60);
+
+/**
  * Limiter for unauthenticated auth actions (sign-in, sign-up, password reset).
  * Keyed by client IP rather than userId because these run before auth.
  *

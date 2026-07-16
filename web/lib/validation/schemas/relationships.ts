@@ -1,5 +1,44 @@
 import { z } from "zod";
 
+/** Contact pipeline stages — mirrors the `contacts.stage` CHECK constraint. */
+export const CONTACT_STAGES = [
+  "cold",
+  "outreach-sent",
+  "coffee-chat",
+  "warm",
+  "interviewed",
+  "offer",
+] as const;
+
+/** create-contact Server Action input (also the RHF resolver schema). */
+export const CreateContactSchema = z
+  .object({
+    name: z.string().trim().min(1, "Name is required.").max(200),
+    firm: z.string().trim().min(1, "Firm is required.").max(200),
+    title: z.string().trim().max(200).optional(),
+    group: z.string().trim().max(200).optional(),
+    school: z.string().trim().max(200).optional(),
+    gradYear: z
+      .string()
+      .trim()
+      .regex(/^\d{4}$/, "Enter a 4-digit year (e.g. 2027).")
+      .optional()
+      .or(z.literal("")),
+    howMet: z.string().trim().max(300).optional(),
+    stage: z.enum(CONTACT_STAGES),
+    linkedinBio: z.string().trim().max(12_000).optional(),
+  })
+  .strict();
+export type CreateContactFormInput = z.infer<typeof CreateContactSchema>;
+
+/** update-contact-stage Server Action input. */
+export const UpdateContactStageSchema = z
+  .object({
+    id: z.string().trim().min(1).max(200),
+    stage: z.enum(CONTACT_STAGES),
+  })
+  .strict();
+
 /** prep-person — generates an AI prep sheet from a contact's bio.
  *
  * `contactId` is optional; when supplied the route enriches the prompt with

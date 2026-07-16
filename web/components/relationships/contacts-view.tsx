@@ -1,8 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
+import { updateContactStageAction } from "@/app/(app)/tools/relationships/actions";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -67,14 +70,34 @@ export function ContactsView({
   chatLogs: ChatLog[];
   events: CalendarEvent[];
 }) {
-  const [tab, setTab] = useState<"calendar" | "contacts" | "pipeline" | "search">("calendar");
+  // Default to the contacts tab while the calendar has nothing to show
+  // (calendar events only exist once chats/interviews are logged with dates).
+  const [tab, setTab] = useState<"calendar" | "contacts" | "pipeline" | "search">(
+    events.length === 0 ? "contacts" : "calendar",
+  );
   const [query, setQuery] = useState("");
   const [stageFilter, setStageFilter] = useState<string | "all">("all");
+  const router = useRouter();
+  const [, startTransition] = useTransition();
 
-  // Pipeline supports in-memory stage overrides (so the user can drag-drop / dropdown-change
-  // a contact's stage and see it move immediately). TODO (needs Supabase + auth):
-  // persist these changes to the contacts table.
+  // Optimistic stage overrides: the card moves columns immediately, the Server
+  // Action persists, and a failure reverts the override with a toast.
   const [stageOverrides, setStageOverrides] = useState<Record<string, ContactStage>>({});
+
+  function changeStage(contact: Contact, next: ContactStage) {
+    const prev = contact.stage;
+    setStageOverrides((p) => ({ ...p, [contact.id]: next }));
+    startTransition(async () => {
+      const result = await updateContactStageAction({ id: contact.id, stage: next });
+      if (!result.ok) {
+        setStageOverrides((p) => ({ ...p, [contact.id]: prev }));
+        toast.error(result.error.message ?? "Couldn't move the contact.");
+        return;
+      }
+      router.refresh();
+    });
+  }
+
   const effectiveContacts = useMemo(
     () =>
       contacts.map((c) => {
@@ -181,30 +204,50 @@ export function ContactsView({
         </div>
 
         <TabsContent value="calendar" className="space-y-8">
-          <section>
-            <p className="eyebrow mb-3">Upcoming</p>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-              {upcoming.map((e) => (
-                <CalendarCard
-                  key={e.id}
-                  event={e}
-                  contact={effectiveContacts.find((c) => c.id === e.contactId)}
-                />
-              ))}
+          {upcoming.length === 0 && past.length === 0 ? (
+            <div className="rounded-md border border-dashed px-6 py-12 text-center">
+              <p className="eyebrow">Empty</p>
+              <p className="text-muted-foreground mt-2 text-sm">
+                Nothing on the calendar yet. Coffee chats and interviews show up here as you log
+                them against your contacts.
+              </p>
             </div>
-          </section>
-          <section>
-            <p className="eyebrow mb-3">Past</p>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-              {past.map((e) => (
-                <CalendarCard
-                  key={e.id}
-                  event={e}
-                  contact={effectiveContacts.find((c) => c.id === e.contactId)}
-                />
-              ))}
-            </div>
-          </section>
+          ) : (
+            <>
+              <section>
+                <p className="eyebrow mb-3">Upcoming</p>
+                {upcoming.length === 0 ? (
+                  <p className="text-muted-foreground text-sm">No upcoming events.</p>
+                ) : (
+                  <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                    {upcoming.map((e) => (
+                      <CalendarCard
+                        key={e.id}
+                        event={e}
+                        contact={effectiveContacts.find((c) => c.id === e.contactId)}
+                      />
+                    ))}
+                  </div>
+                )}
+              </section>
+              <section>
+                <p className="eyebrow mb-3">Past</p>
+                {past.length === 0 ? (
+                  <p className="text-muted-foreground text-sm">No past events.</p>
+                ) : (
+                  <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                    {past.map((e) => (
+                      <CalendarCard
+                        key={e.id}
+                        event={e}
+                        contact={effectiveContacts.find((c) => c.id === e.contactId)}
+                      />
+                    ))}
+                  </div>
+                )}
+              </section>
+            </>
+          )}
         </TabsContent>
 
         <TabsContent value="contacts" className="space-y-4">
@@ -299,7 +342,7 @@ export function ContactsView({
                       <PipelineCard
                         key={c.id}
                         contact={c}
-                        onChangeStage={(next) => setStageOverrides((p) => ({ ...p, [c.id]: next }))}
+                        onChangeStage={(next) => changeStage(c, next)}
                       />
                     ))}
                     {items.length === 0 && (
@@ -412,7 +455,7 @@ function PipelineCard({
     <div className="bg-card hover:border-primary/40 rounded-md border p-2.5 transition-colors duration-150">
       <button
         type="button"
-        onClick={() => router.push(`/relationships/${contact.id}`)}
+        onClick={() => router.push(`/tools/relationships/${contact.id}`)}
         className="block w-full text-left"
       >
         <p className="truncate text-sm leading-tight font-medium">{contact.name}</p>
