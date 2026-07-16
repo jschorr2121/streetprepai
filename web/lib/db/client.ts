@@ -60,20 +60,16 @@ export async function withUser<T>(
 ): Promise<T> {
   const role = token.role && ALLOWED_ROLES.has(token.role) ? token.role : "authenticated";
   return getDb().transaction(async (tx) => {
-    try {
-      await tx.execute(
-        sql`select set_config('request.jwt.claims', ${JSON.stringify(token)}, true)`,
-      );
-      await tx.execute(
-        sql`select set_config('request.jwt.claim.sub', ${token.sub ?? ""}, true)`,
-      );
-      // Role is whitelisted above; safe to interpolate as an identifier.
-      await tx.execute(sql.raw(`set local role ${role}`));
-      return await fn(tx);
-    } finally {
-      await tx.execute(sql`select set_config('request.jwt.claims', null, true)`);
-      await tx.execute(sql`select set_config('request.jwt.claim.sub', null, true)`);
-      await tx.execute(sql.raw("reset role"));
-    }
+    // One round trip for all three GUCs. `is_local = true` makes them
+    // transaction-local — Postgres reverts them automatically on COMMIT or
+    // ROLLBACK, so no teardown statements are needed (the old 3-statement
+    // setup + 3-statement teardown cost 6 pooler round trips per call).
+    // Setting the `role` GUC via set_config is equivalent to SET LOCAL ROLE.
+    await tx.execute(
+      sql`select set_config('request.jwt.claims', ${JSON.stringify(token)}, true),
+                 set_config('request.jwt.claim.sub', ${token.sub ?? ""}, true),
+                 set_config('role', ${role}, true)`,
+    );
+    return await fn(tx);
   });
 }
