@@ -54,9 +54,11 @@
 - [~] Phase 5 — Perpetual improvement — **in progress** (session 3 started it).
   Done: follow-ups loop closed (summary action items → followup rows, widget mark-done
   button, drafted email persisted to `chats.follow_up_draft` — all three had zero
-  callers/writers before). **Good next lanes**: (1) Unit 9 chatbot rebuild
-  (`.scratch/unit-9-chatbot-rebuild/issues/01…05` — diff against existing
-  `/api/chat/general` + `lib/ai/assistant-tools.ts` first, part is built); (2) Unit 8
+  callers/writers before). **Good next lanes**: (1) Unit 9 chatbot rebuild — the
+  code-vs-plan diff is DONE: read `.scratch/unit-9-chatbot-rebuild/
+  SCOPING-2026-07-16.md` FIRST (corrects four stale PRD assumptions: next migration
+  is 0010 not 0007; the AI SDK is NOT installed; search_chat_logs is keyword, not
+  semantic; CHAT_SYSTEM is guide-scoped — plus a recommended issue order); (2) Unit 8
   question-bank issues (migrations 0006/0007 already shipped — diff first); (3) wire
   `lib/analytics/` (PostHogProvider never mounted — product decision, maybe Jake);
   (4) ~~render `chats.follow_up_draft` in the contact history tab~~ done (session 3,
