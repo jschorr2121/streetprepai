@@ -1,8 +1,7 @@
 import type { User } from "@supabase/supabase-js";
 
 import { UnauthorizedError } from "@/lib/errors";
-import { getUser } from "@/lib/supabase/get-user";
-import { createClient } from "@/lib/supabase/server";
+import { getUser, getUserOrNull } from "@/lib/supabase/get-user";
 
 // Server-side auth helpers for Server Components and Server Actions.
 //
@@ -24,8 +23,5 @@ export async function requireUser(): Promise<User> {
 }
 
 export async function getCurrentUserOrNull(): Promise<User | null> {
-  const supabase = await createClient();
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data.user) return null;
-  return data.user;
+  return getUserOrNull();
 }
