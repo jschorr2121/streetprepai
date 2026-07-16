@@ -1,6 +1,6 @@
 import { requireUser } from "@/lib/security/require-user";
 import { parseJson } from "@/lib/validation/parse";
-import { ExtractResumeSchema } from "@/lib/validation/schemas/profile";
+import { ExtractResumeSchema, ExtractedResumeOutputSchema } from "@/lib/validation/schemas/profile";
 import { getOpenAI } from "@/lib/ai/openai";
 import { logUsage } from "@/lib/ai/usage";
 import { wrapUserText } from "@/lib/ai/sanitize";
@@ -54,14 +54,24 @@ export async function POST(req: Request): Promise<Response> {
       userId: gate.user.id,
     });
 
-    let structured: unknown;
+    let raw: unknown;
     try {
-      structured = JSON.parse(content);
+      raw = JSON.parse(content);
     } catch {
-      structured = {};
+      raw = {};
     }
 
-    return Response.json(structured);
+    // Model output is untrusted — validate the shape before returning it.
+    const structured = ExtractedResumeOutputSchema.safeParse(raw);
+    if (!structured.success) {
+      console.error("[profile/extract-resume] invalid model output:", structured.error.issues);
+      return Response.json(
+        { error: "The AI returned an invalid extraction. Please try again." },
+        { status: 502 },
+      );
+    }
+
+    return Response.json(structured.data);
   } catch (err) {
     console.error("[profile/extract-resume]", err);
     return Response.json({ error: "Internal error" }, { status: 500 });

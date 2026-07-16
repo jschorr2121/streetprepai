@@ -48,3 +48,42 @@ export const ExtractResumeSchema = z
   })
   .strict();
 export type ExtractResumeInput = z.infer<typeof ExtractResumeSchema>;
+
+/** profile/extract-resume's model output. LLM JSON is untrusted — parse before
+ * returning it to the client. Loose/nullable on purpose so a slightly-off model
+ * response degrades instead of failing; the profile save path re-validates with
+ * the strict ProfileSaveSchema anyway. */
+export const ExtractedResumeOutputSchema = z.object({
+  fullName: z.string().max(200).nullish(),
+  school: z.string().max(200).nullish(),
+  graduationYear: z.number().int().min(1900).max(2100).nullish(),
+  experiences: z
+    .array(
+      z.object({
+        company: z.string().max(200).optional(),
+        role: z.string().max(200).optional(),
+        startDate: z.string().max(40).optional(),
+        endDate: z.string().max(40).optional(),
+        bullets: z.array(z.string().max(2_000)).max(50).optional(),
+      }),
+    )
+    .max(50)
+    .optional(),
+  education: z
+    .array(
+      z.object({
+        school: z.string().max(200).optional(),
+        degree: z.string().max(200).optional(),
+        field: z.string().max(200).optional(),
+        graduationYear: z.number().int().min(1900).max(2100).nullish(),
+        gpa: z.number().min(0).max(10).nullish(),
+      }),
+    )
+    .max(20)
+    .optional(),
+  skills: z.array(z.string().max(120)).max(100).optional(),
+  targetRoles: z.array(z.string().max(200)).max(50).optional(),
+  targetFirms: z.array(z.string().max(200)).max(100).optional(),
+  suggestedBioSummary: z.string().max(12_000).nullish(),
+});
+export type ExtractedResumeOutput = z.infer<typeof ExtractedResumeOutputSchema>;

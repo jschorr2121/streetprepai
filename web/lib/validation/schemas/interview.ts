@@ -51,6 +51,30 @@ const ScorecardSchema = z
   })
   .strict();
 
+/** interview/score's `save_scorecard` tool output. Model tool calls are
+ * untrusted: the API doesn't enforce the tool's JSON schema, so parse before
+ * use. Fields are optional/loose — the route normalizes gaps (clamps scores,
+ * defaults strings) so a slightly-off response degrades instead of failing. */
+export const ScorecardOutputSchema = z.object({
+  content_score: z.number().optional(),
+  delivery_score: z.number().optional(),
+  rubric: z
+    .array(
+      z.object({
+        dimension: z.string().max(600).optional(),
+        score: z.number().optional(),
+        comment: z.string().max(2000).optional(),
+      }),
+    )
+    .max(20)
+    .optional(),
+  strengths: z.array(z.string().max(2000)).max(20).optional(),
+  improvements: z.array(z.string().max(2000)).max(20).optional(),
+  follow_up_questions: z.array(z.string().max(2000)).max(20).optional(),
+  model_answer: z.string().max(8000).optional(),
+});
+export type ScorecardOutput = z.infer<typeof ScorecardOutputSchema>;
+
 export const InterviewSaveSchema = z
   .object({
     questionText: z.string().trim().min(1).max(1500),

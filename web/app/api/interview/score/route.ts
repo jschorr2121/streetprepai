@@ -1,7 +1,7 @@
 import { requireUser } from "@/lib/security/require-user";
 import { clientSafeError } from "@/lib/security/client-error";
 import { parseJson } from "@/lib/validation/parse";
-import { InterviewScoreSchema } from "@/lib/validation/schemas/interview";
+import { InterviewScoreSchema, ScorecardOutputSchema } from "@/lib/validation/schemas/interview";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { INTERVIEW_SCORE_SYSTEM } from "@/lib/ai/prompts";
 import { logUsage } from "@/lib/ai/usage";
@@ -186,7 +186,18 @@ export async function POST(req: Request): Promise<Response> {
     return Response.json({ error: "Model did not call the save_scorecard tool." }, { status: 502 });
   }
 
-  const input = toolUse.input as Partial<Scorecard>;
+  // Tool output is untrusted model output — parse before normalizing (the tool
+  // JSON schema is advisory; the API doesn't enforce it).
+  const scorecard = ScorecardOutputSchema.safeParse(toolUse.input);
+  if (!scorecard.success) {
+    console.error("[interview/score] invalid tool output:", scorecard.error.issues);
+    return Response.json(
+      { error: "The AI returned an invalid scorecard. Please try again." },
+      { status: 502 },
+    );
+  }
+
+  const input = scorecard.data;
   const result: Scorecard = {
     content_score: clampScore(input.content_score),
     delivery_score: clampScore(input.delivery_score),
