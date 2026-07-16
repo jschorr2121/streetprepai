@@ -13,6 +13,14 @@ import { NextResponse, type NextRequest } from "next/server";
 // refreshed cookies survive — otherwise users get randomly logged out.
 
 const AUTH_ROUTES = ["/login", "/signup", "/forgot-password"];
+
+// Onboarding is one-way (`onboarded_at` is set once and never cleared), so
+// once we've seen it we remember it in a cookie and skip the per-navigation
+// profiles read. The cookie value is the user id, so a different account on
+// the same browser never inherits the flag. Worst case on forgery: the user
+// skips the /onboarding redirect and sees an app shell with default profile
+// fields — it gates UX, not data access (RLS does that).
+const ONBOARDED_COOKIE = "sp-onboarded";
 const ONBOARDING_ROUTE = "/onboarding";
 const DEFAULT_SIGNED_IN_ROUTE = "/dashboard";
 const DEFAULT_SIGNED_OUT_ROUTE = "/login";
@@ -86,16 +94,27 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
     return redirectTo(request, DEFAULT_SIGNED_IN_ROUTE);
   }
 
-  // Onboarding gate. A single RLS-scoped read of `onboarded_at` decides whether
-  // the user still needs onboarding. Cheap (single indexed row); runs only for
-  // authed users on gated routes.
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("onboarded_at")
-    .eq("user_id", user.id)
-    .maybeSingle();
-
-  const onboarded = Boolean(profile?.onboarded_at);
+  // Onboarding gate. The cookie short-circuits the common case; otherwise a
+  // single RLS-scoped read of `onboarded_at` decides, and a hit is memoized
+  // into the cookie so later navigations skip the round trip.
+  let onboarded = request.cookies.get(ONBOARDED_COOKIE)?.value === user.id;
+  if (!onboarded) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("onboarded_at")
+      .eq("user_id", user.id)
+      .maybeSingle();
+    onboarded = Boolean(profile?.onboarded_at);
+    if (onboarded && pathname !== ONBOARDING_ROUTE) {
+      response.cookies.set(ONBOARDED_COOKIE, user.id, {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        path: "/",
+        maxAge: 60 * 60 * 24 * 365,
+      });
+    }
+  }
 
   if (!onboarded && pathname !== ONBOARDING_ROUTE) {
     return redirectTo(request, ONBOARDING_ROUTE);
