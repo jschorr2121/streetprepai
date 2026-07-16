@@ -1,12 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SidebarProfileMenu } from "@/components/auth/sidebar-profile-menu";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
   BookOpenText,
+  Menu,
   Mic,
   NotebookPen,
   BarChart3,
@@ -64,7 +68,17 @@ const sections: NavSection[] = [
   },
 ];
 
-function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
+function NavLink({
+  item,
+  pathname,
+  withTourTarget,
+  onNavigate,
+}: {
+  item: NavItem;
+  pathname: string;
+  withTourTarget: boolean;
+  onNavigate?: () => void;
+}) {
   const active =
     pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
   const Icon = item.icon;
@@ -72,8 +86,11 @@ function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
     <li>
       <Link
         href={item.href}
-        data-tour={item.href}
+        // data-tour targets must be unique in the DOM — only the desktop
+        // sidebar instance carries them (the tour skips them when hidden).
+        data-tour={withTourTarget ? item.href : undefined}
         aria-current={active ? "page" : undefined}
+        onClick={onNavigate}
         className={cn(
           "flex items-center gap-2.5 border-l-2 py-1.5 pr-2 pl-4 text-sm transition-colors duration-150",
           active
@@ -93,40 +110,106 @@ function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
   );
 }
 
+function NavList({
+  pathname,
+  withTourTargets,
+  onNavigate,
+}: {
+  pathname: string;
+  withTourTargets: boolean;
+  onNavigate?: () => void;
+}) {
+  return (
+    <ul className="space-y-0.5">
+      {sections.map((section, i) => {
+        if (section.kind === "item") {
+          return (
+            <NavLink
+              key={section.item.href}
+              item={section.item}
+              pathname={pathname}
+              withTourTarget={withTourTargets}
+              {...(onNavigate ? { onNavigate } : {})}
+            />
+          );
+        }
+        return (
+          <li key={`group-${i}`} className="pt-5">
+            <p className="eyebrow mb-1.5 pl-4">{section.label}</p>
+            <ul className="space-y-0.5">
+              {section.items.map((item) => (
+                <NavLink
+                  key={item.href}
+                  item={item}
+                  pathname={pathname}
+                  withTourTarget={withTourTargets}
+                  {...(onNavigate ? { onNavigate } : {})}
+                />
+              ))}
+            </ul>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function Brand() {
+  return (
+    <Link href="/dashboard" className="flex items-baseline gap-1.5">
+      <span className="font-display text-[17px] leading-none">Street Prep</span>
+      <span className="text-primary font-mono text-[11px] font-medium tracking-[0.14em]">AI</span>
+    </Link>
+  );
+}
+
 export function AppNav({ email, fullName }: { email: string; fullName?: string | undefined }) {
   const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
-    <aside className="bg-background hidden flex-col border-r lg:flex lg:w-60 lg:shrink-0">
-      <div className="flex h-14 items-center border-b px-5">
-        <Link href="/dashboard" className="flex items-baseline gap-1.5">
-          <span className="font-display text-[17px] leading-none">Street Prep</span>
-          <span className="text-primary font-mono text-[11px] font-medium tracking-[0.14em]">
-            AI
-          </span>
-        </Link>
-      </div>
-      <nav className="flex-1 overflow-y-auto py-5">
-        <ul className="space-y-0.5">
-          {sections.map((section, i) => {
-            if (section.kind === "item") {
-              return <NavLink key={section.item.href} item={section.item} pathname={pathname} />;
-            }
-            return (
-              <li key={`group-${i}`} className="pt-5">
-                <p className="eyebrow mb-1.5 pl-4">{section.label}</p>
-                <ul className="space-y-0.5">
-                  {section.items.map((item) => (
-                    <NavLink key={item.href} item={item} pathname={pathname} />
-                  ))}
-                </ul>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-      <div className="border-t p-3">
-        <SidebarProfileMenu email={email} fullName={fullName} />
-      </div>
-    </aside>
+    <>
+      {/* Mobile: top bar with a drawer — below lg the sidebar is hidden and
+          this is the only navigation. */}
+      <header className="bg-background sticky top-0 z-40 flex h-14 items-center justify-between border-b px-4 lg:hidden">
+        <Brand />
+        <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="icon" aria-label="Open navigation">
+              <Menu className="size-5" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-72 gap-0 p-0">
+            <SheetTitle className="sr-only">Navigation</SheetTitle>
+            <div className="flex h-14 items-center border-b px-5">
+              <Brand />
+            </div>
+            <nav className="flex-1 overflow-y-auto py-5">
+              <NavList
+                pathname={pathname}
+                withTourTargets={false}
+                onNavigate={() => setMobileOpen(false)}
+              />
+            </nav>
+            <div className="border-t p-3">
+              <SidebarProfileMenu email={email} fullName={fullName} />
+            </div>
+          </SheetContent>
+        </Sheet>
+      </header>
+
+      {/* Desktop: persistent sidebar. */}
+      <aside className="bg-background hidden flex-col border-r lg:flex lg:w-60 lg:shrink-0">
+        <div className="flex h-14 items-center border-b px-5">
+          <Brand />
+        </div>
+        <nav className="flex-1 overflow-y-auto py-5">
+          <NavList pathname={pathname} withTourTargets />
+        </nav>
+        <div className="border-t p-3">
+          <SidebarProfileMenu email={email} fullName={fullName} />
+        </div>
+      </aside>
+    </>
   );
 }

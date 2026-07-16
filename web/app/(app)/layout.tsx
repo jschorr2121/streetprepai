@@ -13,7 +13,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const fullName = typeof meta["full_name"] === "string" ? meta["full_name"] : undefined;
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen flex-col lg:flex-row">
       <AppNav email={user.email ?? ""} fullName={fullName} />
       <main className="min-w-0 flex-1">{children}</main>
     </div>

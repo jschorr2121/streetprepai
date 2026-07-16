@@ -20,6 +20,10 @@ function measure(selector: string): Rect | null {
   const el = document.querySelector(selector);
   if (!el) return null;
   const r = el.getBoundingClientRect();
+  // display:none targets (e.g. the sidebar below lg) are in the DOM but
+  // measure 0×0 — treat them as absent so the tour doesn't spotlight a
+  // tiny box in the viewport corner.
+  if (r.width === 0 && r.height === 0) return null;
   return {
     top: r.top - PAD,
     left: r.left - PAD,
