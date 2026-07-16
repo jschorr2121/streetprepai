@@ -131,6 +131,12 @@ export function MockStudio() {
   };
 
   const startRecording = useCallback(async () => {
+    // Insecure contexts / older browsers have no mediaDevices at all —
+    // without this check the user gets a raw TypeError in a toast.
+    if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
+      toast.error("Recording isn't supported in this browser. Try a recent Chrome, Edge, or Safari.");
+      return;
+    }
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       streamRef.current = stream;
@@ -178,8 +184,13 @@ export function MockStudio() {
         });
       }, 1000);
     } catch (err) {
+      const name = err instanceof DOMException ? err.name : "";
       toast.error(
-        `Could not access mic: ${err instanceof Error ? err.message : "permission denied"}`,
+        name === "NotAllowedError"
+          ? "Microphone access was blocked. Allow mic access for this site and try again."
+          : name === "NotFoundError"
+            ? "No microphone was found. Plug one in or check your input settings."
+            : "Could not access the microphone. Check your browser settings and try again.",
       );
     }
   }, [audioUrl]);
@@ -223,9 +234,11 @@ export function MockStudio() {
         method: "POST",
         body: form,
       });
-      const data = await res.json();
+      // Non-JSON error bodies (proxy 413/502 pages) must not turn into a
+      // parse-error toast — fall back to the HTTP status.
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        toast.error(data.error ?? "Transcription failed.");
+        toast.error(data.error ?? `Transcription failed (HTTP ${res.status}).`);
         setPhase("review");
         return;
       }
@@ -257,9 +270,9 @@ export function MockStudio() {
           idealAnswerOutline: question.idealAnswerOutline,
         }),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        toast.error(data.error ?? "Scoring failed.");
+        toast.error(data.error ?? `Scoring failed (HTTP ${res.status}).`);
         setPhase("review");
         return;
       }
@@ -524,15 +537,14 @@ function ScorecardView({
         )}
       </Card>
 
-      <div className="flex flex-wrap justify-end gap-2">
-        <Button
-          variant="outline"
-          onClick={() => {
-            // TODO: persist to story bank when DB is wired
-            toast.success("Saved to your story bank.");
-          }}
-        >
+      <div className="flex flex-wrap items-center justify-end gap-2">
+        {/* Story-bank persistence isn't wired yet — a success toast for a no-op
+            would lie to the user, so the button is disabled and labeled. */}
+        <Button variant="outline" disabled title="Coming soon">
           <Save className="size-4" /> Save to story bank
+          <span className="text-muted-foreground ml-1 font-mono text-[10px] tracking-[0.14em]">
+            SOON
+          </span>
         </Button>
         <Button onClick={onTryAnother}>
           <RefreshCw className="size-4" /> Try another question

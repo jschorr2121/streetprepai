@@ -42,6 +42,11 @@ export function ResumeCoach() {
       toast.error("Please upload a PDF.");
       return;
     }
+    // Match the server's 5 MB cap before uploading the whole file.
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("That PDF is over 5 MB. Export a smaller version and try again.");
+      return;
+    }
     setExtracting(true);
     try {
       const res = await fetch("/api/resume/extract", {
@@ -49,9 +54,9 @@ export function ResumeCoach() {
         headers: { "Content-Type": "application/pdf" },
         body: file,
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        toast.error(data.error ?? "Could not extract PDF.");
+        toast.error(data.error ?? `Could not extract PDF (HTTP ${res.status}).`);
         return;
       }
       setRawText(data.raw_text);
@@ -77,9 +82,9 @@ export function ResumeCoach() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ rawText: text }),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        toast.error(data.error ?? "Critique failed.");
+        toast.error(data.error ?? `Critique failed (HTTP ${res.status}).`);
         return;
       }
       setResult(data as CritiqueResult);
@@ -122,14 +127,16 @@ export function ResumeCoach() {
             <TabsContent value="upload" className="mt-4 space-y-4">
               <button
                 type="button"
+                disabled={extracting}
                 onClick={() => fileInputRef.current?.click()}
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={(e) => {
                   e.preventDefault();
+                  if (extracting) return;
                   const f = e.dataTransfer.files?.[0];
                   if (f) void onFile(f);
                 }}
-                className="hover:bg-accent/30 w-full rounded-md border border-dashed p-10 text-center transition-colors duration-150"
+                className="hover:bg-accent/30 w-full rounded-md border border-dashed p-10 text-center transition-colors duration-150 disabled:pointer-events-none disabled:opacity-60"
               >
                 <Upload className="text-muted-foreground mx-auto size-6" />
                 <p className="mt-3 font-medium">
@@ -146,6 +153,8 @@ export function ResumeCoach() {
                   onChange={(e) => {
                     const f = e.target.files?.[0];
                     if (f) void onFile(f);
+                    // Reset so re-selecting the same file fires onChange again.
+                    e.target.value = "";
                   }}
                 />
               </button>

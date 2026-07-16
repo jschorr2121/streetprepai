@@ -21,9 +21,12 @@ export function ChatPanel({
   const [streaming, setStreaming] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
+  // Scroll on new messages only — keying on every streamed token hijacks the
+  // viewport when the user scrolls up to read while a reply streams.
+  const messageCount = messages.length;
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messageCount]);
 
   async function send() {
     const trimmed = input.trim();
@@ -47,7 +50,21 @@ export function ChatPanel({
           messages: next.slice(0, -1),
         }),
       });
-      if (!res.ok || !res.body) throw new Error("stream failed");
+      if (!res.ok || !res.body) {
+        const failure =
+          res.status === 429
+            ? "You're sending messages too quickly — give it a minute, then try again."
+            : res.status === 401
+              ? "Your session expired. Refresh the page and sign in again."
+              : "Sorry, something went wrong. Please try again in a moment.";
+        setMessages((ms) => {
+          const copy = ms.slice();
+          copy[copy.length - 1] = { role: "assistant", content: failure };
+          return copy;
+        });
+        setInput(trimmed); // keep the typed prompt so a retry is one click
+        return;
+      }
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let acc = "";
@@ -70,6 +87,7 @@ export function ChatPanel({
         };
         return copy;
       });
+      setInput(trimmed);
     } finally {
       setStreaming(false);
     }
@@ -147,8 +165,9 @@ export function ChatPanel({
             onClick={send}
             disabled={streaming || !input.trim()}
             className="shrink-0"
+            aria-label="Send message"
           >
-            <ArrowUp className="size-4" />
+            <ArrowUp className="size-4" aria-hidden />
           </Button>
         </div>
       </div>
