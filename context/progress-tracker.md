@@ -16,6 +16,21 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — session 3, Phase 3 complete (2026-07-16, cloud, branch `fable/prod-readiness`)
+
+Phase 3 **complete** — the session-2 backlog is closed (4 commits, suite **353 passing**):
+relationships + firm pages now read real per-user data with genuine empty states (seed
+arrays deleted); `/tools/relationships/new` is a real contact form (RHF + Zod →
+`createContactAction`); pipeline stage changes persist (`updateContactStageAction`,
+optimistic with revert); **chats actually persist now** — nothing ever wrote to the `chats`
+table, so history/search/firm recall/embeddings ran on nothing; `logChatAction` +
+`saveChatSummaryAction` fix that and activate the dormant pgvector embedding path
+(prep sheets now use semantic recall over real past chats); the five streaming routes frame
+mid-stream errors with a sentinel that clients render as styled errors with retry (instead
+of `[Error: …]` prose in the assistant bubble); mock-studio aborts in-flight requests on
+unmount. Filed to jakes-tasks: verify the production `firms` table is seeded. Next: Phase 4
+(production-readiness checklist — `.env.example` regeneration, CI, dep patches, robustness).
+
 ### Prod-readiness relay — session 2, Phase 3 (2026-07-16, cloud, branch `fable/prod-readiness`)
 
 Phase 3 (UX fixes & bugs) — **mostly complete** in the same session, 7 further commits, suite

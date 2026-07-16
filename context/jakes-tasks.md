@@ -69,6 +69,13 @@ needs action it can't perform itself.
   semantic chat recall stops running at the default single-probe (which can silently
   miss matches for per-user filtered searches). Same SQL-editor flow as 0004/0005.
 
+- [ ] **Verify the production `firms` table is seeded** (prod-readiness relay, 2026-07-16) —
+  `/firms`, `/firms/[slug]`, and the firm-prep route now read the `firms` table exclusively
+  (the hardcoded seed arrays were deleted when the pages were wired to real data). Local dev
+  gets rows via `supabase db reset` → `web/supabase/seed.sql`; production only has them if
+  that insert was ever run there. Check `select count(*) from firms;` — if 0, run the firms
+  section of `web/supabase/seed.sql` in the SQL editor (idempotent, `on conflict do nothing`).
+
 ## 🟡 Before launch (not blocking dev, but don't ship without it)
 
 - [ ] **Re-enable "Confirm email" in Supabase** before production so real

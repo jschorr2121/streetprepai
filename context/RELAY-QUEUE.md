@@ -50,12 +50,14 @@ verified. File anything needing a dashboard/secret to `jakes-tasks.md`.
 > no safe Turbopack-compatible cut — documented in CHANGES.md. Baseline → after
 > numbers in `context/CHANGES.md`.
 
-## Phase 3 — UX fixes & bugs
+## Phase 3 — UX fixes & bugs — **DONE (2026-07-16, session 3)**
 
-Go screen by screen (use Playwright `pnpm test:e2e` — LIVE_AI specs self-skip — or careful
-code review if the cloud box can't run browsers): loading/empty/error states, mobile
-layout, keyboard/focus, visual hierarchy, broken or confusing flows, and any real bugs.
-Fix them in code, verified. Compare against what strong consumer apps do.
+> Session 2 did the screen-by-screen sweep (~27 fixes, see CHANGES.md). Session 3
+> closed the backlog: relationships + firm pages wired to real per-user data (seed
+> arrays deleted), real /new contact form + createContactAction, pipeline stage
+> changes persisted, chats actually saved (nothing ever wrote to `chats` — history/
+> search/embeddings ran on nothing), stream errors framed with a sentinel instead of
+> in-band `[Error: …]` prose (5 routes + 4 clients), mock-studio aborts on unmount.
 
 ## Phase 4 — Production-readiness checklist
 

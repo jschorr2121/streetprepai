@@ -397,3 +397,17 @@ migrations already in the repo (`0006_curriculum.sql`, `0007_qbank_seed.sql`,
 already be partially built via ad-hoc local sessions — the next session to pick up Unit
 8/9/10 should diff the issue against current `web/app` + migrations before implementing,
 not assume the PRDs describe a green field.
+
+---
+
+## Prod-readiness relay session 3 — Phase 3 backlog closed (2026-07-16)
+
+Four commits (`15765e0`…`4f38996`), each gated on typecheck + lint + full vitest + build. Suite 346 → **353 passing**.
+
+- **Stream mid-error protocol** — the five plain-text streaming routes (chat/stream, lens/explain, lens/beginner, relationships/prep-person, firms/prep) appended literal `[Error: …]` prose to the byte stream on mid-stream failure, which clients rendered as if the model said it. New `lib/streaming/stream-error.ts` frames the client-safe message with an ASCII record separator (stripped from model deltas as insurance; unit-tested), and `lib/ai/stream-response.ts#streamTextResponse` replaces ~30 lines of identical ReadableStream boilerplate per route. All four consuming components split the accumulator, keep partial content, render the error as a styled `role=alert` line; the chat panel restores the typed prompt for one-click retry. Dev-facing "check ANTHROPIC_API_KEY" copy removed from user-visible error paths.
+- **Mock-studio abort-on-unmount** — transcribe/score fetches now share an AbortController aborted in the unmount cleanup (combined with the existing 120s timeout via `AbortSignal.any`); no more setState/toasts on an unmounted tree.
+- **Relationships + firms real data** — the list/detail/firms pages rendered hardcoded seed contacts/chats/events/firms under first-person copy (the deepest dishonesty left). Now: `requireUser()` + pipelined `lib/data` reads, genuine empty states (contacts CTA empty state, calendar-tab default switched to contacts when eventless, firms empty note), seed arrays deleted. `/tools/relationships/new` is a real RHF+Zod form → `createContactAction`; pipeline stage changes persist via `updateContactStageAction` (optimistic override, revert + toast on failure) through new non-AI `contactsLimiter`. Fixed pipeline cards navigating to the legacy `/relationships/[id]` path.
+- **Chat persistence** — nothing ever wrote to the `chats` table: "log a chat" structured notes into local state, so history/search/firm recall/embeddings all ran on nothing. `logChatAction` saves raw notes *before* the AI call (notes survive structuring failure; same-sitting re-structure updates rather than duplicates; stamps the contact's last-contact date for the nudges widget); `saveChatSummaryAction` persists the Zod-validated summary. The client now passes contactId+chatId to structure-chat — activating the pre-existing but never-exercised server-side pgvector embedding write — and prep-person gets contactId so prep sheets use semantic recall over real past chats.
+- **Decision:** contact/chat mutations live in `lib/data/contacts.ts` (Supabase session-client style) rather than Drizzle/`withUser`, matching the domain's existing reads that the chatbot tools already use. The Server Actions still follow the 7-step skeleton.
+- **Decision:** AI route schemas no longer require a non-empty `contactTitle` (user-created contacts may have none; prompts tolerate the blank).
+- **Filed to jakes-tasks:** verify the production `firms` table contains seed.sql's firms insert — the firms pages + firm-prep route now read it exclusively.

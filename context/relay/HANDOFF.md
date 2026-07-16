@@ -27,21 +27,18 @@
   uncached Anthropic prompts are <1K tokens). Bundle measured: Sentry (incl. Replay,
   deliberate) + zod v4 dominate; Turbopack supports neither the analyzer nor Sentry
   treeshake options — documented in CHANGES.md, not changed.
-- [~] Phase 3 — UX fixes & bugs — **mostly done** (session 2). Screen-by-screen review via
-  code-review agents (no env in cloud box → no live browser). Fixed: mobile navigation
-  (there was NONE below lg) ✅, failed gate scoring shown as a pass ✅, gate reachable
-  unread (asChild disabled no-op) ✅, tour never completing on mobile ✅, relationships AI
-  actions lying on failure ✅, progress page fabricating stats (rebuilt on real data) ✅,
-  vitest not discovering lib/**/*.test.ts (mastery tests never ran; 325→346) ✅, plus ~20
-  medium/low items (timeouts, JSON-parse guards, a11y switches/labels, honest SOON
-  labels, error copy, legacy-link 301s) — full list in CHANGES.md.
-  **Remaining Phase 3 backlog** (next session picks up here): (1) wire relationships +
-  firm pages to real per-user data — they render seed/demo contacts and chats under
-  first-person copy, the deepest dishonesty left in the app; `lib/data/*` Supabase reads
-  exist and are already used by the chatbot tools; needs contact CRUD (the /new stub) or
-  at minimum real reads + genuine empty states; (2) persist contacts-view stage changes
-  (in-memory `stageOverrides` TODO); (3) chat-stream in-band `[Error: …]` text → real
-  error event/sentinel the client can style + retry; (4) mock-studio abort-on-unmount.
+- [x] Phase 3 — UX fixes & bugs — **DONE** (sessions 2+3). Session 2: screen-by-screen
+  sweep, ~27 fixes (mobile nav, gate scoring, tour, progress page fabrication, vitest
+  include; see CHANGES.md). Session 3 closed the backlog: relationships + firm pages
+  wired to real per-user data with genuine empty states (seed arrays deleted) ✅, real
+  /new contact form (RHF+Zod → createContactAction) ✅, pipeline stage changes persisted
+  (optimistic + revert) ✅, **chats now actually persist** (nothing ever wrote to `chats`;
+  logChatAction saves notes before the AI call, saveChatSummaryAction persists the
+  validated summary, structure-chat now gets contactId+chatId so the embedding path
+  finally runs; prep-person gets contactId → semantic recall live) ✅, stream mid-error
+  sentinel (ASCII record-separator framing via lib/streaming/stream-error + shared streamTextResponse;
+  5 routes, 4 clients render styled role=alert + retain partial content) ✅, mock-studio
+  abort-on-unmount ✅.
 - [ ] Phase 4 — Production-readiness checklist (note: CI push trigger fixed; `pnpm build`
       now works without DATABASE_URL, so the CI build step is unblocked; `.env.example`
       regeneration still open)
@@ -69,6 +66,19 @@
 
 ## Session log
 
+- **2026-07-16 (session 3, cloud)** — **Phase 3 COMPLETE**; 4 commits
+  (`15765e0`…`4f38996`). Closed the whole Phase 3 backlog (see checklist above). New
+  facts: (a) contact CRUD lives in `lib/data/contacts.ts` (Supabase-client style, NOT
+  Drizzle/withUser — deliberate, matches the domain's existing reads) with Server
+  Actions in `app/(app)/tools/relationships/actions.ts` + non-AI `contactsLimiter`;
+  (b) `chats.id`/`contacts.id` are text PKs — chats default `gen_random_uuid()::text`,
+  contacts get `crypto.randomUUID()` app-side; (c) AI route schemas (prep-person /
+  structure-chat / draft-followup) now allow empty `contactTitle` — user-created
+  contacts may have none; (d) stream clients split on `STREAM_ERROR_SENTINEL` from
+  `lib/streaming/stream-error` (unit-tested); any new plain-text streaming route should
+  return `streamTextResponse(stream, route)` from `lib/ai/stream-response`; (e) firms
+  pages read the `firms` table — **prod must have seed.sql's firms insert applied**
+  (filed to jakes-tasks); (f) suite now **353 passing**. Next: Phase 4.
 - **2026-07-15 (setup, local)** — Branch + work order created. Relay routine scheduled
   (first run 1:10pm ET). No code work done yet; Phase 1 starts on the first cloud run.
 - **2026-07-16 (session 2, cloud, later)** — **Phase 3 mostly done**; 7 more commits
