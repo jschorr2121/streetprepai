@@ -57,5 +57,7 @@ Thumbs.db
 # friends' copyrighted prep PDFs — source material only, never publish
 extra_content/
 
-# scratch
-.scratch/
+# scratch — only the local security-review findings stay untracked (public repo,
+# live vuln details); feature PRDs/issues under .scratch/<feature>/ are the relay's
+# backlog tracker and must be committed so cloud sessions can read them.
+.scratch/code-review-2026-07/

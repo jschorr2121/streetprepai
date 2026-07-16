@@ -70,6 +70,12 @@ if not already there.
 
 When 1–4 are DONE, keep going — each session picks the highest-value lane and leaves
 artifacts: raise test coverage on real behavior; hunt and fix bugs; UX/perf polish;
-work AFK-safe items from `todo.md` and the issue tracker (`.scratch/<feature>/issues/`);
-and brainstorm production/launch/feature improvements into `context/brainstorms/<date>-<topic>.md`,
-promoting the best to issues. No terminal state — Jake disables the routine when done.
+work AFK-safe items from `todo.md` and the issue tracker (`.scratch/<feature>/issues/`
+— Units 8 question-bank, 9 chatbot rebuild, 10 calendar sync; only
+`.scratch/code-review-2026-07/` stays gitignored, the unit PRDs/issues are committed and
+readable from a cold clone as of 2026-07-16, see CHANGES.md); **before implementing a
+unit issue, diff it against current `web/app` + `web/supabase/migrations` — migrations
+0006-0008 don't match the units' planned numbering, so some of this may already be
+partially built**; and brainstorm production/launch/feature improvements into
+`context/brainstorms/<date>-<topic>.md`, promoting the best to issues. No terminal
+state — Jake disables the routine when done.

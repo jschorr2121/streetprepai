@@ -379,3 +379,21 @@ Screen-by-screen review done via parallel code-review agents (no env/creds in th
 **Fixed (medium/low):** mock-interview "Save to story bank" fired a success toast for a no-op (now disabled + SOON); mic errors branch NotAllowedError/NotFoundError with feature-detection instead of raw TypeError text; transcribe/score/critique/extract parse JSON safely and carry 120s timeouts (a hung request wedged the spinner); chat-panel gets status-aware failure copy (429/401/500), restores the typed prompt for retry, scrolls on new-message only, aria-label on send; resume-coach enforces the 5 MB cap client-side, disables the dropzone mid-extract, resets the file input; reading-lens hides the selection popover below `md` (Explain streamed tokens into a rail that doesn't exist there — spending money invisibly) and drops the dead Highlight/Note buttons; question-bank topic practice and mark-read surface action failures; delete-application asks for confirmation; 7 contact links stopped bouncing through the legacy `/relationships/:id` 301; "Add contact" CTA labeled SOON instead of dead-ending on a stub; reset-password's "link expired" error links to /forgot-password; login drops the redundant generic banner when field errors are shown; advanced-track toggles get `role="switch"`/`aria-checked`; drill inputs get label/id pairs; user-facing error copy no longer references ANTHROPIC_API_KEY/env vars (3 sites).
 
 **Known remaining (Phase 3 backlog, not regressions):** relationships + firm pages render seed/demo data under first-person copy (needs the real-data wiring slice — `lib/data/*` Supabase reads exist but are only used by chatbot tools); contacts-view stage changes aren't persisted (in-memory TODO); chat stream mid-error arrives as literal `[Error: …]` text in-band (protocol change needed); mock-studio in-flight fetches aren't aborted on unmount (timeouts added; full AbortController plumbing deferred).
+
+---
+
+## Relay-chain audit — `.scratch/<feature>/issues/` was invisible to cloud sessions (2026-07-16)
+
+`RELAY-QUEUE.md` Phase 5 names `.scratch/<feature>/issues/` (Units 8/9/10) as a backlog
+source, but the entire `.scratch/` directory was gitignored — a fresh cloud clone never
+had these files, only Jake's local machine did (the same problem already called out for
+`.scratch/code-review-2026-07/findings.md`, just unnoticed for the other three
+subdirectories). Narrowed `.gitignore` to `.scratch/code-review-2026-07/` only (that one
+stays untracked — public repo, live vuln details) and committed the Unit 8/9/10 PRDs +
+issues so cold sessions can actually read them. **Not re-verified for staleness**: qbank
+migrations already in the repo (`0006_curriculum.sql`, `0007_qbank_seed.sql`,
+`0008_profile_tour.sql`) don't match Unit 8/9/10's planned numbering
+(`0006 qbank / 0007 chat threads / 0008 calendar`), meaning some of this backlog may
+already be partially built via ad-hoc local sessions — the next session to pick up Unit
+8/9/10 should diff the issue against current `web/app` + migrations before implementing,
+not assume the PRDs describe a green field.
