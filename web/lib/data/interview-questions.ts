@@ -250,10 +250,7 @@ export function getQuestionsByMode(mode: InterviewMode): InterviewQuestion[] {
   return interviewQuestions.filter((q) => q.mode === mode);
 }
 
-export function pickRandomQuestion(
-  mode: InterviewMode,
-  excludeId?: string,
-): InterviewQuestion {
+export function pickRandomQuestion(mode: InterviewMode, excludeId?: string): InterviewQuestion {
   const pool = getQuestionsByMode(mode).filter((q) => q.id !== excludeId);
   const source = pool.length > 0 ? pool : getQuestionsByMode(mode);
   const picked = source[Math.floor(Math.random() * source.length)];

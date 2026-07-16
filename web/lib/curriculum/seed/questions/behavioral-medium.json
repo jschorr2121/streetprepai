@@ -6,10 +6,19 @@
     "questionType": "curveball",
     "prompt": "I notice a six-month gap on your resume between your last internship and now. Walk me through it.",
     "keyPoints": [
-      {"point": "Addresses the gap directly and factually without excessive apology", "weight": 3},
-      {"point": "Explains what was actually done during the gap, showing productive use of time", "weight": 3},
-      {"point": "Reframes the gap as relevant to the current candidacy where honestly possible", "weight": 2},
-      {"point": "Keeps the explanation brief and moves the conversation forward", "weight": 1}
+      {
+        "point": "Addresses the gap directly and factually without excessive apology",
+        "weight": 3
+      },
+      {
+        "point": "Explains what was actually done during the gap, showing productive use of time",
+        "weight": 3
+      },
+      {
+        "point": "Reframes the gap as relevant to the current candidacy where honestly possible",
+        "weight": 2
+      },
+      { "point": "Keeps the explanation brief and moves the conversation forward", "weight": 1 }
     ],
     "misconceptions": [
       "Being evasive or vague about the gap, which raises more suspicion than the gap itself",
@@ -41,10 +50,19 @@
     "questionType": "verbal",
     "prompt": "You spent two years working in a completely different field before deciding to pursue banking. Walk me through that transition.",
     "keyPoints": [
-      {"point": "Explains the original career choice with genuine reasoning, not dismissively", "weight": 2},
-      {"point": "Identifies the specific realization or moment that triggered the pivot", "weight": 3},
-      {"point": "Describes concrete steps taken to close the skills gap for banking", "weight": 3},
-      {"point": "Frames the prior experience as an asset rather than wasted time", "weight": 2}
+      {
+        "point": "Explains the original career choice with genuine reasoning, not dismissively",
+        "weight": 2
+      },
+      {
+        "point": "Identifies the specific realization or moment that triggered the pivot",
+        "weight": 3
+      },
+      {
+        "point": "Describes concrete steps taken to close the skills gap for banking",
+        "weight": 3
+      },
+      { "point": "Frames the prior experience as an asset rather than wasted time", "weight": 2 }
     ],
     "misconceptions": [
       "Describing the prior career negatively, implying poor judgment in the original choice",
@@ -76,10 +94,19 @@
     "questionType": "verbal",
     "prompt": "Tell me about yourself, but focus specifically on why you'd be a strong fit for our healthcare investment banking group.",
     "keyPoints": [
-      {"point": "Weaves in specific, relevant experience tied to healthcare rather than a generic pitch", "weight": 3},
-      {"point": "Demonstrates genuine industry interest or knowledge, not just interest in banking generally", "weight": 3},
-      {"point": "Still covers core narrative elements (background, motivation, fit) within the tailored frame", "weight": 2},
-      {"point": "Stays concise despite the added specificity", "weight": 1}
+      {
+        "point": "Weaves in specific, relevant experience tied to healthcare rather than a generic pitch",
+        "weight": 3
+      },
+      {
+        "point": "Demonstrates genuine industry interest or knowledge, not just interest in banking generally",
+        "weight": 3
+      },
+      {
+        "point": "Still covers core narrative elements (background, motivation, fit) within the tailored frame",
+        "weight": 2
+      },
+      { "point": "Stays concise despite the added specificity", "weight": 1 }
     ],
     "misconceptions": [
       "Giving the same generic pitch and only tacking 'healthcare' onto the end",
@@ -111,9 +138,18 @@
     "questionType": "verbal",
     "prompt": "Your background touches finance, a research role, and student government. How do those threads connect into one coherent story?",
     "keyPoints": [
-      {"point": "Identifies a genuine common thread across the disparate experiences, not a forced connection", "weight": 3},
-      {"point": "Explains what each experience specifically contributed to that thread", "weight": 3},
-      {"point": "Concludes with how the combination makes the candidate a stronger, not scattered, fit for banking", "weight": 2}
+      {
+        "point": "Identifies a genuine common thread across the disparate experiences, not a forced connection",
+        "weight": 3
+      },
+      {
+        "point": "Explains what each experience specifically contributed to that thread",
+        "weight": 3
+      },
+      {
+        "point": "Concludes with how the combination makes the candidate a stronger, not scattered, fit for banking",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Presenting the experiences as unrelated, leaving the interviewer to do the connecting work",
@@ -145,10 +181,22 @@
     "questionType": "curveball",
     "prompt": "It sounds like you've changed direction a few times already — first pre-med, then engineering, now finance. Why should we believe banking sticks?",
     "keyPoints": [
-      {"point": "Acknowledges the pattern honestly rather than denying or minimizing it", "weight": 2},
-      {"point": "Explains what was genuinely learned from each prior direction and why it didn't stick", "weight": 3},
-      {"point": "Articulates a specific, evidence-based reason banking is different from the prior attempts", "weight": 3},
-      {"point": "Points to sustained action (not just interest) as proof of commitment", "weight": 2}
+      {
+        "point": "Acknowledges the pattern honestly rather than denying or minimizing it",
+        "weight": 2
+      },
+      {
+        "point": "Explains what was genuinely learned from each prior direction and why it didn't stick",
+        "weight": 3
+      },
+      {
+        "point": "Articulates a specific, evidence-based reason banking is different from the prior attempts",
+        "weight": 3
+      },
+      {
+        "point": "Points to sustained action (not just interest) as proof of commitment",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Getting defensive and dismissing the previous paths as mistakes with no value",
@@ -180,10 +228,22 @@
     "questionType": "conceptual",
     "prompt": "You have the analytical profile that would work well in corporate finance, equity research, or trading too. Why banking specifically over those?",
     "keyPoints": [
-      {"point": "Distinguishes banking from each named alternative with a specific, accurate reason", "weight": 3},
-      {"point": "Explains what banking uniquely offers that the others don't (deal breadth, transaction-driven pace, exit optionality)", "weight": 3},
-      {"point": "Avoids dismissing the alternatives as inferior, just different fits", "weight": 2},
-      {"point": "Grounds the comparison in personal preference, not assumptions about pay alone", "weight": 2}
+      {
+        "point": "Distinguishes banking from each named alternative with a specific, accurate reason",
+        "weight": 3
+      },
+      {
+        "point": "Explains what banking uniquely offers that the others don't (deal breadth, transaction-driven pace, exit optionality)",
+        "weight": 3
+      },
+      {
+        "point": "Avoids dismissing the alternatives as inferior, just different fits",
+        "weight": 2
+      },
+      {
+        "point": "Grounds the comparison in personal preference, not assumptions about pay alone",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Giving an answer that would apply equally to any of the paths, showing no real discrimination between them",
@@ -215,10 +275,19 @@
     "questionType": "conceptual",
     "prompt": "Given how demanding the hours are, why is this trade-off worth it to you?",
     "keyPoints": [
-      {"point": "Shows genuine, realistic understanding of the hours (not minimizing or overstating them)", "weight": 3},
-      {"point": "Articulates specific personal reasons the trade-off is worth it, not a generic 'I'm willing to work hard'", "weight": 3},
-      {"point": "Mentions any personal experience already managing high workload as evidence", "weight": 2},
-      {"point": "Avoids implying the hours don't matter or won't be difficult", "weight": 2}
+      {
+        "point": "Shows genuine, realistic understanding of the hours (not minimizing or overstating them)",
+        "weight": 3
+      },
+      {
+        "point": "Articulates specific personal reasons the trade-off is worth it, not a generic 'I'm willing to work hard'",
+        "weight": 3
+      },
+      {
+        "point": "Mentions any personal experience already managing high workload as evidence",
+        "weight": 2
+      },
+      { "point": "Avoids implying the hours don't matter or won't be difficult", "weight": 2 }
     ],
     "misconceptions": [
       "Claiming the hours won't be a problem at all, which sounds naive to an interviewer who's lived it",
@@ -250,10 +319,22 @@
     "questionType": "conceptual",
     "prompt": "You're also interviewing at a peer firm with a similar reputation. What would make you choose us over them?",
     "keyPoints": [
-      {"point": "Names specific, differentiated reasons rather than generic praise that could apply to either firm", "weight": 3},
-      {"point": "Handles the comparison diplomatically without disparaging the peer firm", "weight": 2},
-      {"point": "Shows evidence of having actually researched or spoken to people at both", "weight": 3},
-      {"point": "Answers honestly rather than claiming there's no real competition for the candidate's interest", "weight": 2}
+      {
+        "point": "Names specific, differentiated reasons rather than generic praise that could apply to either firm",
+        "weight": 3
+      },
+      {
+        "point": "Handles the comparison diplomatically without disparaging the peer firm",
+        "weight": 2
+      },
+      {
+        "point": "Shows evidence of having actually researched or spoken to people at both",
+        "weight": 3
+      },
+      {
+        "point": "Answers honestly rather than claiming there's no real competition for the candidate's interest",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Denying interest in the other firm entirely, which can come across as insincere",
@@ -285,10 +366,19 @@
     "questionType": "verbal",
     "prompt": "Tell me about a recent deal our firm has advised on and what stood out to you about it.",
     "keyPoints": [
-      {"point": "Names an accurate, specific deal the firm was actually involved in", "weight": 3},
-      {"point": "Describes the deal's basic structure or size correctly", "weight": 2},
-      {"point": "Identifies a specific, non-obvious detail that stood out, not just the headline outcome", "weight": 3},
-      {"point": "Connects the observation to why it makes the candidate want to work at the firm", "weight": 2}
+      {
+        "point": "Names an accurate, specific deal the firm was actually involved in",
+        "weight": 3
+      },
+      { "point": "Describes the deal's basic structure or size correctly", "weight": 2 },
+      {
+        "point": "Identifies a specific, non-obvious detail that stood out, not just the headline outcome",
+        "weight": 3
+      },
+      {
+        "point": "Connects the observation to why it makes the candidate want to work at the firm",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Naming a deal from a competitor firm by mistake, which signals shallow research",
@@ -320,10 +410,19 @@
     "questionType": "conceptual",
     "prompt": "Our culture is known for being direct and sometimes blunt with feedback. How do you know that will work for you?",
     "keyPoints": [
-      {"point": "Gives a specific past example of receiving and responding well to direct, blunt feedback", "weight": 3},
-      {"point": "Distinguishes between welcoming candor and merely tolerating it", "weight": 2},
-      {"point": "Shows self-awareness about what type of feedback style the candidate responds best to", "weight": 3},
-      {"point": "Avoids an answer that sounds rehearsed or unverified by real experience", "weight": 2}
+      {
+        "point": "Gives a specific past example of receiving and responding well to direct, blunt feedback",
+        "weight": 3
+      },
+      { "point": "Distinguishes between welcoming candor and merely tolerating it", "weight": 2 },
+      {
+        "point": "Shows self-awareness about what type of feedback style the candidate responds best to",
+        "weight": 3
+      },
+      {
+        "point": "Avoids an answer that sounds rehearsed or unverified by real experience",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Claiming to love all criticism without any nuance or specific example",
@@ -355,10 +454,16 @@
     "questionType": "verbal",
     "prompt": "Tell me about a time you had a disagreement with a teammate. How did you resolve it?",
     "keyPoints": [
-      {"point": "Describes the disagreement specifically and fairly, without villainizing the other person", "weight": 3},
-      {"point": "Shows the candidate taking an active, constructive step to resolve it, not waiting it out", "weight": 3},
-      {"point": "States a concrete resolution and outcome", "weight": 2},
-      {"point": "Reflects a lesson learned about handling conflict professionally", "weight": 2}
+      {
+        "point": "Describes the disagreement specifically and fairly, without villainizing the other person",
+        "weight": 3
+      },
+      {
+        "point": "Shows the candidate taking an active, constructive step to resolve it, not waiting it out",
+        "weight": 3
+      },
+      { "point": "States a concrete resolution and outcome", "weight": 2 },
+      { "point": "Reflects a lesson learned about handling conflict professionally", "weight": 2 }
     ],
     "misconceptions": [
       "Describing the disagreement in a way that makes the candidate look blameless and the other person unreasonable",
@@ -390,10 +495,22 @@
     "questionType": "verbal",
     "prompt": "Tell me about a time you failed at something important. What happened and what did you learn?",
     "keyPoints": [
-      {"point": "Chooses a genuine failure with real, meaningful stakes, not a disguised success", "weight": 3},
-      {"point": "Takes clear personal ownership rather than blaming external factors", "weight": 3},
-      {"point": "Describes a specific, actionable lesson and how it was subsequently applied", "weight": 3},
-      {"point": "Maintains a composed, reflective tone rather than sounding defensive or overly self-critical", "weight": 1}
+      {
+        "point": "Chooses a genuine failure with real, meaningful stakes, not a disguised success",
+        "weight": 3
+      },
+      {
+        "point": "Takes clear personal ownership rather than blaming external factors",
+        "weight": 3
+      },
+      {
+        "point": "Describes a specific, actionable lesson and how it was subsequently applied",
+        "weight": 3
+      },
+      {
+        "point": "Maintains a composed, reflective tone rather than sounding defensive or overly self-critical",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Choosing a fake failure that is really a strength in disguise ('I failed because I cared too much')",
@@ -425,10 +542,19 @@
     "questionType": "curveball",
     "prompt": "You mentioned you sometimes struggle to say no when you're already overloaded. Isn't that a real problem in a job where you're constantly being handed more work?",
     "keyPoints": [
-      {"point": "Acknowledges the concern honestly rather than backpedaling from the original weakness", "weight": 3},
-      {"point": "Distinguishes between struggling to say no outright and having developed a specific management strategy", "weight": 3},
-      {"point": "Describes a concrete method for handling competing demands (prioritization conversation, flagging capacity)", "weight": 3},
-      {"point": "Reassures without overselling that the issue is fully solved", "weight": 1}
+      {
+        "point": "Acknowledges the concern honestly rather than backpedaling from the original weakness",
+        "weight": 3
+      },
+      {
+        "point": "Distinguishes between struggling to say no outright and having developed a specific management strategy",
+        "weight": 3
+      },
+      {
+        "point": "Describes a concrete method for handling competing demands (prioritization conversation, flagging capacity)",
+        "weight": 3
+      },
+      { "point": "Reassures without overselling that the issue is fully solved", "weight": 1 }
     ],
     "misconceptions": [
       "Denying the weakness is actually a problem once challenged, contradicting the earlier answer",
@@ -460,10 +586,19 @@
     "questionType": "verbal",
     "prompt": "You said resilience is one of your strengths. Give me a specific example that proves it, not just the claim.",
     "keyPoints": [
-      {"point": "Provides a specific, verifiable story rather than restating the abstract claim", "weight": 3},
-      {"point": "Shows a genuine setback, not a manufactured or minor one", "weight": 2},
-      {"point": "Describes the specific actions taken to persist through the setback", "weight": 3},
-      {"point": "States a concrete outcome that demonstrates the resilience paid off", "weight": 2}
+      {
+        "point": "Provides a specific, verifiable story rather than restating the abstract claim",
+        "weight": 3
+      },
+      { "point": "Shows a genuine setback, not a manufactured or minor one", "weight": 2 },
+      {
+        "point": "Describes the specific actions taken to persist through the setback",
+        "weight": 3
+      },
+      {
+        "point": "States a concrete outcome that demonstrates the resilience paid off",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Restating the claim in different words instead of providing a concrete example",
@@ -495,9 +630,18 @@
     "questionType": "conceptual",
     "prompt": "You've described yourself as highly organized. How specifically would that strength show up in your first six months as an analyst?",
     "keyPoints": [
-      {"point": "Translates the abstract strength into concrete analyst-relevant behaviors", "weight": 3},
-      {"point": "Names specific tasks or scenarios where organization matters (version control, deadline tracking, multi-deal juggling)", "weight": 3},
-      {"point": "Shows realistic understanding of the early-analyst workflow rather than a generic description", "weight": 2}
+      {
+        "point": "Translates the abstract strength into concrete analyst-relevant behaviors",
+        "weight": 3
+      },
+      {
+        "point": "Names specific tasks or scenarios where organization matters (version control, deadline tracking, multi-deal juggling)",
+        "weight": 3
+      },
+      {
+        "point": "Shows realistic understanding of the early-analyst workflow rather than a generic description",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Giving an abstract answer without connecting it to specific analyst tasks",
@@ -529,10 +673,22 @@
     "questionType": "curveball",
     "prompt": "You'd be starting as an analyst a few years older than most of your peers. Won't that be awkward, and are you worried about it?",
     "keyPoints": [
-      {"point": "Addresses the concern directly and confidently without defensiveness", "weight": 3},
-      {"point": "Reframes the age gap as an asset (maturity, prior work experience, perspective)", "weight": 3},
-      {"point": "Shows self-awareness about real adjustment challenges rather than dismissing them entirely", "weight": 2},
-      {"point": "Cites concrete evidence of having already navigated being 'different' in a group setting", "weight": 2}
+      {
+        "point": "Addresses the concern directly and confidently without defensiveness",
+        "weight": 3
+      },
+      {
+        "point": "Reframes the age gap as an asset (maturity, prior work experience, perspective)",
+        "weight": 3
+      },
+      {
+        "point": "Shows self-awareness about real adjustment challenges rather than dismissing them entirely",
+        "weight": 2
+      },
+      {
+        "point": "Cites concrete evidence of having already navigated being 'different' in a group setting",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Denying there's any adjustment involved, which sounds unconvincing",
@@ -564,10 +720,19 @@
     "questionType": "curveball",
     "prompt": "You'd need visa sponsorship to work here. How would you address concerns about that process for an early-career hire?",
     "keyPoints": [
-      {"point": "Demonstrates informed understanding of the visa/sponsorship process rather than vagueness", "weight": 3},
-      {"point": "Reassures with facts, not just optimism, about the realistic timeline and requirements", "weight": 2},
-      {"point": "Emphasizes the value the candidate brings that justifies the sponsorship effort", "weight": 3},
-      {"point": "Stays calm and factual rather than defensive about being asked", "weight": 2}
+      {
+        "point": "Demonstrates informed understanding of the visa/sponsorship process rather than vagueness",
+        "weight": 3
+      },
+      {
+        "point": "Reassures with facts, not just optimism, about the realistic timeline and requirements",
+        "weight": 2
+      },
+      {
+        "point": "Emphasizes the value the candidate brings that justifies the sponsorship effort",
+        "weight": 3
+      },
+      { "point": "Stays calm and factual rather than defensive about being asked", "weight": 2 }
     ],
     "misconceptions": [
       "Being vague or uninformed about how the sponsorship process actually works",
@@ -599,11 +764,23 @@
     "questionType": "multi-step",
     "prompt": "Pick a real deal you've studied and walk me through its strategic rationale, the structure used, and one risk you'd flag if you were advising the buyer.",
     "keyPoints": [
-      {"point": "States the deal's core facts accurately (parties, approximate size, structure)", "weight": 2},
-      {"point": "Articulates the strategic rationale specifically, not just 'growth' or 'synergies' in the abstract", "weight": 3},
-      {"point": "Describes the financing or structural mechanics of the deal correctly", "weight": 3},
-      {"point": "Identifies one specific, credible risk relevant to that particular deal", "weight": 3},
-      {"point": "Organizes the answer clearly across the three requested parts", "weight": 1}
+      {
+        "point": "States the deal's core facts accurately (parties, approximate size, structure)",
+        "weight": 2
+      },
+      {
+        "point": "Articulates the strategic rationale specifically, not just 'growth' or 'synergies' in the abstract",
+        "weight": 3
+      },
+      {
+        "point": "Describes the financing or structural mechanics of the deal correctly",
+        "weight": 3
+      },
+      {
+        "point": "Identifies one specific, credible risk relevant to that particular deal",
+        "weight": 3
+      },
+      { "point": "Organizes the answer clearly across the three requested parts", "weight": 1 }
     ],
     "misconceptions": [
       "Giving a generic risk (integration risk, market risk) with no connection to the specific deal's facts",
@@ -635,10 +812,19 @@
     "questionType": "conceptual",
     "prompt": "Tell me about a deal you followed where, if you'd been advising, you think a different approach would have worked better.",
     "keyPoints": [
-      {"point": "Names a specific real deal with accurate basic facts", "weight": 3},
-      {"point": "Identifies a specific, defensible critique rather than vague second-guessing", "weight": 3},
-      {"point": "Proposes a concrete alternative approach and explains the reasoning", "weight": 3},
-      {"point": "Shows appropriate humility about not having full information available to the actual deal team", "weight": 2}
+      { "point": "Names a specific real deal with accurate basic facts", "weight": 3 },
+      {
+        "point": "Identifies a specific, defensible critique rather than vague second-guessing",
+        "weight": 3
+      },
+      {
+        "point": "Proposes a concrete alternative approach and explains the reasoning",
+        "weight": 3
+      },
+      {
+        "point": "Shows appropriate humility about not having full information available to the actual deal team",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Criticizing a deal outcome purely with the benefit of hindsight without a defensible reasoning process",
@@ -670,10 +856,16 @@
     "questionType": "conceptual",
     "prompt": "How would a meaningful rise in interest rates affect M&A activity, in your view?",
     "keyPoints": [
-      {"point": "Explains the mechanism connecting rates to deal financing costs", "weight": 3},
-      {"point": "Discusses the effect on valuations and buyer/seller price expectations", "weight": 3},
-      {"point": "Distinguishes impact across buyer types (strategic vs. financial sponsor)", "weight": 3},
-      {"point": "Offers a nuanced view rather than a blanket 'M&A slows down' claim", "weight": 2}
+      { "point": "Explains the mechanism connecting rates to deal financing costs", "weight": 3 },
+      {
+        "point": "Discusses the effect on valuations and buyer/seller price expectations",
+        "weight": 3
+      },
+      {
+        "point": "Distinguishes impact across buyer types (strategic vs. financial sponsor)",
+        "weight": 3
+      },
+      { "point": "Offers a nuanced view rather than a blanket 'M&A slows down' claim", "weight": 2 }
     ],
     "misconceptions": [
       "Claiming rates only matter to leveraged buyers and have no effect on strategic acquirers",
@@ -705,10 +897,19 @@
     "questionType": "conceptual",
     "prompt": "What's your view on the current trend in overall M&A deal volume, and what's driving it?",
     "keyPoints": [
-      {"point": "States a specific, plausible directional view rather than a vague 'it's mixed'", "weight": 2},
-      {"point": "Names at least two distinct drivers behind the trend (macro, regulatory, sector-specific)", "weight": 3},
-      {"point": "Distinguishes trends across deal size or sector where relevant", "weight": 3},
-      {"point": "Shows this is an informed, current view rather than outdated or generic commentary", "weight": 2}
+      {
+        "point": "States a specific, plausible directional view rather than a vague 'it's mixed'",
+        "weight": 2
+      },
+      {
+        "point": "Names at least two distinct drivers behind the trend (macro, regulatory, sector-specific)",
+        "weight": 3
+      },
+      { "point": "Distinguishes trends across deal size or sector where relevant", "weight": 3 },
+      {
+        "point": "Shows this is an informed, current view rather than outdated or generic commentary",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Giving a purely macro answer with no connection to actual observed deal activity",
@@ -740,10 +941,22 @@
     "questionType": "conceptual",
     "prompt": "Pick an industry you follow and tell me about a trend you think will meaningfully affect deal activity in that sector over the next couple of years.",
     "keyPoints": [
-      {"point": "Names a specific industry and a specific, non-obvious trend within it", "weight": 3},
-      {"point": "Explains the mechanism by which the trend would affect deal activity specifically", "weight": 3},
-      {"point": "Distinguishes winners and losers or different implications across sub-segments", "weight": 2},
-      {"point": "Shows independent reasoning rather than repeating a headline without analysis", "weight": 2}
+      {
+        "point": "Names a specific industry and a specific, non-obvious trend within it",
+        "weight": 3
+      },
+      {
+        "point": "Explains the mechanism by which the trend would affect deal activity specifically",
+        "weight": 3
+      },
+      {
+        "point": "Distinguishes winners and losers or different implications across sub-segments",
+        "weight": 2
+      },
+      {
+        "point": "Shows independent reasoning rather than repeating a headline without analysis",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Naming a trend so broad it applies to every industry equally, showing no sector-specific insight",
@@ -775,10 +988,19 @@
     "questionType": "verbal",
     "prompt": "Tell me about the hardest project or assignment you've worked on. What made it difficult, and how did you get through it?",
     "keyPoints": [
-      {"point": "Describes a genuinely challenging project with specific, concrete difficulty, not a vague hardship", "weight": 3},
-      {"point": "Explains the specific obstacles faced, whether technical, interpersonal, or time-related", "weight": 2},
-      {"point": "Describes concrete actions taken to work through the difficulty", "weight": 3},
-      {"point": "States a clear outcome and a lesson that would apply to banking work", "weight": 2}
+      {
+        "point": "Describes a genuinely challenging project with specific, concrete difficulty, not a vague hardship",
+        "weight": 3
+      },
+      {
+        "point": "Explains the specific obstacles faced, whether technical, interpersonal, or time-related",
+        "weight": 2
+      },
+      { "point": "Describes concrete actions taken to work through the difficulty", "weight": 3 },
+      {
+        "point": "States a clear outcome and a lesson that would apply to banking work",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Choosing a project that wasn't actually difficult, undermining the credibility of the story",
@@ -810,10 +1032,19 @@
     "questionType": "verbal",
     "prompt": "Tell me about a time you received tough feedback that was hard to hear. How did you respond?",
     "keyPoints": [
-      {"point": "Describes specific, genuinely difficult feedback, not a mild or softened critique", "weight": 3},
-      {"point": "Shows an honest initial reaction before describing how it was processed constructively", "weight": 2},
-      {"point": "Describes a concrete change in behavior made as a result", "weight": 3},
-      {"point": "Reflects genuine growth rather than simply agreeing the feedback was correct without evidence of change", "weight": 2}
+      {
+        "point": "Describes specific, genuinely difficult feedback, not a mild or softened critique",
+        "weight": 3
+      },
+      {
+        "point": "Shows an honest initial reaction before describing how it was processed constructively",
+        "weight": 2
+      },
+      { "point": "Describes a concrete change in behavior made as a result", "weight": 3 },
+      {
+        "point": "Reflects genuine growth rather than simply agreeing the feedback was correct without evidence of change",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Claiming the feedback didn't bother the candidate at all, which can read as inauthentic",

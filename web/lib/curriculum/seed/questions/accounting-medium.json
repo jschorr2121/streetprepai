@@ -6,10 +6,22 @@
     "questionType": "conceptual",
     "prompt": "How do you decide whether a line item belongs above or below the operating income line on an income statement, and why does that classification matter to an analyst?",
     "keyPoints": [
-      {"point": "Operating items relate directly to the core recurring business (COGS, SG&A, R&D, D&A tied to operations)", "weight": 3},
-      {"point": "Non-operating items relate to financing, investing, or unusual/incidental activities (interest expense, interest income, gains/losses on asset sales, litigation)", "weight": 3},
-      {"point": "The distinction matters because operating margin and EBIT are used to compare core business performance across companies with different capital structures", "weight": 3},
-      {"point": "Misclassification can distort peer comparisons and valuation multiples", "weight": 1}
+      {
+        "point": "Operating items relate directly to the core recurring business (COGS, SG&A, R&D, D&A tied to operations)",
+        "weight": 3
+      },
+      {
+        "point": "Non-operating items relate to financing, investing, or unusual/incidental activities (interest expense, interest income, gains/losses on asset sales, litigation)",
+        "weight": 3
+      },
+      {
+        "point": "The distinction matters because operating margin and EBIT are used to compare core business performance across companies with different capital structures",
+        "weight": 3
+      },
+      {
+        "point": "Misclassification can distort peer comparisons and valuation multiples",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Believing all recurring expenses are automatically operating expenses regardless of their nature",
@@ -41,10 +53,10 @@
     "questionType": "calculation",
     "prompt": "A company has revenue of $500 million, COGS of $300 million, SG&A of $80 million, interest expense of $20 million, and a 25% tax rate. Compute net income.",
     "keyPoints": [
-      {"point": "Gross profit = $500M - $300M = $200M", "weight": 2},
-      {"point": "Operating income = $200M - $80M = $120M", "weight": 2},
-      {"point": "Pre-tax income = $120M - $20M interest = $100M", "weight": 3},
-      {"point": "Net income = $100M x (1 - 0.25) = $75M", "weight": 3}
+      { "point": "Gross profit = $500M - $300M = $200M", "weight": 2 },
+      { "point": "Operating income = $200M - $80M = $120M", "weight": 2 },
+      { "point": "Pre-tax income = $120M - $20M interest = $100M", "weight": 3 },
+      { "point": "Net income = $100M x (1 - 0.25) = $75M", "weight": 3 }
     ],
     "misconceptions": [
       "Applying the tax rate before subtracting interest expense",
@@ -76,10 +88,19 @@
     "questionType": "calculation",
     "prompt": "A company reports operating income (EBIT) of $45 million, depreciation of $10 million, and amortization of $5 million. What is EBITDA, and why might an analyst use EBITDA rather than EBIT when valuing this company?",
     "keyPoints": [
-      {"point": "EBITDA = EBIT + D&A = $45M + $10M + $5M = $60M", "weight": 3},
-      {"point": "EBITDA strips out non-cash D&A to approximate cash operating profitability", "weight": 2},
-      {"point": "EBITDA allows comparison across companies with different capital intensity, depreciation policies, or asset ages", "weight": 3},
-      {"point": "Notes EBITDA has limitations — ignores real capex needs and working capital", "weight": 1}
+      { "point": "EBITDA = EBIT + D&A = $45M + $10M + $5M = $60M", "weight": 3 },
+      {
+        "point": "EBITDA strips out non-cash D&A to approximate cash operating profitability",
+        "weight": 2
+      },
+      {
+        "point": "EBITDA allows comparison across companies with different capital intensity, depreciation policies, or asset ages",
+        "weight": 3
+      },
+      {
+        "point": "Notes EBITDA has limitations — ignores real capex needs and working capital",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Forgetting to add both depreciation and amortization, only adding one",
@@ -107,9 +128,12 @@
     "questionType": "single-step",
     "prompt": "A company has GAAP net income of $80 million and 40 million diluted shares. Included in net income is a one-time, after-tax impairment charge of $20 million. What is reported diluted EPS, and what would adjusted diluted EPS be excluding the one-time charge?",
     "keyPoints": [
-      {"point": "Reported diluted EPS = $80M / 40M shares = $2.00", "weight": 2},
-      {"point": "Adjusted net income = $80M + $20M (add back the after-tax charge) = $100M", "weight": 3},
-      {"point": "Adjusted diluted EPS = $100M / 40M shares = $2.50", "weight": 3}
+      { "point": "Reported diluted EPS = $80M / 40M shares = $2.00", "weight": 2 },
+      {
+        "point": "Adjusted net income = $80M + $20M (add back the after-tax charge) = $100M",
+        "weight": 3
+      },
+      { "point": "Adjusted diluted EPS = $100M / 40M shares = $2.50", "weight": 3 }
     ],
     "misconceptions": [
       "Subtracting the charge again instead of adding it back to reverse its impact",
@@ -141,10 +165,22 @@
     "questionType": "conceptual",
     "prompt": "What is goodwill, where does it come from, and where does it sit on the balance sheet?",
     "keyPoints": [
-      {"point": "Goodwill arises in an acquisition when the purchase price exceeds the fair value of identifiable net assets acquired", "weight": 3},
-      {"point": "It represents intangible value like brand, customer relationships, synergies, and workforce that can't be separately identified and valued", "weight": 2},
-      {"point": "Sits on the balance sheet as a non-current, indefinite-lived intangible asset", "weight": 2},
-      {"point": "Not amortized under current GAAP; instead tested annually for impairment", "weight": 2}
+      {
+        "point": "Goodwill arises in an acquisition when the purchase price exceeds the fair value of identifiable net assets acquired",
+        "weight": 3
+      },
+      {
+        "point": "It represents intangible value like brand, customer relationships, synergies, and workforce that can't be separately identified and valued",
+        "weight": 2
+      },
+      {
+        "point": "Sits on the balance sheet as a non-current, indefinite-lived intangible asset",
+        "weight": 2
+      },
+      {
+        "point": "Not amortized under current GAAP; instead tested annually for impairment",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Believing goodwill is amortized like other intangibles",
@@ -176,9 +212,12 @@
     "questionType": "calculation",
     "prompt": "Beginning retained earnings is $150 million. The company generates net income of $40 million during the year and pays $12 million of dividends. What is ending retained earnings?",
     "keyPoints": [
-      {"point": "Ending RE = Beginning RE + Net income - Dividends", "weight": 3},
-      {"point": "$150M + $40M - $12M = $178M", "weight": 3},
-      {"point": "Notes retained earnings reflects cumulative reinvested earnings, not a cash balance", "weight": 1}
+      { "point": "Ending RE = Beginning RE + Net income - Dividends", "weight": 3 },
+      { "point": "$150M + $40M - $12M = $178M", "weight": 3 },
+      {
+        "point": "Notes retained earnings reflects cumulative reinvested earnings, not a cash balance",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Adding dividends instead of subtracting them",
@@ -206,9 +245,12 @@
     "questionType": "calculation",
     "prompt": "Beginning net PP&E is $300 million. During the year, the company spends $60 million on capex and records $45 million of depreciation, with no asset sales. What is ending net PP&E?",
     "keyPoints": [
-      {"point": "Ending net PP&E = Beginning net PP&E + Capex - Depreciation", "weight": 3},
-      {"point": "$300M + $60M - $45M = $315M", "weight": 3},
-      {"point": "Notes capex exceeding depreciation grows the net PP&E base (expanding asset investment)", "weight": 1}
+      { "point": "Ending net PP&E = Beginning net PP&E + Capex - Depreciation", "weight": 3 },
+      { "point": "$300M + $60M - $45M = $315M", "weight": 3 },
+      {
+        "point": "Notes capex exceeding depreciation grows the net PP&E base (expanding asset investment)",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Subtracting capex instead of adding it",
@@ -236,9 +278,18 @@
     "questionType": "conceptual",
     "prompt": "What is deferred revenue, why is it recorded as a liability, and how does it get recognized as revenue over time?",
     "keyPoints": [
-      {"point": "Deferred revenue arises when a company receives cash before it has delivered the corresponding goods or services", "weight": 3},
-      {"point": "It's a liability because the company owes the customer future delivery of goods/services (or a refund)", "weight": 3},
-      {"point": "As the obligation is fulfilled over time, deferred revenue is drawn down and revenue is recognized on the income statement", "weight": 2}
+      {
+        "point": "Deferred revenue arises when a company receives cash before it has delivered the corresponding goods or services",
+        "weight": 3
+      },
+      {
+        "point": "It's a liability because the company owes the customer future delivery of goods/services (or a refund)",
+        "weight": 3
+      },
+      {
+        "point": "As the obligation is fulfilled over time, deferred revenue is drawn down and revenue is recognized on the income statement",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Recording the cash received as revenue immediately upon receipt",
@@ -266,9 +317,18 @@
     "questionType": "conceptual",
     "prompt": "How is capital expenditure classified on the cash flow statement, and how does it factor into the definition of free cash flow?",
     "keyPoints": [
-      {"point": "Capex is recorded as a cash outflow within cash flow from investing", "weight": 3},
-      {"point": "Free cash flow to the firm is typically CFO minus capex (unlevered version may add back after-tax interest)", "weight": 3},
-      {"point": "Free cash flow represents cash available to all capital providers or to reinvest/return to shareholders after maintaining/growing the asset base", "weight": 2}
+      {
+        "point": "Capex is recorded as a cash outflow within cash flow from investing",
+        "weight": 3
+      },
+      {
+        "point": "Free cash flow to the firm is typically CFO minus capex (unlevered version may add back after-tax interest)",
+        "weight": 3
+      },
+      {
+        "point": "Free cash flow represents cash available to all capital providers or to reinvest/return to shareholders after maintaining/growing the asset base",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Classifying capex within financing activities",
@@ -296,9 +356,9 @@
     "questionType": "calculation",
     "prompt": "During the year, a company spends $40 million on capex, spends $15 million to acquire a small business, and receives $8 million from selling an old piece of equipment. What is cash flow from investing?",
     "keyPoints": [
-      {"point": "Capex and the acquisition are cash outflows: -$40M and -$15M", "weight": 3},
-      {"point": "The equipment sale is a cash inflow: +$8M", "weight": 2},
-      {"point": "CFI = -$40M - $15M + $8M = -$47M", "weight": 3}
+      { "point": "Capex and the acquisition are cash outflows: -$40M and -$15M", "weight": 3 },
+      { "point": "The equipment sale is a cash inflow: +$8M", "weight": 2 },
+      { "point": "CFI = -$40M - $15M + $8M = -$47M", "weight": 3 }
     ],
     "misconceptions": [
       "Treating the acquisition as an operating or financing activity instead of investing",
@@ -326,9 +386,12 @@
     "questionType": "calculation",
     "prompt": "During the year, a company issues $50 million of new debt, repays $20 million of existing debt, pays $10 million of dividends, and repurchases $15 million of its own stock. What is cash flow from financing?",
     "keyPoints": [
-      {"point": "Debt issuance is a cash inflow: +$50M; debt repayment is an outflow: -$20M", "weight": 3},
-      {"point": "Dividends and buybacks are both cash outflows: -$10M and -$15M", "weight": 3},
-      {"point": "CFF = $50M - $20M - $10M - $15M = $5M", "weight": 2}
+      {
+        "point": "Debt issuance is a cash inflow: +$50M; debt repayment is an outflow: -$20M",
+        "weight": 3
+      },
+      { "point": "Dividends and buybacks are both cash outflows: -$10M and -$15M", "weight": 3 },
+      { "point": "CFF = $50M - $20M - $10M - $15M = $5M", "weight": 2 }
     ],
     "misconceptions": [
       "Treating dividend payments as an operating cash flow instead of financing",
@@ -360,9 +423,15 @@
     "questionType": "conceptual",
     "prompt": "How is stock-based compensation treated on the cash flow statement, and why do some investors view it skeptically as an 'adjustment' item?",
     "keyPoints": [
-      {"point": "SBC is an operating expense on the income statement that reduces net income but is non-cash", "weight": 2},
-      {"point": "It's added back within cash flow from operations, similar to D&A", "weight": 3},
-      {"point": "Skepticism: SBC is a real economic cost via shareholder dilution, even though no cash leaves the business", "weight": 3}
+      {
+        "point": "SBC is an operating expense on the income statement that reduces net income but is non-cash",
+        "weight": 2
+      },
+      { "point": "It's added back within cash flow from operations, similar to D&A", "weight": 3 },
+      {
+        "point": "Skepticism: SBC is a real economic cost via shareholder dilution, even though no cash leaves the business",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Believing SBC has zero real cost to shareholders since it's non-cash",
@@ -390,9 +459,18 @@
     "questionType": "multi-step",
     "prompt": "A company makes a $10 million credit sale that increases accounts receivable by $10 million, with no cash collected yet and ignoring COGS and taxes for simplicity. Walk through how this transaction flows through all three financial statements.",
     "keyPoints": [
-      {"point": "Income statement: revenue increases by $10 million, flowing through to net income", "weight": 3},
-      {"point": "Balance sheet: accounts receivable increases by $10 million (asset); retained earnings increases by $10 million via net income (equity), keeping it balanced", "weight": 3},
-      {"point": "Cash flow statement: net income is up $10 million in CFO, but the $10 million AR increase is subtracted as a use of cash, netting CFO impact to zero", "weight": 3}
+      {
+        "point": "Income statement: revenue increases by $10 million, flowing through to net income",
+        "weight": 3
+      },
+      {
+        "point": "Balance sheet: accounts receivable increases by $10 million (asset); retained earnings increases by $10 million via net income (equity), keeping it balanced",
+        "weight": 3
+      },
+      {
+        "point": "Cash flow statement: net income is up $10 million in CFO, but the $10 million AR increase is subtracted as a use of cash, netting CFO impact to zero",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Assuming the sale increases cash immediately since it's recorded as revenue",
@@ -420,9 +498,18 @@
     "questionType": "conceptual",
     "prompt": "How does $5 million of stock-based compensation expense flow through all three financial statements?",
     "keyPoints": [
-      {"point": "Income statement: recorded as an operating expense, reduces net income by $5 million (pre-tax; may have a smaller after-tax effect depending on tax deductibility)", "weight": 3},
-      {"point": "Cash flow statement: added back within CFO since it's non-cash, offsetting the net income reduction", "weight": 3},
-      {"point": "Balance sheet: additional paid-in capital (equity) increases by $5 million as shares/options vest, offsetting the retained earnings reduction from lower net income", "weight": 3}
+      {
+        "point": "Income statement: recorded as an operating expense, reduces net income by $5 million (pre-tax; may have a smaller after-tax effect depending on tax deductibility)",
+        "weight": 3
+      },
+      {
+        "point": "Cash flow statement: added back within CFO since it's non-cash, offsetting the net income reduction",
+        "weight": 3
+      },
+      {
+        "point": "Balance sheet: additional paid-in capital (equity) increases by $5 million as shares/options vest, offsetting the retained earnings reduction from lower net income",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Believing SBC has no balance sheet impact at all",
@@ -450,10 +537,16 @@
     "questionType": "multi-step",
     "prompt": "A company uses $30 million of existing cash to pay down $30 million of long-term debt. Walk through the effect on all three financial statements, including the following year's income statement if the debt carried a 6% interest rate.",
     "keyPoints": [
-      {"point": "Balance sheet (at time of paydown): cash decreases $30M, long-term debt decreases $30M; total assets and liabilities both fall by $30M, equity unchanged", "weight": 3},
-      {"point": "Cash flow statement: $30M outflow within cash flow from financing", "weight": 3},
-      {"point": "No immediate income statement impact from the paydown itself", "weight": 1},
-      {"point": "Following year: interest expense falls by $30M x 6% = $1.8M, increasing net income (after tax) and reducing future interest expense", "weight": 3}
+      {
+        "point": "Balance sheet (at time of paydown): cash decreases $30M, long-term debt decreases $30M; total assets and liabilities both fall by $30M, equity unchanged",
+        "weight": 3
+      },
+      { "point": "Cash flow statement: $30M outflow within cash flow from financing", "weight": 3 },
+      { "point": "No immediate income statement impact from the paydown itself", "weight": 1 },
+      {
+        "point": "Following year: interest expense falls by $30M x 6% = $1.8M, increasing net income (after tax) and reducing future interest expense",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Recording the debt paydown as an operating cash flow instead of financing",
@@ -481,9 +574,12 @@
     "questionType": "calculation",
     "prompt": "A company has annual revenue of $365 million (assume all on credit) and ending accounts receivable of $40 million. What is DSO, using a 365-day year?",
     "keyPoints": [
-      {"point": "DSO = (Accounts Receivable / Revenue) x 365", "weight": 3},
-      {"point": "($40M / $365M) x 365 = 40 days", "weight": 3},
-      {"point": "Interprets result: it takes the company roughly 40 days on average to collect cash after a sale", "weight": 2}
+      { "point": "DSO = (Accounts Receivable / Revenue) x 365", "weight": 3 },
+      { "point": "($40M / $365M) x 365 = 40 days", "weight": 3 },
+      {
+        "point": "Interprets result: it takes the company roughly 40 days on average to collect cash after a sale",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Inverting the ratio (using revenue divided by AR)",
@@ -511,9 +607,12 @@
     "questionType": "calculation",
     "prompt": "A company has DIO of 45 days, DSO of 30 days, and DPO of 35 days. What is its cash conversion cycle, and what does that figure mean?",
     "keyPoints": [
-      {"point": "Cash conversion cycle = DIO + DSO - DPO", "weight": 3},
-      {"point": "45 + 30 - 35 = 40 days", "weight": 3},
-      {"point": "Interprets the result as the number of days cash is tied up between paying for inventory and collecting cash from the eventual sale", "weight": 2}
+      { "point": "Cash conversion cycle = DIO + DSO - DPO", "weight": 3 },
+      { "point": "45 + 30 - 35 = 40 days", "weight": 3 },
+      {
+        "point": "Interprets the result as the number of days cash is tied up between paying for inventory and collecting cash from the eventual sale",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Adding DPO instead of subtracting it",
@@ -541,10 +640,22 @@
     "questionType": "conceptual",
     "prompt": "If a company negotiates longer payment terms with its suppliers, extending DPO from 30 to 50 days, how does that affect its cash position and financial statements?",
     "keyPoints": [
-      {"point": "Accounts payable balance increases as the company holds onto cash longer before paying suppliers", "weight": 3},
-      {"point": "The increase in AP shows up as a source of cash in cash flow from operations", "weight": 3},
-      {"point": "No income statement impact — it's a timing/working capital effect, not a change in the expense itself", "weight": 2},
-      {"point": "Mentions the risk: could strain supplier relationships or forfeit early-payment discounts", "weight": 1}
+      {
+        "point": "Accounts payable balance increases as the company holds onto cash longer before paying suppliers",
+        "weight": 3
+      },
+      {
+        "point": "The increase in AP shows up as a source of cash in cash flow from operations",
+        "weight": 3
+      },
+      {
+        "point": "No income statement impact — it's a timing/working capital effect, not a change in the expense itself",
+        "weight": 2
+      },
+      {
+        "point": "Mentions the risk: could strain supplier relationships or forfeit early-payment discounts",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Believing extended payment terms change the total amount owed to suppliers",
@@ -568,9 +679,18 @@
     "questionType": "conceptual",
     "prompt": "What's the difference between a prepaid expense and an accrued liability, and how does each affect the balance sheet?",
     "keyPoints": [
-      {"point": "Prepaid expense: cash paid before the expense is incurred; recorded as a current asset", "weight": 3},
-      {"point": "Accrued liability: expense incurred/recognized before cash is paid; recorded as a current liability", "weight": 3},
-      {"point": "Both reflect timing mismatches between cash movement and expense recognition, just in opposite directions", "weight": 2}
+      {
+        "point": "Prepaid expense: cash paid before the expense is incurred; recorded as a current asset",
+        "weight": 3
+      },
+      {
+        "point": "Accrued liability: expense incurred/recognized before cash is paid; recorded as a current liability",
+        "weight": 3
+      },
+      {
+        "point": "Both reflect timing mismatches between cash movement and expense recognition, just in opposite directions",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Believing both are liabilities, or both are assets",
@@ -598,9 +718,18 @@
     "questionType": "multi-step",
     "prompt": "A company records an additional $50 million of depreciation expense in a period, with a 20% tax rate and no change to capex. Walk through the effect on all three financial statements.",
     "keyPoints": [
-      {"point": "Income statement: pre-tax income falls $50M, taxes fall $50M x 20% = $10M, net income falls $40M", "weight": 3},
-      {"point": "Cash flow statement: CFO change = -$40M (lower NI) + $50M (D&A add-back) = +$10M increase", "weight": 3},
-      {"point": "Balance sheet: PP&E (net) falls by $50M via accumulated depreciation; cash rises by $10M (from the CFO increase); retained earnings falls by $40M (lower NI); net asset change = -$50M+$10M = -$40M, matching the equity change of -$40M", "weight": 3}
+      {
+        "point": "Income statement: pre-tax income falls $50M, taxes fall $50M x 20% = $10M, net income falls $40M",
+        "weight": 3
+      },
+      {
+        "point": "Cash flow statement: CFO change = -$40M (lower NI) + $50M (D&A add-back) = +$10M increase",
+        "weight": 3
+      },
+      {
+        "point": "Balance sheet: PP&E (net) falls by $50M via accumulated depreciation; cash rises by $10M (from the CFO increase); retained earnings falls by $40M (lower NI); net asset change = -$50M+$10M = -$40M, matching the equity change of -$40M",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Forgetting the tax shield when calculating the net income impact",
@@ -628,10 +757,22 @@
     "questionType": "multi-step",
     "prompt": "A company issues $200 million of new debt and immediately uses all of the proceeds to purchase $200 million of new equipment. Walk through the effect on all three financial statements at the moment of these transactions.",
     "keyPoints": [
-      {"point": "Cash flow statement: $200M inflow in CFF (debt issuance) and $200M outflow in CFI (capex); net cash flow impact is zero", "weight": 3},
-      {"point": "Balance sheet: PP&E increases $200M, long-term debt increases $200M; cash is unchanged since it flows in and right back out; equity unaffected", "weight": 3},
-      {"point": "No income statement impact at the moment of the transactions themselves", "weight": 2},
-      {"point": "Notes forward-looking impact: future interest expense will now be higher, and future depreciation will begin on the new equipment", "weight": 1}
+      {
+        "point": "Cash flow statement: $200M inflow in CFF (debt issuance) and $200M outflow in CFI (capex); net cash flow impact is zero",
+        "weight": 3
+      },
+      {
+        "point": "Balance sheet: PP&E increases $200M, long-term debt increases $200M; cash is unchanged since it flows in and right back out; equity unaffected",
+        "weight": 3
+      },
+      {
+        "point": "No income statement impact at the moment of the transactions themselves",
+        "weight": 2
+      },
+      {
+        "point": "Notes forward-looking impact: future interest expense will now be higher, and future depreciation will begin on the new equipment",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Believing cash increases net because debt was issued, ignoring that it was immediately spent",
@@ -659,10 +800,16 @@
     "questionType": "multi-step",
     "prompt": "A company uses $50 million of existing cash to repurchase its own shares in the open market. Walk through the immediate effect on all three financial statements, and explain the impact on EPS going forward.",
     "keyPoints": [
-      {"point": "Balance sheet: cash decreases $50M, treasury stock (contra-equity) increases $50M, reducing total shareholders' equity by $50M", "weight": 3},
-      {"point": "Cash flow statement: $50M outflow within cash flow from financing", "weight": 3},
-      {"point": "No income statement impact from the buyback itself", "weight": 2},
-      {"point": "EPS impact: net income unchanged, but a smaller diluted share count going forward mechanically increases EPS (all else equal)", "weight": 2}
+      {
+        "point": "Balance sheet: cash decreases $50M, treasury stock (contra-equity) increases $50M, reducing total shareholders' equity by $50M",
+        "weight": 3
+      },
+      { "point": "Cash flow statement: $50M outflow within cash flow from financing", "weight": 3 },
+      { "point": "No income statement impact from the buyback itself", "weight": 2 },
+      {
+        "point": "EPS impact: net income unchanged, but a smaller diluted share count going forward mechanically increases EPS (all else equal)",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Recording the buyback as an expense on the income statement",
@@ -690,9 +837,18 @@
     "questionType": "single-step",
     "prompt": "A company determines that $30 million of previously recognized accounts receivable is uncollectible and writes it off, having already maintained a sufficient allowance for doubtful accounts to cover this loss. What is the effect on the income statement, balance sheet, and cash flow statement at the time of the write-off?",
     "keyPoints": [
-      {"point": "No new income statement impact at write-off, since the expense was already recognized earlier when the allowance was established (bad debt expense)", "weight": 3},
-      {"point": "Balance sheet: both accounts receivable and the allowance for doubtful accounts decrease by $30M, netting to no change in net AR or total assets", "weight": 3},
-      {"point": "No cash flow statement impact, since it's a non-cash reclassification with no new expense or cash movement", "weight": 2}
+      {
+        "point": "No new income statement impact at write-off, since the expense was already recognized earlier when the allowance was established (bad debt expense)",
+        "weight": 3
+      },
+      {
+        "point": "Balance sheet: both accounts receivable and the allowance for doubtful accounts decrease by $30M, netting to no change in net AR or total assets",
+        "weight": 3
+      },
+      {
+        "point": "No cash flow statement impact, since it's a non-cash reclassification with no new expense or cash movement",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Recording a new bad debt expense at the moment of write-off, double-counting the loss",
@@ -720,9 +876,12 @@
     "questionType": "single-step",
     "prompt": "A company issues $100 million of new common stock for cash. What is the effect on the balance sheet and cash flow statement?",
     "keyPoints": [
-      {"point": "Balance sheet: cash increases $100M; common stock/APIC increases $100M; total assets and equity both rise by $100M", "weight": 3},
-      {"point": "Cash flow statement: $100M inflow within cash flow from financing", "weight": 3},
-      {"point": "No income statement impact — issuing equity is not revenue", "weight": 2}
+      {
+        "point": "Balance sheet: cash increases $100M; common stock/APIC increases $100M; total assets and equity both rise by $100M",
+        "weight": 3
+      },
+      { "point": "Cash flow statement: $100M inflow within cash flow from financing", "weight": 3 },
+      { "point": "No income statement impact — issuing equity is not revenue", "weight": 2 }
     ],
     "misconceptions": [
       "Recording the proceeds as revenue on the income statement",
@@ -746,9 +905,18 @@
     "questionType": "single-step",
     "prompt": "Deferred revenue increases by $15 million during a period, meaning the company collected $15 million more in customer prepayments than it recognized as revenue during that same period. What is the effect on the income statement, balance sheet, and cash flow statement?",
     "keyPoints": [
-      {"point": "No income statement impact from the increase itself — revenue isn't recognized until earned", "weight": 3},
-      {"point": "Balance sheet: cash increases $15M (assuming the prepayment was in cash); deferred revenue (a liability) increases $15M", "weight": 3},
-      {"point": "Cash flow statement: the $15M increase in deferred revenue is added as a source of cash within CFO", "weight": 3}
+      {
+        "point": "No income statement impact from the increase itself — revenue isn't recognized until earned",
+        "weight": 3
+      },
+      {
+        "point": "Balance sheet: cash increases $15M (assuming the prepayment was in cash); deferred revenue (a liability) increases $15M",
+        "weight": 3
+      },
+      {
+        "point": "Cash flow statement: the $15M increase in deferred revenue is added as a source of cash within CFO",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Recognizing the $15 million as revenue immediately",
@@ -772,10 +940,13 @@
     "questionType": "multi-step",
     "prompt": "Revenue is $400 million, COGS is $220 million, SG&A is $70 million, interest expense is $10 million, the tax rate is 25%, and diluted shares outstanding are 30 million. Compute net income and diluted EPS.",
     "keyPoints": [
-      {"point": "Gross profit = $400M - $220M = $180M", "weight": 2},
-      {"point": "Operating income = $180M - $70M = $110M", "weight": 2},
-      {"point": "Pre-tax income = $110M - $10M = $100M; Net income = $100M x 0.75 = $75M", "weight": 3},
-      {"point": "Diluted EPS = $75M / 30M = $2.50", "weight": 3}
+      { "point": "Gross profit = $400M - $220M = $180M", "weight": 2 },
+      { "point": "Operating income = $180M - $70M = $110M", "weight": 2 },
+      {
+        "point": "Pre-tax income = $110M - $10M = $100M; Net income = $100M x 0.75 = $75M",
+        "weight": 3
+      },
+      { "point": "Diluted EPS = $75M / 30M = $2.50", "weight": 3 }
     ],
     "misconceptions": [
       "Skipping straight from revenue to net income without the intermediate subtotals",
@@ -803,10 +974,16 @@
     "questionType": "multi-step",
     "prompt": "A company acquires a target for $80 million, funded with $30 million of existing cash and $50 million of newly issued debt. The target's identifiable net assets have a fair value of $60 million. Walk through the balance sheet impact.",
     "keyPoints": [
-      {"point": "Goodwill = Purchase price - fair value of identifiable net assets = $80M - $60M = $20M", "weight": 3},
-      {"point": "Cash decreases by $30M (portion funded with existing cash)", "weight": 2},
-      {"point": "Long-term debt increases by $50M (portion funded with new debt)", "weight": 2},
-      {"point": "Total assets increase: -$30M cash + $60M identifiable net assets + $20M goodwill = +$50M, matching the $50M increase in liabilities (debt), with equity unaffected", "weight": 3}
+      {
+        "point": "Goodwill = Purchase price - fair value of identifiable net assets = $80M - $60M = $20M",
+        "weight": 3
+      },
+      { "point": "Cash decreases by $30M (portion funded with existing cash)", "weight": 2 },
+      { "point": "Long-term debt increases by $50M (portion funded with new debt)", "weight": 2 },
+      {
+        "point": "Total assets increase: -$30M cash + $60M identifiable net assets + $20M goodwill = +$50M, matching the $50M increase in liabilities (debt), with equity unaffected",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Forgetting to record goodwill for the excess of purchase price over fair value of net assets acquired",
@@ -838,10 +1015,16 @@
     "questionType": "multi-step",
     "prompt": "A company pays a $20 million dividend and separately repurchases $35 million of its own stock in the same period, all funded from existing cash. Walk through the combined effect on shareholders' equity and cash.",
     "keyPoints": [
-      {"point": "Cash decreases by $55M total ($20M dividend + $35M buyback)", "weight": 3},
-      {"point": "Retained earnings decreases by $20M (dividend)", "weight": 2},
-      {"point": "Treasury stock (contra-equity) increases by $35M, reducing equity by $35M (buyback)", "weight": 2},
-      {"point": "Total equity decreases by $55M combined, matching the $55M decrease in assets (cash)", "weight": 3}
+      { "point": "Cash decreases by $55M total ($20M dividend + $35M buyback)", "weight": 3 },
+      { "point": "Retained earnings decreases by $20M (dividend)", "weight": 2 },
+      {
+        "point": "Treasury stock (contra-equity) increases by $35M, reducing equity by $35M (buyback)",
+        "weight": 2
+      },
+      {
+        "point": "Total equity decreases by $55M combined, matching the $55M decrease in assets (cash)",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Recording both the dividend and buyback through retained earnings, ignoring that buybacks hit treasury stock instead",
@@ -869,9 +1052,18 @@
     "questionType": "conceptual",
     "prompt": "Walk me through, at a high level, how a company tests goodwill for impairment.",
     "keyPoints": [
-      {"point": "Goodwill is tested at least annually, at the reporting unit level, and whenever a triggering event occurs", "weight": 3},
-      {"point": "The company compares the reporting unit's fair value to its carrying value (including allocated goodwill)", "weight": 3},
-      {"point": "If carrying value exceeds fair value, an impairment charge is recorded for the difference, limited to the amount of goodwill on the books", "weight": 3}
+      {
+        "point": "Goodwill is tested at least annually, at the reporting unit level, and whenever a triggering event occurs",
+        "weight": 3
+      },
+      {
+        "point": "The company compares the reporting unit's fair value to its carrying value (including allocated goodwill)",
+        "weight": 3
+      },
+      {
+        "point": "If carrying value exceeds fair value, an impairment charge is recorded for the difference, limited to the amount of goodwill on the books",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Believing goodwill impairment testing happens at the total-company level rather than at the reporting-unit level",
@@ -899,9 +1091,18 @@
     "questionType": "conceptual",
     "prompt": "When does a company use the equity method to account for an investment in another company, versus fully consolidating that company's financials, and how do the two approaches differ?",
     "keyPoints": [
-      {"point": "Equity method typically used for ownership stakes of roughly 20-50%, reflecting significant influence but not control", "weight": 3},
-      {"point": "Full consolidation used when ownership exceeds 50% (control), combining 100% of the subsidiary's financials with a minority interest adjustment", "weight": 3},
-      {"point": "Equity method: investment recorded as a single line on the balance sheet, adjusted for the investor's share of the investee's net income (and dividends received)", "weight": 3}
+      {
+        "point": "Equity method typically used for ownership stakes of roughly 20-50%, reflecting significant influence but not control",
+        "weight": 3
+      },
+      {
+        "point": "Full consolidation used when ownership exceeds 50% (control), combining 100% of the subsidiary's financials with a minority interest adjustment",
+        "weight": 3
+      },
+      {
+        "point": "Equity method: investment recorded as a single line on the balance sheet, adjusted for the investor's share of the investee's net income (and dividends received)",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Believing the equity method line-by-line combines the investee's full financial statements into the investor's",
@@ -929,9 +1130,18 @@
     "questionType": "conceptual",
     "prompt": "What is convertible debt, and at a basic level, how does it affect a company's balance sheet and diluted EPS calculation?",
     "keyPoints": [
-      {"point": "Convertible debt is a bond that can be converted into a fixed number of common shares at the holder's option, typically at a specified conversion price", "weight": 3},
-      {"point": "It's initially recorded as a liability on the balance sheet, generally similar to regular debt (with some accounting nuances around embedded features)", "weight": 2},
-      {"point": "For diluted EPS, if the conversion would be dilutive, the shares from potential conversion are added to the diluted share count, and interest expense (after-tax) is added back to net income (the 'if-converted' method)", "weight": 3}
+      {
+        "point": "Convertible debt is a bond that can be converted into a fixed number of common shares at the holder's option, typically at a specified conversion price",
+        "weight": 3
+      },
+      {
+        "point": "It's initially recorded as a liability on the balance sheet, generally similar to regular debt (with some accounting nuances around embedded features)",
+        "weight": 2
+      },
+      {
+        "point": "For diluted EPS, if the conversion would be dilutive, the shares from potential conversion are added to the diluted share count, and interest expense (after-tax) is added back to net income (the 'if-converted' method)",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Assuming convertible debt is always classified partly as equity on the balance sheet in every case",
@@ -959,9 +1169,18 @@
     "questionType": "conceptual",
     "prompt": "What does it mean for a company to operate with 'negative working capital,' and why isn't that automatically a sign of financial distress?",
     "keyPoints": [
-      {"point": "Negative working capital means current liabilities exceed current assets", "weight": 2},
-      {"point": "Some business models (fast inventory turnover, upfront cash collection, extended supplier terms) generate cash before they need to pay suppliers, structurally producing negative working capital", "weight": 3},
-      {"point": "In those models, negative working capital reflects an efficient, self-funding operating cycle rather than distress — growth can even generate cash rather than consume it", "weight": 3}
+      {
+        "point": "Negative working capital means current liabilities exceed current assets",
+        "weight": 2
+      },
+      {
+        "point": "Some business models (fast inventory turnover, upfront cash collection, extended supplier terms) generate cash before they need to pay suppliers, structurally producing negative working capital",
+        "weight": 3
+      },
+      {
+        "point": "In those models, negative working capital reflects an efficient, self-funding operating cycle rather than distress — growth can even generate cash rather than consume it",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Assuming negative working capital always signals a company can't pay its bills",

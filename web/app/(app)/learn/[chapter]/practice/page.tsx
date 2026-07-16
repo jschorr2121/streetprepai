@@ -28,7 +28,9 @@ export default async function ChapterGatePage({
   if (questions.length === 0) {
     return (
       <div className="mx-auto max-w-2xl px-6 py-12 text-center">
-        <p className="text-muted-foreground">No gate questions are available for this chapter yet.</p>
+        <p className="text-muted-foreground">
+          No gate questions are available for this chapter yet.
+        </p>
         <Button asChild variant="outline" className="mt-4">
           <Link href={`/learn/${chapterSlug}`}>Back to chapter</Link>
         </Button>

@@ -20,10 +20,7 @@ function mapRow(r: DbRow): GuideProgressEntry {
 
 export async function getGuideProgress(userId: string): Promise<GuideProgressEntry[]> {
   const sb = await createClient();
-  const { data, error } = await sb
-    .from("guide_progress")
-    .select("*")
-    .eq("user_id", userId);
+  const { data, error } = await sb.from("guide_progress").select("*").eq("user_id", userId);
   if (error) throw error;
   return (data as DbRow[]).map(mapRow);
 }

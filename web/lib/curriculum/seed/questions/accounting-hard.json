@@ -6,11 +6,14 @@
     "questionType": "multi-step",
     "prompt": "Revenue is $600 million, COGS is $360 million, SG&A is $90 million, D&A embedded within opex is already included above, interest expense is $25 million, interest income is $5 million, there's a one-time $15 million pre-tax gain on an asset sale (included below the operating line), the tax rate is 25%, and diluted shares outstanding are 60 million. Build the income statement down to net income and calculate diluted EPS.",
     "keyPoints": [
-      {"point": "Gross profit = $600M - $360M = $240M", "weight": 2},
-      {"point": "Operating income = $240M - $90M = $150M", "weight": 2},
-      {"point": "Pre-tax income = $150M - $25M interest expense + $5M interest income + $15M gain = $145M", "weight": 3},
-      {"point": "Net income = $145M x (1 - 0.25) = $108.75M", "weight": 3},
-      {"point": "Diluted EPS = $108.75M / 60M = $1.8125 (~$1.81)", "weight": 2}
+      { "point": "Gross profit = $600M - $360M = $240M", "weight": 2 },
+      { "point": "Operating income = $240M - $90M = $150M", "weight": 2 },
+      {
+        "point": "Pre-tax income = $150M - $25M interest expense + $5M interest income + $15M gain = $145M",
+        "weight": 3
+      },
+      { "point": "Net income = $145M x (1 - 0.25) = $108.75M", "weight": 3 },
+      { "point": "Diluted EPS = $108.75M / 60M = $1.8125 (~$1.81)", "weight": 2 }
     ],
     "misconceptions": [
       "Forgetting to include interest income and the one-time gain as additions to pre-tax income",
@@ -42,11 +45,26 @@
     "questionType": "curveball",
     "prompt": "A company reports strong positive net income for the year but has negative cash flow from operations. Walk me through several plausible explanations for how this can happen.",
     "keyPoints": [
-      {"point": "Rapid growth in accounts receivable (revenue booked but cash not yet collected) can be a large use of cash", "weight": 3},
-      {"point": "Rapid inventory buildup ahead of anticipated sales ties up cash without an offsetting revenue/income benefit yet", "weight": 3},
-      {"point": "Aggressive or unsustainable revenue recognition (e.g., channel stuffing, recognizing revenue well ahead of collection) can inflate net income relative to actual cash generated", "weight": 2},
-      {"point": "One-time non-cash gains boosting net income (e.g., a gain on revaluation) with no corresponding cash inflow", "weight": 2},
-      {"point": "Paying down accounts payable faster than usual (a use of cash) while net income stays strong", "weight": 1}
+      {
+        "point": "Rapid growth in accounts receivable (revenue booked but cash not yet collected) can be a large use of cash",
+        "weight": 3
+      },
+      {
+        "point": "Rapid inventory buildup ahead of anticipated sales ties up cash without an offsetting revenue/income benefit yet",
+        "weight": 3
+      },
+      {
+        "point": "Aggressive or unsustainable revenue recognition (e.g., channel stuffing, recognizing revenue well ahead of collection) can inflate net income relative to actual cash generated",
+        "weight": 2
+      },
+      {
+        "point": "One-time non-cash gains boosting net income (e.g., a gain on revaluation) with no corresponding cash inflow",
+        "weight": 2
+      },
+      {
+        "point": "Paying down accounts payable faster than usual (a use of cash) while net income stays strong",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Assuming positive net income guarantees positive cash flow",
@@ -78,11 +96,20 @@
     "questionType": "multi-step",
     "prompt": "A brand-new company starts with $0 on its balance sheet. In its first year: it raises $100 million of equity in cash, borrows $50 million of long-term debt, buys $80 million of equipment in cash, purchases $20 million of inventory on credit (recorded as accounts payable), and generates net income of $10 million for the year (assume net income is fully accrued, with no associated cash collection or payment yet, and ignore depreciation for simplicity). Build the ending balance sheet.",
     "keyPoints": [
-      {"point": "Cash: +$100M (equity) +$50M (debt) -$80M (equipment) = $70M ending cash", "weight": 3},
-      {"point": "Inventory: $20M; Equipment (PP&E): $80M", "weight": 2},
-      {"point": "Total assets = $70M cash + $20M inventory + $80M PP&E + any receivable from the $10M accrued but uncollected net income = $180M+ (see follow-through)", "weight": 3},
-      {"point": "Accounts payable = $20M; Long-term debt = $50M", "weight": 2},
-      {"point": "Equity = $100M paid-in capital + $10M retained earnings = $110M; confirms Assets ($180M) = Liabilities ($70M) + Equity ($110M)", "weight": 3}
+      {
+        "point": "Cash: +$100M (equity) +$50M (debt) -$80M (equipment) = $70M ending cash",
+        "weight": 3
+      },
+      { "point": "Inventory: $20M; Equipment (PP&E): $80M", "weight": 2 },
+      {
+        "point": "Total assets = $70M cash + $20M inventory + $80M PP&E + any receivable from the $10M accrued but uncollected net income = $180M+ (see follow-through)",
+        "weight": 3
+      },
+      { "point": "Accounts payable = $20M; Long-term debt = $50M", "weight": 2 },
+      {
+        "point": "Equity = $100M paid-in capital + $10M retained earnings = $110M; confirms Assets ($180M) = Liabilities ($70M) + Equity ($110M)",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Forgetting that if net income is 'fully accrued with no cash collection,' an offsetting receivable (or other asset) must exist for the balance sheet to balance",
@@ -110,10 +137,22 @@
     "questionType": "curveball",
     "prompt": "The balance sheet always balances by construction, and yet analysts still worry about 'off-balance-sheet' risk. What does that term mean, and why doesn't the balance sheet's built-in mathematical consistency protect against it?",
     "keyPoints": [
-      {"point": "The balance sheet balancing is a mechanical/mathematical property of double-entry bookkeeping — it says nothing about whether all economically relevant obligations or assets are actually being recorded at all", "weight": 3},
-      {"point": "Off-balance-sheet items are real economic exposures (guarantees, certain leases historically, unconsolidated joint ventures, contingent liabilities, special purpose entities) that don't appear as recognized assets/liabilities under accounting rules, even though they carry real risk", "weight": 3},
-      {"point": "Examples: loan guarantees, litigation contingencies not yet meeting recognition thresholds, unconsolidated variable interest entities", "weight": 2},
-      {"point": "Disclosure (footnotes, MD&A) is where much of this risk is captured, rather than on the face of the balance sheet itself", "weight": 2}
+      {
+        "point": "The balance sheet balancing is a mechanical/mathematical property of double-entry bookkeeping — it says nothing about whether all economically relevant obligations or assets are actually being recorded at all",
+        "weight": 3
+      },
+      {
+        "point": "Off-balance-sheet items are real economic exposures (guarantees, certain leases historically, unconsolidated joint ventures, contingent liabilities, special purpose entities) that don't appear as recognized assets/liabilities under accounting rules, even though they carry real risk",
+        "weight": 3
+      },
+      {
+        "point": "Examples: loan guarantees, litigation contingencies not yet meeting recognition thresholds, unconsolidated variable interest entities",
+        "weight": 2
+      },
+      {
+        "point": "Disclosure (footnotes, MD&A) is where much of this risk is captured, rather than on the face of the balance sheet itself",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Believing a balanced balance sheet means all of a company's economic risks and obligations are fully captured on it",
@@ -141,10 +180,10 @@
     "questionType": "multi-step",
     "prompt": "Build a full cash flow statement given the following for the year: net income of $70 million; D&A of $18 million; stock-based compensation of $6 million; accounts receivable increased by $12 million; inventory decreased by $4 million; accounts payable increased by $9 million; capex of $35 million; proceeds from sale of an old machine of $3 million; issuance of $25 million of new debt; repayment of $10 million of old debt; and dividends paid of $8 million. Compute CFO, CFI, CFF, and the total net change in cash.",
     "keyPoints": [
-      {"point": "CFO = $70M + $18M + $6M - $12M + $4M + $9M = $95M", "weight": 3},
-      {"point": "CFI = -$35M + $3M = -$32M", "weight": 2},
-      {"point": "CFF = $25M - $10M - $8M = $7M", "weight": 2},
-      {"point": "Net change in cash = $95M - $32M + $7M = $70M", "weight": 3}
+      { "point": "CFO = $70M + $18M + $6M - $12M + $4M + $9M = $95M", "weight": 3 },
+      { "point": "CFI = -$35M + $3M = -$32M", "weight": 2 },
+      { "point": "CFF = $25M - $10M - $8M = $7M", "weight": 2 },
+      { "point": "Net change in cash = $95M - $32M + $7M = $70M", "weight": 3 }
     ],
     "misconceptions": [
       "Subtracting the inventory decrease and AP increase instead of adding them (getting the direction of working capital adjustments backwards)",
@@ -176,10 +215,22 @@
     "questionType": "curveball",
     "prompt": "A company has been consistently profitable on a GAAP basis for years, yet it suddenly runs out of cash and has to seek emergency financing. How would you use the cash flow statement to investigate what happened?",
     "keyPoints": [
-      {"point": "Check whether CFO has been persistently below net income (working capital deterioration, quality-of-earnings issues) over multiple periods", "weight": 3},
-      {"point": "Check CFI — heavy, possibly debt-funded capex or acquisition spending that outpaced the company's actual cash generation capacity", "weight": 2},
-      {"point": "Check CFF — reliance on continual debt refinancing, and whether debt maturities or covenant triggers created a sudden liquidity crunch even if the business is 'profitable'", "weight": 3},
-      {"point": "Consider off-balance-sheet or contingent obligations (guarantees, litigation, pension shortfalls) that could suddenly require large cash outlays not reflected in normal operating cash flow", "weight": 2}
+      {
+        "point": "Check whether CFO has been persistently below net income (working capital deterioration, quality-of-earnings issues) over multiple periods",
+        "weight": 3
+      },
+      {
+        "point": "Check CFI — heavy, possibly debt-funded capex or acquisition spending that outpaced the company's actual cash generation capacity",
+        "weight": 2
+      },
+      {
+        "point": "Check CFF — reliance on continual debt refinancing, and whether debt maturities or covenant triggers created a sudden liquidity crunch even if the business is 'profitable'",
+        "weight": 3
+      },
+      {
+        "point": "Consider off-balance-sheet or contingent obligations (guarantees, litigation, pension shortfalls) that could suddenly require large cash outlays not reflected in normal operating cash flow",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Assuming consistent GAAP profitability guarantees adequate liquidity",
@@ -211,10 +262,22 @@
     "questionType": "multi-step",
     "prompt": "A company purchases $100 million of additional inventory during the year, financed entirely by a corresponding $100 million increase in accounts payable (no cash changes hands yet, and none of the inventory has been sold). Trace this transaction through all three financial statements, then explain what happens in the following year when $60 million of that inventory is sold for $90 million in cash, with the remaining $40 million still unsold.",
     "keyPoints": [
-      {"point": "Year 1: no income statement impact; balance sheet: inventory +$100M, accounts payable +$100M, balances with no equity change; cash flow statement: no net CFO impact since the AP increase (+$100M source) offsets the inventory increase (-$100M use) within working capital, both non-cash", "weight": 3},
-      {"point": "Year 2: COGS of $60M (inventory sold) reduces gross profit; revenue of $90M recognized, gross profit = $90M - $60M = $30M on this sale", "weight": 3},
-      {"point": "Year 2 balance sheet: inventory decreases by $60M (down to $40M remaining); cash increases by $90M (assuming immediate collection) or AR increases if on credit", "weight": 2},
-      {"point": "Notes AP still needs to eventually be paid down in cash, a separate future cash flow event from the original build-up", "weight": 2}
+      {
+        "point": "Year 1: no income statement impact; balance sheet: inventory +$100M, accounts payable +$100M, balances with no equity change; cash flow statement: no net CFO impact since the AP increase (+$100M source) offsets the inventory increase (-$100M use) within working capital, both non-cash",
+        "weight": 3
+      },
+      {
+        "point": "Year 2: COGS of $60M (inventory sold) reduces gross profit; revenue of $90M recognized, gross profit = $90M - $60M = $30M on this sale",
+        "weight": 3
+      },
+      {
+        "point": "Year 2 balance sheet: inventory decreases by $60M (down to $40M remaining); cash increases by $90M (assuming immediate collection) or AR increases if on credit",
+        "weight": 2
+      },
+      {
+        "point": "Notes AP still needs to eventually be paid down in cash, a separate future cash flow event from the original build-up",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Recording an income statement impact when the inventory is first purchased on credit, rather than only upon sale",
@@ -246,10 +309,22 @@
     "questionType": "multi-step",
     "prompt": "A company has book (GAAP) pre-tax income of $200 million but taxable income for tax-filing purposes of only $160 million, because it used $40 million more of accelerated depreciation for tax purposes than it recorded as book depreciation. The statutory tax rate is 25%. Compute book tax expense, cash taxes actually paid, the resulting deferred tax liability created this year, and walk through how this appears across the income statement, balance sheet, and cash flow statement.",
     "keyPoints": [
-      {"point": "Book tax expense (on the income statement) = $200M x 25% = $50M, based on book pre-tax income", "weight": 3},
-      {"point": "Cash taxes actually paid = $160M x 25% = $40M, based on taxable income", "weight": 3},
-      {"point": "Deferred tax liability created this year = $50M - $40M = $10M (the difference between book expense and cash paid)", "weight": 3},
-      {"point": "Cash flow statement: the $10M non-cash portion of tax expense is added back within CFO (since book tax expense exceeded actual cash taxes paid)", "weight": 2}
+      {
+        "point": "Book tax expense (on the income statement) = $200M x 25% = $50M, based on book pre-tax income",
+        "weight": 3
+      },
+      {
+        "point": "Cash taxes actually paid = $160M x 25% = $40M, based on taxable income",
+        "weight": 3
+      },
+      {
+        "point": "Deferred tax liability created this year = $50M - $40M = $10M (the difference between book expense and cash paid)",
+        "weight": 3
+      },
+      {
+        "point": "Cash flow statement: the $10M non-cash portion of tax expense is added back within CFO (since book tax expense exceeded actual cash taxes paid)",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Assuming book tax expense equals cash taxes paid",
@@ -281,9 +356,18 @@
     "questionType": "multi-step",
     "prompt": "Net income is $90 million. During the year: accounts receivable increased from $60 million to $75 million; inventory decreased from $45 million to $38 million; prepaid expenses increased from $8 million to $11 million; accounts payable increased from $30 million to $42 million; and accrued liabilities decreased from $20 million to $16 million. D&A was $22 million. Compute the net change in working capital and the resulting cash flow from operations.",
     "keyPoints": [
-      {"point": "AR increase ($15M) is a use of cash; Inventory decrease ($7M) is a source; Prepaid increase ($3M) is a use; AP increase ($12M) is a source; Accrued liabilities decrease ($4M) is a use", "weight": 3},
-      {"point": "Net working capital cash impact = -$15M +$7M -$3M +$12M -$4M = -$3M (net use of cash)", "weight": 3},
-      {"point": "CFO = Net income $90M + D&A $22M - $3M net working capital use = $109M", "weight": 3}
+      {
+        "point": "AR increase ($15M) is a use of cash; Inventory decrease ($7M) is a source; Prepaid increase ($3M) is a use; AP increase ($12M) is a source; Accrued liabilities decrease ($4M) is a use",
+        "weight": 3
+      },
+      {
+        "point": "Net working capital cash impact = -$15M +$7M -$3M +$12M -$4M = -$3M (net use of cash)",
+        "weight": 3
+      },
+      {
+        "point": "CFO = Net income $90M + D&A $22M - $3M net working capital use = $109M",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Getting the sign wrong on any individual working capital line (especially the two liability-side items and the prepaid expense)",
@@ -315,10 +399,22 @@
     "questionType": "curveball",
     "prompt": "Some of the fastest-growing companies in history have deliberately built business models around negative working capital. Explain the mechanics of why growth can actually fund itself in such a business, and identify at least one risk this strategy carries if growth suddenly slows or reverses.",
     "keyPoints": [
-      {"point": "Explains the mechanic: collecting cash from customers quickly (or upfront) while paying suppliers on extended terms means each incremental dollar of sales generates cash before the corresponding supplier obligation comes due", "weight": 3},
-      {"point": "As the company scales, this timing gap effectively lets supplier credit fund a growing share of working capital needs, reducing or eliminating the need for external financing to fund growth", "weight": 3},
-      {"point": "Risk: if growth slows sharply or reverses, the same mechanic works in reverse — the company must pay down supplier obligations for prior periods' purchases without the offsetting cash inflow from new growth, creating a real liquidity squeeze", "weight": 3},
-      {"point": "Additional risk: over-reliance on supplier financing can leave the company vulnerable if suppliers tighten terms during a downturn", "weight": 1}
+      {
+        "point": "Explains the mechanic: collecting cash from customers quickly (or upfront) while paying suppliers on extended terms means each incremental dollar of sales generates cash before the corresponding supplier obligation comes due",
+        "weight": 3
+      },
+      {
+        "point": "As the company scales, this timing gap effectively lets supplier credit fund a growing share of working capital needs, reducing or eliminating the need for external financing to fund growth",
+        "weight": 3
+      },
+      {
+        "point": "Risk: if growth slows sharply or reverses, the same mechanic works in reverse — the company must pay down supplier obligations for prior periods' purchases without the offsetting cash inflow from new growth, creating a real liquidity squeeze",
+        "weight": 3
+      },
+      {
+        "point": "Additional risk: over-reliance on supplier financing can leave the company vulnerable if suppliers tighten terms during a downturn",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Believing negative working capital businesses have no liquidity risk at all",
@@ -350,10 +446,22 @@
     "questionType": "multi-step",
     "prompt": "A company grows revenue by $80 million with a 40% incremental gross margin and flat SG&A. To support this growth, it spends $50 million on capex (funded 60% with new debt at a 5% interest rate, 40% with existing cash), and net working capital increases by $10 million as a result of the growth. Assume D&A of $12 million (already reflected in the margin figures is not the case — treat D&A as embedded within opex separately at $12 million, on top of the 40% incremental gross margin figure which already nets out COGS), and a 25% tax rate. Walk through the impact on all three statements for this year.",
     "keyPoints": [
-      {"point": "Incremental gross profit from growth = $80M x 40% = $32M; less new D&A of $12M = $20M incremental operating income", "weight": 3},
-      {"point": "New debt = $50M x 60% = $30M, generating $30M x 5% = $1.5M of new interest expense; incremental pre-tax income = $20M - $1.5M = $18.5M; incremental net income = $18.5M x 0.75 = $13.875M", "weight": 3},
-      {"point": "CFO impact: incremental net income $13.875M + D&A add-back $12M - $10M NWC increase = $15.875M", "weight": 3},
-      {"point": "CFI: -$50M capex; CFF: +$30M new debt; Balance sheet: PP&E up $50M-$12M(depreciated)=net $38M, debt up $30M, cash change = $15.875M(CFO)-$50M(CFI)+$30M(CFF)=-$4.125M", "weight": 2}
+      {
+        "point": "Incremental gross profit from growth = $80M x 40% = $32M; less new D&A of $12M = $20M incremental operating income",
+        "weight": 3
+      },
+      {
+        "point": "New debt = $50M x 60% = $30M, generating $30M x 5% = $1.5M of new interest expense; incremental pre-tax income = $20M - $1.5M = $18.5M; incremental net income = $18.5M x 0.75 = $13.875M",
+        "weight": 3
+      },
+      {
+        "point": "CFO impact: incremental net income $13.875M + D&A add-back $12M - $10M NWC increase = $15.875M",
+        "weight": 3
+      },
+      {
+        "point": "CFI: -$50M capex; CFF: +$30M new debt; Balance sheet: PP&E up $50M-$12M(depreciated)=net $38M, debt up $30M, cash change = $15.875M(CFO)-$50M(CFI)+$30M(CFF)=-$4.125M",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Forgetting to net the new D&A against incremental gross profit before calculating incremental operating income",
@@ -385,9 +493,18 @@
     "questionType": "multi-step",
     "prompt": "A company records a $40 million goodwill impairment charge, fully deductible for tax purposes at a 25% tax rate (assume the tax deduction is available in the current period for simplicity). Walk through the effect on all three financial statements.",
     "keyPoints": [
-      {"point": "Income statement: $40M non-cash impairment charge reduces pre-tax income by $40M; tax benefit of $40M x 25% = $10M; net income falls by $30M after-tax", "weight": 3},
-      {"point": "Balance sheet: goodwill decreases by $40M; cash increases slightly from the tax benefit if taxes are actually reduced in cash terms; retained earnings falls by $30M", "weight": 3},
-      {"point": "Cash flow statement: net income down $30M, add back the full $40M non-cash impairment charge, CFO impact = +$10M (matching the tax benefit)", "weight": 3}
+      {
+        "point": "Income statement: $40M non-cash impairment charge reduces pre-tax income by $40M; tax benefit of $40M x 25% = $10M; net income falls by $30M after-tax",
+        "weight": 3
+      },
+      {
+        "point": "Balance sheet: goodwill decreases by $40M; cash increases slightly from the tax benefit if taxes are actually reduced in cash terms; retained earnings falls by $30M",
+        "weight": 3
+      },
+      {
+        "point": "Cash flow statement: net income down $30M, add back the full $40M non-cash impairment charge, CFO impact = +$10M (matching the tax benefit)",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Treating the impairment as a cash expense that directly reduces the company's cash balance",
@@ -415,10 +532,22 @@
     "questionType": "curveball",
     "prompt": "In a three-statement financial model, cash on the balance sheet is often described as the ultimate 'plug' or 'balancing figure.' What does that mean, and why is it actually a useful check rather than a sign of sloppy modeling?",
     "keyPoints": [
-      {"point": "Cash is the last line completed, calculated as the ending cash balance from the cash flow statement, which itself flows from all the other projected line items across the three statements", "weight": 3},
-      {"point": "If the balance sheet balances (Assets = Liabilities + Equity) after cash is populated this way, without any manual forced plug, it's strong evidence the model's linkages are internally consistent and free of formula errors", "weight": 3},
-      {"point": "If it doesn't balance, that's a diagnostic signal pointing to a broken linkage somewhere in the model, not something to be papered over with a manual plug", "weight": 2},
-      {"point": "Distinguishes this from an inappropriate 'plug' where an analyst manually forces the balance sheet to balance by inserting an arbitrary adjustment, which would mask real errors", "weight": 2}
+      {
+        "point": "Cash is the last line completed, calculated as the ending cash balance from the cash flow statement, which itself flows from all the other projected line items across the three statements",
+        "weight": 3
+      },
+      {
+        "point": "If the balance sheet balances (Assets = Liabilities + Equity) after cash is populated this way, without any manual forced plug, it's strong evidence the model's linkages are internally consistent and free of formula errors",
+        "weight": 3
+      },
+      {
+        "point": "If it doesn't balance, that's a diagnostic signal pointing to a broken linkage somewhere in the model, not something to be papered over with a manual plug",
+        "weight": 2
+      },
+      {
+        "point": "Distinguishes this from an inappropriate 'plug' where an analyst manually forces the balance sheet to balance by inserting an arbitrary adjustment, which would mask real errors",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Believing 'plug' means an analyst manually forces the numbers to balance regardless of the underlying formulas",
@@ -450,10 +579,22 @@
     "questionType": "single-step",
     "prompt": "A company switches its inventory costing method from FIFO to LIFO during a period of persistent inflation, with no change in actual physical inventory purchases or sales volume. Explain the effect on reported COGS, gross profit, net income, ending inventory value, and cash taxes paid.",
     "keyPoints": [
-      {"point": "LIFO matches the most recently purchased (higher-cost, in inflation) inventory against revenue, so COGS is higher under LIFO than FIFO in an inflationary environment", "weight": 3},
-      {"point": "Higher COGS under LIFO means lower gross profit and lower net income compared to FIFO", "weight": 2},
-      {"point": "Ending inventory on the balance sheet is valued at older, lower costs under LIFO, so it's lower than under FIFO", "weight": 2},
-      {"point": "Lower taxable income under LIFO means lower cash taxes paid — a real cash flow benefit despite lower reported net income", "weight": 3}
+      {
+        "point": "LIFO matches the most recently purchased (higher-cost, in inflation) inventory against revenue, so COGS is higher under LIFO than FIFO in an inflationary environment",
+        "weight": 3
+      },
+      {
+        "point": "Higher COGS under LIFO means lower gross profit and lower net income compared to FIFO",
+        "weight": 2
+      },
+      {
+        "point": "Ending inventory on the balance sheet is valued at older, lower costs under LIFO, so it's lower than under FIFO",
+        "weight": 2
+      },
+      {
+        "point": "Lower taxable income under LIFO means lower cash taxes paid — a real cash flow benefit despite lower reported net income",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Assuming LIFO and FIFO produce the same net income, just different balance sheet values",
@@ -481,10 +622,22 @@
     "questionType": "single-step",
     "prompt": "A company spends $40 million on a cost that could plausibly be either capitalized as an asset (amortized over 5 years straight-line) or expensed immediately, at a 25% tax rate. Compare the effect on year-one net income, year-one cash flow from operations, and the balance sheet under each treatment.",
     "keyPoints": [
-      {"point": "Expensing: reduces year-one pre-tax income by $40M; after-tax net income impact = -$30M; but CFO is unaffected by the choice on a total basis since it's a real cash outflow reflected in net income directly (no add-back needed since fully expensed)", "weight": 3},
-      {"point": "Capitalizing: only $8M ($40M/5) hits year-one income statement as amortization; after-tax net income impact = -$6M in year one; but the full $40M cash outflow still hits CFI as an investing outflow (not CFO)", "weight": 3},
-      {"point": "Balance sheet: expensing has no asset created (all $40M reduces retained earnings via lower NI, cash down $40M); capitalizing creates a $40M asset (net $32M after year-one amortization), with a smaller retained earnings reduction", "weight": 3},
-      {"point": "Total company-wide cash outflow of $40M is identical either way — the treatment only affects timing/placement across the statements, and the current-year tax benefit differs ($10M all in year one if expensed vs $2M in year one if capitalized)", "weight": 2}
+      {
+        "point": "Expensing: reduces year-one pre-tax income by $40M; after-tax net income impact = -$30M; but CFO is unaffected by the choice on a total basis since it's a real cash outflow reflected in net income directly (no add-back needed since fully expensed)",
+        "weight": 3
+      },
+      {
+        "point": "Capitalizing: only $8M ($40M/5) hits year-one income statement as amortization; after-tax net income impact = -$6M in year one; but the full $40M cash outflow still hits CFI as an investing outflow (not CFO)",
+        "weight": 3
+      },
+      {
+        "point": "Balance sheet: expensing has no asset created (all $40M reduces retained earnings via lower NI, cash down $40M); capitalizing creates a $40M asset (net $32M after year-one amortization), with a smaller retained earnings reduction",
+        "weight": 3
+      },
+      {
+        "point": "Total company-wide cash outflow of $40M is identical either way — the treatment only affects timing/placement across the statements, and the current-year tax benefit differs ($10M all in year one if expensed vs $2M in year one if capitalized)",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Believing capitalizing versus expensing changes the total cash the company actually spends",
@@ -516,9 +669,18 @@
     "questionType": "multi-step",
     "prompt": "A company is acquired with $400 million of debt at a 7% interest rate. In year one, it generates $60 million of free cash flow before debt service, all of which is used to pay down debt (assume interest is paid in cash each year on the beginning-of-year debt balance, and any remaining free cash flow after interest goes to principal repayment). In year two, it again generates $60 million of pre-interest free cash flow. Calculate the ending debt balance after year two, and the total interest expense saved in year two purely from the year-one paydown.",
     "keyPoints": [
-      {"point": "Year 1: interest = $400M x 7% = $28M; principal repayment = $60M - $28M = $32M; ending debt = $400M - $32M = $368M", "weight": 3},
-      {"point": "Year 2: interest = $368M x 7% = $25.76M; principal repayment = $60M - $25.76M = $34.24M; ending debt = $368M - $34.24M = $333.76M", "weight": 3},
-      {"point": "Interest saved in year 2 due to year-1 paydown = (original $400M x 7%) - ($368M x 7%) = $28M - $25.76M = $2.24M", "weight": 3}
+      {
+        "point": "Year 1: interest = $400M x 7% = $28M; principal repayment = $60M - $28M = $32M; ending debt = $400M - $32M = $368M",
+        "weight": 3
+      },
+      {
+        "point": "Year 2: interest = $368M x 7% = $25.76M; principal repayment = $60M - $25.76M = $34.24M; ending debt = $368M - $34.24M = $333.76M",
+        "weight": 3
+      },
+      {
+        "point": "Interest saved in year 2 due to year-1 paydown = (original $400M x 7%) - ($368M x 7%) = $28M - $25.76M = $2.24M",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Applying the interest rate to the full $60 million of free cash flow instead of the beginning debt balance",
@@ -550,10 +712,22 @@
     "questionType": "multi-step",
     "prompt": "A company records a $60 million impairment charge on a piece of equipment (not goodwill), which is fully deductible for tax purposes in the same period (assume no book-tax basis difference existed prior to the impairment). The tax rate is 25%. Trace this through the income statement, balance sheet, and cash flow statement, and explain what happens to the deferred tax picture.",
     "keyPoints": [
-      {"point": "Income statement: $60M pre-tax impairment charge; tax benefit of $60M x 25% = $15M; net income falls by $45M after-tax", "weight": 3},
-      {"point": "Since fully deductible in the same period, cash taxes actually decrease by $15M in the current period (assuming sufficient taxable income to use the deduction) — no deferred tax asset/liability created from this specific item since book and tax treatment align", "weight": 3},
-      {"point": "Balance sheet: equipment (net PP&E) decreases $60M; cash increases $15M from the tax benefit; retained earnings falls $45M; net asset change (-$60M+$15M=-$45M) matches equity change (-$45M)", "weight": 2},
-      {"point": "Cash flow statement: net income down $45M, add back non-cash impairment of $60M, CFO impact = +$15M (matching the cash tax benefit)", "weight": 2}
+      {
+        "point": "Income statement: $60M pre-tax impairment charge; tax benefit of $60M x 25% = $15M; net income falls by $45M after-tax",
+        "weight": 3
+      },
+      {
+        "point": "Since fully deductible in the same period, cash taxes actually decrease by $15M in the current period (assuming sufficient taxable income to use the deduction) — no deferred tax asset/liability created from this specific item since book and tax treatment align",
+        "weight": 3
+      },
+      {
+        "point": "Balance sheet: equipment (net PP&E) decreases $60M; cash increases $15M from the tax benefit; retained earnings falls $45M; net asset change (-$60M+$15M=-$45M) matches equity change (-$45M)",
+        "weight": 2
+      },
+      {
+        "point": "Cash flow statement: net income down $45M, add back non-cash impairment of $60M, CFO impact = +$15M (matching the cash tax benefit)",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Assuming an impairment always creates a deferred tax asset (it only does so if book and tax treatment diverge, e.g., if not immediately deductible for tax)",
@@ -581,9 +755,18 @@
     "questionType": "multi-step",
     "prompt": "During the year: the company collects $500 million cash from customers and separately recognizes $520 million of revenue on credit sales (so AR increased by $20 million); it purchases $300 million of inventory on credit (AP increases $300 million accordingly) and its COGS for the period is $310 million (so inventory decreased by $10 million net of purchases); and it pays down $280 million of existing accounts payable in cash. Assuming SG&A of $100 million (all paid in cash), a 25% tax rate, and no other items, compute net income and cash flow from operations for the period.",
     "keyPoints": [
-      {"point": "Net income: Revenue $520M - COGS $310M - SG&A $100M = $110M pre-tax; Net income = $110M x 0.75 = $82.5M", "weight": 3},
-      {"point": "Working capital changes: AR increase of $20M (use of cash), Inventory decrease of $10M (source), AP: purchases add $300M to AP but $280M was paid down, so net AP change = +$300M-$280M=+$20M (source of cash)", "weight": 3},
-      {"point": "CFO = Net income $82.5M - $20M(AR) + $10M(Inventory) + $20M(AP) = $92.5M", "weight": 3}
+      {
+        "point": "Net income: Revenue $520M - COGS $310M - SG&A $100M = $110M pre-tax; Net income = $110M x 0.75 = $82.5M",
+        "weight": 3
+      },
+      {
+        "point": "Working capital changes: AR increase of $20M (use of cash), Inventory decrease of $10M (source), AP: purchases add $300M to AP but $280M was paid down, so net AP change = +$300M-$280M=+$20M (source of cash)",
+        "weight": 3
+      },
+      {
+        "point": "CFO = Net income $82.5M - $20M(AR) + $10M(Inventory) + $20M(AP) = $92.5M",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Confusing cash collected with revenue recognized, or double-counting cash flows already embedded in net income within the working capital adjustment",
@@ -615,9 +798,18 @@
     "questionType": "multi-step",
     "prompt": "An acquirer pays $250 million for a target. At acquisition, the target's identifiable tangible net assets have a fair value of $140 million, and the acquirer identifies a separately valued customer relationship intangible asset worth $30 million (to be amortized straight-line over 10 years) that wasn't previously recorded on the target's books. Calculate goodwill created in this deal, and the combined annual pre-tax income statement impact from the amortization of the customer relationship intangible in year one, ignoring any impact from the tangible net assets.",
     "keyPoints": [
-      {"point": "Total identifiable net assets (fair value) = $140M tangible + $30M customer relationship intangible = $170M", "weight": 3},
-      {"point": "Goodwill = Purchase price $250M - Total identifiable net assets $170M = $80M", "weight": 3},
-      {"point": "Annual amortization of customer relationship = $30M / 10 years = $3M pre-tax expense per year", "weight": 3}
+      {
+        "point": "Total identifiable net assets (fair value) = $140M tangible + $30M customer relationship intangible = $170M",
+        "weight": 3
+      },
+      {
+        "point": "Goodwill = Purchase price $250M - Total identifiable net assets $170M = $80M",
+        "weight": 3
+      },
+      {
+        "point": "Annual amortization of customer relationship = $30M / 10 years = $3M pre-tax expense per year",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Forgetting to include the newly identified intangible asset in the 'identifiable net assets' figure before calculating goodwill",
@@ -649,9 +841,18 @@
     "questionType": "conceptual",
     "prompt": "What does it mean for a defined benefit pension plan to be 'underfunded,' how does that show up on the sponsoring company's balance sheet, and why can pension accounting create meaningful earnings volatility unrelated to the company's actual core operating performance?",
     "keyPoints": [
-      {"point": "Underfunded means the present value of the plan's projected benefit obligation exceeds the fair value of plan assets set aside to fund it", "weight": 3},
-      {"point": "The net underfunded (or overfunded) status is recorded as a liability (or asset) on the sponsoring company's balance sheet", "weight": 3},
-      {"point": "Volatility arises because both the benefit obligation (sensitive to discount rate assumptions) and plan asset values (sensitive to market/investment returns) can swing significantly year to year, largely independent of the company's core business performance", "weight": 3}
+      {
+        "point": "Underfunded means the present value of the plan's projected benefit obligation exceeds the fair value of plan assets set aside to fund it",
+        "weight": 3
+      },
+      {
+        "point": "The net underfunded (or overfunded) status is recorded as a liability (or asset) on the sponsoring company's balance sheet",
+        "weight": 3
+      },
+      {
+        "point": "Volatility arises because both the benefit obligation (sensitive to discount rate assumptions) and plan asset values (sensitive to market/investment returns) can swing significantly year to year, largely independent of the company's core business performance",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Believing pension obligations are always fully funded or that the shortfall has no balance sheet impact",
@@ -679,10 +880,22 @@
     "questionType": "conceptual",
     "prompt": "What is a net operating loss (NOL) carryforward, how does it create a deferred tax asset, and under what circumstances would a company need to record a valuation allowance against that deferred tax asset?",
     "keyPoints": [
-      {"point": "An NOL carryforward arises when a company's tax deductions exceed its taxable income in a given year, allowing the excess loss to be carried forward to offset taxable income in future profitable years", "weight": 3},
-      {"point": "The NOL creates a deferred tax asset, representing the future tax savings the company expects to realize by using the NOL to offset future taxable income", "weight": 3},
-      {"point": "A valuation allowance is required when it's more likely than not that some or all of the deferred tax asset won't be realized — typically due to a history of losses or an uncertain path back to sustained profitability", "weight": 3},
-      {"point": "Recording or releasing a valuation allowance directly impacts the income tax provision and net income", "weight": 1}
+      {
+        "point": "An NOL carryforward arises when a company's tax deductions exceed its taxable income in a given year, allowing the excess loss to be carried forward to offset taxable income in future profitable years",
+        "weight": 3
+      },
+      {
+        "point": "The NOL creates a deferred tax asset, representing the future tax savings the company expects to realize by using the NOL to offset future taxable income",
+        "weight": 3
+      },
+      {
+        "point": "A valuation allowance is required when it's more likely than not that some or all of the deferred tax asset won't be realized — typically due to a history of losses or an uncertain path back to sustained profitability",
+        "weight": 3
+      },
+      {
+        "point": "Recording or releasing a valuation allowance directly impacts the income tax provision and net income",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Believing an NOL is automatically usable regardless of the company's future profitability outlook",

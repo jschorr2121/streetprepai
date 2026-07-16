@@ -91,15 +91,13 @@ export async function POST(req: Request): Promise<Response> {
               },
               followups: {
                 type: "array",
-                description:
-                  "2-3 suggested follow-up touches if the banker doesn't respond.",
+                description: "2-3 suggested follow-up touches if the banker doesn't respond.",
                 items: {
                   type: "object",
                   properties: {
                     when: {
                       type: "string",
-                      description:
-                        "Relative time, e.g. '+2 weeks', '+6 weeks', '+3 months'.",
+                      description: "Relative time, e.g. '+2 weeks', '+6 weeks', '+3 months'.",
                     },
                     kind: {
                       type: "string",
@@ -123,7 +121,11 @@ export async function POST(req: Request): Promise<Response> {
   } catch (err) {
     return Response.json(
       {
-        error: clientSafeError("relationships/draft-outreach", err, "The AI request failed. Please try again."),
+        error: clientSafeError(
+          "relationships/draft-outreach",
+          err,
+          "The AI request failed. Please try again.",
+        ),
       },
       { status: 502 },
     );

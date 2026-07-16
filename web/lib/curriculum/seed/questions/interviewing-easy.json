@@ -6,11 +6,26 @@
     "questionType": "conceptual",
     "prompt": "In an investment banking interview, what are the two broad categories interviewers are actually scoring you on, and why does a candidate with a weaker technical answer sometimes still get the offer?",
     "keyPoints": [
-      {"point": "Names fit/motivation (story, why banking, why this group/firm) as one bucket", "weight": 3},
-      {"point": "Names technical competence (accounting, valuation, deal mechanics) as the second bucket", "weight": 3},
-      {"point": "Explains that fit determines whether people want to work with you 100-hour weeks alongside you", "weight": 2},
-      {"point": "Notes technical mistakes are coachable pre-desk but a bad personality fit is not", "weight": 2},
-      {"point": "Mentions interviewers are effectively asking 'would I want to be stuck in an all-nighter with this person'", "weight": 1}
+      {
+        "point": "Names fit/motivation (story, why banking, why this group/firm) as one bucket",
+        "weight": 3
+      },
+      {
+        "point": "Names technical competence (accounting, valuation, deal mechanics) as the second bucket",
+        "weight": 3
+      },
+      {
+        "point": "Explains that fit determines whether people want to work with you 100-hour weeks alongside you",
+        "weight": 2
+      },
+      {
+        "point": "Notes technical mistakes are coachable pre-desk but a bad personality fit is not",
+        "weight": 2
+      },
+      {
+        "point": "Mentions interviewers are effectively asking 'would I want to be stuck in an all-nighter with this person'",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Believing that acing every technical question guarantees an offer regardless of how the conversation felt",
@@ -39,11 +54,26 @@
     "questionType": "conceptual",
     "prompt": "In a typical 30-minute first-round investment banking interview, roughly how is the time usually split between behavioral and technical questions, and what does that imply about how you should prepare?",
     "keyPoints": [
-      {"point": "States behavioral/fit questions usually dominate early first rounds, often more than half the time", "weight": 3},
-      {"point": "Notes technical depth increases in later rounds and at the superday relative to first rounds", "weight": 2},
-      {"point": "Implies candidates should over-invest in story polish relative to how much they'd naturally want to", "weight": 2},
-      {"point": "Mentions the split varies by bank and by interviewer seniority (senior bankers ask fewer technicals)", "weight": 2},
-      {"point": "Notes technical prep still needs to be complete even if it's a smaller share of time, since a single wrong answer can be disqualifying", "weight": 1}
+      {
+        "point": "States behavioral/fit questions usually dominate early first rounds, often more than half the time",
+        "weight": 3
+      },
+      {
+        "point": "Notes technical depth increases in later rounds and at the superday relative to first rounds",
+        "weight": 2
+      },
+      {
+        "point": "Implies candidates should over-invest in story polish relative to how much they'd naturally want to",
+        "weight": 2
+      },
+      {
+        "point": "Mentions the split varies by bank and by interviewer seniority (senior bankers ask fewer technicals)",
+        "weight": 2
+      },
+      {
+        "point": "Notes technical prep still needs to be complete even if it's a smaller share of time, since a single wrong answer can be disqualifying",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Assuming a 30-minute interview is mostly technical because that's what's hardest to study",
@@ -72,11 +102,26 @@
     "questionType": "conceptual",
     "prompt": "What is a HireVue-style one-way video interview, and at what stage of the recruiting process does it typically appear?",
     "keyPoints": [
-      {"point": "Defines it as a recorded, one-way interview: candidate answers pre-set questions on camera with no live interviewer", "weight": 3},
-      {"point": "Notes it typically appears early, often as the first filter after resume/cover letter screening", "weight": 2},
-      {"point": "Mentions answers are usually time-limited per question with limited or no retakes", "weight": 2},
-      {"point": "Notes it's often reviewed later by recruiters or an algorithm-assisted flag before a human watches", "weight": 2},
-      {"point": "States the purpose is to filter volume efficiently before investing live interviewer time", "weight": 1}
+      {
+        "point": "Defines it as a recorded, one-way interview: candidate answers pre-set questions on camera with no live interviewer",
+        "weight": 3
+      },
+      {
+        "point": "Notes it typically appears early, often as the first filter after resume/cover letter screening",
+        "weight": 2
+      },
+      {
+        "point": "Mentions answers are usually time-limited per question with limited or no retakes",
+        "weight": 2
+      },
+      {
+        "point": "Notes it's often reviewed later by recruiters or an algorithm-assisted flag before a human watches",
+        "weight": 2
+      },
+      {
+        "point": "States the purpose is to filter volume efficiently before investing live interviewer time",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Assuming a real person is watching and reacting live, the way they would in a phone call",
@@ -105,11 +150,26 @@
     "questionType": "conceptual",
     "prompt": "A first-round phone interview is often only 15 to 20 minutes long. What is the single most important goal for a candidate in that short window, and how should that shape how you spend the time?",
     "keyPoints": [
-      {"point": "States the primary goal is to avoid disqualification and earn the next round, not to prove overall greatness", "weight": 3},
-      {"point": "Notes this means prioritizing a clean, no-red-flag answer over a maximally impressive but risky one", "weight": 2},
-      {"point": "Mentions keeping answers concise so more ground can be covered given the short window", "weight": 2},
-      {"point": "Notes the interviewer likely has a checklist and is looking for reasons to screen out, not just reasons to be impressed", "weight": 2},
-      {"point": "Implies over-preparing the story and 2-3 technical basics is higher leverage than breadth of knowledge", "weight": 1}
+      {
+        "point": "States the primary goal is to avoid disqualification and earn the next round, not to prove overall greatness",
+        "weight": 3
+      },
+      {
+        "point": "Notes this means prioritizing a clean, no-red-flag answer over a maximally impressive but risky one",
+        "weight": 2
+      },
+      {
+        "point": "Mentions keeping answers concise so more ground can be covered given the short window",
+        "weight": 2
+      },
+      {
+        "point": "Notes the interviewer likely has a checklist and is looking for reasons to screen out, not just reasons to be impressed",
+        "weight": 2
+      },
+      {
+        "point": "Implies over-preparing the story and 2-3 technical basics is higher leverage than breadth of knowledge",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Trying to showcase every accomplishment and piece of technical knowledge in the limited time",
@@ -138,11 +198,26 @@
     "questionType": "conceptual",
     "prompt": "What should you physically bring with you to an in-person superday, and why does bringing extra printed resumes matter even though the firm already has your application on file?",
     "keyPoints": [
-      {"point": "Lists core items: multiple printed resume copies, a notepad and pen, a portfolio folder or padfolio, valid ID", "weight": 3},
-      {"point": "Notes extra resumes matter because not every interviewer will have pulled or printed the application copy", "weight": 2},
-      {"point": "Mentions bringing a printed schedule or interviewer list if provided, to track names and roles", "weight": 2},
-      {"point": "Notes having a professional bag/folder rather than a backpack, and a phone silenced and put away", "weight": 1},
-      {"point": "Mentions water/snack for energy during a multi-hour day if breaks allow", "weight": 1}
+      {
+        "point": "Lists core items: multiple printed resume copies, a notepad and pen, a portfolio folder or padfolio, valid ID",
+        "weight": 3
+      },
+      {
+        "point": "Notes extra resumes matter because not every interviewer will have pulled or printed the application copy",
+        "weight": 2
+      },
+      {
+        "point": "Mentions bringing a printed schedule or interviewer list if provided, to track names and roles",
+        "weight": 2
+      },
+      {
+        "point": "Notes having a professional bag/folder rather than a backpack, and a phone silenced and put away",
+        "weight": 1
+      },
+      {
+        "point": "Mentions water/snack for energy during a multi-hour day if breaks allow",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Assuming the firm's HR team will have printed copies ready for every interviewer",
@@ -171,10 +246,22 @@
     "questionType": "conceptual",
     "prompt": "During a superday you might tell your 'why banking' story to five different interviewers back to back. Why does it matter if the story sounds slightly different each time, and how do interviewers usually catch inconsistencies?",
     "keyPoints": [
-      {"point": "Notes interviewers frequently compare notes with each other after a superday", "weight": 3},
-      {"point": "States inconsistency reads as either dishonesty or a poorly thought-through narrative, both damaging", "weight": 3},
-      {"point": "Recommends keeping core facts and timeline fixed while varying phrasing/emphasis naturally", "weight": 2},
-      {"point": "Notes minor tonal variation across retellings is fine and even expected; factual drift is not", "weight": 1}
+      {
+        "point": "Notes interviewers frequently compare notes with each other after a superday",
+        "weight": 3
+      },
+      {
+        "point": "States inconsistency reads as either dishonesty or a poorly thought-through narrative, both damaging",
+        "weight": 3
+      },
+      {
+        "point": "Recommends keeping core facts and timeline fixed while varying phrasing/emphasis naturally",
+        "weight": 2
+      },
+      {
+        "point": "Notes minor tonal variation across retellings is fine and even expected; factual drift is not",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Believing each interviewer is an isolated data point who will never compare notes with colleagues",
@@ -203,11 +290,26 @@
     "questionType": "verbal",
     "prompt": "Walk me through what you should actually do the night before a superday, in order, to make sure you show up ready.",
     "keyPoints": [
-      {"point": "Confirm logistics: address, start time, dress code, who to check in with, transportation plan", "weight": 3},
-      {"point": "Do a light review of story and technicals rather than cramming new material", "weight": 3},
-      {"point": "Lay out or confirm the outfit and pack the bag (resumes, ID, notepad) ahead of time", "weight": 2},
-      {"point": "Set multiple alarms and plan to sleep enough hours rather than staying up late reviewing", "weight": 2},
-      {"point": "Avoid heavy drinking, unfamiliar food, or late-night socializing that risks a bad night's sleep", "weight": 1}
+      {
+        "point": "Confirm logistics: address, start time, dress code, who to check in with, transportation plan",
+        "weight": 3
+      },
+      {
+        "point": "Do a light review of story and technicals rather than cramming new material",
+        "weight": 3
+      },
+      {
+        "point": "Lay out or confirm the outfit and pack the bag (resumes, ID, notepad) ahead of time",
+        "weight": 2
+      },
+      {
+        "point": "Set multiple alarms and plan to sleep enough hours rather than staying up late reviewing",
+        "weight": 2
+      },
+      {
+        "point": "Avoid heavy drinking, unfamiliar food, or late-night socializing that risks a bad night's sleep",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Cramming new technical topics late at night instead of reinforcing what's already solid",
@@ -236,11 +338,26 @@
     "questionType": "conceptual",
     "prompt": "What specific pieces of firm research should be on your pre-interview checklist, and why is generic knowledge like 'they're a top bulge bracket bank' not enough?",
     "keyPoints": [
-      {"point": "Lists specifics: recent notable deals the firm/group advised on, group structure, industry focus areas", "weight": 3},
-      {"point": "Notes generic praise sounds identical for every candidate and every firm, signaling no real research", "weight": 2},
-      {"point": "Mentions researching interviewers by name/background when known ahead of time", "weight": 2},
-      {"point": "Notes tying research to a personal reason for interest makes it credible rather than recited", "weight": 2},
-      {"point": "Mentions checking recent news or market moves relevant to the group being interviewed with", "weight": 1}
+      {
+        "point": "Lists specifics: recent notable deals the firm/group advised on, group structure, industry focus areas",
+        "weight": 3
+      },
+      {
+        "point": "Notes generic praise sounds identical for every candidate and every firm, signaling no real research",
+        "weight": 2
+      },
+      {
+        "point": "Mentions researching interviewers by name/background when known ahead of time",
+        "weight": 2
+      },
+      {
+        "point": "Notes tying research to a personal reason for interest makes it credible rather than recited",
+        "weight": 2
+      },
+      {
+        "point": "Mentions checking recent news or market moves relevant to the group being interviewed with",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Believing praising the firm's prestige or brand name counts as meaningful research",
@@ -269,11 +386,23 @@
     "questionType": "conceptual",
     "prompt": "How soon after an interview should you send a thank-you note, and what's the risk of sending it either too fast or too slow?",
     "keyPoints": [
-      {"point": "States the general window is within 24 hours, ideally same day", "weight": 3},
-      {"point": "Notes sending instantly (within minutes) can look templated or pre-written rather than genuine", "weight": 2},
-      {"point": "Notes waiting multiple days can signal low enthusiasm or read as an afterthought", "weight": 2},
-      {"point": "Mentions each note should be personalized to the specific conversation, not identical across interviewers", "weight": 2},
-      {"point": "Notes checking recruiter guidance since some firms specify a preferred timeline or format", "weight": 1}
+      { "point": "States the general window is within 24 hours, ideally same day", "weight": 3 },
+      {
+        "point": "Notes sending instantly (within minutes) can look templated or pre-written rather than genuine",
+        "weight": 2
+      },
+      {
+        "point": "Notes waiting multiple days can signal low enthusiasm or read as an afterthought",
+        "weight": 2
+      },
+      {
+        "point": "Mentions each note should be personalized to the specific conversation, not identical across interviewers",
+        "weight": 2
+      },
+      {
+        "point": "Notes checking recruiter guidance since some firms specify a preferred timeline or format",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Believing there's no real downside to sending a thank-you note as fast as technologically possible",

@@ -6,10 +6,22 @@
     "questionType": "conceptual",
     "prompt": "Why do investment banking resumes stick to a strict one-page limit, and what's the risk if a candidate lets it spill onto a second page?",
     "keyPoints": [
-      { "point": "One page is the near-universal norm for undergrad/MBA IB recruiting", "weight": 3 },
-      { "point": "Screeners spend only seconds per resume, so anything on page two is unlikely to be read", "weight": 2 },
-      { "point": "Going over a page signals poor prioritization and editing judgment, which mirrors how you'd handle a client deliverable", "weight": 3 },
-      { "point": "Exceptions are rare and generally limited to senior lateral hires with a decade-plus of experience", "weight": 1 }
+      {
+        "point": "One page is the near-universal norm for undergrad/MBA IB recruiting",
+        "weight": 3
+      },
+      {
+        "point": "Screeners spend only seconds per resume, so anything on page two is unlikely to be read",
+        "weight": 2
+      },
+      {
+        "point": "Going over a page signals poor prioritization and editing judgment, which mirrors how you'd handle a client deliverable",
+        "weight": 3
+      },
+      {
+        "point": "Exceptions are rare and generally limited to senior lateral hires with a decade-plus of experience",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "More experience automatically justifies more pages for any candidate, including undergrads",
@@ -37,9 +49,15 @@
     "questionType": "conceptual",
     "prompt": "Walk me through the basic anatomy of a strong resume bullet for an internship experience in banking recruiting.",
     "keyPoints": [
-      { "point": "Starts with a strong past-tense action verb (Built, Led, Analyzed)", "weight": 2 },
+      {
+        "point": "Starts with a strong past-tense action verb (Built, Led, Analyzed)",
+        "weight": 2
+      },
       { "point": "Provides context — what the task or project actually was", "weight": 2 },
-      { "point": "Includes a quantified scope or result (dollar size, percentage, count)", "weight": 3 },
+      {
+        "point": "Includes a quantified scope or result (dollar size, percentage, count)",
+        "weight": 3
+      },
       { "point": "Avoids passive, duty-listing language like 'responsible for'", "weight": 2 }
     ],
     "misconceptions": [
@@ -68,10 +86,22 @@
     "questionType": "conceptual",
     "prompt": "You're a returning summer intern updating your resume ahead of full-time recruiting. What is a deal sheet, and why would you consider adding one?",
     "keyPoints": [
-      { "point": "A deal sheet lists the live or completed transactions worked on during the internship, with role, transaction size, and status", "weight": 3 },
-      { "point": "It demonstrates concrete deal exposure that generic bullets can't fully convey", "weight": 3 },
-      { "point": "It's typically formatted as a separate section, table, or attached addendum rather than mixed into the main bullets", "weight": 2 },
-      { "point": "Only deals with genuine, meaningful contribution should be included", "weight": 1 }
+      {
+        "point": "A deal sheet lists the live or completed transactions worked on during the internship, with role, transaction size, and status",
+        "weight": 3
+      },
+      {
+        "point": "It demonstrates concrete deal exposure that generic bullets can't fully convey",
+        "weight": 3
+      },
+      {
+        "point": "It's typically formatted as a separate section, table, or attached addendum rather than mixed into the main bullets",
+        "weight": 2
+      },
+      {
+        "point": "Only deals with genuine, meaningful contribution should be included",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "You should list every deal your group worked on, regardless of your involvement",
@@ -99,9 +129,15 @@
     "questionType": "verbal",
     "prompt": "Name three common red flags a banking recruiter looks for when scanning a resume in the first ten seconds, and briefly explain why each one raises concern.",
     "keyPoints": [
-      { "point": "Unexplained gaps in the timeline (semesters, years, or roles missing)", "weight": 2 },
+      {
+        "point": "Unexplained gaps in the timeline (semesters, years, or roles missing)",
+        "weight": 2
+      },
       { "point": "A GPA that's either notably low or conspicuously omitted", "weight": 2 },
-      { "point": "Generic, unquantified bullets that read as duty lists rather than accomplishments", "weight": 2 },
+      {
+        "point": "Generic, unquantified bullets that read as duty lists rather than accomplishments",
+        "weight": 2
+      },
       { "point": "Typos, inconsistent formatting, or sloppy layout", "weight": 3 },
       { "point": "Frequent short-tenure roles without context ('job hopping')", "weight": 1 }
     ],

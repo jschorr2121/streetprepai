@@ -43,8 +43,8 @@ export default async function RelationshipsPage() {
             <p className="eyebrow">Empty</p>
             <p className="text-foreground mt-2 text-sm font-medium">No contacts yet.</p>
             <p className="text-muted-foreground mx-auto mt-1 max-w-md text-xs">
-              Add the first person you&apos;ve networked with — every coffee chat, note,
-              follow-up, and AI prep sheet hangs off a contact.
+              Add the first person you&apos;ve networked with — every coffee chat, note, follow-up,
+              and AI prep sheet hangs off a contact.
             </p>
             <Button asChild size="sm" className="mt-5">
               <Link href="/tools/relationships/new">

@@ -68,10 +68,6 @@ export async function saveMockInterview(
 
 export async function deleteMockInterview(userId: string, id: string): Promise<void> {
   const sb = await createClient();
-  const { error } = await sb
-    .from("mock_interviews")
-    .delete()
-    .eq("id", id)
-    .eq("user_id", userId);
+  const { error } = await sb.from("mock_interviews").delete().eq("id", id).eq("user_id", userId);
   if (error) throw error;
 }

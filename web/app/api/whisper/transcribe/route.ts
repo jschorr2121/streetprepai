@@ -37,22 +37,13 @@ export async function POST(req: Request): Promise<Response> {
 
   const file = incoming.get("audio");
   if (!(file instanceof File)) {
-    return Response.json(
-      { error: "Missing `audio` file in form data." },
-      { status: 400 },
-    );
+    return Response.json({ error: "Missing `audio` file in form data." }, { status: 400 });
   }
   if (file.size === 0) {
-    return Response.json(
-      { error: "Audio file is empty." },
-      { status: 400 },
-    );
+    return Response.json({ error: "Audio file is empty." }, { status: 400 });
   }
   if (file.size > MAX_AUDIO_BYTES) {
-    return Response.json(
-      { error: "Audio file too large (max 25 MB)." },
-      { status: 413 },
-    );
+    return Response.json({ error: "Audio file too large (max 25 MB)." }, { status: 413 });
   }
 
   const upstream = new FormData();
@@ -70,7 +61,11 @@ export async function POST(req: Request): Promise<Response> {
   } catch (err) {
     return Response.json(
       {
-        error: clientSafeError("whisper/transcribe", err, "Transcription failed. Please try again."),
+        error: clientSafeError(
+          "whisper/transcribe",
+          err,
+          "Transcription failed. Please try again.",
+        ),
       },
       { status: 502 },
     );

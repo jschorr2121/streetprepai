@@ -46,11 +46,7 @@ function emptyProfile(userId: string): Profile {
 
 export async function getProfile(userId: string): Promise<Profile> {
   const sb = await createClient();
-  const { data, error } = await sb
-    .from("profiles")
-    .select("*")
-    .eq("user_id", userId)
-    .maybeSingle();
+  const { data, error } = await sb.from("profiles").select("*").eq("user_id", userId).maybeSingle();
   if (error) throw error;
   if (!data) return emptyProfile(userId);
   return mapRow(data as DbRow);

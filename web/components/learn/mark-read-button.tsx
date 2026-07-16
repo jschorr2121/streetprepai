@@ -48,7 +48,13 @@ export function MarkReadButton({
   }
 
   return (
-    <Button variant="ghost" size="sm" onClick={mark} disabled={pending} className="h-7 gap-1 text-xs">
+    <Button
+      variant="ghost"
+      size="sm"
+      onClick={mark}
+      disabled={pending}
+      className="h-7 gap-1 text-xs"
+    >
       {pending ? <Loader2 className="size-3.5 animate-spin" /> : null}
       Mark read
     </Button>

@@ -1,10 +1,7 @@
 import { requireUser } from "@/lib/security/require-user";
 import { clientSafeError } from "@/lib/security/client-error";
 import { parseJson } from "@/lib/validation/parse";
-import {
-  ResumeCritiqueOutputSchema,
-  ResumeCritiqueSchema,
-} from "@/lib/validation/schemas/resume";
+import { ResumeCritiqueOutputSchema, ResumeCritiqueSchema } from "@/lib/validation/schemas/resume";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { RESUME_CRITIQUE_SYSTEM } from "@/lib/ai/prompts";
 import { logUsage } from "@/lib/ai/usage";
@@ -92,8 +89,7 @@ export async function POST(req: Request): Promise<Response> {
             properties: {
               sections: {
                 type: "array",
-                description:
-                  "Resume sections, in the order they appeared on the resume.",
+                description: "Resume sections, in the order they appeared on the resume.",
                 items: {
                   type: "object",
                   properties: {
@@ -171,8 +167,7 @@ export async function POST(req: Request): Promise<Response> {
                   weak_bullets: {
                     type: "integer",
                     minimum: 0,
-                    description:
-                      "Count of bullets with at least one weakness flag.",
+                    description: "Count of bullets with at least one weakness flag.",
                   },
                   top_issues: {
                     type: "array",

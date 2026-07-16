@@ -23,11 +23,7 @@ import { getGuideBySlug } from "@/lib/data/guides";
 import { coreSections, getChapter } from "@/lib/curriculum/chapters";
 import { cn } from "@/lib/utils";
 
-export default async function ChapterPage({
-  params,
-}: {
-  params: Promise<{ chapter: string }>;
-}) {
+export default async function ChapterPage({ params }: { params: Promise<{ chapter: string }> }) {
   const { chapter: chapterSlug } = await params;
   const chapter = getChapter(chapterSlug);
   if (!chapter) notFound();
@@ -180,7 +176,9 @@ export default async function ChapterPage({
           )}
         >
           <div className="flex items-center gap-3">
-            <Trophy className={cn("size-6", gatePassed ? "text-primary" : "text-muted-foreground")} />
+            <Trophy
+              className={cn("size-6", gatePassed ? "text-primary" : "text-muted-foreground")}
+            />
             <div className="flex-1">
               <div className="font-semibold">Chapter gate</div>
               <p className="text-muted-foreground text-sm">

@@ -11,9 +11,7 @@ import { z } from "zod";
 import { actionErrorFromAppError, type ActionResult } from "@/lib/auth/action-result";
 import { requireUser } from "@/lib/auth/server";
 import { withUser } from "@/lib/db/client";
-import {
-  listSittingScores,
-} from "@/lib/db/queries/qbank";
+import { listSittingScores } from "@/lib/db/queries/qbank";
 import {
   markChapterComplete,
   markSectionRead,
@@ -57,7 +55,10 @@ export async function markSectionReadAction(input: unknown): Promise<ActionResul
       markSectionRead(tx, a.userId, parsed.data.chapterSlug, parsed.data.sectionSlug),
     );
   } catch (err) {
-    logger.error({ userId: a.userId, action: "mark_section_read_failed" }, "mark_section_read_failed");
+    logger.error(
+      { userId: a.userId, action: "mark_section_read_failed" },
+      "mark_section_read_failed",
+    );
     Sentry.captureException(err);
     return { ok: false, error: { code: "INTERNAL", message: "Something went wrong." } };
   }
@@ -137,7 +138,13 @@ export async function finishSittingAction(
       };
     });
     logger.info(
-      { userId: a.userId, action: "sitting_finished", chapterSlug, context, score: data.averageScore },
+      {
+        userId: a.userId,
+        action: "sitting_finished",
+        chapterSlug,
+        context,
+        score: data.averageScore,
+      },
       "sitting_finished",
     );
     return { ok: true, data };
@@ -171,7 +178,10 @@ export async function completeUngatedChapterAction(input: unknown): Promise<Acti
       markChapterComplete(tx, a.userId, parsed.data.chapterSlug),
     );
   } catch (err) {
-    logger.error({ userId: a.userId, action: "complete_chapter_failed" }, "complete_chapter_failed");
+    logger.error(
+      { userId: a.userId, action: "complete_chapter_failed" },
+      "complete_chapter_failed",
+    );
     Sentry.captureException(err);
     return { ok: false, error: { code: "INTERNAL", message: "Something went wrong." } };
   }

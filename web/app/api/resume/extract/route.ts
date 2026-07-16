@@ -31,10 +31,7 @@ export async function POST(req: Request): Promise<Response> {
       const form = await req.formData();
       const file = form.get("file");
       if (!(file instanceof File)) {
-        return Response.json(
-          { error: "No `file` field in form." },
-          { status: 400 },
-        );
+        return Response.json({ error: "No `file` field in form." }, { status: 400 });
       }
       if (file.size > MAX_PDF_BYTES) {
         return Response.json(
@@ -55,17 +52,18 @@ export async function POST(req: Request): Promise<Response> {
   } catch (err) {
     return Response.json(
       {
-        error: clientSafeError("resume/extract", err, "Could not read the upload. Please try again."),
+        error: clientSafeError(
+          "resume/extract",
+          err,
+          "Could not read the upload. Please try again.",
+        ),
       },
       { status: 400 },
     );
   }
 
   if (buf.length < 5 || buf.subarray(0, 5).toString() !== "%PDF-") {
-    return Response.json(
-      { error: "File doesn't look like a PDF." },
-      { status: 400 },
-    );
+    return Response.json({ error: "File doesn't look like a PDF." }, { status: 400 });
   }
 
   const parser = new PDFParse({ data: new Uint8Array(buf) });
@@ -93,8 +91,7 @@ export async function POST(req: Request): Promise<Response> {
   if (!cleaned) {
     return Response.json(
       {
-        error:
-          "PDF parsed but contains no extractable text. Is it a scanned image?",
+        error: "PDF parsed but contains no extractable text. Is it a scanned image?",
       },
       { status: 422 },
     );

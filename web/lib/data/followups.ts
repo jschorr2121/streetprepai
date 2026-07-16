@@ -78,4 +78,3 @@ export async function deleteFollowup(userId: string, id: string): Promise<void> 
   const { error } = await sb.from("followups").delete().eq("id", id).eq("user_id", userId);
   if (error) throw error;
 }
-

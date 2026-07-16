@@ -26,7 +26,9 @@ const SEMESTER_ORDER = [
 ] as const;
 
 export function cycleGuidance(currentSemester: string | undefined): CycleGuidance {
-  const idx = currentSemester ? SEMESTER_ORDER.indexOf(currentSemester as (typeof SEMESTER_ORDER)[number]) : -1;
+  const idx = currentSemester
+    ? SEMESTER_ORDER.indexOf(currentSemester as (typeof SEMESTER_ORDER)[number])
+    : -1;
 
   // Sophomore spring / junior fall is the heart of the accelerated BB cycle.
   if (currentSemester === "Sophomore Spring" || currentSemester === "Junior Fall") {

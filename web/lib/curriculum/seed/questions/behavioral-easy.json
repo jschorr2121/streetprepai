@@ -6,11 +6,26 @@
     "questionType": "verbal",
     "prompt": "Walk me through your resume.",
     "keyPoints": [
-      {"point": "Opens with a brief anchor (school, major, current role) rather than restating the resume line by line", "weight": 3},
-      {"point": "Moves chronologically and connects each experience to the next with a clear thread", "weight": 3},
-      {"point": "Ends by tying the narrative to why investment banking is the logical next step", "weight": 3},
-      {"point": "Keeps it under roughly 90 seconds and avoids listing every bullet point", "weight": 2},
-      {"point": "Emphasizes transferable skills (analytical rigor, client exposure, teamwork) over job titles alone", "weight": 2}
+      {
+        "point": "Opens with a brief anchor (school, major, current role) rather than restating the resume line by line",
+        "weight": 3
+      },
+      {
+        "point": "Moves chronologically and connects each experience to the next with a clear thread",
+        "weight": 3
+      },
+      {
+        "point": "Ends by tying the narrative to why investment banking is the logical next step",
+        "weight": 3
+      },
+      {
+        "point": "Keeps it under roughly 90 seconds and avoids listing every bullet point",
+        "weight": 2
+      },
+      {
+        "point": "Emphasizes transferable skills (analytical rigor, client exposure, teamwork) over job titles alone",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Reciting every resume bullet in order instead of telling a narrative",
@@ -39,10 +54,19 @@
     "questionType": "verbal",
     "prompt": "Why did you choose your major, and how does it connect to investment banking?",
     "keyPoints": [
-      {"point": "Gives a genuine, specific reason for the choice rather than a generic 'I like business'", "weight": 3},
-      {"point": "Draws a direct line from coursework or skills to what analysts actually do", "weight": 3},
-      {"point": "Avoids implying the major itself guarantees banking skill (interviewer knows it doesn't)", "weight": 2},
-      {"point": "Keeps the answer to two or three sentences", "weight": 2}
+      {
+        "point": "Gives a genuine, specific reason for the choice rather than a generic 'I like business'",
+        "weight": 3
+      },
+      {
+        "point": "Draws a direct line from coursework or skills to what analysts actually do",
+        "weight": 3
+      },
+      {
+        "point": "Avoids implying the major itself guarantees banking skill (interviewer knows it doesn't)",
+        "weight": 2
+      },
+      { "point": "Keeps the answer to two or three sentences", "weight": 2 }
     ],
     "misconceptions": [
       "Claiming the major was chosen specifically to break into banking from day one, which often sounds inauthentic",
@@ -70,10 +94,16 @@
     "questionType": "verbal",
     "prompt": "Which line on your resume are you most proud of, and why?",
     "keyPoints": [
-      {"point": "Picks one specific line rather than hedging across several", "weight": 3},
-      {"point": "Explains the effort or obstacle behind it, not just the outcome", "weight": 3},
-      {"point": "Connects the achievement to a quality relevant to banking (rigor, initiative, resilience)", "weight": 2},
-      {"point": "Keeps the answer concrete with a number or detail rather than vague praise", "weight": 2}
+      { "point": "Picks one specific line rather than hedging across several", "weight": 3 },
+      { "point": "Explains the effort or obstacle behind it, not just the outcome", "weight": 3 },
+      {
+        "point": "Connects the achievement to a quality relevant to banking (rigor, initiative, resilience)",
+        "weight": 2
+      },
+      {
+        "point": "Keeps the answer concrete with a number or detail rather than vague praise",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Picking the most prestigious-sounding line instead of the one with a genuine story",
@@ -101,10 +131,19 @@
     "questionType": "verbal",
     "prompt": "Tell me about yourself.",
     "keyPoints": [
-      {"point": "Delivers a tight narrative in roughly 60 to 90 seconds rather than a rambling life story", "weight": 3},
-      {"point": "Covers background, a defining experience, and current motivation for banking", "weight": 3},
-      {"point": "Sounds conversational and personal, distinct from a resume recitation", "weight": 2},
-      {"point": "Ends with a forward-looking statement about why this role", "weight": 2}
+      {
+        "point": "Delivers a tight narrative in roughly 60 to 90 seconds rather than a rambling life story",
+        "weight": 3
+      },
+      {
+        "point": "Covers background, a defining experience, and current motivation for banking",
+        "weight": 3
+      },
+      {
+        "point": "Sounds conversational and personal, distinct from a resume recitation",
+        "weight": 2
+      },
+      { "point": "Ends with a forward-looking statement about why this role", "weight": 2 }
     ],
     "misconceptions": [
       "Answering with a full chronological resume walkthrough instead of a personal story",
@@ -132,10 +171,19 @@
     "questionType": "verbal",
     "prompt": "Give me your two-minute pitch on why we should hire you.",
     "keyPoints": [
-      {"point": "Leads with two or three concrete strengths rather than a vague list of adjectives", "weight": 3},
-      {"point": "Backs each strength with a specific piece of evidence from experience", "weight": 3},
-      {"point": "Ties the pitch explicitly to what an analyst needs to do well (accuracy, stamina, teamwork)", "weight": 2},
-      {"point": "Closes with a confident, non-arrogant statement of fit", "weight": 2}
+      {
+        "point": "Leads with two or three concrete strengths rather than a vague list of adjectives",
+        "weight": 3
+      },
+      {
+        "point": "Backs each strength with a specific piece of evidence from experience",
+        "weight": 3
+      },
+      {
+        "point": "Ties the pitch explicitly to what an analyst needs to do well (accuracy, stamina, teamwork)",
+        "weight": 2
+      },
+      { "point": "Closes with a confident, non-arrogant statement of fit", "weight": 2 }
     ],
     "misconceptions": [
       "Listing generic traits like 'hardworking' and 'team player' with no supporting evidence",
@@ -163,10 +211,22 @@
     "questionType": "conceptual",
     "prompt": "Why do you want to go into investment banking?",
     "keyPoints": [
-      {"point": "Names at least two specific reasons rather than one generic pull like 'money and prestige'", "weight": 3},
-      {"point": "Mentions the learning curve or skill-building aspect of the analyst seat", "weight": 3},
-      {"point": "Shows awareness of what the job actually entails (deal execution, client work, hours)", "weight": 2},
-      {"point": "Grounds the answer in a specific experience that sparked the interest", "weight": 2}
+      {
+        "point": "Names at least two specific reasons rather than one generic pull like 'money and prestige'",
+        "weight": 3
+      },
+      {
+        "point": "Mentions the learning curve or skill-building aspect of the analyst seat",
+        "weight": 3
+      },
+      {
+        "point": "Shows awareness of what the job actually entails (deal execution, client work, hours)",
+        "weight": 2
+      },
+      {
+        "point": "Grounds the answer in a specific experience that sparked the interest",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Answering only with compensation, which sounds mercenary and gives the interviewer nothing to trust",
@@ -194,10 +254,19 @@
     "questionType": "conceptual",
     "prompt": "Why banking instead of management consulting?",
     "keyPoints": [
-      {"point": "Draws a real distinction (financial/transactional focus vs. broad operational strategy) rather than dismissing consulting", "weight": 3},
-      {"point": "Explains a personal preference that maps to that distinction (numbers-driven work, deal orientation)", "weight": 3},
-      {"point": "Avoids badmouthing consulting or sounding like banking was a fallback choice", "weight": 2},
-      {"point": "Optionally notes any direct exposure that informed the comparison", "weight": 1}
+      {
+        "point": "Draws a real distinction (financial/transactional focus vs. broad operational strategy) rather than dismissing consulting",
+        "weight": 3
+      },
+      {
+        "point": "Explains a personal preference that maps to that distinction (numbers-driven work, deal orientation)",
+        "weight": 3
+      },
+      {
+        "point": "Avoids badmouthing consulting or sounding like banking was a fallback choice",
+        "weight": 2
+      },
+      { "point": "Optionally notes any direct exposure that informed the comparison", "weight": 1 }
     ],
     "misconceptions": [
       "Claiming consulting work is easier or less rigorous, which sounds dismissive and uninformed",
@@ -225,10 +294,16 @@
     "questionType": "conceptual",
     "prompt": "Why do you want to work at our firm specifically?",
     "keyPoints": [
-      {"point": "Cites something specific to the firm (group strength, deal, culture trait) not generic praise", "weight": 3},
-      {"point": "Connects that specific reason to a personal interest or goal", "weight": 3},
-      {"point": "Avoids answers that would apply equally well to any bank on the street", "weight": 2},
-      {"point": "Shows evidence of research (a recent deal, a group's focus area)", "weight": 2}
+      {
+        "point": "Cites something specific to the firm (group strength, deal, culture trait) not generic praise",
+        "weight": 3
+      },
+      { "point": "Connects that specific reason to a personal interest or goal", "weight": 3 },
+      {
+        "point": "Avoids answers that would apply equally well to any bank on the street",
+        "weight": 2
+      },
+      { "point": "Shows evidence of research (a recent deal, a group's focus area)", "weight": 2 }
     ],
     "misconceptions": [
       "Giving an answer that is really just 'why banking' restated with the firm's name inserted",
@@ -256,9 +331,18 @@
     "questionType": "conceptual",
     "prompt": "What do you know about our firm's culture, and why does it appeal to you?",
     "keyPoints": [
-      {"point": "States a specific, researched cultural characteristic rather than assuming all banks are the same", "weight": 3},
-      {"point": "Explains why that characteristic personally matters, with a reason grounded in past experience", "weight": 3},
-      {"point": "Shows the research came from more than the firm's own marketing (alumni, current employees, press)", "weight": 2}
+      {
+        "point": "States a specific, researched cultural characteristic rather than assuming all banks are the same",
+        "weight": 3
+      },
+      {
+        "point": "Explains why that characteristic personally matters, with a reason grounded in past experience",
+        "weight": 3
+      },
+      {
+        "point": "Shows the research came from more than the firm's own marketing (alumni, current employees, press)",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Repeating marketing language from the firm's website verbatim without independent insight",
@@ -286,10 +370,16 @@
     "questionType": "verbal",
     "prompt": "Tell me about a time you demonstrated leadership.",
     "keyPoints": [
-      {"point": "States the Situation and Task clearly and concisely before the action", "weight": 2},
-      {"point": "Describes specific Actions the candidate personally took, using 'I' rather than only 'we'", "weight": 3},
-      {"point": "States a concrete, ideally quantified Result", "weight": 3},
-      {"point": "Keeps the story under about 90 seconds when spoken aloud", "weight": 2}
+      {
+        "point": "States the Situation and Task clearly and concisely before the action",
+        "weight": 2
+      },
+      {
+        "point": "Describes specific Actions the candidate personally took, using 'I' rather than only 'we'",
+        "weight": 3
+      },
+      { "point": "States a concrete, ideally quantified Result", "weight": 3 },
+      { "point": "Keeps the story under about 90 seconds when spoken aloud", "weight": 2 }
     ],
     "misconceptions": [
       "Describing what the team did without clarifying the candidate's individual contribution",
@@ -317,10 +407,19 @@
     "questionType": "verbal",
     "prompt": "Tell me about a time you worked effectively as part of a team.",
     "keyPoints": [
-      {"point": "Establishes the team's shared goal and the candidate's specific role in it", "weight": 2},
-      {"point": "Describes a concrete contribution the candidate made to the team's success", "weight": 3},
-      {"point": "Includes a specific, ideally measurable outcome", "weight": 3},
-      {"point": "Reflects genuine collaboration rather than the candidate working in isolation", "weight": 2}
+      {
+        "point": "Establishes the team's shared goal and the candidate's specific role in it",
+        "weight": 2
+      },
+      {
+        "point": "Describes a concrete contribution the candidate made to the team's success",
+        "weight": 3
+      },
+      { "point": "Includes a specific, ideally measurable outcome", "weight": 3 },
+      {
+        "point": "Reflects genuine collaboration rather than the candidate working in isolation",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Describing an individual accomplishment and labeling it teamwork after the fact",
@@ -348,10 +447,13 @@
     "questionType": "verbal",
     "prompt": "What is your greatest strength?",
     "keyPoints": [
-      {"point": "Names one specific strength rather than a list", "weight": 2},
-      {"point": "Supports it with a concrete example, not just an assertion", "weight": 3},
-      {"point": "Connects the strength explicitly to what makes a strong analyst", "weight": 3},
-      {"point": "Avoids a generic strength with no differentiation (e.g., 'hard worker' with no story)", "weight": 2}
+      { "point": "Names one specific strength rather than a list", "weight": 2 },
+      { "point": "Supports it with a concrete example, not just an assertion", "weight": 3 },
+      { "point": "Connects the strength explicitly to what makes a strong analyst", "weight": 3 },
+      {
+        "point": "Avoids a generic strength with no differentiation (e.g., 'hard worker' with no story)",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Naming a strength with no supporting example, making it unverifiable and forgettable",
@@ -379,10 +481,19 @@
     "questionType": "verbal",
     "prompt": "What is your greatest weakness?",
     "keyPoints": [
-      {"point": "Names a genuine, specific weakness rather than a disguised strength ('I work too hard')", "weight": 3},
-      {"point": "Gives a concrete example of the weakness showing up", "weight": 3},
-      {"point": "Describes a specific, ongoing action taken to manage or improve it", "weight": 3},
-      {"point": "Avoids naming a weakness that is disqualifying for the role (e.g., can't handle pressure)", "weight": 2}
+      {
+        "point": "Names a genuine, specific weakness rather than a disguised strength ('I work too hard')",
+        "weight": 3
+      },
+      { "point": "Gives a concrete example of the weakness showing up", "weight": 3 },
+      {
+        "point": "Describes a specific, ongoing action taken to manage or improve it",
+        "weight": 3
+      },
+      {
+        "point": "Avoids naming a weakness that is disqualifying for the role (e.g., can't handle pressure)",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Using a humble-brag disguised as a weakness, which interviewers see through immediately",
@@ -410,10 +521,16 @@
     "questionType": "curveball",
     "prompt": "You go to a school we don't typically recruit from. Why should we consider you over candidates from target schools?",
     "keyPoints": [
-      {"point": "Responds calmly and factually rather than defensively", "weight": 3},
-      {"point": "Points to concrete evidence of preparation that offsets the lack of a target-school pipeline", "weight": 3},
-      {"point": "Reframes the school as evidence of initiative for having found and pursued the opportunity", "weight": 2},
-      {"point": "Avoids disparaging target-school candidates", "weight": 2}
+      { "point": "Responds calmly and factually rather than defensively", "weight": 3 },
+      {
+        "point": "Points to concrete evidence of preparation that offsets the lack of a target-school pipeline",
+        "weight": 3
+      },
+      {
+        "point": "Reframes the school as evidence of initiative for having found and pursued the opportunity",
+        "weight": 2
+      },
+      { "point": "Avoids disparaging target-school candidates", "weight": 2 }
     ],
     "misconceptions": [
       "Getting visibly defensive or apologetic about the school choice",
@@ -441,10 +558,19 @@
     "questionType": "curveball",
     "prompt": "Your GPA is lower than we typically see. Can you explain that?",
     "keyPoints": [
-      {"point": "Gives a brief, honest, non-defensive explanation without excessive excuse-making", "weight": 3},
-      {"point": "Provides evidence the GPA doesn't reflect current ability (upward trend, relevant course grades, other achievements)", "weight": 3},
-      {"point": "Takes ownership rather than blaming professors or circumstances entirely", "weight": 2},
-      {"point": "Keeps the answer brief and moves forward rather than dwelling", "weight": 1}
+      {
+        "point": "Gives a brief, honest, non-defensive explanation without excessive excuse-making",
+        "weight": 3
+      },
+      {
+        "point": "Provides evidence the GPA doesn't reflect current ability (upward trend, relevant course grades, other achievements)",
+        "weight": 3
+      },
+      {
+        "point": "Takes ownership rather than blaming professors or circumstances entirely",
+        "weight": 2
+      },
+      { "point": "Keeps the answer brief and moves forward rather than dwelling", "weight": 1 }
     ],
     "misconceptions": [
       "Blaming professors, grading curves, or bad luck without acknowledging any personal factor",
@@ -472,10 +598,19 @@
     "questionType": "verbal",
     "prompt": "Walk me through a deal you've followed recently.",
     "keyPoints": [
-      {"point": "Names the specific deal, parties involved, and rough size or structure", "weight": 3},
-      {"point": "States the strategic rationale in the candidate's own words", "weight": 3},
-      {"point": "Offers a brief personal view or takeaway, not just a summary of the press release", "weight": 2},
-      {"point": "Keeps facts accurate and doesn't overstate confidence in details not actually known", "weight": 2}
+      {
+        "point": "Names the specific deal, parties involved, and rough size or structure",
+        "weight": 3
+      },
+      { "point": "States the strategic rationale in the candidate's own words", "weight": 3 },
+      {
+        "point": "Offers a brief personal view or takeaway, not just a summary of the press release",
+        "weight": 2
+      },
+      {
+        "point": "Keeps facts accurate and doesn't overstate confidence in details not actually known",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Reciting headline facts with no rationale or personal viewpoint attached",
@@ -503,9 +638,18 @@
     "questionType": "verbal",
     "prompt": "What's a deal you would want to work on, and why?",
     "keyPoints": [
-      {"point": "Names a specific type of deal or hypothetical transaction, not a vague 'big deals'", "weight": 3},
-      {"point": "Explains why it's personally interesting, tied to industry knowledge or a skill the candidate wants to build", "weight": 3},
-      {"point": "Shows awareness of what makes that type of deal complex or interesting from a banker's perspective", "weight": 2}
+      {
+        "point": "Names a specific type of deal or hypothetical transaction, not a vague 'big deals'",
+        "weight": 3
+      },
+      {
+        "point": "Explains why it's personally interesting, tied to industry knowledge or a skill the candidate wants to build",
+        "weight": 3
+      },
+      {
+        "point": "Shows awareness of what makes that type of deal complex or interesting from a banker's perspective",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Naming a deal purely for its size or headline appeal with no substantive reasoning",
@@ -533,9 +677,15 @@
     "questionType": "verbal",
     "prompt": "How do you stay current on financial markets?",
     "keyPoints": [
-      {"point": "Names specific, credible sources (publications, newsletters, data providers)", "weight": 3},
-      {"point": "Describes a consistent routine or habit, not a one-off effort", "weight": 3},
-      {"point": "Mentions applying what's read (forming a view, discussing with others) rather than passive consumption", "weight": 2}
+      {
+        "point": "Names specific, credible sources (publications, newsletters, data providers)",
+        "weight": 3
+      },
+      { "point": "Describes a consistent routine or habit, not a one-off effort", "weight": 3 },
+      {
+        "point": "Mentions applying what's read (forming a view, discussing with others) rather than passive consumption",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Naming only social media or headline aggregators with no depth of engagement",
@@ -563,9 +713,15 @@
     "questionType": "verbal",
     "prompt": "Can you name a recent IPO or M&A deal that caught your attention, and explain why?",
     "keyPoints": [
-      {"point": "Names a specific, real, reasonably recent transaction with accurate basic facts", "weight": 3},
-      {"point": "Explains the specific reason it stood out, beyond just its size", "weight": 3},
-      {"point": "Demonstrates the candidate actually understands the mechanics or context, not just the headline", "weight": 2}
+      {
+        "point": "Names a specific, real, reasonably recent transaction with accurate basic facts",
+        "weight": 3
+      },
+      { "point": "Explains the specific reason it stood out, beyond just its size", "weight": 3 },
+      {
+        "point": "Demonstrates the candidate actually understands the mechanics or context, not just the headline",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Naming a deal from years ago that no longer signals current market awareness",
@@ -593,9 +749,18 @@
     "questionType": "verbal",
     "prompt": "Tell me about your most recent internship and what you learned from it.",
     "keyPoints": [
-      {"point": "Describes concrete responsibilities and tasks, not just the company name and title", "weight": 3},
-      {"point": "Names a specific, substantive lesson learned, not a generic 'I learned a lot'", "weight": 3},
-      {"point": "Connects the lesson to how it will make the candidate a better analyst", "weight": 2}
+      {
+        "point": "Describes concrete responsibilities and tasks, not just the company name and title",
+        "weight": 3
+      },
+      {
+        "point": "Names a specific, substantive lesson learned, not a generic 'I learned a lot'",
+        "weight": 3
+      },
+      {
+        "point": "Connects the lesson to how it will make the candidate a better analyst",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Describing the internship only in terms of the company's prestige rather than actual work done",
@@ -623,9 +788,12 @@
     "questionType": "verbal",
     "prompt": "What's the most important thing you learned from a past job, even if it wasn't in finance?",
     "keyPoints": [
-      {"point": "Chooses a specific job and a specific lesson, not a generic reflection", "weight": 3},
-      {"point": "Explains the situation that produced the lesson", "weight": 3},
-      {"point": "Ties the lesson to a skill or habit relevant to banking", "weight": 2}
+      {
+        "point": "Chooses a specific job and a specific lesson, not a generic reflection",
+        "weight": 3
+      },
+      { "point": "Explains the situation that produced the lesson", "weight": 3 },
+      { "point": "Ties the lesson to a skill or habit relevant to banking", "weight": 2 }
     ],
     "misconceptions": [
       "Dismissing a non-finance job as irrelevant instead of extracting a genuine lesson from it",

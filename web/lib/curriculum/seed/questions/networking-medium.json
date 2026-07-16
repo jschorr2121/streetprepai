@@ -6,11 +6,26 @@
     "questionType": "verbal",
     "prompt": "You have a list of 40 alumni working across the banks you're targeting, but limited time before recruiting kicks off. How do you decide who to prioritize reaching out to first?",
     "keyPoints": [
-      { "point": "Prioritize by responsiveness likelihood: junior analysts/associates over senior bankers", "weight": 2 },
-      { "point": "Weight by strength of shared affinity (major, club, recent grad, mutual connection)", "weight": 2 },
-      { "point": "Prioritize target banks/groups where recruiting timeline is earliest or most competitive", "weight": 3 },
-      { "point": "Balance across banks rather than over-concentrating on one to keep options open", "weight": 2 },
-      { "point": "Reach out in batches rather than all 40 at once, to manage follow-through and avoid appearing spammy", "weight": 2 }
+      {
+        "point": "Prioritize by responsiveness likelihood: junior analysts/associates over senior bankers",
+        "weight": 2
+      },
+      {
+        "point": "Weight by strength of shared affinity (major, club, recent grad, mutual connection)",
+        "weight": 2
+      },
+      {
+        "point": "Prioritize target banks/groups where recruiting timeline is earliest or most competitive",
+        "weight": 3
+      },
+      {
+        "point": "Balance across banks rather than over-concentrating on one to keep options open",
+        "weight": 2
+      },
+      {
+        "point": "Reach out in batches rather than all 40 at once, to manage follow-through and avoid appearing spammy",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Reaching out to only the most senior, prestigious-sounding contacts first",
@@ -42,10 +57,22 @@
     "questionType": "conceptual",
     "prompt": "Your direct alumni network at your top target bank is thin, but a friend from a club mentions their older sibling works there. How would you use that kind of second-degree connection, and how is that different from a pure cold email?",
     "keyPoints": [
-      { "point": "Ask the mutual connection (the friend) for a warm introduction rather than reaching out cold yourself first", "weight": 3 },
-      { "point": "A warm intro dramatically raises response and conversion rates versus cold outreach", "weight": 2 },
-      { "point": "Give the friend context/a short blurb to make the intro easy for them to make", "weight": 2 },
-      { "point": "If no intro is possible, reference the mutual connection by name (with permission) in a cold email as a bridge", "weight": 2 }
+      {
+        "point": "Ask the mutual connection (the friend) for a warm introduction rather than reaching out cold yourself first",
+        "weight": 3
+      },
+      {
+        "point": "A warm intro dramatically raises response and conversion rates versus cold outreach",
+        "weight": 2
+      },
+      {
+        "point": "Give the friend context/a short blurb to make the intro easy for them to make",
+        "weight": 2
+      },
+      {
+        "point": "If no intro is possible, reference the mutual connection by name (with permission) in a cold email as a bridge",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Emailing the sibling cold without ever asking the friend for an introduction first",
@@ -74,10 +101,22 @@
     "prompt": "A friend shows you a cold email they wrote: it's 300 words, opens with 'My name is John and I am a rising sophomore passionate about finance,' and ends by asking if the analyst can refer them for an internship. What's wrong with it, and how would you rewrite it?",
     "keyPoints": [
       { "point": "Length is a problem -- should be cut to roughly 100-150 words", "weight": 2 },
-      { "point": "'Passionate about finance' is a generic, unspecific opener that doesn't differentiate the sender", "weight": 2 },
-      { "point": "Asking directly for a referral in the first contact is too big an ask and premature", "weight": 3 },
-      { "point": "Rewrite should include a specific personalized reason for reaching out to this person", "weight": 2 },
-      { "point": "Rewrite should replace the referral ask with a request for a short call", "weight": 2 }
+      {
+        "point": "'Passionate about finance' is a generic, unspecific opener that doesn't differentiate the sender",
+        "weight": 2
+      },
+      {
+        "point": "Asking directly for a referral in the first contact is too big an ask and premature",
+        "weight": 3
+      },
+      {
+        "point": "Rewrite should include a specific personalized reason for reaching out to this person",
+        "weight": 2
+      },
+      {
+        "point": "Rewrite should replace the referral ask with a request for a short call",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Believing a longer, more detailed email demonstrates more effort and is therefore more persuasive",
@@ -110,10 +149,22 @@
     "prompt": "You have 20 minutes on the phone with a first-year analyst. Walk me through how you'd structure the conversation and what kinds of questions you'd ask.",
     "keyPoints": [
       { "point": "Open with light rapport-building before jumping into questions", "weight": 1 },
-      { "point": "Ask about their personal path/story into the group -- genuine, open-ended questions", "weight": 3 },
-      { "point": "Ask about day-to-day, group culture, and what they wish they'd known before joining", "weight": 2 },
-      { "point": "Avoid questions easily answered by the firm's website or public info", "weight": 2 },
-      { "point": "Leave time near the end to briefly mention your own background if asked, and to ask about next steps", "weight": 2 }
+      {
+        "point": "Ask about their personal path/story into the group -- genuine, open-ended questions",
+        "weight": 3
+      },
+      {
+        "point": "Ask about day-to-day, group culture, and what they wish they'd known before joining",
+        "weight": 2
+      },
+      {
+        "point": "Avoid questions easily answered by the firm's website or public info",
+        "weight": 2
+      },
+      {
+        "point": "Leave time near the end to briefly mention your own background if asked, and to ask about next steps",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Asking questions that are easily googleable, like 'what does your bank do?'",
@@ -145,10 +196,22 @@
     "questionType": "verbal",
     "prompt": "An analyst you've spoken with twice offers to refer you for their bank's summer analyst program. What do you need to do to make that referral go smoothly, and what should you avoid doing?",
     "keyPoints": [
-      { "point": "Promptly send exactly what they need -- resume, application link/details, correct role name", "weight": 3 },
-      { "point": "Make it as low-effort as possible for the referrer (don't require them to chase you for info)", "weight": 2 },
-      { "point": "Follow up on your own application status rather than repeatedly pestering the referrer for updates", "weight": 2 },
-      { "point": "Thank them regardless of the outcome, and update them once you hear back", "weight": 2 }
+      {
+        "point": "Promptly send exactly what they need -- resume, application link/details, correct role name",
+        "weight": 3
+      },
+      {
+        "point": "Make it as low-effort as possible for the referrer (don't require them to chase you for info)",
+        "weight": 2
+      },
+      {
+        "point": "Follow up on your own application status rather than repeatedly pestering the referrer for updates",
+        "weight": 2
+      },
+      {
+        "point": "Thank them regardless of the outcome, and update them once you hear back",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Assuming a referral guarantees an interview or offer",

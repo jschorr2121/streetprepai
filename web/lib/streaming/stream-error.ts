@@ -11,9 +11,7 @@ export function encodeStreamError(message: string): string {
 }
 
 export function stripStreamSentinel(text: string): string {
-  return text.includes(STREAM_ERROR_SENTINEL)
-    ? text.replaceAll(STREAM_ERROR_SENTINEL, "")
-    : text;
+  return text.includes(STREAM_ERROR_SENTINEL) ? text.replaceAll(STREAM_ERROR_SENTINEL, "") : text;
 }
 
 export type StreamPayload = { content: string; error: string | null };

@@ -141,14 +141,26 @@ export function PracticeSession({
         </div>
       </header>
 
-      <AnswerCard key={current.id} question={current} context={context} onGraded={handleGraded} autoFocus />
+      <AnswerCard
+        key={current.id}
+        question={current}
+        context={context}
+        onGraded={handleGraded}
+        autoFocus
+      />
 
       {currentGraded && (
         <div className="mt-4 flex flex-col items-end gap-2">
           {finishError && <p className="text-destructive text-sm">{finishError}</p>}
           <Button onClick={next} disabled={finishing} className="gap-1.5">
             {finishing && <Loader2 className="size-4 animate-spin" />}
-            {isLast ? (gated ? (finishError ? "Try again" : "Finish & score") : "Finish") : "Next question"}
+            {isLast
+              ? gated
+                ? finishError
+                  ? "Try again"
+                  : "Finish & score"
+                : "Finish"
+              : "Next question"}
           </Button>
         </div>
       )}

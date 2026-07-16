@@ -6,11 +6,26 @@
     "questionType": "conceptual",
     "prompt": "Walk me through how investment banking recruiting actually works, from the first time a student engages with a firm to receiving an offer.",
     "keyPoints": [
-      {"point": "Networking / informational calls with bankers happen before or alongside applying, and often drive referrals", "weight": 3},
-      {"point": "Formal application submitted through the firm's campus portal, usually with resume, transcript, and sometimes a cover letter", "weight": 2},
-      {"point": "Online assessment or HireVue-style video interview screens candidates before live interviews", "weight": 2},
-      {"point": "First-round interviews (often on-campus or via video) lead to a superday of multiple back-to-back interviews", "weight": 3},
-      {"point": "Offers are frequently extended same-day or within days, sometimes with short acceptance windows", "weight": 2}
+      {
+        "point": "Networking / informational calls with bankers happen before or alongside applying, and often drive referrals",
+        "weight": 3
+      },
+      {
+        "point": "Formal application submitted through the firm's campus portal, usually with resume, transcript, and sometimes a cover letter",
+        "weight": 2
+      },
+      {
+        "point": "Online assessment or HireVue-style video interview screens candidates before live interviews",
+        "weight": 2
+      },
+      {
+        "point": "First-round interviews (often on-campus or via video) lead to a superday of multiple back-to-back interviews",
+        "weight": 3
+      },
+      {
+        "point": "Offers are frequently extended same-day or within days, sometimes with short acceptance windows",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That submitting an online application alone is enough to get noticed without any networking",
@@ -38,10 +53,19 @@
     "questionType": "conceptual",
     "prompt": "What is a superday, and how is it different from a first-round interview?",
     "keyPoints": [
-      {"point": "First round is usually one or two interviews, often shorter or over video, used to narrow the pool", "weight": 2},
-      {"point": "Superday is a compressed, in-person round of multiple back-to-back interviews in one day", "weight": 3},
-      {"point": "Superday interviewers are typically a mix of analysts, associates, VPs, and sometimes MDs across the group", "weight": 2},
-      {"point": "Superday is usually the final stage before an offer decision", "weight": 2}
+      {
+        "point": "First round is usually one or two interviews, often shorter or over video, used to narrow the pool",
+        "weight": 2
+      },
+      {
+        "point": "Superday is a compressed, in-person round of multiple back-to-back interviews in one day",
+        "weight": 3
+      },
+      {
+        "point": "Superday interviewers are typically a mix of analysts, associates, VPs, and sometimes MDs across the group",
+        "weight": 2
+      },
+      { "point": "Superday is usually the final stage before an offer decision", "weight": 2 }
     ],
     "misconceptions": [
       "That a superday is just one long interview rather than several distinct ones with different people",
@@ -69,10 +93,22 @@
     "questionType": "conceptual",
     "prompt": "How does the investment banking recruiting timeline differ between sophomore year and junior year for a student targeting a summer analyst role?",
     "keyPoints": [
-      {"point": "Sophomore year centers on landing a sophomore-year 'diversity' or spring insight program that acts as a fast-track to the junior-year process", "weight": 3},
-      {"point": "Junior year on-cycle recruiting for full-time-track summer analyst roles at large banks now often kicks off remarkably early, sometimes in the fall of junior year or even before", "weight": 3},
-      {"point": "Networking and coffee chats typically need to start well before applications open in either year", "weight": 2},
-      {"point": "Missing a given track doesn't end the process — off-cycle and later-cycle opportunities still exist", "weight": 2}
+      {
+        "point": "Sophomore year centers on landing a sophomore-year 'diversity' or spring insight program that acts as a fast-track to the junior-year process",
+        "weight": 3
+      },
+      {
+        "point": "Junior year on-cycle recruiting for full-time-track summer analyst roles at large banks now often kicks off remarkably early, sometimes in the fall of junior year or even before",
+        "weight": 3
+      },
+      {
+        "point": "Networking and coffee chats typically need to start well before applications open in either year",
+        "weight": 2
+      },
+      {
+        "point": "Missing a given track doesn't end the process — off-cycle and later-cycle opportunities still exist",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That recruiting only happens once, senior year, before graduation",
@@ -100,10 +136,22 @@
     "questionType": "conceptual",
     "prompt": "What's the difference between a bulge bracket, an elite boutique, and a middle-market bank, and why does it matter for a candidate deciding where to apply?",
     "keyPoints": [
-      {"point": "Bulge brackets (e.g., large global banks) offer full-service platforms: M&A plus underwriting, sales & trading, lending, and balance sheet", "weight": 2},
-      {"point": "Elite boutiques are pure advisory shops focused on M&A and restructuring, no balance sheet or trading", "weight": 2},
-      {"point": "Middle-market banks focus on smaller deal sizes and often specific sectors or regions, with more hands-on junior experience", "weight": 2},
-      {"point": "Differences affect deal size, deal type exposure, hours culture, brand recognition, and later exit opportunities", "weight": 2}
+      {
+        "point": "Bulge brackets (e.g., large global banks) offer full-service platforms: M&A plus underwriting, sales & trading, lending, and balance sheet",
+        "weight": 2
+      },
+      {
+        "point": "Elite boutiques are pure advisory shops focused on M&A and restructuring, no balance sheet or trading",
+        "weight": 2
+      },
+      {
+        "point": "Middle-market banks focus on smaller deal sizes and often specific sectors or regions, with more hands-on junior experience",
+        "weight": 2
+      },
+      {
+        "point": "Differences affect deal size, deal type exposure, hours culture, brand recognition, and later exit opportunities",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That 'bigger bank' always means 'better analyst experience'",
@@ -131,10 +179,22 @@
     "questionType": "conceptual",
     "prompt": "What actually goes into submitting a strong investment banking application, and what mechanical mistakes trip up candidates?",
     "keyPoints": [
-      {"point": "Core materials: resume, unofficial transcript, and often a cover letter or short essay responses tailored to the firm", "weight": 2},
-      {"point": "Applications are usually submitted through a firm-specific portal (or campus career system) with fixed windows/deadlines", "weight": 2},
-      {"point": "Referrals from a banker inside the firm often route a resume for priority review", "weight": 2},
-      {"point": "Common mechanical mistakes: missing deadlines, generic/unedited materials, wrong firm name in a cover letter, incomplete portal fields", "weight": 2}
+      {
+        "point": "Core materials: resume, unofficial transcript, and often a cover letter or short essay responses tailored to the firm",
+        "weight": 2
+      },
+      {
+        "point": "Applications are usually submitted through a firm-specific portal (or campus career system) with fixed windows/deadlines",
+        "weight": 2
+      },
+      {
+        "point": "Referrals from a banker inside the firm often route a resume for priority review",
+        "weight": 2
+      },
+      {
+        "point": "Common mechanical mistakes: missing deadlines, generic/unedited materials, wrong firm name in a cover letter, incomplete portal fields",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That one resume and cover letter can be copy-pasted across every firm without changes",
@@ -162,10 +222,22 @@
     "questionType": "conceptual",
     "prompt": "What is a 'resume drop' and how does it differ from applying cold through a firm's website?",
     "keyPoints": [
-      {"point": "A resume drop is a campus/career-center-facilitated batch submission window tied to a specific recruiting cycle", "weight": 2},
-      {"point": "Cold applying means submitting directly through a firm's own careers site without going through a school's system", "weight": 2},
-      {"point": "Resume drops are often the primary or only channel firms use at target schools, making them effectively mandatory there", "weight": 2},
-      {"point": "Missing a resume drop window can mean missing that firm's cycle entirely at that school, unlike some rolling cold applications", "weight": 2}
+      {
+        "point": "A resume drop is a campus/career-center-facilitated batch submission window tied to a specific recruiting cycle",
+        "weight": 2
+      },
+      {
+        "point": "Cold applying means submitting directly through a firm's own careers site without going through a school's system",
+        "weight": 2
+      },
+      {
+        "point": "Resume drops are often the primary or only channel firms use at target schools, making them effectively mandatory there",
+        "weight": 2
+      },
+      {
+        "point": "Missing a resume drop window can mean missing that firm's cycle entirely at that school, unlike some rolling cold applications",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That a resume drop and a cold application achieve the same thing through different websites",
@@ -193,10 +265,22 @@
     "questionType": "conceptual",
     "prompt": "What should a strong investment banking cover letter actually include, and what makes most cover letters weak?",
     "keyPoints": [
-      {"point": "Should be specific to the firm: something concrete about the group, a recent deal, or a person the candidate spoke with", "weight": 3},
-      {"point": "Should connect the candidate's actual experience to why they'd be useful on a deal team, not just state generic interest", "weight": 2},
-      {"point": "Should be short, roughly half a page to a page, and free of clichés like 'passion for finance'", "weight": 2},
-      {"point": "Weak letters are template-driven, generic enough to apply to any bank, and focus on what the candidate wants rather than what they offer", "weight": 2}
+      {
+        "point": "Should be specific to the firm: something concrete about the group, a recent deal, or a person the candidate spoke with",
+        "weight": 3
+      },
+      {
+        "point": "Should connect the candidate's actual experience to why they'd be useful on a deal team, not just state generic interest",
+        "weight": 2
+      },
+      {
+        "point": "Should be short, roughly half a page to a page, and free of clichés like 'passion for finance'",
+        "weight": 2
+      },
+      {
+        "point": "Weak letters are template-driven, generic enough to apply to any bank, and focus on what the candidate wants rather than what they offer",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That cover letters need to summarize the entire resume in paragraph form",
@@ -224,10 +308,22 @@
     "questionType": "conceptual",
     "prompt": "How would you research a firm before an interview, and what specifically should you be able to speak to?",
     "keyPoints": [
-      {"point": "Recent deals the group or firm has advised on, ideally within the last 6-12 months", "weight": 3},
-      {"point": "The group's specific focus (sector, product, region) versus the firm's overall platform", "weight": 2},
-      {"point": "General firm facts: size, culture, notable strengths, and how it's positioned relative to peers", "weight": 2},
-      {"point": "Something learned from talking to people at the firm, not just public information", "weight": 2}
+      {
+        "point": "Recent deals the group or firm has advised on, ideally within the last 6-12 months",
+        "weight": 3
+      },
+      {
+        "point": "The group's specific focus (sector, product, region) versus the firm's overall platform",
+        "weight": 2
+      },
+      {
+        "point": "General firm facts: size, culture, notable strengths, and how it's positioned relative to peers",
+        "weight": 2
+      },
+      {
+        "point": "Something learned from talking to people at the firm, not just public information",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That reading the firm's 'About Us' page is sufficient preparation",
@@ -255,10 +351,22 @@
     "questionType": "conceptual",
     "prompt": "If you apply to a specific sector or industry group as an analyst, are you locked into that sector for your entire career?",
     "keyPoints": [
-      {"point": "Group placement at the analyst level shapes early experience but isn't a permanent career sentence", "weight": 3},
-      {"point": "Some firms use generalist programs where sector assignment happens after joining rather than at application", "weight": 2},
-      {"point": "Moving sectors later (associate level, buy-side, or lateral) is common but easiest early and gets harder with more years of specialization", "weight": 2},
-      {"point": "Sector choice does meaningfully shape resume narrative and which buy-side recruiters see the candidate as a fit", "weight": 2}
+      {
+        "point": "Group placement at the analyst level shapes early experience but isn't a permanent career sentence",
+        "weight": 3
+      },
+      {
+        "point": "Some firms use generalist programs where sector assignment happens after joining rather than at application",
+        "weight": 2
+      },
+      {
+        "point": "Moving sectors later (associate level, buy-side, or lateral) is common but easiest early and gets harder with more years of specialization",
+        "weight": 2
+      },
+      {
+        "point": "Sector choice does meaningfully shape resume narrative and which buy-side recruiters see the candidate as a fit",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That picking a sector group at the analyst level permanently determines your entire career path",
@@ -286,10 +394,22 @@
     "questionType": "conceptual",
     "prompt": "What is TMT coverage, and what kinds of companies and deals does a TMT group typically work on?",
     "keyPoints": [
-      {"point": "TMT stands for Technology, Media, and Telecommunications, sometimes split into sub-groups", "weight": 2},
-      {"point": "Covers companies from early-growth software and internet businesses to large legacy telecom and media companies", "weight": 2},
-      {"point": "Deal mix includes M&A, IPOs and growth equity, and debt financing, often with high deal volume given sector activity", "weight": 2},
-      {"point": "Valuation and metrics can differ meaningfully across the sub-sectors (e.g., ARR/subscriber multiples for software vs. EBITDA for legacy telecom)", "weight": 2}
+      {
+        "point": "TMT stands for Technology, Media, and Telecommunications, sometimes split into sub-groups",
+        "weight": 2
+      },
+      {
+        "point": "Covers companies from early-growth software and internet businesses to large legacy telecom and media companies",
+        "weight": 2
+      },
+      {
+        "point": "Deal mix includes M&A, IPOs and growth equity, and debt financing, often with high deal volume given sector activity",
+        "weight": 2
+      },
+      {
+        "point": "Valuation and metrics can differ meaningfully across the sub-sectors (e.g., ARR/subscriber multiples for software vs. EBITDA for legacy telecom)",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That TMT only covers software startups and doesn't include large legacy companies like telecom carriers",
@@ -317,10 +437,22 @@
     "questionType": "conceptual",
     "prompt": "What does a Consumer & Retail investment banking group typically cover, and what makes its deal work distinctive?",
     "keyPoints": [
-      {"point": "Covers companies selling directly or indirectly to consumers: retail, apparel, food & beverage, restaurants, consumer products", "weight": 2},
-      {"point": "Deal work includes M&A (strategic consolidation and private equity-backed buyouts), IPOs, and financing", "weight": 2},
-      {"point": "Brand strength, same-store sales, and unit economics matter more here than in many other sectors", "weight": 2},
-      {"point": "Sector is sensitive to consumer spending cycles and shifting channels (e.g., e-commerce vs. brick-and-mortar)", "weight": 2}
+      {
+        "point": "Covers companies selling directly or indirectly to consumers: retail, apparel, food & beverage, restaurants, consumer products",
+        "weight": 2
+      },
+      {
+        "point": "Deal work includes M&A (strategic consolidation and private equity-backed buyouts), IPOs, and financing",
+        "weight": 2
+      },
+      {
+        "point": "Brand strength, same-store sales, and unit economics matter more here than in many other sectors",
+        "weight": 2
+      },
+      {
+        "point": "Sector is sensitive to consumer spending cycles and shifting channels (e.g., e-commerce vs. brick-and-mortar)",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That Consumer & Retail only covers physical retail stores and excludes food, beverage, or consumer products companies",

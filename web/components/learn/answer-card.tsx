@@ -103,7 +103,7 @@ export function AnswerCard({
         </Badge>
       </div>
 
-      <p className="mb-4 font-medium leading-relaxed">{question.prompt}</p>
+      <p className="mb-4 leading-relaxed font-medium">{question.prompt}</p>
 
       <Textarea
         value={answer}
@@ -121,7 +121,11 @@ export function AnswerCard({
             Graded on a published rubric — you&apos;ll see exactly what you hit and missed.
           </span>
           <Button onClick={submitMain} disabled={!answer.trim() || pending} className="gap-1.5">
-            {pending ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
+            {pending ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <Sparkles className="size-4" />
+            )}
             {pending ? "Grading…" : "Submit for grading"}
           </Button>
         </div>
@@ -152,8 +156,8 @@ export function AnswerCard({
       )}
 
       {showFollowup && followup && (
-        <div className="border-primary/30 mt-4 rounded-lg border-l-2 bg-accent/30 p-4">
-          <p className="mb-3 font-medium leading-relaxed">{followup.prompt}</p>
+        <div className="border-primary/30 bg-accent/30 mt-4 rounded-lg border-l-2 p-4">
+          <p className="mb-3 leading-relaxed font-medium">{followup.prompt}</p>
           <Textarea
             value={followupAnswer}
             onChange={(e) => setFollowupAnswer(e.target.value)}
@@ -189,9 +193,7 @@ function RubricResult({ grade, compact = false }: { grade: GradedAnswer; compact
         <div
           className={cn(
             "flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium",
-            grade.correct
-              ? "bg-primary/10 text-primary"
-              : "bg-destructive/10 text-destructive",
+            grade.correct ? "bg-primary/10 text-primary" : "bg-destructive/10 text-destructive",
           )}
         >
           {grade.correct ? <CheckCircle2 className="size-4" /> : <XCircle className="size-4" />}
@@ -214,9 +216,7 @@ function RubricResult({ grade, compact = false }: { grade: GradedAnswer; compact
               )}
               <span>
                 <span className={cn(!kp.hit && "text-muted-foreground")}>{kp.point}</span>
-                {kp.comment && (
-                  <span className="text-muted-foreground"> — {kp.comment}</span>
-                )}
+                {kp.comment && <span className="text-muted-foreground"> — {kp.comment}</span>}
               </span>
             </li>
           ))}
@@ -243,7 +243,7 @@ function RubricResult({ grade, compact = false }: { grade: GradedAnswer; compact
           <summary className="text-primary cursor-pointer text-sm font-medium">
             Show a model answer
           </summary>
-          <div className="mt-2 rounded-lg border bg-muted/30 p-3">
+          <div className="bg-muted/30 mt-2 rounded-lg border p-3">
             <Markdown content={grade.modelAnswer} className="text-sm [&>p]:text-sm" />
           </div>
         </details>

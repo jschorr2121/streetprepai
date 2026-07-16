@@ -21,15 +21,9 @@ export async function POST(req: Request): Promise<Response> {
   const client = getAnthropic();
 
   const summaryText = [
-    summary.topics?.length
-      ? `Topics discussed: ${summary.topics.join("; ")}`
-      : null,
-    summary.adviceGiven?.length
-      ? `Advice given: ${summary.adviceGiven.join("; ")}`
-      : null,
-    summary.commitments?.length
-      ? `Commitments from them: ${summary.commitments.join("; ")}`
-      : null,
+    summary.topics?.length ? `Topics discussed: ${summary.topics.join("; ")}` : null,
+    summary.adviceGiven?.length ? `Advice given: ${summary.adviceGiven.join("; ")}` : null,
+    summary.commitments?.length ? `Commitments from them: ${summary.commitments.join("; ")}` : null,
     summary.personalDetails?.length
       ? `Personal details: ${summary.personalDetails.join("; ")}`
       : null,
@@ -72,9 +66,7 @@ export async function POST(req: Request): Promise<Response> {
 
   const subjectMatch = text.match(/^Subject:\s*(.+)$/m);
   const subject = subjectMatch?.[1]?.trim() ?? "Thank you";
-  const body = text
-    .replace(/^Subject:\s*.+$/m, "")
-    .trim();
+  const body = text.replace(/^Subject:\s*.+$/m, "").trim();
 
   return Response.json({ subject, body });
 }

@@ -6,11 +6,26 @@
     "questionType": "curveball",
     "prompt": "Most banks use some form of standardized interview scorecard behind the scenes, even in first rounds. What are the specific 'red flag' categories that tend to override an otherwise strong scorecard, and why do interviewers weight them so heavily even against strong technical scores?",
     "keyPoints": [
-      {"point": "Names dishonesty/inconsistency (caught exaggerating or contradicting themselves) as a near-automatic disqualifier", "weight": 3},
-      {"point": "Names arrogance or disrespect toward staff (rude to receptionist, dismissive of junior interviewer) as a hard red flag", "weight": 3},
-      {"point": "Names lack of genuine motivation/generic 'any bank will do' signaling as a soft but serious red flag", "weight": 2},
-      {"point": "Explains the override logic: red flags predict how someone behaves under the sustained pressure of the actual job, which technical scores don't capture", "weight": 3},
-      {"point": "Notes red flags are disproportionately weighted because false negatives (rejecting a good candidate) are cheaper than false positives (hiring a toxic one) in a small-team, high-trust environment", "weight": 2}
+      {
+        "point": "Names dishonesty/inconsistency (caught exaggerating or contradicting themselves) as a near-automatic disqualifier",
+        "weight": 3
+      },
+      {
+        "point": "Names arrogance or disrespect toward staff (rude to receptionist, dismissive of junior interviewer) as a hard red flag",
+        "weight": 3
+      },
+      {
+        "point": "Names lack of genuine motivation/generic 'any bank will do' signaling as a soft but serious red flag",
+        "weight": 2
+      },
+      {
+        "point": "Explains the override logic: red flags predict how someone behaves under the sustained pressure of the actual job, which technical scores don't capture",
+        "weight": 3
+      },
+      {
+        "point": "Notes red flags are disproportionately weighted because false negatives (rejecting a good candidate) are cheaper than false positives (hiring a toxic one) in a small-team, high-trust environment",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Believing a high technical score can always offset a red flag as long as the total 'points' balance out",
@@ -47,11 +62,26 @@
     "questionType": "curveball",
     "prompt": "Some firms now use automated analysis alongside human review of HireVue-style recordings, scoring things like speech pace, filler words, and facial expression consistency. How should knowing this change your preparation, and what's the risk of over-optimizing for an algorithm at the expense of sounding human?",
     "keyPoints": [
-      {"point": "Notes that basic hygiene factors (pacing, minimal filler words, steady eye contact with the lens) are worth deliberately practicing since they're measurable and low-cost to fix", "weight": 3},
-      {"point": "Warns against over-optimizing for algorithmic metrics at the cost of natural tone, since human reviewers still watch flagged/borderline recordings and can penalize robotic delivery", "weight": 3},
-      {"point": "Notes content and substance still matter most; a smooth, filler-free but empty answer scores worse with human reviewers than a slightly imperfect but substantive one", "weight": 2},
-      {"point": "Recommends practicing via repeated recorded self-review specifically to catch pacing/filler patterns without memorizing scripted delivery", "weight": 2},
-      {"point": "Notes candidates should not assume the algorithm is the sole gatekeeper; treat it as a first-pass filter feeding into eventual human judgment", "weight": 1}
+      {
+        "point": "Notes that basic hygiene factors (pacing, minimal filler words, steady eye contact with the lens) are worth deliberately practicing since they're measurable and low-cost to fix",
+        "weight": 3
+      },
+      {
+        "point": "Warns against over-optimizing for algorithmic metrics at the cost of natural tone, since human reviewers still watch flagged/borderline recordings and can penalize robotic delivery",
+        "weight": 3
+      },
+      {
+        "point": "Notes content and substance still matter most; a smooth, filler-free but empty answer scores worse with human reviewers than a slightly imperfect but substantive one",
+        "weight": 2
+      },
+      {
+        "point": "Recommends practicing via repeated recorded self-review specifically to catch pacing/filler patterns without memorizing scripted delivery",
+        "weight": 2
+      },
+      {
+        "point": "Notes candidates should not assume the algorithm is the sole gatekeeper; treat it as a first-pass filter feeding into eventual human judgment",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Believing that speaking as slowly and evenly as possible universally scores better, when unnaturally flat delivery can itself read poorly to a human reviewer",
@@ -88,11 +118,26 @@
     "questionType": "curveball",
     "prompt": "You're 10 minutes into a first-round call and the interviewer is curt, interrupts you mid-answer, and pushes back aggressively on a technical point you're actually confident is correct. How do you handle the rest of the interview, and how do you decide whether this is a deliberate stress test or a genuinely bad interviewer?",
     "keyPoints": [
-      {"point": "Recommends staying calm and professional regardless of which explanation is true, since the response is largely the same either way", "weight": 3},
-      {"point": "Notes that pushing back respectfully with reasoning, rather than immediately caving, is usually the right move if genuinely confident in the technical point", "weight": 3},
-      {"point": "Advises against matching hostility with defensiveness or irritation, since composure itself is what's often being evaluated", "weight": 2},
-      {"point": "Notes it's hard to reliably distinguish a stress test from genuine rudeness in the moment, so the safer strategy doesn't depend on guessing correctly", "weight": 2},
-      {"point": "Mentions this is also useful diagnostic information about the team/culture worth weighing if an offer materializes", "weight": 1}
+      {
+        "point": "Recommends staying calm and professional regardless of which explanation is true, since the response is largely the same either way",
+        "weight": 3
+      },
+      {
+        "point": "Notes that pushing back respectfully with reasoning, rather than immediately caving, is usually the right move if genuinely confident in the technical point",
+        "weight": 3
+      },
+      {
+        "point": "Advises against matching hostility with defensiveness or irritation, since composure itself is what's often being evaluated",
+        "weight": 2
+      },
+      {
+        "point": "Notes it's hard to reliably distinguish a stress test from genuine rudeness in the moment, so the safer strategy doesn't depend on guessing correctly",
+        "weight": 2
+      },
+      {
+        "point": "Mentions this is also useful diagnostic information about the team/culture worth weighing if an offer materializes",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Immediately backing down on a technical point just because the interviewer pushes back forcefully, even when confident it's correct",
@@ -129,11 +174,26 @@
     "questionType": "curveball",
     "prompt": "You have a superday for Bank A scheduled at 9am, and Bank B, which you'd actually prefer, calls two days prior offering you a first-round slot that only works at 11am the same day, overlapping with Bank A's superday. How do you handle this scheduling conflict, and what does the way you communicate about it signal to each firm?",
     "keyPoints": [
-      {"point": "Recommends trying to negotiate a schedule change with one firm first rather than immediately declining or canceling either", "weight": 3},
-      {"point": "Advises being honest with recruiters about having a scheduling conflict without necessarily disclosing which specific firm is involved", "weight": 3},
-      {"point": "Warns against canceling a confirmed superday last-minute without communicating professionally, since it burns the relationship and can affect future cycles", "weight": 2},
-      {"point": "Notes recruiters deal with this regularly and are often more flexible than candidates assume, especially for good candidates", "weight": 2},
-      {"point": "Discusses weighing preference for Bank B against the real risk/cost of jeopardizing a confirmed superday at Bank A", "weight": 1}
+      {
+        "point": "Recommends trying to negotiate a schedule change with one firm first rather than immediately declining or canceling either",
+        "weight": 3
+      },
+      {
+        "point": "Advises being honest with recruiters about having a scheduling conflict without necessarily disclosing which specific firm is involved",
+        "weight": 3
+      },
+      {
+        "point": "Warns against canceling a confirmed superday last-minute without communicating professionally, since it burns the relationship and can affect future cycles",
+        "weight": 2
+      },
+      {
+        "point": "Notes recruiters deal with this regularly and are often more flexible than candidates assume, especially for good candidates",
+        "weight": 2
+      },
+      {
+        "point": "Discusses weighing preference for Bank B against the real risk/cost of jeopardizing a confirmed superday at Bank A",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Assuming firms will be offended by a scheduling conflict request and it's safer to just silently pick one and ghost the other",
@@ -170,11 +230,26 @@
     "questionType": "curveball",
     "prompt": "You receive an offer from Bank A with a 5-business-day deadline, but you're genuinely more interested in Bank B, whose process is still two rounds away from a decision. How do you communicate with both firms to give yourself the best chance of ending up at Bank B without burning the offer from Bank A?",
     "keyPoints": [
-      {"point": "Recommends promptly and gracefully accepting/acknowledging Bank A's offer while requesting any reasonable extension if needed, without lying about reasons", "weight": 2},
-      {"point": "Recommends immediately contacting Bank B to disclose the competing offer and deadline, explicitly asking if they can expedite the process", "weight": 3},
-      {"point": "Warns against telling Bank A anything false (like a fabricated reason) to buy time, since it risks the offer being rescinded if discovered", "weight": 2},
-      {"point": "Notes that being honest with Bank A about needing the process time (without necessarily naming Bank B) is usually acceptable and common", "weight": 2},
-      {"point": "Discusses the real risk/tradeoff: if Bank B can't expedite and the deadline passes, the candidate must decide whether to accept Bank A or risk having no offer", "weight": 2}
+      {
+        "point": "Recommends promptly and gracefully accepting/acknowledging Bank A's offer while requesting any reasonable extension if needed, without lying about reasons",
+        "weight": 2
+      },
+      {
+        "point": "Recommends immediately contacting Bank B to disclose the competing offer and deadline, explicitly asking if they can expedite the process",
+        "weight": 3
+      },
+      {
+        "point": "Warns against telling Bank A anything false (like a fabricated reason) to buy time, since it risks the offer being rescinded if discovered",
+        "weight": 2
+      },
+      {
+        "point": "Notes that being honest with Bank A about needing the process time (without necessarily naming Bank B) is usually acceptable and common",
+        "weight": 2
+      },
+      {
+        "point": "Discusses the real risk/tradeoff: if Bank B can't expedite and the deadline passes, the candidate must decide whether to accept Bank A or risk having no offer",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Assuming firms never grant deadline extensions and it's pointless to ask",

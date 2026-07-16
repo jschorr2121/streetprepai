@@ -11,7 +11,9 @@ export type UsagePayload = {
 export function logUsage(payload: UsagePayload): void {
   const admin = getAdminClient();
   if (!admin) {
-    console.warn("[ai/usage] logUsage: admin client unavailable (SUPABASE_SERVICE_ROLE_KEY not set)");
+    console.warn(
+      "[ai/usage] logUsage: admin client unavailable (SUPABASE_SERVICE_ROLE_KEY not set)",
+    );
     return;
   }
 

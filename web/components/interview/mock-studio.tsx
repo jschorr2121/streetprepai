@@ -136,7 +136,9 @@ export function MockStudio() {
     // Insecure contexts / older browsers have no mediaDevices at all —
     // without this check the user gets a raw TypeError in a toast.
     if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
-      toast.error("Recording isn't supported in this browser. Try a recent Chrome, Edge, or Safari.");
+      toast.error(
+        "Recording isn't supported in this browser. Try a recent Chrome, Edge, or Safari.",
+      );
       return;
     }
     try {

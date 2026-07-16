@@ -77,11 +77,11 @@ deterministic reference data (firms, jobs) that integration tests rely on.
 
 ## Migration order
 
-| File                              | Purpose                                                    |
-|-----------------------------------|------------------------------------------------------------|
-| `0000_baseline.sql`               | Full initial schema (all per-user tables + reference data) |
-| `0001_ai_usage.sql`               | `ai_usage` table for token/cost tracking                   |
-| `0002_perf_indexes.sql`           | Composite and partial indexes for hot read paths           |
-| `0003_pgvector.sql`               | pgvector extension + `chat_embeddings` + `match_chat_embeddings` RPC |
+| File                    | Purpose                                                              |
+| ----------------------- | -------------------------------------------------------------------- |
+| `0000_baseline.sql`     | Full initial schema (all per-user tables + reference data)           |
+| `0001_ai_usage.sql`     | `ai_usage` table for token/cost tracking                             |
+| `0002_perf_indexes.sql` | Composite and partial indexes for hot read paths                     |
+| `0003_pgvector.sql`     | pgvector extension + `chat_embeddings` + `match_chat_embeddings` RPC |
 
 See `supabase/POLICIES.md` for RLS policy documentation.

@@ -58,19 +58,12 @@ function mapChatRow(r: ChatRow): ChatLog {
 
 export async function getContacts(userId: string): Promise<Contact[]> {
   const sb = await createClient();
-  const { data, error } = await sb
-    .from("contacts")
-    .select("*")
-    .eq("user_id", userId)
-    .order("name");
+  const { data, error } = await sb.from("contacts").select("*").eq("user_id", userId).order("name");
   if (error) throw error;
   return (data as ContactRow[]).map(mapContactRow);
 }
 
-export async function getContactById(
-  id: string,
-  userId: string,
-): Promise<Contact | null> {
+export async function getContactById(id: string, userId: string): Promise<Contact | null> {
   const sb = await createClient();
   const { data, error } = await sb
     .from("contacts")
@@ -93,10 +86,7 @@ export async function getChatLogs(userId: string): Promise<ChatLog[]> {
   return (data as ChatRow[]).map(mapChatRow);
 }
 
-export async function getChatLogsForContact(
-  contactId: string,
-  userId: string,
-): Promise<ChatLog[]> {
+export async function getChatLogsForContact(contactId: string, userId: string): Promise<ChatLog[]> {
   const sb = await createClient();
   const { data, error } = await sb
     .from("chats")
@@ -122,10 +112,7 @@ export type CreateContactInput = {
   linkedinBio?: string | undefined;
 };
 
-export async function createContact(
-  userId: string,
-  input: CreateContactInput,
-): Promise<Contact> {
+export async function createContact(userId: string, input: CreateContactInput): Promise<Contact> {
   const sb = await createClient();
   const { data, error } = await sb
     .from("contacts")
@@ -235,5 +222,3 @@ export async function updateContactStage(
   if (error) throw error;
   return data ? mapContactRow(data as ContactRow) : null;
 }
-
-

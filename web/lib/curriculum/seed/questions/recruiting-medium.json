@@ -6,10 +6,22 @@
     "questionType": "conceptual",
     "prompt": "Explain the difference between a generalist placement model and an industry-specific placement model for incoming analysts, and how that affects what a candidate should expect during recruiting.",
     "keyPoints": [
-      {"point": "Generalist model: analysts join the bank broadly and are assigned to a specific group after joining, sometimes through a bidding process", "weight": 3},
-      {"point": "Industry-specific model: candidates apply and interview directly for a named group (e.g., Healthcare, TMT) from the start", "weight": 3},
-      {"point": "Generalist model gives more flexibility and time to discover fit, but placement can go to less-preferred groups depending on performance/demand", "weight": 2},
-      {"point": "Industry-specific model requires earlier certainty and more targeted interview prep, but guarantees the group if hired", "weight": 2}
+      {
+        "point": "Generalist model: analysts join the bank broadly and are assigned to a specific group after joining, sometimes through a bidding process",
+        "weight": 3
+      },
+      {
+        "point": "Industry-specific model: candidates apply and interview directly for a named group (e.g., Healthcare, TMT) from the start",
+        "weight": 3
+      },
+      {
+        "point": "Generalist model gives more flexibility and time to discover fit, but placement can go to less-preferred groups depending on performance/demand",
+        "weight": 2
+      },
+      {
+        "point": "Industry-specific model requires earlier certainty and more targeted interview prep, but guarantees the group if hired",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That all bulge bracket banks use the same placement model",
@@ -41,11 +53,26 @@
     "questionType": "verbal",
     "prompt": "You're a sophomore who just decided you want to recruit for investment banking. Walk me through how you'd build a recruiting plan for the next 12 months.",
     "keyPoints": [
-      {"point": "Start with self-assessment: GPA, relevant coursework, and realistic target list of firm tiers given current profile", "weight": 2},
-      {"point": "Build technical foundation early: accounting, valuation, and modeling basics before networking conversations require them", "weight": 2},
-      {"point": "Begin networking outreach months ahead of application windows, tracking contacts and firm-specific deadlines", "weight": 3},
-      {"point": "Target sophomore-year programs where eligible as a fast-track into junior-year recruiting", "weight": 2},
-      {"point": "Build in checkpoints to reassess target list and technical readiness as the year progresses, not a single static plan", "weight": 2}
+      {
+        "point": "Start with self-assessment: GPA, relevant coursework, and realistic target list of firm tiers given current profile",
+        "weight": 2
+      },
+      {
+        "point": "Build technical foundation early: accounting, valuation, and modeling basics before networking conversations require them",
+        "weight": 2
+      },
+      {
+        "point": "Begin networking outreach months ahead of application windows, tracking contacts and firm-specific deadlines",
+        "weight": 3
+      },
+      {
+        "point": "Target sophomore-year programs where eligible as a fast-track into junior-year recruiting",
+        "weight": 2
+      },
+      {
+        "point": "Build in checkpoints to reassess target list and technical readiness as the year progresses, not a single static plan",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That recruiting prep can start right before applications open with no lead time",
@@ -77,11 +104,26 @@
     "questionType": "conceptual",
     "prompt": "How would you go about building a target list of firms to apply to, and what factors should actually drive that list beyond just brand prestige?",
     "keyPoints": [
-      {"point": "Consider fit across firm tier (BB/EB/MM) given realistic competitiveness of the candidate's profile", "weight": 2},
-      {"point": "Weigh sector or group focus against candidate's stated interests and prior exposure", "weight": 2},
-      {"point": "Factor in where the candidate actually has or can build networking connections, since that materially affects odds", "weight": 2},
-      {"point": "Balance the list across reach, realistic, and safer options rather than concentrating only on top-prestige names", "weight": 2},
-      {"point": "Consider timeline/deadline overlap and whether applying to too many firms dilutes networking quality per firm", "weight": 1}
+      {
+        "point": "Consider fit across firm tier (BB/EB/MM) given realistic competitiveness of the candidate's profile",
+        "weight": 2
+      },
+      {
+        "point": "Weigh sector or group focus against candidate's stated interests and prior exposure",
+        "weight": 2
+      },
+      {
+        "point": "Factor in where the candidate actually has or can build networking connections, since that materially affects odds",
+        "weight": 2
+      },
+      {
+        "point": "Balance the list across reach, realistic, and safer options rather than concentrating only on top-prestige names",
+        "weight": 2
+      },
+      {
+        "point": "Consider timeline/deadline overlap and whether applying to too many firms dilutes networking quality per firm",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "That the target list should just be the most prestigious firms regardless of realistic fit",
@@ -113,10 +155,22 @@
     "questionType": "conceptual",
     "prompt": "What is a HireVue-style assessment, and how should a candidate prepare differently for it compared to a live phone or video interview?",
     "keyPoints": [
-      {"point": "HireVue is a recorded, one-way video interview where the candidate answers fixed prompts within a time limit, no live interviewer present", "weight": 3},
-      {"point": "Often paired with or replaced by an online numeric/logic assessment used purely as a volume screen", "weight": 2},
-      {"point": "Preparation should include practicing concise, structured answers within the time limit since there's no chance to clarify or read the interviewer", "weight": 2},
-      {"point": "Environment and delivery matter more than in a live call: lighting, eye contact with camera, no back-and-forth to recover from a stumble", "weight": 2}
+      {
+        "point": "HireVue is a recorded, one-way video interview where the candidate answers fixed prompts within a time limit, no live interviewer present",
+        "weight": 3
+      },
+      {
+        "point": "Often paired with or replaced by an online numeric/logic assessment used purely as a volume screen",
+        "weight": 2
+      },
+      {
+        "point": "Preparation should include practicing concise, structured answers within the time limit since there's no chance to clarify or read the interviewer",
+        "weight": 2
+      },
+      {
+        "point": "Environment and delivery matter more than in a live call: lighting, eye contact with camera, no back-and-forth to recover from a stumble",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That a recorded video interview is graded less rigorously than a live one because no human is present in real time",
@@ -148,10 +202,22 @@
     "questionType": "conceptual",
     "prompt": "If a candidate strikes out during on-cycle recruiting, what realistic paths remain to still land an investment banking role?",
     "keyPoints": [
-      {"point": "Off-cycle recruiting: smaller firms and some larger banks continue hiring on a rolling basis after on-cycle closes", "weight": 3},
-      {"point": "Middle-market and boutique firms often recruit later and less rigidly than bulge brackets/elite boutiques", "weight": 2},
-      {"point": "Lateral or full-time recruiting later (e.g., after a different internship, or post-grad) remains an option, not just internship-stage recruiting", "weight": 2},
-      {"point": "Networking becomes even more important off-cycle since fewer structured pipelines exist to surface candidates", "weight": 2}
+      {
+        "point": "Off-cycle recruiting: smaller firms and some larger banks continue hiring on a rolling basis after on-cycle closes",
+        "weight": 3
+      },
+      {
+        "point": "Middle-market and boutique firms often recruit later and less rigidly than bulge brackets/elite boutiques",
+        "weight": 2
+      },
+      {
+        "point": "Lateral or full-time recruiting later (e.g., after a different internship, or post-grad) remains an option, not just internship-stage recruiting",
+        "weight": 2
+      },
+      {
+        "point": "Networking becomes even more important off-cycle since fewer structured pipelines exist to surface candidates",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That missing on-cycle means the door to investment banking is permanently closed",
@@ -183,10 +249,22 @@
     "questionType": "conceptual",
     "prompt": "What distinguishes Goldman Sachs's Investment Banking Division from other bulge brackets in terms of structure and reputation, and what should a candidate know before interviewing there?",
     "keyPoints": [
-      {"point": "Broad full-service platform with strong M&A, capital markets, and financing capabilities across sectors", "weight": 2},
-      {"point": "Historically strong brand for producing candidates who move on to top private equity and hedge fund roles", "weight": 2},
-      {"point": "Known for a demanding, competitive internal culture, including rigorous training and long hours expectations", "weight": 2},
-      {"point": "Candidates should be able to speak to specific groups within IBD (sector or product coverage) rather than only the firm brand", "weight": 2}
+      {
+        "point": "Broad full-service platform with strong M&A, capital markets, and financing capabilities across sectors",
+        "weight": 2
+      },
+      {
+        "point": "Historically strong brand for producing candidates who move on to top private equity and hedge fund roles",
+        "weight": 2
+      },
+      {
+        "point": "Known for a demanding, competitive internal culture, including rigorous training and long hours expectations",
+        "weight": 2
+      },
+      {
+        "point": "Candidates should be able to speak to specific groups within IBD (sector or product coverage) rather than only the firm brand",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That 'Goldman Sachs' as a name is enough preparation without understanding the specific group being interviewed for",
@@ -218,10 +296,22 @@
     "questionType": "conceptual",
     "prompt": "How is Goldman Sachs's Investment Banking Division typically organized between sector coverage groups and product groups, and why does that distinction matter for a candidate?",
     "keyPoints": [
-      {"point": "Sector coverage groups (e.g., healthcare, TMT, industrials) own client relationships within an industry", "weight": 2},
-      {"point": "Product groups (e.g., M&A, leveraged finance, equity capital markets) provide specialized deal execution expertise across sectors", "weight": 2},
-      {"point": "Coverage bankers often pull in product specialists for specific deal types rather than executing every deal type alone", "weight": 2},
-      {"point": "Candidates should understand whether they're interviewing for a coverage seat or a product seat since day-to-day work differs", "weight": 2}
+      {
+        "point": "Sector coverage groups (e.g., healthcare, TMT, industrials) own client relationships within an industry",
+        "weight": 2
+      },
+      {
+        "point": "Product groups (e.g., M&A, leveraged finance, equity capital markets) provide specialized deal execution expertise across sectors",
+        "weight": 2
+      },
+      {
+        "point": "Coverage bankers often pull in product specialists for specific deal types rather than executing every deal type alone",
+        "weight": 2
+      },
+      {
+        "point": "Candidates should understand whether they're interviewing for a coverage seat or a product seat since day-to-day work differs",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That all groups within IBD do essentially the same work regardless of whether they're labeled coverage or product",
@@ -253,10 +343,22 @@
     "questionType": "conceptual",
     "prompt": "What advantage does J.P. Morgan's scale and balance sheet give it competitively, and how should that shape a candidate's understanding of the firm before an interview?",
     "keyPoints": [
-      {"point": "Large balance sheet and lending capability lets JPM win advisory mandates partly through financing relationships, not just advice alone", "weight": 3},
-      {"point": "Broad platform spans IBD, commercial banking, asset management, and markets, creating cross-referral opportunities for deals", "weight": 2},
-      {"point": "Scale supports one of the largest analyst classes, meaning more structured, standardized training but also more internal competition for top group placements", "weight": 2},
-      {"point": "Candidates should be able to speak to how the platform's breadth (not just advisory brand) creates client relationships", "weight": 2}
+      {
+        "point": "Large balance sheet and lending capability lets JPM win advisory mandates partly through financing relationships, not just advice alone",
+        "weight": 3
+      },
+      {
+        "point": "Broad platform spans IBD, commercial banking, asset management, and markets, creating cross-referral opportunities for deals",
+        "weight": 2
+      },
+      {
+        "point": "Scale supports one of the largest analyst classes, meaning more structured, standardized training but also more internal competition for top group placements",
+        "weight": 2
+      },
+      {
+        "point": "Candidates should be able to speak to how the platform's breadth (not just advisory brand) creates client relationships",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That J.P. Morgan competes purely on advisory quality with no reference to its lending or balance sheet capabilities",
@@ -288,10 +390,22 @@
     "questionType": "conceptual",
     "prompt": "What is Morgan Stanley generally known for competitively among bulge brackets, and how should a candidate frame their interest in the firm?",
     "keyPoints": [
-      {"point": "Strong historical reputation in select sectors and in wealth management/institutional securities complementing IBD", "weight": 2},
-      {"point": "Known for a polished, prestige-conscious culture with competitive selectivity similar to top peers", "weight": 2},
-      {"point": "Candidates should tie interest to specific group strengths rather than generic bulge bracket appeal", "weight": 2},
-      {"point": "Like peers, group and deal-team culture can vary meaningfully within the firm, so research should go beyond firm-level reputation", "weight": 2}
+      {
+        "point": "Strong historical reputation in select sectors and in wealth management/institutional securities complementing IBD",
+        "weight": 2
+      },
+      {
+        "point": "Known for a polished, prestige-conscious culture with competitive selectivity similar to top peers",
+        "weight": 2
+      },
+      {
+        "point": "Candidates should tie interest to specific group strengths rather than generic bulge bracket appeal",
+        "weight": 2
+      },
+      {
+        "point": "Like peers, group and deal-team culture can vary meaningfully within the firm, so research should go beyond firm-level reputation",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That every group at Morgan Stanley has an identical culture and reputation",
@@ -323,10 +437,22 @@
     "questionType": "conceptual",
     "prompt": "What distinguishes Evercore as an elite boutique, and why might a candidate choose it over a bulge bracket offer covering the same industry?",
     "keyPoints": [
-      {"point": "Pure advisory model: no balance sheet, no trading, no conflicts from proprietary financing interests, positioned as independent advice", "weight": 3},
-      {"point": "Leaner staffing typically means more direct deal exposure and client interaction per junior banker", "weight": 2},
-      {"point": "Strong reputation particularly in large-cap M&A advisory, competing directly with bulge brackets for marquee mandates", "weight": 2},
-      {"point": "Tradeoff: narrower product exposure (no capital markets/underwriting experience) compared to a full-service platform", "weight": 2}
+      {
+        "point": "Pure advisory model: no balance sheet, no trading, no conflicts from proprietary financing interests, positioned as independent advice",
+        "weight": 3
+      },
+      {
+        "point": "Leaner staffing typically means more direct deal exposure and client interaction per junior banker",
+        "weight": 2
+      },
+      {
+        "point": "Strong reputation particularly in large-cap M&A advisory, competing directly with bulge brackets for marquee mandates",
+        "weight": 2
+      },
+      {
+        "point": "Tradeoff: narrower product exposure (no capital markets/underwriting experience) compared to a full-service platform",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That elite boutiques like Evercore are lower prestige simply because they're smaller than bulge brackets",
@@ -358,10 +484,22 @@
     "questionType": "conceptual",
     "prompt": "What are the major sub-sectors within a typical healthcare investment banking group, and why does the sector attract such heavy deal activity?",
     "keyPoints": [
-      {"point": "Sub-sectors typically include pharmaceuticals/biotech, medical devices, healthcare services/providers, and managed care/payers", "weight": 3},
-      {"point": "Deal drivers include M&A consolidation among providers, biotech licensing and buyouts, and financing needs for R&D-heavy companies", "weight": 2},
-      {"point": "Valuation approaches differ meaningfully across sub-sectors (e.g., pipeline/NPV-driven for biotech vs. EBITDA-driven for services)", "weight": 2},
-      {"point": "Regulatory dynamics (FDA approval, reimbursement policy) create sector-specific deal risk and timing considerations", "weight": 2}
+      {
+        "point": "Sub-sectors typically include pharmaceuticals/biotech, medical devices, healthcare services/providers, and managed care/payers",
+        "weight": 3
+      },
+      {
+        "point": "Deal drivers include M&A consolidation among providers, biotech licensing and buyouts, and financing needs for R&D-heavy companies",
+        "weight": 2
+      },
+      {
+        "point": "Valuation approaches differ meaningfully across sub-sectors (e.g., pipeline/NPV-driven for biotech vs. EBITDA-driven for services)",
+        "weight": 2
+      },
+      {
+        "point": "Regulatory dynamics (FDA approval, reimbursement policy) create sector-specific deal risk and timing considerations",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That healthcare banking is a single homogeneous sector with one valuation approach",
@@ -393,10 +531,22 @@
     "questionType": "conceptual",
     "prompt": "What makes deal activity in the energy sector distinctive, particularly around acquisitions and divestitures (A&D), and how does that shape the work of an energy-focused analyst?",
     "keyPoints": [
-      {"point": "A&D deals involve buying or selling specific assets (e.g., an oil field or set of wells) rather than whole companies", "weight": 3},
-      {"point": "Valuation is heavily reserve- and commodity-price-driven, using specialized metrics like proved reserves and production curves", "weight": 2},
-      {"point": "Deal activity is highly cyclical, tracking commodity price swings more directly than many other sectors", "weight": 2},
-      {"point": "Energy analysts often need familiarity with specialized technical/engineering inputs (reserve reports) alongside standard financial modeling", "weight": 2}
+      {
+        "point": "A&D deals involve buying or selling specific assets (e.g., an oil field or set of wells) rather than whole companies",
+        "weight": 3
+      },
+      {
+        "point": "Valuation is heavily reserve- and commodity-price-driven, using specialized metrics like proved reserves and production curves",
+        "weight": 2
+      },
+      {
+        "point": "Deal activity is highly cyclical, tracking commodity price swings more directly than many other sectors",
+        "weight": 2
+      },
+      {
+        "point": "Energy analysts often need familiarity with specialized technical/engineering inputs (reserve reports) alongside standard financial modeling",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That energy deals always involve buying or selling entire companies rather than discrete assets",

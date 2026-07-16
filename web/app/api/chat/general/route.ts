@@ -19,9 +19,8 @@ export async function POST(req: Request): Promise<Response> {
 
   const openai = getOpenAI();
   // Drizzle read scoped to the authenticated user via RLS (Unit 3 migration).
-  const profile = await withUser(
-    { sub: gate.user.id, role: "authenticated" },
-    (tx) => getProfile(tx, gate.user.id),
+  const profile = await withUser({ sub: gate.user.id, role: "authenticated" }, (tx) =>
+    getProfile(tx, gate.user.id),
   );
 
   const systemContent = [
@@ -73,7 +72,11 @@ export async function POST(req: Request): Promise<Response> {
           }
 
           // Execute tool calls and continue the loop.
-          messages.push({ role: "assistant", content: msg.content ?? null, tool_calls: msg.tool_calls });
+          messages.push({
+            role: "assistant",
+            content: msg.content ?? null,
+            tool_calls: msg.tool_calls,
+          });
           for (const call of msg.tool_calls) {
             if (call.type !== "function") continue;
             let result: unknown;

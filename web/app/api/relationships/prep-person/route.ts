@@ -47,7 +47,9 @@ export async function POST(req: Request): Promise<Response> {
     group ? `- Group: ${capText(group, 200)}` : null,
     school ? `- School: ${capText(school, 200)}` : null,
     "",
-    bio ? `LinkedIn / bio text they shared:\n${wrapUserText(bio, "bio", { maxChars: 12000 })}` : null,
+    bio
+      ? `LinkedIn / bio text they shared:\n${wrapUserText(bio, "bio", { maxChars: 12000 })}`
+      : null,
     studentContext
       ? `Student context:\n${wrapUserText(studentContext, "student_context", { maxChars: 4000 })}`
       : `Student context: Undergraduate targeting IB Summer Analyst roles.`,

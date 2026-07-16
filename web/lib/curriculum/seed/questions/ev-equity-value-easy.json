@@ -6,10 +6,19 @@
     "questionType": "conceptual",
     "prompt": "In your own words, what does a company's equity value represent, and who has a claim to it?",
     "keyPoints": [
-      {"point": "Equity value is the value belonging to common shareholders only", "weight": 3},
-      {"point": "It is the residual claim left over after all debt, preferred stock, and other senior claims are satisfied", "weight": 3},
-      {"point": "Calculated as share price times diluted shares outstanding (market view), not a balance sheet book value", "weight": 2},
-      {"point": "Distinguishes it from enterprise value, which reflects claims of all capital providers", "weight": 1}
+      { "point": "Equity value is the value belonging to common shareholders only", "weight": 3 },
+      {
+        "point": "It is the residual claim left over after all debt, preferred stock, and other senior claims are satisfied",
+        "weight": 3
+      },
+      {
+        "point": "Calculated as share price times diluted shares outstanding (market view), not a balance sheet book value",
+        "weight": 2
+      },
+      {
+        "point": "Distinguishes it from enterprise value, which reflects claims of all capital providers",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Confusing equity value with the 'total stockholders' equity' line on the balance sheet, which is a historical accounting figure",
@@ -17,8 +26,14 @@
     ],
     "modelAnswer": "Equity value is what the company is worth to its common shareholders specifically — it's their slice of the pie after every other claim on the business has been paid. If you liquidated the company, paid off the debt holders, the preferred shareholders, and any other senior claimants, whatever's left over belongs to common equity. In practice we calculate it as the current share price multiplied by diluted shares outstanding, so it's a market-based, forward-looking number, not the 'total stockholders' equity' line you'd find on the balance sheet, which is a historical accounting construct built from retained earnings and paid-in capital. Equity value moves with the stock price and reflects everything the market knows or believes about the company's prospects, capital structure, and risk. It's the number you'd use if you were only buying out the common shareholders — for example, in a going-private transaction where the acquirer assumes the existing debt rather than repaying it.",
     "followups": [
-      {"prompt": "How does equity value differ from book value of equity, and why do they diverge so much for a growing tech company?", "modelAnswer": "Book value of equity is an accounting figure — historical paid-in capital plus accumulated retained earnings minus dividends and buybacks — sitting on the balance sheet at cost, not market value. Equity value is share price times diluted shares, a forward-looking market judgment on future cash flows. For a fast-growing tech company, the market often prices in years of expected growth and intangible value like brand, technology, and network effects that never hit the balance sheet, so equity value can be many multiples of book value. Conversely, a mature, capital-intensive company with depressed growth expectations can trade below book value if the market doubts the assets will earn an adequate return."},
-      {"prompt": "If a company has never issued any debt or preferred stock, is its equity value the same as its enterprise value?", "modelAnswer": "Almost, but not quite — you still need to net out cash. Enterprise value equals equity value plus debt and preferred and minority interest, minus cash. With no debt or preferred, those add-back items are zero, but the company likely still holds some cash on its balance sheet, which gets subtracted. So enterprise value would be equity value minus cash, reflecting that a buyer acquiring the whole company effectively gets that cash back and could use it to fund part of the purchase price. Only if the company also held zero cash would enterprise value exactly equal equity value."}
+      {
+        "prompt": "How does equity value differ from book value of equity, and why do they diverge so much for a growing tech company?",
+        "modelAnswer": "Book value of equity is an accounting figure — historical paid-in capital plus accumulated retained earnings minus dividends and buybacks — sitting on the balance sheet at cost, not market value. Equity value is share price times diluted shares, a forward-looking market judgment on future cash flows. For a fast-growing tech company, the market often prices in years of expected growth and intangible value like brand, technology, and network effects that never hit the balance sheet, so equity value can be many multiples of book value. Conversely, a mature, capital-intensive company with depressed growth expectations can trade below book value if the market doubts the assets will earn an adequate return."
+      },
+      {
+        "prompt": "If a company has never issued any debt or preferred stock, is its equity value the same as its enterprise value?",
+        "modelAnswer": "Almost, but not quite — you still need to net out cash. Enterprise value equals equity value plus debt and preferred and minority interest, minus cash. With no debt or preferred, those add-back items are zero, but the company likely still holds some cash on its balance sheet, which gets subtracted. So enterprise value would be equity value minus cash, reflecting that a buyer acquiring the whole company effectively gets that cash back and could use it to fund part of the purchase price. Only if the company also held zero cash would enterprise value exactly equal equity value."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "enterprise-value-vs-equity-value",
@@ -31,10 +46,19 @@
     "questionType": "conceptual",
     "prompt": "What does enterprise value represent, and why do we call it the value of a company's 'core operations'?",
     "keyPoints": [
-      {"point": "Enterprise value is the total value of the business's operating assets, available to all capital providers combined", "weight": 3},
-      {"point": "It excludes non-operating items like excess cash, which don't come from the core business", "weight": 3},
-      {"point": "It represents the theoretical takeover cost: what an acquirer must pay for equity plus what it must assume or repay in debt, minus cash it receives", "weight": 2},
-      {"point": "Independent of how the company happens to be financed today", "weight": 1}
+      {
+        "point": "Enterprise value is the total value of the business's operating assets, available to all capital providers combined",
+        "weight": 3
+      },
+      {
+        "point": "It excludes non-operating items like excess cash, which don't come from the core business",
+        "weight": 3
+      },
+      {
+        "point": "It represents the theoretical takeover cost: what an acquirer must pay for equity plus what it must assume or repay in debt, minus cash it receives",
+        "weight": 2
+      },
+      { "point": "Independent of how the company happens to be financed today", "weight": 1 }
     ],
     "misconceptions": [
       "Thinking enterprise value is simply 'total assets' from the balance sheet",
@@ -42,8 +66,14 @@
     ],
     "modelAnswer": "Enterprise value is the value of the actual operating business — the part that generates revenue and profit — independent of how that business happens to be financed. It represents what it would cost, in theory, to buy the entire company outright: you'd have to pay off the equity holders, and you'd also assume or repay the debt and preferred holders, but you'd get to keep any cash sitting on the balance sheet, which effectively offsets part of the price. We strip out cash because cash isn't really part of operations — it's a non-operating asset that doesn't help generate the company's revenue or EBITDA, it's just sitting there. That's why EV is called the value of 'core operations': it isolates the business itself from capital structure decisions like how much debt versus equity the company chose to raise, and from cash balances that reflect financing history rather than operating performance.",
     "followups": [
-      {"prompt": "Why is EV a more useful number than equity value when you're comparing two companies in the same industry?", "modelAnswer": "Because equity value is distorted by capital structure — a company that finances itself with more debt will have a smaller equity value relative to the size of its operations than an all-equity-funded competitor of the same operating scale, even though the underlying businesses could be identical. EV strips that distortion out by looking at the whole capital structure together, so you're comparing the value of the operations themselves rather than how each company happened to divide up the claims on those operations."},
-      {"prompt": "Would a private company have an enterprise value even though it doesn't have a public share price?", "modelAnswer": "Yes — enterprise value doesn't require a public market price, only some estimate of what the equity is worth, which could come from a DCF, a comparable companies analysis, a recent funding round, or an offer on the table. You'd still build the same bridge: estimated equity value plus debt and preferred minus cash. Private company valuations often start from EV instead, working backwards to imply an equity value once financing terms are known, especially in LBO or M&A contexts."}
+      {
+        "prompt": "Why is EV a more useful number than equity value when you're comparing two companies in the same industry?",
+        "modelAnswer": "Because equity value is distorted by capital structure — a company that finances itself with more debt will have a smaller equity value relative to the size of its operations than an all-equity-funded competitor of the same operating scale, even though the underlying businesses could be identical. EV strips that distortion out by looking at the whole capital structure together, so you're comparing the value of the operations themselves rather than how each company happened to divide up the claims on those operations."
+      },
+      {
+        "prompt": "Would a private company have an enterprise value even though it doesn't have a public share price?",
+        "modelAnswer": "Yes — enterprise value doesn't require a public market price, only some estimate of what the equity is worth, which could come from a DCF, a comparable companies analysis, a recent funding round, or an offer on the table. You'd still build the same bridge: estimated equity value plus debt and preferred minus cash. Private company valuations often start from EV instead, working backwards to imply an equity value once financing terms are known, especially in LBO or M&A contexts."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "enterprise-value-vs-equity-value",
@@ -56,9 +86,18 @@
     "questionType": "conceptual",
     "prompt": "Why is enterprise value described as capital-structure-neutral, while equity value is not?",
     "keyPoints": [
-      {"point": "EV sums the claims of all capital providers (debt, preferred, minority interest, equity) minus non-operating cash, so shifting the mix between them doesn't change the total", "weight": 3},
-      {"point": "Equity value only reflects one slice (common shareholders), so it shrinks or grows as debt is added or repaid, even if operations are unchanged", "weight": 3},
-      {"point": "Example: refinancing equity with debt (or vice versa) changes equity value and debt levels but leaves EV roughly the same", "weight": 2}
+      {
+        "point": "EV sums the claims of all capital providers (debt, preferred, minority interest, equity) minus non-operating cash, so shifting the mix between them doesn't change the total",
+        "weight": 3
+      },
+      {
+        "point": "Equity value only reflects one slice (common shareholders), so it shrinks or grows as debt is added or repaid, even if operations are unchanged",
+        "weight": 3
+      },
+      {
+        "point": "Example: refinancing equity with debt (or vice versa) changes equity value and debt levels but leaves EV roughly the same",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Thinking EV changes whenever a company takes on more debt",
@@ -66,8 +105,14 @@
     ],
     "modelAnswer": "Enterprise value is capital-structure-neutral because it adds up the claims of everyone who has a stake in the business — debt holders, preferred holders, minority shareholders, and common equity — and then subtracts non-operating cash. If a company decides to swap some equity for debt, say by borrowing money and using it to buy back stock, the total pie represented by EV doesn't really change: debt goes up, equity value goes down by a similar amount, and the sum stays close to constant, assuming operations are unaffected. Equity value, by contrast, is just one slice of that pie, so it's directly affected by financing decisions — issue more debt to fund a buyback and equity value falls even though the underlying business generates the exact same cash flow. That's why bankers use EV, and EV-based multiples like EV/EBITDA, when they want to compare or value the operating business itself, independent of how management chose to finance it.",
     "followups": [
-      {"prompt": "Give a quick numeric example showing EV staying roughly constant while equity value changes due to a financing decision.", "modelAnswer": "Say a company has equity value of $1,000M and no debt or cash, so EV is $1,000M. It borrows $200M and uses all of it to buy back stock. Equity value falls to roughly $800M since $200M was paid out to departing shareholders, and debt is now $200M. New EV = $800M equity value + $200M debt - $0 cash = $1,000M. The EV is unchanged; only how it's split between debt and equity holders has shifted."},
-      {"prompt": "Is EV ever affected by financing decisions at all?", "modelAnswer": "Mechanically, EV shouldn't move purely from shuffling debt and equity, but in reality it can shift indirectly — for instance if added leverage increases the company's cost of capital or bankruptcy risk, the market might reprice the whole enterprise lower. Tax shields from interest deductibility can also make debt financing marginally value-accretive versus pure equity financing. So EV is capital-structure-neutral by construction in the arithmetic sense, but not entirely immune to how financing choices affect market perception and taxes."}
+      {
+        "prompt": "Give a quick numeric example showing EV staying roughly constant while equity value changes due to a financing decision.",
+        "modelAnswer": "Say a company has equity value of $1,000M and no debt or cash, so EV is $1,000M. It borrows $200M and uses all of it to buy back stock. Equity value falls to roughly $800M since $200M was paid out to departing shareholders, and debt is now $200M. New EV = $800M equity value + $200M debt - $0 cash = $1,000M. The EV is unchanged; only how it's split between debt and equity holders has shifted."
+      },
+      {
+        "prompt": "Is EV ever affected by financing decisions at all?",
+        "modelAnswer": "Mechanically, EV shouldn't move purely from shuffling debt and equity, but in reality it can shift indirectly — for instance if added leverage increases the company's cost of capital or bankruptcy risk, the market might reprice the whole enterprise lower. Tax shields from interest deductibility can also make debt financing marginally value-accretive versus pure equity financing. So EV is capital-structure-neutral by construction in the arithmetic sense, but not entirely immune to how financing choices affect market perception and taxes."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "enterprise-value-vs-equity-value",
@@ -80,10 +125,22 @@
     "questionType": "conceptual",
     "prompt": "If you're acquiring 100% of a company, which value — enterprise or equity — tells you what you actually have to pay, and why isn't it that simple?",
     "keyPoints": [
-      {"point": "Equity value is what's paid directly to shareholders to buy out their shares", "weight": 3},
-      {"point": "But EV is the true economic cost, because the acquirer typically must also assume or repay existing debt and preferred stock", "weight": 3},
-      {"point": "The acquirer also gets to use the target's existing cash, offsetting part of the cost", "weight": 2},
-      {"point": "So EV = the real all-in cost of the operating business; equity value = just the check written to shareholders", "weight": 1}
+      {
+        "point": "Equity value is what's paid directly to shareholders to buy out their shares",
+        "weight": 3
+      },
+      {
+        "point": "But EV is the true economic cost, because the acquirer typically must also assume or repay existing debt and preferred stock",
+        "weight": 3
+      },
+      {
+        "point": "The acquirer also gets to use the target's existing cash, offsetting part of the cost",
+        "weight": 2
+      },
+      {
+        "point": "So EV = the real all-in cost of the operating business; equity value = just the check written to shareholders",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Assuming equity value alone captures the full cost of an acquisition",
@@ -91,7 +148,10 @@
     ],
     "modelAnswer": "You technically pay equity value directly to the shareholders — that's the check that closes the deal for their shares. But that's not the full economic cost of owning the business, because in most deals the acquirer also has to deal with the target's existing debt: either repay it at closing or assume it going forward, and if there's preferred stock, that has to be addressed too. On the flip side, the target usually has cash sitting on its balance sheet, and the acquirer effectively gets to use that cash, which offsets part of what it has to lay out. When you net all of that together — equity value paid to shareholders, plus debt and preferred assumed or repaid, minus cash acquired — you land on enterprise value, which is why EV is considered the true, all-in economic price of buying the whole operating business, not just the equity slice.",
     "followups": [
-      {"prompt": "In a real M&A deal, does the buyer literally write two separate checks — one for equity and one for debt?", "modelAnswer": "It depends on deal structure. In many deals the buyer pays the equity purchase price to shareholders and simultaneously either repays the target's existing debt at close (common when the debt has change-of-control provisions triggering repayment) or leaves it in place and assumes it on the combined balance sheet going forward. Either way, the economics are the same: the buyer's true cost includes the debt burden it's taking on. Deal press releases usually quote 'enterprise value' or 'transaction value' for exactly this reason — it captures the full cost, not just the equity check."}
+      {
+        "prompt": "In a real M&A deal, does the buyer literally write two separate checks — one for equity and one for debt?",
+        "modelAnswer": "It depends on deal structure. In many deals the buyer pays the equity purchase price to shareholders and simultaneously either repays the target's existing debt at close (common when the debt has change-of-control provisions triggering repayment) or leaves it in place and assumes it on the combined balance sheet going forward. Either way, the economics are the same: the buyer's true cost includes the debt burden it's taking on. Deal press releases usually quote 'enterprise value' or 'transaction value' for exactly this reason — it captures the full cost, not just the equity check."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "enterprise-value-vs-equity-value",
@@ -104,10 +164,19 @@
     "questionType": "conceptual",
     "prompt": "What's the difference between basic shares outstanding and diluted shares outstanding?",
     "keyPoints": [
-      {"point": "Basic shares outstanding are the shares currently issued and held by investors today", "weight": 3},
-      {"point": "Diluted shares outstanding add in shares that could be created from in-the-money options, warrants, and convertible securities", "weight": 3},
-      {"point": "Diluted count is always greater than or equal to basic count", "weight": 1},
-      {"point": "Diluted count is used to properly value equity because it reflects all potential claims on the company", "weight": 2}
+      {
+        "point": "Basic shares outstanding are the shares currently issued and held by investors today",
+        "weight": 3
+      },
+      {
+        "point": "Diluted shares outstanding add in shares that could be created from in-the-money options, warrants, and convertible securities",
+        "weight": 3
+      },
+      { "point": "Diluted count is always greater than or equal to basic count", "weight": 1 },
+      {
+        "point": "Diluted count is used to properly value equity because it reflects all potential claims on the company",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Thinking diluted shares simply means basic shares plus all outstanding options regardless of strike price",
@@ -115,7 +184,10 @@
     ],
     "modelAnswer": "Basic shares outstanding is just the count of common shares that currently exist and are held by investors — the number you'd find on the cover of the 10-K. Diluted shares outstanding takes that basic count and adds in the additional shares that would be created if all in-the-money stock options, warrants, and convertible securities were exercised or converted. The idea is that these instruments represent real potential claims on the company's equity, so if you only used the basic count, you'd overstate the value per share and understate how many people actually have an economic stake in the business. Diluted share count is always equal to or greater than basic share count, and it's the number bankers use whenever they calculate equity value, because it reflects the full potential ownership base rather than just what's outstanding today.",
     "followups": [
-      {"prompt": "Would restricted stock units (RSUs) that have already vested but not yet been delivered be part of basic or diluted shares?", "modelAnswer": "Vested RSUs that are just pending delivery are generally treated as basic shares, or close to it, because the recipient has an unconditional right to the shares with no exercise price or further contingency — they're essentially already owned. Unvested RSUs, on the other hand, are more like a dilutive instrument until they vest, and companies typically include expected unvested RSUs in the diluted share count using a method similar to the treasury stock method, though without a cash exercise price involved."}
+      {
+        "prompt": "Would restricted stock units (RSUs) that have already vested but not yet been delivered be part of basic or diluted shares?",
+        "modelAnswer": "Vested RSUs that are just pending delivery are generally treated as basic shares, or close to it, because the recipient has an unconditional right to the shares with no exercise price or further contingency — they're essentially already owned. Unvested RSUs, on the other hand, are more like a dilutive instrument until they vest, and companies typically include expected unvested RSUs in the diluted share count using a method similar to the treasury stock method, though without a cash exercise price involved."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "diluted-share-count",
@@ -128,9 +200,18 @@
     "questionType": "conceptual",
     "prompt": "Why do bankers use diluted share count instead of basic share count when calculating equity value?",
     "keyPoints": [
-      {"point": "Diluted share count reflects the full economic ownership base, including holders of in-the-money options and convertibles who will eventually become shareholders", "weight": 3},
-      {"point": "Using only basic shares would overstate the value attributable to today's shareholders and understate total claims", "weight": 3},
-      {"point": "Equity value = share price x diluted shares, giving a more accurate market capitalization figure", "weight": 2}
+      {
+        "point": "Diluted share count reflects the full economic ownership base, including holders of in-the-money options and convertibles who will eventually become shareholders",
+        "weight": 3
+      },
+      {
+        "point": "Using only basic shares would overstate the value attributable to today's shareholders and understate total claims",
+        "weight": 3
+      },
+      {
+        "point": "Equity value = share price x diluted shares, giving a more accurate market capitalization figure",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Believing using basic shares is 'close enough' and doesn't meaningfully change equity value",
@@ -138,7 +219,10 @@
     ],
     "modelAnswer": "If you only used basic shares outstanding, you'd be ignoring all the option holders and convertible security holders who have a real, near-certain claim on future shares once they exercise or convert. That would understate the true number of people with an economic interest in the company and, as a result, overstate the value per share. Using diluted shares gives a more accurate picture of the total equity claims outstanding, so when you multiply diluted share count by the current share price, you get a more precise equity value figure. This matters more for companies with large employee option pools or convertible debt outstanding — for those, the gap between basic and diluted equity value can be meaningful, sometimes several percentage points of total equity value, so getting this number right directly affects downstream figures like the EV bridge and any multiples calculated from equity value.",
     "followups": [
-      {"prompt": "Does the gap between basic and diluted share count matter more for a mature blue-chip company or a high-growth tech company, and why?", "modelAnswer": "It typically matters more for high-growth tech companies, because they tend to compensate employees heavily with stock options and RSUs as part of their equity-heavy compensation culture, and they're more likely to have convertible notes outstanding to fund growth without diluting equity upfront. A mature blue-chip company usually has a much smaller option pool relative to its share count, so the basic-to-diluted gap tends to be a rounding error. For a richly-optioned growth company, ignoring dilution can meaningfully overstate equity value and any multiples derived from it."}
+      {
+        "prompt": "Does the gap between basic and diluted share count matter more for a mature blue-chip company or a high-growth tech company, and why?",
+        "modelAnswer": "It typically matters more for high-growth tech companies, because they tend to compensate employees heavily with stock options and RSUs as part of their equity-heavy compensation culture, and they're more likely to have convertible notes outstanding to fund growth without diluting equity upfront. A mature blue-chip company usually has a much smaller option pool relative to its share count, so the basic-to-diluted gap tends to be a rounding error. For a richly-optioned growth company, ignoring dilution can meaningfully overstate equity value and any multiples derived from it."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "diluted-share-count",
@@ -151,9 +235,18 @@
     "questionType": "conceptual",
     "prompt": "When would stock options NOT add to the diluted share count?",
     "keyPoints": [
-      {"point": "Options are excluded when they are 'out of the money' — their exercise price is above the current share price", "weight": 3},
-      {"point": "No rational holder would exercise an out-of-the-money option, so it represents no real dilution today", "weight": 2},
-      {"point": "Under the treasury stock method, out-of-the-money options are simply excluded from the calculation rather than included with a negative adjustment", "weight": 2}
+      {
+        "point": "Options are excluded when they are 'out of the money' — their exercise price is above the current share price",
+        "weight": 3
+      },
+      {
+        "point": "No rational holder would exercise an out-of-the-money option, so it represents no real dilution today",
+        "weight": 2
+      },
+      {
+        "point": "Under the treasury stock method, out-of-the-money options are simply excluded from the calculation rather than included with a negative adjustment",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Thinking all outstanding options are always added regardless of strike price",
@@ -161,7 +254,10 @@
     ],
     "modelAnswer": "Stock options only get added to diluted share count when they're 'in the money,' meaning the current share price is above the option's exercise price — that's when a holder would actually want to exercise. If the exercise price is above the current share price, the option is 'out of the money,' and no rational holder would pay more than the stock is currently worth just to exercise it, so it creates zero dilution today and gets excluded entirely from the diluted share count. This is a key part of the treasury stock method: you only run the calculation — proceeds from exercise, shares repurchased with those proceeds, net new shares issued — for option tranches that are currently in the money. Out-of-the-money tranches are simply left out, not included with some kind of negative or reduced share count.",
     "followups": [
-      {"prompt": "If a stock price falls significantly after options were granted, does that mean the diluted share count could decrease over time?", "modelAnswer": "Yes, in a sense — if enough previously in-the-money options become out-of-the-money as the stock price falls, they'll drop out of the diluted share count calculation entirely, which brings diluted shares closer to basic shares. This is why diluted share count isn't a fixed number; it moves with the stock price. It's a good reminder that dilution calculations need to be redone at the current share price whenever you're calculating equity value, not pulled stale from an old filing."}
+      {
+        "prompt": "If a stock price falls significantly after options were granted, does that mean the diluted share count could decrease over time?",
+        "modelAnswer": "Yes, in a sense — if enough previously in-the-money options become out-of-the-money as the stock price falls, they'll drop out of the diluted share count calculation entirely, which brings diluted shares closer to basic shares. This is why diluted share count isn't a fixed number; it moves with the stock price. It's a good reminder that dilution calculations need to be redone at the current share price whenever you're calculating equity value, not pulled stale from an old filing."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "diluted-share-count",
@@ -174,10 +270,13 @@
     "questionType": "conceptual",
     "prompt": "Walk me through the basic formula that gets you from equity value to enterprise value.",
     "keyPoints": [
-      {"point": "Start with equity value (share price x diluted shares)", "weight": 3},
-      {"point": "Add total debt and preferred stock and minority interest", "weight": 3},
-      {"point": "Subtract cash and cash equivalents", "weight": 3},
-      {"point": "Result is enterprise value, representing the value of the entire operating business", "weight": 1}
+      { "point": "Start with equity value (share price x diluted shares)", "weight": 3 },
+      { "point": "Add total debt and preferred stock and minority interest", "weight": 3 },
+      { "point": "Subtract cash and cash equivalents", "weight": 3 },
+      {
+        "point": "Result is enterprise value, representing the value of the entire operating business",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Adding cash instead of subtracting it",
@@ -185,7 +284,10 @@
     ],
     "modelAnswer": "The basic bridge starts with equity value — share price times diluted shares outstanding. From there you add total debt, because debt holders have a claim on the business that isn't reflected in the equity value alone. You also add preferred stock and minority interest, for the same reason — they're claims held by someone other than common shareholders. Then you subtract cash and cash equivalents, because that cash is a non-operating asset the acquirer would effectively receive and could use to offset the purchase price. What's left after all those adjustments is enterprise value: the value of the whole operating business, available to and claimed by every type of capital provider combined, not just common equity. In shorthand: EV = Equity Value + Debt + Preferred Stock + Minority Interest − Cash & Equivalents.",
     "followups": [
-      {"prompt": "Why do we go from equity value to EV rather than the other way around in most practical settings?", "modelAnswer": "In practice you often start with equity value because it's the number the market gives you directly — share price times shares outstanding is observable for any public company. Debt, preferred, minority interest, and cash are all balance sheet items you can pull straight from the financials. So the natural direction is equity value, which requires market data, bridging to EV, which requires balance sheet data. That said, in DCF or LBO work you often go the other direction — build up to EV from projected cash flows, then bridge back down to implied equity value and share price, which is 'solving' the bridge in reverse."}
+      {
+        "prompt": "Why do we go from equity value to EV rather than the other way around in most practical settings?",
+        "modelAnswer": "In practice you often start with equity value because it's the number the market gives you directly — share price times shares outstanding is observable for any public company. Debt, preferred, minority interest, and cash are all balance sheet items you can pull straight from the financials. So the natural direction is equity value, which requires market data, bridging to EV, which requires balance sheet data. That said, in DCF or LBO work you often go the other direction — build up to EV from projected cash flows, then bridge back down to implied equity value and share price, which is 'solving' the bridge in reverse."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "the-ev-bridge",
@@ -198,9 +300,18 @@
     "questionType": "conceptual",
     "prompt": "Why do we ADD debt when going from equity value to enterprise value?",
     "keyPoints": [
-      {"point": "Debt holders have a claim on the company's operating value, separate from and senior to common equity", "weight": 3},
-      {"point": "Equity value alone excludes that claim, so it understates the total value of the business", "weight": 2},
-      {"point": "An acquirer of the whole company must repay or assume that debt, so it's part of the true cost/value of the operations", "weight": 2}
+      {
+        "point": "Debt holders have a claim on the company's operating value, separate from and senior to common equity",
+        "weight": 3
+      },
+      {
+        "point": "Equity value alone excludes that claim, so it understates the total value of the business",
+        "weight": 2
+      },
+      {
+        "point": "An acquirer of the whole company must repay or assume that debt, so it's part of the true cost/value of the operations",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Thinking debt is subtracted because it's a liability, the way it would be netted on a balance sheet",
@@ -208,7 +319,10 @@
     ],
     "modelAnswer": "We add debt because debt holders have a real claim on the value of the business, and that claim simply isn't captured anywhere in equity value, which only reflects what belongs to common shareholders. Think about it from an acquirer's perspective: if you're buying the whole company, you're not just buying out the shareholders, you're also on the hook for the debt — either you repay it at close or you take it over and keep servicing it. Either way, that debt represents part of the true economic cost of owning the entire operating business, so it has to be layered on top of equity value to get to enterprise value. It's a bit counterintuitive at first because on a balance sheet, debt is a liability that reduces net worth, but in the EV bridge we're not calculating net worth — we're calculating total claims on the operating assets, and debt is one of those claims that needs to be added, not netted away.",
     "followups": [
-      {"prompt": "Does it matter whether the debt is short-term or long-term when building the EV bridge?", "modelAnswer": "For the purposes of the standard EV bridge, you generally include all interest-bearing debt regardless of maturity — both the current portion of long-term debt and long-term debt itself — because both represent claims that carry a cost of capital and require repayment. What you typically exclude are pure operating liabilities like accounts payable or accrued expenses, since those aren't financing obligations, they're part of day-to-day operations already reflected in the company's working capital and EBITDA. The key distinction is financing versus operating, not short-term versus long-term."}
+      {
+        "prompt": "Does it matter whether the debt is short-term or long-term when building the EV bridge?",
+        "modelAnswer": "For the purposes of the standard EV bridge, you generally include all interest-bearing debt regardless of maturity — both the current portion of long-term debt and long-term debt itself — because both represent claims that carry a cost of capital and require repayment. What you typically exclude are pure operating liabilities like accounts payable or accrued expenses, since those aren't financing obligations, they're part of day-to-day operations already reflected in the company's working capital and EBITDA. The key distinction is financing versus operating, not short-term versus long-term."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "the-ev-bridge",
@@ -221,9 +335,18 @@
     "questionType": "conceptual",
     "prompt": "Why do we SUBTRACT cash when going from equity value to enterprise value?",
     "keyPoints": [
-      {"point": "Cash is a non-operating asset that isn't needed to run the core business and doesn't generate the EBITDA/EBIT used in multiples", "weight": 3},
-      {"point": "An acquirer buying the company effectively gets to use that cash, offsetting part of the purchase price", "weight": 3},
-      {"point": "Subtracting cash keeps EV focused purely on the value of operations, independent of how much cash happens to be sitting on the balance sheet", "weight": 2}
+      {
+        "point": "Cash is a non-operating asset that isn't needed to run the core business and doesn't generate the EBITDA/EBIT used in multiples",
+        "weight": 3
+      },
+      {
+        "point": "An acquirer buying the company effectively gets to use that cash, offsetting part of the purchase price",
+        "weight": 3
+      },
+      {
+        "point": "Subtracting cash keeps EV focused purely on the value of operations, independent of how much cash happens to be sitting on the balance sheet",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Thinking cash is subtracted because it's somehow a liability",
@@ -231,7 +354,10 @@
     ],
     "modelAnswer": "We subtract cash because it's not really part of the operating business — it's sitting on the balance sheet, not generating the revenue or EBITDA that the company's operations produce. If you're an acquirer buying 100% of the company, you effectively receive that cash the moment the deal closes, and you could immediately use it to pay down some of the purchase price or to repay assumed debt. So economically, cash reduces your true net cost of the acquisition, which is why it gets netted out of enterprise value. It also keeps EV meaningful for comparison purposes: two companies with identical operating businesses but very different cash balances would otherwise look like they have very different total values, even though their actual operations are worth the same. Subtracting cash strips that distortion out and isolates the value of the core business itself.",
     "followups": [
-      {"prompt": "Should you always subtract 100% of the cash balance, no matter what?", "modelAnswer": "In a simplified bridge, yes, you typically subtract the full cash and equivalents balance. But in more nuanced analysis, bankers sometimes distinguish between 'excess cash,' which is truly non-operating and available to offset a purchase price, and a minimum operating cash balance the business needs to run day-to-day, like funding payroll and inventory between billing cycles. That operating cash arguably shouldn't be netted out because the business genuinely needs it to function. In practice, for a first-pass analysis you subtract all cash, but it's worth flagging that distinction if asked to go deeper."}
+      {
+        "prompt": "Should you always subtract 100% of the cash balance, no matter what?",
+        "modelAnswer": "In a simplified bridge, yes, you typically subtract the full cash and equivalents balance. But in more nuanced analysis, bankers sometimes distinguish between 'excess cash,' which is truly non-operating and available to offset a purchase price, and a minimum operating cash balance the business needs to run day-to-day, like funding payroll and inventory between billing cycles. That operating cash arguably shouldn't be netted out because the business genuinely needs it to function. In practice, for a first-pass analysis you subtract all cash, but it's worth flagging that distinction if asked to go deeper."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "the-ev-bridge",
@@ -244,9 +370,9 @@
     "questionType": "calculation",
     "prompt": "A company has an equity value of $800 million, total debt of $300 million, and cash of $50 million. Assume no preferred stock or minority interest. What is its enterprise value?",
     "keyPoints": [
-      {"point": "Applies EV = Equity Value + Debt - Cash", "weight": 3},
-      {"point": "Correctly computes 800 + 300 - 50 = $1,050 million", "weight": 3},
-      {"point": "States the final figure with correct units/sign", "weight": 1}
+      { "point": "Applies EV = Equity Value + Debt - Cash", "weight": 3 },
+      { "point": "Correctly computes 800 + 300 - 50 = $1,050 million", "weight": 3 },
+      { "point": "States the final figure with correct units/sign", "weight": 1 }
     ],
     "misconceptions": [
       "Adding cash instead of subtracting it, yielding $1,150M",
@@ -254,7 +380,10 @@
     ],
     "modelAnswer": "Starting from equity value of $800 million, I add the $300 million of total debt since debt holders have a claim on the business that isn't captured in equity value alone, bringing the running total to $1,100 million. Then I subtract the $50 million of cash, since that's a non-operating asset the company holds that would effectively offset an acquirer's purchase price. That gives an enterprise value of $1,050 million. There's no preferred stock or minority interest to layer in here, so the bridge is a straightforward three-line calculation: $800M plus $300M minus $50M equals $1,050M enterprise value.",
     "followups": [
-      {"prompt": "If the company later paid down $100 million of that debt using existing cash, what would the new EV be?", "modelAnswer": "Debt falls to $200 million and cash falls to a negative amount unless they had at least $100M, so let's say cash falls to $0 (using the full $50M plus assuming they had more cash available, or more precisely if they only had $50M cash they couldn't fully pay down $100M without other means — but assuming they can), the key point is that using cash to pay down debt shouldn't change EV at all, since both debt and cash fall by the same amount and equity value is unaffected. EV would remain $1,050 million; only the composition of debt versus cash within the bridge shifts, illustrating why using cash to retire debt is 'value-neutral' from an EV standpoint."}
+      {
+        "prompt": "If the company later paid down $100 million of that debt using existing cash, what would the new EV be?",
+        "modelAnswer": "Debt falls to $200 million and cash falls to a negative amount unless they had at least $100M, so let's say cash falls to $0 (using the full $50M plus assuming they had more cash available, or more precisely if they only had $50M cash they couldn't fully pay down $100M without other means — but assuming they can), the key point is that using cash to pay down debt shouldn't change EV at all, since both debt and cash fall by the same amount and equity value is unaffected. EV would remain $1,050 million; only the composition of debt versus cash within the bridge shifts, illustrating why using cash to retire debt is 'value-neutral' from an EV standpoint."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "the-ev-bridge",
@@ -267,9 +396,18 @@
     "questionType": "single-step",
     "prompt": "A company raises $100 million of new debt and simply holds the proceeds as cash on its balance sheet, without using it for anything yet. What happens to its enterprise value and its equity value immediately after the raise?",
     "keyPoints": [
-      {"point": "Debt increases by $100M and cash increases by $100M, so the two offset in the EV bridge and EV is unchanged", "weight": 3},
-      {"point": "Equity value is unaffected immediately, since no shares were issued or repurchased and no value was distributed to shareholders", "weight": 3},
-      {"point": "Notes this is a purely mechanical, capital-structure-neutral event at the moment of issuance", "weight": 1}
+      {
+        "point": "Debt increases by $100M and cash increases by $100M, so the two offset in the EV bridge and EV is unchanged",
+        "weight": 3
+      },
+      {
+        "point": "Equity value is unaffected immediately, since no shares were issued or repurchased and no value was distributed to shareholders",
+        "weight": 3
+      },
+      {
+        "point": "Notes this is a purely mechanical, capital-structure-neutral event at the moment of issuance",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Thinking EV rises by $100M because debt went up, forgetting the offsetting cash increase",
@@ -277,7 +415,10 @@
     ],
     "modelAnswer": "Immediately after the raise, enterprise value is essentially unchanged. Debt increases by $100 million, which on its own would push EV up, but the company is simply holding that $100 million as cash, which gets subtracted right back out in the bridge, so the two effects cancel. Equity value doesn't move either, at least not mechanically — no new shares were issued to the public, nothing was paid out to shareholders, and the company's operations haven't changed at all, so the share price and equity value should be roughly the same as they were the moment before the raise. This is a good example of a purely financing-related event: it changes the composition of the balance sheet, debt is now higher and so is cash, but it doesn't change the value of the underlying operating business or what shareholders actually own.",
     "followups": [
-      {"prompt": "Would your answer change if the market believed the extra leverage now made the company financially riskier?", "modelAnswer": "Yes, in a real-world setting the market might reprice the stock downward if investors believe the added debt increases bankruptcy risk or reduces financial flexibility, even though nothing about the operations changed. That would show up as a drop in equity value, and correspondingly EV could shift too, since it's built from equity value. But that's a second-order market reaction to perceived risk, not a mechanical consequence of the transaction itself — on a pure balance sheet basis, the immediate, mechanical answer is that EV and equity value are unchanged."}
+      {
+        "prompt": "Would your answer change if the market believed the extra leverage now made the company financially riskier?",
+        "modelAnswer": "Yes, in a real-world setting the market might reprice the stock downward if investors believe the added debt increases bankruptcy risk or reduces financial flexibility, even though nothing about the operations changed. That would show up as a drop in equity value, and correspondingly EV could shift too, since it's built from equity value. But that's a second-order market reaction to perceived risk, not a mechanical consequence of the transaction itself — on a pure balance sheet basis, the immediate, mechanical answer is that EV and equity value are unchanged."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "event-impacts-on-ev",
@@ -290,9 +431,18 @@
     "questionType": "single-step",
     "prompt": "A company pays a $50 million cash dividend to its shareholders. Assuming no other changes, what happens to its equity value and enterprise value?",
     "keyPoints": [
-      {"point": "Cash falls by $50M and equity value falls by roughly $50M as that value has been distributed out of the company", "weight": 3},
-      {"point": "Because both cash and equity value fall by the same amount, EV stays roughly the same", "weight": 3},
-      {"point": "Reflects that a dividend transfers value from inside the company to shareholders' pockets, it doesn't destroy or create value", "weight": 1}
+      {
+        "point": "Cash falls by $50M and equity value falls by roughly $50M as that value has been distributed out of the company",
+        "weight": 3
+      },
+      {
+        "point": "Because both cash and equity value fall by the same amount, EV stays roughly the same",
+        "weight": 3
+      },
+      {
+        "point": "Reflects that a dividend transfers value from inside the company to shareholders' pockets, it doesn't destroy or create value",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Thinking EV falls because cash fell, without recognizing equity value also falls to offset it",
@@ -300,7 +450,10 @@
     ],
     "modelAnswer": "Once the $50 million dividend is paid, the company's cash balance drops by $50 million, and correspondingly its equity value should fall by roughly $50 million too, since that value has literally left the company and landed in shareholders' pockets — the stock typically trades down by close to the dividend amount on the ex-dividend date. Enterprise value, though, stays roughly the same, because in the bridge, cash falls by $50 million, which on its own would push EV up, but equity value also falls by $50 million, which pushes EV down by the same amount — the two effects offset each other. That makes intuitive sense: paying a dividend doesn't create or destroy any value in the operating business, it just moves cash that used to sit inside the company out to shareholders directly, so the value of the operations, which is what EV measures, is unaffected.",
     "followups": [
-      {"prompt": "How is this similar to or different from a stock buyback of the same dollar amount?", "modelAnswer": "Both a dividend and a buyback of the same dollar amount reduce cash and reduce total equity value by roughly that amount, leaving EV unchanged in both cases. The difference is mechanical: a dividend pays cash out to every shareholder proportionally without changing the share count, so the per-share price drops by the dividend amount. A buyback instead reduces the share count by repurchasing shares at the market price, so in theory the per-share price stays about the same while fewer shares remain outstanding. Total equity value falls identically either way, but the path — price per share versus number of shares — differs."}
+      {
+        "prompt": "How is this similar to or different from a stock buyback of the same dollar amount?",
+        "modelAnswer": "Both a dividend and a buyback of the same dollar amount reduce cash and reduce total equity value by roughly that amount, leaving EV unchanged in both cases. The difference is mechanical: a dividend pays cash out to every shareholder proportionally without changing the share count, so the per-share price drops by the dividend amount. A buyback instead reduces the share count by repurchasing shares at the market price, so in theory the per-share price stays about the same while fewer shares remain outstanding. Total equity value falls identically either way, but the path — price per share versus number of shares — differs."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "event-impacts-on-ev",
@@ -313,9 +466,18 @@
     "questionType": "single-step",
     "prompt": "A company uses $30 million of its existing cash to buy back its own stock at the current market price. What happens to its equity value, its share count, and its enterprise value?",
     "keyPoints": [
-      {"point": "Cash falls by $30M and total equity value falls by roughly $30M as that value is paid out to departing shareholders", "weight": 3},
-      {"point": "Share count decreases, but per-share price stays roughly the same since shares were repurchased at fair market value", "weight": 2},
-      {"point": "EV is roughly unchanged, since the drop in cash offsets the drop in equity value in the bridge", "weight": 2}
+      {
+        "point": "Cash falls by $30M and total equity value falls by roughly $30M as that value is paid out to departing shareholders",
+        "weight": 3
+      },
+      {
+        "point": "Share count decreases, but per-share price stays roughly the same since shares were repurchased at fair market value",
+        "weight": 2
+      },
+      {
+        "point": "EV is roughly unchanged, since the drop in cash offsets the drop in equity value in the bridge",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Thinking a buyback increases enterprise value by reducing the share count",
@@ -323,7 +485,10 @@
     ],
     "modelAnswer": "The company spends $30 million of cash to repurchase its own shares, so cash falls by $30 million and total equity value falls by roughly $30 million too, since that value has been paid out to the shareholders who sold their shares back to the company. Share count decreases by whatever number of shares $30 million bought at the current market price, but the price per remaining share should stay roughly the same, because the buyback happened at fair market value — you're not creating value out of nothing, you're just reducing both cash and the shares outstanding proportionally. Enterprise value stays roughly unchanged, for the same reason as a dividend: cash falling by $30 million would push EV up on its own, but equity value falling by $30 million offsets that, so the net effect on EV is close to zero. It's another financing-type event that redistributes value rather than creating or destroying it.",
     "followups": [
-      {"prompt": "Does a buyback affect earnings per share, even if it doesn't affect enterprise value?", "modelAnswer": "Yes — a buyback reduces the diluted share count, so even with identical net income, EPS mechanically increases because you're dividing the same numerator by a smaller denominator. That's a big reason companies sometimes pursue buybacks: it can boost EPS and, if the market keeps applying the same P/E multiple, push the stock price up over time, even though the true underlying enterprise value and cash flow generation of the business haven't changed at all. It's a reminder that EPS-driven narratives can diverge from actual value creation in the operating business."}
+      {
+        "prompt": "Does a buyback affect earnings per share, even if it doesn't affect enterprise value?",
+        "modelAnswer": "Yes — a buyback reduces the diluted share count, so even with identical net income, EPS mechanically increases because you're dividing the same numerator by a smaller denominator. That's a big reason companies sometimes pursue buybacks: it can boost EPS and, if the market keeps applying the same P/E multiple, push the stock price up over time, even though the true underlying enterprise value and cash flow generation of the business haven't changed at all. It's a reminder that EPS-driven narratives can diverge from actual value creation in the operating business."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "event-impacts-on-ev",
@@ -336,9 +501,18 @@
     "questionType": "conceptual",
     "prompt": "Why do we pair enterprise value with EBITDA or EBIT, rather than pairing enterprise value with Net Income?",
     "keyPoints": [
-      {"point": "EBITDA and EBIT are pre-interest, capital-structure-neutral measures of profitability, available to all capital providers", "weight": 3},
-      {"point": "Net Income is after interest expense, so it only reflects what's left for common equity holders after debt service", "weight": 3},
-      {"point": "Pairing a capital-structure-neutral numerator (EV) with a capital-structure-affected denominator (Net Income) creates an inconsistent, distorted multiple", "weight": 2}
+      {
+        "point": "EBITDA and EBIT are pre-interest, capital-structure-neutral measures of profitability, available to all capital providers",
+        "weight": 3
+      },
+      {
+        "point": "Net Income is after interest expense, so it only reflects what's left for common equity holders after debt service",
+        "weight": 3
+      },
+      {
+        "point": "Pairing a capital-structure-neutral numerator (EV) with a capital-structure-affected denominator (Net Income) creates an inconsistent, distorted multiple",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Thinking EV/Net Income is just as valid a multiple as EV/EBITDA",
@@ -346,7 +520,10 @@
     ],
     "modelAnswer": "The core rule for building any valuation multiple is that the numerator and denominator need to represent the same group of investors — that's what makes the multiple consistent and comparable across companies. Enterprise value represents the claims of everyone: debt holders, preferred holders, and common equity holders combined. EBITDA and EBIT are measured before interest expense, so they're also capital-structure-neutral — they represent cash flow or profit available to all of those capital providers before anyone gets paid their specific piece. Net Income, on the other hand, is calculated after interest expense has already been paid to debt holders, so it only reflects what's left over for common shareholders. If you divided EV, which represents all investors, by Net Income, which only represents common shareholders after debt service, you'd get a multiple that mixes two different investor bases and doesn't mean anything consistent across companies with different amounts of leverage. That's why EV pairs with EBITDA or EBIT, and equity value pairs with Net Income instead.",
     "followups": [
-      {"prompt": "What's the correct value to pair with Net Income, and why does that pairing work?", "modelAnswer": "Net Income should be paired with equity value, giving you the P/E ratio when expressed on a per-share basis. That works because Net Income is already after interest expense and preferred dividends, meaning it only reflects the earnings available to common shareholders — the same investor base that equity value represents. Both the numerator and denominator are speaking the same capital-structure 'language,' so the resulting multiple is internally consistent and can be reasonably compared across companies, though it's still affected by leverage differences in a different way, since more debt increases financial risk to that residual earnings stream."}
+      {
+        "prompt": "What's the correct value to pair with Net Income, and why does that pairing work?",
+        "modelAnswer": "Net Income should be paired with equity value, giving you the P/E ratio when expressed on a per-share basis. That works because Net Income is already after interest expense and preferred dividends, meaning it only reflects the earnings available to common shareholders — the same investor base that equity value represents. Both the numerator and denominator are speaking the same capital-structure 'language,' so the resulting multiple is internally consistent and can be reasonably compared across companies, though it's still affected by leverage differences in a different way, since more debt increases financial risk to that residual earnings stream."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "pairing-metrics-with-values",
@@ -359,9 +536,18 @@
     "questionType": "conceptual",
     "prompt": "What value do we pair with EPS to get the P/E ratio, and why is that pairing correct?",
     "keyPoints": [
-      {"point": "P/E pairs the share price (equity value per share) with EPS (Net Income per share)", "weight": 3},
-      {"point": "Both the numerator and denominator represent only what belongs to common shareholders, after interest and preferred dividends", "weight": 3},
-      {"point": "This consistency is why P/E is a valid, widely-used multiple despite being affected by capital structure differences", "weight": 1}
+      {
+        "point": "P/E pairs the share price (equity value per share) with EPS (Net Income per share)",
+        "weight": 3
+      },
+      {
+        "point": "Both the numerator and denominator represent only what belongs to common shareholders, after interest and preferred dividends",
+        "weight": 3
+      },
+      {
+        "point": "This consistency is why P/E is a valid, widely-used multiple despite being affected by capital structure differences",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Thinking P/E pairs enterprise value with EPS",
@@ -369,7 +555,10 @@
     ],
     "modelAnswer": "The P/E ratio pairs share price — which is just equity value expressed on a per-share basis — with earnings per share, which is Net Income divided by diluted shares outstanding. This pairing works because both sides of the ratio represent the same investor group: common shareholders. Share price reflects what the market is willing to pay for a claim on the company's residual profits after debt holders and preferred shareholders have already been paid, and EPS is exactly that — Net Income after interest expense and preferred dividends have already been subtracted, divided across the shares that have a claim on what's left. Because numerator and denominator are speaking the same capital-structure language, P/E is internally consistent, even though it's still influenced by how leveraged a company is, since more debt means more interest expense eating into Net Income before it ever reaches EPS.",
     "followups": [
-      {"prompt": "Why can't you just divide EV by EPS to get a similar multiple?", "modelAnswer": "You could compute that number mechanically, but it wouldn't mean anything useful, because you'd be mixing investor bases again — EV represents all capital providers combined, while EPS is Net Income divided among only common shareholders, after debt holders have already been paid their interest. Dividing a total-firm value by a per-share, post-interest earnings figure creates a mismatched multiple that isn't comparable across companies with different capital structures, the same core issue as EV/Net Income at the aggregate level."}
+      {
+        "prompt": "Why can't you just divide EV by EPS to get a similar multiple?",
+        "modelAnswer": "You could compute that number mechanically, but it wouldn't mean anything useful, because you'd be mixing investor bases again — EV represents all capital providers combined, while EPS is Net Income divided among only common shareholders, after debt holders have already been paid their interest. Dividing a total-firm value by a per-share, post-interest earnings figure creates a mismatched multiple that isn't comparable across companies with different capital structures, the same core issue as EV/Net Income at the aggregate level."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "pairing-metrics-with-values",
@@ -382,9 +571,15 @@
     "questionType": "conceptual",
     "prompt": "When you see an EV/Revenue multiple, which value — EV or equity value — is in the numerator, and why is that the correct pairing?",
     "keyPoints": [
-      {"point": "Enterprise value is the correct numerator, not equity value", "weight": 3},
-      {"point": "Revenue is generated by the entire operating business and is completely unaffected by capital structure or interest expense", "weight": 3},
-      {"point": "Since revenue is capital-structure-neutral, it must be paired with EV, which is also capital-structure-neutral", "weight": 2}
+      { "point": "Enterprise value is the correct numerator, not equity value", "weight": 3 },
+      {
+        "point": "Revenue is generated by the entire operating business and is completely unaffected by capital structure or interest expense",
+        "weight": 3
+      },
+      {
+        "point": "Since revenue is capital-structure-neutral, it must be paired with EV, which is also capital-structure-neutral",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Pairing equity value with revenue instead of EV",
@@ -392,7 +587,10 @@
     ],
     "modelAnswer": "EV/Revenue always uses enterprise value in the numerator, never equity value. The logic is the same consistency rule that applies to every multiple: revenue is generated by the whole operating business before any interest expense, taxes, or capital structure effects come into play at all — it sits at the very top of the income statement, completely untouched by how the company happens to be financed. Because revenue is fully capital-structure-neutral, it needs to be paired with a capital-structure-neutral value, which is enterprise value, not equity value. If you paired equity value with revenue instead, you'd be comparing a number that reflects only common shareholders' claims against a number that reflects the entire business's top-line output, and that mismatch would make the multiple meaningless for comparing companies with different amounts of debt.",
     "followups": [
-      {"prompt": "Why is EV/Revenue often used for early-stage or unprofitable companies specifically?", "modelAnswer": "Early-stage or unprofitable companies frequently have negative or near-zero EBITDA, EBIT, and Net Income, which makes multiples like EV/EBITDA or P/E either meaningless or wildly distorted since you'd be dividing by a small or negative number. Revenue, on the other hand, is almost always positive and growing for these companies, even if profitability hasn't kicked in yet, so EV/Revenue becomes one of the few usable multiples to compare valuation across similar high-growth, pre-profit businesses, even though it says nothing directly about margins or cash generation."}
+      {
+        "prompt": "Why is EV/Revenue often used for early-stage or unprofitable companies specifically?",
+        "modelAnswer": "Early-stage or unprofitable companies frequently have negative or near-zero EBITDA, EBIT, and Net Income, which makes multiples like EV/EBITDA or P/E either meaningless or wildly distorted since you'd be dividing by a small or negative number. Revenue, on the other hand, is almost always positive and growing for these companies, even if profitability hasn't kicked in yet, so EV/Revenue becomes one of the few usable multiples to compare valuation across similar high-growth, pre-profit businesses, even though it says nothing directly about margins or cash generation."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "pairing-metrics-with-values",
@@ -405,9 +603,18 @@
     "questionType": "conceptual",
     "prompt": "Can enterprise value ever be negative? If so, roughly how would that happen, and what would it suggest about the market's view of the company?",
     "keyPoints": [
-      {"point": "Yes, EV can be negative if cash exceeds the sum of equity value, debt, preferred, and minority interest", "weight": 3},
-      {"point": "This tends to happen with companies holding very large cash balances relative to a depressed market cap, e.g. struggling or distressed businesses with a lot of cash left", "weight": 2},
-      {"point": "It suggests the market is valuing the operating business at less than zero, implying investors expect the operations to destroy value or burn cash going forward, or simply distrust management's use of the cash", "weight": 3}
+      {
+        "point": "Yes, EV can be negative if cash exceeds the sum of equity value, debt, preferred, and minority interest",
+        "weight": 3
+      },
+      {
+        "point": "This tends to happen with companies holding very large cash balances relative to a depressed market cap, e.g. struggling or distressed businesses with a lot of cash left",
+        "weight": 2
+      },
+      {
+        "point": "It suggests the market is valuing the operating business at less than zero, implying investors expect the operations to destroy value or burn cash going forward, or simply distrust management's use of the cash",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Assuming EV can never mathematically go below zero",
@@ -415,7 +622,10 @@
     ],
     "modelAnswer": "Yes, enterprise value can technically be negative — it happens when a company's cash balance is larger than its equity value plus debt, preferred stock, and minority interest combined. This is unusual but does show up, typically for smaller or distressed companies whose stock has been beaten down heavily by the market, even though a large cash pile is sitting on the balance sheet from a prior asset sale, an old business that was wound down, or accumulated profits from better days. When EV is negative, it implies the market is valuing the core operating business at less than zero, essentially saying the operations are expected to destroy value going forward, perhaps by burning through cash, or that investors don't trust management to deploy that cash productively rather than waste it. It's a flag worth investigating rather than assuming it's automatically a screaming bargain, since there's often a real reason — like ongoing losses, litigation risk, or governance concerns — behind the market's pessimism.",
     "followups": [
-      {"prompt": "Would you treat a negative-EV company as an automatic buy signal in a screening exercise?", "modelAnswer": "No — while a negative EV can occasionally flag a genuinely undervalued 'cigar butt' opportunity, it's more often a red flag that deserves deeper diligence before acting on it. You'd want to understand why the market is so pessimistic: is the core business burning cash every quarter, is there pending litigation or regulatory risk eating into that cash pile, does management have a history of value-destructive capital allocation, or is the cash trapped overseas with tax friction to repatriate it? Screening tools can surface negative-EV names, but the actual investment decision requires understanding the underlying story, not just the arithmetic."}
+      {
+        "prompt": "Would you treat a negative-EV company as an automatic buy signal in a screening exercise?",
+        "modelAnswer": "No — while a negative EV can occasionally flag a genuinely undervalued 'cigar butt' opportunity, it's more often a red flag that deserves deeper diligence before acting on it. You'd want to understand why the market is so pessimistic: is the core business burning cash every quarter, is there pending litigation or regulatory risk eating into that cash pile, does management have a history of value-destructive capital allocation, or is the cash trapped overseas with tax friction to repatriate it? Screening tools can surface negative-EV names, but the actual investment decision requires understanding the underlying story, not just the arithmetic."
+      }
     ],
     "chapterSlug": "ev-equity-value",
     "sectionSlug": "ev-edge-cases",

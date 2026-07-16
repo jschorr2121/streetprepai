@@ -124,9 +124,7 @@ export function NewContactForm() {
             aria-invalid={!!errors.gradYear}
             {...register("gradYear")}
           />
-          {errors.gradYear && (
-            <p className="text-destructive text-xs">{errors.gradYear.message}</p>
-          )}
+          {errors.gradYear && <p className="text-destructive text-xs">{errors.gradYear.message}</p>}
         </div>
 
         <div className="space-y-1.5">

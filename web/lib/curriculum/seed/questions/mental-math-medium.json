@@ -6,10 +6,22 @@
     "questionType": "multi-step",
     "prompt": "A company has $50 million in revenue and grows 8% per year. Roughly what's revenue after 3 years, and roughly how many years does it take to double using the Rule of 72?",
     "keyPoints": [
-      { "point": "Applies the Rule of 72 to estimate doubling time: 72 / 8 = 9 years", "weight": 3 },
-      { "point": "Compounds 8% growth year by year rather than multiplying 8% x 3 and adding it as simple growth", "weight": 3 },
-      { "point": "Approximates year-1 revenue at $54M, year-2 at roughly $58-58.3M, year-3 at roughly $63M", "weight": 3 },
-      { "point": "Flags that compounding is slightly higher than the simple 24% (3 x 8%) estimate", "weight": 2 }
+      {
+        "point": "Applies the Rule of 72 to estimate doubling time: 72 / 8 = 9 years",
+        "weight": 3
+      },
+      {
+        "point": "Compounds 8% growth year by year rather than multiplying 8% x 3 and adding it as simple growth",
+        "weight": 3
+      },
+      {
+        "point": "Approximates year-1 revenue at $54M, year-2 at roughly $58-58.3M, year-3 at roughly $63M",
+        "weight": 3
+      },
+      {
+        "point": "Flags that compounding is slightly higher than the simple 24% (3 x 8%) estimate",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Multiplying 8% by 3 years and adding that flat 24% to revenue, ignoring compounding",
@@ -43,7 +55,10 @@
     "keyPoints": [
       { "point": "Recognizes sequential percentage changes multiply rather than add", "weight": 3 },
       { "point": "Computes 1.20 x 0.90 = 1.08", "weight": 3 },
-      { "point": "States the net change is +8%, not the naive +10% from simply adding 20% and -10%", "weight": 2 },
+      {
+        "point": "States the net change is +8%, not the naive +10% from simply adding 20% and -10%",
+        "weight": 2
+      },
       { "point": "Optionally illustrates with concrete dollar figures to verify", "weight": 1 }
     ],
     "misconceptions": [
@@ -76,7 +91,10 @@
     "questionType": "calculation",
     "prompt": "A company has two segments. Segment A does $60 million in revenue and trades at a 3.0x revenue multiple. Segment B does $40 million in revenue and trades at a 5.0x revenue multiple. What's the implied blended (weighted average) revenue multiple for the whole company?",
     "keyPoints": [
-      { "point": "Recognizes the blended multiple is a revenue-weighted average, not a simple average of 3.0x and 5.0x", "weight": 3 },
+      {
+        "point": "Recognizes the blended multiple is a revenue-weighted average, not a simple average of 3.0x and 5.0x",
+        "weight": 3
+      },
       { "point": "Computes implied value of each segment: $180M and $200M", "weight": 2 },
       { "point": "Sums total implied value ($380M) and total revenue ($100M)", "weight": 2 },
       { "point": "Divides to get the blended multiple, 3.8x", "weight": 3 }
@@ -114,7 +132,10 @@
       { "point": "Computes EV = EBITDA x multiple = $80M x 7.5 = $600M", "weight": 3 },
       { "point": "States equity value = EV - net debt = $600M - $150M = $450M", "weight": 3 },
       { "point": "Divides equity value by share count: $450M / 50M = $9.00", "weight": 3 },
-      { "point": "Narrates the EV-to-equity bridge order explicitly rather than jumping to a number", "weight": 1 }
+      {
+        "point": "Narrates the EV-to-equity bridge order explicitly rather than jumping to a number",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Adding net debt instead of subtracting it when bridging from EV to equity value",
@@ -183,9 +204,15 @@
     "prompt": "A stock trades at $60 with EPS of $4.00, so a 15x P/E. A close public comp with similar growth and margins trades at 18x P/E. If the stock re-rated to that comp's multiple, what would the implied share price be?",
     "keyPoints": [
       { "point": "Confirms the current multiple checks out: $60 / $4 = 15x", "weight": 2 },
-      { "point": "Applies the new multiple directly to EPS rather than to the old price", "weight": 3 },
+      {
+        "point": "Applies the new multiple directly to EPS rather than to the old price",
+        "weight": 3
+      },
       { "point": "Computes 18 x $4 = $72", "weight": 3 },
-      { "point": "States the implied upside is $12, or 20%, versus the current $60 price", "weight": 2 }
+      {
+        "point": "States the implied upside is $12, or 20%, versus the current $60 price",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Scaling the old price by the ratio of multiples incorrectly, e.g., adding the multiple difference (3) directly to the price",
@@ -217,10 +244,19 @@
     "questionType": "calculation",
     "prompt": "A company's revenue grew from $100 million to $133.1 million over 3 years. Estimate the compound annual growth rate (CAGR).",
     "keyPoints": [
-      { "point": "Recognizes CAGR requires finding the growth rate whose 3-year compounding gives the total multiple", "weight": 3 },
+      {
+        "point": "Recognizes CAGR requires finding the growth rate whose 3-year compounding gives the total multiple",
+        "weight": 3
+      },
       { "point": "Computes total growth multiple: $133.1M / $100M = 1.331", "weight": 2 },
-      { "point": "Recognizes 1.331 as 1.1 cubed (or estimates via trial: 1.1^3 = 1.331) to back into CAGR = 10%", "weight": 3 },
-      { "point": "States CAGR is meaningfully different from simply dividing total growth by 3 years", "weight": 2 }
+      {
+        "point": "Recognizes 1.331 as 1.1 cubed (or estimates via trial: 1.1^3 = 1.331) to back into CAGR = 10%",
+        "weight": 3
+      },
+      {
+        "point": "States CAGR is meaningfully different from simply dividing total growth by 3 years",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Computing total growth of 33.1% and dividing by 3 to get an 11.03% 'CAGR', which is the wrong (simple average) approach",
@@ -253,9 +289,18 @@
     "prompt": "A company has $450 million of total debt and $90 million of EBITDA. What's its Debt/EBITDA leverage ratio, and is that a high or low level of leverage for a typical corporate borrower?",
     "keyPoints": [
       { "point": "Computes 450 / 90 = 5.0x", "weight": 3 },
-      { "point": "Simplifies the division (e.g., 45/9 = 5) rather than doing it the hard way", "weight": 2 },
-      { "point": "Contextualizes 5.0x as elevated/highly levered relative to a typical investment-grade range of roughly 1-3x", "weight": 3 },
-      { "point": "Notes that 'high' is sector- and credit-quality dependent, not an absolute universal threshold", "weight": 1 }
+      {
+        "point": "Simplifies the division (e.g., 45/9 = 5) rather than doing it the hard way",
+        "weight": 2
+      },
+      {
+        "point": "Contextualizes 5.0x as elevated/highly levered relative to a typical investment-grade range of roughly 1-3x",
+        "weight": 3
+      },
+      {
+        "point": "Notes that 'high' is sector- and credit-quality dependent, not an absolute universal threshold",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Inverting the ratio and computing EBITDA/Debt instead of Debt/EBITDA",
@@ -287,10 +332,19 @@
     "questionType": "curveball",
     "prompt": "You're in a hallway with three light switches, each connected to one of three light bulbs in a room you can't see into. You can flip the switches as much as you want, but you may only enter the room one time. How do you determine which switch controls which bulb?",
     "keyPoints": [
-      { "point": "Recognizes that on/off alone (binary state) can't distinguish 3 possibilities across one room visit, so a third signal channel — heat — is needed", "weight": 3 },
+      {
+        "point": "Recognizes that on/off alone (binary state) can't distinguish 3 possibilities across one room visit, so a third signal channel — heat — is needed",
+        "weight": 3
+      },
       { "point": "Turns switch 1 on and leaves it on for a few minutes", "weight": 2 },
-      { "point": "Turns switch 1 off, then immediately turns switch 2 on, then enters the room", "weight": 3 },
-      { "point": "Identifies bulbs: on and lit = switch 2; off but warm = switch 1; off and cold = switch 3", "weight": 3 }
+      {
+        "point": "Turns switch 1 off, then immediately turns switch 2 on, then enters the room",
+        "weight": 3
+      },
+      {
+        "point": "Identifies bulbs: on and lit = switch 2; off but warm = switch 1; off and cold = switch 3",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Trying to solve it purely with on/off states and concluding it's impossible with only one entry",
@@ -322,10 +376,19 @@
     "questionType": "curveball",
     "prompt": "You have a 3-gallon jug and a 5-gallon jug, no markings on either, and an unlimited water supply. How do you measure out exactly 4 gallons?",
     "keyPoints": [
-      { "point": "Fills the 5-gallon jug and pours into the 3-gallon jug, leaving 2 gallons in the 5-gallon jug", "weight": 3 },
-      { "point": "Empties the 3-gallon jug, then pours the remaining 2 gallons from the 5-gallon jug into it", "weight": 2 },
+      {
+        "point": "Fills the 5-gallon jug and pours into the 3-gallon jug, leaving 2 gallons in the 5-gallon jug",
+        "weight": 3
+      },
+      {
+        "point": "Empties the 3-gallon jug, then pours the remaining 2 gallons from the 5-gallon jug into it",
+        "weight": 2
+      },
       { "point": "Refills the 5-gallon jug completely", "weight": 1 },
-      { "point": "Pours from the 5-gallon jug into the 3-gallon jug (which already has 2 gallons, so it only takes 1 more) until the 3-gallon jug is full, leaving exactly 4 gallons in the 5-gallon jug", "weight": 3 }
+      {
+        "point": "Pours from the 5-gallon jug into the 3-gallon jug (which already has 2 gallons, so it only takes 1 more) until the 3-gallon jug is full, leaving exactly 4 gallons in the 5-gallon jug",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Trying to reach 4 gallons by only using the 3-gallon jug's capacity repeatedly, without leveraging the 5-gallon jug's larger capacity and the leftover-amount trick",

@@ -6,10 +6,22 @@
     "questionType": "curveball",
     "prompt": "Your resume says you left your last internship a month early. That's unusual — what actually happened?",
     "keyPoints": [
-      {"point": "Answers honestly and directly without evasion or visible discomfort", "weight": 3},
-      {"point": "Takes ownership of the candidate's own role in the situation, if any, rather than only blaming the employer", "weight": 3},
-      {"point": "Provides a coherent, verifiable explanation with no contradictions", "weight": 3},
-      {"point": "Redirects constructively toward what was learned or how it's been addressed since", "weight": 2}
+      {
+        "point": "Answers honestly and directly without evasion or visible discomfort",
+        "weight": 3
+      },
+      {
+        "point": "Takes ownership of the candidate's own role in the situation, if any, rather than only blaming the employer",
+        "weight": 3
+      },
+      {
+        "point": "Provides a coherent, verifiable explanation with no contradictions",
+        "weight": 3
+      },
+      {
+        "point": "Redirects constructively toward what was learned or how it's been addressed since",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Giving a vague, evasive non-answer that raises more suspicion than a straight answer would",
@@ -45,10 +57,16 @@
     "questionType": "curveball",
     "prompt": "Honestly, that pitch sounded rehearsed and generic. Give me a version of 'tell me about yourself' that's actually convincing.",
     "keyPoints": [
-      {"point": "Stays composed rather than flustered by the direct criticism", "weight": 3},
-      {"point": "Delivers a genuinely more specific, differentiated version with a concrete anecdote", "weight": 3},
-      {"point": "Avoids becoming defensive about the critique itself", "weight": 2},
-      {"point": "Demonstrates the ability to adapt on the fly, which is itself a signal of composure under pressure", "weight": 2}
+      { "point": "Stays composed rather than flustered by the direct criticism", "weight": 3 },
+      {
+        "point": "Delivers a genuinely more specific, differentiated version with a concrete anecdote",
+        "weight": 3
+      },
+      { "point": "Avoids becoming defensive about the critique itself", "weight": 2 },
+      {
+        "point": "Demonstrates the ability to adapt on the fly, which is itself a signal of composure under pressure",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Getting visibly rattled or apologetic in a way that undermines confidence for the rest of the interview",
@@ -80,10 +98,22 @@
     "questionType": "curveball",
     "prompt": "Most analysts leave for private equity or a similar exit after two years. Convince me you're not just using us as a stepping stone.",
     "keyPoints": [
-      {"point": "Responds honestly rather than making an implausible blanket promise of permanence", "weight": 3},
-      {"point": "Distinguishes between using the job instrumentally and genuinely valuing the analyst role itself", "weight": 3},
-      {"point": "Gives specific evidence for why the analyst work itself, not just the exit, is the goal", "weight": 3},
-      {"point": "Acknowledges the industry norm honestly rather than pretending it doesn't apply broadly", "weight": 1}
+      {
+        "point": "Responds honestly rather than making an implausible blanket promise of permanence",
+        "weight": 3
+      },
+      {
+        "point": "Distinguishes between using the job instrumentally and genuinely valuing the analyst role itself",
+        "weight": 3
+      },
+      {
+        "point": "Gives specific evidence for why the analyst work itself, not just the exit, is the goal",
+        "weight": 3
+      },
+      {
+        "point": "Acknowledges the industry norm honestly rather than pretending it doesn't apply broadly",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Promising to stay for a specific long tenure in a way that sounds unrealistic and rehearsed",
@@ -115,10 +145,19 @@
     "questionType": "curveball",
     "prompt": "Compensation at top tech companies has converged with banking in recent years, and the hours are much better. Why would anyone still choose banking over tech?",
     "keyPoints": [
-      {"point": "Acknowledges the premise honestly rather than disputing accurate compensation trends", "weight": 2},
-      {"point": "Identifies specific, non-compensation reasons banking remains distinctly attractive", "weight": 3},
-      {"point": "Grounds the answer in personal preference rather than a generic industry defense", "weight": 3},
-      {"point": "Avoids disparaging tech careers as a category", "weight": 1}
+      {
+        "point": "Acknowledges the premise honestly rather than disputing accurate compensation trends",
+        "weight": 2
+      },
+      {
+        "point": "Identifies specific, non-compensation reasons banking remains distinctly attractive",
+        "weight": 3
+      },
+      {
+        "point": "Grounds the answer in personal preference rather than a generic industry defense",
+        "weight": 3
+      },
+      { "point": "Avoids disparaging tech careers as a category", "weight": 1 }
     ],
     "misconceptions": [
       "Disputing the compensation convergence outright rather than engaging with the premise honestly",
@@ -150,10 +189,22 @@
     "questionType": "curveball",
     "prompt": "Let's be honest — we're not one of the largest, most prestigious banks on the street. Why would someone with your profile settle for us?",
     "keyPoints": [
-      {"point": "Rejects the framing of 'settling' respectfully without dismissing the interviewer's point entirely", "weight": 3},
-      {"point": "Articulates specific, substantive advantages of a smaller or mid-tier platform over a bulge bracket", "weight": 3},
-      {"point": "Grounds the answer in personal priorities rather than a generic defense of smaller firms", "weight": 2},
-      {"point": "Maintains genuine enthusiasm and confidence rather than sounding like a consolation choice", "weight": 2}
+      {
+        "point": "Rejects the framing of 'settling' respectfully without dismissing the interviewer's point entirely",
+        "weight": 3
+      },
+      {
+        "point": "Articulates specific, substantive advantages of a smaller or mid-tier platform over a bulge bracket",
+        "weight": 3
+      },
+      {
+        "point": "Grounds the answer in personal priorities rather than a generic defense of smaller firms",
+        "weight": 2
+      },
+      {
+        "point": "Maintains genuine enthusiasm and confidence rather than sounding like a consolation choice",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Agreeing with the framing that the firm is a lesser choice, undermining the candidate's own conviction",
@@ -185,10 +236,22 @@
     "questionType": "verbal",
     "prompt": "Tell me about a time you disagreed with someone more senior than you, someone whose authority you had to respect. How did you handle it?",
     "keyPoints": [
-      {"point": "Describes a genuine disagreement with real stakes, not a trivial preference difference", "weight": 3},
-      {"point": "Shows appropriate deference to the power dynamic while still raising the concern", "weight": 3},
-      {"point": "Uses evidence or a low-friction approach to raise the disagreement rather than direct confrontation", "weight": 3},
-      {"point": "States a clear outcome, whether the candidate's view prevailed or not", "weight": 2}
+      {
+        "point": "Describes a genuine disagreement with real stakes, not a trivial preference difference",
+        "weight": 3
+      },
+      {
+        "point": "Shows appropriate deference to the power dynamic while still raising the concern",
+        "weight": 3
+      },
+      {
+        "point": "Uses evidence or a low-friction approach to raise the disagreement rather than direct confrontation",
+        "weight": 3
+      },
+      {
+        "point": "States a clear outcome, whether the candidate's view prevailed or not",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Describing a story where the candidate simply overrides the senior person's decision, which misreads the real power dynamics of a professional hierarchy",
@@ -224,10 +287,22 @@
     "questionType": "verbal",
     "prompt": "Tell me about a time you faced an ethical dilemma, where the easy path and the right path weren't the same thing. What did you do?",
     "keyPoints": [
-      {"point": "Describes a genuine ethical tension with real competing pressures, not a manufactured or trivial dilemma", "weight": 3},
-      {"point": "Shows the candidate reasoning through the trade-offs rather than reacting impulsively", "weight": 3},
-      {"point": "Takes the harder, more principled action despite some real cost or discomfort", "weight": 3},
-      {"point": "Reflects a mature understanding of professional integrity relevant to banking's high-trust environment", "weight": 2}
+      {
+        "point": "Describes a genuine ethical tension with real competing pressures, not a manufactured or trivial dilemma",
+        "weight": 3
+      },
+      {
+        "point": "Shows the candidate reasoning through the trade-offs rather than reacting impulsively",
+        "weight": 3
+      },
+      {
+        "point": "Takes the harder, more principled action despite some real cost or discomfort",
+        "weight": 3
+      },
+      {
+        "point": "Reflects a mature understanding of professional integrity relevant to banking's high-trust environment",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Choosing a story with an obviously easy 'right answer,' undermining the credibility of it being a genuine dilemma",
@@ -263,10 +338,22 @@
     "questionType": "curveball",
     "prompt": "You told me your weakness is that you get anxious under public scrutiny. Frankly, that sounds disqualifying for a job where you'll be grilled by clients and senior bankers constantly. Convince me otherwise.",
     "keyPoints": [
-      {"point": "Doesn't retract or minimize the original weakness dishonestly to escape the challenge", "weight": 3},
-      {"point": "Draws a precise distinction between the weakness as stated and what the job actually requires", "weight": 3},
-      {"point": "Provides concrete evidence of functioning effectively despite the anxiety, not proof it's gone", "weight": 3},
-      {"point": "Describes a specific coping mechanism or preparation habit that manages the anxiety in practice", "weight": 2}
+      {
+        "point": "Doesn't retract or minimize the original weakness dishonestly to escape the challenge",
+        "weight": 3
+      },
+      {
+        "point": "Draws a precise distinction between the weakness as stated and what the job actually requires",
+        "weight": 3
+      },
+      {
+        "point": "Provides concrete evidence of functioning effectively despite the anxiety, not proof it's gone",
+        "weight": 3
+      },
+      {
+        "point": "Describes a specific coping mechanism or preparation habit that manages the anxiety in practice",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Backpedaling and claiming the weakness isn't really true once challenged, contradicting the earlier answer",
@@ -298,10 +385,22 @@
     "questionType": "curveball",
     "prompt": "You majored in philosophy with no finance or accounting coursework at all. Why should we trust you can handle the technical demands of this job as quickly as someone with a finance background?",
     "keyPoints": [
-      {"point": "Acknowledges the gap honestly rather than claiming equivalent preparation", "weight": 2},
-      {"point": "Provides specific, concrete evidence of self-taught technical competence, not just intent to learn", "weight": 3},
-      {"point": "Articulates a specific advantage the non-traditional background provides", "weight": 3},
-      {"point": "Offers to be tested or demonstrate the skill directly rather than only asserting it verbally", "weight": 2}
+      {
+        "point": "Acknowledges the gap honestly rather than claiming equivalent preparation",
+        "weight": 2
+      },
+      {
+        "point": "Provides specific, concrete evidence of self-taught technical competence, not just intent to learn",
+        "weight": 3
+      },
+      {
+        "point": "Articulates a specific advantage the non-traditional background provides",
+        "weight": 3
+      },
+      {
+        "point": "Offers to be tested or demonstrate the skill directly rather than only asserting it verbally",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Claiming the major doesn't matter at all, dismissing a legitimate concern",
@@ -333,10 +432,19 @@
     "questionType": "curveball",
     "prompt": "You were laid off from your last job. Walk me through what happened, honestly, and why we shouldn't see that as a red flag.",
     "keyPoints": [
-      {"point": "Explains the circumstances factually and without excessive defensiveness", "weight": 3},
-      {"point": "Distinguishes clearly between a broad, business-driven layoff and individual performance issues, with evidence", "weight": 3},
-      {"point": "Describes constructive, verifiable use of the subsequent time", "weight": 3},
-      {"point": "Offers a path to independent verification (references) rather than asking to be taken purely at their word", "weight": 1}
+      {
+        "point": "Explains the circumstances factually and without excessive defensiveness",
+        "weight": 3
+      },
+      {
+        "point": "Distinguishes clearly between a broad, business-driven layoff and individual performance issues, with evidence",
+        "weight": 3
+      },
+      { "point": "Describes constructive, verifiable use of the subsequent time", "weight": 3 },
+      {
+        "point": "Offers a path to independent verification (references) rather than asking to be taken purely at their word",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Being vague about whether the layoff was performance-related, leaving ambiguity that reads worse than a direct answer",
@@ -368,10 +476,22 @@
     "questionType": "curveball",
     "prompt": "You mentioned a deal you liked where a strategic acquirer paid what looked like a rich premium. Defend that price — why might paying up have actually been the disciplined choice?",
     "keyPoints": [
-      {"point": "Engages seriously with the challenge rather than retreating to a vague defense", "weight": 2},
-      {"point": "Articulates specific reasons a premium can be justified (scarcity, strategic fit, synergy realization confidence)", "weight": 3},
-      {"point": "Acknowledges the genuine risk of overpaying rather than one-sidedly defending it", "weight": 3},
-      {"point": "Distinguishes disciplined premium-paying from simple overpayment with a clear standard", "weight": 3}
+      {
+        "point": "Engages seriously with the challenge rather than retreating to a vague defense",
+        "weight": 2
+      },
+      {
+        "point": "Articulates specific reasons a premium can be justified (scarcity, strategic fit, synergy realization confidence)",
+        "weight": 3
+      },
+      {
+        "point": "Acknowledges the genuine risk of overpaying rather than one-sidedly defending it",
+        "weight": 3
+      },
+      {
+        "point": "Distinguishes disciplined premium-paying from simple overpayment with a clear standard",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Defending any premium reflexively as justified without a substantive standard for what makes it disciplined",
@@ -403,11 +523,20 @@
     "questionType": "multi-step",
     "prompt": "Take a real cross-border acquisition you've studied. Walk me through the strategic rationale, the biggest risk you'd flag to the buyer's board, and how you'd structure the deal to mitigate that specific risk.",
     "keyPoints": [
-      {"point": "States accurate basic facts about a real cross-border deal", "weight": 2},
-      {"point": "Articulates a specific strategic rationale beyond generic 'international expansion'", "weight": 3},
-      {"point": "Identifies a cross-border-specific risk (regulatory, currency, integration, political) with real specificity", "weight": 3},
-      {"point": "Proposes a concrete structural or contractual mitigation tied directly to that risk", "weight": 3},
-      {"point": "Organizes the answer clearly across the three parts requested", "weight": 1}
+      { "point": "States accurate basic facts about a real cross-border deal", "weight": 2 },
+      {
+        "point": "Articulates a specific strategic rationale beyond generic 'international expansion'",
+        "weight": 3
+      },
+      {
+        "point": "Identifies a cross-border-specific risk (regulatory, currency, integration, political) with real specificity",
+        "weight": 3
+      },
+      {
+        "point": "Proposes a concrete structural or contractual mitigation tied directly to that risk",
+        "weight": 3
+      },
+      { "point": "Organizes the answer clearly across the three parts requested", "weight": 1 }
     ],
     "misconceptions": [
       "Naming a generic risk like 'integration risk' without any cross-border-specific reasoning",
@@ -439,10 +568,22 @@
     "questionType": "curveball",
     "prompt": "If the Fed cut rates sharply and unexpectedly next month, walk me through the second-order effects on private equity deal activity specifically, not just the obvious first-order one.",
     "keyPoints": [
-      {"point": "States the obvious first-order effect briefly before moving to second-order reasoning", "weight": 2},
-      {"point": "Identifies at least two distinct second-order effects with clear causal reasoning", "weight": 3},
-      {"point": "Considers competitive dynamics among sponsors, not just financing cost mechanics", "weight": 3},
-      {"point": "Shows awareness that sharp, unexpected moves carry distinct dynamics from gradual, anticipated ones", "weight": 2}
+      {
+        "point": "States the obvious first-order effect briefly before moving to second-order reasoning",
+        "weight": 2
+      },
+      {
+        "point": "Identifies at least two distinct second-order effects with clear causal reasoning",
+        "weight": 3
+      },
+      {
+        "point": "Considers competitive dynamics among sponsors, not just financing cost mechanics",
+        "weight": 3
+      },
+      {
+        "point": "Shows awareness that sharp, unexpected moves carry distinct dynamics from gradual, anticipated ones",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Stopping at the obvious first-order point (cheaper debt, higher prices) without engaging with second-order effects as asked",
@@ -474,10 +615,22 @@
     "questionType": "verbal",
     "prompt": "Tell me about a time your mistake had a real consequence for someone else, not just for you. How did you handle it in the moment and afterward?",
     "keyPoints": [
-      {"point": "Describes a genuine mistake with a real, specific impact on another person or the organization", "weight": 3},
-      {"point": "Shows immediate, proactive handling of the mistake rather than concealment or delay", "weight": 3},
-      {"point": "Describes taking direct responsibility with the affected party, not just internally", "weight": 3},
-      {"point": "Reflects a durable process change made afterward, not just an apology", "weight": 2}
+      {
+        "point": "Describes a genuine mistake with a real, specific impact on another person or the organization",
+        "weight": 3
+      },
+      {
+        "point": "Shows immediate, proactive handling of the mistake rather than concealment or delay",
+        "weight": 3
+      },
+      {
+        "point": "Describes taking direct responsibility with the affected party, not just internally",
+        "weight": 3
+      },
+      {
+        "point": "Reflects a durable process change made afterward, not just an apology",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Describing a mistake whose consequence was minor or entirely self-contained, avoiding the real difficulty asked about",
@@ -509,10 +662,22 @@
     "questionType": "verbal",
     "prompt": "Tell me about a time at work or in an internship where you were asked to do something you weren't comfortable with. What did you do?",
     "keyPoints": [
-      {"point": "Describes a genuine instance of discomfort with real stakes, not a trivial task dislike", "weight": 3},
-      {"point": "Shows the candidate handling it professionally rather than either silent compliance or open refusal", "weight": 3},
-      {"point": "Distinguishes clearly between a legitimate ethical concern and simple task avoidance", "weight": 2},
-      {"point": "States a concrete resolution and what was learned about navigating workplace authority responsibly", "weight": 2}
+      {
+        "point": "Describes a genuine instance of discomfort with real stakes, not a trivial task dislike",
+        "weight": 3
+      },
+      {
+        "point": "Shows the candidate handling it professionally rather than either silent compliance or open refusal",
+        "weight": 3
+      },
+      {
+        "point": "Distinguishes clearly between a legitimate ethical concern and simple task avoidance",
+        "weight": 2
+      },
+      {
+        "point": "States a concrete resolution and what was learned about navigating workplace authority responsibly",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Describing simple task discomfort (e.g., disliking formatting work) as though it were an ethical concern",

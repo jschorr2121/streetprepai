@@ -118,10 +118,7 @@ export async function markChapterComplete(
 
 // ─── Topic mastery ────────────────────────────────────────────────────────────
 
-export async function listTopicMastery(
-  db: Executor,
-  userId: string,
-): Promise<TopicMasteryEntry[]> {
+export async function listTopicMastery(db: Executor, userId: string): Promise<TopicMasteryEntry[]> {
   const rows = await db.select().from(topicMastery).where(eq(topicMastery.userId, userId));
   return rows.map((r) => ({ topic: r.topic, score: Number(r.score), attempts: r.attempts }));
 }

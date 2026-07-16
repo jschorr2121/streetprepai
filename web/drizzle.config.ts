@@ -6,9 +6,7 @@ import { defineConfig } from "drizzle-kit";
 // back to the pooler URL the app uses at runtime.
 const url = process.env.DIRECT_URL ?? process.env.DATABASE_URL;
 if (!url) {
-  throw new Error(
-    "DIRECT_URL or DATABASE_URL must be set for drizzle-kit. See .env.example.",
-  );
+  throw new Error("DIRECT_URL or DATABASE_URL must be set for drizzle-kit. See .env.example.");
 }
 
 export default defineConfig({

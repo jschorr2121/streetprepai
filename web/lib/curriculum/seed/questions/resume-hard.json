@@ -6,10 +6,22 @@
     "questionType": "multi-step",
     "prompt": "You're advising a candidate with two internships, a study-abroad leadership role, and three club involvements — all competing for space on a single page. Walk me through how you'd triage what stays, what gets cut, and how you'd order the sections to fit banking conventions.",
     "keyPoints": [
-      { "point": "Order sections by convention: Education at top, Experience next (reverse chronological, most relevant/recent first), then Leadership/Activities, then Skills/Interests last", "weight": 3 },
-      { "point": "Triage criteria for what stays: relevance to IB (deal/quant exposure) first, recency second, prestige/impact of the role third", "weight": 3 },
-      { "point": "Cut or consolidate redundant club bullets that don't add a distinct skill beyond what's already shown", "weight": 2 },
-      { "point": "Keep leadership entries only if genuinely differentiated (e.g., president role, managed a budget, led a team of a specific size)", "weight": 2 }
+      {
+        "point": "Order sections by convention: Education at top, Experience next (reverse chronological, most relevant/recent first), then Leadership/Activities, then Skills/Interests last",
+        "weight": 3
+      },
+      {
+        "point": "Triage criteria for what stays: relevance to IB (deal/quant exposure) first, recency second, prestige/impact of the role third",
+        "weight": 3
+      },
+      {
+        "point": "Cut or consolidate redundant club bullets that don't add a distinct skill beyond what's already shown",
+        "weight": 2
+      },
+      {
+        "point": "Keep leadership entries only if genuinely differentiated (e.g., president role, managed a budget, led a team of a specific size)",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Every extracurricular should get at least one line to show well-roundedness",
@@ -45,10 +57,22 @@
     "questionType": "calculation",
     "prompt": "A candidate built a comparable companies analysis covering 12 companies and found that the target traded at a 15% discount to the peer median EV/EBITDA of 9.0x, implying the target traded at 7.65x. First, check whether that discount math is actually correct. Then turn the finding into a properly structured resume bullet.",
     "keyPoints": [
-      { "point": "Verify the math: 9.0x times (1 minus 0.15) equals 7.65x, so the stated discount is correct", "weight": 2 },
-      { "point": "Bullet opens with a strong action verb tied to the specific deliverable (e.g., 'Built' a comps analysis)", "weight": 2 },
-      { "point": "Bullet includes scope (12 comparable companies) and the quantified finding (15% discount, 9.0x vs 7.65x)", "weight": 3 },
-      { "point": "Bullet conveys an analytical conclusion or insight, not just that a task was completed", "weight": 2 },
+      {
+        "point": "Verify the math: 9.0x times (1 minus 0.15) equals 7.65x, so the stated discount is correct",
+        "weight": 2
+      },
+      {
+        "point": "Bullet opens with a strong action verb tied to the specific deliverable (e.g., 'Built' a comps analysis)",
+        "weight": 2
+      },
+      {
+        "point": "Bullet includes scope (12 comparable companies) and the quantified finding (15% discount, 9.0x vs 7.65x)",
+        "weight": 3
+      },
+      {
+        "point": "Bullet conveys an analytical conclusion or insight, not just that a task was completed",
+        "weight": 2
+      },
       { "point": "Bullet stays concise, ideally one line", "weight": 1 }
     ],
     "misconceptions": [
@@ -81,11 +105,26 @@
     "questionType": "conceptual",
     "prompt": "A candidate switched majors twice and has an unexplained semester gap visible in the resume's dates. As their coach, how do you decide whether to address this on the resume itself, save it for the interview, or use the cover letter — and what's the risk of each approach?",
     "keyPoints": [
-      { "point": "Unexplained visible gaps invite negative assumptions, so silence is risky specifically when the gap is obvious from the dates themselves", "weight": 3 },
-      { "point": "Minor gaps are usually best left off the resume and prepared as a crisp, confident interview answer rather than using scarce page space", "weight": 2 },
-      { "point": "Resume space should only be used for an explanation if it actually strengthens the candidacy (e.g., a fellowship or documented reason), not as a generic disclaimer", "weight": 2 },
-      { "point": "The cover letter is rarely read closely in IB recruiting, so it shouldn't be relied on as the primary fix for a resume-level concern", "weight": 2 },
-      { "point": "The overall goal is to preempt suspicion without wasting the resume's limited real estate on defensive content", "weight": 1 }
+      {
+        "point": "Unexplained visible gaps invite negative assumptions, so silence is risky specifically when the gap is obvious from the dates themselves",
+        "weight": 3
+      },
+      {
+        "point": "Minor gaps are usually best left off the resume and prepared as a crisp, confident interview answer rather than using scarce page space",
+        "weight": 2
+      },
+      {
+        "point": "Resume space should only be used for an explanation if it actually strengthens the candidacy (e.g., a fellowship or documented reason), not as a generic disclaimer",
+        "weight": 2
+      },
+      {
+        "point": "The cover letter is rarely read closely in IB recruiting, so it shouldn't be relied on as the primary fix for a resume-level concern",
+        "weight": 2
+      },
+      {
+        "point": "The overall goal is to preempt suspicion without wasting the resume's limited real estate on defensive content",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Any gap or inconsistency should be explained directly on the resume to avoid looking like it's being hidden",

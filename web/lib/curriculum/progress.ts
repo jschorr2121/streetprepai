@@ -1,12 +1,7 @@
 // Derives learning-flow state from stored progress rows — pure, no DB. The
 // pages fetch the raw rows via lib/db/queries/curriculum and pass them here.
 
-import {
-  chapters,
-  coreSections,
-  spineChapters,
-  type ChapterDef,
-} from "@/lib/curriculum/chapters";
+import { chapters, coreSections, spineChapters, type ChapterDef } from "@/lib/curriculum/chapters";
 import type { ChapterProgressEntry, SectionProgressEntry } from "@/lib/types";
 
 export type ChapterStatus = {
@@ -30,7 +25,9 @@ export function computeFlow(
   sectionProgress: SectionProgressEntry[],
   chapterProgress: ChapterProgressEntry[],
 ): FlowState {
-  const readSet = new Set(sectionProgress.filter((s) => s.readAt).map((s) => key(s.chapterSlug, s.sectionSlug)));
+  const readSet = new Set(
+    sectionProgress.filter((s) => s.readAt).map((s) => key(s.chapterSlug, s.sectionSlug)),
+  );
   const drillSet = new Set(
     sectionProgress.filter((s) => s.drillCompletedAt).map((s) => key(s.chapterSlug, s.sectionSlug)),
   );

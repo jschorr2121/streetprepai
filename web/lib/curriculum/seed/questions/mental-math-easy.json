@@ -68,7 +68,10 @@
     "keyPoints": [
       { "point": "Rounds 19 up to 20 to simplify the multiplication", "weight": 3 },
       { "point": "Computes 23 x 20 = 460", "weight": 2 },
-      { "point": "Subtracts the extra 23 (one group of 20 became one group of 19) to get 437", "weight": 3 },
+      {
+        "point": "Subtracts the extra 23 (one group of 20 became one group of 19) to get 437",
+        "weight": 3
+      },
       { "point": "States the final answer clearly", "weight": 1 }
     ],
     "misconceptions": [
@@ -188,7 +191,10 @@
     "questionType": "curveball",
     "prompt": "A bat and a ball together cost $1.10. The bat costs $1.00 more than the ball. How much does the ball cost?",
     "keyPoints": [
-      { "point": "Sets up an equation rather than trusting the intuitive answer of $0.10", "weight": 3 },
+      {
+        "point": "Sets up an equation rather than trusting the intuitive answer of $0.10",
+        "weight": 3
+      },
       { "point": "Lets ball = x and bat = x + 1.00", "weight": 2 },
       { "point": "Solves 2x + 1.00 = 1.10 to get x = 0.05", "weight": 3 },
       { "point": "Verifies by checking $0.05 + $1.05 = $1.10", "weight": 2 }
@@ -219,8 +225,14 @@
     "questionType": "curveball",
     "prompt": "You flip a fair coin 3 times. What's the probability of getting at least one heads?",
     "keyPoints": [
-      { "point": "Recognizes the complement approach is faster than enumerating all 'at least one' cases", "weight": 3 },
-      { "point": "Computes the probability of zero heads (all tails) as (1/2)^3 = 1/8", "weight": 3 },
+      {
+        "point": "Recognizes the complement approach is faster than enumerating all 'at least one' cases",
+        "weight": 3
+      },
+      {
+        "point": "Computes the probability of zero heads (all tails) as (1/2)^3 = 1/8",
+        "weight": 3
+      },
       { "point": "Subtracts from 1 to get 7/8", "weight": 2 },
       { "point": "Converts to a percentage, 87.5%, for a clean spoken answer", "weight": 1 }
     ],

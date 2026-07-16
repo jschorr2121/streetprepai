@@ -43,8 +43,14 @@
     "questionType": "verbal",
     "prompt": "Multiply 87 by 92 in your head, and talk me through exactly how you're doing it as you go.",
     "keyPoints": [
-      { "point": "Chooses a rounding strategy — e.g., treating the numbers as (90-3) and (90+2)", "weight": 3 },
-      { "point": "Expands correctly: 90x90 + 90x2 - 3x90 - 3x2, or equivalently applies distributive/difference-based expansion without error", "weight": 3 },
+      {
+        "point": "Chooses a rounding strategy — e.g., treating the numbers as (90-3) and (90+2)",
+        "weight": 3
+      },
+      {
+        "point": "Expands correctly: 90x90 + 90x2 - 3x90 - 3x2, or equivalently applies distributive/difference-based expansion without error",
+        "weight": 3
+      },
       { "point": "Computes each partial product accurately: 8,100 + 180 - 270 - 6", "weight": 2 },
       { "point": "Arrives at the correct total, 8,004, and states it clearly", "weight": 3 }
     ],
@@ -78,10 +84,16 @@
     "questionType": "multi-step",
     "prompt": "A project generates $20 million per year for 5 years, discounted at a 10% cost of capital. Roughly, what's the present value of those cash flows? Talk through your approximation approach.",
     "keyPoints": [
-      { "point": "Recognizes this as a 5-year annuity and estimates the annuity factor rather than discounting each year individually", "weight": 3 },
+      {
+        "point": "Recognizes this as a 5-year annuity and estimates the annuity factor rather than discounting each year individually",
+        "weight": 3
+      },
       { "point": "Approximates the 5-year, 10% annuity factor at roughly 3.8", "weight": 3 },
       { "point": "Multiplies $20M by the annuity factor to get roughly $76M", "weight": 3 },
-      { "point": "Flags this as an approximation and notes the direction of any rounding error", "weight": 1 }
+      {
+        "point": "Flags this as an approximation and notes the direction of any rounding error",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Simply multiplying $20M by 5 years to get $100M, ignoring discounting entirely",
@@ -116,7 +128,10 @@
       { "point": "Computes pro forma combined net income = $300M + $50M = $350M", "weight": 3 },
       { "point": "Computes pro forma share count = 100M + 20M = 120M", "weight": 2 },
       { "point": "Computes pro forma EPS = $350M / 120M ≈ $2.92", "weight": 3 },
-      { "point": "Compares to standalone $3.00 EPS and correctly concludes the deal is dilutive by about 8 cents", "weight": 3 }
+      {
+        "point": "Compares to standalone $3.00 EPS and correctly concludes the deal is dilutive by about 8 cents",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Adding the target's EPS to the acquirer's EPS directly, rather than recombining total net income over total shares",
@@ -148,10 +163,22 @@
     "questionType": "curveball",
     "prompt": "You have 2 identical eggs and access to a 100-floor building. An egg breaks if dropped from at or above some unknown critical floor, and survives if dropped from below it. You want to determine the critical floor with certainty. What's the minimum number of drops you need in the worst case, and what strategy achieves it?",
     "keyPoints": [
-      { "point": "Recognizes that with 1 egg remaining after a break, the only safe strategy is to search linearly one floor at a time", "weight": 2 },
-      { "point": "Sets up the decreasing-interval strategy: first drop at floor 14, then intervals shrink by 1 each time a floor survives (14, 13, 12, ... 1)", "weight": 3 },
-      { "point": "Explains why intervals must decrease by exactly 1: each survived drop 'uses up' one attempt, leaving one fewer worst-case drop available for the linear search with the second egg", "weight": 3 },
-      { "point": "Verifies the sum 14+13+...+1 = 105 ≥ 100 covers the building, and that 13+12+...+1 = 91 < 100 would not, confirming 14 is the minimum", "weight": 3 }
+      {
+        "point": "Recognizes that with 1 egg remaining after a break, the only safe strategy is to search linearly one floor at a time",
+        "weight": 2
+      },
+      {
+        "point": "Sets up the decreasing-interval strategy: first drop at floor 14, then intervals shrink by 1 each time a floor survives (14, 13, 12, ... 1)",
+        "weight": 3
+      },
+      {
+        "point": "Explains why intervals must decrease by exactly 1: each survived drop 'uses up' one attempt, leaving one fewer worst-case drop available for the linear search with the second egg",
+        "weight": 3
+      },
+      {
+        "point": "Verifies the sum 14+13+...+1 = 105 ≥ 100 covers the building, and that 13+12+...+1 = 91 < 100 would not, confirming 14 is the minimum",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Defaulting to a binary search strategy (drop from floor 50, then 25 or 75, etc.), which is optimal for many eggs but fails here since a break with only 1 egg left forces a slow linear search over a potentially large remaining range",
@@ -183,10 +210,22 @@
     "questionType": "curveball",
     "prompt": "You have 12 balls that look identical, but exactly one of them is a different weight than the other 11 — you don't know if it's heavier or lighter. You have a balance scale and can use it only 3 times. Describe a strategy to identify the odd ball and determine whether it's heavier or lighter.",
     "keyPoints": [
-      { "point": "Splits the 12 balls into three groups of 4 for the first weighing (4 vs 4, with 4 set aside)", "weight": 3 },
-      { "point": "Correctly reasons through both branches: if the first weighing balances, the odd ball is among the 4 set-aside balls; if it tips, the odd ball is among the 8 weighed, with the tip direction narrowing whether it's heavier or lighter", "weight": 3 },
-      { "point": "Designs the second weighing to further narrow the candidate set to at most 3 balls while preserving information about heavy/light direction", "weight": 3 },
-      { "point": "Uses the third weighing to isolate the single odd ball and confirm heavier or lighter", "weight": 2 }
+      {
+        "point": "Splits the 12 balls into three groups of 4 for the first weighing (4 vs 4, with 4 set aside)",
+        "weight": 3
+      },
+      {
+        "point": "Correctly reasons through both branches: if the first weighing balances, the odd ball is among the 4 set-aside balls; if it tips, the odd ball is among the 8 weighed, with the tip direction narrowing whether it's heavier or lighter",
+        "weight": 3
+      },
+      {
+        "point": "Designs the second weighing to further narrow the candidate set to at most 3 balls while preserving information about heavy/light direction",
+        "weight": 3
+      },
+      {
+        "point": "Uses the third weighing to isolate the single odd ball and confirm heavier or lighter",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Trying to solve it by simple halving (6 vs 6) each time, which fails to reliably narrow down to a single ball with direction information in only 3 weighings",

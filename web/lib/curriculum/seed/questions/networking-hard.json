@@ -6,11 +6,26 @@
     "questionType": "verbal",
     "prompt": "You've sent cold emails to 15 alumni at your top-choice bank over the past month. Three responded and had good calls; the other 12 never replied, including several you followed up with once. Recruiting season opens in three weeks. Walk me through how you'd handle the remaining 12 and structure your outreach cadence going forward.",
     "keyPoints": [
-      { "point": "Distinguish between a single follow-up already sent vs. contacts never followed up with yet -- only escalate the latter", "weight": 2 },
-      { "point": "Cap follow-ups at roughly two touches total per contact; stop after that without response", "weight": 3 },
-      { "point": "Space follow-ups appropriately (roughly 7-10 days), don't re-contact too soon", "weight": 2 },
-      { "point": "Reallocate time toward the 3 responsive contacts (deepen those relationships) and toward new names rather than over-indexing on unresponsive ones", "weight": 3 },
-      { "point": "Recognize non-response is usually about the recipient's bandwidth, not a signal to take personally or escalate aggressively", "weight": 2 }
+      {
+        "point": "Distinguish between a single follow-up already sent vs. contacts never followed up with yet -- only escalate the latter",
+        "weight": 2
+      },
+      {
+        "point": "Cap follow-ups at roughly two touches total per contact; stop after that without response",
+        "weight": 3
+      },
+      {
+        "point": "Space follow-ups appropriately (roughly 7-10 days), don't re-contact too soon",
+        "weight": 2
+      },
+      {
+        "point": "Reallocate time toward the 3 responsive contacts (deepen those relationships) and toward new names rather than over-indexing on unresponsive ones",
+        "weight": 3
+      },
+      {
+        "point": "Recognize non-response is usually about the recipient's bandwidth, not a signal to take personally or escalate aggressively",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Sending a third or fourth follow-up to contacts who've already ignored two messages",
@@ -42,11 +57,23 @@
     "questionType": "curveball",
     "prompt": "You're 10 minutes into a coffee chat with a Managing Director. Instead of answering your questions about his path into banking, he starts grilling you on why interest rates affect DCF valuations and seems to be testing you. How do you handle this?",
     "keyPoints": [
-      { "point": "Stay composed and answer the technical question genuinely rather than deflecting or looking flustered", "weight": 3 },
-      { "point": "Recognize this may be a deliberate, informal test of poise and preparedness, not hostility", "weight": 2 },
+      {
+        "point": "Stay composed and answer the technical question genuinely rather than deflecting or looking flustered",
+        "weight": 3
+      },
+      {
+        "point": "Recognize this may be a deliberate, informal test of poise and preparedness, not hostility",
+        "weight": 2
+      },
       { "point": "Give a concise, correct answer rather than rambling to fill time", "weight": 2 },
-      { "point": "After answering, look for a natural opening to redirect back toward conversation rather than staying purely in technical Q&A mode", "weight": 2 },
-      { "point": "Don't fake confidence on something you don't know -- acknowledge gaps honestly if it happens", "weight": 1 }
+      {
+        "point": "After answering, look for a natural opening to redirect back toward conversation rather than staying purely in technical Q&A mode",
+        "weight": 2
+      },
+      {
+        "point": "Don't fake confidence on something you don't know -- acknowledge gaps honestly if it happens",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Getting visibly rattled or refusing to engage because 'this is supposed to be a coffee chat, not an interview'",
@@ -78,10 +105,22 @@
     "questionType": "curveball",
     "prompt": "Two analysts at the same bank -- one you've talked to twice and like a lot, another you barely know but who is more senior and in the group you actually want -- both independently offer to refer you for the same summer analyst role. How do you handle this?",
     "keyPoints": [
-      { "point": "Recognize most banks' referral systems only accept/credit one referral per candidate per role -- can't accept both", "weight": 3 },
-      { "point": "Decide based on relevance to target group and/or relationship strength, not just seniority or whoever asked first", "weight": 3 },
-      { "point": "Communicate honestly and gracefully with the person not chosen, thanking them without burning the relationship", "weight": 2 },
-      { "point": "Avoid letting both people believe they are the one referring, which risks an awkward or embarrassing overlap internally", "weight": 2 }
+      {
+        "point": "Recognize most banks' referral systems only accept/credit one referral per candidate per role -- can't accept both",
+        "weight": 3
+      },
+      {
+        "point": "Decide based on relevance to target group and/or relationship strength, not just seniority or whoever asked first",
+        "weight": 3
+      },
+      {
+        "point": "Communicate honestly and gracefully with the person not chosen, thanking them without burning the relationship",
+        "weight": 2
+      },
+      {
+        "point": "Avoid letting both people believe they are the one referring, which risks an awkward or embarrassing overlap internally",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Trying to accept both referrals to hedge, assuming there's no downside",

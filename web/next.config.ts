@@ -25,7 +25,11 @@ function src(...parts: Array<string | undefined>): string {
 // except PostHog's asset CDN, plus clickjacking and form exfiltration.
 const csp = [
   `default-src 'self'`,
-  src(`script-src 'self' 'unsafe-inline'`, isDev ? `'unsafe-eval'` : undefined, posthogAssetsOrigin),
+  src(
+    `script-src 'self' 'unsafe-inline'`,
+    isDev ? `'unsafe-eval'` : undefined,
+    posthogAssetsOrigin,
+  ),
   `style-src 'self' 'unsafe-inline'`,
   src(`img-src 'self' blob: data:`, supabaseOrigin),
   `font-src 'self' data:`,

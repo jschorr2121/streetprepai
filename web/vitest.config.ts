@@ -50,7 +50,11 @@ export default defineConfig({
           // lib/**/*.test.ts covers colocated pure-function tests (the
           // code-standards convention) — without it lib/mastery/mastery.test.ts
           // silently never ran.
-          include: ["tests/unit/**/*.test.ts", "tests/integration/**/*.test.ts", "lib/**/*.test.ts"],
+          include: [
+            "tests/unit/**/*.test.ts",
+            "tests/integration/**/*.test.ts",
+            "lib/**/*.test.ts",
+          ],
           setupFiles: ["./tests/setup/node.ts"],
         },
       },

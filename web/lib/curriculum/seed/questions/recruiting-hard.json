@@ -6,10 +6,19 @@
     "questionType": "calculation",
     "prompt": "League tables typically rank banks by total dollar value of deals advised on, not by number of deals. Bank A advised on 3 M&A deals this year worth $2.1 billion, $3.4 billion, and $1.5 billion. Bank B advised on 5 smaller deals worth $0.8 billion, $0.9 billion, $0.7 billion, $1.1 billion, and $1.0 billion. Which bank ranks higher on a standard M&A league table, and what does that ranking actually tell you (and not tell you) about the two banks?",
     "keyPoints": [
-      {"point": "Correctly sums Bank A's deal value to $7.0 billion (2.1+3.4+1.5)", "weight": 3},
-      {"point": "Correctly sums Bank B's deal value to $4.5 billion (0.8+0.9+0.7+1.1+1.0)", "weight": 3},
-      {"point": "Concludes Bank A ranks higher since league tables rank by total dollar volume, not deal count", "weight": 2},
-      {"point": "Notes the ranking doesn't capture deal quality, fee revenue, role on the deal (sole vs. co-advisor), or client relationship depth", "weight": 2}
+      { "point": "Correctly sums Bank A's deal value to $7.0 billion (2.1+3.4+1.5)", "weight": 3 },
+      {
+        "point": "Correctly sums Bank B's deal value to $4.5 billion (0.8+0.9+0.7+1.1+1.0)",
+        "weight": 3
+      },
+      {
+        "point": "Concludes Bank A ranks higher since league tables rank by total dollar volume, not deal count",
+        "weight": 2
+      },
+      {
+        "point": "Notes the ranking doesn't capture deal quality, fee revenue, role on the deal (sole vs. co-advisor), or client relationship depth",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That the bank with more deals (Bank B, with 5) automatically ranks higher on a standard league table",
@@ -45,10 +54,19 @@
     "questionType": "calculation",
     "prompt": "Bank X advised on a single deal worth $5.0 billion and earned a 0.5% advisory fee. Bank Y advised on five separate $1.0 billion deals, earning a 1.0% advisory fee on each. Both banks get credited with $5.0 billion of total deal value on the league table this year. Calculate each bank's actual fee revenue, and explain why the identical league table credit is misleading here.",
     "keyPoints": [
-      {"point": "Correctly calculates Bank X's fee: $5.0bn x 0.5% = $25 million", "weight": 3},
-      {"point": "Correctly calculates Bank Y's fee: 5 x ($1.0bn x 1.0%) = $50 million total", "weight": 3},
-      {"point": "Identifies that identical league table credit ($5.0bn) masks a 2x difference in actual fee revenue", "weight": 2},
-      {"point": "Explains that fee percentages typically decline with deal size, so league table dollar volume is a poor proxy for revenue", "weight": 2}
+      { "point": "Correctly calculates Bank X's fee: $5.0bn x 0.5% = $25 million", "weight": 3 },
+      {
+        "point": "Correctly calculates Bank Y's fee: 5 x ($1.0bn x 1.0%) = $50 million total",
+        "weight": 3
+      },
+      {
+        "point": "Identifies that identical league table credit ($5.0bn) masks a 2x difference in actual fee revenue",
+        "weight": 2
+      },
+      {
+        "point": "Explains that fee percentages typically decline with deal size, so league table dollar volume is a poor proxy for revenue",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That equal league table credit implies equal actual revenue for the two banks",
@@ -80,10 +98,22 @@
     "questionType": "conceptual",
     "prompt": "What distinguishes Lazard's franchise as an independent advisory firm, particularly its restructuring practice, and why does that matter for a candidate evaluating fit?",
     "keyPoints": [
-      {"point": "Long-standing reputation as a pure, independent advisory firm with strong restructuring and financial advisory heritage", "weight": 2},
-      {"point": "Restructuring advisory work is counter-cyclical, staying active or growing during economic downturns when traditional M&A slows", "weight": 3},
-      {"point": "Restructuring work involves distressed companies, creditor negotiations, and capital structure analysis distinct from standard M&A valuation", "weight": 2},
-      {"point": "A candidate interested in stability across economic cycles, or in creditor/legal-adjacent deal work, may find restructuring especially appealing", "weight": 2}
+      {
+        "point": "Long-standing reputation as a pure, independent advisory firm with strong restructuring and financial advisory heritage",
+        "weight": 2
+      },
+      {
+        "point": "Restructuring advisory work is counter-cyclical, staying active or growing during economic downturns when traditional M&A slows",
+        "weight": 3
+      },
+      {
+        "point": "Restructuring work involves distressed companies, creditor negotiations, and capital structure analysis distinct from standard M&A valuation",
+        "weight": 2
+      },
+      {
+        "point": "A candidate interested in stability across economic cycles, or in creditor/legal-adjacent deal work, may find restructuring especially appealing",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That restructuring advisory work follows the same cyclical pattern as regular M&A, slowing down during recessions",
@@ -115,10 +145,22 @@
     "questionType": "conceptual",
     "prompt": "What distinguishes Centerview's model as an elite boutique in terms of firm structure, and why does that affect the analyst experience compared to a larger, more hierarchical bank?",
     "keyPoints": [
-      {"point": "Very lean, partner-heavy structure with a relatively small analyst class compared to bulge brackets", "weight": 3},
-      {"point": "Pure advisory model, no capital markets or trading, similar to other elite boutiques", "weight": 2},
-      {"point": "Lean staffing means fewer layers between analysts and senior bankers/clients, higher individual deal exposure and responsibility", "weight": 2},
-      {"point": "Selectivity and small class size mean a highly competitive, narrow recruiting funnel relative to demand", "weight": 2}
+      {
+        "point": "Very lean, partner-heavy structure with a relatively small analyst class compared to bulge brackets",
+        "weight": 3
+      },
+      {
+        "point": "Pure advisory model, no capital markets or trading, similar to other elite boutiques",
+        "weight": 2
+      },
+      {
+        "point": "Lean staffing means fewer layers between analysts and senior bankers/clients, higher individual deal exposure and responsibility",
+        "weight": 2
+      },
+      {
+        "point": "Selectivity and small class size mean a highly competitive, narrow recruiting funnel relative to demand",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That a small analyst class at an elite boutique means less prestigious or lower-quality deal work than a large bulge bracket class",
@@ -150,10 +192,22 @@
     "questionType": "conceptual",
     "prompt": "Why is financial modeling for FIG (Financial Institutions Group) companies, like banks and insurers, meaningfully different from modeling a typical industrial or consumer company, and what does an analyst need to understand to work in this group?",
     "keyPoints": [
-      {"point": "Banks/insurers are regulated on capital adequacy (e.g., regulatory capital ratios), which constrains growth, dividends, and M&A differently than a normal company", "weight": 3},
-      {"point": "Standard enterprise-value and DCF frameworks generally don't apply well; valuation instead often centers on price-to-book or price-to-tangible-book and price-to-earnings", "weight": 3},
-      {"point": "A bank's balance sheet items (loans, deposits) are its core operating business, unlike a typical industrial company where the balance sheet is more incidental to operations", "weight": 2},
-      {"point": "Interest rate sensitivity and credit risk (loan losses) are central to earnings, requiring different modeling drivers than a typical operating company", "weight": 2}
+      {
+        "point": "Banks/insurers are regulated on capital adequacy (e.g., regulatory capital ratios), which constrains growth, dividends, and M&A differently than a normal company",
+        "weight": 3
+      },
+      {
+        "point": "Standard enterprise-value and DCF frameworks generally don't apply well; valuation instead often centers on price-to-book or price-to-tangible-book and price-to-earnings",
+        "weight": 3
+      },
+      {
+        "point": "A bank's balance sheet items (loans, deposits) are its core operating business, unlike a typical industrial company where the balance sheet is more incidental to operations",
+        "weight": 2
+      },
+      {
+        "point": "Interest rate sensitivity and credit risk (loan losses) are central to earnings, requiring different modeling drivers than a typical operating company",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That a standard unlevered free cash flow DCF works fine for valuing a bank the same way it does for a normal operating company",
@@ -189,10 +243,22 @@
     "questionType": "conceptual",
     "prompt": "Industrials is often described as one of the broadest sector groups in investment banking. What makes it so broad, and what tradeoffs does that breadth create for both deal analysis and an analyst's day-to-day experience?",
     "keyPoints": [
-      {"point": "Industrials spans widely different sub-verticals: aerospace & defense, industrial manufacturing, transportation/logistics, building products, chemicals, etc.", "weight": 2},
-      {"point": "Each sub-vertical has different cyclicality drivers (e.g., defense is less economically cyclical than manufacturing/transportation)", "weight": 3},
-      {"point": "Breadth means analysts may need to quickly ramp up on very different business models and valuation drivers across deals", "weight": 2},
-      {"point": "Tradeoff: broad exposure builds versatile modeling skills but can mean less deep specialization compared to a narrower sector group", "weight": 2}
+      {
+        "point": "Industrials spans widely different sub-verticals: aerospace & defense, industrial manufacturing, transportation/logistics, building products, chemicals, etc.",
+        "weight": 2
+      },
+      {
+        "point": "Each sub-vertical has different cyclicality drivers (e.g., defense is less economically cyclical than manufacturing/transportation)",
+        "weight": 3
+      },
+      {
+        "point": "Breadth means analysts may need to quickly ramp up on very different business models and valuation drivers across deals",
+        "weight": 2
+      },
+      {
+        "point": "Tradeoff: broad exposure builds versatile modeling skills but can mean less deep specialization compared to a narrower sector group",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That all industrials sub-verticals move through the economic cycle the same way and at the same time",
@@ -224,10 +290,22 @@
     "questionType": "calculation",
     "prompt": "A real estate group analyst is evaluating a REIT. The company reports net income of $50 million, depreciation & amortization of $30 million, and a $5 million gain on property sale during the year (which should be excluded from FFO). Separately, the REIT's core property portfolio generates net operating income (NOI) of $80 million, and the portfolio is valued at $1,000 million. Calculate (a) Funds From Operations (FFO) and (b) the implied cap rate, and briefly explain why REITs are analyzed using these metrics instead of standard net income and EV/EBITDA.",
     "keyPoints": [
-      {"point": "Correctly calculates FFO: $50mm net income + $30mm D&A - $5mm gain on sale = $75 million", "weight": 3},
-      {"point": "Correctly calculates cap rate: $80mm NOI / $1,000mm property value = 8.0%", "weight": 3},
-      {"point": "Explains FFO adjusts for real estate's large non-cash depreciation charges, which distort net income relative to actual cash-generating ability", "weight": 2},
-      {"point": "Explains cap rate as a standardized way to compare property-level returns independent of financing/capital structure", "weight": 2}
+      {
+        "point": "Correctly calculates FFO: $50mm net income + $30mm D&A - $5mm gain on sale = $75 million",
+        "weight": 3
+      },
+      {
+        "point": "Correctly calculates cap rate: $80mm NOI / $1,000mm property value = 8.0%",
+        "weight": 3
+      },
+      {
+        "point": "Explains FFO adjusts for real estate's large non-cash depreciation charges, which distort net income relative to actual cash-generating ability",
+        "weight": 2
+      },
+      {
+        "point": "Explains cap rate as a standardized way to compare property-level returns independent of financing/capital structure",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "That gains on property sales should be added to FFO rather than excluded, since FFO is meant to reflect recurring operating performance",

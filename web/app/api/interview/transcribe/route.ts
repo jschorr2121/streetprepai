@@ -34,16 +34,10 @@ export async function POST(req: Request): Promise<Response> {
       const form = await req.formData();
       const file = form.get("file");
       if (!(file instanceof File)) {
-        return Response.json(
-          { error: "No `file` field in form-data." },
-          { status: 400 },
-        );
+        return Response.json({ error: "No `file` field in form-data." }, { status: 400 });
       }
       if (file.size > MAX_AUDIO_BYTES) {
-        return Response.json(
-          { error: "Audio is larger than 25 MB." },
-          { status: 413 },
-        );
+        return Response.json({ error: "Audio is larger than 25 MB." }, { status: 413 });
       }
       if (file.size === 0) {
         return Response.json({ error: "Empty audio file." }, { status: 400 });
@@ -54,10 +48,7 @@ export async function POST(req: Request): Promise<Response> {
     } else if (contentType.startsWith("audio/")) {
       const arrayBuf = await req.arrayBuffer();
       if (arrayBuf.byteLength > MAX_AUDIO_BYTES) {
-        return Response.json(
-          { error: "Audio is larger than 25 MB." },
-          { status: 413 },
-        );
+        return Response.json({ error: "Audio is larger than 25 MB." }, { status: 413 });
       }
       if (arrayBuf.byteLength === 0) {
         return Response.json({ error: "Empty audio body." }, { status: 400 });
@@ -86,7 +77,11 @@ export async function POST(req: Request): Promise<Response> {
   } catch (err) {
     return Response.json(
       {
-        error: clientSafeError("interview/transcribe", err, "Could not read the audio upload. Please try again."),
+        error: clientSafeError(
+          "interview/transcribe",
+          err,
+          "Could not read the audio upload. Please try again.",
+        ),
       },
       { status: 400 },
     );
@@ -101,11 +96,7 @@ export async function POST(req: Request): Promise<Response> {
   }
 
   const upstream = new FormData();
-  upstream.append(
-    "file",
-    new Blob([new Uint8Array(audioBuffer)], { type: mimeType }),
-    filename,
-  );
+  upstream.append("file", new Blob([new Uint8Array(audioBuffer)], { type: mimeType }), filename);
   upstream.append("model", "whisper-1");
   upstream.append("response_format", "verbose_json");
   upstream.append("timestamp_granularities[]", "word");
@@ -120,7 +111,11 @@ export async function POST(req: Request): Promise<Response> {
   } catch (err) {
     return Response.json(
       {
-        error: clientSafeError("interview/transcribe", err, "Transcription failed. Please try again."),
+        error: clientSafeError(
+          "interview/transcribe",
+          err,
+          "Transcription failed. Please try again.",
+        ),
       },
       { status: 502 },
     );

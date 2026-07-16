@@ -11,7 +11,11 @@
 
 import * as Sentry from "@sentry/nextjs";
 
-import { actionErrorFromAppError, fieldErrorsFromIssues, type ActionResult } from "@/lib/auth/action-result";
+import {
+  actionErrorFromAppError,
+  fieldErrorsFromIssues,
+  type ActionResult,
+} from "@/lib/auth/action-result";
 import { requireUser } from "@/lib/auth/server";
 import {
   createContact,
@@ -215,7 +219,10 @@ export async function logChatAction(input: unknown): Promise<ActionResult<ChatLo
       // Best-effort: the chat is already saved; a failed date stamp only
       // affects the "gentle nudges" widget, so log instead of failing.
       await touchContactLastContact(userId, contact.id).catch((err: unknown) => {
-        logger.warn({ userId, action: "contact_touch_failed", contactId: contact.id }, "contact_touch_failed");
+        logger.warn(
+          { userId, action: "contact_touch_failed", contactId: contact.id },
+          "contact_touch_failed",
+        );
         Sentry.captureException(err);
       });
     }
@@ -229,7 +236,10 @@ export async function logChatAction(input: unknown): Promise<ActionResult<ChatLo
   }
 
   // Step 6 — Log success.
-  logger.info({ userId, action: "chat_logged", chatId: chat.id, contactId: contact.id }, "chat_logged");
+  logger.info(
+    { userId, action: "chat_logged", chatId: chat.id, contactId: contact.id },
+    "chat_logged",
+  );
 
   // Step 7 — Return.
   return { ok: true, data: chat };

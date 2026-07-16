@@ -11,7 +11,12 @@ import { CheckCircle2, RefreshCw, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Markdown } from "@/components/reader/markdown";
-import { DRILL_GENERATORS, DRILL_META, type Drill, type DrillKind } from "@/lib/curriculum/drills/generators";
+import {
+  DRILL_GENERATORS,
+  DRILL_META,
+  type Drill,
+  type DrillKind,
+} from "@/lib/curriculum/drills/generators";
 import { cn } from "@/lib/utils";
 
 export function DrillRunner({ kind }: { kind: DrillKind }) {
@@ -77,7 +82,10 @@ export function DrillRunner({ kind }: { kind: DrillKind }) {
                   ) : (
                     <>
                       <XCircle className="text-destructive size-4" />
-                      <span className="text-muted-foreground">= {f.value}{f.unit ?? ""}</span>
+                      <span className="text-muted-foreground">
+                        = {f.value}
+                        {f.unit ?? ""}
+                      </span>
                     </>
                   )}
                 </span>
@@ -88,11 +96,7 @@ export function DrillRunner({ kind }: { kind: DrillKind }) {
       </div>
 
       {!checked ? (
-        <Button
-          className="mt-4"
-          onClick={check}
-          disabled={results.every((r) => !r.answered)}
-        >
+        <Button className="mt-4" onClick={check} disabled={results.every((r) => !r.answered)}>
           Check answer
         </Button>
       ) : (
@@ -106,7 +110,7 @@ export function DrillRunner({ kind }: { kind: DrillKind }) {
             {allCorrect ? <CheckCircle2 className="size-4" /> : <XCircle className="size-4" />}
             {allCorrect ? "Correct" : "Check the working below"}
           </div>
-          <div className="rounded-lg border bg-muted/30 p-3">
+          <div className="bg-muted/30 rounded-lg border p-3">
             <Markdown content={drill.explanation} className="text-sm [&>p]:text-sm" />
           </div>
           <Button variant="outline" onClick={nextDrill} className="gap-1.5">

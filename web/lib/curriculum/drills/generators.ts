@@ -114,9 +114,7 @@ export function generateTsm(rng: Rng): Drill {
   return {
     kind: "tsm",
     prompt: `A company has ${shares} basic shares and ${options} in-the-money options struck at $${strike}. The share price is $${price}. Using the treasury stock method, what is the diluted share count?`,
-    fields: [
-      { key: "diluted", label: "Diluted shares", value: diluted, tolerance: 1 },
-    ],
+    fields: [{ key: "diluted", label: "Diluted shares", value: diluted, tolerance: 1 }],
     explanation: `Options raise $${proceeds} on exercise (${options} × $${strike}). The company repurchases $${proceeds} ÷ $${price} = ${buyback} shares. Net new shares = ${options} − ${buyback} = ${netNew}. Diluted count = ${shares} + ${netNew} = ${diluted}.`,
   };
 }
@@ -197,7 +195,8 @@ export const DRILL_META: Record<DrillKind, { title: string; topic: string; blurb
   "three-statement": {
     title: "3-Statement Change",
     topic: "accounting",
-    blurb: "A random line item moves — walk all three statements to the change in net income and cash.",
+    blurb:
+      "A random line item moves — walk all three statements to the change in net income and cash.",
   },
   tsm: {
     title: "Treasury Stock Method",

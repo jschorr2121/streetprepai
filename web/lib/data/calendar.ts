@@ -39,5 +39,3 @@ export async function getCalendarEvents(userId: string): Promise<CalendarEvent[]
   if (error) throw error;
   return (data as DbRow[]).map(mapRow);
 }
-
-

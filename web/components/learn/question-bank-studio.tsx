@@ -152,7 +152,11 @@ function TopicPractice({ topics }: { topics: TopicOption[] }) {
             </div>
           </div>
           <Button onClick={serve} disabled={pending || !topic} className="gap-1.5">
-            {pending ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
+            {pending ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <Sparkles className="size-4" />
+            )}
             {question ? "Next question" : "Start"}
           </Button>
         </div>

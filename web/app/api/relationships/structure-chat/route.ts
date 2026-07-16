@@ -41,14 +41,12 @@ export async function POST(req: Request): Promise<Response> {
             adviceGiven: {
               type: "array",
               items: { type: "string" },
-              description:
-                "Specific pieces of advice the banker gave the student.",
+              description: "Specific pieces of advice the banker gave the student.",
             },
             commitments: {
               type: "array",
               items: { type: "string" },
-              description:
-                "Things the banker said they would do (intros, resources, follow-ups).",
+              description: "Things the banker said they would do (intros, resources, follow-ups).",
             },
             personalDetails: {
               type: "array",
@@ -69,17 +67,10 @@ export async function POST(req: Request): Promise<Response> {
                 },
                 required: ["description"],
               },
-              description:
-                "Action items the student should complete after this chat.",
+              description: "Action items the student should complete after this chat.",
             },
           },
-          required: [
-            "topics",
-            "adviceGiven",
-            "commitments",
-            "personalDetails",
-            "followUps",
-          ],
+          required: ["topics", "adviceGiven", "commitments", "personalDetails", "followUps"],
         },
       },
     ],

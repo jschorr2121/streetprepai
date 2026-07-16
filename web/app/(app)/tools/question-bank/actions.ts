@@ -161,7 +161,10 @@ export async function gradeAnswerAction(
       return { question: q, followup: f };
     }));
   } catch (err) {
-    logger.error({ userId, action: "qbank_question_load_failed", questionId }, "qbank_question_load_failed");
+    logger.error(
+      { userId, action: "qbank_question_load_failed", questionId },
+      "qbank_question_load_failed",
+    );
     Sentry.captureException(err);
     return { ok: false, error: { code: "INTERNAL", message: "Something went wrong." } };
   }
@@ -218,7 +221,9 @@ export async function gradeAnswerAction(
       if (!followup) {
         const prev = await getSpacedState(tx, userId, question.id);
         const next = nextReview(
-          prev ? { intervalDays: prev.intervalDays, consecutiveCorrect: prev.consecutiveCorrect } : null,
+          prev
+            ? { intervalDays: prev.intervalDays, consecutiveCorrect: prev.consecutiveCorrect }
+            : null,
           grade.correct,
           new Date(),
         );
@@ -255,7 +260,10 @@ export async function gradeAnswerAction(
       return next ? { id: next.id, prompt: next.prompt } : null;
     });
   } catch (err) {
-    logger.error({ userId, action: "qbank_attempt_persist_failed", questionId }, "qbank_attempt_persist_failed");
+    logger.error(
+      { userId, action: "qbank_attempt_persist_failed", questionId },
+      "qbank_attempt_persist_failed",
+    );
     Sentry.captureException(err);
     // The grade itself succeeded — return it rather than failing the user.
   }

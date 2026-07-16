@@ -6,10 +6,22 @@
     "questionType": "conceptual",
     "prompt": "You don't know anyone at the banks you're targeting. How do you actually find alumni from your school working in investment banking?",
     "keyPoints": [
-      { "point": "Use LinkedIn's alumni tool filtered by school, then filter by industry/employer", "weight": 3 },
-      { "point": "Check school career center database and finance/investment club rosters", "weight": 2 },
-      { "point": "Look at bank-specific recruiting lists or prior years' incoming analyst classes if available", "weight": 2 },
-      { "point": "Prioritize closer affinity (same major, same clubs, recent grads) over random alumni", "weight": 2 }
+      {
+        "point": "Use LinkedIn's alumni tool filtered by school, then filter by industry/employer",
+        "weight": 3
+      },
+      {
+        "point": "Check school career center database and finance/investment club rosters",
+        "weight": 2
+      },
+      {
+        "point": "Look at bank-specific recruiting lists or prior years' incoming analyst classes if available",
+        "weight": 2
+      },
+      {
+        "point": "Prioritize closer affinity (same major, same clubs, recent grads) over random alumni",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Assuming you need a personal introduction before reaching out to any alumnus",
@@ -37,9 +49,15 @@
     "questionType": "conceptual",
     "prompt": "Walk me through the basic structure of a cold outreach email to a banker you've never met.",
     "keyPoints": [
-      { "point": "Clear, specific subject line identifying who you are and why you're writing", "weight": 3 },
+      {
+        "point": "Clear, specific subject line identifying who you are and why you're writing",
+        "weight": 3
+      },
       { "point": "Brief personal introduction: name, school, year, area of interest", "weight": 2 },
-      { "point": "A specific, genuine reason for reaching out to this person (shared background or their work)", "weight": 2 },
+      {
+        "point": "A specific, genuine reason for reaching out to this person (shared background or their work)",
+        "weight": 2
+      },
       { "point": "A low-friction ask: a short call, not a job or referral", "weight": 3 },
       { "point": "Concise overall -- under 150 words with a clear close", "weight": 2 }
     ],
@@ -69,9 +87,18 @@
     "questionType": "conceptual",
     "prompt": "What is the actual goal of a coffee chat, and how is that different from a job interview?",
     "keyPoints": [
-      { "point": "Goal is building a relationship and gathering information, not being evaluated on technical skill", "weight": 3 },
-      { "point": "It's a two-way conversation -- you're also assessing fit for the group/bank", "weight": 2 },
-      { "point": "Success is measured by the banker remembering you positively and being willing to help further, not by a hire/no-hire decision", "weight": 2 },
+      {
+        "point": "Goal is building a relationship and gathering information, not being evaluated on technical skill",
+        "weight": 3
+      },
+      {
+        "point": "It's a two-way conversation -- you're also assessing fit for the group/bank",
+        "weight": 2
+      },
+      {
+        "point": "Success is measured by the banker remembering you positively and being willing to help further, not by a hire/no-hire decision",
+        "weight": 2
+      },
       { "point": "Should feel conversational, not scripted or interrogative", "weight": 2 }
     ],
     "misconceptions": [
@@ -101,9 +128,15 @@
     "prompt": "You just finished a 20-minute call with a second-year analyst. When and how should you follow up?",
     "keyPoints": [
       { "point": "Send a thank-you note within 24 hours of the call", "weight": 3 },
-      { "point": "Reference something specific from the conversation to show genuine engagement", "weight": 2 },
+      {
+        "point": "Reference something specific from the conversation to show genuine engagement",
+        "weight": 2
+      },
       { "point": "Keep it short and don't ask for anything new in the same message", "weight": 2 },
-      { "point": "Note the contact and conversation details for future reference before ongoing periodic check-ins", "weight": 1 }
+      {
+        "point": "Note the contact and conversation details for future reference before ongoing periodic check-ins",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Waiting a week or more to send a thank-you, by which point the conversation isn't fresh anymore",

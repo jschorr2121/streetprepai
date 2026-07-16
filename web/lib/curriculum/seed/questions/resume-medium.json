@@ -6,10 +6,19 @@
     "questionType": "conceptual",
     "prompt": "A candidate's resume uses 0.5-inch margins, 9-point font, and single-spaced cramped lines to force everything onto one page. Is this the right way to satisfy the one-page rule? What should they do instead?",
     "keyPoints": [
-      { "point": "Cramming via tiny margins/fonts hurts readability and looks unprofessional rather than efficient", "weight": 3 },
+      {
+        "point": "Cramming via tiny margins/fonts hurts readability and looks unprofessional rather than efficient",
+        "weight": 3
+      },
       { "point": "The correct fix is cutting content, not shrinking the container", "weight": 3 },
-      { "point": "Standard convention is roughly 10-11pt body font and 0.5-0.75 inch margins", "weight": 2 },
-      { "point": "Prioritize the most recent and most relevant experience; cut older or tangential lines first", "weight": 2 }
+      {
+        "point": "Standard convention is roughly 10-11pt body font and 0.5-0.75 inch margins",
+        "weight": 2
+      },
+      {
+        "point": "Prioritize the most recent and most relevant experience; cut older or tangential lines first",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Shrinking font size is an acceptable substitute for editing content",
@@ -41,11 +50,26 @@
     "questionType": "verbal",
     "prompt": "Rewrite this weak bullet into a strong banker bullet, and walk me through each change and why you made it: 'Responsible for helping with financial models and presentations for client meetings.'",
     "keyPoints": [
-      { "point": "Replace passive 'responsible for' opener with a strong past-tense action verb (e.g., 'Built' or 'Developed')", "weight": 2 },
-      { "point": "Name the specific deliverable instead of the vague category (e.g., a 3-statement model or DCF, not just 'financial models')", "weight": 3 },
-      { "point": "Add scope or context, such as the deal type and size the work supported", "weight": 2 },
-      { "point": "Add a quantified outcome or scale (number of models, deal size, number of meetings)", "weight": 3 },
-      { "point": "Remove the vague, duty-listing framing entirely rather than just swapping words", "weight": 2 }
+      {
+        "point": "Replace passive 'responsible for' opener with a strong past-tense action verb (e.g., 'Built' or 'Developed')",
+        "weight": 2
+      },
+      {
+        "point": "Name the specific deliverable instead of the vague category (e.g., a 3-statement model or DCF, not just 'financial models')",
+        "weight": 3
+      },
+      {
+        "point": "Add scope or context, such as the deal type and size the work supported",
+        "weight": 2
+      },
+      {
+        "point": "Add a quantified outcome or scale (number of models, deal size, number of meetings)",
+        "weight": 3
+      },
+      {
+        "point": "Remove the vague, duty-listing framing entirely rather than just swapping words",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Rewriting a bullet just means swapping 'responsible for' with a synonym like 'assisted with'",
@@ -77,10 +101,22 @@
     "questionType": "conceptual",
     "prompt": "How should a deal sheet differ in format and content from a regular bullet-point experience section, and what deal details are appropriate versus inappropriate to disclose?",
     "keyPoints": [
-      { "point": "Format as a compact table or list: transaction type, sector, size, your role, and status", "weight": 3 },
-      { "point": "Appropriate to include: publicly announced deal size/type, sector, general role description", "weight": 2 },
-      { "point": "Inappropriate to include: non-public client names under NDA, exact fee or commission figures, confidential deal terms", "weight": 3 },
-      { "point": "Use sanitized descriptors when a deal isn't public, e.g. '$150mm sell-side divestiture, consumer products sector'", "weight": 2 }
+      {
+        "point": "Format as a compact table or list: transaction type, sector, size, your role, and status",
+        "weight": 3
+      },
+      {
+        "point": "Appropriate to include: publicly announced deal size/type, sector, general role description",
+        "weight": 2
+      },
+      {
+        "point": "Inappropriate to include: non-public client names under NDA, exact fee or commission figures, confidential deal terms",
+        "weight": 3
+      },
+      {
+        "point": "Use sanitized descriptors when a deal isn't public, e.g. '$150mm sell-side divestiture, consumer products sector'",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "As long as it's on a resume rather than shared publicly, any confidential deal detail is fine to include",
@@ -112,11 +148,20 @@
     "questionType": "calculation",
     "prompt": "A candidate's resume bullet reads: 'Improved efficiency of the monthly financial reporting process.' Using invented but plausible metrics, rewrite this as a quantified bullet, and walk through the arithmetic behind the improvement you cite.",
     "keyPoints": [
-      { "point": "State a clear baseline metric before the improvement (e.g., prior turnaround time)", "weight": 3 },
+      {
+        "point": "State a clear baseline metric before the improvement (e.g., prior turnaround time)",
+        "weight": 3
+      },
       { "point": "State the improved metric after the change", "weight": 2 },
       { "point": "Correctly calculate and state the percentage improvement", "weight": 3 },
-      { "point": "Name the specific action/mechanism that drove the improvement (e.g., automating a step in Excel)", "weight": 2 },
-      { "point": "Avoid vague adjectives like 'efficient' or 'significant' without a number attached", "weight": 1 }
+      {
+        "point": "Name the specific action/mechanism that drove the improvement (e.g., automating a step in Excel)",
+        "weight": 2
+      },
+      {
+        "point": "Avoid vague adjectives like 'efficient' or 'significant' without a number attached",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Any number added to a bullet counts as sufficient quantification, even without a clear before/after comparison",
@@ -148,9 +193,18 @@
     "questionType": "conceptual",
     "prompt": "A candidate has a 3.4 GPA and has left GPA off their resume entirely. Is omitting GPA itself a red flag? How should the candidate handle this?",
     "keyPoints": [
-      { "point": "Omitting GPA below a bank's informal cutoff is itself read as a signal that the number is weak", "weight": 3 },
-      { "point": "Including it is usually better than omitting when it's above common minor cutoffs (roughly 3.3-3.5), since honesty avoids suspicion", "weight": 2 },
-      { "point": "If the GPA is genuinely weak, offset with major GPA, an upward trend, or strong quantitative signals, and prepare to address it directly if asked", "weight": 3 },
+      {
+        "point": "Omitting GPA below a bank's informal cutoff is itself read as a signal that the number is weak",
+        "weight": 3
+      },
+      {
+        "point": "Including it is usually better than omitting when it's above common minor cutoffs (roughly 3.3-3.5), since honesty avoids suspicion",
+        "weight": 2
+      },
+      {
+        "point": "If the GPA is genuinely weak, offset with major GPA, an upward trend, or strong quantitative signals, and prepare to address it directly if asked",
+        "weight": 3
+      },
       { "point": "Never state a rounded or misleading GPA figure", "weight": 1 }
     ],
     "misconceptions": [

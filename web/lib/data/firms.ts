@@ -34,5 +34,3 @@ export async function getFirmBySlug(slug: string): Promise<Firm | null> {
   if (error) throw error;
   return data ? mapRow(data as DbRow) : null;
 }
-
-

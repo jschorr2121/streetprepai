@@ -5,11 +5,7 @@ import { getChatLogs, getContacts } from "@/lib/data/contacts";
 import { FirmPrep } from "@/components/firms/firm-prep";
 import { FirmPastChats } from "@/components/firms/firm-past-chats";
 
-export default async function FirmPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function FirmPage({ params }: { params: Promise<{ slug: string }> }) {
   const user = await requireUser();
   const { slug } = await params;
   const [firm, chatLogs, contacts] = await Promise.all([

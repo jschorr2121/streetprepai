@@ -37,12 +37,7 @@ export async function POST(req: Request): Promise<Response> {
 
   const fillersPerMin =
     audioMetrics.totalSpeakingMs > 0
-      ? Number(
-          (
-            (audioMetrics.fillerCount /
-              (audioMetrics.totalSpeakingMs / 60_000)) || 0
-          ).toFixed(2),
-        )
+      ? Number((audioMetrics.fillerCount / (audioMetrics.totalSpeakingMs / 60_000) || 0).toFixed(2))
       : 0;
 
   const userPrompt = [
@@ -80,8 +75,7 @@ export async function POST(req: Request): Promise<Response> {
       tools: [
         {
           name: "save_scorecard",
-          description:
-            "Save the structured scorecard for the student's mock-interview answer.",
+          description: "Save the structured scorecard for the student's mock-interview answer.",
           input_schema: {
             type: "object",
             properties: {
@@ -126,16 +120,14 @@ export async function POST(req: Request): Promise<Response> {
               strengths: {
                 type: "array",
                 items: { type: "string" },
-                description:
-                  "2-3 specific strengths. Quote the student verbatim where it helps.",
+                description: "2-3 specific strengths. Quote the student verbatim where it helps.",
                 minItems: 2,
                 maxItems: 3,
               },
               improvements: {
                 type: "array",
                 items: { type: "string" },
-                description:
-                  "2-3 highest-leverage, concrete fixes for next attempt.",
+                description: "2-3 highest-leverage, concrete fixes for next attempt.",
                 minItems: 2,
                 maxItems: 3,
               },
@@ -191,10 +183,7 @@ export async function POST(req: Request): Promise<Response> {
 
   const toolUse = response.content.find((c) => c.type === "tool_use");
   if (!toolUse || toolUse.type !== "tool_use") {
-    return Response.json(
-      { error: "Model did not call the save_scorecard tool." },
-      { status: 502 },
-    );
+    return Response.json({ error: "Model did not call the save_scorecard tool." }, { status: 502 });
   }
 
   const input = toolUse.input as Partial<Scorecard>;

@@ -90,9 +90,8 @@ describe("logUsage", () => {
     // Real supabase-js inserts are lazy thenables: the HTTP request only fires
     // once `.then()` is attached. A bare `void builder` silently no-ops, so
     // this test models the builder shape instead of an eager promise.
-    const then = vi.fn(
-      (onFulfilled: (v: { error: unknown }) => unknown) =>
-        Promise.resolve({ error: null }).then(onFulfilled),
+    const then = vi.fn((onFulfilled: (v: { error: unknown }) => unknown) =>
+      Promise.resolve({ error: null }).then(onFulfilled),
     );
     const insert = vi.fn(() => ({ then }));
     const from = vi.fn(() => ({ insert }));

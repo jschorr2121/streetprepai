@@ -17,18 +17,9 @@ export interface AudioMetrics {
   totalSpeakingMs: number;
 }
 
-const FILLER_PHRASES = [
-  "you know",
-  "sort of",
-  "kind of",
-];
+const FILLER_PHRASES = ["you know", "sort of", "kind of"];
 
-const FILLER_WORDS = new Set([
-  "uh",
-  "um",
-  "like",
-  "basically",
-]);
+const FILLER_WORDS = new Set(["uh", "um", "like", "basically"]);
 
 const PAUSE_THRESHOLD_MS = 400;
 
@@ -61,21 +52,22 @@ export function analyzeAudio(words: TimestampedWord[]): AudioMetrics {
   let pauseGapMs = 0;
   let longestPauseMs = 0;
   for (let i = 1; i < words.length; i++) {
-    const gapMs = Math.max(
-      0,
-      Math.round((words[i]!.start - words[i - 1]!.end) * 1000),
-    );
+    const gapMs = Math.max(0, Math.round((words[i]!.start - words[i - 1]!.end) * 1000));
     totalGapMs += gapMs;
     if (gapMs > longestPauseMs) longestPauseMs = gapMs;
     if (gapMs > PAUSE_THRESHOLD_MS) pauseGapMs += gapMs;
   }
-  const pauseRatio =
-    totalGapMs > 0 ? Math.min(1, pauseGapMs / totalGapMs) : 0;
+  const pauseRatio = totalGapMs > 0 ? Math.min(1, pauseGapMs / totalGapMs) : 0;
 
   // Filler detection — work over the full normalized transcript so multi-word
   // fillers ("you know") match across token boundaries, then scan single tokens.
   const normalized = words
-    .map((w) => w.word.toLowerCase().replace(/[^a-z' ]/g, "").trim())
+    .map((w) =>
+      w.word
+        .toLowerCase()
+        .replace(/[^a-z' ]/g, "")
+        .trim(),
+    )
     .filter((w) => w.length > 0);
   const joined = " " + normalized.join(" ") + " ";
 

@@ -6,11 +6,26 @@
     "questionType": "conceptual",
     "prompt": "How should your interview strategy change when facing a panel of three interviewers at once versus a traditional one-on-one, and what's the most common mistake candidates make in a panel setting?",
     "keyPoints": [
-      {"point": "Notes the need to distribute eye contact across all panelists, not just the one who asked the question", "weight": 3},
-      {"point": "Identifies the common mistake: fixating only on whoever asked the question and ignoring the others", "weight": 3},
-      {"point": "Mentions panels often split roles (one on technical, one on fit, one silent/observing), so read the room", "weight": 2},
-      {"point": "Notes pacing may need to slow slightly since multiple people are absorbing and may jump in with follow-ups", "weight": 2},
-      {"point": "Mentions addressing the group collectively during opening/closing remarks rather than just one person", "weight": 1}
+      {
+        "point": "Notes the need to distribute eye contact across all panelists, not just the one who asked the question",
+        "weight": 3
+      },
+      {
+        "point": "Identifies the common mistake: fixating only on whoever asked the question and ignoring the others",
+        "weight": 3
+      },
+      {
+        "point": "Mentions panels often split roles (one on technical, one on fit, one silent/observing), so read the room",
+        "weight": 2
+      },
+      {
+        "point": "Notes pacing may need to slow slightly since multiple people are absorbing and may jump in with follow-ups",
+        "weight": 2
+      },
+      {
+        "point": "Mentions addressing the group collectively during opening/closing remarks rather than just one person",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Treating a panel as just three separate one-on-one interviews stacked together",
@@ -43,11 +58,26 @@
     "questionType": "multi-step",
     "prompt": "Walk me through how you would use the prep time before recording a HireVue answer, step by step, if you're given 30 seconds to prepare and 90 seconds to answer a behavioral prompt.",
     "keyPoints": [
-      {"point": "Step 1: quickly identify which prepared story/framework best fits the prompt rather than improvising fresh", "weight": 3},
-      {"point": "Step 2: jot a 3-4 word skeleton (situation, action, result) rather than full sentences given limited time", "weight": 3},
-      {"point": "Step 3: mentally note a target pace/checkpoint so the answer lands within the 90-second limit", "weight": 2},
-      {"point": "Step 4: start recording promptly rather than wasting seconds hesitating once time starts", "weight": 2},
-      {"point": "Mentions practicing this exact prep-to-record workflow beforehand so it's not being invented live", "weight": 1}
+      {
+        "point": "Step 1: quickly identify which prepared story/framework best fits the prompt rather than improvising fresh",
+        "weight": 3
+      },
+      {
+        "point": "Step 2: jot a 3-4 word skeleton (situation, action, result) rather than full sentences given limited time",
+        "weight": 3
+      },
+      {
+        "point": "Step 3: mentally note a target pace/checkpoint so the answer lands within the 90-second limit",
+        "weight": 2
+      },
+      {
+        "point": "Step 4: start recording promptly rather than wasting seconds hesitating once time starts",
+        "weight": 2
+      },
+      {
+        "point": "Mentions practicing this exact prep-to-record workflow beforehand so it's not being invented live",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Trying to write out full sentences during the 30-second prep window instead of a bullet skeleton",
@@ -80,11 +110,26 @@
     "questionType": "conceptual",
     "prompt": "A HireVue technical question gives you 45 seconds of prep and 2 minutes to answer 'walk me through the three financial statements and how they link.' How do you decide what to cut, given you almost certainly can't cover everything you know in 2 minutes?",
     "keyPoints": [
-      {"point": "Prioritizes the core linkage mechanism (net income to retained earnings to cash flow to balance sheet) over exhaustive detail", "weight": 3},
-      {"point": "Notes the goal is demonstrating understanding of structure/relationships, not reciting every line item", "weight": 3},
-      {"point": "Mentions using prep time to decide the cut points before speaking rather than discovering the time limit mid-answer", "weight": 2},
-      {"point": "Recommends a brief, high-level statement-by-statement summary before the linkage, kept short deliberately", "weight": 2},
-      {"point": "Notes ending with a clean concluding sentence rather than getting cut off mid-thought", "weight": 1}
+      {
+        "point": "Prioritizes the core linkage mechanism (net income to retained earnings to cash flow to balance sheet) over exhaustive detail",
+        "weight": 3
+      },
+      {
+        "point": "Notes the goal is demonstrating understanding of structure/relationships, not reciting every line item",
+        "weight": 3
+      },
+      {
+        "point": "Mentions using prep time to decide the cut points before speaking rather than discovering the time limit mid-answer",
+        "weight": 2
+      },
+      {
+        "point": "Recommends a brief, high-level statement-by-statement summary before the linkage, kept short deliberately",
+        "weight": 2
+      },
+      {
+        "point": "Notes ending with a clean concluding sentence rather than getting cut off mid-thought",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Trying to define every single line item on all three statements within the time limit",
@@ -117,11 +162,26 @@
     "questionType": "verbal",
     "prompt": "Walk me through the structure you'd use to answer 'walk me through your resume' in a way that naturally builds toward 'why investment banking,' in order.",
     "keyPoints": [
-      {"point": "Starts with a brief origin point or early interest that seeds the later narrative, not a full life history", "weight": 2},
-      {"point": "Moves chronologically through 2-3 key experiences, each tied to a skill or realization relevant to banking", "weight": 3},
-      {"point": "Builds momentum so each experience logically motivates the next step, avoiding a disconnected list", "weight": 3},
-      {"point": "Lands on a clear, specific 'why banking now' conclusion that ties the prior points together", "weight": 3},
-      {"point": "Keeps total length to roughly 60-90 seconds, deliberately excluding tangents", "weight": 1}
+      {
+        "point": "Starts with a brief origin point or early interest that seeds the later narrative, not a full life history",
+        "weight": 2
+      },
+      {
+        "point": "Moves chronologically through 2-3 key experiences, each tied to a skill or realization relevant to banking",
+        "weight": 3
+      },
+      {
+        "point": "Builds momentum so each experience logically motivates the next step, avoiding a disconnected list",
+        "weight": 3
+      },
+      {
+        "point": "Lands on a clear, specific 'why banking now' conclusion that ties the prior points together",
+        "weight": 3
+      },
+      {
+        "point": "Keeps total length to roughly 60-90 seconds, deliberately excluding tangents",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Reciting the resume top to bottom like a list of bullet points with no narrative thread",
@@ -154,11 +214,26 @@
     "questionType": "conceptual",
     "prompt": "How should you approach the 'what's your biggest weakness' question in a way that sounds honest rather than a disguised humble-brag, and what makes an answer fall flat?",
     "keyPoints": [
-      {"point": "Picks a real, specific weakness relevant to work habits, not a fake weakness dressed as a strength", "weight": 3},
-      {"point": "Includes a concrete example of the weakness actually causing a problem, not just an abstract label", "weight": 2},
-      {"point": "Describes a specific, ongoing action taken to address it, showing self-awareness and improvement", "weight": 3},
-      {"point": "Avoids weaknesses that are core to the job (e.g. 'I'm bad under pressure' for a high-pressure role)", "weight": 2},
-      {"point": "Keeps tone matter-of-fact rather than overly self-deprecating or defensive", "weight": 1}
+      {
+        "point": "Picks a real, specific weakness relevant to work habits, not a fake weakness dressed as a strength",
+        "weight": 3
+      },
+      {
+        "point": "Includes a concrete example of the weakness actually causing a problem, not just an abstract label",
+        "weight": 2
+      },
+      {
+        "point": "Describes a specific, ongoing action taken to address it, showing self-awareness and improvement",
+        "weight": 3
+      },
+      {
+        "point": "Avoids weaknesses that are core to the job (e.g. 'I'm bad under pressure' for a high-pressure role)",
+        "weight": 2
+      },
+      {
+        "point": "Keeps tone matter-of-fact rather than overly self-deprecating or defensive",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Using a disguised strength like 'I work too hard' or 'I'm too much of a perfectionist' as the weakness",
@@ -191,11 +266,26 @@
     "questionType": "multi-step",
     "prompt": "You have a virtual superday tomorrow with five back-to-back Zoom rounds. Walk me through your technical and environmental setup checklist, step by step, to avoid a mid-interview disaster.",
     "keyPoints": [
-      {"point": "Test the actual video platform, camera, mic, and internet connection the day before, not just assume it works", "weight": 3},
-      {"point": "Set up a clean, quiet, well-lit background with a backup location/plan if something fails", "weight": 3},
-      {"point": "Close unnecessary apps/tabs, silence all notifications, and have a wired connection or strong wifi as backup", "weight": 2},
-      {"point": "Keep phone charged nearby with the recruiter's contact info in case of a dropped call", "weight": 2},
-      {"point": "Plan bio/water breaks and know the schedule/links for each round in advance", "weight": 1}
+      {
+        "point": "Test the actual video platform, camera, mic, and internet connection the day before, not just assume it works",
+        "weight": 3
+      },
+      {
+        "point": "Set up a clean, quiet, well-lit background with a backup location/plan if something fails",
+        "weight": 3
+      },
+      {
+        "point": "Close unnecessary apps/tabs, silence all notifications, and have a wired connection or strong wifi as backup",
+        "weight": 2
+      },
+      {
+        "point": "Keep phone charged nearby with the recruiter's contact info in case of a dropped call",
+        "weight": 2
+      },
+      {
+        "point": "Plan bio/water breaks and know the schedule/links for each round in advance",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Assuming a laptop that worked fine for casual video calls will handle five hours of back-to-back professional rounds without issue",
@@ -228,11 +318,26 @@
     "questionType": "conceptual",
     "prompt": "By your fourth interview of a five-round superday, you've answered 'why this firm' four times already. How do you keep the fifth answer sounding genuine and fresh rather than fatigued or robotic?",
     "keyPoints": [
-      {"point": "Recommends briefly re-grounding before each round by recalling why the reasons are actually true, not just reciting them", "weight": 3},
-      {"point": "Suggests varying which specific detail or example is emphasized based on that interviewer's background/group", "weight": 2},
-      {"point": "Notes physical resets between rounds (posture, breathing, brief break) help combat vocal/energy fatigue", "weight": 2},
-      {"point": "Warns against speeding up or flattening delivery out of boredom, which reads as low enthusiasm", "weight": 2},
-      {"point": "Mentions treating each interviewer as meeting them for the first time, since they are", "weight": 1}
+      {
+        "point": "Recommends briefly re-grounding before each round by recalling why the reasons are actually true, not just reciting them",
+        "weight": 3
+      },
+      {
+        "point": "Suggests varying which specific detail or example is emphasized based on that interviewer's background/group",
+        "weight": 2
+      },
+      {
+        "point": "Notes physical resets between rounds (posture, breathing, brief break) help combat vocal/energy fatigue",
+        "weight": 2
+      },
+      {
+        "point": "Warns against speeding up or flattening delivery out of boredom, which reads as low enthusiasm",
+        "weight": 2
+      },
+      {
+        "point": "Mentions treating each interviewer as meeting them for the first time, since they are",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Assuming fatigue is invisible to the interviewer since they don't know it's the fourth repetition",
@@ -265,11 +370,26 @@
     "questionType": "conceptual",
     "prompt": "It's 2pm, you're two hours into a five-hour superday, and you can feel your energy crashing after a heavy lunch. What practical steps do you take to recover before the next round, and what should you have done differently at lunch to prevent this?",
     "keyPoints": [
-      {"point": "Recommends light, low-glycemic food choices at superday lunches specifically to avoid a post-meal energy dip", "weight": 3},
-      {"point": "Suggests immediate recovery tactics: brief walk, water, light stretching, avoiding more caffeine/sugar as a quick fix", "weight": 2},
-      {"point": "Notes portion control and avoiding heavy/fried or very carb-dense food at the superday lunch itself", "weight": 2},
-      {"point": "Mentions mentally resetting energy through posture and breathing rather than relying purely on food/caffeine", "weight": 2},
-      {"point": "Notes planning ahead: eating a lighter breakfast/lunch and bringing a healthy snack rather than relying on firm-provided catering blindly", "weight": 1}
+      {
+        "point": "Recommends light, low-glycemic food choices at superday lunches specifically to avoid a post-meal energy dip",
+        "weight": 3
+      },
+      {
+        "point": "Suggests immediate recovery tactics: brief walk, water, light stretching, avoiding more caffeine/sugar as a quick fix",
+        "weight": 2
+      },
+      {
+        "point": "Notes portion control and avoiding heavy/fried or very carb-dense food at the superday lunch itself",
+        "weight": 2
+      },
+      {
+        "point": "Mentions mentally resetting energy through posture and breathing rather than relying purely on food/caffeine",
+        "weight": 2
+      },
+      {
+        "point": "Notes planning ahead: eating a lighter breakfast/lunch and bringing a healthy snack rather than relying on firm-provided catering blindly",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Reaching for more coffee or sugary snacks as the fix, which often worsens the crash later",
@@ -302,11 +422,26 @@
     "questionType": "verbal",
     "prompt": "Walk me through how you'd prepare a bank of closing questions to ask interviewers, and how you'd decide which ones to actually use with a specific interviewer in the moment.",
     "keyPoints": [
-      {"point": "Prepares a pool of several questions in advance rather than one single generic question", "weight": 2},
-      {"point": "Includes at least one question tailored to the interviewer's specific role/background/group", "weight": 3},
-      {"point": "Avoids questions with answers easily found on the firm's public website (signals lack of research)", "weight": 3},
-      {"point": "Selects questions in the moment based on what actually came up in conversation, not a fixed script", "weight": 2},
-      {"point": "Avoids questions about compensation, hours, or vacation in early rounds", "weight": 1}
+      {
+        "point": "Prepares a pool of several questions in advance rather than one single generic question",
+        "weight": 2
+      },
+      {
+        "point": "Includes at least one question tailored to the interviewer's specific role/background/group",
+        "weight": 3
+      },
+      {
+        "point": "Avoids questions with answers easily found on the firm's public website (signals lack of research)",
+        "weight": 3
+      },
+      {
+        "point": "Selects questions in the moment based on what actually came up in conversation, not a fixed script",
+        "weight": 2
+      },
+      {
+        "point": "Avoids questions about compensation, hours, or vacation in early rounds",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Asking a question whose answer is clearly stated on the firm's careers page, which signals no real research",
@@ -339,11 +474,26 @@
     "questionType": "verbal",
     "prompt": "Walk me through the structure and content of a strong thank-you email after a superday interview, in order, and explain what makes it feel personalized rather than templated.",
     "keyPoints": [
-      {"point": "Opens with genuine thanks referencing the specific interview/conversation, not a generic greeting", "weight": 2},
-      {"point": "Includes one specific detail from the actual conversation (a topic discussed, a story shared, a question asked)", "weight": 3},
-      {"point": "Briefly reinforces genuine interest/fit tied to something discussed, not a repeated generic pitch", "weight": 2},
-      {"point": "Keeps it short, a few sentences to one short paragraph, not a lengthy essay", "weight": 2},
-      {"point": "Closes with clear appreciation and openness to next steps, professional sign-off", "weight": 1}
+      {
+        "point": "Opens with genuine thanks referencing the specific interview/conversation, not a generic greeting",
+        "weight": 2
+      },
+      {
+        "point": "Includes one specific detail from the actual conversation (a topic discussed, a story shared, a question asked)",
+        "weight": 3
+      },
+      {
+        "point": "Briefly reinforces genuine interest/fit tied to something discussed, not a repeated generic pitch",
+        "weight": 2
+      },
+      {
+        "point": "Keeps it short, a few sentences to one short paragraph, not a lengthy essay",
+        "weight": 2
+      },
+      {
+        "point": "Closes with clear appreciation and openness to next steps, professional sign-off",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Sending an identical templated email to every interviewer with only the name swapped",

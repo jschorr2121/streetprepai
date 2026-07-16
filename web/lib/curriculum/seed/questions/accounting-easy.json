@@ -6,11 +6,17 @@
     "questionType": "conceptual",
     "prompt": "Walk me through the major line items on an income statement, from revenue down to net income.",
     "keyPoints": [
-      {"point": "Starts with revenue, subtracts COGS to get gross profit", "weight": 3},
-      {"point": "Subtracts operating expenses (SG&A, R&D) from gross profit to get operating income", "weight": 3},
-      {"point": "Adds/subtracts non-operating items like interest expense and other income to get pre-tax income", "weight": 2},
-      {"point": "Subtracts taxes to arrive at net income", "weight": 3},
-      {"point": "Mentions EPS as a derived figure at the very bottom", "weight": 1}
+      { "point": "Starts with revenue, subtracts COGS to get gross profit", "weight": 3 },
+      {
+        "point": "Subtracts operating expenses (SG&A, R&D) from gross profit to get operating income",
+        "weight": 3
+      },
+      {
+        "point": "Adds/subtracts non-operating items like interest expense and other income to get pre-tax income",
+        "weight": 2
+      },
+      { "point": "Subtracts taxes to arrive at net income", "weight": 3 },
+      { "point": "Mentions EPS as a derived figure at the very bottom", "weight": 1 }
     ],
     "misconceptions": [
       "Treating gross profit and operating income as the same line",
@@ -38,9 +44,15 @@
     "questionType": "conceptual",
     "prompt": "What's the difference between gross profit and operating income, and why does the distinction matter?",
     "keyPoints": [
-      {"point": "Gross profit = revenue minus COGS only", "weight": 3},
-      {"point": "Operating income = gross profit minus operating expenses (SG&A, R&D, marketing)", "weight": 3},
-      {"point": "Gross margin isolates production/direct cost efficiency; operating margin captures the full cost structure including overhead", "weight": 2}
+      { "point": "Gross profit = revenue minus COGS only", "weight": 3 },
+      {
+        "point": "Operating income = gross profit minus operating expenses (SG&A, R&D, marketing)",
+        "weight": 3
+      },
+      {
+        "point": "Gross margin isolates production/direct cost efficiency; operating margin captures the full cost structure including overhead",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Using the two terms interchangeably",
@@ -64,9 +76,15 @@
     "questionType": "conceptual",
     "prompt": "In plain terms, when does a company recognize revenue under accrual accounting?",
     "keyPoints": [
-      {"point": "Revenue is recognized when it is earned — goods delivered or services performed — not necessarily when cash is received", "weight": 3},
-      {"point": "This follows the matching principle underlying accrual accounting", "weight": 2},
-      {"point": "Example: cash received in advance creates deferred revenue (a liability) until earned", "weight": 2}
+      {
+        "point": "Revenue is recognized when it is earned — goods delivered or services performed — not necessarily when cash is received",
+        "weight": 3
+      },
+      { "point": "This follows the matching principle underlying accrual accounting", "weight": 2 },
+      {
+        "point": "Example: cash received in advance creates deferred revenue (a liability) until earned",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Believing revenue equals cash collected in the period",
@@ -90,10 +108,16 @@
     "questionType": "single-step",
     "prompt": "A company has net income of $40 million and 20 million basic weighted-average shares outstanding, with no preferred dividends. What is basic EPS?",
     "keyPoints": [
-      {"point": "EPS = net income available to common shareholders / weighted-average shares outstanding", "weight": 3},
-      {"point": "Correctly divides $40 million by 20 million shares", "weight": 3},
-      {"point": "Arrives at $2.00 per share", "weight": 2},
-      {"point": "Notes this is basic EPS, distinct from diluted EPS which would use a higher share count", "weight": 1}
+      {
+        "point": "EPS = net income available to common shareholders / weighted-average shares outstanding",
+        "weight": 3
+      },
+      { "point": "Correctly divides $40 million by 20 million shares", "weight": 3 },
+      { "point": "Arrives at $2.00 per share", "weight": 2 },
+      {
+        "point": "Notes this is basic EPS, distinct from diluted EPS which would use a higher share count",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Multiplying instead of dividing net income by share count",
@@ -117,9 +141,15 @@
     "questionType": "conceptual",
     "prompt": "What is the fundamental accounting equation, and why must a balance sheet always balance?",
     "keyPoints": [
-      {"point": "States Assets = Liabilities + Shareholders' Equity", "weight": 3},
-      {"point": "Explains double-entry bookkeeping: every transaction affects at least two accounts", "weight": 3},
-      {"point": "Equity is the residual claim after liabilities are subtracted from assets", "weight": 2}
+      { "point": "States Assets = Liabilities + Shareholders' Equity", "weight": 3 },
+      {
+        "point": "Explains double-entry bookkeeping: every transaction affects at least two accounts",
+        "weight": 3
+      },
+      {
+        "point": "Equity is the residual claim after liabilities are subtracted from assets",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Thinking the balance sheet 'balances' by coincidence rather than by construction of double-entry accounting",
@@ -143,9 +173,15 @@
     "questionType": "conceptual",
     "prompt": "What distinguishes a current asset or liability from a non-current one?",
     "keyPoints": [
-      {"point": "Current items are expected to be converted to cash or settled within 12 months (or one operating cycle)", "weight": 3},
-      {"point": "Non-current items extend beyond that horizon", "weight": 2},
-      {"point": "Gives examples: cash, AR, inventory as current assets; PP&E, goodwill, long-term debt as non-current", "weight": 2}
+      {
+        "point": "Current items are expected to be converted to cash or settled within 12 months (or one operating cycle)",
+        "weight": 3
+      },
+      { "point": "Non-current items extend beyond that horizon", "weight": 2 },
+      {
+        "point": "Gives examples: cash, AR, inventory as current assets; PP&E, goodwill, long-term debt as non-current",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Assuming all debt is non-current, ignoring that the current portion of long-term debt is reclassified as current",
@@ -169,10 +205,19 @@
     "questionType": "conceptual",
     "prompt": "What makes up the shareholders' equity section of the balance sheet?",
     "keyPoints": [
-      {"point": "Common stock and additional paid-in capital (APIC) from shares issued", "weight": 2},
-      {"point": "Retained earnings — cumulative net income less dividends paid over time", "weight": 3},
-      {"point": "Treasury stock — a contra-equity account for repurchased shares", "weight": 2},
-      {"point": "Accumulated other comprehensive income (AOCI) for items like FX translation or unrealized gains/losses", "weight": 1}
+      {
+        "point": "Common stock and additional paid-in capital (APIC) from shares issued",
+        "weight": 2
+      },
+      {
+        "point": "Retained earnings — cumulative net income less dividends paid over time",
+        "weight": 3
+      },
+      { "point": "Treasury stock — a contra-equity account for repurchased shares", "weight": 2 },
+      {
+        "point": "Accumulated other comprehensive income (AOCI) for items like FX translation or unrealized gains/losses",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Believing equity is simply cash the company has on hand",
@@ -196,9 +241,9 @@
     "questionType": "single-step",
     "prompt": "A company has total liabilities of $65 million and total shareholders' equity of $35 million. What are total assets?",
     "keyPoints": [
-      {"point": "Applies Assets = Liabilities + Equity", "weight": 3},
-      {"point": "Adds $65 million and $35 million correctly", "weight": 3},
-      {"point": "Arrives at $100 million total assets", "weight": 2}
+      { "point": "Applies Assets = Liabilities + Equity", "weight": 3 },
+      { "point": "Adds $65 million and $35 million correctly", "weight": 3 },
+      { "point": "Arrives at $100 million total assets", "weight": 2 }
     ],
     "misconceptions": [
       "Subtracting instead of adding liabilities and equity",
@@ -222,9 +267,18 @@
     "questionType": "conceptual",
     "prompt": "What are the three sections of the cash flow statement, and what does each capture?",
     "keyPoints": [
-      {"point": "Cash flow from operations (CFO): cash generated from core business activities", "weight": 3},
-      {"point": "Cash flow from investing (CFI): capex, acquisitions, purchases/sales of investments", "weight": 3},
-      {"point": "Cash flow from financing (CFF): debt issuance/repayment, equity issuance, dividends, buybacks", "weight": 3}
+      {
+        "point": "Cash flow from operations (CFO): cash generated from core business activities",
+        "weight": 3
+      },
+      {
+        "point": "Cash flow from investing (CFI): capex, acquisitions, purchases/sales of investments",
+        "weight": 3
+      },
+      {
+        "point": "Cash flow from financing (CFF): debt issuance/repayment, equity issuance, dividends, buybacks",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Putting capex in the financing section instead of investing",
@@ -248,9 +302,15 @@
     "questionType": "conceptual",
     "prompt": "The indirect method cash flow statement starts with what line item, and why?",
     "keyPoints": [
-      {"point": "Starts with net income from the income statement", "weight": 3},
-      {"point": "Purpose is to reconcile accrual-based net income to actual cash generated", "weight": 3},
-      {"point": "Adjusts for non-cash items (D&A, stock comp) and changes in working capital", "weight": 2}
+      { "point": "Starts with net income from the income statement", "weight": 3 },
+      {
+        "point": "Purpose is to reconcile accrual-based net income to actual cash generated",
+        "weight": 3
+      },
+      {
+        "point": "Adjusts for non-cash items (D&A, stock comp) and changes in working capital",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Believing the indirect method starts with revenue or cash receipts directly",
@@ -274,9 +334,18 @@
     "questionType": "conceptual",
     "prompt": "Why is depreciation added back to net income on the cash flow statement even though it reduced net income?",
     "keyPoints": [
-      {"point": "Depreciation is a non-cash expense — no cash actually leaves the business when it's recorded", "weight": 3},
-      {"point": "It already reduced net income on the income statement via COGS/opex", "weight": 2},
-      {"point": "Adding it back in CFO removes the non-cash distortion to reflect true cash generated", "weight": 3}
+      {
+        "point": "Depreciation is a non-cash expense — no cash actually leaves the business when it's recorded",
+        "weight": 3
+      },
+      {
+        "point": "It already reduced net income on the income statement via COGS/opex",
+        "weight": 2
+      },
+      {
+        "point": "Adding it back in CFO removes the non-cash distortion to reflect true cash generated",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Thinking the add-back means depreciation 'doesn't matter'",
@@ -300,10 +369,13 @@
     "questionType": "single-step",
     "prompt": "Net income is $50 million, D&A is $12 million, and there is a $3 million net increase in working capital (a use of cash), with a 25% tax rate already reflected in net income. What is cash flow from operations?",
     "keyPoints": [
-      {"point": "Starts from net income of $50 million", "weight": 2},
-      {"point": "Adds back D&A of $12 million as a non-cash expense", "weight": 3},
-      {"point": "Subtracts the $3 million increase in working capital since it's a use of cash", "weight": 3},
-      {"point": "Arrives at CFO of $59 million", "weight": 2}
+      { "point": "Starts from net income of $50 million", "weight": 2 },
+      { "point": "Adds back D&A of $12 million as a non-cash expense", "weight": 3 },
+      {
+        "point": "Subtracts the $3 million increase in working capital since it's a use of cash",
+        "weight": 3
+      },
+      { "point": "Arrives at CFO of $59 million", "weight": 2 }
     ],
     "misconceptions": [
       "Adding the working capital increase instead of subtracting it",
@@ -327,9 +399,15 @@
     "questionType": "conceptual",
     "prompt": "How does net income connect the income statement to the balance sheet and cash flow statement?",
     "keyPoints": [
-      {"point": "Net income is the bottom line of the income statement", "weight": 2},
-      {"point": "It's the starting point for cash flow from operations in the indirect method", "weight": 3},
-      {"point": "It flows into retained earnings on the balance sheet, net of any dividends paid", "weight": 3}
+      { "point": "Net income is the bottom line of the income statement", "weight": 2 },
+      {
+        "point": "It's the starting point for cash flow from operations in the indirect method",
+        "weight": 3
+      },
+      {
+        "point": "It flows into retained earnings on the balance sheet, net of any dividends paid",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Thinking net income flows directly into cash on the balance sheet",
@@ -353,9 +431,15 @@
     "questionType": "conceptual",
     "prompt": "Trace how a single depreciation expense touches all three financial statements.",
     "keyPoints": [
-      {"point": "Income statement: reduces operating income and therefore net income", "weight": 3},
-      {"point": "Cash flow statement: added back in CFO since it's non-cash", "weight": 3},
-      {"point": "Balance sheet: reduces net PP&E via accumulated depreciation; retained earnings falls by the after-tax impact through net income", "weight": 3}
+      {
+        "point": "Income statement: reduces operating income and therefore net income",
+        "weight": 3
+      },
+      { "point": "Cash flow statement: added back in CFO since it's non-cash", "weight": 3 },
+      {
+        "point": "Balance sheet: reduces net PP&E via accumulated depreciation; retained earnings falls by the after-tax impact through net income",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Believing depreciation only affects the income statement",
@@ -379,9 +463,18 @@
     "questionType": "conceptual",
     "prompt": "How does a capital expenditure show up on the balance sheet and cash flow statement, assuming it doesn't hit the income statement directly?",
     "keyPoints": [
-      {"point": "Cash flow statement: recorded as an outflow in cash flow from investing", "weight": 3},
-      {"point": "Balance sheet: increases gross PP&E, decreases cash by the same amount", "weight": 3},
-      {"point": "No immediate income statement impact — the cost is expensed gradually over time via depreciation", "weight": 2}
+      {
+        "point": "Cash flow statement: recorded as an outflow in cash flow from investing",
+        "weight": 3
+      },
+      {
+        "point": "Balance sheet: increases gross PP&E, decreases cash by the same amount",
+        "weight": 3
+      },
+      {
+        "point": "No immediate income statement impact — the cost is expensed gradually over time via depreciation",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Thinking capex is expensed immediately on the income statement like an operating cost",
@@ -405,9 +498,15 @@
     "questionType": "conceptual",
     "prompt": "What is working capital, and what does it measure?",
     "keyPoints": [
-      {"point": "Working capital = current assets minus current liabilities", "weight": 3},
-      {"point": "Measures short-term liquidity — the company's ability to meet near-term obligations", "weight": 3},
-      {"point": "Operating working capital typically excludes cash and short-term debt to focus on the core operating cycle", "weight": 2}
+      { "point": "Working capital = current assets minus current liabilities", "weight": 3 },
+      {
+        "point": "Measures short-term liquidity — the company's ability to meet near-term obligations",
+        "weight": 3
+      },
+      {
+        "point": "Operating working capital typically excludes cash and short-term debt to focus on the core operating cycle",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Confusing working capital with total cash on hand",
@@ -431,9 +530,18 @@
     "questionType": "conceptual",
     "prompt": "What do DSO, DIO, and DPO each measure, in plain English?",
     "keyPoints": [
-      {"point": "DSO (days sales outstanding): average number of days it takes to collect cash from customers after a sale", "weight": 3},
-      {"point": "DIO (days inventory outstanding): average number of days inventory sits before being sold", "weight": 3},
-      {"point": "DPO (days payable outstanding): average number of days the company takes to pay its suppliers", "weight": 3}
+      {
+        "point": "DSO (days sales outstanding): average number of days it takes to collect cash from customers after a sale",
+        "weight": 3
+      },
+      {
+        "point": "DIO (days inventory outstanding): average number of days inventory sits before being sold",
+        "weight": 3
+      },
+      {
+        "point": "DPO (days payable outstanding): average number of days the company takes to pay its suppliers",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Mixing up which metric measures collection speed versus payment speed",
@@ -457,9 +565,18 @@
     "questionType": "single-step",
     "prompt": "A company has current assets of $80 million (including $10 million of cash) and current liabilities of $50 million. What is net working capital, and what is operating working capital excluding cash?",
     "keyPoints": [
-      {"point": "Net working capital = current assets minus current liabilities = $80M - $50M = $30M", "weight": 3},
-      {"point": "Operating working capital excludes cash: ($80M - $10M) - $50M = $20M", "weight": 3},
-      {"point": "Explains why cash is often excluded when analyzing operating working capital", "weight": 2}
+      {
+        "point": "Net working capital = current assets minus current liabilities = $80M - $50M = $30M",
+        "weight": 3
+      },
+      {
+        "point": "Operating working capital excludes cash: ($80M - $10M) - $50M = $20M",
+        "weight": 3
+      },
+      {
+        "point": "Explains why cash is often excluded when analyzing operating working capital",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Forgetting to subtract cash out when computing operating working capital",
@@ -483,9 +600,15 @@
     "questionType": "conceptual",
     "prompt": "If you were building a three-statement model from scratch, in what order would you build the statements, and why?",
     "keyPoints": [
-      {"point": "Build the income statement first, since it drives net income", "weight": 3},
-      {"point": "Then build the cash flow statement, which uses net income plus balance sheet changes (D&A, working capital, capex, financing)", "weight": 3},
-      {"point": "The balance sheet is completed last, since it needs both net income (for retained earnings) and the ending cash balance from the cash flow statement", "weight": 3}
+      { "point": "Build the income statement first, since it drives net income", "weight": 3 },
+      {
+        "point": "Then build the cash flow statement, which uses net income plus balance sheet changes (D&A, working capital, capex, financing)",
+        "weight": 3
+      },
+      {
+        "point": "The balance sheet is completed last, since it needs both net income (for retained earnings) and the ending cash balance from the cash flow statement",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Believing the balance sheet can be built independently first without inputs from the other two statements",
@@ -509,9 +632,15 @@
     "questionType": "conceptual",
     "prompt": "Why is net income often described as the 'hinge' connecting the three financial statements?",
     "keyPoints": [
-      {"point": "It's the final line of the income statement", "weight": 2},
-      {"point": "It's the starting point for cash flow from operations on the cash flow statement", "weight": 3},
-      {"point": "It flows into retained earnings on the balance sheet, net of dividends", "weight": 3}
+      { "point": "It's the final line of the income statement", "weight": 2 },
+      {
+        "point": "It's the starting point for cash flow from operations on the cash flow statement",
+        "weight": 3
+      },
+      {
+        "point": "It flows into retained earnings on the balance sheet, net of dividends",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Thinking net income is only relevant to the income statement",
@@ -535,9 +664,12 @@
     "questionType": "single-step",
     "prompt": "Accounts payable increases by $10 million during the year, holding everything else constant. What is the effect on cash flow from operations?",
     "keyPoints": [
-      {"point": "An increase in accounts payable is a source of cash", "weight": 3},
-      {"point": "CFO increases by $10 million", "weight": 3},
-      {"point": "No direct income statement impact — the related expense was already recognized when incurred, regardless of payment timing", "weight": 2}
+      { "point": "An increase in accounts payable is a source of cash", "weight": 3 },
+      { "point": "CFO increases by $10 million", "weight": 3 },
+      {
+        "point": "No direct income statement impact — the related expense was already recognized when incurred, regardless of payment timing",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Treating an AP increase as a use of cash rather than a source",
@@ -561,10 +693,19 @@
     "questionType": "single-step",
     "prompt": "A company pays $5 million cash upfront for a one-year insurance policy. What's the immediate effect on the balance sheet and cash flow statement?",
     "keyPoints": [
-      {"point": "Balance sheet: cash decreases by $5 million, prepaid expense (an asset) increases by $5 million", "weight": 3},
-      {"point": "Total assets are unchanged — it's an asset-for-asset swap", "weight": 2},
-      {"point": "Cash flow statement: recorded as a $5 million use of cash within cash flow from operations", "weight": 3},
-      {"point": "No income statement impact yet — the expense is recognized over the year as the insurance coverage is used up", "weight": 2}
+      {
+        "point": "Balance sheet: cash decreases by $5 million, prepaid expense (an asset) increases by $5 million",
+        "weight": 3
+      },
+      { "point": "Total assets are unchanged — it's an asset-for-asset swap", "weight": 2 },
+      {
+        "point": "Cash flow statement: recorded as a $5 million use of cash within cash flow from operations",
+        "weight": 3
+      },
+      {
+        "point": "No income statement impact yet — the expense is recognized over the year as the insurance coverage is used up",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Recording the full $5 million as an immediate expense on the income statement",
@@ -588,9 +729,15 @@
     "questionType": "single-step",
     "prompt": "Depreciation expense increases by $20 million with a 25% tax rate, all else equal. What's the effect on net income and on cash flow from operations?",
     "keyPoints": [
-      {"point": "Pre-tax income falls by $20 million", "weight": 2},
-      {"point": "Taxes fall by $20M x 25% = $5 million, so net income falls by $15 million", "weight": 3},
-      {"point": "CFO change = -$15 million (lower NI) + $20 million (D&A add-back) = +$5 million increase", "weight": 3}
+      { "point": "Pre-tax income falls by $20 million", "weight": 2 },
+      {
+        "point": "Taxes fall by $20M x 25% = $5 million, so net income falls by $15 million",
+        "weight": 3
+      },
+      {
+        "point": "CFO change = -$15 million (lower NI) + $20 million (D&A add-back) = +$5 million increase",
+        "weight": 3
+      }
     ],
     "misconceptions": [
       "Assuming depreciation is cash-neutral to net income (ignoring the tax shield)",
@@ -614,9 +761,9 @@
     "questionType": "multi-step",
     "prompt": "Revenue is $200 million, COGS is $120 million, and operating expenses (SG&A) are $50 million. Compute gross profit and operating income.",
     "keyPoints": [
-      {"point": "Gross profit = Revenue - COGS = $200M - $120M = $80M", "weight": 3},
-      {"point": "Operating income = Gross profit - SG&A = $80M - $50M = $30M", "weight": 3},
-      {"point": "Correctly sequences the two subtractions in order", "weight": 2}
+      { "point": "Gross profit = Revenue - COGS = $200M - $120M = $80M", "weight": 3 },
+      { "point": "Operating income = Gross profit - SG&A = $80M - $50M = $30M", "weight": 3 },
+      { "point": "Correctly sequences the two subtractions in order", "weight": 2 }
     ],
     "misconceptions": [
       "Subtracting SG&A directly from revenue and skipping the gross profit step",
@@ -640,10 +787,19 @@
     "questionType": "multi-step",
     "prompt": "Net income is $60 million, D&A is $15 million, capital expenditures are $25 million, and the increase in net working capital is $5 million. What is free cash flow (defined here as NI + D&A - Capex - increase in NWC)?",
     "keyPoints": [
-      {"point": "Start with net income of $60 million and add back D&A of $15 million to get $75 million", "weight": 2},
-      {"point": "Subtract capex of $25 million to get $50 million", "weight": 2},
-      {"point": "Subtract the $5 million increase in NWC to arrive at FCF of $45 million", "weight": 3},
-      {"point": "Understands this approximates cash flow from operations minus capex", "weight": 1}
+      {
+        "point": "Start with net income of $60 million and add back D&A of $15 million to get $75 million",
+        "weight": 2
+      },
+      { "point": "Subtract capex of $25 million to get $50 million", "weight": 2 },
+      {
+        "point": "Subtract the $5 million increase in NWC to arrive at FCF of $45 million",
+        "weight": 3
+      },
+      {
+        "point": "Understands this approximates cash flow from operations minus capex",
+        "weight": 1
+      }
     ],
     "misconceptions": [
       "Adding capex instead of subtracting it",
@@ -667,9 +823,18 @@
     "questionType": "conceptual",
     "prompt": "What's the difference between a deferred tax asset and a deferred tax liability, at a basic level?",
     "keyPoints": [
-      {"point": "Deferred tax asset arises when a company has paid or will pay more tax now than book expense implies, creating a future tax benefit (e.g. from NOLs or reserves)", "weight": 3},
-      {"point": "Deferred tax liability arises when a company pays less tax now than book expense implies, creating a future tax obligation (e.g. accelerated tax depreciation)", "weight": 3},
-      {"point": "Both stem from timing differences between book (GAAP) accounting and tax accounting", "weight": 2}
+      {
+        "point": "Deferred tax asset arises when a company has paid or will pay more tax now than book expense implies, creating a future tax benefit (e.g. from NOLs or reserves)",
+        "weight": 3
+      },
+      {
+        "point": "Deferred tax liability arises when a company pays less tax now than book expense implies, creating a future tax obligation (e.g. accelerated tax depreciation)",
+        "weight": 3
+      },
+      {
+        "point": "Both stem from timing differences between book (GAAP) accounting and tax accounting",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Thinking deferred taxes represent actual cash sitting somewhere",
@@ -693,9 +858,18 @@
     "questionType": "conceptual",
     "prompt": "Under current lease accounting rules, how do operating leases and finance leases differ in how they hit the balance sheet and income statement?",
     "keyPoints": [
-      {"point": "Both are now recorded on the balance sheet as a right-of-use asset and a corresponding lease liability", "weight": 3},
-      {"point": "Operating lease: single, straight-line lease expense on the income statement combining interest and amortization", "weight": 3},
-      {"point": "Finance lease: expense is split into separate interest expense and amortization expense, typically front-loaded (higher expense early, lower later)", "weight": 2}
+      {
+        "point": "Both are now recorded on the balance sheet as a right-of-use asset and a corresponding lease liability",
+        "weight": 3
+      },
+      {
+        "point": "Operating lease: single, straight-line lease expense on the income statement combining interest and amortization",
+        "weight": 3
+      },
+      {
+        "point": "Finance lease: expense is split into separate interest expense and amortization expense, typically front-loaded (higher expense early, lower later)",
+        "weight": 2
+      }
     ],
     "misconceptions": [
       "Believing operating leases are still kept entirely off the balance sheet",

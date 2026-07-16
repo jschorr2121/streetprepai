@@ -38,40 +38,59 @@ function mapType(fullType, colName) {
 
   let builder;
   let imp;
-  if (base === "text" || base === "character varying" || /^character varying\(/.test(base) || /^varchar/.test(base)) {
-    builder = `text(${arg})`; imp = "text";
+  if (
+    base === "text" ||
+    base === "character varying" ||
+    /^character varying\(/.test(base) ||
+    /^varchar/.test(base)
+  ) {
+    builder = `text(${arg})`;
+    imp = "text";
   } else if (base === "uuid") {
-    builder = `uuid(${arg})`; imp = "uuid";
+    builder = `uuid(${arg})`;
+    imp = "uuid";
   } else if (base === "timestamp with time zone") {
-    builder = `timestamp(${arg}, { withTimezone: true, mode: "string" })`; imp = "timestamp";
+    builder = `timestamp(${arg}, { withTimezone: true, mode: "string" })`;
+    imp = "timestamp";
   } else if (base === "timestamp without time zone") {
-    builder = `timestamp(${arg}, { mode: "string" })`; imp = "timestamp";
+    builder = `timestamp(${arg}, { mode: "string" })`;
+    imp = "timestamp";
   } else if (base === "date") {
-    builder = `date(${arg})`; imp = "date";
+    builder = `date(${arg})`;
+    imp = "date";
   } else if (base === "jsonb") {
-    builder = `jsonb(${arg})`; imp = "jsonb";
+    builder = `jsonb(${arg})`;
+    imp = "jsonb";
   } else if (base === "json") {
-    builder = `json(${arg})`; imp = "json";
+    builder = `json(${arg})`;
+    imp = "json";
   } else if (base === "integer") {
-    builder = `integer(${arg})`; imp = "integer";
+    builder = `integer(${arg})`;
+    imp = "integer";
   } else if (base === "bigint") {
-    builder = `bigint(${arg}, { mode: "number" })`; imp = "bigint";
+    builder = `bigint(${arg}, { mode: "number" })`;
+    imp = "bigint";
   } else if (base === "smallint") {
-    builder = `smallint(${arg})`; imp = "smallint";
+    builder = `smallint(${arg})`;
+    imp = "smallint";
   } else if (base === "boolean") {
-    builder = `boolean(${arg})`; imp = "boolean";
+    builder = `boolean(${arg})`;
+    imp = "boolean";
   } else if (base === "numeric" || /^numeric\(/.test(base)) {
     const m = base.match(/^numeric\((\d+),\s*(\d+)\)/);
     builder = m ? `numeric(${arg}, { precision: ${m[1]}, scale: ${m[2]} })` : `numeric(${arg})`;
     imp = "numeric";
   } else if (/^vector\((\d+)\)/.test(base)) {
     const dims = base.match(/^vector\((\d+)\)/)[1];
-    builder = `vector(${arg}, { dimensions: ${dims} })`; imp = "vector";
+    builder = `vector(${arg}, { dimensions: ${dims} })`;
+    imp = "vector";
   } else if (base === "vector") {
-    builder = `vector(${arg})`; imp = "vector";
+    builder = `vector(${arg})`;
+    imp = "vector";
   } else {
     console.warn(`  ! Unmapped type "${fullType}" on column ${colName} — emitting as text()`);
-    builder = `text(${arg})`; imp = "text";
+    builder = `text(${arg})`;
+    imp = "text";
   }
 
   const imports = new Set([imp]);

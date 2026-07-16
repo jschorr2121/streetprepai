@@ -19,11 +19,28 @@ const OUT = path.join(ROOT, "supabase/migrations/0007_qbank_seed.sql");
 const MANIFEST = path.join(ROOT, "lib/curriculum/chapters.ts");
 
 const VALID_TOPICS = new Set([
-  "recruiting", "networking", "resume", "behavioral", "accounting",
-  "ev-equity-value", "valuation", "dcf", "ma", "lbo", "mental-math", "interviewing",
+  "recruiting",
+  "networking",
+  "resume",
+  "behavioral",
+  "accounting",
+  "ev-equity-value",
+  "valuation",
+  "dcf",
+  "ma",
+  "lbo",
+  "mental-math",
+  "interviewing",
 ]);
 const VALID_DIFFICULTY = new Set(["easy", "medium", "hard"]);
-const VALID_TYPE = new Set(["conceptual", "single-step", "multi-step", "calculation", "verbal", "curveball"]);
+const VALID_TYPE = new Set([
+  "conceptual",
+  "single-step",
+  "multi-step",
+  "calculation",
+  "verbal",
+  "curveball",
+]);
 
 // Pull the set of valid chapter/section slugs straight from the manifest source.
 const manifestSrc = fs.readFileSync(MANIFEST, "utf8");
@@ -68,12 +85,34 @@ for (const file of files) {
   }
   for (const item of arr) {
     const id = item?.id;
-    if (!id || typeof id !== "string") { skipped++; continue; }
-    if (seenIds.has(id)) { skipped++; continue; }
-    if (!VALID_TOPICS.has(item.topic)) { problems.push(`${id}: bad topic ${item.topic}`); skipped++; continue; }
-    if (!VALID_DIFFICULTY.has(item.difficulty)) { problems.push(`${id}: bad difficulty`); skipped++; continue; }
-    if (!VALID_TYPE.has(item.questionType)) { problems.push(`${id}: bad questionType ${item.questionType}`); skipped++; continue; }
-    if (!item.prompt || !item.modelAnswer) { problems.push(`${id}: missing prompt/modelAnswer`); skipped++; continue; }
+    if (!id || typeof id !== "string") {
+      skipped++;
+      continue;
+    }
+    if (seenIds.has(id)) {
+      skipped++;
+      continue;
+    }
+    if (!VALID_TOPICS.has(item.topic)) {
+      problems.push(`${id}: bad topic ${item.topic}`);
+      skipped++;
+      continue;
+    }
+    if (!VALID_DIFFICULTY.has(item.difficulty)) {
+      problems.push(`${id}: bad difficulty`);
+      skipped++;
+      continue;
+    }
+    if (!VALID_TYPE.has(item.questionType)) {
+      problems.push(`${id}: bad questionType ${item.questionType}`);
+      skipped++;
+      continue;
+    }
+    if (!item.prompt || !item.modelAnswer) {
+      problems.push(`${id}: missing prompt/modelAnswer`);
+      skipped++;
+      continue;
+    }
     if (item.chapterSlug && !chapterSlugs.has(item.chapterSlug)) {
       problems.push(`${id}: unknown chapterSlug ${item.chapterSlug}`);
       // keep it but null the chapter link so it still serves in topic mode
@@ -88,9 +127,9 @@ for (const file of files) {
 
     questionRows.push(
       `(${q(id)}, ${q(item.topic)}, ${q(item.difficulty)}, ${q(item.questionType)}, ${q(item.prompt)}, ` +
-      `${jsonLit(keyPoints)}, ${jsonLit(misconceptions)}, ${q(item.modelAnswer)}, ` +
-      `${item.chapterSlug ? q(item.chapterSlug) : "null"}, ${item.sectionSlug ? q(item.sectionSlug) : "null"}, ` +
-      `${advanced}, 'curated', true)`,
+        `${jsonLit(keyPoints)}, ${jsonLit(misconceptions)}, ${q(item.modelAnswer)}, ` +
+        `${item.chapterSlug ? q(item.chapterSlug) : "null"}, ${item.sectionSlug ? q(item.sectionSlug) : "null"}, ` +
+        `${advanced}, 'curated', true)`,
     );
 
     const followups = Array.isArray(item.followups) ? item.followups : [];
