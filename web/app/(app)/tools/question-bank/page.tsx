@@ -20,7 +20,7 @@ const TOPIC_OPTIONS = [...new Map(chapters.map((c) => [c.topic, c.shortTitle])).
 export default async function QuestionBankPage() {
   const user = await requireUser();
 
-  const { dueCount, due, chapterRows } = await withUser(
+  const { dueCount, due, fresh } = await withUser(
     { sub: user.id, role: "authenticated" },
     async (tx) => {
       const [dueCount, due, chapterRows] = await Promise.all([
@@ -28,22 +28,21 @@ export default async function QuestionBankPage() {
         listDueReviews(tx, user.id, DAILY_TARGET),
         listChapterProgress(tx, user.id),
       ]);
-      return { dueCount, due, chapterRows };
+
+      // Interleave: topics the user has engaged with (started chapters), else all.
+      const startedTopics = [
+        ...new Set(
+          chapterRows
+            .map((c) => chapters.find((ch) => ch.slug === c.chapterSlug)?.topic)
+            .filter((t): t is CurriculumTopic => !!t),
+        ),
+      ];
+      const poolTopics =
+        startedTopics.length > 0 ? startedTopics : TOPIC_OPTIONS.map((t) => t.value);
+
+      const fresh = await getInterleavedQuestions(tx, poolTopics, DAILY_TARGET);
+      return { dueCount, due, fresh };
     },
-  );
-
-  // Interleave: topics the user has engaged with (started chapters), else all.
-  const startedTopics = [
-    ...new Set(
-      chapterRows
-        .map((c) => chapters.find((ch) => ch.slug === c.chapterSlug)?.topic)
-        .filter((t): t is CurriculumTopic => !!t),
-    ),
-  ];
-  const poolTopics = startedTopics.length > 0 ? startedTopics : TOPIC_OPTIONS.map((t) => t.value);
-
-  const fresh = await withUser({ sub: user.id, role: "authenticated" }, (tx) =>
-    getInterleavedQuestions(tx, poolTopics, DAILY_TARGET),
   );
 
   // Daily set = due reviews first, then fresh, deduped, capped.
