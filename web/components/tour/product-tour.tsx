@@ -40,17 +40,31 @@ export function ProductTour({ steps, active }: { steps: TourStep[]; active: bool
   const [rect, setRect] = useState<Rect | null>(null);
   const [dismissed, setDismissed] = useState(false);
 
+  const finish = useCallback(() => {
+    setDismissed(true);
+    completeTourAction().catch(() => {
+      // Non-critical: worst case the tour shows again next session.
+    });
+  }, []);
+
   const recompute = useCallback(() => {
-    if (!active) return;
+    if (!active || dismissed) return;
     // Skip forward past any steps whose target isn't present right now.
     let i = index;
     while (i < steps.length && !measure(steps[i]!.selector)) i++;
+    if (i >= steps.length) {
+      // Ran out of visible targets (e.g. the remaining steps point at the
+      // sidebar, hidden below lg). Treat it as completing the tour — silently
+      // unmounting without recording completion made it reappear forever.
+      finish();
+      return;
+    }
     if (i !== index) {
       setIndex(i);
       return;
     }
-    setRect(i < steps.length ? measure(steps[i]!.selector) : null);
-  }, [active, index, steps]);
+    setRect(measure(steps[i]!.selector));
+  }, [active, dismissed, index, steps, finish]);
 
   useEffect(() => {
     // Measure after paint (also keeps setState out of the synchronous effect body).
@@ -63,13 +77,6 @@ export function ProductTour({ steps, active }: { steps: TourStep[]; active: bool
       window.removeEventListener("scroll", recompute, true);
     };
   }, [recompute]);
-
-  const finish = useCallback(() => {
-    setDismissed(true);
-    completeTourAction().catch(() => {
-      // Non-critical: worst case the tour shows again next session.
-    });
-  }, []);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {

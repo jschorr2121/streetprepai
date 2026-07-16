@@ -85,18 +85,27 @@ function TopicPractice({ topics }: { topics: TopicOption[] }) {
   const [question, setQuestion] = useState<AnswerCardQuestion | null>(null);
   const [pending, setPending] = useState(false);
   const [empty, setEmpty] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function serve() {
     setPending(true);
     setEmpty(false);
-    const res = await serveQuestionAction({ topic, difficulty });
-    setPending(false);
-    if (res.ok) {
-      if (res.data) setQuestion(res.data);
-      else {
-        setQuestion(null);
-        setEmpty(true);
+    setError(null);
+    try {
+      const res = await serveQuestionAction({ topic, difficulty });
+      if (res.ok) {
+        if (res.data) setQuestion(res.data);
+        else {
+          setQuestion(null);
+          setEmpty(true);
+        }
+      } else {
+        setError(res.error.message);
       }
+    } catch {
+      setError("Something went wrong fetching a question. Please try again.");
+    } finally {
+      setPending(false);
     }
   }
 
@@ -154,6 +163,8 @@ function TopicPractice({ topics }: { topics: TopicOption[] }) {
           No questions for that combination yet. Try another difficulty.
         </p>
       )}
+
+      {error && <p className="text-destructive text-sm">{error}</p>}
 
       {question && <AnswerCard key={question.id} question={question} context="qbank" autoFocus />}
     </div>

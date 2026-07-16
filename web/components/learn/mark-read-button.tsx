@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Check, Loader2 } from "lucide-react";
 
+import { toast } from "sonner";
+
 import { markSectionReadAction } from "@/app/(app)/learn/actions";
 import { Button } from "@/components/ui/button";
 
@@ -22,11 +24,18 @@ export function MarkReadButton({
 
   async function mark() {
     setPending(true);
-    const res = await markSectionReadAction({ chapterSlug, sectionSlug });
-    setPending(false);
-    if (res.ok) {
-      setDone(true);
-      router.refresh();
+    try {
+      const res = await markSectionReadAction({ chapterSlug, sectionSlug });
+      if (res.ok) {
+        setDone(true);
+        router.refresh();
+      } else {
+        toast.error(res.error.message);
+      }
+    } catch {
+      toast.error("Couldn't mark this section as read. Please try again.");
+    } finally {
+      setPending(false);
     }
   }
 

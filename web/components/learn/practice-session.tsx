@@ -39,6 +39,7 @@ export function PracticeSession({
   const [scores, setScores] = useState<number[]>([]);
   const [currentGraded, setCurrentGraded] = useState(false);
   const [finishing, setFinishing] = useState(false);
+  const [finishError, setFinishError] = useState<string | null>(null);
   const [result, setResult] = useState<{
     averageScore: number;
     passed: boolean;
@@ -48,6 +49,9 @@ export function PracticeSession({
   const current = questions[index];
   const isLast = index >= questions.length - 1;
   const gated = context === "section-drill" || context === "chapter-gate";
+  // Only the chapter gate is pass/fail; a section drill records progress but
+  // never completes a chapter, so it must not get "Gate passed" copy.
+  const isGate = context === "chapter-gate";
 
   function handleGraded(r: { score: number; correct: boolean }) {
     setScores((s) => [...s, r.score]);
@@ -57,19 +61,29 @@ export function PracticeSession({
   async function next() {
     if (isLast) {
       if (gated && chapterSlug) {
+        // A failed server-side scoring must NOT fall through to the ungated
+        // "passed" tally — stay here, show the error, let the user retry.
         setFinishing(true);
-        const res = await finishSittingAction({
-          chapterSlug,
-          ...(sectionSlug ? { sectionSlug } : {}),
-          context,
-          startedAt: startedAt.current,
-        });
-        setFinishing(false);
-        if (res.ok) {
-          setResult(res.data);
-          router.refresh();
-          return;
+        setFinishError(null);
+        try {
+          const res = await finishSittingAction({
+            chapterSlug,
+            ...(sectionSlug ? { sectionSlug } : {}),
+            context,
+            startedAt: startedAt.current,
+          });
+          if (res.ok) {
+            setResult(res.data);
+            router.refresh();
+          } else {
+            setFinishError(res.error.message);
+          }
+        } catch {
+          setFinishError("Something went wrong scoring this session. Please try again.");
+        } finally {
+          setFinishing(false);
         }
+        return;
       }
       // Ungated (qbank / daily-drill) — just show the tally.
       setResult({
@@ -87,11 +101,11 @@ export function PracticeSession({
     return (
       <SessionSummary
         result={result}
-        gated={gated}
+        gated={isGate}
         count={questions.length}
         backHref={backHref}
         onRetry={
-          gated
+          isGate
             ? () => {
                 startedAt.current = new Date().toISOString();
                 setIndex(0);
@@ -118,7 +132,7 @@ export function PracticeSession({
           <div className="bg-muted h-1.5 flex-1 overflow-hidden rounded-full">
             <div
               className="bg-primary h-full rounded-full transition-all"
-              style={{ width: `${(index / questions.length) * 100}%` }}
+              style={{ width: `${((index + (currentGraded ? 1 : 0)) / questions.length) * 100}%` }}
             />
           </div>
           <span className="text-muted-foreground text-xs">
@@ -130,10 +144,11 @@ export function PracticeSession({
       <AnswerCard key={current.id} question={current} context={context} onGraded={handleGraded} autoFocus />
 
       {currentGraded && (
-        <div className="mt-4 flex justify-end">
+        <div className="mt-4 flex flex-col items-end gap-2">
+          {finishError && <p className="text-destructive text-sm">{finishError}</p>}
           <Button onClick={next} disabled={finishing} className="gap-1.5">
             {finishing && <Loader2 className="size-4 animate-spin" />}
-            {isLast ? (gated ? "Finish & score" : "Finish") : "Next question"}
+            {isLast ? (gated ? (finishError ? "Try again" : "Finish & score") : "Finish") : "Next question"}
           </Button>
         </div>
       )}

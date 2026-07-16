@@ -189,11 +189,18 @@ export default async function ChapterPage({
                   : "A mixed quiz across this chapter. Score 85%+ to mark it complete. All content stays open regardless."}
               </p>
             </div>
-            <Button asChild disabled={!allCoreRead}>
-              <Link href={`/learn/${chapter.slug}/practice`}>
-                {gatePassed ? "Retake gate" : "Take the gate"}
-              </Link>
-            </Button>
+            {allCoreRead ? (
+              <Button asChild>
+                <Link href={`/learn/${chapter.slug}/practice`}>
+                  {gatePassed ? "Retake gate" : "Take the gate"}
+                </Link>
+              </Button>
+            ) : (
+              // `disabled` on an asChild <Link> is a no-op (anchors ignore it),
+              // so an unread gate rendered a live link. Render a real disabled
+              // button instead.
+              <Button disabled>Take the gate</Button>
+            )}
           </div>
           {!allCoreRead && (
             <p className="text-muted-foreground mt-3 text-xs">
