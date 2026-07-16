@@ -16,6 +16,14 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — session 3, Phase 5 started (2026-07-16, cloud, branch `fable/prod-readiness`)
+
+First Phase 5 slice: the follow-ups loop is now real end-to-end — chat summaries create
+followup rows (deduped, unit-tested due-date normalization), the relationships widget
+can mark them done, and the AI-drafted follow-up email persists to the chat log. All
+three paths previously had zero callers/writers. Suite **362 passing**. Next-lane menu
+for future sessions is in `context/relay/HANDOFF.md`.
+
 ### Prod-readiness relay — session 3, Phase 4 complete (2026-07-16, cloud, branch `fable/prod-readiness`)
 
 Phase 4 **complete** in the same session: repo-wide prettier (CI's failing first gate),

@@ -51,7 +51,19 @@
   Confirm-email toggle already in jakes-tasks ✅. Accepted-low: whisper transcribe
   `as`-casts its verbose_json response (degrades via ?? fallbacks — documented, not
   changed).
-- [ ] Phase 5 — Perpetual improvement
+- [~] Phase 5 — Perpetual improvement — **in progress** (session 3 started it).
+  Done: follow-ups loop closed (summary action items → followup rows, widget mark-done
+  button, drafted email persisted to `chats.follow_up_draft` — all three had zero
+  callers/writers before). **Good next lanes**: (1) Unit 9 chatbot rebuild
+  (`.scratch/unit-9-chatbot-rebuild/issues/01…05` — diff against existing
+  `/api/chat/general` + `lib/ai/assistant-tools.ts` first, part is built); (2) Unit 8
+  question-bank issues (migrations 0006/0007 already shipped — diff first); (3) wire
+  `lib/analytics/` (PostHogProvider never mounted — product decision, maybe Jake);
+  (4) render `chats.follow_up_draft` in the contact history tab (now persisted, not
+  yet displayed); (5) Unit 10 calendar sync is BLOCKED on Google Cloud creds
+  (jakes-tasks). todo.md's remaining unstruck items (ai chat back / application
+  tracker / chatbot / onboarding quiz) map to Units 8-9 + existing features — check
+  before treating as new work.
 
 ## Blockers
 
@@ -75,6 +87,15 @@
 
 ## Session log
 
+- **2026-07-16 (session 3, cloud, later)** — **Phase 4 COMPLETE + Phase 5 started**;
+  ~8 more commits. Phase 4: repo-wide prettier (CI gate 1 was failing on 89 files —
+  KEEP `pnpm format` before committing or CI breaks again), `.env.example` regenerated
+  + git-tracked, dep patches (eslint-config-next/zod/supabase-js; majors deliberately
+  skipped), robustness fixes (interview/score + extract-resume now Zod-parse LLM
+  output), mid-stream-error integration test. Phase 5 slice: follow-ups loop closed
+  (summary → followup rows w/ dedupe + unit-tested date normalization, widget
+  mark-done, draft persisted). Suite **362 passing**. Next lanes in the Phase 5
+  checklist note above.
 - **2026-07-16 (session 3, cloud)** — **Phase 3 COMPLETE**; 4 commits
   (`15765e0`…`4f38996`). Closed the whole Phase 3 backlog (see checklist above). New
   facts: (a) contact CRUD lives in `lib/data/contacts.ts` (Supabase-client style, NOT
