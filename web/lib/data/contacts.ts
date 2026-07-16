@@ -1,5 +1,6 @@
 import type { Contact, ChatLog } from "@/lib/types";
 import { createClient } from "@/lib/supabase/server";
+import type { ChatSummaryOutput } from "@/lib/validation/schemas/relationships";
 
 type ContactRow = {
   id: string;
@@ -146,6 +147,71 @@ export async function createContact(
     .single();
   if (error) throw error;
   return mapContactRow(data as ContactRow);
+}
+
+/**
+ * Inserts a chat log (raw notes; structured summary is saved separately once
+ * the AI structuring succeeds), or updates the raw notes of an existing log
+ * when `id` is given (re-structuring the same sitting must not duplicate rows).
+ * Returns null only in the update case when the row isn't the caller's.
+ */
+export async function upsertChatLog(
+  userId: string,
+  input: { id?: string | undefined; contactId: string; rawNotes: string },
+): Promise<ChatLog | null> {
+  const sb = await createClient();
+  if (input.id) {
+    const { data, error } = await sb
+      .from("chats")
+      .update({ raw_notes: input.rawNotes })
+      .eq("id", input.id)
+      .eq("user_id", userId)
+      .eq("contact_id", input.contactId)
+      .select()
+      .maybeSingle();
+    if (error) throw error;
+    return data ? mapChatRow(data as ChatRow) : null;
+  }
+  const { data, error } = await sb
+    .from("chats")
+    .insert({
+      user_id: userId,
+      contact_id: input.contactId,
+      raw_notes: input.rawNotes,
+    })
+    .select()
+    .single();
+  if (error) throw error;
+  return mapChatRow(data as ChatRow);
+}
+
+export async function saveChatStructured(
+  userId: string,
+  chatId: string,
+  structured: ChatSummaryOutput,
+): Promise<ChatLog | null> {
+  const sb = await createClient();
+  const { data, error } = await sb
+    .from("chats")
+    .update({ structured })
+    .eq("id", chatId)
+    .eq("user_id", userId)
+    .select()
+    .maybeSingle();
+  if (error) throw error;
+  return data ? mapChatRow(data as ChatRow) : null;
+}
+
+/** Stamps today as the contact's last interaction/contact date (nudge widget input). */
+export async function touchContactLastContact(userId: string, contactId: string): Promise<void> {
+  const sb = await createClient();
+  const today = new Date().toISOString().slice(0, 10);
+  const { error } = await sb
+    .from("contacts")
+    .update({ last_interaction_at: today, last_contact_at: today })
+    .eq("id", contactId)
+    .eq("user_id", userId);
+  if (error) throw error;
 }
 
 /**

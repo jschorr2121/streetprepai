@@ -13,13 +13,22 @@ import * as Sentry from "@sentry/nextjs";
 
 import { actionErrorFromAppError, fieldErrorsFromIssues, type ActionResult } from "@/lib/auth/action-result";
 import { requireUser } from "@/lib/auth/server";
-import { createContact, updateContactStage } from "@/lib/data/contacts";
+import {
+  createContact,
+  getContactById,
+  saveChatStructured,
+  touchContactLastContact,
+  updateContactStage,
+  upsertChatLog,
+} from "@/lib/data/contacts";
 import { AppError } from "@/lib/errors";
 import { logger } from "@/lib/logging/logger";
 import { contactsLimiter } from "@/lib/ratelimit/limiters";
-import type { Contact } from "@/lib/types";
+import type { Contact, ChatLog } from "@/lib/types";
 import {
   CreateContactSchema,
+  LogChatSchema,
+  SaveChatSummarySchema,
   UpdateContactStageSchema,
 } from "@/lib/validation/schemas/relationships";
 
@@ -145,4 +154,141 @@ export async function updateContactStageAction(input: unknown): Promise<ActionRe
 
   // Step 7 — Return.
   return { ok: true, data: contact };
+}
+
+// ─── logChatAction ───────────────────────────────────────────────────────────
+
+export async function logChatAction(input: unknown): Promise<ActionResult<ChatLog>> {
+  // Step 1 — Auth.
+  let userId: string;
+  try {
+    const user = await requireUser();
+    userId = user.id;
+  } catch (err) {
+    if (err instanceof AppError) return actionErrorFromAppError(err);
+    throw err;
+  }
+
+  // Step 2 — Validate.
+  const parsed = LogChatSchema.safeParse(input);
+  if (!parsed.success) {
+    return {
+      ok: false,
+      error: {
+        code: "VALIDATION_FAILED",
+        message: "Invalid request.",
+        fieldErrors: fieldErrorsFromIssues(parsed.error.issues),
+      },
+    };
+  }
+
+  // Step 3 — Rate limit.
+  const rl = await contactsLimiter(userId);
+  if (!rl.allowed) {
+    return {
+      ok: false,
+      error: {
+        code: "RATE_LIMITED",
+        message: `Too many requests — try again in ${rl.retryAfterSeconds}s.`,
+      },
+    };
+  }
+
+  // Step 4 — Ownership: the chat must hang off a contact the caller owns.
+  let contact: Contact | null;
+  try {
+    contact = await getContactById(parsed.data.contactId, userId);
+  } catch (err) {
+    logger.error({ userId, action: "chat_log_ownership_check_failed" }, "ownership check error");
+    Sentry.captureException(err);
+    return { ok: false, error: { code: "INTERNAL", message: "Something went wrong." } };
+  }
+  if (!contact) {
+    return { ok: false, error: { code: "NOT_FOUND", message: "Contact not found." } };
+  }
+
+  // Step 5 — Work.
+  let chat: ChatLog | null;
+  try {
+    chat = await upsertChatLog(userId, parsed.data);
+    if (chat) {
+      // Best-effort: the chat is already saved; a failed date stamp only
+      // affects the "gentle nudges" widget, so log instead of failing.
+      await touchContactLastContact(userId, contact.id).catch((err: unknown) => {
+        logger.warn({ userId, action: "contact_touch_failed", contactId: contact.id }, "contact_touch_failed");
+        Sentry.captureException(err);
+      });
+    }
+  } catch (err) {
+    logger.error({ userId, action: "chat_log_failed" }, "chat_log_failed");
+    Sentry.captureException(err);
+    return { ok: false, error: { code: "INTERNAL", message: "Something went wrong." } };
+  }
+  if (!chat) {
+    return { ok: false, error: { code: "NOT_FOUND", message: "Chat log not found." } };
+  }
+
+  // Step 6 — Log success.
+  logger.info({ userId, action: "chat_logged", chatId: chat.id, contactId: contact.id }, "chat_logged");
+
+  // Step 7 — Return.
+  return { ok: true, data: chat };
+}
+
+// ─── saveChatSummaryAction ───────────────────────────────────────────────────
+
+export async function saveChatSummaryAction(input: unknown): Promise<ActionResult<ChatLog>> {
+  // Step 1 — Auth.
+  let userId: string;
+  try {
+    const user = await requireUser();
+    userId = user.id;
+  } catch (err) {
+    if (err instanceof AppError) return actionErrorFromAppError(err);
+    throw err;
+  }
+
+  // Step 2 — Validate (structured is model output — parse before persisting).
+  const parsed = SaveChatSummarySchema.safeParse(input);
+  if (!parsed.success) {
+    return {
+      ok: false,
+      error: {
+        code: "VALIDATION_FAILED",
+        message: "Invalid request.",
+        fieldErrors: fieldErrorsFromIssues(parsed.error.issues),
+      },
+    };
+  }
+
+  // Step 3 — Rate limit.
+  const rl = await contactsLimiter(userId);
+  if (!rl.allowed) {
+    return {
+      ok: false,
+      error: {
+        code: "RATE_LIMITED",
+        message: `Too many requests — try again in ${rl.retryAfterSeconds}s.`,
+      },
+    };
+  }
+
+  // Steps 4+5 — Ownership + work in one round trip (UPDATE scoped by user_id).
+  let chat: ChatLog | null;
+  try {
+    chat = await saveChatStructured(userId, parsed.data.chatId, parsed.data.structured);
+  } catch (err) {
+    logger.error({ userId, action: "chat_summary_save_failed" }, "chat_summary_save_failed");
+    Sentry.captureException(err);
+    return { ok: false, error: { code: "INTERNAL", message: "Something went wrong." } };
+  }
+  if (!chat) {
+    return { ok: false, error: { code: "NOT_FOUND", message: "Chat log not found." } };
+  }
+
+  // Step 6 — Log success.
+  logger.info({ userId, action: "chat_summary_saved", chatId: chat.id }, "chat_summary_saved");
+
+  // Step 7 — Return.
+  return { ok: true, data: chat };
 }

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -22,6 +23,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import type { Contact, ChatLog, CalendarEvent, ContactStage } from "@/lib/types";
+import { logChatAction, saveChatSummaryAction } from "@/app/(app)/tools/relationships/actions";
 import { OutreachDrawer } from "@/components/relationships/outreach-drawer";
 import { splitStreamError } from "@/lib/streaming/stream-error";
 import { cn } from "@/lib/utils";
@@ -48,12 +50,16 @@ export function ContactDetail({
   chatLogs: ChatLog[];
   events: CalendarEvent[];
 }) {
+  const router = useRouter();
   const [prepSheet, setPrepSheet] = useState("");
   const [prepError, setPrepError] = useState<string | null>(null);
   const [prepLoading, setPrepLoading] = useState(false);
   const [notes, setNotes] = useState("");
   const [structuring, setStructuring] = useState(false);
   const [structured, setStructured] = useState<ChatLog["structured"] | null>(null);
+  // Set once the current sitting's notes are persisted; re-structuring the same
+  // sitting updates this chat log instead of inserting a duplicate.
+  const [loggedChatId, setLoggedChatId] = useState<string | null>(null);
   const [followUp, setFollowUp] = useState<{
     subject: string;
     body: string;
@@ -170,6 +176,8 @@ export function ContactDetail({
           group: contact.group,
           school: contact.school,
           bio: contact.linkedinBio,
+          // Enables server-side semantic recall over past chats with this contact.
+          contactId: contact.id,
         }),
       });
       if (!res.ok || !res.body) throw new Error("failed");
@@ -195,6 +203,21 @@ export function ContactDetail({
     if (!notes.trim()) return;
     setStructuring(true);
     try {
+      // 1. Persist the raw notes first — even if AI structuring fails, the
+      //    chat is saved to history.
+      const saved = await logChatAction({
+        contactId: contact.id,
+        rawNotes: notes,
+        ...(loggedChatId ? { chatId: loggedChatId } : {}),
+      });
+      if (!saved.ok) {
+        toast.error(saved.error.message ?? "Couldn't save the chat.");
+        return;
+      }
+      setLoggedChatId(saved.data.id);
+
+      // 2. Structure with AI (also kicks off the semantic-recall embedding
+      //    server-side now that the chat row exists).
       const res = await fetch("/api/relationships/structure-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -203,19 +226,30 @@ export function ContactDetail({
           contactFirm: contact.firm,
           contactTitle: contact.title,
           rawNotes: notes,
+          contactId: contact.id,
+          chatId: saved.data.id,
         }),
       });
       if (!res.ok) {
         toast.error(
           res.status === 429
-            ? "You're going too fast — give it a minute and try again."
-            : "Couldn't structure notes. Please try again.",
+            ? "Notes saved. You're going too fast — give it a minute, then structure again."
+            : "Notes saved, but structuring failed. Please try again.",
         );
+        router.refresh();
         return;
       }
       const data = await res.json();
       setStructured(data);
-      toast.success("Notes structured — scroll down to draft the follow-up.");
+
+      // 3. Persist the structured summary onto the chat log.
+      const persisted = await saveChatSummaryAction({ chatId: saved.data.id, structured: data });
+      if (!persisted.ok) {
+        toast.error("Summary generated, but it couldn't be saved to history.");
+      } else {
+        toast.success("Chat logged — scroll down to draft the follow-up.");
+      }
+      router.refresh();
     } catch {
       toast.error("Couldn't structure notes.");
     } finally {

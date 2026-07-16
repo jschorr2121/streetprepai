@@ -39,6 +39,16 @@ export const UpdateContactStageSchema = z
   })
   .strict();
 
+/** log-chat Server Action input. `chatId` set = update that log's raw notes
+ * (re-structuring the same sitting) instead of inserting a new row. */
+export const LogChatSchema = z
+  .object({
+    contactId: z.string().trim().min(1).max(200),
+    rawNotes: z.string().trim().min(1, "Notes are required.").max(20_000),
+    chatId: z.string().trim().min(1).max(200).optional(),
+  })
+  .strict();
+
 /** prep-person — generates an AI prep sheet from a contact's bio.
  *
  * `contactId` is optional; when supplied the route enriches the prompt with
@@ -49,7 +59,8 @@ export const PrepPersonSchema = z
   .object({
     name: z.string().trim().min(1).max(200),
     firm: z.string().trim().min(1).max(200),
-    title: z.string().trim().min(1).max(200),
+    // Empty allowed: user-created contacts may have no title.
+    title: z.string().trim().max(200),
     group: z.string().trim().max(200).optional(),
     school: z.string().trim().max(200).optional(),
     bio: z.string().trim().max(12_000).optional(),
@@ -85,7 +96,8 @@ export const DraftFollowupSchema = z
   .object({
     contactName: z.string().trim().min(1).max(200),
     contactFirm: z.string().trim().min(1).max(200),
-    contactTitle: z.string().trim().min(1).max(200),
+    // Empty allowed: user-created contacts may have no title.
+    contactTitle: z.string().trim().max(200),
     contactSchool: z.string().trim().max(200).optional(),
     summary: SummarySchema,
     studentName: z.string().trim().max(200).optional(),
@@ -105,7 +117,8 @@ export const StructureChatSchema = z
   .object({
     contactName: z.string().trim().min(1).max(200),
     contactFirm: z.string().trim().min(1).max(200),
-    contactTitle: z.string().trim().min(1).max(200),
+    // Empty allowed: user-created contacts may have no title.
+    contactTitle: z.string().trim().max(200),
     rawNotes: z.string().trim().min(1).max(20_000),
     contactId: z.string().trim().min(1).max(200).optional(),
     chatId: z.string().trim().min(1).max(200).optional(),
@@ -128,6 +141,15 @@ export const ChatSummaryOutputSchema = z.object({
     .max(100),
 });
 export type ChatSummaryOutput = z.infer<typeof ChatSummaryOutputSchema>;
+
+/** save-chat-summary Server Action input: persists a structured summary
+ * (already-validated model output shape) onto an existing chat log. */
+export const SaveChatSummarySchema = z
+  .object({
+    chatId: z.string().trim().min(1).max(200),
+    structured: ChatSummaryOutputSchema,
+  })
+  .strict();
 
 /** draft-outreach's `save_outreach_draft` tool output. Fields are optional —
  * the route normalizes gaps (padding subjects, defaulting strings) so a
