@@ -58,7 +58,10 @@ export function ResetPasswordForm() {
 
       {formError ? (
         <p className="text-destructive text-sm" role="alert">
-          {formError}
+          {formError}{" "}
+          <a href="/forgot-password" className="underline underline-offset-2">
+            Request a new link
+          </a>
         </p>
       ) : null}
 

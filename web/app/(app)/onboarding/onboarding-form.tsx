@@ -224,6 +224,8 @@ export function OnboardingForm() {
         <Label>Study depth</Label>
         <button
           type="button"
+          role="switch"
+          aria-checked={advancedTrack}
           onClick={() => setValue("advancedTrack", !advancedTrack)}
           className="border-border hover:border-primary/40 flex w-full items-start gap-3 rounded-lg border p-3 text-left transition-colors"
         >

@@ -13,7 +13,6 @@ import {
   X,
   Loader2,
   MessageSquare,
-  NotebookPen,
   BookOpen,
   ArrowLeft,
   Glasses,
@@ -333,7 +332,9 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
             </section>
           ))}
 
-          <div className="text-muted-foreground mt-16 border-t pt-8 text-sm">
+          {/* The lens rail is desktop-only (hidden below md), so don't advertise
+              highlighting where the output has nowhere to render. */}
+          <div className="text-muted-foreground mt-16 hidden border-t pt-8 text-sm md:block">
             <p className="flex items-center gap-1.5">
               <Highlighter className="size-3.5" />
               Highlight any passage to get an explanation.
@@ -412,33 +413,15 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
 
       {popover && (
         <div
-          className="fixed z-50 -translate-x-1/2 -translate-y-full"
+          // max-md:hidden — the explanation rail doesn't exist below md, so
+          // firing Explain there would stream tokens into an invisible panel.
+          className="fixed z-50 -translate-x-1/2 -translate-y-full max-md:hidden"
           style={{ left: popover.x, top: popover.y }}
         >
           <div className="bg-popover text-popover-foreground flex items-center gap-1 rounded-md border p-1 shadow-md">
             <Button size="sm" variant="ghost" className="h-8 gap-1.5" onClick={explainSelection}>
               <TextSearch aria-hidden className="text-primary size-3.5" />
               Explain
-            </Button>
-            <div className="bg-border h-5 w-px" />
-            <Button
-              size="sm"
-              variant="ghost"
-              className="h-8 gap-1.5"
-              onClick={() => setPopover(null)}
-            >
-              <Highlighter aria-hidden className="size-3.5" />
-              Highlight
-            </Button>
-            <div className="bg-border h-5 w-px" />
-            <Button
-              size="sm"
-              variant="ghost"
-              className="h-8 gap-1.5"
-              onClick={() => setPopover(null)}
-            >
-              <NotebookPen aria-hidden className="size-3.5" />
-              Note
             </Button>
             <Button
               size="icon"

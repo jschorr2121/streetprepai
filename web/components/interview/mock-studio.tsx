@@ -233,6 +233,8 @@ export function MockStudio() {
       const res = await fetch("/api/interview/transcribe", {
         method: "POST",
         body: form,
+        // A hung request otherwise leaves the "Transcribing…" spinner forever.
+        signal: AbortSignal.timeout(120_000),
       });
       // Non-JSON error bodies (proxy 413/502 pages) must not turn into a
       // parse-error toast — fall back to the HTTP status.
@@ -250,7 +252,13 @@ export function MockStudio() {
         toast.message("Using a demo transcript (no OPENAI_API_KEY set).");
       }
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Transcription failed.");
+      toast.error(
+        err instanceof DOMException && err.name === "TimeoutError"
+          ? "Transcription took too long — please try again."
+          : err instanceof Error
+            ? err.message
+            : "Transcription failed.",
+      );
       setPhase("review");
       return;
     }
@@ -262,6 +270,7 @@ export function MockStudio() {
       const res = await fetch("/api/interview/score", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: AbortSignal.timeout(120_000),
         body: JSON.stringify({
           question: question.text,
           mode: question.mode,
@@ -279,7 +288,13 @@ export function MockStudio() {
       setScorecard(data as Scorecard);
       setPhase("scored");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Scoring failed.");
+      toast.error(
+        err instanceof DOMException && err.name === "TimeoutError"
+          ? "Scoring took too long — please try again."
+          : err instanceof Error
+            ? err.message
+            : "Scoring failed.",
+      );
       setPhase("review");
     }
   }, [question]);

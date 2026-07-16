@@ -55,8 +55,11 @@ export function DrillRunner({ kind }: { kind: DrillKind }) {
           const r = results.find((x) => x.field.key === f.key);
           return (
             <div key={f.key} className="flex items-center gap-3">
-              <label className="w-56 shrink-0 text-sm">{f.label}</label>
+              <label htmlFor={`drill-${f.key}`} className="w-56 shrink-0 text-sm">
+                {f.label}
+              </label>
               <Input
+                id={`drill-${f.key}`}
                 type="number"
                 step="any"
                 value={values[f.key] ?? ""}

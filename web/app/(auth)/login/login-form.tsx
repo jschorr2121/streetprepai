@@ -39,6 +39,9 @@ export function LoginForm() {
       for (const [field, message] of Object.entries(result.error.fieldErrors)) {
         setError(field as keyof SignInInput, { message });
       }
+      // Field errors already highlight the inputs — a second generic banner
+      // ("Check the highlighted fields") is just noise.
+      return;
     }
     setFormError(result.error.message);
   }
