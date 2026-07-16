@@ -189,6 +189,23 @@ export async function saveChatStructured(
   return data ? mapChatRow(data as ChatRow) : null;
 }
 
+export async function saveChatFollowUpDraft(
+  userId: string,
+  chatId: string,
+  draft: { subject: string; body: string },
+): Promise<ChatLog | null> {
+  const sb = await createClient();
+  const { data, error } = await sb
+    .from("chats")
+    .update({ follow_up_draft: draft })
+    .eq("id", chatId)
+    .eq("user_id", userId)
+    .select()
+    .maybeSingle();
+  if (error) throw error;
+  return data ? mapChatRow(data as ChatRow) : null;
+}
+
 /** Stamps today as the contact's last interaction/contact date (nudge widget input). */
 export async function touchContactLastContact(userId: string, contactId: string): Promise<void> {
   const sb = await createClient();

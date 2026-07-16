@@ -151,6 +151,27 @@ export const SaveChatSummarySchema = z
   })
   .strict();
 
+/** save-follow-up-draft Server Action input: persists the AI-drafted follow-up
+ * email onto the chat log it was drafted from. */
+export const SaveFollowUpDraftSchema = z
+  .object({
+    chatId: z.string().trim().min(1).max(200),
+    draft: z
+      .object({
+        subject: z.string().trim().min(1).max(300),
+        body: z.string().trim().min(1).max(10_000),
+      })
+      .strict(),
+  })
+  .strict();
+
+/** complete-followup Server Action input. */
+export const CompleteFollowupSchema = z
+  .object({
+    id: z.string().uuid("Invalid follow-up ID."),
+  })
+  .strict();
+
 /** draft-outreach's `save_outreach_draft` tool output. Fields are optional —
  * the route normalizes gaps (padding subjects, defaulting strings) so a
  * slightly-off model response degrades instead of failing. */

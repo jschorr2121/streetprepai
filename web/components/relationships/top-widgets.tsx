@@ -1,13 +1,16 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useTransition } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Mail, ArrowRight } from "lucide-react";
+import { Mail, ArrowRight, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Contact } from "@/lib/types";
 import type { Followup } from "@/lib/data/followups";
+import { completeFollowupAction } from "@/app/(app)/tools/relationships/actions";
 import { OutreachDrawer } from "@/components/relationships/outreach-drawer";
 
 const SIX_WEEKS_MS = 1000 * 60 * 60 * 24 * 7 * 6;
@@ -39,6 +42,28 @@ export function RelationshipsTopWidgets({
   followups: Followup[];
 }) {
   const [outreachContact, setOutreachContact] = useState<Contact | null>(null);
+  const router = useRouter();
+  const [, startTransition] = useTransition();
+
+  // Optimistically hide completed follow-ups; revert on failure.
+  const [completedIds, setCompletedIds] = useState<Set<string>>(new Set());
+
+  function markDone(id: string) {
+    setCompletedIds((prev) => new Set(prev).add(id));
+    startTransition(async () => {
+      const result = await completeFollowupAction({ id });
+      if (!result.ok) {
+        setCompletedIds((prev) => {
+          const next = new Set(prev);
+          next.delete(id);
+          return next;
+        });
+        toast.error(result.error.message ?? "Couldn't complete the follow-up.");
+        return;
+      }
+      router.refresh();
+    });
+  }
 
   // Capture "now" once per mount to keep the render pure (lint rule react-hooks/purity).
   // The lazy initializer runs on the client when the component mounts.
@@ -59,8 +84,11 @@ export function RelationshipsTopWidgets({
   }, [contacts, now]);
 
   const sortedFollowups = useMemo(
-    () => [...followups].sort((a, b) => a.dueAt.localeCompare(b.dueAt)),
-    [followups],
+    () =>
+      followups
+        .filter((f) => !completedIds.has(f.id))
+        .sort((a, b) => a.dueAt.localeCompare(b.dueAt)),
+    [followups, completedIds],
   );
 
   if (staleContacts.length === 0 && sortedFollowups.length === 0) return null;
@@ -131,9 +159,8 @@ export function RelationshipsTopWidgets({
               if (!contact) return null;
               const due = relativeDue(f.dueAt, now);
               return (
-                <Link
+                <div
                   key={f.id}
-                  href={`/tools/relationships/${contact.id}`}
                   className="hover:bg-accent/30 flex items-center gap-3 px-4 py-3 transition-colors duration-150 first:rounded-t-md last:rounded-b-md"
                 >
                   <div
@@ -144,8 +171,11 @@ export function RelationshipsTopWidgets({
                   >
                     {due.label}
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium">
+                  <Link
+                    href={`/tools/relationships/${contact.id}`}
+                    className="group min-w-0 flex-1"
+                  >
+                    <p className="group-hover:text-primary truncate text-sm font-medium transition-colors">
                       {contact.name}
                       <span className="text-muted-foreground font-normal">
                         {" · "}
@@ -153,12 +183,21 @@ export function RelationshipsTopWidgets({
                       </span>
                     </p>
                     <p className="text-muted-foreground truncate text-xs">{f.note}</p>
-                  </div>
+                  </Link>
                   <Badge variant="secondary" className="shrink-0">
                     {f.kind === "post-chat" ? "post-chat" : "outreach"}
                   </Badge>
-                  <ArrowRight className="text-muted-foreground size-3.5 shrink-0" aria-hidden />
-                </Link>
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="size-7 shrink-0"
+                    onClick={() => markDone(f.id)}
+                    aria-label={`Mark follow-up for ${contact.name} done`}
+                    title="Mark done"
+                  >
+                    <Check className="size-3.5" aria-hidden />
+                  </Button>
+                </div>
               );
             })}
           </div>

@@ -1,6 +1,21 @@
+import { addDays } from "date-fns";
+
 import { createClient } from "@/lib/supabase/server";
 
 export type FollowupKind = "post-chat" | "outreach";
+
+/**
+ * Normalizes a model-suggested due date ("ISO date if implied") to a
+ * `YYYY-MM-DD` string for the `followups.due_at` date column. Unparseable or
+ * missing input defaults to three days out.
+ */
+export function followupDueDate(dueBy: string | undefined, now: Date = new Date()): string {
+  if (dueBy) {
+    const iso = dueBy.slice(0, 10);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(iso) && !Number.isNaN(Date.parse(iso))) return iso;
+  }
+  return addDays(now, 3).toISOString().slice(0, 10);
+}
 
 export interface Followup {
   id: string;
@@ -63,14 +78,19 @@ export async function createFollowup(
   return mapRow(data as DbRow);
 }
 
-export async function completeFollowup(userId: string, id: string): Promise<void> {
+/** Returns false when the row doesn't exist or isn't the caller's (the
+ * user_id filter doubles as the ownership check; RLS is the safety net). */
+export async function completeFollowup(userId: string, id: string): Promise<boolean> {
   const sb = await createClient();
-  const { error } = await sb
+  const { data, error } = await sb
     .from("followups")
     .update({ completed_at: new Date().toISOString() })
     .eq("id", id)
-    .eq("user_id", userId);
+    .eq("user_id", userId)
+    .select("id")
+    .maybeSingle();
   if (error) throw error;
+  return data !== null;
 }
 
 export async function deleteFollowup(userId: string, id: string): Promise<void> {

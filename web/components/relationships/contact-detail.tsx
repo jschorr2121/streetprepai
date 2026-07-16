@@ -23,7 +23,11 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import type { Contact, ChatLog, CalendarEvent, ContactStage } from "@/lib/types";
-import { logChatAction, saveChatSummaryAction } from "@/app/(app)/tools/relationships/actions";
+import {
+  logChatAction,
+  saveChatSummaryAction,
+  saveFollowUpDraftAction,
+} from "@/app/(app)/tools/relationships/actions";
 import { OutreachDrawer } from "@/components/relationships/outreach-drawer";
 import { splitStreamError } from "@/lib/streaming/stream-error";
 import { cn } from "@/lib/utils";
@@ -282,6 +286,13 @@ export function ContactDetail({
       }
       const data = await res.json();
       setFollowUp(data);
+      // Persist the draft onto the chat log so it survives navigation.
+      if (loggedChatId) {
+        const persisted = await saveFollowUpDraftAction({ chatId: loggedChatId, draft: data });
+        if (!persisted.ok) {
+          toast.error("Draft generated, but it couldn't be saved to history.");
+        }
+      }
     } catch {
       toast.error("Couldn't draft follow-up.");
     } finally {
