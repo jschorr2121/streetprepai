@@ -16,6 +16,17 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — session 3, Phase 4 complete (2026-07-16, cloud, branch `fable/prod-readiness`)
+
+Phase 4 **complete** in the same session: repo-wide prettier (CI's failing first gate),
+`web/.env.example` regenerated from audited env reads and git-tracked, safe dep patches
+(eslint-config-next / zod / supabase-js — next+react were already current), robustness
+audit fixed the two real gaps (interview/score now Zod-parses LLM tool output — was an
+uncaught-500 risk on the core scoring flow; extract-resume validates model JSON), stale
+CONTRIBUTING.md env-var/branch names fixed, and a new integration test pins the
+mid-stream error contract. Suite **354 passing**; all six CI steps verified green
+locally. Next: Phase 5 (perpetual improvement).
+
 ### Prod-readiness relay — session 3, Phase 3 complete (2026-07-16, cloud, branch `fable/prod-readiness`)
 
 Phase 3 **complete** — the session-2 backlog is closed (4 commits, suite **353 passing**):

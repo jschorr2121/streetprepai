@@ -59,14 +59,14 @@ verified. File anything needing a dashboard/secret to `jakes-tasks.md`.
 > search/embeddings ran on nothing), stream errors framed with a sentinel instead of
 > in-band `[Error: …]` prose (5 routes + 4 clients), mock-studio aborts on unmount.
 
-## Phase 4 — Production-readiness checklist
+## Phase 4 — Production-readiness checklist — **DONE (2026-07-16, session 3)**
 
-Regenerate `web/.env.example` from vars actually read in code; get CI green
-(`format:check`→`lint`→`typecheck`→`test:unit`→`test:int`→`build`); apply safe, tested
-dependency upgrades (the flagged Next/React patch releases) one at a time; tighten
-robustness (input validation at trust boundaries, no swallowed errors). File the
-"re-enable Supabase Confirm email before launch" dashboard toggle to `jakes-tasks.md`
-if not already there.
+> `.env.example` regenerated from audited `process.env` reads (now git-tracked via
+> `!.env.example`); CI's first gate unblocked (prettier was failing on 89 files — repo-wide
+> format applied; all six CI steps verified green locally); deps: Next/React patches were
+> already current, added eslint-config-next 16.2.10 + zod 4.4.3 + supabase-js 2.110.7;
+> robustness audit run — interview/score (crash risk) and extract-resume now Zod-parse
+> LLM output like their siblings. Confirm-email toggle already filed in jakes-tasks.
 
 ## Phase 5 — Perpetual improvement (never idle)
 

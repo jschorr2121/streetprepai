@@ -39,9 +39,18 @@
   sentinel (ASCII record-separator framing via lib/streaming/stream-error + shared streamTextResponse;
   5 routes, 4 clients render styled role=alert + retain partial content) ✅, mock-studio
   abort-on-unmount ✅.
-- [ ] Phase 4 — Production-readiness checklist (note: CI push trigger fixed; `pnpm build`
-      now works without DATABASE_URL, so the CI build step is unblocked; `.env.example`
-      regeneration still open)
+- [x] Phase 4 — Production-readiness checklist — **DONE** (session 3). `.env.example`
+  regenerated from an audit of every `process.env` read and git-tracked
+  (`!.env.example` exception) ✅; repo-wide prettier applied — format:check was failing
+  on 89 files and is CI's first gate; all six CI steps verified green locally ✅;
+  deps: next/react already current, bumped eslint-config-next 16.2.10, zod 4.4.3,
+  supabase-js 2.110.7 (each verified) ✅; robustness audit → interview/score now
+  Zod-parses tool output (was the ONLY tool-call route that didn't — non-array rubric
+  = uncaught 500 on the core scoring flow) and extract-resume validates model JSON
+  before returning ✅; CONTRIBUTING.md stale env-var name + main→master fixed ✅;
+  Confirm-email toggle already in jakes-tasks ✅. Accepted-low: whisper transcribe
+  `as`-casts its verbose_json response (degrades via ?? fallbacks — documented, not
+  changed).
 - [ ] Phase 5 — Perpetual improvement
 
 ## Blockers

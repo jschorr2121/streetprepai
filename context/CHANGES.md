@@ -411,3 +411,14 @@ Four commits (`15765e0`…`4f38996`), each gated on typecheck + lint + full vite
 - **Decision:** contact/chat mutations live in `lib/data/contacts.ts` (Supabase session-client style) rather than Drizzle/`withUser`, matching the domain's existing reads that the chatbot tools already use. The Server Actions still follow the 7-step skeleton.
 - **Decision:** AI route schemas no longer require a non-empty `contactTitle` (user-created contacts may have none; prompts tolerate the blank).
 - **Filed to jakes-tasks:** verify the production `firms` table contains seed.sql's firms insert — the firms pages + firm-prep route now read it exclusively.
+
+---
+
+## Prod-readiness relay session 3 (continued) — Phase 4 complete (2026-07-16)
+
+- **CI gate 1 unblocked** — `pnpm format:check` (CI's first step) was failing on 89 files; applied `pnpm format` repo-wide (style-only, verified with typecheck+lint+full suite). All six CI steps now verified green locally.
+- **`web/.env.example` regenerated** — from an audit of every `process.env.*` reference in app/scripts/configs/CI (no `.env*` file was read). Documents required vs optional + degradation behavior, server-only vs NEXT_PUBLIC, and script/test-only vars. Git-tracked via a `!.env.example` gitignore exception. Jake's open task moved to Done.
+- **Docs drift fixed** — CONTRIBUTING.md referenced `LIVE_AI` (code reads `STREETPREP_E2E_LIVE_AI`) and "merge to main" (repo deploys from master).
+- **Deps** — next/react patches were already current (session 1); bumped eslint-config-next 16.2.4→16.2.10 (match next), zod 4.3.6→4.4.3, @supabase/supabase-js 2.105.3→2.110.7. Each verified (typecheck/lint/353-test suite/build). Majors deliberately skipped (typescript 7, eslint 10, @anthropic-ai/sdk 0.111, @supabase/ssr 0.12 — not "safe patch" territory).
+- **Robustness audit (agent-swept, hand-verified)** — two real gaps fixed: `interview/score` was the only Claude tool-call route that type-asserted `tool_use.input` instead of Zod-parsing (a non-array rubric from the model threw outside the try/catch → uncaught 500 on the core scoring flow; now parsed with a tolerant `ScorecardOutputSchema`, 502 + safe copy on mismatch); `profile/extract-resume` returned model JSON to the client unvalidated (now `ExtractedResumeOutputSchema`). Accepted-low, documented: whisper transcribe `as`-casts its verbose_json response but degrades via `??` fallbacks. Audit found no silent empty catches, no unvalidated Server Actions, no unverified webhooks (none exist).
+- **New test** — integration test pinning the mid-stream failure contract on `/api/chat/stream` (200 + sentinel framing, partial content preserved, no raw upstream error text). Suite: **354 passing**.
