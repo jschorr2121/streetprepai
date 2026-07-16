@@ -62,6 +62,10 @@ export function ApplicationRow({ application }: Props) {
   }
 
   async function handleDelete() {
+    // Deletion is permanent and the trash icon is easy to mis-tap on mobile.
+    if (!window.confirm(`Delete the ${application.firm} application? This can't be undone.`)) {
+      return;
+    }
     startTransition(async () => {
       const result = await deleteApplicationAction({ id: application.id });
       if (!result.ok) {

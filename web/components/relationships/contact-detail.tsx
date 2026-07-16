@@ -180,7 +180,7 @@ export function ContactDetail({
         setPrepSheet(acc);
       }
     } catch {
-      setPrepSheet("Sorry, couldn't reach Claude. Check ANTHROPIC_API_KEY in .env.local.");
+      setPrepSheet("Sorry, something went wrong generating the prep sheet. Please try again.");
     } finally {
       setPrepLoading(false);
     }
@@ -200,6 +200,14 @@ export function ContactDetail({
           rawNotes: notes,
         }),
       });
+      if (!res.ok) {
+        toast.error(
+          res.status === 429
+            ? "You're going too fast — give it a minute and try again."
+            : "Couldn't structure notes. Please try again.",
+        );
+        return;
+      }
       const data = await res.json();
       setStructured(data);
       toast.success("Notes structured — scroll down to draft the follow-up.");
@@ -225,6 +233,14 @@ export function ContactDetail({
           summary: structured,
         }),
       });
+      if (!res.ok) {
+        toast.error(
+          res.status === 429
+            ? "You're going too fast — give it a minute and try again."
+            : "Couldn't draft the follow-up. Please try again.",
+        );
+        return;
+      }
       const data = await res.json();
       setFollowUp(data);
     } catch {

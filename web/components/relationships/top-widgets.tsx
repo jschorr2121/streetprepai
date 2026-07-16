@@ -81,7 +81,7 @@ export function RelationshipsTopWidgets({
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
                       <Link
-                        href={`/relationships/${c.id}`}
+                        href={`/tools/relationships/${c.id}`}
                         className="hover:text-primary text-sm font-medium transition-colors"
                       >
                         {c.name}
@@ -109,7 +109,7 @@ export function RelationshipsTopWidgets({
                       Draft check-in
                     </Button>
                     <Button asChild size="sm" variant="ghost" className="h-7 gap-1 text-xs">
-                      <Link href={`/relationships/${c.id}`}>
+                      <Link href={`/tools/relationships/${c.id}`}>
                         Open
                         <ArrowRight className="size-3" aria-hidden />
                       </Link>
@@ -133,7 +133,7 @@ export function RelationshipsTopWidgets({
               return (
                 <Link
                   key={f.id}
-                  href={`/relationships/${contact.id}`}
+                  href={`/tools/relationships/${contact.id}`}
                   className="hover:bg-accent/30 flex items-center gap-3 px-4 py-3 transition-colors duration-150 first:rounded-t-md last:rounded-b-md"
                 >
                   <div

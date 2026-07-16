@@ -236,7 +236,7 @@ export function ContactsView({
               {filtered.map((c) => (
                 <li key={c.id}>
                   <Link
-                    href={`/relationships/${c.id}`}
+                    href={`/tools/relationships/${c.id}`}
                     className="group hover:bg-accent/30 flex items-start justify-between gap-4 p-4 transition-colors duration-150"
                   >
                     <div className="min-w-0 flex-1">
@@ -328,7 +328,7 @@ export function ContactsView({
             searchResults.map(({ log, contact }) => (
               <Link
                 key={log.id}
-                href={`/relationships/${contact.id}`}
+                href={`/tools/relationships/${contact.id}`}
                 className="bg-card hover:border-primary/40 block rounded-md border p-4 transition-colors duration-150"
               >
                 <div className="mb-2 flex items-center justify-between gap-3">
@@ -391,7 +391,7 @@ function CalendarCard({ event, contact }: { event: CalendarEvent; contact?: Cont
 
   if (contact) {
     return (
-      <Link href={`/relationships/${contact.id}`} className="block">
+      <Link href={`/tools/relationships/${contact.id}`} className="block">
         {content}
       </Link>
     );

@@ -23,7 +23,7 @@ export function FirmPastChats({
           return (
             <li key={log.id}>
               <Link
-                href={`/relationships/${contact.id}`}
+                href={`/tools/relationships/${contact.id}`}
                 className="group hover:bg-accent/40 -mx-3 block rounded-sm border-b px-3 py-3.5 transition-colors duration-150"
               >
                 <div className="flex items-baseline justify-between gap-3">
