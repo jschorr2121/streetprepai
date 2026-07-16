@@ -87,6 +87,7 @@ export function MockStudio() {
   const streamRef = useRef<MediaStream | null>(null);
   const audioBlobRef = useRef<Blob | null>(null);
   const tickerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const submitAbortRef = useRef<AbortController | null>(null);
 
   // Cleanup on unmount.
   useEffect(() => {
@@ -96,6 +97,7 @@ export function MockStudio() {
         streamRef.current.getTracks().forEach((t) => t.stop());
       }
       if (audioUrl) URL.revokeObjectURL(audioUrl);
+      submitAbortRef.current?.abort();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -223,6 +225,11 @@ export function MockStudio() {
     setTranscript(null);
     setScorecard(null);
 
+    // Tie both fetches to component lifetime so navigating away mid-submit
+    // aborts the request instead of resolving into setState on an unmounted tree.
+    const unmountAbort = new AbortController();
+    submitAbortRef.current = unmountAbort;
+
     // 1. Transcribe.
     let words: TimestampedWord[] = [];
     let text = "";
@@ -234,7 +241,7 @@ export function MockStudio() {
         method: "POST",
         body: form,
         // A hung request otherwise leaves the "Transcribing…" spinner forever.
-        signal: AbortSignal.timeout(120_000),
+        signal: AbortSignal.any([unmountAbort.signal, AbortSignal.timeout(120_000)]),
       });
       // Non-JSON error bodies (proxy 413/502 pages) must not turn into a
       // parse-error toast — fall back to the HTTP status.
@@ -252,6 +259,7 @@ export function MockStudio() {
         toast.message("Using a demo transcript (no OPENAI_API_KEY set).");
       }
     } catch (err) {
+      if (unmountAbort.signal.aborted) return; // unmounted mid-request
       toast.error(
         err instanceof DOMException && err.name === "TimeoutError"
           ? "Transcription took too long — please try again."
@@ -270,7 +278,7 @@ export function MockStudio() {
       const res = await fetch("/api/interview/score", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        signal: AbortSignal.timeout(120_000),
+        signal: AbortSignal.any([unmountAbort.signal, AbortSignal.timeout(120_000)]),
         body: JSON.stringify({
           question: question.text,
           mode: question.mode,
@@ -288,6 +296,7 @@ export function MockStudio() {
       setScorecard(data as Scorecard);
       setPhase("scored");
     } catch (err) {
+      if (unmountAbort.signal.aborted) return; // unmounted mid-request
       toast.error(
         err instanceof DOMException && err.name === "TimeoutError"
           ? "Scoring took too long — please try again."
