@@ -16,6 +16,20 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — session 2, Phase 3 (2026-07-16, cloud, branch `fable/prod-readiness`)
+
+Phase 3 (UX fixes & bugs) — **mostly complete** in the same session, 7 further commits, suite
+now **346 passing** (vitest include fixed — colocated `lib/**/*.test.ts` like the mastery
+model's tests silently never ran). Headliners: the app had **no navigation below `lg`**
+(added top bar + Sheet drawer); a failed chapter-gate scoring rendered as "Gate passed /
+chapter complete"; the gate was reachable without reading (disabled on an asChild Link is a
+no-op); the product tour re-appeared forever on mobile; relationships AI actions showed
+success toasts / blank emails on API failure; the progress page presented hardcoded +
+Math.random() data as the user's real stats (rebuilt on topic_mastery/attempts with a tested
+activity helper); ~20 medium/low fixes (timeouts, JSON guards, a11y, honest SOON labels,
+error copy). Remaining backlog (relationships real-data slice, stage-change persistence,
+chat-stream error protocol, abort-on-unmount) is documented in `context/relay/HANDOFF.md`.
+
 ### Prod-readiness relay — session 2 (2026-07-16, cloud, branch `fable/prod-readiness`)
 
 Phase 2 (performance) of `context/RELAY-QUEUE.md` — **complete**, 8 commits pushed, every

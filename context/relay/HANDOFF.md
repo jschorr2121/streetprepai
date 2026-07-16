@@ -27,7 +27,21 @@
   uncached Anthropic prompts are <1K tokens). Bundle measured: Sentry (incl. Replay,
   deliberate) + zod v4 dominate; Turbopack supports neither the analyzer nor Sentry
   treeshake options — documented in CHANGES.md, not changed.
-- [ ] Phase 3 — UX fixes & bugs — **START HERE** (see session-2 notes below)
+- [~] Phase 3 — UX fixes & bugs — **mostly done** (session 2). Screen-by-screen review via
+  code-review agents (no env in cloud box → no live browser). Fixed: mobile navigation
+  (there was NONE below lg) ✅, failed gate scoring shown as a pass ✅, gate reachable
+  unread (asChild disabled no-op) ✅, tour never completing on mobile ✅, relationships AI
+  actions lying on failure ✅, progress page fabricating stats (rebuilt on real data) ✅,
+  vitest not discovering lib/**/*.test.ts (mastery tests never ran; 325→346) ✅, plus ~20
+  medium/low items (timeouts, JSON-parse guards, a11y switches/labels, honest SOON
+  labels, error copy, legacy-link 301s) — full list in CHANGES.md.
+  **Remaining Phase 3 backlog** (next session picks up here): (1) wire relationships +
+  firm pages to real per-user data — they render seed/demo contacts and chats under
+  first-person copy, the deepest dishonesty left in the app; `lib/data/*` Supabase reads
+  exist and are already used by the chatbot tools; needs contact CRUD (the /new stub) or
+  at minimum real reads + genuine empty states; (2) persist contacts-view stage changes
+  (in-memory `stageOverrides` TODO); (3) chat-stream in-band `[Error: …]` text → real
+  error event/sentinel the client can style + retry; (4) mock-studio abort-on-unmount.
 - [ ] Phase 4 — Production-readiness checklist (note: CI push trigger fixed; `pnpm build`
       now works without DATABASE_URL, so the CI build step is unblocked; `.env.example`
       regeneration still open)
@@ -57,6 +71,12 @@
 
 - **2026-07-15 (setup, local)** — Branch + work order created. Relay routine scheduled
   (first run 1:10pm ET). No code work done yet; Phase 1 starts on the first cloud run.
+- **2026-07-16 (session 2, cloud, later)** — **Phase 3 mostly done**; 7 more commits
+  (`847dbe9`…`c97c0ed`). Mobile nav added (Sheet drawer + top bar); gate/tour/practice
+  state-machine bugs fixed; progress page rebuilt on real data (new `lib/mastery/
+  activity.ts` + tests); vitest include fixed (lib colocated tests now run — suite 346);
+  ~20 medium/low UX fixes. Suite: **346 passing**; build green. Remaining Phase 3
+  backlog listed in the checklist above — start with the relationships real-data slice.
 - **2026-07-16 (session 2, cloud)** — **Phase 2 COMPLETE**; 8 commits pushed
   (`8dc6bac`…`c6ce07b` + docs). See CHANGES.md for the full measurement story and
   baseline → after counts. Facts for later sessions: (a) the relationships/firms UI pages
