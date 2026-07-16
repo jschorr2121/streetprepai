@@ -23,6 +23,7 @@ import {
 import { toast } from "sonner";
 import type { Contact, ChatLog, CalendarEvent, ContactStage } from "@/lib/types";
 import { OutreachDrawer } from "@/components/relationships/outreach-drawer";
+import { splitStreamError } from "@/lib/streaming/stream-error";
 import { cn } from "@/lib/utils";
 
 // Ledger tag per stage — semantic Badge variants, no decorative color.
@@ -48,6 +49,7 @@ export function ContactDetail({
   events: CalendarEvent[];
 }) {
   const [prepSheet, setPrepSheet] = useState("");
+  const [prepError, setPrepError] = useState<string | null>(null);
   const [prepLoading, setPrepLoading] = useState(false);
   const [notes, setNotes] = useState("");
   const [structuring, setStructuring] = useState(false);
@@ -156,6 +158,7 @@ export function ContactDetail({
   async function generatePrepSheet() {
     setPrepLoading(true);
     setPrepSheet("");
+    setPrepError(null);
     try {
       const res = await fetch("/api/relationships/prep-person", {
         method: "POST",
@@ -177,10 +180,12 @@ export function ContactDetail({
         const { value, done } = await reader.read();
         if (done) break;
         acc += decoder.decode(value, { stream: true });
-        setPrepSheet(acc);
+        const { content, error } = splitStreamError(acc);
+        setPrepSheet(content);
+        setPrepError(error);
       }
     } catch {
-      setPrepSheet("Sorry, something went wrong generating the prep sheet. Please try again.");
+      setPrepError("Sorry, something went wrong generating the prep sheet. Please try again.");
     } finally {
       setPrepLoading(false);
     }
@@ -351,6 +356,11 @@ export function ContactDetail({
                   {contact.linkedinBio}
                 </p>
               </details>
+            )}
+            {prepError && (
+              <p className="text-destructive mb-3 text-sm" role="alert">
+                {prepError}
+              </p>
             )}
             {prepSheet ? (
               <div className="bg-accent/30 rounded-md border p-5">

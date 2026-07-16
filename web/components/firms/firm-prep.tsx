@@ -5,16 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Markdown } from "@/components/reader/markdown";
+import { splitStreamError } from "@/lib/streaming/stream-error";
 import { Loader2 } from "lucide-react";
 import type { Firm } from "@/lib/types";
 
 export function FirmPrep({ firm }: { firm: Firm }) {
   const [prep, setPrep] = useState("");
+  const [prepError, setPrepError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   async function generate() {
     setLoading(true);
     setPrep("");
+    setPrepError(null);
     try {
       const res = await fetch(`/api/firms/${firm.slug}/prep`, {
         method: "POST",
@@ -27,10 +30,12 @@ export function FirmPrep({ firm }: { firm: Firm }) {
         const { value, done } = await reader.read();
         if (done) break;
         acc += decoder.decode(value, { stream: true });
-        setPrep(acc);
+        const { content, error } = splitStreamError(acc);
+        setPrep(content);
+        setPrepError(error);
       }
     } catch {
-      setPrep("Sorry, couldn't reach Claude. Make sure ANTHROPIC_API_KEY is set.");
+      setPrepError("Sorry, something went wrong generating the prep sheet. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -86,6 +91,11 @@ export function FirmPrep({ firm }: { firm: Firm }) {
           </details>
         )}
 
+        {prepError && (
+          <p className="text-destructive mb-3 text-sm" role="alert">
+            {prepError}
+          </p>
+        )}
         {prep ? (
           <div className="bg-accent/30 rounded-md border p-5">
             <Markdown content={prep} />

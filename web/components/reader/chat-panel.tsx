@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Markdown } from "@/components/reader/markdown";
+import { splitStreamError } from "@/lib/streaming/stream-error";
 import { ArrowUp, Loader2 } from "lucide-react";
 
-type Message = { role: "user" | "assistant"; content: string };
+type Message = { role: "user" | "assistant"; content: string; error?: string };
 
 export function ChatPanel({
   guideTitle,
@@ -68,16 +69,24 @@ export function ChatPanel({
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let acc = "";
+      let sawError = false;
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
         acc += decoder.decode(value, { stream: true });
+        const { content, error } = splitStreamError(acc);
+        sawError = error !== null;
         setMessages((ms) => {
           const copy = ms.slice();
-          copy[copy.length - 1] = { role: "assistant", content: acc };
+          copy[copy.length - 1] = {
+            role: "assistant",
+            content,
+            ...(error !== null && { error }),
+          };
           return copy;
         });
       }
+      if (sawError) setInput(trimmed); // keep the typed prompt so a retry is one click
     } catch {
       setMessages((ms) => {
         const copy = ms.slice();
@@ -134,8 +143,15 @@ export function ChatPanel({
               >
                 {m.role === "user" ? (
                   m.content
-                ) : m.content ? (
-                  <Markdown content={m.content} className="text-sm" />
+                ) : m.content || m.error ? (
+                  <>
+                    {m.content && <Markdown content={m.content} className="text-sm" />}
+                    {m.error && (
+                      <p className="text-destructive mt-1.5 text-xs" role="alert">
+                        {m.error}
+                      </p>
+                    )}
+                  </>
                 ) : (
                   <Loader2 className="text-muted-foreground size-3.5 animate-spin" />
                 )}

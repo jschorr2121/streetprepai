@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import { splitStreamError } from "@/lib/streaming/stream-error";
 import type { Guide, Section } from "@/lib/types";
 import {
   Highlighter,
@@ -26,9 +27,10 @@ type LensExplanation = {
   selection: string;
   answer: string;
   streaming: boolean;
+  error?: string;
 };
 
-type BeginnerRewrite = { streaming: boolean; content: string };
+type BeginnerRewrite = { streaming: boolean; content: string; error?: string };
 
 export function ReadingLens({ guide, sections }: { guide: Guide; sections: Section[] }) {
   const [beginnerMode, setBeginnerMode] = useState(false);
@@ -131,7 +133,12 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
         const { value, done } = await reader.read();
         if (done) break;
         acc += decoder.decode(value, { stream: true });
-        setExplanations((xs) => xs.map((x) => (x.id === id ? { ...x, answer: acc } : x)));
+        const { content, error } = splitStreamError(acc);
+        setExplanations((xs) =>
+          xs.map((x) =>
+            x.id === id ? { ...x, answer: content, ...(error !== null && { error }) } : x,
+          ),
+        );
       }
       setExplanations((xs) => xs.map((x) => (x.id === id ? { ...x, streaming: false } : x)));
     } catch {
@@ -141,8 +148,7 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
             ? {
                 ...x,
                 streaming: false,
-                answer:
-                  "Sorry, something went wrong reaching Claude. Make sure ANTHROPIC_API_KEY is set in .env.local.",
+                error: "Sorry, something went wrong. Please try highlighting the passage again.",
               }
             : x,
         ),
@@ -179,21 +185,30 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
           const { value, done } = await reader.read();
           if (done) break;
           acc += decoder.decode(value, { stream: true });
+          const { content, error } = splitStreamError(acc);
           setRewrites((r) => ({
             ...r,
-            [section.id]: { streaming: true, content: acc },
+            [section.id]: { streaming: true, content, ...(error !== null && { error }) },
           }));
         }
-        setRewrites((r) => ({
-          ...r,
-          [section.id]: { streaming: false, content: acc },
-        }));
+        setRewrites((r) => {
+          const current = r[section.id];
+          return {
+            ...r,
+            [section.id]: {
+              streaming: false,
+              content: current?.content ?? "",
+              ...(current?.error !== undefined && { error: current.error }),
+            },
+          };
+        });
       } catch {
         setRewrites((r) => ({
           ...r,
           [section.id]: {
             streaming: false,
-            content: "_Couldn't rewrite this section — check ANTHROPIC_API_KEY._",
+            content: "",
+            error: "Couldn't rewrite this section. Toggle Beginner mode again to retry.",
           },
         }));
       }
@@ -317,6 +332,11 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
                     )}
                   </div>
                   <Markdown content={rewrites[section.id]?.content ?? ""} />
+                  {rewrites[section.id]?.error && (
+                    <p className="text-destructive mt-2 text-xs" role="alert">
+                      {rewrites[section.id]?.error}
+                    </p>
+                  )}
                   <details className="mt-3 text-xs">
                     <summary className="text-muted-foreground hover:text-foreground cursor-pointer">
                       Show original
@@ -394,11 +414,16 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
                       </blockquote>
                       {x.answer ? (
                         <Markdown content={x.answer} className="text-sm [&>p]:text-sm" />
-                      ) : (
+                      ) : x.error ? null : (
                         <div className="text-muted-foreground flex items-center gap-1.5 text-xs">
                           <Loader2 className="size-3 animate-spin" />
                           Thinking…
                         </div>
+                      )}
+                      {x.error && (
+                        <p className="text-destructive mt-2 text-xs" role="alert">
+                          {x.error}
+                        </p>
                       )}
                     </div>
                   ))

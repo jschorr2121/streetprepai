@@ -1,11 +1,11 @@
 import { requireUser } from "@/lib/security/require-user";
-import { clientSafeError } from "@/lib/security/client-error";
 import { parseJson } from "@/lib/validation/parse";
 import { LensBeginnerSchema } from "@/lib/validation/schemas/lens";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { LENS_BEGINNER_SYSTEM } from "@/lib/ai/prompts";
 import { trackStream } from "@/lib/ai/usage";
 import { wrapUserText, capText } from "@/lib/ai/sanitize";
+import { streamTextResponse } from "@/lib/ai/stream-response";
 
 export const runtime = "nodejs";
 
@@ -40,34 +40,5 @@ export async function POST(req: Request): Promise<Response> {
 
   trackStream(stream, "lens/beginner", { userId: gate.user.id });
 
-  const encoder = new TextEncoder();
-  const readable = new ReadableStream({
-    async start(controller) {
-      try {
-        for await (const event of stream) {
-          if (
-            event.type === "content_block_delta" &&
-            event.delta.type === "text_delta"
-          ) {
-            controller.enqueue(encoder.encode(event.delta.text));
-          }
-        }
-      } catch (err) {
-        controller.enqueue(
-          encoder.encode(
-            `\n\n[Error: ${clientSafeError("lens/beginner", err, "The response failed. Please try again.")}]`,
-          ),
-        );
-      } finally {
-        controller.close();
-      }
-    },
-  });
-
-  return new Response(readable, {
-    headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "no-cache, no-transform",
-    },
-  });
+  return streamTextResponse(stream, "lens/beginner");
 }

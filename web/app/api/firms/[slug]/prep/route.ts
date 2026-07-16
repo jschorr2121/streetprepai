@@ -1,10 +1,10 @@
 import { requireUser } from "@/lib/security/require-user";
-import { clientSafeError } from "@/lib/security/client-error";
 import { FirmSlugSchema } from "@/lib/validation/schemas/firms";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { PREP_FIRM_SYSTEM } from "@/lib/ai/prompts";
 import { trackStream } from "@/lib/ai/usage";
 import { wrapUserText } from "@/lib/ai/sanitize";
+import { streamTextResponse } from "@/lib/ai/stream-response";
 import { getFirmBySlug } from "@/lib/data/firms";
 
 export const runtime = "nodejs";
@@ -57,34 +57,5 @@ export async function POST(
 
   trackStream(stream, "firms/prep", { userId: gate.user.id });
 
-  const encoder = new TextEncoder();
-  const readable = new ReadableStream({
-    async start(controller) {
-      try {
-        for await (const event of stream) {
-          if (
-            event.type === "content_block_delta" &&
-            event.delta.type === "text_delta"
-          ) {
-            controller.enqueue(encoder.encode(event.delta.text));
-          }
-        }
-      } catch (err) {
-        controller.enqueue(
-          encoder.encode(
-            `\n\n[Error: ${clientSafeError("firms/prep", err, "The response failed. Please try again.")}]`,
-          ),
-        );
-      } finally {
-        controller.close();
-      }
-    },
-  });
-
-  return new Response(readable, {
-    headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "no-cache, no-transform",
-    },
-  });
+  return streamTextResponse(stream, "firms/prep");
 }
