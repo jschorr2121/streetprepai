@@ -16,14 +16,18 @@
   #13 client-supplied assistant turns — inherent to the stateless chat API; #11 XFF IP
   key — platform-managed on Vercel; #16 `ai_usage.user_id` nullable — needs a
   backfill-aware migration file.
-- [ ] Phase 2 — Performance (the long loading times) — **START HERE.** Measure first:
-  bundle analyzer isn't installed (`@next/bundle-analyzer` was never added); Turbopack
-  build output has no size table, so add the analyzer or use `--profile`. Check DB
-  indexes against `web/supabase/migrations/` + hot queries in `lib/db/queries/` and
-  `lib/data/`; look at the pgvector ivfflat index; audit prompt-caching coverage
-  (several routes already use `cache_control: ephemeral`); check `use cache`/ISR
-  opportunities on firms/sectors/learn metadata. Record baseline → after in CHANGES.md.
-- [ ] Phase 3 — UX fixes & bugs
+- [x] Phase 2 — Performance — **DONE** (session 2). The latency was network round trips:
+  withUser overhead 8→3 statements/txn ✅, getUser deduped via React cache() ✅, proxy
+  onboarding read memoized in a user-scoped cookie ✅, page reads pipelined with
+  Promise.all (postgres.js pipelines; dashboard ~17→~7 RTs/navigation) ✅, question-bank
+  double transaction folded ✅, migration `0009_perf_indexes_2.sql` authored (2 covering
+  indexes, 10 prefix-redundant drops, ivfflat probes=10) — **Jake applies** ✅, loading
+  skeletons on all 6 DB-backed routes that lacked one ✅, dead `lib/cache` removed ✅.
+  Prompt-caching invariant verified satisfied (OpenAI routes cache automatically; the
+  uncached Anthropic prompts are <1K tokens). Bundle measured: Sentry (incl. Replay,
+  deliberate) + zod v4 dominate; Turbopack supports neither the analyzer nor Sentry
+  treeshake options — documented in CHANGES.md, not changed.
+- [ ] Phase 3 — UX fixes & bugs — **START HERE** (see session-2 notes below)
 - [ ] Phase 4 — Production-readiness checklist (note: CI push trigger fixed; `pnpm build`
       now works without DATABASE_URL, so the CI build step is unblocked; `.env.example`
       regeneration still open)
@@ -53,6 +57,17 @@
 
 - **2026-07-15 (setup, local)** — Branch + work order created. Relay routine scheduled
   (first run 1:10pm ET). No code work done yet; Phase 1 starts on the first cloud run.
+- **2026-07-16 (session 2, cloud)** — **Phase 2 COMPLETE**; 8 commits pushed
+  (`8dc6bac`…`c6ce07b` + docs). See CHANGES.md for the full measurement story and
+  baseline → after counts. Facts for later sessions: (a) the relationships/firms UI pages
+  still render SEED data (`lib/data/contacts.ts` seeds, `seedFirms`) — the real Supabase
+  reads in `lib/data/*` are exercised only by the chatbot tools; wiring pages to real
+  data is Phase 3+ product work; (b) `lib/analytics/` is entirely unwired (PostHogProvider
+  never mounted, no tracking call sites); (c) architecture.md says Voyage embeddings but
+  the code uses OpenAI text-embedding-3-small — doc/code drift, untouched; (d) new
+  `sp-onboarded` cookie in `lib/auth/middleware.ts` memoizes the onboarding gate — if an
+  un-onboard flow is ever added, that cookie logic must change; (e) Turbopack: no bundle
+  analyzer, no Sentry treeshake — don't re-litigate without new tooling.
 - **2026-07-15 (session 1, cloud)** — **Phase 1 COMPLETE**; 19 commits pushed to
   `fable/prod-readiness` (`3995243`…`7bb03ff` + docs). Fixed: usage-logging lazy
   thenable (fix-first), 4 blocking lint errors, 5 pre-existing test failures (stale mocks),

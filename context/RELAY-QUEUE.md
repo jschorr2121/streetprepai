@@ -40,13 +40,15 @@ it, not leaking raw server error text to clients, adding security response heade
 removing unused heavy deps, and wiring Sentry's build plugin. One fix per commit, each
 verified. File anything needing a dashboard/secret to `jakes-tasks.md`.
 
-## Phase 2 — Performance
+## Phase 2 — Performance — **DONE (2026-07-16, session 2)**
 
-Address `todo.md`'s "fix the long loading times." Measure first (build output + route
-payloads, DB indexes on every FK and hot `WHERE`/`ORDER BY`, the pgvector index, N+1
-queries, redundant/uncached LLM calls, bundle size, caching/ISR/streaming opportunities,
-prompt-caching coverage per the invariant), fix the measured problems, record
-baseline → after numbers in `context/CHANGES.md`. No speculative rewrites.
+> Measured + fixed: withUser 8→3 statements/txn, getUser deduped (React cache),
+> proxy onboarding read memoized (cookie), page reads pipelined (dashboard ~17→~7
+> RTs/navigation), migration 0009 authored (covering indexes + ivfflat probes —
+> Jake applies), loading skeletons on all DB-backed routes, dead lib/cache removed.
+> Prompt-caching invariant already satisfied. Bundle measured (Sentry/zod dominate);
+> no safe Turbopack-compatible cut — documented in CHANGES.md. Baseline → after
+> numbers in `context/CHANGES.md`.
 
 ## Phase 3 — UX fixes & bugs
 

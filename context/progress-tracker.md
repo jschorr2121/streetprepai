@@ -16,6 +16,25 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — session 2 (2026-07-16, cloud, branch `fable/prod-readiness`)
+
+Phase 2 (performance) of `context/RELAY-QUEUE.md` — **complete**, 8 commits pushed, every
+commit gated on typecheck + lint + full vitest (+ build). Measured first: the latency story
+was network round trips, not slow queries — 4 auth/PostgREST calls before page data (proxy
+getUser + onboarding read, layout getUser, page getUser), 8 statements of `withUser`
+transaction overhead, and serial per-page reads. Fixed: `withUser` 8→3 statements per
+transaction (single set_config round trip, teardown dropped — transaction-local GUCs
+auto-revert); `auth.getUser()` deduped per render pass with React `cache()`; proxy onboarding
+read memoized in a user-scoped cookie (one-way flag); independent page reads pipelined via
+Promise.all (postgres.js pipelines on one connection — dashboard 5→1 RTs, learn 3→1,
+question-bank 3→1 + its second transaction folded in). Net: dashboard navigation ~17→~7
+round trips. Authored `0009_perf_indexes_2.sql` (2 covering indexes, 10 prefix-redundant
+drops, `ivfflat.probes=10` on the recall RPC) — apply filed to jakes-tasks. Added loading
+skeletons to the 6 DB-backed routes that had none. Removed the dead `lib/cache` layer (zero
+consumers, misleading comments). Audited prompt caching (invariant already satisfied) and
+bundle (Sentry+zod dominate; documented, no safe Turbopack-compatible cut). Noted:
+`lib/analytics/` is entirely unwired (provider never mounted) — future work.
+
 ### Prod-readiness relay — session 1 (2026-07-15, cloud, branch `fable/prod-readiness`)
 
 Phase 1 (correctness & security hardening) of `context/RELAY-QUEUE.md` — most items done, all

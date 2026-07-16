@@ -332,3 +332,30 @@ First cloud run of the `fable/prod-readiness` relay (see `context/RELAY-QUEUE.md
 - **Deps:** removed 12 unused packages (googleapis, ai + @ai-sdk/anthropic, @react-email/components, inngest, groq-sdk, framer-motion, next-mdx-remote, rehype-slug, remark-gfm, drizzle-zod, resend) — zero imports; reinstall when the owning feature lands (closes finding #17).
 - **Sentry build plugin wired** (finding #10): `withSentryConfig` uploads + deletes source maps when `SENTRY_AUTH_TOKEN`/`SENTRY_ORG`/`SENTRY_PROJECT` exist; no-op otherwise. Env task filed to jakes-tasks.
 - **CI:** push trigger fixed `main` → `master`; four pre-existing blocking ESLint errors fixed (unescaped entity; three sync-setState-in-effect via rAF); stale test mocks/fixtures repaired (chat/general now mocks the Drizzle layer; onboarding fixture gained required `advancedTrack`; critique fixture updated to the endpoint's actual contract).
+
+---
+
+## Prod-readiness relay session 2 — Phase 2 performance (2026-07-16)
+
+Measure-first pass on the "long loading times" complaint. Every commit on `fable/prod-readiness`, gated on typecheck + lint + full vitest (+ build). Baseline: build green, 325 tests passing.
+
+**What the measurement found (the latency story per authenticated navigation):**
+
+1. Proxy called `auth.getUser()` (network RT to Supabase Auth) + a PostgREST `profiles.onboarded_at` read; then the `(app)` layout called `getUser()` again, and the page a third time — 4 network calls before any page data.
+2. `withUser` spent 8 pooler statements per transaction (BEGIN, 3 setup, 3 teardown, COMMIT) around the actual queries.
+3. Pages issued independent reads with sequential awaits (dashboard: 5 serial round trips; learn pages: 3; question bank: 3 + a second full transaction).
+4. Index audit (all migrations vs every query in `lib/data`/`lib/db/queries`): two sorted reads lacked covering indexes; ten single-column indexes were strict prefixes of existing composites; the pgvector RPC ran at default `ivfflat.probes = 1` (poor recall on per-user filtered ANN).
+5. Prompt caching: all Anthropic routes with >1K stable tokens already set `cache_control`; the uncached remainder are OpenAI-backed (automatic caching) or sub-1K prompts — invariant satisfied, no change.
+6. Bundle (Turbopack, no analyzer support): largest client chunks are Sentry (~590K min across two chunks — includes Replay, which is a deliberate error-replay choice from session 1; Turbopack doesn't support Sentry's treeshake options) and zod v4 (~256K, shared by client forms). Documented, not changed — no safe, non-invasive fix under Turbopack today.
+
+**Fixes (baseline → after, structural round-trip counts — no live DB reachable from the cloud box, so these are statement/RT counts, not wall-clock):**
+
+- `withUser` overhead: 8 statements → 3 per call (one `set_config(claims, sub, role)` SELECT; teardown dropped entirely — `is_local=true` GUCs revert on COMMIT/ROLLBACK). 28 call sites benefit.
+- `auth.getUser()`: 2 calls per render pass (layout + page) → 1 via React `cache()`; `getCurrentUserOrNull` shares the memo.
+- Proxy onboarding read: 1 PostgREST RT per navigation → 0 after first hit (memoized in an httpOnly cookie keyed to the user id; onboarding is one-way so staleness can't occur; forgery only skips a UX redirect, data stays behind RLS).
+- Dashboard queries: 5 serial RTs → 1 pipelined batch (postgres.js pipelines concurrent queries on the transaction connection — verified in its `connection.js` sent-queue/max_pipeline logic). Same for learn index/chapter (3→1) and question bank (3→1, plus its second transaction folded into the first: 2 transactions → 1).
+- Net per dashboard navigation: ~17 network round trips → ~7.
+- Migration `0009_perf_indexes_2.sql` (file only; apply filed to jakes-tasks): `chats(user_id, contact_id, happened_at desc)`, `applied_jobs(user_id, stage, added_at desc)`, drops the ten prefix-redundant indexes, recreates `match_chat_embeddings` with `SET ivfflat.probes = 10` (~sqrt(lists=100)).
+- Loading skeletons added to every DB-backed route that lacked one (learn ×4, question-bank, onboarding) so navigation paints immediately.
+- **Decision — removed the dead `lib/cache` layer** (`wrap.ts`, `tags.ts`): zero consumers, and its doc comment falsely claimed public reads were wrapped. All public pages render static seed/fs data, so there is nothing to cache today; git history keeps it if a wiring pass ever has a real target. `RUNTIME-AUDIT.md` moved to `web/docs/api-route-runtime-audit.md`.
+- **Observation (not changed):** `lib/analytics/` (PostHog provider + typed event helpers) has zero consumers — the provider isn't mounted and no helper is called. Wiring it is product work (what to track, consent posture), left for Phase 5 / Jake.
