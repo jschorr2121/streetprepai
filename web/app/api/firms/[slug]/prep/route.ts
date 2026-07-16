@@ -1,6 +1,5 @@
 import { requireUser } from "@/lib/security/require-user";
 import { clientSafeError } from "@/lib/security/client-error";
-import { parseJson } from "@/lib/validation/parse";
 import { FirmSlugSchema } from "@/lib/validation/schemas/firms";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { PREP_FIRM_SYSTEM } from "@/lib/ai/prompts";

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BookOpenText, CheckCircle2, GraduationCap, Lock } from "lucide-react";
+import { ArrowRight, CheckCircle2, GraduationCap, Lock } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { requireUser } from "@/lib/auth/server";

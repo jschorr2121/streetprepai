@@ -61,13 +61,12 @@ export function ChatPanel({
           return copy;
         });
       }
-    } catch (e) {
+    } catch {
       setMessages((ms) => {
         const copy = ms.slice();
         copy[copy.length - 1] = {
           role: "assistant",
-          content:
-            "Sorry, something went wrong talking to Claude. Check that ANTHROPIC_API_KEY is set and try again.",
+          content: "Sorry, something went wrong. Please try again in a moment.",
         };
         return copy;
       });

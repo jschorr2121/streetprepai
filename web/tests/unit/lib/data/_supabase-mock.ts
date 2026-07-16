@@ -66,7 +66,7 @@ export function buildSupabaseMockGraph(): SupabaseMockGraph {
   const upsert = vi.fn(() => chain);
   const del = vi.fn(() => chain);
 
-  const from = vi.fn((_table: string) => ({
+  const from = vi.fn(() => ({
     select,
     insert,
     update,
