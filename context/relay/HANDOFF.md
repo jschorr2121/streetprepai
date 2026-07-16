@@ -59,8 +59,8 @@
   `/api/chat/general` + `lib/ai/assistant-tools.ts` first, part is built); (2) Unit 8
   question-bank issues (migrations 0006/0007 already shipped — diff first); (3) wire
   `lib/analytics/` (PostHogProvider never mounted — product decision, maybe Jake);
-  (4) render `chats.follow_up_draft` in the contact history tab (now persisted, not
-  yet displayed); (5) Unit 10 calendar sync is BLOCKED on Google Cloud creds
+  (4) ~~render `chats.follow_up_draft` in the contact history tab~~ done (session 3,
+  collapsible in History); (5) Unit 10 calendar sync is BLOCKED on Google Cloud creds
   (jakes-tasks). todo.md's remaining unstruck items (ai chat back / application
   tracker / chatbot / onboarding quiz) map to Units 8-9 + existing features — check
   before treating as new work.
