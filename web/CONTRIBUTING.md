@@ -26,15 +26,15 @@ Production secrets live in Vercel project settings — do not commit them.
 
 ## Test pyramid
 
-| Command              | What it runs                                                     | Cost                          |
-| -------------------- | ---------------------------------------------------------------- | ----------------------------- |
-| `pnpm test:unit`     | Vitest unit specs (pure functions, prompt builders, utils)       | $0                            |
-| `pnpm test:int`      | Vitest integration specs (route handlers w/ MSW + mocked Claude) | $0                            |
-| `pnpm test:e2e`      | Playwright E2E — `LIVE_AI`-flagged specs are skipped             | $0                            |
-| `pnpm test:e2e:live` | Playwright E2E with real Claude + OpenAI calls                   | **Costs money** — opt-in only |
-| `pnpm test:coverage` | Coverage report from unit + int                                  | $0                            |
+| Command              | What it runs                                                        | Cost                          |
+| -------------------- | ------------------------------------------------------------------- | ----------------------------- |
+| `pnpm test:unit`     | Vitest unit specs (pure functions, prompt builders, utils)          | $0                            |
+| `pnpm test:int`      | Vitest integration specs (route handlers w/ MSW + mocked Claude)    | $0                            |
+| `pnpm test:e2e`      | Playwright E2E — `STREETPREP_E2E_LIVE_AI`-flagged specs are skipped | $0                            |
+| `pnpm test:e2e:live` | Playwright E2E with real Claude + OpenAI calls                      | **Costs money** — opt-in only |
+| `pnpm test:coverage` | Coverage report from unit + int                                     | $0                            |
 
-**E2E live-AI gate:** specs that hit real Anthropic/OpenAI APIs check `process.env.LIVE_AI === "1"` and skip otherwise. CI runs `test:e2e` (skipped) — never `test:e2e:live`. Run live tests locally before shipping anything that materially changes a prompt or model call.
+**E2E live-AI gate:** specs that hit real Anthropic/OpenAI APIs check `process.env.STREETPREP_E2E_LIVE_AI === "1"` and skip otherwise. CI runs `test:e2e` (skipped) — never `test:e2e:live`. Run live tests locally before shipping anything that materially changes a prompt or model call.
 
 ## API route checklist
 
@@ -71,9 +71,9 @@ Every PR runs `.github/workflows/ci.yml`:
 4. `test:unit` — Vitest unit
 5. `test:int` — Vitest integration
 6. `build` — `next build` with placeholder envs
-7. `e2e` — Playwright (LIVE_AI specs skipped)
+7. `e2e` — Playwright (STREETPREP_E2E_LIVE_AI specs skipped)
 
-All must pass before merge. Vercel deploys on merge to `main` via its GitHub integration — no extra release workflow.
+All must pass before merge. Vercel deploys on merge to `master` via its GitHub integration — no extra release workflow.
 
 ## Style
 

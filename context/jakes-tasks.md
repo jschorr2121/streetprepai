@@ -21,11 +21,6 @@ needs action it can't perform itself.
   has everything. One uncommitted local-only change was dropped in the move
   (`.gstack/browse-audit.jsonl`, a QA log, saved to
   `/private/tmp/.../scratchpad/browse-audit.diff` — low value, safe to lose).
-- [ ] **Regenerate `web/.env.example`** — it was an unrecoverable dead iCloud placeholder
-  (not tracked by git — `web/.gitignore`'s `.env*` pattern also catches the example file) and
-  was dropped during the move. Not blocking (it's just a template), but worth recreating from
-  the vars actually read across `lib/env.ts` / server actions so new setups have something to
-  copy from.
 
 > Reminder: when you deploy, make sure the **new Upstash creds + the Supabase
 > auth settings are also set in Vercel project env**, not just `web/.env.local`.
@@ -101,6 +96,11 @@ needs action it can't perform itself.
 ---
 
 ## ✅ Done
+
+- [x] **Regenerate `web/.env.example`** — done by the prod-readiness relay (2026-07-16):
+  regenerated from the vars actually read in code (audited every `process.env.*` reference)
+  and now tracked in git (`web/.gitignore` gained a `!.env.example` exception). Skim it once
+  to sanity-check the required-vs-optional annotations against your Vercel env.
 
 - [x] **Unpushed history squashed + repo fully repaired** (2026-07-07) — the 12
   unpushed master commits were squashed into `15a4866` on origin's `1a06923`
