@@ -61,6 +61,13 @@ needs action it can't perform itself.
   webhook-driven calendar sync and the channel-renewal cron run as Inngest functions.
 - [ ] **Apply migrations 0006–0009 as their units land** (Units 8–10) — same manual
   SQL-editor flow as 0004/0005 if the DB is unreachable from the dev environment.
+- [ ] **Apply migration `0009_perf_indexes_2.sql`** (prod-readiness relay, 2026-07-16) —
+  idempotent; adds two covering indexes (`chats(user_id, contact_id, happened_at desc)`,
+  `applied_jobs(user_id, stage, added_at desc)`), drops ten single-column indexes that
+  are strict prefixes of existing composites (pure write-cost savings, read plans
+  unchanged), and re-creates `match_chat_embeddings` with `SET ivfflat.probes = 10` so
+  semantic chat recall stops running at the default single-probe (which can silently
+  miss matches for per-user filtered searches). Same SQL-editor flow as 0004/0005.
 
 ## 🟡 Before launch (not blocking dev, but don't ship without it)
 
