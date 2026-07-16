@@ -636,6 +636,16 @@ export function ContactDetail({
                       />
                     </div>
                   )}
+                  {log.followUpDraft && (
+                    <details className="mt-4 border-t pt-4">
+                      <summary className="text-muted-foreground hover:text-foreground cursor-pointer text-xs">
+                        Drafted follow-up · {log.followUpDraft.subject}
+                      </summary>
+                      <pre className="mt-2 font-sans text-sm leading-relaxed whitespace-pre-wrap">
+                        {log.followUpDraft.body}
+                      </pre>
+                    </details>
+                  )}
                 </div>
               ))}
             </div>
