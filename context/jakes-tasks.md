@@ -46,6 +46,12 @@ needs action it can't perform itself.
   questions of the same topic/difficulty (recommended) vs. generate-then-self-check
   (2x cost). Drop the answers in the issue file or here.
 
+- [ ] **Product call: chat-driven onboarding?** (relay session 4, 2026-07-17) — your
+  todo.md item "onboarding as an ai chat kinda flow that fills in for you" is now cheap
+  to build (Unit 9 shipped all the ingredients). Sketch + the 3 decisions you'd need to
+  make are in `context/brainstorms/2026-07-17-chat-onboarding.md`. Say go/no-go and the
+  relay can build it in one session.
+
 - [ ] **Confirm friend permissions for personal prep materials** (curriculum content
   authoring — see `context/curriculum.md` §7) — get an OK from Maddy Kozower, Max
   Ellis, and Zachary Ufberg before shipping any content derived from their personal
