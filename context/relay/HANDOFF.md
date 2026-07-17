@@ -52,20 +52,17 @@
   `as`-casts its verbose_json response (degrades via ?? fallbacks — documented, not
   changed).
 - [~] Phase 5 — Perpetual improvement — **in progress** (session 3 started it).
-  Done: follow-ups loop closed (summary action items → followup rows, widget mark-done
-  button, drafted email persisted to `chats.follow_up_draft` — all three had zero
-  callers/writers before); **Unit 9 issue 01 shipped** (session 4 — see log below).
-  **Good next lanes**: (1) Unit 9 issues 02→05→03→04 — read `.scratch/
-  unit-9-chatbot-rebuild/SCOPING-2026-07-16.md` FIRST (its v6 note is superseded:
-  AI SDK **v7** is installed; search_chat_logs is keyword, not semantic; CHAT_SYSTEM
-  is guide-scoped — assistant uses ASSISTANT_SYSTEM); (2) Unit 8
-  question-bank issues (migrations 0006/0007 already shipped — diff first); (3) wire
-  `lib/analytics/` (PostHogProvider never mounted — product decision, maybe Jake);
-  (4) ~~render `chats.follow_up_draft` in the contact history tab~~ done (session 3,
-  collapsible in History); (5) Unit 10 calendar sync is BLOCKED on Google Cloud creds
-  (jakes-tasks). todo.md's remaining unstruck items (ai chat back / application
-  tracker / chatbot / onboarding quiz) map to Units 8-9 + existing features — check
-  before treating as new work.
+  Done: follow-ups loop closed (session 3); **UNIT 9 COMPLETE — all five issues**
+  (session 4, see log); **Unit 8 scoped + its test debt closed** (session 4 —
+  issues 01–05 were already shipped by Unit 11; read `.scratch/unit-8-question-bank/
+  SCOPING-2026-07-17.md` before touching qbank). **Good next lanes (session 5+)**:
+  (1) e2e coverage — playwright specs for the chatbot golden path ("why JPM",
+  mocked LLM) + question bank, `STREETPREP_E2E_AUTH=1`, best started with fresh
+  context; (2) Jake-gated go-aheads once answered in jakes-tasks: Unit 8 #06
+  (AI-generated questions), chat-driven onboarding (brainstorm 2026-07-17),
+  PostHog wiring (`lib/analytics/` still unmounted — product decision);
+  (3) Unit 10 calendar sync stays BLOCKED on Google Cloud creds (jakes-tasks);
+  (4) smaller: LLM thread auto-titles, firm_data refresh pipeline (own unit).
 
 ## Blockers
 
