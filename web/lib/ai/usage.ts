@@ -40,6 +40,40 @@ export function logUsage(payload: UsagePayload): void {
     });
 }
 
+/**
+ * Structural subset of the AI SDK's `LanguageModelUsage` (v7). Declared here so
+ * usage tracking stays decoupled from the `ai` package's types.
+ */
+export type SdkUsage = {
+  inputTokens: number | undefined;
+  outputTokens: number | undefined;
+  inputTokenDetails?: {
+    noCacheTokens?: number | undefined;
+    cacheReadTokens?: number | undefined;
+    cacheWriteTokens?: number | undefined;
+  };
+};
+
+/**
+ * Map AI SDK usage to the Anthropic-shaped `TokenUsage` that pricing expects:
+ * `input_tokens` is NON-cached input there, while the SDK's `inputTokens` is the
+ * total. Prefer the SDK's explicit `noCacheTokens`, else back out the cached
+ * portions from the total.
+ */
+export function sdkUsageToTokenUsage(usage: SdkUsage): TokenUsage {
+  const cacheRead = usage.inputTokenDetails?.cacheReadTokens ?? 0;
+  const cacheWrite = usage.inputTokenDetails?.cacheWriteTokens ?? 0;
+  const input =
+    usage.inputTokenDetails?.noCacheTokens ??
+    Math.max((usage.inputTokens ?? 0) - cacheRead - cacheWrite, 0);
+  return {
+    input_tokens: input,
+    output_tokens: usage.outputTokens ?? 0,
+    cache_read_input_tokens: cacheRead,
+    cache_creation_input_tokens: cacheWrite,
+  };
+}
+
 type TrackStreamOpts = { userId?: string };
 
 export function trackStream(

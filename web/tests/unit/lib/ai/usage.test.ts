@@ -306,3 +306,47 @@ describe("assertUnderQuota", () => {
     expect(r).toEqual({ ok: true, usedUsd: 0 });
   });
 });
+
+describe("sdkUsageToTokenUsage", () => {
+  it("prefers explicit noCacheTokens and maps cache fields", async () => {
+    const { sdkUsageToTokenUsage } = await import("@/lib/ai/usage");
+    expect(
+      sdkUsageToTokenUsage({
+        inputTokens: 100,
+        outputTokens: 40,
+        inputTokenDetails: { noCacheTokens: 70, cacheReadTokens: 25, cacheWriteTokens: 5 },
+      }),
+    ).toEqual({
+      input_tokens: 70,
+      output_tokens: 40,
+      cache_read_input_tokens: 25,
+      cache_creation_input_tokens: 5,
+    });
+  });
+
+  it("backs out cached tokens from the total when noCacheTokens is absent", async () => {
+    const { sdkUsageToTokenUsage } = await import("@/lib/ai/usage");
+    expect(
+      sdkUsageToTokenUsage({
+        inputTokens: 100,
+        outputTokens: 10,
+        inputTokenDetails: { cacheReadTokens: 60, cacheWriteTokens: 30 },
+      }),
+    ).toEqual({
+      input_tokens: 10,
+      output_tokens: 10,
+      cache_read_input_tokens: 60,
+      cache_creation_input_tokens: 30,
+    });
+  });
+
+  it("treats fully-undefined usage as zeros (never negative)", async () => {
+    const { sdkUsageToTokenUsage } = await import("@/lib/ai/usage");
+    expect(sdkUsageToTokenUsage({ inputTokens: undefined, outputTokens: undefined })).toEqual({
+      input_tokens: 0,
+      output_tokens: 0,
+      cache_read_input_tokens: 0,
+      cache_creation_input_tokens: 0,
+    });
+  });
+});
