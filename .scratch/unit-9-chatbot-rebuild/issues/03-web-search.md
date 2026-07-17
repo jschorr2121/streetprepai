@@ -1,6 +1,6 @@
 # 03 — Native web search tool
 
-Status: ready-for-agent
+Status: done (2026-07-17, relay session 4)
 Blocked by: 02
 PRD: ../PRD.md
 
