@@ -7,6 +7,7 @@ import {
   getMessages,
   getThread,
   listThreads,
+  toStoredParts,
 } from "@/lib/db/queries/chat";
 import { createPgliteDb } from "../../../../helpers/pglite-db";
 
@@ -82,6 +83,58 @@ describe("lib/db/queries/chat", () => {
     const messages = await getMessages(db, USER_A, THREAD_1);
     expect(messages).toHaveLength(1);
     expect(messages[0]?.parts[0]?.text).toBe("good");
+  });
+
+  it("round-trips settled tool parts alongside text parts", async () => {
+    const db = await createPgliteDb();
+    await createThread(db, USER_A, THREAD_1, "t");
+    const parts = toStoredParts([
+      {
+        type: "tool-get_applied_jobs",
+        toolCallId: "call_1",
+        state: "output-available",
+        input: {},
+        output: { count: 2, byStage: { applied: [] } },
+      },
+      { type: "text", text: "You have 2 applications." },
+    ]);
+    expect(parts).toHaveLength(2);
+    await appendMessages(db, USER_A, THREAD_1, [{ role: "assistant", parts }]);
+
+    const messages = await getMessages(db, USER_A, THREAD_1);
+    expect(messages[0]?.parts.map((p) => p.type)).toEqual(["tool-get_applied_jobs", "text"]);
+    const tool = messages[0]?.parts[0];
+    expect(tool && "output" in tool ? tool.output : null).toEqual({
+      count: 2,
+      byStage: { applied: [] },
+    });
+  });
+
+  it("toStoredParts drops transient/unknown parts and keeps settled ones", () => {
+    const parts = toStoredParts([
+      { type: "step-start" },
+      { type: "text", text: "" },
+      { type: "text", text: "kept", state: "done" },
+      { type: "tool-search_chat_logs", toolCallId: "c1", state: "input-streaming", input: {} },
+      {
+        type: "tool-search_chat_logs",
+        toolCallId: "c2",
+        state: "output-error",
+        input: { query: "x" },
+        errorText: "Tool search_chat_logs failed",
+      },
+      "not even an object",
+    ]);
+    expect(parts).toEqual([
+      { type: "text", text: "kept" },
+      {
+        type: "tool-search_chat_logs",
+        toolCallId: "c2",
+        state: "output-error",
+        input: { query: "x" },
+        errorText: "Tool search_chat_logs failed",
+      },
+    ]);
   });
 
   it("appendMessages with an empty batch is a no-op", async () => {

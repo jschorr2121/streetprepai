@@ -9,6 +9,7 @@ const chatLogsMock = vi.fn();
 const chatLogsForContactMock = vi.fn();
 const calendarMock = vi.fn();
 const getApplicationsMock = vi.fn();
+const findSimilarChatsMock = vi.fn();
 
 vi.mock("@/lib/data/profile", () => ({
   getProfile: (...args: unknown[]) => profileMock(...args),
@@ -21,6 +22,9 @@ vi.mock("@/lib/data/contacts", () => ({
 }));
 vi.mock("@/lib/data/calendar", () => ({
   getCalendarEvents: (...args: unknown[]) => calendarMock(...args),
+}));
+vi.mock("@/lib/data/semantic-recall", () => ({
+  findSimilarChats: (...args: unknown[]) => findSimilarChatsMock(...args),
 }));
 vi.mock("@/lib/db/queries/applications", () => ({
   getApplications: (...args: unknown[]) => getApplicationsMock(...args),
@@ -39,247 +43,193 @@ beforeEach(() => {
   chatLogsForContactMock.mockReset();
   calendarMock.mockReset();
   getApplicationsMock.mockReset();
+  findSimilarChatsMock.mockReset();
+  findSimilarChatsMock.mockResolvedValue([]);
 });
 
-describe("ASSISTANT_TOOLS schema", () => {
-  it("declares the expected tool set including get_applied_jobs", async () => {
-    const { ASSISTANT_TOOLS } = await import("@/lib/ai/assistant-tools");
-    const names = ASSISTANT_TOOLS.map((t) => (t as { name?: string }).name ?? "").filter(Boolean);
-    expect(names).toEqual(
-      expect.arrayContaining([
-        "get_resume",
-        "get_applied_jobs",
-        "list_contacts",
-        "get_contact",
-        "get_upcoming_events",
-        "search_chat_logs",
-        "web_search",
-      ]),
-    );
+// AI SDK ToolCallOptions — executors don't read these, but the signature wants them.
+const OPTS = { toolCallId: "call_1", messages: [] };
+
+async function tools(userId = "u-1") {
+  const { buildAssistantTools } = await import("@/lib/ai/assistant-tools");
+  return buildAssistantTools(userId);
+}
+
+describe("buildAssistantTools registry", () => {
+  it("declares the expected tool set (web_search arrives in issue 03)", async () => {
+    expect(Object.keys(await tools()).sort()).toEqual([
+      "get_applied_jobs",
+      "get_contact",
+      "get_resume",
+      "get_upcoming_events",
+      "list_contacts",
+      "search_chat_logs",
+    ]);
+  });
+
+  it("every tool has a Zod inputSchema and an execute", async () => {
+    for (const [name, t] of Object.entries(await tools())) {
+      expect(t.inputSchema, name).toBeTruthy();
+      expect(typeof t.execute, name).toBe("function");
+    }
   });
 });
 
-describe("executeTool dispatch", () => {
-  it("get_resume → calls getProfile and returns resume-shaped payload", async () => {
+describe("tool executors (userId via closure)", () => {
+  it("get_resume → calls getProfile with the closure userId", async () => {
     profileMock.mockResolvedValue(fakeProfile());
-    const { executeTool } = await import("@/lib/ai/assistant-tools");
-    const out = (await executeTool("u-1", "get_resume", {})) as {
+    const t = await tools("u-42");
+    const out = (await t.get_resume.execute!({}, OPTS)) as {
       fullName: string;
       resumeText: string | null;
       experiences: unknown[];
     };
-    expect(profileMock).toHaveBeenCalledWith("u-1");
+    expect(profileMock).toHaveBeenCalledWith("u-42");
     expect(out.fullName).toBe("Jane Test");
     expect(out.resumeText).toContain("Wharton");
     expect(Array.isArray(out.experiences)).toBe(true);
   });
 
-  it("list_contacts → returns summary rows, filtered by stage and firm", async () => {
+  it("list_contacts → filtered by stage and firm", async () => {
     contactsMock.mockResolvedValue([
       fakeContact({ id: "c1", firm: "Goldman Sachs", stage: "warm" }),
       fakeContact({ id: "c2", firm: "Evercore", stage: "warm" }),
       fakeContact({ id: "c3", firm: "Goldman Sachs", stage: "cold" }),
     ]);
-    const { executeTool } = await import("@/lib/ai/assistant-tools");
-    const out = (await executeTool("u-1", "list_contacts", {
-      stage: "warm",
-      firm: "goldman",
-    })) as Array<{ id: string }>;
+    const t = await tools();
+    const out = (await t.list_contacts.execute!(
+      { stage: "warm", firm: "goldman" },
+      OPTS,
+    )) as Array<{
+      id: string;
+    }>;
     expect(out.length).toBe(1);
     expect(out[0]!.id).toBe("c1");
   });
 
-  it("list_contacts → with no filters returns all summary rows", async () => {
-    contactsMock.mockResolvedValue([fakeContact({ id: "c1" }), fakeContact({ id: "c2" })]);
-    const { executeTool } = await import("@/lib/ai/assistant-tools");
-    const out = (await executeTool("u-1", "list_contacts", {})) as Array<{
-      id: string;
-    }>;
-    expect(out.length).toBe(2);
-  });
-
-  it("get_contact → returns {contact, chats}", async () => {
+  it("get_contact → returns {contact, chats}; {error} when missing", async () => {
     contactByIdMock.mockResolvedValue(fakeContact());
     chatLogsForContactMock.mockResolvedValue([fakeChatLog()]);
-    const { executeTool } = await import("@/lib/ai/assistant-tools");
-    const out = (await executeTool("u-1", "get_contact", {
-      contactId: "c_001",
-    })) as { contact: unknown; chats: unknown[] };
+    const t = await tools();
+    const out = (await t.get_contact.execute!({ contactId: "c_001" }, OPTS)) as {
+      contact: unknown;
+      chats: unknown[];
+    };
     expect(contactByIdMock).toHaveBeenCalledWith("c_001", "u-1");
-    expect(chatLogsForContactMock).toHaveBeenCalledWith("c_001", "u-1");
     expect(out.contact).toBeTruthy();
     expect(out.chats.length).toBe(1);
-  });
 
-  it("get_contact → returns {error} when contact not found", async () => {
     contactByIdMock.mockResolvedValue(null);
-    const { executeTool } = await import("@/lib/ai/assistant-tools");
-    const out = (await executeTool("u-1", "get_contact", {
-      contactId: "missing",
-    })) as { error?: string };
-    expect(out.error).toBeTruthy();
+    chatLogsForContactMock.mockResolvedValue([]);
+    const missing = (await t.get_contact.execute!({ contactId: "nope" }, OPTS)) as {
+      error?: string;
+    };
+    expect(missing.error).toBeTruthy();
   });
 
   it("get_upcoming_events → filters by status and time window", async () => {
     const now = Date.now();
     calendarMock.mockResolvedValue([
-      {
-        id: "e1",
-        status: "upcoming",
-        startsAt: new Date(now + 1000 * 60 * 60).toISOString(),
-      },
+      { id: "e1", status: "upcoming", startsAt: new Date(now + 1000 * 60 * 60).toISOString() },
       {
         id: "e2",
         status: "upcoming",
-        startsAt: new Date(now + 1000 * 60 * 60 * 24 * 30).toISOString(), // 30 days out
+        startsAt: new Date(now + 1000 * 60 * 60 * 24 * 30).toISOString(),
       },
-      {
-        id: "e3",
-        status: "past",
-        startsAt: new Date(now - 1000 * 60 * 60).toISOString(),
-      },
+      { id: "e3", status: "past", startsAt: new Date(now - 1000 * 60 * 60).toISOString() },
     ]);
-    const { executeTool } = await import("@/lib/ai/assistant-tools");
-    const out = (await executeTool("u-1", "get_upcoming_events", {
-      daysAhead: 7,
-    })) as Array<{ id: string }>;
+    const t = await tools();
+    const out = (await t.get_upcoming_events.execute!({ daysAhead: 7 }, OPTS)) as Array<{
+      id: string;
+    }>;
     expect(out.length).toBe(1);
     expect(out[0]!.id).toBe("e1");
   });
 
-  it("search_chat_logs → returns hits with snippet", async () => {
-    chatLogsMock.mockResolvedValue([
-      fakeChatLog({
-        id: "chat_a",
-        contactId: "c_001",
-        rawNotes: "We talked about a SaaS LBO they were modeling at the desk.",
-        structured: {
-          topics: ["lbo"],
-          adviceGiven: [],
-          commitments: [],
-          personalDetails: [],
-          followUps: [],
-        },
-      }),
-      fakeChatLog({
-        id: "chat_b",
-        contactId: "c_001",
-        rawNotes: "Discussed campus recruiting only",
-        structured: {
-          topics: [],
-          adviceGiven: [],
-          commitments: [],
-          personalDetails: [],
-          followUps: [],
-        },
-      }),
-    ]);
-    contactsMock.mockResolvedValue([fakeContact()]);
-    const { executeTool } = await import("@/lib/ai/assistant-tools");
-    const out = (await executeTool("u-1", "search_chat_logs", {
-      query: "saas lbo",
-    })) as { count: number; hits: Array<{ chatId: string; snippet: string }> };
-    expect(out.count).toBe(1);
-    expect(out.hits[0]!.chatId).toBe("chat_a");
-    expect(out.hits[0]!.snippet.toLowerCase()).toContain("saas lbo");
-  });
-
-  it("returns {error} for an unknown tool name (does not throw)", async () => {
-    const { executeTool } = await import("@/lib/ai/assistant-tools");
-    const out = (await executeTool("u-1", "nope", {})) as { error?: string };
-    expect(out.error).toMatch(/Unknown tool/);
-  });
-
   it("returns a generic {error} when an underlying data call throws", async () => {
     profileMock.mockRejectedValue(new Error("db down"));
-    const { executeTool } = await import("@/lib/ai/assistant-tools");
-    const out = (await executeTool("u-1", "get_resume", {})) as { error?: string };
+    const t = await tools();
+    const out = (await t.get_resume.execute!({}, OPTS)) as { error?: string };
     // Raw error internals must not flow back through the model to the user.
     expect(out.error).toBe("Tool get_resume failed");
     expect(out.error).not.toContain("db down");
   });
+});
 
-  // ─── get_applied_jobs ───────────────────────────────────────────────────────
+describe("search_chat_logs (hybrid semantic + keyword)", () => {
+  const keywordChat = fakeChatLog({
+    id: "chat_kw",
+    contactId: "c_001",
+    rawNotes: "We talked about a SaaS LBO they were modeling at the desk.",
+    structured: {
+      topics: ["lbo"],
+      adviceGiven: [],
+      commitments: [],
+      personalDetails: [],
+      followUps: [],
+    },
+  });
 
-  it("get_applied_jobs → groups by stage correctly", async () => {
-    getApplicationsMock.mockResolvedValue([
-      {
-        id: "a1",
-        firm: "Goldman Sachs",
-        role: "Summer Analyst",
-        stage: "applied",
-        deadline: undefined,
-        notes: undefined,
-      },
-      {
-        id: "a2",
-        firm: "Evercore",
-        role: "Summer Analyst",
-        stage: "applied",
-        deadline: undefined,
-        notes: undefined,
-      },
-      {
-        id: "a3",
-        firm: "JPMorgan",
-        role: "Summer Analyst",
-        stage: "interview",
-        deadline: "2026-09-01",
-        notes: "Good progress",
-      },
-    ]);
-    const { executeTool } = await import("@/lib/ai/assistant-tools");
-    const out = (await executeTool("u-1", "get_applied_jobs", {})) as {
+  it("returns keyword hits with snippets when semantic recall is empty", async () => {
+    chatLogsMock.mockResolvedValue([keywordChat]);
+    contactsMock.mockResolvedValue([fakeContact({ id: "c_001" })]);
+    const t = await tools();
+    const out = (await t.search_chat_logs.execute!({ query: "saas lbo" }, OPTS)) as {
       count: number;
-      byStage: Record<string, Array<{ id: string; firm: string }>>;
+      hits: Array<{ chatId: string; snippet: string; match: string }>;
+    };
+    expect(out.count).toBe(1);
+    expect(out.hits[0]!.chatId).toBe("chat_kw");
+    expect(out.hits[0]!.match).toBe("keyword");
+    expect(out.hits[0]!.snippet.toLowerCase()).toContain("saas lbo");
+  });
+
+  it("puts semantic hits first and dedupes overlapping chatIds", async () => {
+    findSimilarChatsMock.mockResolvedValue([
+      { chatId: "chat_sem", contactId: "c_001", similarity: 0.9, summaryText: "Apollo culture" },
+      { chatId: "chat_kw", contactId: "c_001", similarity: 0.8, summaryText: "SaaS LBO chat" },
+    ]);
+    chatLogsMock.mockResolvedValue([keywordChat]);
+    contactsMock.mockResolvedValue([fakeContact({ id: "c_001", name: "Jordan Vega" })]);
+    const t = await tools();
+    const out = (await t.search_chat_logs.execute!({ query: "saas lbo" }, OPTS)) as {
+      count: number;
+      hits: Array<{ chatId: string; match: string; contactName: string }>;
+    };
+    // chat_kw matches BOTH ways but appears once (semantic wins).
+    expect(out.count).toBe(2);
+    expect(out.hits.map((h) => h.chatId)).toEqual(["chat_sem", "chat_kw"]);
+    expect(out.hits.every((h) => h.match === "semantic")).toBe(true);
+    expect(out.hits[0]!.contactName).toBe("Jordan Vega");
+    expect(findSimilarChatsMock).toHaveBeenCalledWith({
+      userId: "u-1",
+      queryText: "saas lbo",
+      k: 5,
+    });
+  });
+});
+
+describe("get_applied_jobs", () => {
+  it("groups by stage and passes the stage filter through", async () => {
+    getApplicationsMock.mockResolvedValue([
+      { id: "a1", firm: "Goldman Sachs", role: "Summer Analyst", stage: "applied" },
+      { id: "a2", firm: "Evercore", role: "Summer Analyst", stage: "applied" },
+      { id: "a3", firm: "Lazard", role: "Summer Analyst", stage: "superday" },
+    ]);
+    const t = await tools();
+    const out = (await t.get_applied_jobs.execute!({}, OPTS)) as {
+      count: number;
+      byStage: Record<string, unknown[]>;
     };
     expect(out.count).toBe(3);
     expect(out.byStage["applied"]).toHaveLength(2);
-    expect(out.byStage["interview"]).toHaveLength(1);
-    expect(out.byStage["interview"]![0]!.firm).toBe("JPMorgan");
-  });
+    expect(out.byStage["superday"]).toHaveLength(1);
 
-  it("get_applied_jobs → filters by stage when provided", async () => {
-    getApplicationsMock.mockResolvedValue([
-      {
-        id: "a1",
-        firm: "GS",
-        role: "Analyst",
-        stage: "offer",
-        deadline: undefined,
-        notes: undefined,
-      },
-    ]);
-    const { executeTool } = await import("@/lib/ai/assistant-tools");
-    const out = (await executeTool("u-1", "get_applied_jobs", { stage: "offer" })) as {
-      count: number;
-      byStage: Record<string, unknown[]>;
-    };
-    expect(out.count).toBe(1);
-    expect(out.byStage["offer"]).toHaveLength(1);
-    // Confirm getApplications was called with the stage option.
-    expect(getApplicationsMock).toHaveBeenCalledWith(null, "u-1", { stage: "offer" });
-  });
-
-  it("get_applied_jobs → returns { count: 0, byStage: {} } when user has zero applications", async () => {
     getApplicationsMock.mockResolvedValue([]);
-    const { executeTool } = await import("@/lib/ai/assistant-tools");
-    const out = (await executeTool("u-1", "get_applied_jobs", {})) as {
+    const filtered = (await t.get_applied_jobs.execute!({ stage: "superday" }, OPTS)) as {
       count: number;
-      byStage: Record<string, unknown[]>;
     };
-    expect(out.count).toBe(0);
-    expect(out.byStage).toEqual({});
-  });
-
-  it("get_applied_jobs → rejects an invalid stage value with a structured error", async () => {
-    const { executeTool } = await import("@/lib/ai/assistant-tools");
-    const out = (await executeTool("u-1", "get_applied_jobs", { stage: "bookmarked" })) as {
-      error?: string;
-    };
-    // "bookmarked" is not in APPLIED_JOB_STAGES — the model gets an error it
-    // can correct rather than silently unfiltered results labeled as filtered.
-    expect(out.error).toMatch(/Invalid arguments/);
-    expect(getApplicationsMock).not.toHaveBeenCalled();
+    expect(getApplicationsMock).toHaveBeenLastCalledWith(null, "u-1", { stage: "superday" });
+    expect(filtered.count).toBe(0);
   });
 });

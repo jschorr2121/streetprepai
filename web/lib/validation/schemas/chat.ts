@@ -48,15 +48,3 @@ export const AssistantChatSchema = z
   })
   .strict();
 export type AssistantChatInput = z.infer<typeof AssistantChatSchema>;
-
-/**
- * chat/general — OpenAI tool-use assistant. Profile data is loaded server-side
- * from the user's own row (already trusted), so only the messages array needs
- * client-side validation.
- */
-export const ChatGeneralSchema = z
-  .object({
-    messages: z.array(ChatTurnSchema).min(1).max(50),
-  })
-  .strict();
-export type ChatGeneralInput = z.infer<typeof ChatGeneralSchema>;

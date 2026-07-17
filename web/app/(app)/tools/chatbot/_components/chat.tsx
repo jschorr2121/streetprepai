@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport, type UIMessage } from "ai";
+import { DefaultChatTransport, getToolName, isToolUIPart, type UIMessage } from "ai";
 import { ArrowUp, Loader2 } from "lucide-react";
 
 import { Markdown } from "@/components/reader/markdown";
@@ -20,6 +20,75 @@ function messageText(m: UIMessage): string {
     .filter((p) => p.type === "text")
     .map((p) => p.text)
     .join("");
+}
+
+const TOOL_LABELS: Record<string, string> = {
+  get_resume: "Checked: your resume",
+  list_contacts: "Checked: your contacts",
+  get_contact: "Checked: contact details",
+  get_upcoming_events: "Checked: your calendar",
+  search_chat_logs: "Searched your chat logs",
+  get_applied_jobs: "Checked: your applications",
+};
+
+function toolResultSummary(output: unknown): string | null {
+  if (Array.isArray(output)) {
+    return `${output.length} result${output.length === 1 ? "" : "s"}`;
+  }
+  if (output && typeof output === "object") {
+    if ("error" in output && typeof output.error === "string") return "lookup failed";
+    if ("count" in output && typeof output.count === "number") {
+      return `${output.count} result${output.count === 1 ? "" : "s"}`;
+    }
+  }
+  return null;
+}
+
+/**
+ * Citation chip for a settled tool invocation, rendered from a UIMessage tool
+ * part. Expands to a compact JSON view of what the assistant consulted.
+ */
+export function ToolChip({
+  toolName,
+  state,
+  output,
+  errorText,
+}: {
+  toolName: string;
+  state: string;
+  output?: unknown;
+  errorText?: string;
+}) {
+  const label = TOOL_LABELS[toolName] ?? toolName.replaceAll("_", " ");
+  if (state !== "output-available" && state !== "output-error") {
+    return (
+      <span className="border-border text-muted-foreground inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs">
+        <Loader2 className="size-3 animate-spin" />
+        {label}
+      </span>
+    );
+  }
+  const failed = state === "output-error";
+  const summary = failed ? "failed" : toolResultSummary(output);
+  return (
+    <details className="group inline-block align-middle">
+      <summary
+        className={`inline-flex cursor-pointer list-none items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs [&::-webkit-details-marker]:hidden ${
+          failed
+            ? "border-destructive/40 text-destructive"
+            : "border-border text-muted-foreground hover:text-foreground"
+        }`}
+      >
+        🔍 {label}
+        {summary ? ` — ${summary}` : ""}
+      </summary>
+      <pre className="bg-secondary text-muted-foreground mt-1.5 max-h-48 overflow-auto rounded-md p-2.5 text-[11px] leading-relaxed whitespace-pre-wrap">
+        {failed
+          ? (errorText ?? "The lookup failed.")
+          : JSON.stringify(output, null, 2)?.slice(0, 4_000)}
+      </pre>
+    </details>
+  );
 }
 
 export function AssistantChat({
@@ -110,8 +179,29 @@ export function AssistantChat({
               >
                 {m.role === "user" ? (
                   text
-                ) : text ? (
-                  <Markdown content={text} className="text-sm" />
+                ) : m.parts.length > 0 ? (
+                  <div className="space-y-2">
+                    {m.parts.map((p, i) => {
+                      if (p.type === "text") {
+                        return p.text ? (
+                          <Markdown key={i} content={p.text} className="text-sm" />
+                        ) : null;
+                      }
+                      if (isToolUIPart(p)) {
+                        return (
+                          <div key={i}>
+                            <ToolChip
+                              toolName={getToolName(p)}
+                              state={p.state}
+                              output={p.state === "output-available" ? p.output : undefined}
+                              errorText={p.state === "output-error" ? p.errorText : undefined}
+                            />
+                          </div>
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
                 ) : (
                   <Loader2 className="text-muted-foreground size-3.5 animate-spin" />
                 )}

@@ -1,7 +1,8 @@
 import { anthropic } from "@ai-sdk/anthropic";
-import { convertToModelMessages, streamText, type UIMessage } from "ai";
+import { convertToModelMessages, stepCountIs, streamText, type UIMessage } from "ai";
 
 import { MODELS } from "@/lib/ai/anthropic";
+import { buildAssistantTools } from "@/lib/ai/assistant-tools";
 import { ASSISTANT_SYSTEM } from "@/lib/ai/prompts";
 import { logUsage, sdkUsageToTokenUsage } from "@/lib/ai/usage";
 import { withUser } from "@/lib/db/client";
@@ -10,6 +11,7 @@ import {
   createThread,
   getMessages,
   getThread,
+  toStoredParts,
   type StoredPart,
 } from "@/lib/db/queries/chat";
 import { requireUser } from "@/lib/security/require-user";
@@ -20,14 +22,6 @@ export const runtime = "nodejs";
 
 const ENDPOINT = "chat/assistant";
 
-function textParts(parts: Array<{ type?: string; text?: unknown }>): StoredPart[] {
-  return parts.flatMap((p) =>
-    p.type === "text" && typeof p.text === "string" && p.text.length > 0
-      ? [{ type: "text" as const, text: p.text }]
-      : [],
-  );
-}
-
 export async function POST(req: Request): Promise<Response> {
   const gate = await requireUser(req, { tier: "expensive", route: ENDPOINT });
   if (!gate.ok) return gate.response;
@@ -37,7 +31,9 @@ export async function POST(req: Request): Promise<Response> {
   if (!parsed.ok) return parsed.response;
   const { threadId, message } = parsed.data;
 
-  const userParts = textParts(message.parts);
+  const userParts = toStoredParts(message.parts).filter(
+    (p): p is Extract<StoredPart, { type: "text" }> => p.type === "text",
+  );
   if (userParts.length === 0) {
     return Response.json({ error: "Message has no text" }, { status: 400 });
   }
@@ -55,10 +51,18 @@ export async function POST(req: Request): Promise<Response> {
 
   const uiMessages: UIMessage[] = [...prior, { id: message.id, role: "user", parts: userParts }];
 
+  const tools = buildAssistantTools(userId);
+
   const result = streamText({
     model: anthropic(MODELS.sonnet),
     system: ASSISTANT_SYSTEM,
-    messages: await convertToModelMessages(uiMessages),
+    messages: await convertToModelMessages(uiMessages, {
+      tools,
+      ignoreIncompleteToolCalls: true,
+    }),
+    tools,
+    // Tool-loop budget: enough for a couple of lookups + the final answer.
+    stopWhen: stepCountIs(6),
     maxOutputTokens: 1_200,
     onEnd: ({ usage }) => {
       logUsage({
@@ -73,7 +77,8 @@ export async function POST(req: Request): Promise<Response> {
   return result.toUIMessageStreamResponse({
     originalMessages: uiMessages,
     onEnd: async ({ responseMessage }) => {
-      const parts = textParts(responseMessage.parts);
+      // Persist text + settled tool parts; transient states are dropped.
+      const parts = toStoredParts(responseMessage.parts);
       if (parts.length === 0) return;
       try {
         await withUser({ sub: userId, role: "authenticated" }, (tx) =>

@@ -4,15 +4,52 @@ import { z } from "zod";
 import type { Executor } from "@/lib/db/client";
 import { chatMessages, chatThreads } from "@/lib/db/schema";
 
-// Persisted subset of the AI SDK UIMessage: text parts only for now (issue 02
-// extends this union with tool parts — jsonb column needs no change).
-const StoredPartSchema = z.object({
+// Persisted subset of the AI SDK UIMessage parts: text parts plus SETTLED tool
+// invocations (output-available / output-error). Transient states
+// (input-streaming, approval-*) and step-start parts are never persisted.
+// Unknown keys the SDK adds (e.g. `state: "done"` on text parts) are stripped.
+const StoredTextPartSchema = z.object({
   type: z.literal("text"),
   text: z.string(),
 });
+const StoredToolPartSchema = z.discriminatedUnion("state", [
+  z.object({
+    type: z.templateLiteral(["tool-", z.string()]),
+    toolCallId: z.string(),
+    state: z.literal("output-available"),
+    input: z.json(),
+    output: z.json(),
+  }),
+  z.object({
+    type: z.templateLiteral(["tool-", z.string()]),
+    toolCallId: z.string(),
+    state: z.literal("output-error"),
+    // The SDK's UIMessage type requires the key to exist even when undefined.
+    input: z.json().nullable().default(null),
+    errorText: z.string(),
+  }),
+]);
+const StoredPartSchema = z.union([StoredTextPartSchema, StoredToolPartSchema]);
 const StoredPartsSchema = z.array(StoredPartSchema);
 
 export type StoredPart = z.infer<typeof StoredPartSchema>;
+
+/**
+ * Filter an untrusted/SDK-produced parts array down to the persistable subset.
+ * Non-conforming parts (streaming states, step markers, empty text) are
+ * dropped rather than failing the whole message.
+ */
+export function toStoredParts(parts: unknown): StoredPart[] {
+  if (!Array.isArray(parts)) return [];
+  const out: StoredPart[] = [];
+  for (const raw of parts) {
+    const parsed = StoredPartSchema.safeParse(raw);
+    if (!parsed.success) continue;
+    if (parsed.data.type === "text" && parsed.data.text.length === 0) continue;
+    out.push(parsed.data);
+  }
+  return out;
+}
 
 export type ChatRole = "user" | "assistant";
 

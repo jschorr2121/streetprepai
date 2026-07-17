@@ -26,6 +26,9 @@ vi.mock("ai", () => ({
   convertToModelMessages: vi.fn(async (msgs: Array<{ role: string }>) =>
     msgs.map((m) => ({ role: m.role, content: "converted" })),
   ),
+  // buildAssistantTools (imported by the route) also resolves "ai" to this mock.
+  tool: (def: unknown) => def,
+  stepCountIs: (n: number) => ({ kind: "step-count", n }),
 }));
 
 vi.mock("@ai-sdk/anthropic", () => ({
@@ -52,12 +55,16 @@ const getThreadMock = vi.fn();
 const createThreadMock = vi.fn();
 const getMessagesMock = vi.fn();
 const appendMessagesMock = vi.fn();
-vi.mock("@/lib/db/queries/chat", () => ({
-  getThread: (...args: unknown[]) => getThreadMock(...args),
-  createThread: (...args: unknown[]) => createThreadMock(...args),
-  getMessages: (...args: unknown[]) => getMessagesMock(...args),
-  appendMessages: (...args: unknown[]) => appendMessagesMock(...args),
-}));
+vi.mock("@/lib/db/queries/chat", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/lib/db/queries/chat")>();
+  return {
+    ...actual, // keep the real toStoredParts
+    getThread: (...args: unknown[]) => getThreadMock(...args),
+    createThread: (...args: unknown[]) => createThreadMock(...args),
+    getMessages: (...args: unknown[]) => getMessagesMock(...args),
+    appendMessages: (...args: unknown[]) => appendMessagesMock(...args),
+  };
+});
 
 beforeEach(() => {
   getUserMock.mockReset();
@@ -133,13 +140,75 @@ describe("POST /api/chat/assistant", () => {
     // History is not loaded for a brand-new thread.
     expect(getMessagesMock).not.toHaveBeenCalled();
 
-    // The model call includes the new user turn and the standalone system prompt.
+    // The model call includes the new user turn, the standalone system prompt,
+    // and the closure-injected tool registry with a bounded step count.
     const call = streamTextMock.mock.calls[0]?.[0] as {
       system: string;
       messages: Array<{ role: string }>;
+      tools: Record<string, unknown>;
+      stopWhen: unknown;
     };
     expect(call.system).toContain("standalone IB prep mentor");
     expect(call.messages).toHaveLength(1);
+    expect(Object.keys(call.tools).sort()).toEqual([
+      "get_applied_jobs",
+      "get_contact",
+      "get_resume",
+      "get_upcoming_events",
+      "list_contacts",
+      "search_chat_logs",
+    ]);
+    expect(call.stopWhen).toEqual({ kind: "step-count", n: 6 });
+  });
+
+  it("persists settled tool parts from the response message", async () => {
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-assist-tools" }));
+    getThreadMock.mockResolvedValue({ id: THREAD_ID, title: "t" });
+    getMessagesMock.mockResolvedValue([]);
+    const { POST } = await import("@/app/api/chat/assistant/route");
+    await POST(makeRequest(validBody, "10.9.0.6"));
+
+    const streamOpts = toUIMessageStreamResponseMock.mock.calls[0]?.[0] as {
+      onEnd: (event: { responseMessage: unknown }) => Promise<void>;
+    };
+    appendMessagesMock.mockClear();
+    await streamOpts.onEnd({
+      responseMessage: {
+        id: "resp-2",
+        role: "assistant",
+        parts: [
+          { type: "step-start" },
+          {
+            type: "tool-get_applied_jobs",
+            toolCallId: "call_9",
+            state: "output-available",
+            input: {},
+            output: { count: 1, byStage: {} },
+          },
+          { type: "text", text: "Your GS app is at superday.", state: "done" },
+        ],
+      },
+    });
+    expect(appendMessagesMock).toHaveBeenCalledWith(
+      expect.anything(),
+      "u-assist-tools",
+      THREAD_ID,
+      [
+        {
+          role: "assistant",
+          parts: [
+            {
+              type: "tool-get_applied_jobs",
+              toolCallId: "call_9",
+              state: "output-available",
+              input: {},
+              output: { count: 1, byStage: {} },
+            },
+            { type: "text", text: "Your GS app is at superday." },
+          ],
+        },
+      ],
+    );
   });
 
   it("loads prior history for an existing thread and persists the assistant reply onEnd", async () => {
