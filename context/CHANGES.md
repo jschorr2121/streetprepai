@@ -428,3 +428,17 @@ Four commits (`15765e0`…`4f38996`), each gated on typecheck + lint + full vite
 ## Prod-readiness relay session 3 (continued) — Phase 5 slice: follow-ups become real (2026-07-16)
 
 `createFollowup`/`completeFollowup` in `lib/data/followups.ts` had zero callers: the "Upcoming follow-ups" widget could never display anything, the structured summary's `followUps` action items were discarded, and the AI-drafted follow-up email was lost on navigation. Now: `saveChatSummaryAction` creates followup rows from the summary (best-effort, deduped against the contact's open followups by note; model `dueBy` normalized by a unit-tested `followupDueDate` helper, default +3 days); the widget rows get a mark-done button backed by `completeFollowupAction` (optimistic hide, revert + toast on failure; `completeFollowup` now reports not-found instead of silently no-oping); `saveFollowUpDraftAction` persists the drafted email onto the chat row (`chats.follow_up_draft`, previously never written). Suite: **362 passing**.
+
+---
+
+## Prod-readiness relay session 4 — Phase 5: Unit 9 issue 01 shipped (2026-07-17)
+
+`/tools/chatbot` is now a real streaming assistant with persistence (was a coming-soon stub).
+
+- **Stack decision — AI SDK v7, not v6.** The Unit 9 PRD assumed `ai` v6; latest stable is now **7.0.31**. Installed `ai@7 + @ai-sdk/anthropic@4 + @ai-sdk/react@4` and coded against the v7 API verified from the installed `.d.ts` (v7 renames the persistence callback `onFinish`→`onEnd`, adds `usage.inputTokenDetails`). Bundle-vigilance: justified — replaces a hand-rolled fetch/reader/stream-protocol/persistence stack for every chat surface going forward; issue 02's tool loop needs it.
+- **Migration `0010_chat_threads.sql`** — `chat_threads` + `chat_messages`, owner RLS, idempotent (Jake applies — filed). `content` jsonb holds the UIMessage `parts` array (tool parts in issue 02 need no schema change). A `seq` identity column provides total message order — `created_at` ties within a single batched insert, so ordering by timestamp alone is nondeterministic.
+- **Anti-spoofing beats the PRD default**: the client sends only the newest turn (`prepareSendMessagesRequest`); the server reloads history from the DB, so client-supplied assistant turns (deferred finding #13 on the guide chat) are structurally impossible on this route. The user turn is persisted BEFORE the model call (survives stream failure); the assistant turn persists in `toUIMessageStreamResponse.onEnd`.
+- **Usage invariant kept**: new `sdkUsageToTokenUsage` maps v7 `LanguageModelUsage` (total input + `inputTokenDetails.noCacheTokens/cacheReadTokens/cacheWriteTokens`) onto the Anthropic-shaped `TokenUsage` (`input_tokens` = non-cached) so `calculateCost` prices correctly; `logUsage` fires from `streamText.onEnd` on every request.
+- **New `ASSISTANT_SYSTEM` prompt** — `CHAT_SYSTEM` is guide-scoped by design; the assistant prompt explicitly forbids fabricating personal data until issue 02's tools land.
+- Thread ids are client-generated uuids validated with `z.uuid()` — avoids a response-header dance to communicate a server-created id; RLS + `user_id` scoping makes collision/hijack a non-issue.
+- Suite: **376 passing** (query round-trip/isolation/ordering on PGlite, route contract tests with `ai` mocked at the module boundary, usage-mapper unit tests). Build green.

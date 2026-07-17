@@ -1,6 +1,6 @@
 # 01 — Streaming chat at /tools/chatbot with thread persistence
 
-Status: ready-for-agent
+Status: done (2026-07-17, relay session 4 — shipped on AI SDK v7; see SCOPING file + context/CHANGES.md)
 Blocked by: —
 PRD: ../PRD.md
 

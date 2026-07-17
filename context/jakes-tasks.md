@@ -12,6 +12,12 @@ needs action it can't perform itself.
 
 ## 🔴 Needed now (blocks the current unit from working end-to-end)
 
+- [ ] **Apply migration `0010_chat_threads.sql`** (relay session 4, 2026-07-17) — the new
+  `/tools/chatbot` (Unit 9 issue 01) reads/writes `chat_threads` + `chat_messages`; the
+  page 500s in prod until this runs. Idempotent — paste into the Supabase SQL editor
+  (same manual flow as 0009). Owner RLS on both tables; after applying, spot-check that
+  a second account can't read another user's thread.
+
 - [ ] **Recreate the `design/ui-overhaul` git worktree in `~/Developer/InterviewPrep`** —
   the repo moved out of iCloud (see Done below) but that worktree still lives at the old
   `~/Documents/InterviewPrep/.claude/worktrees/ui-overhaul` path, since git won't let the

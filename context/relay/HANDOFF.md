@@ -54,11 +54,11 @@
 - [~] Phase 5 — Perpetual improvement — **in progress** (session 3 started it).
   Done: follow-ups loop closed (summary action items → followup rows, widget mark-done
   button, drafted email persisted to `chats.follow_up_draft` — all three had zero
-  callers/writers before). **Good next lanes**: (1) Unit 9 chatbot rebuild — the
-  code-vs-plan diff is DONE: read `.scratch/unit-9-chatbot-rebuild/
-  SCOPING-2026-07-16.md` FIRST (corrects four stale PRD assumptions: next migration
-  is 0010 not 0007; the AI SDK is NOT installed; search_chat_logs is keyword, not
-  semantic; CHAT_SYSTEM is guide-scoped — plus a recommended issue order); (2) Unit 8
+  callers/writers before); **Unit 9 issue 01 shipped** (session 4 — see log below).
+  **Good next lanes**: (1) Unit 9 issues 02→05→03→04 — read `.scratch/
+  unit-9-chatbot-rebuild/SCOPING-2026-07-16.md` FIRST (its v6 note is superseded:
+  AI SDK **v7** is installed; search_chat_logs is keyword, not semantic; CHAT_SYSTEM
+  is guide-scoped — assistant uses ASSISTANT_SYSTEM); (2) Unit 8
   question-bank issues (migrations 0006/0007 already shipped — diff first); (3) wire
   `lib/analytics/` (PostHogProvider never mounted — product decision, maybe Jake);
   (4) ~~render `chats.follow_up_draft` in the contact history tab~~ done (session 3,
@@ -88,6 +88,22 @@
 - Jake tasks filed: Sentry env vars, CSP verification on first preview deploy, spend-cap value.
 
 ## Session log
+
+- **2026-07-17 (session 4, cloud)** — **Unit 9 issue 01 SHIPPED** (3 commits): real
+  streaming chatbot at `/tools/chatbot` with thread persistence. Facts for the next
+  session: (a) the AI SDK is **v7.0.31** (PRD said v6 — stale; verify APIs against
+  installed `.d.ts`, not training data; persistence callback is `onEnd`, usage has
+  `inputTokenDetails`); (b) migration numbering: **0010 is taken**, next is 0011;
+  (c) the route reloads history server-side — client sends only `{threadId, message}`
+  (see `AssistantChatSchema`); thread ids are client-generated uuids; (d) messages
+  store only text parts today — issue 02 extends `StoredPartSchema` in
+  `lib/db/queries/chat.ts` (jsonb needs no migration); a `seq` identity column orders
+  messages (created_at ties in batches); (e) `sdkUsageToTokenUsage` in `lib/ai/usage.ts`
+  is the AI-SDK usage adapter — use it for any new AI-SDK route; (f) 0010 filed to
+  jakes-tasks (page 500s in prod until applied). **Next**: issue 02 (tool use — make
+  the semantic-vs-keyword `search_chat_logs` decision explicitly, consolidate
+  `assistant-tools.ts` to AI SDK `tool()`s, delete the OpenAI parallel stack after
+  parity), then 05 (thread rail), 03 (web search), 04 (firm data).
 
 - **2026-07-16 (session 3, cloud, later)** — **Phase 4 COMPLETE + Phase 5 started**;
   ~8 more commits. Phase 4: repo-wide prettier (CI gate 1 was failing on 89 files —

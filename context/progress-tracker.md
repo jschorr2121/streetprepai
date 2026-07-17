@@ -16,6 +16,17 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — session 4, Unit 9 issue 01 (2026-07-17, cloud, branch `fable/prod-readiness`)
+
+`/tools/chatbot` shipped as a real streaming assistant (AI SDK **v7** — PRD's v6 is
+stale; see CHANGES.md): migration `0010_chat_threads.sql` (Jake applies — filed),
+thread/message queries + PGlite tests, `/api/chat/assistant` (expensive-tier gate,
+server-side history reload so client history can't be spoofed, user turn persisted
+before the model call, usage logged via new `sdkUsageToTokenUsage`), new
+`ASSISTANT_SYSTEM` prompt, and a `useChat` UI with markdown + saved threads. Suite
+**376 passing**; build green. Next: issue 02 (tool use) — semantic-vs-keyword
+decision first, then issue 05 (thread rail).
+
 ### Prod-readiness relay — session 3, Phase 5 started (2026-07-16, cloud, branch `fable/prod-readiness`)
 
 First Phase 5 slice: the follow-ups loop is now real end-to-end — chat summaries create
