@@ -22,6 +22,7 @@ import { AssistantChatSchema } from "@/lib/validation/schemas/chat";
 export const runtime = "nodejs";
 
 const ENDPOINT = "chat/assistant";
+const MODEL_CONTEXT_MESSAGES = 30;
 
 export async function POST(req: Request): Promise<Response> {
   const gate = await requireUser(req, { tier: "expensive", route: ENDPOINT });
@@ -52,6 +53,11 @@ export async function POST(req: Request): Promise<Response> {
 
   const uiMessages: UIMessage[] = [...prior, { id: message.id, role: "user", parts: userParts }];
 
+  // Bound per-turn token cost on long threads: the model sees a rolling window
+  // (whole messages, so tool call/result pairs stay intact); the UI and DB keep
+  // the full history. 30 turns ≈ well under the cap even with tool payloads.
+  const modelContext = uiMessages.slice(-MODEL_CONTEXT_MESSAGES);
+
   const tools = {
     ...buildAssistantTools(userId),
     // Anthropic's server-side web search (locked vendor decision) — capped to
@@ -63,7 +69,7 @@ export async function POST(req: Request): Promise<Response> {
   const result = streamText({
     model: anthropic(MODELS.sonnet),
     system: ASSISTANT_SYSTEM,
-    messages: await convertToModelMessages(uiMessages, {
+    messages: await convertToModelMessages(modelContext, {
       tools,
       ignoreIncompleteToolCalls: true,
     }),

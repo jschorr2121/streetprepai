@@ -265,6 +265,27 @@ describe("POST /api/chat/assistant", () => {
     ]);
   });
 
+  it("caps the model context window on long threads but keeps full history for the client", async () => {
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-assist-long" }));
+    getThreadMock.mockResolvedValue({ id: THREAD_ID, title: "t" });
+    getMessagesMock.mockResolvedValue(
+      Array.from({ length: 40 }, (_, i) => ({
+        id: `m${i}`,
+        role: i % 2 === 0 ? "user" : "assistant",
+        parts: [{ type: "text", text: `turn ${i}` }],
+      })),
+    );
+    const { POST } = await import("@/app/api/chat/assistant/route");
+    await POST(makeRequest(validBody, "10.9.0.7"));
+
+    const call = streamTextMock.mock.calls[0]?.[0] as { messages: unknown[] };
+    expect(call.messages).toHaveLength(30);
+    const streamOpts = toUIMessageStreamResponseMock.mock.calls[0]?.[0] as {
+      originalMessages: unknown[];
+    };
+    expect(streamOpts.originalMessages).toHaveLength(41);
+  });
+
   it("logs usage from the stream's onEnd with mapped token fields", async () => {
     getUserMock.mockResolvedValue(fakeUser({ id: "u-assist-usage" }));
     getThreadMock.mockResolvedValue(null);
