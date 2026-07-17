@@ -1,6 +1,6 @@
 # 04 — Firm-data tool + "prep me for why JPM" golden path
 
-Status: ready-for-agent
+Status: done (2026-07-17, relay session 4 — e2e golden-path spec deferred; firm_data pipeline is its own later unit)
 Blocked by: 02
 PRD: ../PRD.md
 
