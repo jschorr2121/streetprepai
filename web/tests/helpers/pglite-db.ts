@@ -24,7 +24,8 @@ import type { Executor } from "@/lib/db/client";
 /**
  * Creates an isolated in-memory PGlite Drizzle instance with the minimal
  * schema tables needed by lib/db/queries tests (profiles, applied_jobs,
- * chat_threads, chat_messages).
+ * chat_threads, chat_messages, qbank_questions, qbank_followups,
+ * qbank_attempts, qbank_spaced_state, topic_mastery).
  * Each call returns a fresh database with empty tables.
  */
 export async function createPgliteDb(): Promise<Executor> {
@@ -89,6 +90,76 @@ export async function createPgliteDb(): Promise<Executor> {
       role        text          not null check (role in ('user', 'assistant')),
       content     jsonb         not null,
       created_at  timestamptz   not null default now()
+    )
+  `);
+
+  // Question bank — shared content (lib/db/schema/qbank.ts).
+  await db.execute(`
+    create table qbank_questions (
+      id              text          primary key,
+      topic           text          not null,
+      difficulty      text          not null,
+      question_type   text          not null,
+      prompt          text          not null,
+      key_points      jsonb         not null default '[]'::jsonb,
+      misconceptions  jsonb         not null default '[]'::jsonb,
+      model_answer    text          not null,
+      chapter_slug    text,
+      section_slug    text,
+      advanced        boolean       not null default false,
+      source          text          not null default 'curated',
+      active          boolean       not null default true,
+      created_at      timestamptz   not null default now()
+    )
+  `);
+
+  await db.execute(`
+    create table qbank_followups (
+      id            text    primary key,
+      question_id   text    not null,
+      ordinal       integer not null,
+      prompt        text    not null,
+      model_answer  text    not null
+    )
+  `);
+
+  // Question bank — user state (lib/db/schema/qbank.ts).
+  await db.execute(`
+    create table qbank_attempts (
+      id                 uuid          primary key default gen_random_uuid(),
+      user_id            uuid          not null,
+      question_id        text          not null,
+      followup_id        text,
+      answer             text          not null,
+      score               numeric(5, 2) not null,
+      correct            boolean       not null,
+      rubric_breakdown   jsonb         not null default '{}'::jsonb,
+      context            text          not null default 'qbank',
+      answered_at        timestamptz   not null default now()
+    )
+  `);
+
+  await db.execute(`
+    create table qbank_spaced_state (
+      user_id              uuid          not null,
+      question_id          text          not null,
+      next_due_at          timestamptz   not null,
+      interval_days        integer       not null default 2,
+      consecutive_correct  integer       not null default 0,
+      updated_at           timestamptz   not null default now(),
+      primary key (user_id, question_id)
+    )
+  `);
+
+  // Curriculum progress — topic mastery (lib/db/schema/curriculum-progress.ts).
+  await db.execute(`
+    create table topic_mastery (
+      user_id     uuid          not null,
+      topic       text          not null,
+      score       numeric(4, 3) not null default 0,
+      attempts    integer       not null default 0,
+      updated_at  timestamptz   not null default now(),
+      primary key (user_id, topic)
     )
   `);
 
