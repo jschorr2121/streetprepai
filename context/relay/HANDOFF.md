@@ -110,8 +110,13 @@
   "why JPM" golden path (`tests/e2e/chatbot.spec.ts`, mocked LLM); `firm_data`
   refresh pipeline (own unit); LLM auto-titling of threads; deleting
   `lib/streaming/stream-error` is NOT possible yet (guide chat still uses it).
-  **Next lanes**: Unit 8 question-bank issues (diff against migrations 0006/0007
-  first), e2e coverage, or todo.md unstruck items.
+  **Session tail**: Unit 8 diffed (`.scratch/unit-8-question-bank/
+  SCOPING-2026-07-17.md`) — issues 01–05 were already shipped by Unit 11; the 50-test
+  debt backfill is done (suite **441 passing**); issue 06 + chat-onboarding are
+  triage-gated on Jake (jakes-tasks). **Next lanes for session 5**: (1) e2e coverage
+  (fresh context recommended: playwright specs for chatbot golden path + question
+  bank, mocked LLM, STREETPREP_E2E_AUTH=1); (2) any Jake go-aheads (Unit 8 #06,
+  chat onboarding); (3) Unit 10 calendar sync stays BLOCKED on Google creds.
 
 - **2026-07-16 (session 3, cloud, later)** — **Phase 4 COMPLETE + Phase 5 started**;
   ~8 more commits. Phase 4: repo-wide prettier (CI gate 1 was failing on 89 files —

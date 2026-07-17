@@ -27,7 +27,10 @@ per-search cost tracking, and the "why JPM" firm-prep synthesis path (`get_firm`
 fuzzy lookup + firm-scoped chat search + attribution prompt). Built on AI SDK v7
 (PRD's v6 was stale). The parallel OpenAI chat stack was deleted. Suite
 **390 passing**; build green. Deferred: e2e specs, firm_data pipeline, LLM thread
-titles. Next lanes: Unit 8 question-bank issues, e2e coverage.
+titles. Session tail: Unit 8 scoped — issues 01–05 were already shipped by Unit 11,
+so the session backfilled the missing 50 tests over qbank queries/actions instead
+(suite **441 passing**); issue 06 + chat-onboarding brainstorm are triage-gated on
+Jake. Next lanes: e2e coverage (fresh session), Jake's go-aheads.
 
 ### Prod-readiness relay — session 3, Phase 5 started (2026-07-16, cloud, branch `fable/prod-readiness`)
 
