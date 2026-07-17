@@ -35,6 +35,17 @@ needs action it can't perform itself.
 
 ## 🟠 Upcoming units (do before that unit starts, not blocking today)
 
+- [ ] **Unit 8 issue 06 triage (AI-generated qbank questions)** (relay session 4,
+  2026-07-17) — Unit 8 issues 01–05 turned out to be already shipped by Unit 11 (see
+  `.scratch/unit-8-question-bank/SCOPING-2026-07-17.md`); issue 06 is the only one left
+  and needs three product calls before an agent builds it: (a) is it still worth
+  building at all now that the bank has 532 curated questions (40–71 per gated
+  technical chapter)? (b) if yes: generated questions global-shared
+  (`source='ai_generated'`, service-role insert, admin review later — recommended) or
+  per-user private? (c) quality gate: single generation call few-shot on curated
+  questions of the same topic/difficulty (recommended) vs. generate-then-self-check
+  (2x cost). Drop the answers in the issue file or here.
+
 - [ ] **Confirm friend permissions for personal prep materials** (curriculum content
   authoring — see `context/curriculum.md` §7) — get an OK from Maddy Kozower, Max
   Ellis, and Zachary Ufberg before shipping any content derived from their personal
