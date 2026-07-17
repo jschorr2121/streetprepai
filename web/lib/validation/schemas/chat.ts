@@ -48,3 +48,7 @@ export const AssistantChatSchema = z
   })
   .strict();
 export type AssistantChatInput = z.infer<typeof AssistantChatSchema>;
+
+/** deleteThreadAction — chatbot thread management (Unit 9 issue 05). */
+export const DeleteThreadSchema = z.object({ threadId: z.uuid() }).strict();
+export type DeleteThreadInput = z.infer<typeof DeleteThreadSchema>;

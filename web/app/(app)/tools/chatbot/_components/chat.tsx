@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, getToolName, isToolUIPart, type UIMessage } from "ai";
 import { ArrowUp, Loader2 } from "lucide-react";
@@ -103,6 +104,7 @@ export function AssistantChat({
   // reload land on the same thread.
   const [threadId] = useState(() => initialThreadId ?? crypto.randomUUID());
   const [input, setInput] = useState("");
+  const router = useRouter();
 
   const transport = useMemo(
     () =>
@@ -120,6 +122,14 @@ export function AssistantChat({
     id: threadId,
     messages: initialMessages,
     transport,
+    onFinish: () => {
+      // A brand-new thread now exists server-side: sync the URL so reloads and
+      // the thread rail (server components) both point at it.
+      if (!initialThreadId) {
+        router.replace(`/tools/chatbot?thread=${threadId}`, { scroll: false });
+      }
+      router.refresh();
+    },
   });
 
   // Scroll on new messages only — keying on every streamed token hijacks the

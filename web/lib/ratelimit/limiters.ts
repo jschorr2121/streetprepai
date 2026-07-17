@@ -121,6 +121,12 @@ export const applicationsLimiter = makeSlidingWindow("rl:action:applications", 1
 export const contactsLimiter = makeSlidingWindow("rl:action:contacts", 120, 60);
 
 /**
+ * Limiter for chatbot thread management (delete/rename). No AI calls; cheap
+ * CRUD — deletes are rarer than contact edits, so a smaller budget.
+ */
+export const chatThreadsLimiter = makeSlidingWindow("rl:action:chat:threads", 60, 60);
+
+/**
  * Limiter for unauthenticated auth actions (sign-in, sign-up, password reset).
  * Keyed by client IP rather than userId because these run before auth.
  *

@@ -4,6 +4,7 @@ import { chatMessages } from "@/lib/db/schema";
 import {
   appendMessages,
   createThread,
+  deleteThread,
   getMessages,
   getThread,
   listThreads,
@@ -135,6 +136,24 @@ describe("lib/db/queries/chat", () => {
         errorText: "Tool search_chat_logs failed",
       },
     ]);
+  });
+
+  it("deleteThread cascades messages and refuses cross-user deletes", async () => {
+    const db = await createPgliteDb();
+    await createThread(db, USER_A, THREAD_1, "t");
+    await appendMessages(db, USER_A, THREAD_1, [
+      { role: "user", parts: [{ type: "text", text: "hi" }] },
+    ]);
+
+    // Someone else's delete is a no-op that reports not-found.
+    expect(await deleteThread(db, USER_B, THREAD_1)).toBe(false);
+    expect(await getThread(db, USER_A, THREAD_1)).not.toBeNull();
+
+    expect(await deleteThread(db, USER_A, THREAD_1)).toBe(true);
+    expect(await getThread(db, USER_A, THREAD_1)).toBeNull();
+    // FK cascade removed the messages: re-creating the thread id shows none.
+    await createThread(db, USER_A, THREAD_1, "t2");
+    expect(await getMessages(db, USER_A, THREAD_1)).toEqual([]);
   });
 
   it("appendMessages with an empty batch is a no-op", async () => {

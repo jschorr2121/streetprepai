@@ -130,6 +130,23 @@ export async function getMessages(
   return messages;
 }
 
+/**
+ * Delete a thread owned by `userId`. Messages go with it via the FK's
+ * ON DELETE CASCADE (migration 0010). Returns false when the thread doesn't
+ * exist or belongs to someone else — callers surface that as NOT_FOUND.
+ */
+export async function deleteThread(
+  db: Executor,
+  userId: string,
+  threadId: string,
+): Promise<boolean> {
+  const deleted = await db
+    .delete(chatThreads)
+    .where(and(eq(chatThreads.id, threadId), eq(chatThreads.userId, userId)))
+    .returning({ id: chatThreads.id });
+  return deleted.length > 0;
+}
+
 export async function appendMessages(
   db: Executor,
   userId: string,
