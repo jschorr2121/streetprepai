@@ -1,6 +1,6 @@
 # 05 — Thread management: list, switch, new, delete
 
-Status: ready-for-agent
+Status: done (2026-07-17, relay session 4 — renameThread skipped per issue; e2e deferred)
 Blocked by: 01
 PRD: ../PRD.md
 
