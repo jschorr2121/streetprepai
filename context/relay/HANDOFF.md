@@ -89,21 +89,29 @@
 
 ## Session log
 
-- **2026-07-17 (session 4, cloud)** — **Unit 9 issue 01 SHIPPED** (3 commits): real
-  streaming chatbot at `/tools/chatbot` with thread persistence. Facts for the next
-  session: (a) the AI SDK is **v7.0.31** (PRD said v6 — stale; verify APIs against
-  installed `.d.ts`, not training data; persistence callback is `onEnd`, usage has
+- **2026-07-17 (session 4, cloud)** — **UNIT 9 COMPLETE — all five issues shipped**
+  (01 streaming+persistence, 02 tool use, 05 thread rail, 03 web search, 04 firm
+  prep; ~10 commits). Suite went 362 → **390 passing**; every issue verified with
+  typecheck/lint/full suite/build before its commit. Facts for the next session:
+  (a) the AI SDK is **v7.0.31** (PRD said v6 — stale; verify APIs against installed
+  `.d.ts`, not training data; persistence callback is `onEnd`, usage has
   `inputTokenDetails`); (b) migration numbering: **0010 is taken**, next is 0011;
-  (c) the route reloads history server-side — client sends only `{threadId, message}`
-  (see `AssistantChatSchema`); thread ids are client-generated uuids; (d) messages
-  store only text parts today — issue 02 extends `StoredPartSchema` in
-  `lib/db/queries/chat.ts` (jsonb needs no migration); a `seq` identity column orders
-  messages (created_at ties in batches); (e) `sdkUsageToTokenUsage` in `lib/ai/usage.ts`
-  is the AI-SDK usage adapter — use it for any new AI-SDK route; (f) 0010 filed to
-  jakes-tasks (page 500s in prod until applied). **Next**: issue 02 (tool use — make
-  the semantic-vs-keyword `search_chat_logs` decision explicitly, consolidate
-  `assistant-tools.ts` to AI SDK `tool()`s, delete the OpenAI parallel stack after
-  parity), then 05 (thread rail), 03 (web search), 04 (firm data).
+  (c) `/api/chat/assistant` reloads history server-side — client sends only
+  `{threadId, message}`; thread ids are client-generated uuids; a `seq` identity
+  column orders messages; (d) `StoredPartSchema` in `lib/db/queries/chat.ts` governs
+  what persists (text + settled tool parts + source-url; extend it for new part
+  types — jsonb needs no migration); (e) `sdkUsageToTokenUsage` + `logUsage
+  surchargeUsd` in `lib/ai/usage.ts` are the AI-SDK usage adapters (web search =
+  $0.01/call); (f) tools live in `buildAssistantTools(userId)` (closure-injected
+  userId; provider web_search added in the route); search_chat_logs is hybrid
+  semantic+keyword with an optional firm scope; (g) **0010 must be applied by Jake**
+  (page 500s in prod until then) and prod needs seed.sql's firms rows (both in
+  jakes-tasks). **Deferred (candidates for next sessions)**: e2e specs incl. the
+  "why JPM" golden path (`tests/e2e/chatbot.spec.ts`, mocked LLM); `firm_data`
+  refresh pipeline (own unit); LLM auto-titling of threads; deleting
+  `lib/streaming/stream-error` is NOT possible yet (guide chat still uses it).
+  **Next lanes**: Unit 8 question-bank issues (diff against migrations 0006/0007
+  first), e2e coverage, or todo.md unstruck items.
 
 - **2026-07-16 (session 3, cloud, later)** — **Phase 4 COMPLETE + Phase 5 started**;
   ~8 more commits. Phase 4: repo-wide prettier (CI gate 1 was failing on 89 files —

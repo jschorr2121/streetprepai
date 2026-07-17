@@ -16,16 +16,18 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
-### Prod-readiness relay — session 4, Unit 9 issue 01 (2026-07-17, cloud, branch `fable/prod-readiness`)
+### Prod-readiness relay — session 4, UNIT 9 COMPLETE (2026-07-17, cloud, branch `fable/prod-readiness`)
 
-`/tools/chatbot` shipped as a real streaming assistant (AI SDK **v7** — PRD's v6 is
-stale; see CHANGES.md): migration `0010_chat_threads.sql` (Jake applies — filed),
-thread/message queries + PGlite tests, `/api/chat/assistant` (expensive-tier gate,
-server-side history reload so client history can't be spoofed, user turn persisted
-before the model call, usage logged via new `sdkUsageToTokenUsage`), new
-`ASSISTANT_SYSTEM` prompt, and a `useChat` UI with markdown + saved threads. Suite
-**376 passing**; build green. Next: issue 02 (tool use) — semantic-vs-keyword
-decision first, then issue 05 (thread rail).
+All five Unit 9 issues shipped in one session — `/tools/chatbot` is now a real
+product surface: streaming Claude chat with persistent threads (migration
+`0010_chat_threads.sql` — **Jake applies, page 500s in prod until then**), tool use
+over the user's own data with citation chips (hybrid semantic+keyword chat search),
+a thread rail (switch/new/delete), Anthropic native web search with source links and
+per-search cost tracking, and the "why JPM" firm-prep synthesis path (`get_firm`
+fuzzy lookup + firm-scoped chat search + attribution prompt). Built on AI SDK v7
+(PRD's v6 was stale). The parallel OpenAI chat stack was deleted. Suite
+**390 passing**; build green. Deferred: e2e specs, firm_data pipeline, LLM thread
+titles. Next lanes: Unit 8 question-bank issues, e2e coverage.
 
 ### Prod-readiness relay — session 3, Phase 5 started (2026-07-16, cloud, branch `fable/prod-readiness`)
 
