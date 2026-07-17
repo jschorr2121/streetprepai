@@ -1,6 +1,6 @@
 # 02 — Tool use: profile, applications, contacts, events, semantic chat search
 
-Status: ready-for-agent
+Status: done (2026-07-17, relay session 4 — hybrid semantic+keyword search decision; see context/CHANGES.md)
 Blocked by: 01
 PRD: ../PRD.md
 
