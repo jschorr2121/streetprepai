@@ -45,7 +45,7 @@ const sections: NavSection[] = [
       { href: "/tools/resume-coach", label: "Resume Coach", icon: FileText },
       { href: "/tools/relationships", label: "Relationships", icon: HeartHandshake },
       { href: "/tools/applications", label: "Applications", icon: Briefcase },
-      { href: "/tools/chatbot", label: "Chatbot", icon: MessageSquare, soon: true },
+      { href: "/tools/chatbot", label: "Chatbot", icon: MessageSquare },
       { href: "/tools/story-framer", label: "Story Framer", icon: NotebookPen, soon: true },
       { href: "/tools/question-bank", label: "Question Bank", icon: ListChecks, soon: true },
     ],
