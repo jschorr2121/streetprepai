@@ -1,0 +1,95 @@
+import { describe, expect, it } from "vitest";
+
+import { chatMessages } from "@/lib/db/schema";
+import {
+  appendMessages,
+  createThread,
+  getMessages,
+  getThread,
+  listThreads,
+} from "@/lib/db/queries/chat";
+import { createPgliteDb } from "../../../../helpers/pglite-db";
+
+const USER_A = "00000000-0000-4000-8000-00000000000a";
+const USER_B = "00000000-0000-4000-8000-00000000000b";
+const THREAD_1 = "11111111-0000-4000-8000-000000000001";
+const THREAD_2 = "11111111-0000-4000-8000-000000000002";
+
+describe("lib/db/queries/chat", () => {
+  it("round-trips a thread and scopes reads to the owner", async () => {
+    const db = await createPgliteDb();
+    await createThread(db, USER_A, THREAD_1, "How do I prep for LBOs?");
+
+    const own = await getThread(db, USER_A, THREAD_1);
+    expect(own?.title).toBe("How do I prep for LBOs?");
+
+    expect(await getThread(db, USER_B, THREAD_1)).toBeNull();
+    expect(await listThreads(db, USER_B)).toEqual([]);
+  });
+
+  it("lists threads most-recently-updated first", async () => {
+    const db = await createPgliteDb();
+    await createThread(db, USER_A, THREAD_1, "first");
+    await createThread(db, USER_A, THREAD_2, "second");
+
+    // Appending to the older thread bumps it to the top.
+    await appendMessages(db, USER_A, THREAD_1, [
+      { role: "user", parts: [{ type: "text", text: "hi" }] },
+    ]);
+
+    const threads = await listThreads(db, USER_A);
+    expect(threads.map((t) => t.title)).toEqual(["first", "second"]);
+  });
+
+  it("round-trips messages in insertion order, even within one batch", async () => {
+    const db = await createPgliteDb();
+    await createThread(db, USER_A, THREAD_1, "t");
+
+    await appendMessages(db, USER_A, THREAD_1, [
+      { role: "user", parts: [{ type: "text", text: "question" }] },
+      { role: "assistant", parts: [{ type: "text", text: "answer" }] },
+    ]);
+    await appendMessages(db, USER_A, THREAD_1, [
+      { role: "user", parts: [{ type: "text", text: "follow-up" }] },
+    ]);
+
+    const messages = await getMessages(db, USER_A, THREAD_1);
+    expect(messages.map((m) => [m.role, m.parts[0]?.text])).toEqual([
+      ["user", "question"],
+      ["assistant", "answer"],
+      ["user", "follow-up"],
+    ]);
+    // Loaded rows satisfy the UIMessage shape (id + role + parts).
+    expect(messages[0]?.id).toBeTruthy();
+
+    // Cross-user read comes back empty.
+    expect(await getMessages(db, USER_B, THREAD_1)).toEqual([]);
+  });
+
+  it("skips malformed content rows instead of failing the thread", async () => {
+    const db = await createPgliteDb();
+    await createThread(db, USER_A, THREAD_1, "t");
+    await appendMessages(db, USER_A, THREAD_1, [
+      { role: "user", parts: [{ type: "text", text: "good" }] },
+    ]);
+    await db.insert(chatMessages).values({
+      threadId: THREAD_1,
+      userId: USER_A,
+      role: "assistant",
+      content: { not: "a parts array" },
+    });
+
+    const messages = await getMessages(db, USER_A, THREAD_1);
+    expect(messages).toHaveLength(1);
+    expect(messages[0]?.parts[0]?.text).toBe("good");
+  });
+
+  it("appendMessages with an empty batch is a no-op", async () => {
+    const db = await createPgliteDb();
+    await createThread(db, USER_A, THREAD_1, "t");
+    const before = await getThread(db, USER_A, THREAD_1);
+    await appendMessages(db, USER_A, THREAD_1, []);
+    const after = await getThread(db, USER_A, THREAD_1);
+    expect(after?.updatedAt).toBe(before?.updatedAt);
+  });
+});

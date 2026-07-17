@@ -2,6 +2,7 @@ export * from "./ai-usage";
 export * from "./applied-jobs";
 export * from "./calendar-events";
 export * from "./chat-embeddings";
+export * from "./chat-threads";
 export * from "./chats";
 export * from "./contacts";
 export * from "./curriculum-progress";

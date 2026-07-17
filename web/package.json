@@ -27,6 +27,8 @@
     "db:studio": "node scripts/db-guard.mjs && node --env-file=.env.local ./node_modules/drizzle-kit/bin.cjs studio"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^4.0.16",
+    "@ai-sdk/react": "^4.0.34",
     "@anthropic-ai/sdk": "^0.90.0",
     "@hookform/resolvers": "^5.2.2",
     "@sentry/nextjs": "^10.51.0",
@@ -34,6 +36,7 @@
     "@supabase/supabase-js": "^2.110.7",
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.37.0",
+    "ai": "^7.0.31",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",

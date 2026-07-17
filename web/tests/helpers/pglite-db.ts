@@ -23,7 +23,8 @@ import type { Executor } from "@/lib/db/client";
 
 /**
  * Creates an isolated in-memory PGlite Drizzle instance with the minimal
- * schema tables needed by lib/db/queries tests (profiles, applied_jobs).
+ * schema tables needed by lib/db/queries tests (profiles, applied_jobs,
+ * chat_threads, chat_messages).
  * Each call returns a fresh database with empty tables.
  */
 export async function createPgliteDb(): Promise<Executor> {
@@ -66,6 +67,28 @@ export async function createPgliteDb(): Promise<Executor> {
       notes       text,
       added_at    timestamptz   default now(),
       updated_at  timestamptz   default now()
+    )
+  `);
+
+  await db.execute(`
+    create table chat_threads (
+      id          uuid          primary key default gen_random_uuid(),
+      user_id     uuid          not null,
+      title       text          not null,
+      created_at  timestamptz   not null default now(),
+      updated_at  timestamptz   not null default now()
+    )
+  `);
+
+  await db.execute(`
+    create table chat_messages (
+      id          uuid          primary key default gen_random_uuid(),
+      seq         bigint        generated always as identity,
+      thread_id   uuid          not null references chat_threads (id) on delete cascade,
+      user_id     uuid          not null,
+      role        text          not null check (role in ('user', 'assistant')),
+      content     jsonb         not null,
+      created_at  timestamptz   not null default now()
     )
   `);
 
