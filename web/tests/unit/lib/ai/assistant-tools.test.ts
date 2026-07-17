@@ -26,6 +26,10 @@ vi.mock("@/lib/data/calendar", () => ({
 vi.mock("@/lib/data/semantic-recall", () => ({
   findSimilarChats: (...args: unknown[]) => findSimilarChatsMock(...args),
 }));
+const getFirmByQueryMock = vi.hoisted(() => vi.fn());
+vi.mock("@/lib/data/firms", () => ({
+  getFirmByQuery: (...args: unknown[]) => getFirmByQueryMock(...args),
+}));
 vi.mock("@/lib/db/queries/applications", () => ({
   getApplications: (...args: unknown[]) => getApplicationsMock(...args),
 }));
@@ -45,6 +49,7 @@ beforeEach(() => {
   getApplicationsMock.mockReset();
   findSimilarChatsMock.mockReset();
   findSimilarChatsMock.mockResolvedValue([]);
+  getFirmByQueryMock.mockReset();
 });
 
 // AI SDK ToolCallOptions — executors don't read these, but the signature wants them.
@@ -60,6 +65,7 @@ describe("buildAssistantTools registry", () => {
     expect(Object.keys(await tools()).sort()).toEqual([
       "get_applied_jobs",
       "get_contact",
+      "get_firm",
       "get_resume",
       "get_upcoming_events",
       "list_contacts",
@@ -206,6 +212,61 @@ describe("search_chat_logs (hybrid semantic + keyword)", () => {
       queryText: "saas lbo",
       k: 5,
     });
+  });
+});
+
+describe("search_chat_logs firm scope", () => {
+  it("restricts both semantic and keyword hits to contacts at the firm", async () => {
+    findSimilarChatsMock.mockResolvedValue([
+      { chatId: "chat_jpm", contactId: "c_jpm", similarity: 0.9, summaryText: "JPM culture" },
+      { chatId: "chat_ev", contactId: "c_ev", similarity: 0.85, summaryText: "Evercore culture" },
+    ]);
+    chatLogsMock.mockResolvedValue([
+      fakeChatLog({ id: "chat_kw_ev", contactId: "c_ev", rawNotes: "culture at the desk" }),
+    ]);
+    contactsMock.mockResolvedValue([
+      fakeContact({ id: "c_jpm", firm: "J.P. Morgan" }),
+      fakeContact({ id: "c_ev", firm: "Evercore" }),
+    ]);
+    const t = await tools();
+    const out = (await t.search_chat_logs.execute!({ query: "culture", firm: "morgan" }, OPTS)) as {
+      count: number;
+      hits: Array<{ chatId: string }>;
+    };
+    expect(out.hits.map((h) => h.chatId)).toEqual(["chat_jpm"]);
+    // Firm scope over-fetches semantic candidates before filtering.
+    expect(findSimilarChatsMock).toHaveBeenCalledWith({
+      userId: "u-1",
+      queryText: "culture",
+      k: 10,
+    });
+  });
+});
+
+describe("get_firm", () => {
+  it("returns the matched firm with capped earnings text", async () => {
+    getFirmByQueryMock.mockResolvedValue({
+      slug: "jpmorgan",
+      name: "J.P. Morgan",
+      tier: "BB",
+      hq: "NYC",
+      description: "Bulge bracket.",
+      latestEarningsRaw: "Q2".repeat(5000),
+    });
+    const t = await tools();
+    const out = (await t.get_firm.execute!({ firm: "JPM" }, OPTS)) as {
+      firm: { name: string; latestEarningsRaw: string };
+    };
+    expect(getFirmByQueryMock).toHaveBeenCalledWith("JPM");
+    expect(out.firm.name).toBe("J.P. Morgan");
+    expect(out.firm.latestEarningsRaw.length).toBeLessThanOrEqual(4_000);
+  });
+
+  it("returns a relayable {error} for unknown firms", async () => {
+    getFirmByQueryMock.mockResolvedValue(null);
+    const t = await tools();
+    const out = (await t.get_firm.execute!({ firm: "Centerview" }, OPTS)) as { error?: string };
+    expect(out.error).toContain("Centerview");
   });
 });
 

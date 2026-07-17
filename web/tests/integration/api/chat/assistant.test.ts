@@ -164,6 +164,7 @@ describe("POST /api/chat/assistant", () => {
     expect(Object.keys(call.tools).sort()).toEqual([
       "get_applied_jobs",
       "get_contact",
+      "get_firm",
       "get_resume",
       "get_upcoming_events",
       "list_contacts",

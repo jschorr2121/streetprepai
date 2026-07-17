@@ -45,8 +45,8 @@ describe("ToolChip", () => {
   });
 
   it("falls back to a humanized tool name for unknown tools", () => {
-    render(<ToolChip toolName="get_firm" state="output-available" output={[]} />);
-    expect(screen.getByText(/get firm — 0 results/)).toBeInTheDocument();
+    render(<ToolChip toolName="get_deal_news" state="output-available" output={[]} />);
+    expect(screen.getByText(/get deal news — 0 results/)).toBeInTheDocument();
   });
 });
 

@@ -30,6 +30,7 @@ const TOOL_LABELS: Record<string, string> = {
   get_upcoming_events: "Checked: your calendar",
   search_chat_logs: "Searched your chat logs",
   get_applied_jobs: "Checked: your applications",
+  get_firm: "Checked: firm data",
   web_search: "Searched the web",
 };
 

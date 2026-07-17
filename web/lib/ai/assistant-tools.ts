@@ -9,6 +9,7 @@ import {
   getChatLogsForContact,
 } from "@/lib/data/contacts";
 import { getCalendarEvents } from "@/lib/data/calendar";
+import { getFirmByQuery } from "@/lib/data/firms";
 import { findSimilarChats } from "@/lib/data/semantic-recall";
 import { withUser } from "@/lib/db/client";
 import { getApplications } from "@/lib/db/queries/applications";
@@ -146,23 +147,35 @@ export function buildAssistantTools(userId: string) {
 
     search_chat_logs: tool({
       description:
-        "Search the user's past networking chat notes by topic or keyword. Combines semantic (meaning-based) and exact keyword matching.",
-      inputSchema: z.object({ query: z.string().min(1).describe("Search query.") }),
-      execute: ({ query }) =>
+        "Search the user's past networking chat notes by topic or keyword. Combines semantic (meaning-based) and exact keyword matching. Optionally scope to contacts at one firm.",
+      inputSchema: z.object({
+        query: z.string().min(1).describe("Search query."),
+        firm: z
+          .string()
+          .optional()
+          .describe("Only search chats with contacts at this firm (name substring)."),
+      }),
+      execute: ({ query, firm }) =>
         run("search_chat_logs", async () => {
           // Hybrid: semantic recall (pgvector over structured summaries) catches
           // paraphrases; keyword substring keeps exact matches working for chats
           // that were never embedded. findSimilarChats degrades to [] on its own.
+          // With a firm scope we over-fetch semantic hits, then filter.
           const [contacts, allChats, semantic] = await Promise.all([
             getContacts(userId),
             getChatLogs(userId),
-            findSimilarChats({ userId, queryText: query, k: 5 }),
+            findSimilarChats({ userId, queryText: query, k: firm ? 10 : 5 }),
           ]);
           const contactMap = new Map(contacts.map((c) => [c.id, c]));
+          const firmLower = firm?.toLowerCase();
+          const atFirm = (contactId: string) =>
+            !firmLower ||
+            (contactMap.get(contactId)?.firm.toLowerCase().includes(firmLower) ?? false);
           const hits: ChatLogHit[] = [];
           const seen = new Set<string>();
 
           for (const s of semantic) {
+            if (!atFirm(s.contactId)) continue;
             seen.add(s.chatId);
             hits.push({
               chatId: s.chatId,
@@ -175,7 +188,7 @@ export function buildAssistantTools(userId: string) {
 
           const q = query.toLowerCase();
           for (const chat of allChats) {
-            if (seen.has(chat.id)) continue;
+            if (seen.has(chat.id) || !atFirm(chat.contactId)) continue;
             const searchText = [
               chat.rawNotes,
               ...(chat.structured?.topics ?? []),
@@ -195,6 +208,30 @@ export function buildAssistantTools(userId: string) {
           }
 
           return { count: hits.length, hits };
+        }),
+    }),
+
+    get_firm: tool({
+      description:
+        "Look up a firm's profile data (tier, HQ, description, latest earnings summary) by name, abbreviation, or slug — e.g. 'JPM', 'Goldman Sachs', 'evercore'.",
+      inputSchema: z.object({
+        firm: z.string().min(1).describe("Firm name, abbreviation, or slug."),
+      }),
+      execute: ({ firm }) =>
+        run("get_firm", async () => {
+          // Firms are shared read-only content — no user scoping needed. The
+          // { firm } wrapper keeps the shape additive for the future firm_data
+          // pipeline (earnings/deals/news rows).
+          const match = await getFirmByQuery(firm);
+          if (!match) return { error: `No firm found matching "${capText(firm, 100)}"` };
+          return {
+            firm: {
+              ...match,
+              latestEarningsRaw: match.latestEarningsRaw
+                ? capText(match.latestEarningsRaw, 4_000)
+                : null,
+            },
+          };
         }),
     }),
 

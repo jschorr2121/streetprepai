@@ -34,3 +34,35 @@ export async function getFirmBySlug(slug: string): Promise<Firm | null> {
   if (error) throw error;
   return data ? mapRow(data as DbRow) : null;
 }
+
+/**
+ * Fuzzy firm lookup for the chatbot's get_firm tool. Pure so it's unit-testable
+ * against a fixed list; matching order = exact slug → exact normalized name →
+ * word initials ("jpm" → "J.P. Morgan", "gs" → "Goldman Sachs") → substring.
+ */
+export function matchFirm(firms: Firm[], query: string): Firm | null {
+  const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/gi, "");
+  const q = norm(query);
+  if (!q) return null;
+
+  // Split on every non-alphanumeric run so "J.P. Morgan" → j+p+m = "jpm".
+  const initials = (name: string) =>
+    name
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter(Boolean)
+      .map((w) => w[0])
+      .join("");
+
+  return (
+    firms.find((f) => f.slug === query.trim().toLowerCase()) ??
+    firms.find((f) => norm(f.name) === q) ??
+    firms.find((f) => initials(f.name) === q || norm(f.name).startsWith(q)) ??
+    firms.find((f) => norm(f.name).includes(q)) ??
+    null
+  );
+}
+
+export async function getFirmByQuery(query: string): Promise<Firm | null> {
+  return matchFirm(await getAllFirms(), query);
+}
