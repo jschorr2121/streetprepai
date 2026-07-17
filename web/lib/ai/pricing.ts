@@ -57,6 +57,13 @@ export const PRICING: Record<string, PricingEntry> = {
   },
 };
 
+/**
+ * Anthropic's server-side web_search tool is billed per search ($10 / 1,000)
+ * on top of tokens. Token pricing above can't express per-call costs, so
+ * routes pass `surchargeUsd` to `logUsage` instead.
+ */
+export const WEB_SEARCH_PER_CALL_USD = 0.01;
+
 export function calculateCost(model: string, usage: TokenUsage): number {
   const p = PRICING[model] ?? PRICING[model.split("-20")[0]!] ?? null;
   if (!p) return 0;

@@ -4,6 +4,7 @@ import { convertToModelMessages, stepCountIs, streamText, type UIMessage } from 
 import { MODELS } from "@/lib/ai/anthropic";
 import { buildAssistantTools } from "@/lib/ai/assistant-tools";
 import { ASSISTANT_SYSTEM } from "@/lib/ai/prompts";
+import { WEB_SEARCH_PER_CALL_USD } from "@/lib/ai/pricing";
 import { logUsage, sdkUsageToTokenUsage } from "@/lib/ai/usage";
 import { withUser } from "@/lib/db/client";
 import {
@@ -51,7 +52,13 @@ export async function POST(req: Request): Promise<Response> {
 
   const uiMessages: UIMessage[] = [...prior, { id: message.id, role: "user", parts: userParts }];
 
-  const tools = buildAssistantTools(userId);
+  const tools = {
+    ...buildAssistantTools(userId),
+    // Anthropic's server-side web search (locked vendor decision) — capped to
+    // bound the per-search surcharge. 20250305 is the version claude-sonnet-4-6
+    // supports; revisit when MODELS.sonnet moves.
+    web_search: anthropic.tools.webSearch_20250305({ maxUses: 3 }),
+  };
 
   const result = streamText({
     model: anthropic(MODELS.sonnet),
@@ -64,18 +71,25 @@ export async function POST(req: Request): Promise<Response> {
     // Tool-loop budget: enough for a couple of lookups + the final answer.
     stopWhen: stepCountIs(6),
     maxOutputTokens: 1_200,
-    onEnd: ({ usage }) => {
+    onEnd: ({ usage, content }) => {
+      // Web searches are billed per call on top of tokens.
+      const searches = content.filter(
+        (p) => p.type === "tool-result" && p.toolName === "web_search",
+      ).length;
       logUsage({
         model: MODELS.sonnet,
         usage: sdkUsageToTokenUsage(usage),
         endpoint: ENDPOINT,
         userId,
+        surchargeUsd: searches * WEB_SEARCH_PER_CALL_USD,
       });
     },
   });
 
   return result.toUIMessageStreamResponse({
     originalMessages: uiMessages,
+    // Forward source parts so web-search citations reach the client.
+    sendSources: true,
     onEnd: async ({ responseMessage }) => {
       // Persist text + settled tool parts; transient states are dropped.
       const parts = toStoredParts(responseMessage.parts);

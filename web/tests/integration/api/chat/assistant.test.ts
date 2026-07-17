@@ -31,9 +31,20 @@ vi.mock("ai", () => ({
   stepCountIs: (n: number) => ({ kind: "step-count", n }),
 }));
 
-vi.mock("@ai-sdk/anthropic", () => ({
-  anthropic: vi.fn(() => "mock-anthropic-model"),
-}));
+vi.mock("@ai-sdk/anthropic", () => {
+  const anthropic = Object.assign(
+    vi.fn(() => "mock-anthropic-model"),
+    {
+      tools: {
+        webSearch_20250305: (cfg: Record<string, unknown>) => ({
+          kind: "provider-web-search",
+          ...cfg,
+        }),
+      },
+    },
+  );
+  return { anthropic };
+});
 
 const logUsageMock = vi.fn();
 vi.mock("@/lib/ai/usage", async (importOriginal) => {
@@ -157,8 +168,16 @@ describe("POST /api/chat/assistant", () => {
       "get_upcoming_events",
       "list_contacts",
       "search_chat_logs",
+      "web_search",
     ]);
+    expect(call.tools["web_search"]).toEqual({ kind: "provider-web-search", maxUses: 3 });
     expect(call.stopWhen).toEqual({ kind: "step-count", n: 6 });
+
+    // Web-search citations must reach the client.
+    const streamOpts = toUIMessageStreamResponseMock.mock.calls[0]?.[0] as {
+      sendSources?: boolean;
+    };
+    expect(streamOpts.sendSources).toBe(true);
   });
 
   it("persists settled tool parts from the response message", async () => {
@@ -252,7 +271,7 @@ describe("POST /api/chat/assistant", () => {
     await POST(makeRequest(validBody, "10.9.0.5"));
 
     const call = streamTextMock.mock.calls[0]?.[0] as {
-      onEnd: (event: { usage: unknown }) => void;
+      onEnd: (event: { usage: unknown; content: unknown[] }) => void;
     };
     call.onEnd({
       usage: {
@@ -260,6 +279,12 @@ describe("POST /api/chat/assistant", () => {
         outputTokens: 40,
         inputTokenDetails: { noCacheTokens: 70, cacheReadTokens: 30, cacheWriteTokens: 0 },
       },
+      content: [
+        { type: "tool-result", toolName: "web_search", output: [] },
+        { type: "tool-result", toolName: "get_resume", output: {} },
+        { type: "tool-result", toolName: "web_search", output: [] },
+        { type: "text", text: "answer" },
+      ],
     });
     expect(logUsageMock).toHaveBeenCalledWith({
       model: "claude-sonnet-4-6",
@@ -271,6 +296,8 @@ describe("POST /api/chat/assistant", () => {
       },
       endpoint: "chat/assistant",
       userId: "u-assist-usage",
+      // Two web searches → 2 × $0.01 flat surcharge on top of token cost.
+      surchargeUsd: 0.02,
     });
   });
 

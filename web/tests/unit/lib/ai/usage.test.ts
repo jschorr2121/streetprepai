@@ -350,3 +350,27 @@ describe("sdkUsageToTokenUsage", () => {
     });
   });
 });
+
+describe("logUsage surcharge", () => {
+  it("adds flat surchargeUsd on top of token cost", async () => {
+    vi.resetModules();
+    const insert = vi.fn().mockResolvedValue({ data: null, error: null });
+    vi.doMock("@/lib/supabase/admin", () => ({
+      getAdminClient: vi.fn(() => ({ from: vi.fn(() => ({ insert })) })),
+    }));
+    const { logUsage } = await import("@/lib/ai/usage");
+    const { calculateCost } = await import("@/lib/ai/pricing");
+    const usage = { input_tokens: 1000, output_tokens: 500 };
+    logUsage({
+      model: "claude-sonnet-4-6",
+      usage,
+      endpoint: "chat/assistant",
+      userId: "u-1",
+      surchargeUsd: 0.02,
+    });
+    await new Promise((r) => setTimeout(r, 0));
+    await new Promise((r) => setTimeout(r, 0));
+    const inserted = insert.mock.calls[0]![0] as { cost_usd: number };
+    expect(inserted.cost_usd).toBeCloseTo(calculateCost("claude-sonnet-4-6", usage) + 0.02, 10);
+  });
+});

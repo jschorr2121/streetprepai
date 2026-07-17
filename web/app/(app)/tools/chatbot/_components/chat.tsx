@@ -30,7 +30,46 @@ const TOOL_LABELS: Record<string, string> = {
   get_upcoming_events: "Checked: your calendar",
   search_chat_logs: "Searched your chat logs",
   get_applied_jobs: "Checked: your applications",
+  web_search: "Searched the web",
 };
+
+/** Deduped web citation list rendered under an answer that used web_search. */
+export function SourceList({ parts }: { parts: UIMessage["parts"] }) {
+  const seen = new Set<string>();
+  const sources: Array<{ url: string; title: string; domain: string }> = [];
+  for (const p of parts) {
+    if (p.type !== "source-url" || seen.has(p.url)) continue;
+    seen.add(p.url);
+    let domain = "";
+    try {
+      domain = new URL(p.url).hostname.replace(/^www\./, "");
+    } catch {
+      continue; // unparsable URL — skip rather than render a broken link
+    }
+    sources.push({ url: p.url, title: p.title || domain, domain });
+  }
+  if (sources.length === 0) return null;
+  return (
+    <div className="border-border/60 mt-2 border-t pt-2">
+      <p className="text-muted-foreground text-[11px] font-medium">Sources</p>
+      <ul className="mt-1 space-y-0.5">
+        {sources.map((s) => (
+          <li key={s.url} className="truncate text-xs">
+            <a
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              {s.title}
+            </a>
+            <span className="text-muted-foreground"> — {s.domain}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 function toolResultSummary(output: unknown): string | null {
   if (Array.isArray(output)) {
@@ -211,6 +250,7 @@ export function AssistantChat({
                       }
                       return null;
                     })}
+                    <SourceList parts={m.parts} />
                   </div>
                 ) : (
                   <Loader2 className="text-muted-foreground size-3.5 animate-spin" />

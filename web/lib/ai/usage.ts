@@ -6,6 +6,8 @@ export type UsagePayload = {
   usage: TokenUsage;
   endpoint: string;
   userId?: string;
+  /** Flat per-call costs (e.g. web-search surcharge) added on top of token cost. */
+  surchargeUsd?: number;
 };
 
 export function logUsage(payload: UsagePayload): void {
@@ -17,7 +19,7 @@ export function logUsage(payload: UsagePayload): void {
     return;
   }
 
-  const costUsd = calculateCost(payload.model, payload.usage);
+  const costUsd = calculateCost(payload.model, payload.usage) + (payload.surchargeUsd ?? 0);
 
   // Supabase query builders are lazy thenables — the request only fires once
   // `.then()` is attached. A bare `void builder` never executes the insert.

@@ -125,6 +125,15 @@ describe("lib/db/queries/chat", () => {
         errorText: "Tool search_chat_logs failed",
       },
       "not even an object",
+      { type: "source-url", sourceId: "s1", url: "https://example.com/a", title: "Example" },
+      {
+        type: "tool-web_search",
+        toolCallId: "c3",
+        state: "output-available",
+        input: { query: "evercore deals" },
+        output: [],
+        providerExecuted: true,
+      },
     ]);
     expect(parts).toEqual([
       { type: "text", text: "kept" },
@@ -134,6 +143,15 @@ describe("lib/db/queries/chat", () => {
         state: "output-error",
         input: { query: "x" },
         errorText: "Tool search_chat_logs failed",
+      },
+      { type: "source-url", sourceId: "s1", url: "https://example.com/a", title: "Example" },
+      {
+        type: "tool-web_search",
+        toolCallId: "c3",
+        state: "output-available",
+        input: { query: "evercore deals" },
+        output: [],
+        providerExecuted: true,
       },
     ]);
   });

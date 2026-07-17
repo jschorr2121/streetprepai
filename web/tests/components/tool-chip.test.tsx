@@ -49,3 +49,34 @@ describe("ToolChip", () => {
     expect(screen.getByText(/get firm — 0 results/)).toBeInTheDocument();
   });
 });
+
+describe("SourceList", () => {
+  it("renders deduped web citations with domain and skips bad URLs", async () => {
+    const { SourceList } = await import("@/app/(app)/tools/chatbot/_components/chat");
+    render(
+      <SourceList
+        parts={[
+          { type: "text", text: "answer" },
+          { type: "source-url", sourceId: "s1", url: "https://www.ft.com/x", title: "FT story" },
+          { type: "source-url", sourceId: "s2", url: "https://www.ft.com/x", title: "dup" },
+          { type: "source-url", sourceId: "s3", url: "not a url", title: "broken" },
+          { type: "source-url", sourceId: "s4", url: "https://reuters.com/y" },
+        ]}
+      />,
+    );
+    expect(screen.getByText("Sources")).toBeInTheDocument();
+    const links = screen.getAllByRole("link");
+    expect(links).toHaveLength(2);
+    expect(links[0]).toHaveAttribute("href", "https://www.ft.com/x");
+    expect(links[0]).toHaveAttribute("target", "_blank");
+    expect(links[0]!.getAttribute("rel")).toContain("noopener");
+    // Untitled source falls back to its domain as the link text.
+    expect(links[1]).toHaveTextContent("reuters.com");
+  });
+
+  it("renders nothing when there are no source parts", async () => {
+    const { SourceList } = await import("@/app/(app)/tools/chatbot/_components/chat");
+    const { container } = render(<SourceList parts={[{ type: "text", text: "hi" }]} />);
+    expect(container.innerHTML).toBe("");
+  });
+});

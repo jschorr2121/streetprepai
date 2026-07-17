@@ -19,6 +19,9 @@ const StoredToolPartSchema = z.discriminatedUnion("state", [
     state: z.literal("output-available"),
     input: z.json(),
     output: z.json(),
+    // Provider-executed tools (web_search) must round-trip this flag so
+    // convertToModelMessages rebuilds them as server tool calls on reload.
+    providerExecuted: z.boolean().optional(),
   }),
   z.object({
     type: z.templateLiteral(["tool-", z.string()]),
@@ -27,9 +30,21 @@ const StoredToolPartSchema = z.discriminatedUnion("state", [
     // The SDK's UIMessage type requires the key to exist even when undefined.
     input: z.json().nullable().default(null),
     errorText: z.string(),
+    providerExecuted: z.boolean().optional(),
   }),
 ]);
-const StoredPartSchema = z.union([StoredTextPartSchema, StoredToolPartSchema]);
+// Web-search citations (title + link) — persisted so sources survive reload.
+const StoredSourcePartSchema = z.object({
+  type: z.literal("source-url"),
+  sourceId: z.string(),
+  url: z.string(),
+  title: z.string().optional(),
+});
+const StoredPartSchema = z.union([
+  StoredTextPartSchema,
+  StoredToolPartSchema,
+  StoredSourcePartSchema,
+]);
 const StoredPartsSchema = z.array(StoredPartSchema);
 
 export type StoredPart = z.infer<typeof StoredPartSchema>;
