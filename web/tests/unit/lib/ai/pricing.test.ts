@@ -3,7 +3,7 @@ import { calculateCost, PRICING, type TokenUsage } from "@/lib/ai/pricing";
 
 const cases: Array<[string, TokenUsage, number]> = [
   // pure input
-  ["claude-opus-4-7", { input_tokens: 1_000_000, output_tokens: 0 }, 15.0],
+  ["claude-opus-4-7", { input_tokens: 1_000_000, output_tokens: 0 }, 5.0],
   ["claude-sonnet-4-6", { input_tokens: 1_000_000, output_tokens: 0 }, 3.0],
   ["claude-haiku-4-5-20251001", { input_tokens: 1_000_000, output_tokens: 0 }, 1.0],
   ["gpt-5.4-nano", { input_tokens: 1_000_000, output_tokens: 0 }, 0.2],
@@ -11,7 +11,7 @@ const cases: Array<[string, TokenUsage, number]> = [
   ["text-embedding-3-small", { input_tokens: 1_000_000, output_tokens: 0 }, 0.02],
 
   // pure output
-  ["claude-opus-4-7", { input_tokens: 0, output_tokens: 1_000_000 }, 75.0],
+  ["claude-opus-4-7", { input_tokens: 0, output_tokens: 1_000_000 }, 25.0],
   ["claude-sonnet-4-6", { input_tokens: 0, output_tokens: 1_000_000 }, 15.0],
   ["claude-haiku-4-5-20251001", { input_tokens: 0, output_tokens: 1_000_000 }, 5.0],
   ["gpt-5.4-nano", { input_tokens: 0, output_tokens: 1_000_000 }, 1.25],
@@ -20,7 +20,7 @@ const cases: Array<[string, TokenUsage, number]> = [
   [
     "claude-opus-4-7",
     { input_tokens: 0, output_tokens: 0, cache_creation_input_tokens: 1_000_000 },
-    18.75,
+    6.25,
   ],
   [
     "claude-sonnet-4-6",
@@ -37,7 +37,7 @@ const cases: Array<[string, TokenUsage, number]> = [
   [
     "claude-opus-4-7",
     { input_tokens: 0, output_tokens: 0, cache_read_input_tokens: 1_000_000 },
-    1.5,
+    0.5,
   ],
   [
     "claude-sonnet-4-6",

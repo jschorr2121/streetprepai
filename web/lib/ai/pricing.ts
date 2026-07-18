@@ -13,11 +13,13 @@ export type PricingEntry = {
 };
 
 export const PRICING: Record<string, PricingEntry> = {
+  // Opus 4.5+ dropped to $5/$25 (the $15/$75 rates were Opus 4.1 and earlier):
+  // https://platform.claude.com/docs/en/about-claude/pricing
   "claude-opus-4-7": {
-    input: 15.0,
-    output: 75.0,
-    cache_write: 18.75,
-    cache_read: 1.5,
+    input: 5.0,
+    output: 25.0,
+    cache_write: 6.25,
+    cache_read: 0.5,
   },
   "claude-sonnet-4-6": {
     input: 3.0,
