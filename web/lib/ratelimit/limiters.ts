@@ -23,80 +23,29 @@
  *   limits are fail-closed).
  */
 
-import * as Sentry from "@sentry/nextjs";
-import { Ratelimit } from "@upstash/ratelimit";
-
-import { logger } from "@/lib/logging/logger";
-import { getRedis } from "@/lib/security/redis";
+import { buildLimiter, type StoreErrorMode } from "@/lib/ratelimit/core";
 
 export type LimiterResult = { allowed: true } | { allowed: false; retryAfterSeconds: number };
 
-// Tracks whether we have already emitted the "rate limiting disabled in
-// production" warning for each prefix, so it fires once per cold start rather
-// than on every request.
-const warnedMisconfiguredPrefixes = new Set<string>();
-
-type StoreErrorMode = "allow" | "deny";
-
+/**
+ * Thin adapter over the shared sliding-window core (`lib/ratelimit/core.ts`).
+ * Server Action limiters have no in-memory fallback: in local dev without
+ * Upstash they degrade open so development is unblocked; the store-error policy
+ * is the only place fail-closed behavior comes from. Maps the core's normalized
+ * result onto this surface's `LimiterResult` shape.
+ */
 function makeSlidingWindow(
   prefix: string,
   requests: number,
   windowSec: number,
   opts: { onStoreError: StoreErrorMode } = { onStoreError: "allow" },
 ): (key: string) => Promise<LimiterResult> {
-  const redis = getRedis();
-
-  if (!redis) {
-    // No Upstash credentials in this environment.
-    // In production this is a misconfiguration — alert once per cold start.
-    const isProduction =
-      process.env.NODE_ENV === "production" || process.env.VERCEL_ENV === "production";
-
-    if (isProduction && !warnedMisconfiguredPrefixes.has(prefix)) {
-      warnedMisconfiguredPrefixes.add(prefix);
-      const msg = "rate_limiting_disabled_no_redis";
-      logger.error({ prefix }, msg);
-      Sentry.captureMessage(`Rate limiting disabled — Upstash env not set (prefix: ${prefix})`, {
-        level: "error",
-      });
-    }
-
-    if (isProduction && opts.onStoreError === "deny") {
-      // AI limiter with no store in production: fail closed — unmetered LLM
-      // spend is worse than a blocked feature. Dev/preview stays open.
-      return async () => ({ allowed: false, retryAfterSeconds: 60 });
-    }
-
-    // Degrade open: allow all calls when env is missing.
-    return async () => ({ allowed: true });
-  }
-
-  const limiter = new Ratelimit({
-    redis,
-    limiter: Ratelimit.slidingWindow(requests, `${windowSec} s`),
-    prefix,
-    analytics: false,
-  });
+  const check = buildLimiter(prefix, requests, windowSec, { onStoreError: opts.onStoreError });
 
   return async (key: string): Promise<LimiterResult> => {
-    try {
-      const result = await limiter.limit(key);
-      if (result.success) return { allowed: true };
-      return {
-        allowed: false,
-        retryAfterSeconds: Math.max(1, Math.ceil((result.reset - Date.now()) / 1000)),
-      };
-    } catch (err) {
-      // Store unreachable (DNS failure, network timeout, etc.). Log + alert,
-      // then apply the limiter's store-failure policy: deny for AI spend,
-      // allow for auth/CRUD so infra outages never crash those actions.
-      logger.error({ err, prefix }, "ratelimit_store_error");
-      Sentry.captureException(err);
-      if (opts.onStoreError === "deny") {
-        return { allowed: false, retryAfterSeconds: 30 };
-      }
-      return { allowed: true };
-    }
+    const result = await check(key);
+    if (result.allowed) return { allowed: true };
+    return { allowed: false, retryAfterSeconds: result.retryAfterSeconds };
   };
 }
 
