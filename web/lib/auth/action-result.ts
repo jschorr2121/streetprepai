@@ -6,7 +6,7 @@
 // neutral home (e.g. lib/actions.ts) as the canonical reference. Codes are the
 // fixed set from code-standards.
 
-import type { AppError } from "@/lib/errors";
+import { ValidationError, type AppError } from "@/lib/errors";
 
 export type ActionErrorCode =
   | "UNAUTHORIZED"
@@ -51,6 +51,7 @@ export function actionErrorFromAppError(err: AppError): { ok: false; error: Acti
     error: {
       code: err.code as ActionErrorCode,
       message: err.message,
+      ...(err instanceof ValidationError ? { fieldErrors: err.fieldErrors } : {}),
     },
   };
 }
