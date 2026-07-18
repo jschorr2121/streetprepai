@@ -86,6 +86,25 @@
 
 ## Session log
 
+- **2026-07-18 (session 5, cloud, IN PROGRESS — checkpoint)** — Phase 5. Committed so
+  far: (1) architecture.md embeddings drift fixed (docs now say OpenAI
+  text-embedding-3-small, the actual stack; Voyage switch stays an open Jake
+  decision); (2) **e2e unblocked** — playwright.config.ts got a `webServer` block
+  (`pnpm build && pnpm start`, reuseExistingServer outside CI) so `pnpm test:e2e`
+  is self-sufficient; CI's e2e job could never pass before (no server was ever
+  started). Verified with a real run under CI's placeholder env: 1 passed,
+  6 skipped. New opt-in `PLAYWRIGHT_CHROMIUM_EXECUTABLE` env var for containers
+  with a pre-seeded chromium (`/opt/pw-browsers/chromium` here — the installed
+  revision mismatches @playwright/test 1.59.1's expected one, so set it locally).
+  Signed-out requests never hit the placeholder Supabase URL (auth-js
+  short-circuits without a session cookie). In flight (subagents): LLM thread
+  auto-titles (chat-title.ts + onEnd hook in /api/chat/assistant); e2e
+  golden-path specs (chatbot w/ mocked AI-SDK-v7 UI-message stream via
+  page.route, question-bank smoke, storageState global-setup gated on
+  STREETPREP_E2E_AUTH + STREETPREP_E2E_EMAIL/PASSWORD). Known facts: authed e2e
+  specs need real creds — CI would need secrets before ungating them (file to
+  jakes-tasks when specs land).
+
 - **2026-07-17 (session 4, cloud)** — **UNIT 9 COMPLETE — all five issues shipped**
   (01 streaming+persistence, 02 tool use, 05 thread rail, 03 web search, 04 firm
   prep; ~10 commits). Suite went 362 → **390 passing**; every issue verified with
