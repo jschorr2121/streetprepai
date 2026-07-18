@@ -88,8 +88,8 @@ async function recordGateAttempt(questionId: string, score: number, answeredAt: 
 beforeEach(async () => {
   db = await createPgliteDb();
   withUserMock.mockReset();
-  withUserMock.mockImplementation(
-    async (_token: unknown, fn: (tx: Executor) => Promise<unknown>) => fn(db),
+  withUserMock.mockImplementation(async (_token: unknown, fn: (tx: Executor) => Promise<unknown>) =>
+    fn(db),
   );
   requireUserMock.mockReset();
   requireUserMock.mockResolvedValue({ id: USER_ID });
@@ -184,9 +184,7 @@ describe("finishSittingAction — chapter gate", () => {
       expect(result.data.chapterCompleted).toBe(true);
     }
 
-    const rows = await db
-      .select()
-      .from(chapterProgress);
+    const rows = await db.select().from(chapterProgress);
     expect(rows).toHaveLength(1);
     expect(rows[0]!.gatePassedAt).not.toBeNull();
   });

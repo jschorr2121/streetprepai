@@ -113,7 +113,11 @@ describe("listMyUsageSince", () => {
 
   it("orders rows newest first", async () => {
     await insertUsage({ userId: USER_A, endpoint: "first", createdAt: "2026-07-01T00:00:00.000Z" });
-    await insertUsage({ userId: USER_A, endpoint: "second", createdAt: "2026-07-10T00:00:00.000Z" });
+    await insertUsage({
+      userId: USER_A,
+      endpoint: "second",
+      createdAt: "2026-07-10T00:00:00.000Z",
+    });
     await insertUsage({ userId: USER_A, endpoint: "third", createdAt: "2026-07-05T00:00:00.000Z" });
 
     const result = await listMyUsageSince(db, USER_A, "2026-01-01T00:00:00.000Z");

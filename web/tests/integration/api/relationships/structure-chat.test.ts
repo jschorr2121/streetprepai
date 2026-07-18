@@ -142,10 +142,7 @@ describe("POST /api/relationships/structure-chat", () => {
     const json = await res.json();
     expect(typeof json.error).toBe("string");
     expect(json.error).not.toContain("upstream boom");
-    expect(errorSpy).toHaveBeenCalledWith(
-      "[relationships/structure-chat]",
-      expect.any(Error),
-    );
+    expect(errorSpy).toHaveBeenCalledWith("[relationships/structure-chat]", expect.any(Error));
     errorSpy.mockRestore();
   });
 

@@ -27,8 +27,9 @@ const createServerClientMock = vi.fn((_url: string, _key: string, options: unkno
   // Capture the cookies option so we can exercise getAll/setAll like the
   // real @supabase/ssr client would (it calls setAll when refreshing a
   // session; we don't emulate refresh, but we prove the plumbing is wired).
-  lastCookiesOption = (options as { cookies: { getAll: () => unknown; setAll: (c: unknown) => void } })
-    .cookies;
+  lastCookiesOption = (
+    options as { cookies: { getAll: () => unknown; setAll: (c: unknown) => void } }
+  ).cookies;
   return {
     auth: { getUser: getUserMock },
     from: fromMock,
@@ -145,9 +146,7 @@ describe("updateSession — authenticated on landing/auth routes", () => {
     getUserMock.mockResolvedValue({ data: { user: fakeUser() } });
     maybeSingleMock.mockResolvedValue({ data: { onboarded_at: "2026-01-01T00:00:00Z" } });
     const { updateSession } = await import("@/lib/auth/middleware");
-    const res = await updateSession(
-      makeRequest("/", { cookie: `sp-onboarded=${fakeUser().id}` }),
-    );
+    const res = await updateSession(makeRequest("/", { cookie: `sp-onboarded=${fakeUser().id}` }));
     expect(res.status).toBe(307);
     expect(res.headers.get("location")).toBe("http://localhost/dashboard");
   });

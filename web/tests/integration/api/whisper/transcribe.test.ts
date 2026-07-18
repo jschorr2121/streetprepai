@@ -36,10 +36,10 @@ beforeEach(() => {
   logUsageMock.mockReset();
   vi.spyOn(globalThis, "fetch").mockImplementation(
     async () =>
-      new Response(
-        JSON.stringify({ text: "mocked openai whisper text", duration: 12.3 }),
-        { status: 200, headers: { "Content-Type": "application/json" } },
-      ),
+      new Response(JSON.stringify({ text: "mocked openai whisper text", duration: 12.3 }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
   );
 });
 

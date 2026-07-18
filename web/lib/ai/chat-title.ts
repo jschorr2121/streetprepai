@@ -41,9 +41,7 @@ export async function generateThreadTitle(opts: GenerateThreadTitleOpts): Promis
   const client = getAnthropic();
   const prompt = [
     wrapUserText(capText(opts.userText, 2_000), "student_message"),
-    opts.assistantText
-      ? wrapUserText(capText(opts.assistantText, 1_000), "assistant_reply")
-      : null,
+    opts.assistantText ? wrapUserText(capText(opts.assistantText, 1_000), "assistant_reply") : null,
   ]
     .filter((s): s is string => Boolean(s))
     .join("\n\n");
