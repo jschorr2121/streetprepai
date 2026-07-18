@@ -1,17 +1,18 @@
 /**
  * Named rate limiters for Server Actions.
  *
- * Architecture: reuses the Upstash Redis client (`lib/security/redis.ts`) and
- * the Ratelimit class already imported by `lib/security/rate-limit.ts`. This
- * module is the canonical home for Server Action limiters; Route Handler
- * limiters live in `lib/security/rate-limit.ts` (unchanged).
+ * This is one of two thin adapters over the shared sliding-window core
+ * (`lib/ratelimit/core.ts`); the other is the Route Handler adapter in
+ * `lib/security/rate-limit.ts`. The core owns the Redis lookup, store-error
+ * policy, and result normalization — this module just declares the named
+ * limiters and maps the core's result onto `LimiterResult`.
  *
- * Each limiter is a sliding-window Upstash Ratelimit keyed by `userId` (not
- * IP) — Server Actions run after auth, so user identity is always known.
+ * Each limiter is a sliding-window limiter keyed by `userId` (not IP) — Server
+ * Actions run after auth, so user identity is always known.
  *
- * If Upstash env is unset (local dev without Redis), `check()` returns
- * `{ allowed: true }` so development is unblocked. Production must have
- * `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` set.
+ * If Upstash env is unset (local dev without Redis), limiters degrade open so
+ * development is unblocked. Production must have `UPSTASH_REDIS_REST_URL` +
+ * `UPSTASH_REDIS_REST_TOKEN` set.
  *
  * STORE-FAILURE POLICY (R1/R3, tightened for AI spend):
  * - Non-AI limiters (auth, CRUD) degrade OPEN when the Upstash store is

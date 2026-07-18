@@ -1,3 +1,13 @@
+/**
+ * Rate limiting for API Route Handlers (per-user + per-IP buckets).
+ *
+ * This is one of two thin adapters over the shared sliding-window core
+ * (`lib/ratelimit/core.ts`); the other is the Server Action adapter in
+ * `lib/ratelimit/limiters.ts`. The core owns the Redis lookup, in-memory
+ * counting fallback, store-error policy, and result normalization — this module
+ * maps tiers to budgets and runs the dual user/IP check.
+ */
+
 import { buildLimiter, type LimiterCheck, type StoreErrorMode } from "@/lib/ratelimit/core";
 
 /**
