@@ -14,7 +14,7 @@
 | LLM                     | Anthropic Claude (Opus / Sonnet / Haiku)                                    | All generative AI. Server-side only — API key never reaches the browser.                                                                            |
 | AI SDK layer            | Vercel AI SDK for chatbot UI + `@anthropic-ai/sdk` for everything else      | `useChat` for the streaming tool-using chatbot; raw Anthropic SDK for explain, beginner mode, scoring, prep sheets, structuring (full control of prompt caching + tool use). |
 | Web search (chatbot)    | Anthropic native `web_search` tool                                          | Chatbot's web tool. No separate vendor; pricing rolled into Claude calls.                                                                           |
-| Embeddings              | Voyage AI `voyage-4-lite` (queries) / `voyage-4-large` (heavy docs)         | Semantic search across networking chats and content. Voyage 4 MoE means lite/large share a vector space — index once, query at any quality tier.    |
+| Embeddings              | OpenAI `text-embedding-3-small` (as built)                                  | Semantic search across networking chats and content. Voyage (`voyage-4-lite`/`-4-large`) was the originally locked vendor but was never installed; every shipped artifact (lib/ai/embeddings.ts, pgvector migrations, pricing) uses OpenAI. Switching to Voyage is an open product/cost decision (needs a re-embed plan) — see progress-tracker Open Questions. |
 | Speech-to-text          | Groq Whisper Turbo                                                          | Voice mock interview transcription and post-event note dictation. Cheap, fast inference.                                                            |
 | Resume parsing          | `pdf-parse` (text extraction) → Claude tool use (structured profile JSON)   | Two-stage: extract text from the PDF, then send to Claude for structured field extraction.                                                          |
 | Background jobs         | Inngest                                                                     | Spaced re-surfacing of weak Q-bank items, weekly firm-data refresh, prep-sheet pre-generation, embedding backfills, follow-up reminders.            |
@@ -66,7 +66,7 @@ Each folder owns one concern and exposes a stable public API via `index.ts`. Cro
 - `lib/auth/` — Supabase auth helpers, session retrieval, server-side user fetch, middleware. The single source of `getCurrentUser()` and `requireUser()`.
 - `lib/db/` — Drizzle schema (`schema/`), typed queries (`queries/`), migrations (`migrations/`). **No** LLM calls, **no** UI imports. The only place SQL is written.
 - `lib/inngest/` — Inngest client + all background job functions (spaced re-surfacing, weekly firm refresh, prep-sheet pre-gen, embedding backfills, follow-up reminders). May import `lib/ai`, `lib/db`, `lib/embeddings`. **Never** imported from a Server Action or page.
-- `lib/embeddings/` — Voyage client, embedding generation, pgvector similarity search helpers. Imports `lib/db` for vector queries.
+- `lib/embeddings/` — embedding generation (OpenAI `text-embedding-3-small` via `lib/ai/embeddings.ts` today), pgvector similarity search helpers. Imports `lib/db` for vector queries.
 - `lib/speech/` — Groq Whisper Turbo client wrapper.
 - `lib/calendar/` — Google Calendar OAuth flow + sync logic + webhook handlers' business logic.
 - `lib/ratelimit/` — Upstash Ratelimit configurations per route. Exports named limiters consumed by Server Actions and API routes.
@@ -131,7 +131,7 @@ Embedding columns sit on the tables that need them, not in a separate database:
 - `qbank_questions.embedding` — find similar questions for variety + duplicate detection.
 - `firm_data.embedding` — chatbot retrieval over firm intel.
 
-All embeddings produced by Voyage `voyage-4-lite` by default. The MoE architecture means we can re-query with `voyage-4-large` against the same vectors when quality matters.
+All embeddings produced by OpenAI `text-embedding-3-small` (1536-dim) as built. Voyage was the originally planned vendor; migrating means re-embedding existing vectors — an open decision tracked in progress-tracker.
 
 ### Supabase Storage
 
@@ -170,7 +170,7 @@ Reading-heavy prose for each chapter section. The `chapters`, `sections`, and `p
 - Every signed-in surface (`app/(app)/**`, `app/api/**` except webhooks) requires a valid Supabase Auth session. Anonymous access is allowed only on `app/(marketing)/**` and `app/(auth)/**`.
 - Sign-in methods: **email + password** and **Google OAuth**. Both flow through Supabase Auth.
 - Sessions are stored in HTTP-only cookies by `@supabase/ssr`. Server Components and Server Actions read the user via `lib/auth.requireUser()`, which throws/redirects on missing session.
-- Anthropic, Voyage, Groq, and other LLM API keys live in environment variables and are accessed only by server code in `lib/ai`, `lib/embeddings`, `lib/speech`. They never reach the browser.
+- Anthropic, OpenAI (embeddings), Groq, and other LLM API keys live in environment variables and are accessed only by server code in `lib/ai`, `lib/embeddings`, `lib/speech`. They never reach the browser.
 - A Next.js middleware refreshes the Supabase session cookie on every request to `(app)` routes.
 
 ### Roles
@@ -222,7 +222,7 @@ A user becomes `admin` by an explicit row in an `admins` table; the role is mirr
 
 Rules the codebase must never violate. Each is enforceable and reviewable in a diff.
 
-1. **All LLM, embedding, and speech-to-text calls happen server-side.** The Anthropic, Voyage, and Groq API keys live in environment variables and are touched only by code in `lib/ai`, `lib/embeddings`, `lib/speech`, and modules they call. Client components never import these keys or these modules.
+1. **All LLM, embedding, and speech-to-text calls happen server-side.** The Anthropic, OpenAI, and Groq API keys live in environment variables and are touched only by code in `lib/ai`, `lib/embeddings`, `lib/speech`, and modules they call. Client components never import these keys or these modules.
 2. **No free-form JSON parsing from LLM output.** Any time we need structured data from Claude (resume parsing, chat structuring, scorecards, story framings, prep sheets), we use Claude **tool use** with a typed Zod-validated schema. Never `JSON.parse` of a model's text response.
 3. **Every user-owned table has RLS scoped to `auth.uid()` via `USING` and `WITH CHECK`.** User-facing paths read and write Postgres through a session-scoped Drizzle client, not the service-role key. The service-role key is used only inside `lib/inngest/**`, webhook handlers, and explicit admin operations.
 4. **Every LLM call writes one `llm_usage` row** (user_id, route, model, input tokens, output tokens, cost USD, latency ms, status). This is the cost-control backbone — never bypass it, even in scripts.
