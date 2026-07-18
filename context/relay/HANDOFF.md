@@ -86,7 +86,7 @@
 
 ## Session log
 
-- **2026-07-18 (session 5, cloud, FINAL — 16 commits, all pushed, suite 472)** — Phase 5.
+- **2026-07-18 (session 5, cloud, FINAL — 19 commits, all pushed, suite 521)** — Phase 5.
   Second half of the session ran three adversarial review sweeps + fixes on top of
   checkpoint 2's work: (1) **whisper spend blind spot** (CONFIRMED, also affects
   master/prod today): neither transcribe route ever logged ai_usage — now one row
@@ -110,7 +110,10 @@
   (c) served-question-set pinning if gate integrity matters more than effort;
   (d) e2e: get authed specs actually running once Jake supplies creds (then CI
   secrets item); (e) perpetual: more coverage, UX polish, brainstorms. Suite
-  baseline for session 6: **472 passing / 63 files**; e2e 1 passed/10 skipped.
+  baseline for session 6: **521 passing / 65 files** (session tail added 100%
+  coverage on lib/auth/middleware.ts, lib/db/queries/ai-usage.ts, and the
+  contact mutations, + fixed SAMPLE_GUIDE_SLUG to a real guide); e2e 1
+  passed/10 skipped.
 
 - **2026-07-18 (session 5, cloud, checkpoint 2 — superseded by FINAL above)** — Phase 5.
   Committed this session (9 commits, all pushed): architecture.md embeddings drift;
