@@ -15,6 +15,7 @@ import {
 } from "@/lib/auth/action-result";
 import { requireUser } from "@/lib/auth/server";
 import { gradeAnswer } from "@/lib/ai/grading";
+import { assertAiActionAllowed } from "@/lib/ai/usage";
 import { withUser } from "@/lib/db/client";
 import {
   getFollowupById,
@@ -147,6 +148,17 @@ export async function gradeAnswerAction(
         message: `Grading limit reached — try again in ${rl.retryAfterSeconds}s.`,
       },
     };
+  }
+
+  // Step 3.5 — Monthly spend cap. This action calls a paid LLM outside the API
+  // routes' requireUser gate, so it must enforce the same per-user monthly cap
+  // itself (after the per-minute limit, before any AI call). Fails closed only
+  // on a definitive over-cap answer; a store failure reads as $0 and is allowed.
+  try {
+    await assertAiActionAllowed(userId);
+  } catch (err) {
+    if (err instanceof AppError) return actionErrorFromAppError(err);
+    throw err;
   }
 
   // Step 4 — Ownership: attempts are always written for the caller (userId from

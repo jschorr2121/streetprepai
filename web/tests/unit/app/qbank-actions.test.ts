@@ -32,6 +32,7 @@ const {
   getTopicMasteryMock,
   upsertTopicMasteryMock,
   gradeAnswerMock,
+  assertAiActionAllowedMock,
 } = vi.hoisted(() => ({
   withUserMock: vi.fn(),
   requireUserMock: vi.fn(),
@@ -47,6 +48,7 @@ const {
   getTopicMasteryMock: vi.fn(),
   upsertTopicMasteryMock: vi.fn(),
   gradeAnswerMock: vi.fn(),
+  assertAiActionAllowedMock: vi.fn(),
 }));
 
 vi.mock("@/lib/db/client", () => ({
@@ -76,6 +78,14 @@ vi.mock("@/lib/ai/grading", () => ({
   gradeAnswer: gradeAnswerMock,
 }));
 
+vi.mock("@/lib/ai/usage", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/lib/ai/usage")>();
+  return {
+    ...actual,
+    assertAiActionAllowed: (...args: unknown[]) => assertAiActionAllowedMock(...args),
+  };
+});
+
 vi.mock("@/lib/auth/server", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/lib/auth/server")>();
   return {
@@ -94,6 +104,7 @@ vi.mock("@/lib/logging/logger", () => ({
 
 import { gradeAnswerAction, serveQuestionAction } from "@/app/(app)/tools/question-bank/actions";
 import { UnauthorizedError } from "@/lib/auth/server";
+import { RateLimitedError } from "@/lib/errors";
 
 const USER_ID = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
 
@@ -129,6 +140,8 @@ beforeEach(() => {
   getTopicMasteryMock.mockReset();
   upsertTopicMasteryMock.mockReset();
   gradeAnswerMock.mockReset();
+  assertAiActionAllowedMock.mockReset();
+  assertAiActionAllowedMock.mockResolvedValue(undefined);
 
   getProfileMock.mockResolvedValue({ userId: USER_ID, advancedTrack: false });
   getFollowupsMock.mockResolvedValue([]);
@@ -253,6 +266,24 @@ describe("gradeAnswerAction", () => {
     const result = await gradeAnswerAction(VALID_GRADE_INPUT);
     expect(result.ok).toBe(false);
     if (!result.ok) expect(result.error.code).toBe("RATE_LIMITED");
+    expect(gradeAnswerMock).not.toHaveBeenCalled();
+    expect(withUserMock).not.toHaveBeenCalled();
+  });
+
+  it("returns RATE_LIMITED and does not call the grader when over the monthly spend cap", async () => {
+    getQuestionByIdMock.mockResolvedValue(QUESTION);
+    assertAiActionAllowedMock.mockRejectedValue(
+      new RateLimitedError("Monthly AI usage limit reached. It resets on the 1st."),
+    );
+
+    const result = await gradeAnswerAction(VALID_GRADE_INPUT);
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.error.code).toBe("RATE_LIMITED");
+      expect(result.error.message).toMatch(/Monthly AI usage limit/);
+    }
+    // The paid AI call must not fire, and no question load / persistence runs.
     expect(gradeAnswerMock).not.toHaveBeenCalled();
     expect(withUserMock).not.toHaveBeenCalled();
   });

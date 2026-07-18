@@ -1,4 +1,5 @@
 import { getAdminClient } from "@/lib/supabase/admin";
+import { RateLimitedError } from "@/lib/errors";
 import { calculateCost, type TokenUsage } from "./pricing";
 
 export type UsagePayload = {
@@ -124,4 +125,37 @@ export type QuotaResult = { ok: boolean; usedUsd: number };
 export async function assertUnderQuota(userId: string, capUsd: number): Promise<QuotaResult> {
   const { totalUsd } = await getUserUsageThisMonth(userId);
   return { ok: totalUsd < capUsd, usedUsd: totalUsd };
+}
+
+// Monthly per-user AI spend cap in USD — the same backstop that
+// lib/security/require-user.ts enforces for AI API routes. Tunable via env;
+// <= 0 disables the check. Kept here so AI-calling Server Actions (which never
+// pass through requireUser) can enforce the identical cap.
+const DEFAULT_MONTHLY_CAP_USD = 20;
+
+function monthlyCapUsd(): number {
+  const raw = process.env.AI_USER_MONTHLY_CAP_USD;
+  if (!raw) return DEFAULT_MONTHLY_CAP_USD;
+  const parsed = Number(raw);
+  return Number.isFinite(parsed) ? parsed : DEFAULT_MONTHLY_CAP_USD;
+}
+
+/**
+ * Enforce the monthly AI spend cap for an AI-calling Server Action. Place it
+ * after auth + the per-minute rate limit, immediately before the paid AI call.
+ *
+ * Throws `RateLimitedError` (→ the `RATE_LIMITED` Server-Action failure shape,
+ * via `actionErrorFromAppError`) ONLY on a definitive over-cap answer. It
+ * mirrors `assertUnderQuota`'s store-failure stance: when the admin client is
+ * unavailable or the usage query errors, usage reads as $0, so the call is
+ * allowed (fail-open) rather than blocking every user on a transient DB fault —
+ * the recorded spend in `ai_usage` is the source of truth, not this gate.
+ */
+export async function assertAiActionAllowed(userId: string): Promise<void> {
+  const cap = monthlyCapUsd();
+  if (cap <= 0) return;
+  const { ok } = await assertUnderQuota(userId, cap);
+  if (!ok) {
+    throw new RateLimitedError("Monthly AI usage limit reached. It resets on the 1st.");
+  }
 }
