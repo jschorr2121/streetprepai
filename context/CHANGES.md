@@ -488,3 +488,22 @@ Four commits (`15765e0`…`4f38996`), each gated on typecheck + lint + full vite
   decision. firm_data refresh pipeline brainstorm authored
   (`context/brainstorms/2026-07-18-firm-data-refresh.md`) with 4 product questions filed.
 - Session-final suite: **465 passing**; typecheck/lint/build green throughout.
+
+## Prod-readiness relay session 5 (continued) — third review sweep: learn/mastery (2026-07-18)
+
+- **Gate-scoring integrity closed** — `finishSittingAction` now enforces a 6h sitting
+  window and a minimum distinct-question count (canonical GATE_QUESTION_COUNT /
+  SECTION_DRILL_COUNT moved to `lib/curriculum/chapters.ts`, clamped to the live pool for
+  thin sections). Before: one easy graded question with `context: "chapter-gate"` passed
+  the whole 8-question 85% gate. Residual (conscious): the served-question set isn't
+  pinned — needs server-side sitting sessions if ever warranted.
+- **Paper-LBO NaN eliminated** — leverage now rolls strictly below entryMultiple
+  (the 6/6 overlap made equityIn 0 → MOIC/IRR NaN → unsolvable drill, ~1/24 of runs).
+- **Reviewed clean in this sweep** (don't re-hunt without new evidence): mastery math
+  (no div-by-zero/NaN, sane spaced-rep intervals), UTC streak math + empty states,
+  onboarding cookie tradeoff (unsigned but self-scoped, documented), limiter policy
+  (AI fail-closed, CRUD degrade-open, serve path correctly unlimited), applications
+  ownership + RLS, curriculum flow empty-data paths, RLS coverage across all
+  qbank/progress/applications tables. Earlier sweeps: chatbot subsystem (2 real findings,
+  both fixed), interview/resume/relationships (1 invariant violation + 3 consistency
+  gaps, all fixed). Session-final suite: **472 passing**.
