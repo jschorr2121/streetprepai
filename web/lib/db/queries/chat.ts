@@ -88,7 +88,24 @@ export async function createThread(
   threadId: string,
   title: string,
 ): Promise<void> {
-  await db.insert(chatThreads).values({ id: threadId, userId, title });
+  // `id` is a client-supplied uuid PK. Two concurrent first POSTs with the same
+  // threadId both see getThread → null and both try to insert; without this the
+  // loser hits a unique-PK violation → uncaught 500 and the user turn is dropped.
+  // onConflictDoNothing makes the loser a silent no-op instead.
+  //
+  // This does NOT weaken user-scoping. A conflict only means "some row already
+  // owns this PK"; it never inserts a row with a different owner. If an attacker
+  // POSTs with a victim's threadId: getThread (scoped to attacker) returns null,
+  // this insert conflicts on the victim's PK and no-ops (no attacker-owned thread
+  // is created), and the subsequent appendMessages/updateThreadTitle are each
+  // independently user-scoped — the UPDATE in appendMessages matches
+  // (id AND user_id=attacker) → 0 rows, and RLS's WITH CHECK forbids writing a
+  // row the caller doesn't own. The attacker cannot read or mutate the victim's
+  // thread; the only residue is orphan attacker-owned messages that only the
+  // attacker can see and that cascade-delete with the victim's thread.
+  await db.insert(chatThreads).values({ id: threadId, userId, title }).onConflictDoNothing({
+    target: chatThreads.id,
+  });
 }
 
 export async function getThread(

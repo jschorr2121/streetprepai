@@ -16,6 +16,29 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — chat abort spend-cap fix + createThread race (2026-07-18, session 5)
+
+A correctness review of the chatbot route found that a client disconnect
+mid-stream skipped streamText's `onEnd` (it runs in the event-processor's
+`flush()`, which never fires on cancel) — so the expensive sonnet call's
+`ai_usage` row was never written while the partial reply still persisted and
+the haiku title call still logged. Since `assertUnderQuota` sums `ai_usage`,
+aborting requests bypassed the monthly spend cap. Fix: `void
+result.consumeStream({ onError })` before returning the response — the SDK
+tees the base stream, so draining the consume branch guarantees the usage log
+regardless of client connection (verified against the installed v7.0.31
+dist). Titling is now also skipped if the assistant persist failed
+(`persisted` flag). Second fix: `createThread` gained
+`onConflictDoNothing({ target: chatThreads.id })` — concurrent first POSTs
+with the same client-generated threadId no longer 500/drop the user turn;
+cross-user id-collision verified safe (RLS + per-query `user_id` predicates
+mean an attacker posting a victim's threadId can neither create nor mutate
+the victim's thread). Tests: consumeStream invoked + usage logged, titling
+skipped on persist failure, duplicate-id createThread no-op that can't
+transfer ownership. Suite 454 passing. Known residual (accepted): whether
+full vs partial assistant text persists on a hard disconnect is still
+timing-dependent — the guaranteed win is usage logging.
+
 ### Prod-readiness relay — LLM thread auto-titling (2026-07-18, cloud, branch `fable/prod-readiness`)
 
 Closed the last Unit 9 deferral: chatbot threads were titled by truncating the

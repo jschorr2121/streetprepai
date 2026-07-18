@@ -30,6 +30,23 @@ describe("lib/db/queries/chat", () => {
     expect(await listThreads(db, USER_B)).toEqual([]);
   });
 
+  it("createThread on a duplicate id is a silent no-op (concurrent first-message race)", async () => {
+    const db = await createPgliteDb();
+    await createThread(db, USER_A, THREAD_1, "original title");
+
+    // A second createThread for the same client-supplied uuid PK — the losing
+    // side of two concurrent first POSTs — must not throw (would surface as a
+    // 500 and drop the user turn). onConflictDoNothing keeps the original row.
+    await expect(createThread(db, USER_A, THREAD_1, "racing title")).resolves.toBeUndefined();
+    expect((await getThread(db, USER_A, THREAD_1))?.title).toBe("original title");
+
+    // A different user colliding on the same id also no-ops and cannot take
+    // ownership: the row still belongs to USER_A, and USER_B sees nothing.
+    await expect(createThread(db, USER_B, THREAD_1, "hijack")).resolves.toBeUndefined();
+    expect(await getThread(db, USER_B, THREAD_1)).toBeNull();
+    expect((await getThread(db, USER_A, THREAD_1))?.title).toBe("original title");
+  });
+
   it("lists threads most-recently-updated first", async () => {
     const db = await createPgliteDb();
     await createThread(db, USER_A, THREAD_1, "first");

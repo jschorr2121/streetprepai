@@ -98,6 +98,21 @@ export async function POST(req: Request): Promise<Response> {
     },
   });
 
+  // Drain the model stream to completion server-side, independent of the client
+  // connection. streamText's `onEnd` (usage logging above) only fires when the
+  // event-processor stream finishes; if the client disconnects mid-stream that
+  // stream is never drained and the expensive sonnet call logs $0 — a spend-cap
+  // bypass, since assertUnderQuota sums ai_usage. Meanwhile the response's own
+  // `onEnd` (persist + title) still fires on cancel, so an aborted request would
+  // otherwise persist a partial reply and bill a haiku title while logging
+  // nothing for the main call. consumeStream tees a branch off the same source
+  // and pulls it through to the end, guaranteeing usage is always logged. This
+  // is the documented AI SDK pattern for reliable persistence/usage on abort.
+  // Fire-and-forget: consumeStream internally routes any error to onError.
+  void result.consumeStream({
+    onError: (err) => console.error("[chat/assistant] consumeStream error:", err),
+  });
+
   return result.toUIMessageStreamResponse({
     originalMessages: uiMessages,
     // Forward source parts so web-search citations reach the client.
@@ -106,10 +121,12 @@ export async function POST(req: Request): Promise<Response> {
       // Persist text + settled tool parts; transient states are dropped.
       const parts = toStoredParts(responseMessage.parts);
       if (parts.length === 0) return;
+      let persisted = false;
       try {
         await withUser({ sub: userId, role: "authenticated" }, (tx) =>
           appendMessages(tx, userId, threadId, [{ role: "assistant", parts }]),
         );
+        persisted = true;
       } catch (err) {
         console.error("[chat/assistant] failed to persist assistant message:", err);
       }
@@ -120,8 +137,10 @@ export async function POST(req: Request): Promise<Response> {
       // lifecycle — no new client-callable route, no new rate limiter (the
       // `expensive` tier gate above already bounds this request). Best
       // effort only: any failure is caught and logged, and the fallback
-      // title set at thread creation stands.
-      if (isNewThread) {
+      // title set at thread creation stands. Skipped when the assistant reply
+      // failed to persist — don't spend a title call on a thread whose first
+      // exchange isn't stored.
+      if (isNewThread && persisted) {
         try {
           const assistantText = parts
             .filter((p) => p.type === "text")

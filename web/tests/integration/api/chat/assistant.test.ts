@@ -18,8 +18,10 @@ vi.mock("@/lib/supabase/get-user", () => ({
 }));
 
 const toUIMessageStreamResponseMock = vi.fn();
+const consumeStreamMock = vi.fn(() => Promise.resolve());
 const streamTextMock = vi.fn(() => ({
   toUIMessageStreamResponse: toUIMessageStreamResponseMock,
+  consumeStream: consumeStreamMock,
 }));
 vi.mock("ai", () => ({
   streamText: (opts: unknown) => streamTextMock(opts as never),
@@ -89,6 +91,7 @@ beforeEach(() => {
   streamTextMock.mockClear();
   toUIMessageStreamResponseMock.mockReset();
   toUIMessageStreamResponseMock.mockReturnValue(new Response("stream", { status: 200 }));
+  consumeStreamMock.mockClear();
   logUsageMock.mockReset();
   withUserMock.mockClear();
   getThreadMock.mockReset();
@@ -332,6 +335,40 @@ describe("POST /api/chat/assistant", () => {
     });
   });
 
+  it("drains the model stream via consumeStream so main-call usage logs even on client disconnect", async () => {
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-assist-drain" }));
+    getThreadMock.mockResolvedValue(null);
+    const { POST } = await import("@/app/api/chat/assistant/route");
+    await POST(makeRequest(validBody, "10.9.0.11"));
+
+    // The route must drain the source stream server-side, regardless of whether
+    // the client keeps reading the response body. Without this, streamText's
+    // onEnd never fires on abort and the expensive sonnet call logs $0.
+    expect(consumeStreamMock).toHaveBeenCalledTimes(1);
+
+    // consumeStream draining the source is exactly what guarantees streamText's
+    // onEnd runs — driving it here confirms usage still logs for the main call.
+    const call = streamTextMock.mock.calls[0]?.[0] as {
+      onEnd: (event: { usage: unknown; content: unknown[] }) => void;
+    };
+    call.onEnd({
+      usage: {
+        inputTokens: 50,
+        outputTokens: 20,
+        inputTokenDetails: { noCacheTokens: 50, cacheReadTokens: 0, cacheWriteTokens: 0 },
+      },
+      content: [{ type: "text", text: "answer" }],
+    });
+    expect(logUsageMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        model: "claude-sonnet-4-6",
+        endpoint: "chat/assistant",
+        userId: "u-assist-drain",
+        surchargeUsd: 0,
+      }),
+    );
+  });
+
   it("generates and persists a title on the thread's first exchange (LLM auto-titling)", async () => {
     getUserMock.mockResolvedValue(fakeUser({ id: "u-assist-title-new" }));
     getThreadMock.mockResolvedValue(null); // new thread
@@ -413,6 +450,34 @@ describe("POST /api/chat/assistant", () => {
       THREAD_ID,
       [{ role: "assistant", parts: [{ type: "text", text: "an answer" }] }],
     );
+    expect(updateThreadTitleMock).not.toHaveBeenCalled();
+  });
+
+  it("does not title a thread whose assistant reply failed to persist", async () => {
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-assist-persist-fail" }));
+    getThreadMock.mockResolvedValue(null); // new thread → would normally title
+    // First append (the user turn, before the model call) succeeds; the second
+    // (the assistant reply, in onEnd) fails.
+    appendMessagesMock.mockResolvedValueOnce(undefined).mockRejectedValue(new Error("db down"));
+    generateThreadTitleMock.mockResolvedValue("should not be used");
+    const { POST } = await import("@/app/api/chat/assistant/route");
+    await POST(makeRequest(validBody, "10.9.0.12"));
+
+    const streamOpts = toUIMessageStreamResponseMock.mock.calls[0]?.[0] as {
+      onEnd: (event: { responseMessage: unknown }) => Promise<void>;
+    };
+    // The persist failure is swallowed (onEnd resolves), but titling is skipped
+    // — no point spending a haiku title call on a first exchange that isn't stored.
+    await expect(
+      streamOpts.onEnd({
+        responseMessage: {
+          id: "resp-persist-fail",
+          role: "assistant",
+          parts: [{ type: "text", text: "an answer", state: "done" }],
+        },
+      }),
+    ).resolves.toBeUndefined();
+    expect(generateThreadTitleMock).not.toHaveBeenCalled();
     expect(updateThreadTitleMock).not.toHaveBeenCalled();
   });
 
