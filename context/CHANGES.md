@@ -447,3 +447,44 @@ Four commits (`15765e0`…`4f38996`), each gated on typecheck + lint + full vite
 - **Issue 03 (native web search) shipped same session** — provider-executed `webSearch_20250305` (maxUses 3), `sendSources: true`, `source-url` parts persisted (+ `providerExecuted` flag round-trips), SourceList citation UI, per-search surcharge modeled (`WEB_SEARCH_PER_CALL_USD` → `logUsage.surchargeUsd`; the spend cap now sees search costs). Suite: **381 passing**; build green.
 - **Issue 04 (firm data / "why JPM") shipped same session** — `get_firm` with fuzzy matching (slug → normalized name → initials 'JPM'/'GS' → substring; pure `matchFirm` unit-tested), firm-scoped `search_chat_logs` (extended rather than a new tool; semantic over-fetch k=10 then filter), firm-prep synthesis prompt with explicit source attribution + never-invent rule. Reused `lib/data/firms.ts` (domain's existing Supabase-client layer) instead of adding `lib/db/queries/firms.ts`. Deferred: e2e golden-path spec (with all other e2e), `firm_data` refresh pipeline (own unit per architecture.md). **Unit 9 is now fully shipped (01→05)**. Suite: **390 passing**; build green.
 - **Unit 8 scoped + closed down to one open issue** — a code-vs-plan diff (`.scratch/unit-8-question-bank/SCOPING-2026-07-17.md`) found issues 01–05 were already shipped by Unit 11 under different shapes (no rubric column — key_points/misconceptions/model_answer; follow-ups are ordinal chains, not trees; fail-closed grading limiter is deliberate). The real gap was test debt: **50 new tests** backfilled over `lib/db/queries/qbank.ts`, the topic-mastery queries, and `serveQuestionAction`/`gradeAnswerAction`. Issue 06 (AI-generated questions) is triage-gated on Jake — filed. todo.md's shipped items struck; chat-onboarding brainstorm logged (`context/brainstorms/2026-07-17-chat-onboarding.md`). Session-final suite: **441 passing**.
+
+## Prod-readiness relay session 5 — Phase 5: e2e real, chatbot hardening, spend-cap integrity (2026-07-18)
+
+- **e2e is now actually runnable** — `playwright.config.ts` gained a `webServer` block
+  (`pnpm build && pnpm start`; `reuseExistingServer` outside CI). Before this, CI's e2e job
+  ran playwright against nothing and could never pass. Verified under CI's placeholder env:
+  signed-out requests never contact Supabase (auth-js short-circuits without a session
+  cookie), so placeholders are safe. Opt-in `PLAYWRIGHT_CHROMIUM_EXECUTABLE` for containers
+  with pre-seeded browsers.
+- **Auth storageState plumbing + the two deferred golden-path specs** — `global-setup.ts`
+  signs in via the real /login form when `STREETPREP_E2E_AUTH=1` + creds are set (no-op
+  otherwise); chatbot spec mocks `/api/chat/assistant` with a hand-built AI SDK v7
+  UI-message SSE stream (format verified against the installed dist); question-bank spec
+  stays on the AI-free serve path. Baseline: 1 passed / 10 skipped. CI secrets to ungate
+  filed to jakes-tasks (optional).
+- **LLM thread auto-titling** (last Unit 9 deferral) — haiku call in the assistant route's
+  `onEnd` on first exchange only; sanitized plain text (never parsed as JSON); best-effort
+  (failure keeps the truncation fallback); one `ai_usage` row (`chat/assistant/title`); no
+  new route/limiter (runs inside the expensive-tier-gated request).
+- **Spend-cap integrity, two real holes found by review and fixed**:
+  (1) client disconnect mid-stream skipped `streamText.onEnd` (flush never runs on cancel)
+  so the main sonnet call logged nothing while partial replies still persisted — aborting
+  every request bypassed the monthly cap. Fixed with `void result.consumeStream({onError})`
+  (SDK tees the base stream; drain guarantees the usage log), verified against ai@7.0.31
+  dist. (2) Whisper transcription never logged usage at all — both transcribe routes now
+  write one row per call (duration/60 × $0.006 via `surchargeUsd`; missing duration → $0
+  row). The token-priced `whisper-1` PRICING entry was decorative and is gone.
+- **`createThread` races tolerated** — `onConflictDoNothing` on the client-supplied uuid PK;
+  cross-user collision verified safe (RLS + per-query user_id predicates: an attacker
+  posting a victim's threadId can neither create nor mutate the victim's thread).
+- **New-thread flicker fixed** (issue 06, filed + closed same session) — stable mount key
+  via `ChatSession` wrapper + pure `computeNextChatSessionState`; first-send confirmation
+  no longer remounts `AssistantChat`, so the streamed reply can't race the refresh read.
+- **Consistency sweep from the second review** — structure-chat/draft-followup wrap the
+  Anthropic call → 502 like siblings; resume-coach skips unknown weakness flags; dead
+  'markets' mode removed from `INTERVIEW_MODES`.
+- **Docs reconciled to reality** — architecture.md now says OpenAI
+  `text-embedding-3-small` (what's actually shipped); Voyage switch is an open Jake
+  decision. firm_data refresh pipeline brainstorm authored
+  (`context/brainstorms/2026-07-18-firm-data-refresh.md`) with 4 product questions filed.
+- Session-final suite: **465 passing**; typecheck/lint/build green throughout.
