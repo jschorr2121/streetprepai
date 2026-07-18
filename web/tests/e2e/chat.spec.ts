@@ -1,5 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { SAMPLE_GUIDE_SLUG, LIVE_AI_SKIP_FLAG, LIVE_AI_SKIP_REASON } from "./_helpers";
+import {
+  AUTH_STORAGE_STATE_PATH,
+  SAMPLE_GUIDE_SLUG,
+  LIVE_AI_SKIP_FLAG,
+  LIVE_AI_SKIP_REASON,
+} from "./_helpers";
 
 /**
  * /guide/<slug> is public, but the chat panel hits /api/chat/stream which (a)
@@ -10,6 +15,7 @@ import { SAMPLE_GUIDE_SLUG, LIVE_AI_SKIP_FLAG, LIVE_AI_SKIP_REASON } from "./_he
 
 test.describe("Chat with guide (live Anthropic — costs $)", () => {
   test.skip(LIVE_AI_SKIP_FLAG, LIVE_AI_SKIP_REASON);
+  test.use({ storageState: AUTH_STORAGE_STATE_PATH });
   test.setTimeout(60_000); // streaming first-token latency
 
   test("open guide → chat tab → send message → response streams in", async ({ page }) => {

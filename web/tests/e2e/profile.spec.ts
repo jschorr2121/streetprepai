@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { AUTH_SKIP_FLAG, AUTH_SKIP_REASON } from "./_helpers";
+import { AUTH_SKIP_FLAG, AUTH_SKIP_REASON, AUTH_STORAGE_STATE_PATH } from "./_helpers";
 
 /**
  * Auth strategy: AUTHED. /profile loads the logged-in user's profile via the
@@ -12,6 +12,7 @@ import { AUTH_SKIP_FLAG, AUTH_SKIP_REASON } from "./_helpers";
 
 test.describe("Profile (golden path)", () => {
   test.skip(AUTH_SKIP_FLAG, AUTH_SKIP_REASON);
+  test.use({ storageState: AUTH_STORAGE_STATE_PATH });
   test.setTimeout(45_000);
 
   test("load profile → edit a field → save → reload preserves the change", async ({ page }) => {

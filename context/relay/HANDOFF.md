@@ -104,6 +104,41 @@
   STREETPREP_E2E_AUTH + STREETPREP_E2E_EMAIL/PASSWORD). Known facts: authed e2e
   specs need real creds — CI would need secrets before ungating them (file to
   jakes-tasks when specs land).
+  - **Deferred e2e subagent landed (same session, not yet committed):**
+    `tests/e2e/global-setup.ts` added (wired via `globalSetup` in
+    `playwright.config.ts`) — signs in through the real `/login` form once and
+    writes `tests/e2e/.auth/user.json` (gitignored) only when
+    `STREETPREP_E2E_AUTH=1` + `STREETPREP_E2E_EMAIL`/`STREETPREP_E2E_PASSWORD`
+    are set; no-ops otherwise. `_helpers.ts` gained `AUTH_STORAGE_STATE_PATH`
+    plus `buildUiMessageStream()`/`UI_MESSAGE_STREAM_HEADERS` (the AI SDK
+    v7.0.31 wire format, verified against `node_modules/ai/dist/index.js`, not
+    training data: SSE `data: <json>\n\n` lines of `UIMessageChunk`s —
+    `start`→`start-step`→`text-start`→`text-delta`→`text-end`→`finish-step`→
+    `finish`→literal `data: [DONE]`). New `tests/e2e/chatbot.spec.ts` (2 tests:
+    send → mocked reply renders → URL gains `?thread=<uuid>`; thread rail gets
+    an entry) mocks `/api/chat/assistant` via `page.route` — no
+    `STREETPREP_E2E_LIVE_AI` needed. New `tests/e2e/question-bank.spec.ts`
+    drives the "By topic" tab (`serveQuestionAction` is a pure DB read, no AI)
+    to serve a question and prove the submit button enables on input, without
+    ever calling `gradeAnswerAction` (that hits Claude). Added
+    `data-testid="qbank-topic-<value>"` / `qbank-difficulty-<value>` /
+    `qbank-serve-button"` to `components/learn/question-bank-studio.tsx` only
+    (attribute-only; did not touch `AnswerCard`/`PracticeSession`, which
+    another concurrent agent's chatbot work didn't overlap with either). Also
+    wired the previously-inert `storageState` into the five *existing* authed
+    specs that assumed a logged-in session but never had one
+    (`profile.spec.ts`, `applications.spec.ts`, `interview.spec.ts`,
+    `resume.spec.ts`, and the authed describe in `chat.spec.ts`) via
+    `test.use({ storageState: AUTH_STORAGE_STATE_PATH })` scoped inside each
+    gated `describe` block — `auth.spec.ts` deliberately untouched (its public
+    redirect test and its self-contained signup golden path must not carry a
+    pre-authed session). Verified: `pnpm typecheck` clean, `pnpm lint` 0
+    errors, `pnpm exec prettier --check` clean, `pnpm test:e2e` under CI's
+    placeholder env → **1 passed, 10 skipped** (was 1/6; +4 for the two new
+    specs' two tests each). CI secrets needed to actually run these authed
+    specs filed to `jakes-tasks.md`. Left uncommitted per the calling
+    session's instructions — next session should `git status`/review and
+    commit if it looks good.
 
 - **2026-07-17 (session 4, cloud)** — **UNIT 9 COMPLETE — all five issues shipped**
   (01 streaming+persistence, 02 tool use, 05 thread rail, 03 web search, 04 firm

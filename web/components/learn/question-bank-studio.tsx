@@ -118,6 +118,7 @@ function TopicPractice({ topics }: { topics: TopicOption[] }) {
             {topics.map((t) => (
               <button
                 key={t.value}
+                data-testid={`qbank-topic-${t.value}`}
                 onClick={() => setTopic(t.value)}
                 className={cn(
                   "rounded-full border px-3 py-1 text-xs transition-colors",
@@ -138,6 +139,7 @@ function TopicPractice({ topics }: { topics: TopicOption[] }) {
               {DIFFICULTIES.map((d) => (
                 <button
                   key={d}
+                  data-testid={`qbank-difficulty-${d}`}
                   onClick={() => setDifficulty(d)}
                   className={cn(
                     "rounded-full border px-3 py-1 text-xs capitalize transition-colors",
@@ -151,7 +153,12 @@ function TopicPractice({ topics }: { topics: TopicOption[] }) {
               ))}
             </div>
           </div>
-          <Button onClick={serve} disabled={pending || !topic} className="gap-1.5">
+          <Button
+            data-testid="qbank-serve-button"
+            onClick={serve}
+            disabled={pending || !topic}
+            className="gap-1.5"
+          >
             {pending ? (
               <Loader2 className="size-4 animate-spin" />
             ) : (

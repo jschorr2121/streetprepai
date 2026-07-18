@@ -124,6 +124,28 @@ needs action it can't perform itself.
   `assertUnderQuota` into every AI route; default is **$20/user/month**, override
   with `AI_USER_MONTHLY_CAP_USD` in Vercel env (`<=0` disables). Sanity-check the
   default against expected usage/pricing. (prod-readiness relay, 2026-07-15)
+- [ ] **(Optional) Give CI a real login to run the authed Playwright specs** — as of
+  2026-07-18 `web/tests/e2e/global-setup.ts` signs in once via the real `/login`
+  form and saves a `storageState` (cookies + localStorage) that every authed spec
+  (`chatbot.spec.ts`, `question-bank.spec.ts`, `profile.spec.ts`,
+  `applications.spec.ts`, `interview.spec.ts`, `resume.spec.ts`, the authed half of
+  `chat.spec.ts`) now consumes via `test.use({ storageState: AUTH_STORAGE_STATE_PATH })`.
+  It only runs when **`STREETPREP_E2E_AUTH=1`** AND **`STREETPREP_E2E_EMAIL`** /
+  **`STREETPREP_E2E_PASSWORD`** are all set — absent today in both local dev and
+  `.github/workflows/ci.yml`, so these specs stay SKIPPED everywhere right now (by
+  design — this is not blocking). To actually exercise them in CI: (1) create a
+  standing test account in the real (or a staging) Supabase project — onboarded,
+  with "Confirm email" off or already-confirmed for that account; (2) add
+  `STREETPREP_E2E_EMAIL` / `STREETPREP_E2E_PASSWORD` as GitHub Actions repo/env
+  secrets; (3) set `STREETPREP_E2E_AUTH=1` in the `e2e` job's env in
+  `.github/workflows/ci.yml` alongside the existing placeholder envs (this repo's
+  CI workflow was intentionally left untouched by this change — see CHANGES.md).
+  The chatbot spec mocks the LLM via `page.route` so it's free to run in CI; the
+  question-bank spec only serves questions (a DB read), never grades (no AI call),
+  so it's also free. `resume.spec.ts` / `chat.spec.ts`'s authed describe blocks are
+  separately gated behind `STREETPREP_E2E_LIVE_AI` and hit real Anthropic — do not
+  enable those in CI without also accepting the per-run cost. (prod-readiness relay,
+  session 5, 2026-07-18)
 
 ---
 

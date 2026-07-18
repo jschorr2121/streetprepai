@@ -318,6 +318,16 @@ Full implementation of the curriculum + daily workflow so a new user is carried 
 - Sourced from commercial prep-guide extracts for facts/sequencing only per sourcing rules in curriculum.md §7 — all prose and worked-example numbers original, no named case studies or vendor references carried over.
 - Chapter 10 (`valuation`) now has all 6 sections in `chapters.ts` present as guide files. Chapters 9 and 11 (`ev-equity-value`, `dcf`) remain fully covered from prior work; other chapters' gaps (ch. 1–2, ch. 8 §5–8, ch. 14) still open per curriculum.md §6.
 
+### E2E: deferred golden-path specs + storageState plumbing (2026-07-18, session 5)
+
+- **`tests/e2e/global-setup.ts`** (new, wired via `globalSetup` in `playwright.config.ts`): signs in through the real `/login` form and saves `tests/e2e/.auth/user.json` (gitignored) — but only when `STREETPREP_E2E_AUTH=1` and `STREETPREP_E2E_EMAIL`/`STREETPREP_E2E_PASSWORD` are all set; no-ops otherwise (today's CI default), so it adds zero cost to the unauthed run.
+- **`tests/e2e/chatbot.spec.ts`** (new): the "why JPM" golden path from Unit 9's PRD — `/tools/chatbot?thread=new` → send → mocked assistant reply renders → URL gains `?thread=<uuid>`; a second test checks the thread rail gets an entry. Mocks `/api/chat/assistant` via `page.route` with a hand-built AI SDK **v7.0.31** UI-message-stream (SSE `data: <json>\n\n` chunks — `start`/`start-step`/`text-start`/`text-delta`/`text-end`/`finish-step`/`finish`, then `data: [DONE]`; format verified against `node_modules/ai/dist/index.js`, not training data), so it never needs `STREETPREP_E2E_LIVE_AI`.
+- **`tests/e2e/question-bank.spec.ts`** (new): drives the "By topic" tab — `serveQuestionAction` is a pure DB read (no AI), so the spec serves a question and proves the "Submit for grading" button enables on input, without ever calling `gradeAnswerAction` (that hits Claude). Added `data-testid="qbank-topic-<value>"`/`qbank-difficulty-<value>`/`qbank-serve-button` to `components/learn/question-bank-studio.tsx` (attribute-only).
+- **`tests/e2e/_helpers.ts`** gained `AUTH_STORAGE_STATE_PATH`, `buildUiMessageStream()`, `UI_MESSAGE_STREAM_HEADERS`.
+- Wired the previously-inert `storageState` into the five *existing* authed specs that assumed a logged-in session but never had one (`profile.spec.ts`, `applications.spec.ts`, `interview.spec.ts`, `resume.spec.ts`, the authed describe in `chat.spec.ts`) via `test.use({ storageState: AUTH_STORAGE_STATE_PATH })` scoped inside each gated `describe` — `auth.spec.ts` untouched on purpose (its public redirect test and self-contained signup golden path must stay unauthed).
+- Verified: typecheck/lint/prettier clean; `pnpm test:e2e` under CI's placeholder env → **1 passed, 10 skipped** (was 1 passed / 6 skipped). CI has no auth secrets yet, so these specs stay skipped there by design — filed to `jakes-tasks.md` (optional, not blocking) with the exact secrets + workflow edit needed to actually run them.
+- Full detail + rationale in `context/relay/HANDOFF.md`'s 2026-07-18 session-5 entry.
+
 ## In Progress
 
 - Nothing active in code. **PRDs + tracer-bullet issues for Units 8–10 are written and ready** (2026-07-07) in the local-markdown tracker:

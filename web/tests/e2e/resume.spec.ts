@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import {
   AUTH_SKIP_FLAG,
   AUTH_SKIP_REASON,
+  AUTH_STORAGE_STATE_PATH,
   LIVE_AI_SKIP_FLAG,
   LIVE_AI_SKIP_REASON,
   SAMPLE_RESUME_TEXT,
@@ -15,6 +16,7 @@ import {
 test.describe("Resume Coach (live Anthropic — costs $)", () => {
   test.skip(AUTH_SKIP_FLAG, AUTH_SKIP_REASON);
   test.skip(LIVE_AI_SKIP_FLAG, LIVE_AI_SKIP_REASON);
+  test.use({ storageState: AUTH_STORAGE_STATE_PATH });
   test.setTimeout(60_000); // critique runs Claude end-to-end
 
   test("paste resume text → review → response area populates", async ({ page }) => {

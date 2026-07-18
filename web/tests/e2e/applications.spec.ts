@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { AUTH_SKIP_FLAG, AUTH_SKIP_REASON } from "./_helpers";
+import { AUTH_SKIP_FLAG, AUTH_SKIP_REASON, AUTH_STORAGE_STATE_PATH } from "./_helpers";
 
 /**
  * Application Tracker — golden-path E2E (Unit 7).
@@ -17,6 +17,7 @@ import { AUTH_SKIP_FLAG, AUTH_SKIP_REASON } from "./_helpers";
 
 test.describe("Application Tracker (golden path)", () => {
   test.skip(AUTH_SKIP_FLAG, AUTH_SKIP_REASON);
+  test.use({ storageState: AUTH_STORAGE_STATE_PATH });
   test.setTimeout(60_000);
 
   test("add → appears → filter hides it → clear filter → stage edit → delete → gone", async ({

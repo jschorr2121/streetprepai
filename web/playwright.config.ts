@@ -18,6 +18,12 @@ import { defineConfig, devices } from "@playwright/test";
 // Authed specs are gated behind STREETPREP_E2E_AUTH=1 (see tests/e2e/_helpers.ts).
 export default defineConfig({
   testDir: "./tests/e2e",
+  // Signs in once (via the real /login form) and saves a storageState file
+  // that authed specs opt into — but only when STREETPREP_E2E_AUTH=1 and
+  // STREETPREP_E2E_EMAIL/STREETPREP_E2E_PASSWORD are set. No-ops otherwise
+  // (the CI default), so this adds no cost to the unauthed run. See
+  // tests/e2e/global-setup.ts and AUTH_STORAGE_STATE_PATH in _helpers.ts.
+  globalSetup: "./tests/e2e/global-setup.ts",
   timeout: 60_000,
   fullyParallel: false,
   retries: 0,

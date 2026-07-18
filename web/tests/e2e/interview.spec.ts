@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { AUTH_SKIP_FLAG, AUTH_SKIP_REASON } from "./_helpers";
+import { AUTH_SKIP_FLAG, AUTH_SKIP_REASON, AUTH_STORAGE_STATE_PATH } from "./_helpers";
 
 /**
  * Auth strategy: AUTHED. /interview is part of the (app) shell which sits
@@ -9,6 +9,7 @@ import { AUTH_SKIP_FLAG, AUTH_SKIP_REASON } from "./_helpers";
 
 test.describe("Mock Interview Studio (golden path)", () => {
   test.skip(AUTH_SKIP_FLAG, AUTH_SKIP_REASON);
+  test.use({ storageState: AUTH_STORAGE_STATE_PATH });
 
   test("open studio → pick a mode → recording controls + question render", async ({ page }) => {
     await page.goto("/interview");
