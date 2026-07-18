@@ -86,6 +86,32 @@
 
 ## Session log
 
+- **2026-07-18 (session 5, cloud, checkpoint 2 — all landed work committed)** — Phase 5.
+  Committed this session (9 commits, all pushed): architecture.md embeddings drift;
+  playwright `webServer` (e2e self-sufficient, CI e2e was unrunnable before);
+  **LLM thread auto-titling** (haiku in `chat/assistant` onEnd, best-effort,
+  sanitized plain text, one ai_usage row `chat/assistant/title`, user-scoped
+  `updateThreadTitle`; suite 454); e2e golden-path specs commit (chatbot mocked-LLM
+  "why JPM" + question-bank smoke + storageState global-setup — the sub-entry
+  below is now COMMITTED, ignore its "left uncommitted" tail); firm_data refresh
+  brainstorm (`context/brainstorms/2026-07-18-firm-data-refresh.md`) + Jake
+  questions filed; chatbot flicker race filed as
+  `.scratch/unit-9-chatbot-rebuild/issues/06-new-thread-refresh-flicker.md`
+  (ready-for-agent, low); **fix(chatbot) abort/spend-cap** — an opus review
+  CONFIRMED that client disconnect mid-stream skipped streamText's onEnd (usage
+  row for the sonnet call never written → monthly spend cap bypassable by
+  aborting; partial reply + title still persisted/logged). Fixed with
+  `void result.consumeStream({onError})` (verified against ai@7.0.31 dist:
+  teed base stream, drain guarantees flush→onEnd→logUsage) + titling skipped
+  when persist fails + `createThread` onConflictDoNothing (concurrent
+  first-POST 500; cross-user collision verified safe under RLS + user_id
+  predicates). Still in flight: sonnet bug-hunt over interview/resume/
+  relationships routes. Session-5 facts for later sessions: (a) run local e2e
+  with `PLAYWRIGHT_CHROMIUM_EXECUTABLE=/opt/pw-browsers/chromium` + CI
+  placeholder env → 1 passed/10 skipped is the green baseline; (b) mocking the
+  assistant stream = `buildUiMessageStream()` in tests/e2e/_helpers.ts;
+  (c) `logUsage` is sync fire-and-forget by design at all call sites.
+
 - **2026-07-18 (session 5, cloud, IN PROGRESS — checkpoint)** — Phase 5. Committed so
   far: (1) architecture.md embeddings drift fixed (docs now say OpenAI
   text-embedding-3-small, the actual stack; Voyage switch stays an open Jake
