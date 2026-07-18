@@ -46,8 +46,10 @@ export const LIVE_AI_SKIP_FLAG = !process.env.STREETPREP_E2E_LIVE_AI;
 
 /**
  * A guide slug guaranteed to exist in content/guides/. Used by the chat spec.
+ * (Was "dcf-fundamentals", which never matched a real file — the live-AI chat
+ * spec would have 404'd if ever run.)
  */
-export const SAMPLE_GUIDE_SLUG = "dcf-fundamentals";
+export const SAMPLE_GUIDE_SLUG = "walk-me-through-a-dcf";
 
 /**
  * HTTP response headers `result.toUIMessageStreamResponse()` sets (see
