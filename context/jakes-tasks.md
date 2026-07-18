@@ -124,6 +124,21 @@ needs action it can't perform itself.
   `assertUnderQuota` into every AI route; default is **$20/user/month**, override
   with `AI_USER_MONTHLY_CAP_USD` in Vercel env (`<=0` disables). Sanity-check the
   default against expected usage/pricing. (prod-readiness relay, 2026-07-15)
+  *Update 2026-07-18 (session 6): the cap now also gates `gradeAnswerAction` (the
+  only AI-calling Server Action), and an opus pricing bug was fixed — interview
+  scoring/resume critique had been logged at 3x their real cost, so historical
+  `ai_usage` totals overstate opus spend; the $20 default now stretches ~3x
+  further on those features than the old data suggests.*
+
+- [ ] **Product call: cheaper transcription model?** (prod-readiness relay,
+  2026-07-18) — swapping OpenAI `whisper-1` ($0.006/min) for
+  `gpt-4o-mini-transcribe` ($0.003/min) halves transcription cost with a
+  one-line model change in the two transcribe routes. Gated on you because the
+  interview flow derives delivery metrics (WPM, filler words, pauses) from the
+  transcript's timestamped words, and transcript style/timestamps can differ
+  between models — worth a quick A/B on one of your own recordings before
+  switching. Details + sources in
+  `context/brainstorms/2026-07-18-ai-cost-optimization.md`. Say go/no-go.
 - [ ] **(Optional) Give CI a real login to run the authed Playwright specs** — as of
   2026-07-18 `web/tests/e2e/global-setup.ts` signs in once via the real `/login`
   form and saves a `storageState` (cookies + localStorage) that every authed spec
