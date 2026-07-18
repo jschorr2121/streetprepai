@@ -1,6 +1,6 @@
 # 06 — New-thread router.refresh() can momentarily drop the streamed reply
 
-Status: ready-for-agent (filed 2026-07-18, relay session 5 — low severity, cosmetic race)
+Status: done (2026-07-18, relay session 6 — stable mount key, see Comments)
 Blocked by: —
 PRD: ../PRD.md
 
@@ -37,3 +37,32 @@ from the DB — only momentarily invisible.
   call: note which in the PR).
 - Existing chatbot e2e spec (`tests/e2e/chatbot.spec.ts`) still passes; extend it if the fix
   changes URL/remount behavior.
+
+## Comments
+
+Went with the first fix direction (stable key across the first send), implemented as a small
+client wrapper rather than tracking a client-generated id in `page.tsx` (that's a Server
+Component and can't hold the uuid).
+
+`page.tsx` no longer keys `AssistantChat` itself; it renders a new `ChatSession` wrapper
+(`_components/chat.tsx`) that owns the mount key via a pure `computeNextChatSessionState`
+transition function: a `knownId: null -> non-null` change (a brand-new thread's
+client-generated id getting confirmed by `router.refresh()`) keeps the existing `mountKey`
+— so `AssistantChat` never remounts and `initialMessages`/`initialThreadId` prop churn is
+inert (confirmed against `@ai-sdk/react@4.0.34`: `useChat`'s `Chat` instance is only
+recreated when the `id` option changes, and `AssistantChat`'s own `threadId` state is a
+`useState` initializer that ignores prop updates after mount — so nothing resets). Any other
+transition (switching to a different existing thread, or an explicit `?thread=new` reset)
+gets a new `mountKey` and remounts/resets as before. `router.refresh()` stays in `onFinish`
+unchanged — the rail still updates because `ThreadRail` is a sibling server-rendered from the
+same refreshed `page.tsx`, untouched by this change.
+
+Files: `app/(app)/tools/chatbot/_components/chat.tsx` (new `computeNextChatSessionState` +
+`ChatSession`), `app/(app)/tools/chatbot/page.tsx` (renders `ChatSession` instead of keying
+`AssistantChat` directly). New test `tests/components/chat-session.test.ts` covers the four
+transition cases as a pure-function unit test (no DOM needed).
+
+Verified: typecheck/lint clean, full vitest suite 463/463 passing, `pnpm test:e2e` under CI's
+placeholder env still reports **1 passed / 10 skipped** (no regression — the existing
+`chatbot.spec.ts` golden path already covers the "URL gains `?thread=<uuid>`" and "rail gains
+an entry" assertions this fix had to preserve, so it wasn't extended further).

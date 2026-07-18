@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/page-header";
 import { requireUser } from "@/lib/auth/server";
 import { withUser } from "@/lib/db/client";
 import { getMessages, listThreads, type ChatThread } from "@/lib/db/queries/chat";
-import { AssistantChat } from "./_components/chat";
+import { ChatSession } from "./_components/chat";
 import { ThreadRail } from "./_components/thread-rail";
 
 export default async function ChatbotPage({
@@ -58,11 +58,7 @@ export default async function ChatbotPage({
               </div>
             </details>
           )}
-          <AssistantChat
-            key={active?.id ?? "new"}
-            initialThreadId={active?.id ?? null}
-            initialMessages={messages}
-          />
+          <ChatSession activeThreadId={active?.id ?? null} initialMessages={messages} />
         </div>
       </div>
     </div>

@@ -16,6 +16,26 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — new-thread refresh flicker fix, issue 06 (2026-07-18, session 6)
+
+Closed `.scratch/unit-9-chatbot-rebuild/issues/06-new-thread-refresh-flicker.md`: on a brand-new
+thread, `key={active?.id ?? "new"}` in `page.tsx` remounted `AssistantChat` the moment
+`router.refresh()` (called from the client's `onFinish`) caught up with the server-persisted
+thread id — racing the just-streamed assistant reply (persisted in the route's `onEnd`) against
+the refresh's `getMessages` read, so the reply could flicker out until the next navigation. Fix:
+`page.tsx` now renders a new `ChatSession` wrapper (`_components/chat.tsx`) instead of keying
+`AssistantChat` directly. `ChatSession` owns the mount key via a pure
+`computeNextChatSessionState` transition function — a `null -> non-null` change in the active
+thread id (the new thread's own id being confirmed) keeps the same mount key so
+`AssistantChat` never remounts and the race is moot; any other transition (switching to a
+different existing thread, or an explicit `?thread=new` reset) still gets a fresh mount key and
+resets the composer as before. `router.refresh()` stays unchanged — the thread rail still
+updates since `ThreadRail` is a sibling re-rendered from the same refreshed `page.tsx`. New test
+`tests/components/chat-session.test.ts` (pure-function, 5 cases) covers the transition rule.
+Verified: typecheck/lint clean, full vitest suite **463/463** passing, `pnpm test:e2e` under
+CI's placeholder env still **1 passed / 10 skipped** (no regression — `chatbot.spec.ts`'s
+existing golden path already asserts the URL/rail behavior this fix had to preserve).
+
 ### Prod-readiness relay — chat abort spend-cap fix + createThread race (2026-07-18, session 5)
 
 A correctness review of the chatbot route found that a client disconnect

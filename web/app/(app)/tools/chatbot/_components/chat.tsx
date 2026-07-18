@@ -132,6 +132,64 @@ export function ToolChip({
   );
 }
 
+type ChatSessionState = { knownId: string | null; mountKey: string };
+
+/**
+ * Decides whether a change in the server-resolved active thread id should
+ * remount the mounted `AssistantChat` instance (new `mountKey`) or leave it
+ * alone. A brand-new thread's client-generated id (see `AssistantChat`'s
+ * `threadId` state) only becomes visible here once the server persists it
+ * and `router.refresh()` picks it up — that null -> non-null transition is
+ * the same conversation catching up with its own id, not a switch, so the
+ * instance (and its already-streamed messages) must survive it. Any other
+ * change — a different thread, or an explicit reset to "new" — is a real
+ * switch and should reset the chat.
+ */
+export function computeNextChatSessionState(
+  prev: ChatSessionState,
+  activeThreadId: string | null,
+): ChatSessionState {
+  if (activeThreadId === prev.knownId) return prev;
+  const ownIdConfirmed = prev.knownId === null && activeThreadId !== null;
+  return {
+    knownId: activeThreadId,
+    mountKey: ownIdConfirmed ? prev.mountKey : (activeThreadId ?? "new"),
+  };
+}
+
+/**
+ * Server-driven wrapper around `AssistantChat` that owns its mount key.
+ * `page.tsx` re-resolves `activeThreadId` from `searchParams` on every
+ * `router.refresh()`; keying `AssistantChat` directly off that value would
+ * remount it the moment a brand-new thread's id gets confirmed, racing the
+ * just-streamed assistant reply against the server's persist (issue 06).
+ * See `computeNextChatSessionState` for the remount rule.
+ */
+export function ChatSession({
+  activeThreadId,
+  initialMessages,
+}: {
+  activeThreadId: string | null;
+  initialMessages: UIMessage[];
+}) {
+  const [session, setSession] = useState<ChatSessionState>(() => ({
+    knownId: activeThreadId,
+    mountKey: activeThreadId ?? "new",
+  }));
+
+  if (activeThreadId !== session.knownId) {
+    setSession(computeNextChatSessionState(session, activeThreadId));
+  }
+
+  return (
+    <AssistantChat
+      key={session.mountKey}
+      initialThreadId={activeThreadId}
+      initialMessages={initialMessages}
+    />
+  );
+}
+
 export function AssistantChat({
   initialThreadId,
   initialMessages,
