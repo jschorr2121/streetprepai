@@ -266,6 +266,15 @@ describe("gradeAnswerAction", () => {
     expect(gradeAnswerMock).not.toHaveBeenCalled();
   });
 
+  it("returns INTERNAL when the grading call itself throws", async () => {
+    getQuestionByIdMock.mockResolvedValue(QUESTION);
+    gradeAnswerMock.mockRejectedValue(new Error("anthropic down"));
+
+    const result = await gradeAnswerAction(VALID_GRADE_INPUT);
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.error.code).toBe("INTERNAL");
+  });
+
   it("happy path: grades the answer, records the attempt, and returns the grade", async () => {
     getQuestionByIdMock.mockResolvedValue(QUESTION);
     gradeAnswerMock.mockResolvedValue(GRADE_RESULT);

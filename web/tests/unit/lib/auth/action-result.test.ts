@@ -79,16 +79,7 @@ describe("actionErrorFromAppError", () => {
     expect(actionErrorFromAppError(new ExternalServiceError()).error.code).toBe("INTERNAL");
   });
 
-  // BUG: actionErrorFromAppError (web/lib/auth/action-result.ts:48-56) never
-  // copies ValidationError.fieldErrors onto the returned ActionError, even
-  // though ActionError.fieldErrors exists specifically for this purpose and
-  // ValidationError always carries a fieldErrors map. Every Server Action that
-  // throws ValidationError loses per-field messages, so forms can't render
-  // inline errors from a caught AppError -- only from a raw Zod safeParse via
-  // fieldErrorsFromIssues directly. Repro: actionErrorFromAppError(new
-  // ValidationError("msg", { email: "bad" })).error.fieldErrors is undefined.
-  // Asserting the CORRECT behavior below; skipped until the source is fixed.
-  it.skip("propagates fieldErrors from a ValidationError onto the ActionError", () => {
+  it("propagates fieldErrors from a ValidationError onto the ActionError", () => {
     const err = new ValidationError("Check the highlighted fields.", { email: "Invalid email" });
     const result = actionErrorFromAppError(err);
     expect(result.error.fieldErrors).toEqual({ email: "Invalid email" });

@@ -2,25 +2,18 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { fakeUser } from "@/tests/fixtures/user";
 
-// requireUser() delegates to lib/supabase/get-user's getUser().
+// Both helpers delegate to lib/supabase/get-user (the React cache()-deduped
+// wrapper): requireUser() → getUser(), getCurrentUserOrNull() → getUserOrNull().
 const getUserFn = vi.fn();
+const getUserOrNullFn = vi.fn();
 vi.mock("@/lib/supabase/get-user", () => ({
   getUser: (...args: unknown[]) => getUserFn(...args),
-}));
-
-// getCurrentUserOrNull() does NOT go through get-user.ts -- it calls
-// createClient() from lib/supabase/server directly and reads
-// supabase.auth.getUser() itself, so it needs its own mock target.
-const authGetUserFn = vi.fn();
-const createClientFn = vi.fn(async () => ({ auth: { getUser: authGetUserFn } }));
-vi.mock("@/lib/supabase/server", () => ({
-  createClient: (...args: unknown[]) => createClientFn(...args),
+  getUserOrNull: (...args: unknown[]) => getUserOrNullFn(...args),
 }));
 
 beforeEach(() => {
   getUserFn.mockReset();
-  authGetUserFn.mockReset();
-  createClientFn.mockClear();
+  getUserOrNullFn.mockReset();
 });
 
 describe("requireUser", () => {
@@ -56,26 +49,18 @@ describe("requireUser", () => {
 });
 
 describe("getCurrentUserOrNull", () => {
-  it("returns the user when supabase.auth.getUser() succeeds", async () => {
+  it("returns the user when a session exists", async () => {
     const { getCurrentUserOrNull } = await import("@/lib/auth/server");
     const u = fakeUser();
-    authGetUserFn.mockResolvedValue({ data: { user: u }, error: null });
+    getUserOrNullFn.mockResolvedValue(u);
 
     const result = await getCurrentUserOrNull();
     expect(result).toBe(u);
   });
 
-  it("returns null when supabase.auth.getUser() returns an error", async () => {
+  it("returns null when there is no session", async () => {
     const { getCurrentUserOrNull } = await import("@/lib/auth/server");
-    authGetUserFn.mockResolvedValue({ data: { user: null }, error: new Error("no session") });
-
-    const result = await getCurrentUserOrNull();
-    expect(result).toBeNull();
-  });
-
-  it("returns null when there's no error but also no user in the payload", async () => {
-    const { getCurrentUserOrNull } = await import("@/lib/auth/server");
-    authGetUserFn.mockResolvedValue({ data: { user: null }, error: null });
+    getUserOrNullFn.mockResolvedValue(null);
 
     const result = await getCurrentUserOrNull();
     expect(result).toBeNull();
