@@ -52,6 +52,15 @@ needs action it can't perform itself.
   make are in `context/brainstorms/2026-07-17-chat-onboarding.md`. Say go/no-go and the
   relay can build it in one session.
 
+- [ ] **Product call: firm_data refresh pipeline** (relay session 5, 2026-07-18) —
+  decision-ready brainstorm in `context/brainstorms/2026-07-18-firm-data-refresh.md`
+  (weekly Inngest cron + Anthropic web_search synthesis, ~$3–5/mo at 21 firms). Four
+  questions need your answers before an agent builds it: (a) firm roster — full ~21
+  target list or start with the 3 seeded (GS/Evercore/MS)? (b) is weekly freshness a
+  real SLA (needs alerting) or soft target? (c) cost cap/alert wanted? (d) confirm
+  compliance posture: web_search + LLM synthesis only, never republishing news-API
+  content verbatim. Answer here or in the brainstorm file.
+
 - [ ] **Confirm friend permissions for personal prep materials** (curriculum content
   authoring — see `context/curriculum.md` §7) — get an OK from Maddy Kozower, Max
   Ellis, and Zachary Ufberg before shipping any content derived from their personal
