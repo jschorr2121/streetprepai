@@ -1,4 +1,5 @@
 import { requireUser } from "@/lib/security/require-user";
+import { clientSafeError } from "@/lib/security/client-error";
 import { parseJson } from "@/lib/validation/parse";
 import {
   ChatSummaryOutputSchema,
@@ -22,66 +23,81 @@ export async function POST(req: Request): Promise<Response> {
 
   const client = getAnthropic();
 
-  const response = await client.messages.create({
-    model: MODELS.sonnet,
-    max_tokens: 1500,
-    system: STRUCTURE_CHAT_SYSTEM,
-    tools: [
-      {
-        name: "save_chat_summary",
-        description: "Save the structured summary of the coffee chat.",
-        input_schema: {
-          type: "object",
-          properties: {
-            topics: {
-              type: "array",
-              items: { type: "string" },
-              description: "Main topics covered in the conversation.",
-            },
-            adviceGiven: {
-              type: "array",
-              items: { type: "string" },
-              description: "Specific pieces of advice the banker gave the student.",
-            },
-            commitments: {
-              type: "array",
-              items: { type: "string" },
-              description: "Things the banker said they would do (intros, resources, follow-ups).",
-            },
-            personalDetails: {
-              type: "array",
-              items: { type: "string" },
-              description:
-                "Personal details about the banker worth remembering next time (family, hobbies, hometown, interests).",
-            },
-            followUps: {
-              type: "array",
-              items: {
-                type: "object",
-                properties: {
-                  description: { type: "string" },
-                  dueBy: {
-                    type: "string",
-                    description: "ISO date if a due date is implied.",
-                  },
-                },
-                required: ["description"],
+  let response;
+  try {
+    response = await client.messages.create({
+      model: MODELS.sonnet,
+      max_tokens: 1500,
+      system: STRUCTURE_CHAT_SYSTEM,
+      tools: [
+        {
+          name: "save_chat_summary",
+          description: "Save the structured summary of the coffee chat.",
+          input_schema: {
+            type: "object",
+            properties: {
+              topics: {
+                type: "array",
+                items: { type: "string" },
+                description: "Main topics covered in the conversation.",
               },
-              description: "Action items the student should complete after this chat.",
+              adviceGiven: {
+                type: "array",
+                items: { type: "string" },
+                description: "Specific pieces of advice the banker gave the student.",
+              },
+              commitments: {
+                type: "array",
+                items: { type: "string" },
+                description:
+                  "Things the banker said they would do (intros, resources, follow-ups).",
+              },
+              personalDetails: {
+                type: "array",
+                items: { type: "string" },
+                description:
+                  "Personal details about the banker worth remembering next time (family, hobbies, hometown, interests).",
+              },
+              followUps: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    description: { type: "string" },
+                    dueBy: {
+                      type: "string",
+                      description: "ISO date if a due date is implied.",
+                    },
+                  },
+                  required: ["description"],
+                },
+                description: "Action items the student should complete after this chat.",
+              },
             },
+            required: ["topics", "adviceGiven", "commitments", "personalDetails", "followUps"],
           },
-          required: ["topics", "adviceGiven", "commitments", "personalDetails", "followUps"],
         },
-      },
-    ],
-    tool_choice: { type: "tool", name: "save_chat_summary" },
-    messages: [
+      ],
+      tool_choice: { type: "tool", name: "save_chat_summary" },
+      messages: [
+        {
+          role: "user",
+          content: `Contact: ${capText(contactName, 200)}, ${capText(contactTitle, 200)} at ${capText(contactFirm, 200)}.\n\nRaw notes the student just jotted down:\n${wrapUserText(rawNotes, "raw_notes", { maxChars: 20000 })}\n\nStructure these into a memory record.`,
+        },
+      ],
+    });
+  } catch (err) {
+    return Response.json(
       {
-        role: "user",
-        content: `Contact: ${capText(contactName, 200)}, ${capText(contactTitle, 200)} at ${capText(contactFirm, 200)}.\n\nRaw notes the student just jotted down:\n${wrapUserText(rawNotes, "raw_notes", { maxChars: 20000 })}\n\nStructure these into a memory record.`,
+        error: clientSafeError(
+          "relationships/structure-chat",
+          err,
+          "The AI request failed. Please try again.",
+        ),
       },
-    ],
-  });
+      { status: 502 },
+    );
+  }
 
   logUsage({
     model: MODELS.sonnet,
@@ -97,7 +113,10 @@ export async function POST(req: Request): Promise<Response> {
 
   const toolUse = response.content.find((c) => c.type === "tool_use");
   if (!toolUse || toolUse.type !== "tool_use") {
-    return Response.json({ error: "no tool call" }, { status: 500 });
+    return Response.json(
+      { error: "Model did not call the save_chat_summary tool." },
+      { status: 502 },
+    );
   }
 
   // Tool output is untrusted model output — validate before embedding/returning.

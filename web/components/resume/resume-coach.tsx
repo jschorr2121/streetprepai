@@ -318,11 +318,18 @@ function BulletDiff({
         <div className="space-y-2">
           <div className="flex flex-wrap items-center gap-2">
             <span className="eyebrow">Before</span>
-            {bullet.weakness_flags.map((f) => (
-              <Badge key={f} variant="outline">
-                {FLAG_LABELS[f]}
-              </Badge>
-            ))}
+            {bullet.weakness_flags.map((f) => {
+              // The server schema allows any string for graceful degradation
+              // (see lib/validation/schemas/resume.ts); skip flags we don't
+              // have a label for rather than rendering a blank badge.
+              const label = FLAG_LABELS[f];
+              if (!label) return null;
+              return (
+                <Badge key={f} variant="outline">
+                  {label}
+                </Badge>
+              );
+            })}
           </div>
           <p className="bg-destructive/5 rounded-sm p-3 text-sm leading-relaxed">
             {bullet.original}

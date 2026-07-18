@@ -1,4 +1,5 @@
 import { requireUser } from "@/lib/security/require-user";
+import { clientSafeError } from "@/lib/security/client-error";
 import { parseJson } from "@/lib/validation/parse";
 import { DraftFollowupSchema } from "@/lib/validation/schemas/relationships";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
@@ -40,12 +41,26 @@ export async function POST(req: Request): Promise<Response> {
     `Student name: ${capText(studentName ?? "Jake", 200)}`,
   ].join("\n");
 
-  const response = await client.messages.create({
-    model: MODELS.haiku,
-    max_tokens: 400,
-    system: DRAFT_FOLLOWUP_SYSTEM,
-    messages: [{ role: "user", content: prompt }],
-  });
+  let response;
+  try {
+    response = await client.messages.create({
+      model: MODELS.haiku,
+      max_tokens: 400,
+      system: DRAFT_FOLLOWUP_SYSTEM,
+      messages: [{ role: "user", content: prompt }],
+    });
+  } catch (err) {
+    return Response.json(
+      {
+        error: clientSafeError(
+          "relationships/draft-followup",
+          err,
+          "The AI request failed. Please try again.",
+        ),
+      },
+      { status: 502 },
+    );
+  }
 
   logUsage({
     model: MODELS.haiku,

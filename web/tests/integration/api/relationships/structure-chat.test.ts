@@ -13,29 +13,31 @@ vi.mock("@/lib/supabase/get-user", () => ({
   getUserOrNull: () => getUserMock().catch(() => null),
 }));
 
+const createMock = vi.fn().mockResolvedValue({
+  content: [
+    {
+      type: "tool_use",
+      id: "tu_1",
+      name: "save_chat_summary",
+      input: {
+        topics: ["TMT deal flow"],
+        adviceGiven: ["read M&I"],
+        commitments: ["intro to summer analyst"],
+        personalDetails: ["from Boston"],
+        followUps: [{ description: "send thank-you", dueBy: "2026-04-17" }],
+      },
+    },
+  ],
+  model: "claude-sonnet-4-6",
+  usage: { input_tokens: 10, output_tokens: 5 },
+  stop_reason: "tool_use",
+});
+
 vi.mock("@/lib/ai/anthropic", () => ({
   getAnthropic: () => ({
     messages: {
       stream: vi.fn(),
-      create: vi.fn().mockResolvedValue({
-        content: [
-          {
-            type: "tool_use",
-            id: "tu_1",
-            name: "save_chat_summary",
-            input: {
-              topics: ["TMT deal flow"],
-              adviceGiven: ["read M&I"],
-              commitments: ["intro to summer analyst"],
-              personalDetails: ["from Boston"],
-              followUps: [{ description: "send thank-you", dueBy: "2026-04-17" }],
-            },
-          },
-        ],
-        model: "claude-sonnet-4-6",
-        usage: { input_tokens: 10, output_tokens: 5 },
-        stop_reason: "tool_use",
-      }),
+      create: (...args: unknown[]) => createMock(...args),
     },
   }),
   MODELS: {
@@ -122,6 +124,29 @@ describe("POST /api/relationships/structure-chat", () => {
     const json = await res.json();
     expect(Array.isArray(json.topics)).toBe(true);
     expect(Array.isArray(json.followUps)).toBe(true);
+  });
+
+  it("returns 502 and logs server-side when the Anthropic call throws", async () => {
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-sc-throw" }));
+    createMock.mockRejectedValueOnce(new Error("upstream boom"));
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const { POST } = await import("@/app/api/relationships/structure-chat/route");
+    const res = await POST(
+      new Request("http://localhost/api/relationships/structure-chat", {
+        method: "POST",
+        body: JSON.stringify(validBody),
+        headers: { "x-forwarded-for": "22.2.0.1", "Content-Type": "application/json" },
+      }),
+    );
+    expect(res.status).toBe(502);
+    const json = await res.json();
+    expect(typeof json.error).toBe("string");
+    expect(json.error).not.toContain("upstream boom");
+    expect(errorSpy).toHaveBeenCalledWith(
+      "[relationships/structure-chat]",
+      expect.any(Error),
+    );
+    errorSpy.mockRestore();
   });
 
   it("returns 429 after exhausting per-user budget", async () => {

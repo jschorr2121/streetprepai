@@ -49,12 +49,6 @@ export const PRICING: Record<string, PricingEntry> = {
     cache_write: 0,
     cache_read: 0,
   },
-  "whisper-1": {
-    input: 0.006,
-    output: 0.0,
-    cache_write: 0,
-    cache_read: 0,
-  },
 };
 
 /**
@@ -63,6 +57,14 @@ export const PRICING: Record<string, PricingEntry> = {
  * routes pass `surchargeUsd` to `logUsage` instead.
  */
 export const WEB_SEARCH_PER_CALL_USD = 0.01;
+
+/**
+ * OpenAI Whisper (`whisper-1`) is billed per minute of audio, not per token —
+ * $0.006/min per OpenAI's published pricing. There's no token count to plug
+ * into `calculateCost`, so transcribe routes pass a duration-derived
+ * `surchargeUsd` to `logUsage` instead (usage.input_tokens/output_tokens = 0).
+ */
+export const WHISPER_USD_PER_MINUTE = 0.006;
 
 export function calculateCost(model: string, usage: TokenUsage): number {
   const p = PRICING[model] ?? PRICING[model.split("-20")[0]!] ?? null;

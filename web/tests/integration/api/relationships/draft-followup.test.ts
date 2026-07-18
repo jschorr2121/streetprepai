@@ -13,21 +13,23 @@ vi.mock("@/lib/supabase/get-user", () => ({
   getUserOrNull: () => getUserMock().catch(() => null),
 }));
 
+const createMock = vi.fn().mockResolvedValue({
+  content: [
+    {
+      type: "text",
+      text: "Subject: Thanks for the chat\n\nHi Alex,\n\nThanks again for taking the time...",
+    },
+  ],
+  model: "claude-haiku-4-5-20251001",
+  usage: { input_tokens: 10, output_tokens: 5 },
+  stop_reason: "end_turn",
+});
+
 vi.mock("@/lib/ai/anthropic", () => ({
   getAnthropic: () => ({
     messages: {
       stream: vi.fn(),
-      create: vi.fn().mockResolvedValue({
-        content: [
-          {
-            type: "text",
-            text: "Subject: Thanks for the chat\n\nHi Alex,\n\nThanks again for taking the time...",
-          },
-        ],
-        model: "claude-haiku-4-5-20251001",
-        usage: { input_tokens: 10, output_tokens: 5 },
-        stop_reason: "end_turn",
-      }),
+      create: (...args: unknown[]) => createMock(...args),
     },
   }),
   MODELS: {
@@ -120,6 +122,29 @@ describe("POST /api/relationships/draft-followup", () => {
     expect(json.subject).toBe("Thanks for the chat");
     expect(typeof json.body).toBe("string");
     expect(json.body).toContain("Hi Alex");
+  });
+
+  it("returns 502 and logs server-side when the Anthropic call throws", async () => {
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-df-throw" }));
+    createMock.mockRejectedValueOnce(new Error("upstream boom"));
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const { POST } = await import("@/app/api/relationships/draft-followup/route");
+    const res = await POST(
+      new Request("http://localhost/api/relationships/draft-followup", {
+        method: "POST",
+        body: JSON.stringify(validBody),
+        headers: { "x-forwarded-for": "21.2.0.1", "Content-Type": "application/json" },
+      }),
+    );
+    expect(res.status).toBe(502);
+    const json = await res.json();
+    expect(typeof json.error).toBe("string");
+    expect(json.error).not.toContain("upstream boom");
+    expect(errorSpy).toHaveBeenCalledWith(
+      "[relationships/draft-followup]",
+      expect.any(Error),
+    );
+    errorSpy.mockRestore();
   });
 
   it("returns 429 after exhausting per-user budget", async () => {

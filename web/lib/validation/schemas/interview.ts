@@ -1,6 +1,10 @@
 import { z } from "zod";
 
-export const INTERVIEW_MODES = ["technical", "behavioral", "firm", "superday", "markets"] as const;
+// Only these 4 modes are used by the UI, `InterviewMode`
+// (lib/data/interview-questions.ts), and seeded questions. The `mock_interviews.mode`
+// DB CHECK constraint (supabase/migrations/0000_baseline.sql) still allows a 5th
+// value, 'markets' — a superset there is harmless, and narrowing it needs a migration.
+export const INTERVIEW_MODES = ["technical", "behavioral", "firm", "superday"] as const;
 
 const AudioMetricsSchema = z
   .object({

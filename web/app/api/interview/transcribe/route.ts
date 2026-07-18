@@ -1,5 +1,7 @@
 import { requireUser } from "@/lib/security/require-user";
 import { clientSafeError } from "@/lib/security/client-error";
+import { logUsage } from "@/lib/ai/usage";
+import { WHISPER_USD_PER_MINUTE } from "@/lib/ai/pricing";
 import type { TimestampedWord } from "@/lib/audio/analyze";
 
 export const runtime = "nodejs";
@@ -17,6 +19,8 @@ export interface TranscribeResponse {
 interface WhisperVerboseJson {
   text: string;
   words?: Array<{ word: string; start: number; end: number }>;
+  /** Audio duration in seconds — present on verbose_json responses. */
+  duration?: number;
 }
 
 export async function POST(req: Request): Promise<Response> {
@@ -138,6 +142,18 @@ export async function POST(req: Request): Promise<Response> {
     start: w.start,
     end: w.end,
   }));
+
+  // Whisper bills per minute of audio regardless of transcript content, so
+  // log one row per successful upstream call — a missing `duration` still
+  // logs a $0 row rather than silently skipping the row entirely.
+  const durationSeconds = data.duration ?? 0;
+  logUsage({
+    model: "whisper-1",
+    usage: { input_tokens: 0, output_tokens: 0 },
+    endpoint: "interview/transcribe",
+    userId: gate.user.id,
+    surchargeUsd: (durationSeconds / 60) * WHISPER_USD_PER_MINUTE,
+  });
 
   if (!transcript) {
     return Response.json(
