@@ -166,12 +166,20 @@ describe("POST /api/chat/assistant", () => {
     // The model call includes the new user turn, the standalone system prompt,
     // and the closure-injected tool registry with a bounded step count.
     const call = streamTextMock.mock.calls[0]?.[0] as {
-      system: string;
+      system: {
+        role: string;
+        content: string;
+        providerOptions: { anthropic: { cacheControl: { type: string } } };
+      };
       messages: Array<{ role: string }>;
       tools: Record<string, unknown>;
       stopWhen: unknown;
     };
-    expect(call.system).toContain("standalone IB prep mentor");
+    expect(call.system.role).toBe("system");
+    expect(call.system.content).toContain("standalone IB prep mentor");
+    // Prompt caching: the stable prefix carries an Anthropic ephemeral cache
+    // breakpoint so it is not re-billed at full input rate every turn.
+    expect(call.system.providerOptions.anthropic.cacheControl).toEqual({ type: "ephemeral" });
     expect(call.messages).toHaveLength(1);
     expect(Object.keys(call.tools).sort()).toEqual([
       "get_applied_jobs",
@@ -191,6 +199,22 @@ describe("POST /api/chat/assistant", () => {
       sendSources?: boolean;
     };
     expect(streamOpts.sendSources).toBe(true);
+  });
+
+  it("marks the stable prefix with an Anthropic ephemeral cache breakpoint", async () => {
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-assist-cache" }));
+    getThreadMock.mockResolvedValue(null);
+    const { POST } = await import("@/app/api/chat/assistant/route");
+    await POST(makeRequest(validBody, "10.9.0.13"));
+
+    // The system prompt is passed as a SystemModelMessage (not a bare string) so
+    // it can carry providerOptions — the only way to attach cache_control. The
+    // breakpoint lands on the system block, which Anthropic caches together with
+    // the tool schemas that precede it in the serialized request.
+    const call = streamTextMock.mock.calls[0]?.[0] as {
+      system: { providerOptions?: { anthropic?: { cacheControl?: unknown } } };
+    };
+    expect(call.system.providerOptions?.anthropic?.cacheControl).toEqual({ type: "ephemeral" });
   });
 
   it("persists settled tool parts from the response message", async () => {

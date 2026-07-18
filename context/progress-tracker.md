@@ -23,8 +23,9 @@ Additions since the first checkpoint:
 - **Consolidation complete** (slices 2–3): `checkRateLimit` now runs on the shared `lib/ratelimit/core.ts` primitive with key prefixes/tier numbers byte-preserved (no live bucket resets) and a new store-error policy — Redis failure denies AI tiers (expensive/whisper) and allows cheap/public, where previously any Redis throw 500'd the route.
 - **Monthly spend cap now enforced in Server Actions**: new `assertAiActionAllowed(userId)` gates `gradeAnswerAction` (enumerated: the only AI-calling Server Action). Same error/message as the API routes; store-failure semantics identical to `require-user.ts`.
 - **Opus pricing bug**: `PRICING["claude-opus-4-7"]` carried Opus-4.1-era \$15/\$75 rates; corrected to the published \$5/\$25 (cache 6.25/0.5). Interview scoring and resume critique were logged at 3x real cost, so users hit the \$20 monthly cap ~3x early. Historical `ai_usage` rows keep their stored cost.
-- **AI cost brainstorm** committed (`context/brainstorms/2026-07-18-ai-cost-optimization.md`): chat assistant prompt caching (in flight), cheaper transcription model, web_search tool-version upgrade, model routing.
-- Suite: **626 passing / 74 files**.
+- **AI cost brainstorm** committed (`context/brainstorms/2026-07-18-ai-cost-optimization.md`): chat assistant prompt caching (done, below), cheaper transcription model, web_search tool-version upgrade, model routing.
+- **Chat assistant prompt caching landed**: `chat/assistant` now passes `ASSISTANT_SYSTEM` as a `SystemModelMessage` with `providerOptions.anthropic.cacheControl: { type: "ephemeral" }` (AI SDK v7 + `@ai-sdk/anthropic@4.0.16`). Anthropic serializes tools → system → messages, so the single system breakpoint caches the whole ~1.2–1.5k-token stable prefix (tool schemas + system) at the $0.30/MTok cache-read rate instead of re-billing $3/MTok every turn. `sdkUsageToTokenUsage` already mapped `cacheReadTokens`/`cacheWriteTokens`, so cache tokens flow into `ai_usage` with no mapping change. `generateThreadTitle` (haiku, ~164-token prefix) left as-is — too small to cache.
+- Suite: **627 passing / 74 files**.
 
 ### (superseded by the above) Prod-readiness relay — rate-limit stack consolidation + coverage push (2026-07-18, session 6) — IN PROGRESS
 

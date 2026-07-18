@@ -74,7 +74,20 @@ export async function POST(req: Request): Promise<Response> {
 
   const result = streamText({
     model: anthropic(MODELS.sonnet),
-    system: ASSISTANT_SYSTEM,
+    // Prompt caching: mark the stable prefix (tool schemas + this system prompt)
+    // with an Anthropic ephemeral cache breakpoint. Anthropic serializes the
+    // request as tools → system → messages, so a single breakpoint on the system
+    // block caches everything before it too — the whole ~1.2-1.5k-token prefix is
+    // re-used at the $0.30/MTok cache-read rate instead of re-billed at $3/MTok
+    // every turn. The `system` field accepts a SystemModelMessage precisely so
+    // providerOptions (caching) can ride along — see ai@7 SystemModelMessage.
+    // Requires the prefix to be byte-stable across requests: buildAssistantTools
+    // builds a fixed-order registry and never leaks userId into schema text.
+    system: {
+      role: "system",
+      content: ASSISTANT_SYSTEM,
+      providerOptions: { anthropic: { cacheControl: { type: "ephemeral" } } },
+    },
     messages: await convertToModelMessages(modelContext, {
       tools,
       ignoreIncompleteToolCalls: true,
