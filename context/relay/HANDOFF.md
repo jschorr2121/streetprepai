@@ -86,7 +86,37 @@
 
 ## Session log
 
-- **2026-07-18 (session 6, cloud, IN PROGRESS — checkpoint 2)** — Since checkpoint 1:
+- **2026-07-18 (session 6, cloud, FINAL — ~18 commits, all pushed, suite 720/80)** —
+  Phase 5. Full-session summary (details in the two checkpoints below): (1) **auth/
+  rate-limit consolidation COMPLETE** — one shared primitive `lib/ratelimit/core.ts`
+  (`buildLimiter`), both surfaces are thin adapters; key prefixes/tiers byte-preserved;
+  NEW store-error policy: Redis failure now denies AI tiers and allows cheap/public
+  (previously it 500'd every route). (2) **Spend-cap bypass closed** —
+  `assertAiActionAllowed` gates `gradeAnswerAction` (the only AI-calling Server
+  Action). (3) **Opus pricing bug** — PRICING had $15/$75 for claude-opus-4-7, real
+  price $5/$25 (verified live): interview-score + resume-critique were billed 3x
+  in ai_usage, tripping the $20 cap ~3x early. (4) **Prompt caching enabled** on
+  chat/assistant (SystemModelMessage + anthropic cacheControl; tools+system prefix
+  ~1.1–1.5k tokens > 1024 floor; usage mapping already captured cache tokens).
+  (5) **fieldErrors fix** — actionErrorFromAppError now propagates
+  ValidationError.fieldErrors. (6) **Coverage push +199 tests / +15 files**
+  (521→720): pure lib modules, real lib/ai/grading, relationships + auth actions,
+  stream-response bridge, dashboard tour action, analytics no-op paths.
+  (7) Prettier CI-gate fix (7 session-5 files weren't format-clean). All gates
+  verified at end: typecheck ✅ lint 0 err ✅ suite 720/80 ✅ build exit 0 ✅
+  e2e 1 passed/10 skipped (green baseline) ✅ repo-wide prettier ✅. **Flake note:**
+  1 test failed ONCE on the first run after fresh pnpm install, never in 6
+  subsequent runs (identity unknown — output wasn't captured); treat first-run
+  failures after install as suspect warm-up, capture the log before diagnosing.
+  **Next-lane menu (session 7)**: (a) Jake-gated go-aheads if answered (Unit 8 #06,
+  chat onboarding, firm_data, transcription-model swap, e2e CI creds);
+  (b) web_search_20260209 upgrade — SDK 4.0.16 exposes it but sonnet-4-6 model
+  support unverified and a live test costs money (route comment documents the pin);
+  (c) more brainstorm items (`2026-07-18-ai-cost-optimization.md`): model routing
+  for grading, batch API for embeddings backfills; (d) perpetual: UX polish sweep
+  with fresh eyes, component (dom-project) test coverage is still thin.
+
+- **2026-07-18 (session 6, cloud, superseded — checkpoint 2)** — Since checkpoint 1:
   **consolidation COMPLETE** (`5de1d7d` slice 2 — checkRateLimit on the shared core,
   prefixes/tiers byte-preserved, NEW store-error policy deny-AI/allow-cheap;
   `514e877` slice 3 — headers now describe one core + two adapters); **R4 spend-cap

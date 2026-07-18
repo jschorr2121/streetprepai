@@ -16,7 +16,15 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
-### Prod-readiness relay — rate-limit stack consolidation + coverage push + AI cost fixes (2026-07-18, session 6) — IN PROGRESS
+### Prod-readiness relay — rate-limit stack consolidation + coverage push + AI cost fixes (2026-07-18, session 6) — COMPLETE
+
+Final numbers: ~18 commits pushed; suite **720 passing / 80 files** (from 521/65);
+typecheck/lint/build/e2e-baseline all green. Late additions beyond the checkpoint
+notes below: Anthropic prompt caching enabled on the chat assistant's stable prefix
+(system + tool schemas now cache at 0.1x on hits); relationships + auth Server
+Actions fully unit-tested (+68); stream-response bridge, dashboard tour action, and
+analytics no-op paths covered (+25). Two new Jake questions filed (cheaper
+transcription model; spend-cap context update).
 
 Additions since the first checkpoint:
 
