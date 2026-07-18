@@ -86,6 +86,28 @@
 
 ## Session log
 
+- **2026-07-18 (session 6, cloud, IN PROGRESS — checkpoint 2)** — Since checkpoint 1:
+  **consolidation COMPLETE** (`5de1d7d` slice 2 — checkRateLimit on the shared core,
+  prefixes/tiers byte-preserved, NEW store-error policy deny-AI/allow-cheap;
+  `514e877` slice 3 — headers now describe one core + two adapters); **R4 spend-cap
+  gap CLOSED** (`03caf58` — `assertAiActionAllowed(userId)` in lib/ai/usage.ts gates
+  gradeAnswerAction, the ONLY AI-calling Server Action [verified by enumeration];
+  same RateLimitedError/message as routes; fail-open on store fault, closed on
+  definitive over-cap — mirrors require-user); **opus pricing bug FIXED**
+  (`867df1f` — PRICING had Opus-4.1-era \$15/\$75 for claude-opus-4-7; real price
+  \$5/\$25 verified against Anthropic's live pricing page → interview/score +
+  resume/critique were logged at 3x cost, tripping the \$20 cap ~3x early);
+  **style commit** `7ef469f` (7 session-5 files weren't prettier-clean — CI's
+  format gate would fail at 9751967; watch for this: run prettier --check
+  repo-wide before ending a session); **cost brainstorm** committed
+  (`context/brainstorms/2026-07-18-ai-cost-optimization.md`, `1ae6e8d`) — top
+  items: chat/assistant caches NOTHING (bare-string system; in flight this
+  session), whisper→gpt-4o-mini-transcribe would halve transcription cost
+  (quality-gate first), web_search_20260209 dynamic-filter variant cuts
+  compounding search-result token re-billing. Suite at checkpoint 2:
+  **626 passing / 74 files**. In flight: prompt-caching on chat/assistant
+  (opus agent). Remaining queue: flake hunt (run LAST, quiet machine).
+
 - **2026-07-18 (session 6, cloud, IN PROGRESS — checkpoint 1)** — Phase 5. Lane picked:
   auth/rate-limit consolidation (design-first, opus design + opus implementation) +
   parallel coverage push. Landed so far: **fieldErrors fix** (`8bec85b` — the shared

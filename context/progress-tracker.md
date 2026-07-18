@@ -16,7 +16,17 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
-### Prod-readiness relay — rate-limit stack consolidation + coverage push (2026-07-18, session 6) — IN PROGRESS
+### Prod-readiness relay — rate-limit stack consolidation + coverage push + AI cost fixes (2026-07-18, session 6) — IN PROGRESS
+
+Additions since the first checkpoint:
+
+- **Consolidation complete** (slices 2–3): `checkRateLimit` now runs on the shared `lib/ratelimit/core.ts` primitive with key prefixes/tier numbers byte-preserved (no live bucket resets) and a new store-error policy — Redis failure denies AI tiers (expensive/whisper) and allows cheap/public, where previously any Redis throw 500'd the route.
+- **Monthly spend cap now enforced in Server Actions**: new `assertAiActionAllowed(userId)` gates `gradeAnswerAction` (enumerated: the only AI-calling Server Action). Same error/message as the API routes; store-failure semantics identical to `require-user.ts`.
+- **Opus pricing bug**: `PRICING["claude-opus-4-7"]` carried Opus-4.1-era \$15/\$75 rates; corrected to the published \$5/\$25 (cache 6.25/0.5). Interview scoring and resume critique were logged at 3x real cost, so users hit the \$20 monthly cap ~3x early. Historical `ai_usage` rows keep their stored cost.
+- **AI cost brainstorm** committed (`context/brainstorms/2026-07-18-ai-cost-optimization.md`): chat assistant prompt caching (in flight), cheaper transcription model, web_search tool-version upgrade, model routing.
+- Suite: **626 passing / 74 files**.
+
+### (superseded by the above) Prod-readiness relay — rate-limit stack consolidation + coverage push (2026-07-18, session 6) — IN PROGRESS
 
 - **fix(actions)** `actionErrorFromAppError` dropped `ValidationError.fieldErrors` — every Server Action translating a thrown ValidationError lost per-field form messages. Now propagated (`8bec85b`); regression test included in the batch below.
 - **Coverage push (~120 new tests)**: pure-module unit tests for `lib/audio/analyze`, `lib/curriculum/{cycle,progress,chapters}`, `lib/validation/parse`, `lib/auth/{action-result,server}`, `lib/logging/request-context`, plus real-module tests for `lib/ai/grading` (previously only ever `vi.mock`'d away — prompt building, score rounding, no-tool_use error path now covered) and an `INTERNAL`-on-grading-throw case in the qbank action spec. (`c1869ad`, `43ccc64`, `c28ee8d`.)
