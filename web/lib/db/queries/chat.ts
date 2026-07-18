@@ -106,6 +106,23 @@ export async function getThread(
   return { id: row.id, title: row.title, createdAt: row.createdAt, updatedAt: row.updatedAt };
 }
 
+/**
+ * Overwrite a thread's title (LLM auto-titling after the first exchange, or
+ * any future manual rename). Scoped to the owning user like every other
+ * write here — a foreign/missing thread id is a silent no-op.
+ */
+export async function updateThreadTitle(
+  db: Executor,
+  userId: string,
+  threadId: string,
+  title: string,
+): Promise<void> {
+  await db
+    .update(chatThreads)
+    .set({ title })
+    .where(and(eq(chatThreads.id, threadId), eq(chatThreads.userId, userId)));
+}
+
 export async function listThreads(db: Executor, userId: string): Promise<ChatThread[]> {
   const rows = await db
     .select()

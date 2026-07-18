@@ -16,6 +16,29 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — LLM thread auto-titling (2026-07-18, cloud, branch `fable/prod-readiness`)
+
+Closed the last Unit 9 deferral: chatbot threads were titled by truncating the
+first user message to 60 chars (`app/api/chat/assistant/route.ts`). Now, on a
+thread's first exchange only, `onEnd` (after the assistant turn persists)
+best-effort calls `generateThreadTitle` (`lib/ai/chat-title.ts` — haiku,
+plain-text output, sanitized via `sanitizeTitle`, never `JSON.parse`d) and
+writes the result via the new `updateThreadTitle` query
+(`lib/db/queries/chat.ts`, user-scoped like every other write there). A
+failure is caught and logged (`console.error`, matching the sibling persist
+catch two lines up) and the fallback title stands — chat responses never
+break. No new route or rate limiter: it runs inside the already
+`expensive`-tier-gated `chat/assistant` request, after the streamed response
+is already in flight. One `ai_usage` row per title call
+(`endpoint: "chat/assistant/title"`). The thread rail
+(`_components/thread-rail.tsx`) needed no changes — it just renders whatever
+title `listThreads` returns from the next server-rendered page load. Tests:
+`tests/unit/lib/ai/chat-title.test.ts` (sanitizer), `updateThreadTitle` cases
+in `tests/unit/lib/db/queries/chat.test.ts`, and three wiring tests in
+`tests/integration/api/chat/assistant.test.ts` (new-thread titling,
+no-op on follow-up turns, best-effort failure doesn't break the response).
+Suite **454 passing** (was 451); typecheck/lint clean.
+
 ### Prod-readiness relay — session 4, UNIT 9 COMPLETE (2026-07-17, cloud, branch `fable/prod-readiness`)
 
 All five Unit 9 issues shipped in one session — `/tools/chatbot` is now a real
@@ -27,7 +50,7 @@ per-search cost tracking, and the "why JPM" firm-prep synthesis path (`get_firm`
 fuzzy lookup + firm-scoped chat search + attribution prompt). Built on AI SDK v7
 (PRD's v6 was stale). The parallel OpenAI chat stack was deleted. Suite
 **390 passing**; build green. Deferred: e2e specs, firm_data pipeline, LLM thread
-titles. Session tail: Unit 8 scoped — issues 01–05 were already shipped by Unit 11,
+titles (~~done — see entry above~~). Session tail: Unit 8 scoped — issues 01–05 were already shipped by Unit 11,
 so the session backfilled the missing 50 tests over qbank queries/actions instead
 (suite **441 passing**); issue 06 + chat-onboarding brainstorm are triage-gated on
 Jake. Next lanes: e2e coverage (fresh session), Jake's go-aheads.

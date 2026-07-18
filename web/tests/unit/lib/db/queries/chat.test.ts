@@ -9,6 +9,7 @@ import {
   getThread,
   listThreads,
   toStoredParts,
+  updateThreadTitle,
 } from "@/lib/db/queries/chat";
 import { createPgliteDb } from "../../../../helpers/pglite-db";
 
@@ -172,6 +173,20 @@ describe("lib/db/queries/chat", () => {
     // FK cascade removed the messages: re-creating the thread id shows none.
     await createThread(db, USER_A, THREAD_1, "t2");
     expect(await getMessages(db, USER_A, THREAD_1)).toEqual([]);
+  });
+
+  it("updateThreadTitle overwrites the title (LLM auto-titling) and is scoped to the owner", async () => {
+    const db = await createPgliteDb();
+    await createThread(db, USER_A, THREAD_1, "How do I prep for LBOs?");
+
+    // A different user's write is a silent no-op — the real title survives.
+    await updateThreadTitle(db, USER_B, THREAD_1, "hijacked title");
+    expect((await getThread(db, USER_A, THREAD_1))?.title).toBe("How do I prep for LBOs?");
+
+    await updateThreadTitle(db, USER_A, THREAD_1, "LBO prep strategy");
+    expect((await getThread(db, USER_A, THREAD_1))?.title).toBe("LBO prep strategy");
+    // Other users still can't see it.
+    expect(await getThread(db, USER_B, THREAD_1)).toBeNull();
   });
 
   it("appendMessages with an empty batch is a no-op", async () => {

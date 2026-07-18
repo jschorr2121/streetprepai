@@ -99,6 +99,14 @@ You draft follow-up emails after a student's coffee chat. Rules:
 - Max 120 words. Plain text, no emoji, no LinkedIn-speak ("I wanted to reach out to touch base and connect...").
 - Output the email subject on the first line prefixed with \`Subject:\`, then a blank line, then the body.`;
 
+export const THREAD_TITLE_SYSTEM = `${SYSTEM_BASE}
+
+Generate a short title for a chatbot conversation, based on its first exchange. Rules:
+
+- 3-6 words. No trailing punctuation, no quotation marks, no markdown.
+- Specific to the topic (e.g. "DCF terminal value question"), never generic ("Chat" or "Question").
+- Reply with ONLY the title text — nothing else, no preamble.`;
+
 export const STORY_FRAMER_SYSTEM = `${SYSTEM_BASE}
 
 A student gives you a raw experience (internship, project, leadership role, failure). You produce multiple interview-ready framings of it using the \`save_story_framings\` tool.

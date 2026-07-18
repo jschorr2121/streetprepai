@@ -3,6 +3,7 @@ import { convertToModelMessages, stepCountIs, streamText, type UIMessage } from 
 
 import { MODELS } from "@/lib/ai/anthropic";
 import { buildAssistantTools } from "@/lib/ai/assistant-tools";
+import { generateThreadTitle } from "@/lib/ai/chat-title";
 import { ASSISTANT_SYSTEM } from "@/lib/ai/prompts";
 import { WEB_SEARCH_PER_CALL_USD } from "@/lib/ai/pricing";
 import { logUsage, sdkUsageToTokenUsage } from "@/lib/ai/usage";
@@ -13,6 +14,7 @@ import {
   getMessages,
   getThread,
   toStoredParts,
+  updateThreadTitle,
   type StoredPart,
 } from "@/lib/db/queries/chat";
 import { requireUser } from "@/lib/security/require-user";
@@ -43,8 +45,12 @@ export async function POST(req: Request): Promise<Response> {
 
   // Load history and persist the user turn BEFORE the model call, in one
   // transaction — the user's message survives even if the stream fails.
+  // `isNewThread` gates LLM auto-titling below: only the first exchange
+  // gets a generated title: later turns keep whatever title already stuck.
+  let isNewThread = false;
   const prior = await withUser({ sub: userId, role: "authenticated" }, async (tx) => {
     const existing = await getThread(tx, userId, threadId);
+    isNewThread = !existing;
     if (!existing) await createThread(tx, userId, threadId, title);
     const history = existing ? await getMessages(tx, userId, threadId) : [];
     await appendMessages(tx, userId, threadId, [{ role: "user", parts: userParts }]);
@@ -106,6 +112,34 @@ export async function POST(req: Request): Promise<Response> {
         );
       } catch (err) {
         console.error("[chat/assistant] failed to persist assistant message:", err);
+      }
+
+      // LLM auto-titling: only on the thread's first exchange, replacing the
+      // truncated-message fallback set at creation. Runs after the response
+      // has already been streamed to the client, inside this request's
+      // lifecycle — no new client-callable route, no new rate limiter (the
+      // `expensive` tier gate above already bounds this request). Best
+      // effort only: any failure is caught and logged, and the fallback
+      // title set at thread creation stands.
+      if (isNewThread) {
+        try {
+          const assistantText = parts
+            .filter((p) => p.type === "text")
+            .map((p) => p.text)
+            .join(" ");
+          const generated = await generateThreadTitle({
+            userText: userParts[0]!.text,
+            assistantText: assistantText.length > 0 ? assistantText : undefined,
+            userId,
+          });
+          if (generated) {
+            await withUser({ sub: userId, role: "authenticated" }, (tx) =>
+              updateThreadTitle(tx, userId, threadId, generated),
+            );
+          }
+        } catch (err) {
+          console.error("[chat/assistant] failed to generate thread title:", err);
+        }
       }
     },
   });

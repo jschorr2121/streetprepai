@@ -66,6 +66,7 @@ const getThreadMock = vi.fn();
 const createThreadMock = vi.fn();
 const getMessagesMock = vi.fn();
 const appendMessagesMock = vi.fn();
+const updateThreadTitleMock = vi.fn();
 vi.mock("@/lib/db/queries/chat", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/lib/db/queries/chat")>();
   return {
@@ -74,8 +75,14 @@ vi.mock("@/lib/db/queries/chat", async (importOriginal) => {
     createThread: (...args: unknown[]) => createThreadMock(...args),
     getMessages: (...args: unknown[]) => getMessagesMock(...args),
     appendMessages: (...args: unknown[]) => appendMessagesMock(...args),
+    updateThreadTitle: (...args: unknown[]) => updateThreadTitleMock(...args),
   };
 });
+
+const generateThreadTitleMock = vi.fn();
+vi.mock("@/lib/ai/chat-title", () => ({
+  generateThreadTitle: (...args: unknown[]) => generateThreadTitleMock(...args),
+}));
 
 beforeEach(() => {
   getUserMock.mockReset();
@@ -88,6 +95,8 @@ beforeEach(() => {
   createThreadMock.mockReset();
   getMessagesMock.mockReset();
   appendMessagesMock.mockReset();
+  updateThreadTitleMock.mockReset();
+  generateThreadTitleMock.mockReset();
 });
 
 const THREAD_ID = "22222222-0000-4000-8000-000000000001";
@@ -321,6 +330,90 @@ describe("POST /api/chat/assistant", () => {
       // Two web searches → 2 × $0.01 flat surcharge on top of token cost.
       surchargeUsd: 0.02,
     });
+  });
+
+  it("generates and persists a title on the thread's first exchange (LLM auto-titling)", async () => {
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-assist-title-new" }));
+    getThreadMock.mockResolvedValue(null); // new thread
+    generateThreadTitleMock.mockResolvedValue("LBO study plan");
+    const { POST } = await import("@/app/api/chat/assistant/route");
+    await POST(makeRequest(validBody, "10.9.0.8"));
+
+    const streamOpts = toUIMessageStreamResponseMock.mock.calls[0]?.[0] as {
+      onEnd: (event: { responseMessage: unknown }) => Promise<void>;
+    };
+    await streamOpts.onEnd({
+      responseMessage: {
+        id: "resp-title-1",
+        role: "assistant",
+        parts: [{ type: "text", text: "Here's a plan.", state: "done" }],
+      },
+    });
+
+    expect(generateThreadTitleMock).toHaveBeenCalledWith({
+      userText: "How should I study for LBO questions?",
+      assistantText: "Here's a plan.",
+      userId: "u-assist-title-new",
+    });
+    expect(updateThreadTitleMock).toHaveBeenCalledWith(
+      expect.anything(),
+      "u-assist-title-new",
+      THREAD_ID,
+      "LBO study plan",
+    );
+  });
+
+  it("does not attempt titling on an existing thread's follow-up turn", async () => {
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-assist-title-old" }));
+    getThreadMock.mockResolvedValue({ id: THREAD_ID, title: "already titled" });
+    getMessagesMock.mockResolvedValue([]);
+    const { POST } = await import("@/app/api/chat/assistant/route");
+    await POST(makeRequest(validBody, "10.9.0.9"));
+
+    const streamOpts = toUIMessageStreamResponseMock.mock.calls[0]?.[0] as {
+      onEnd: (event: { responseMessage: unknown }) => Promise<void>;
+    };
+    await streamOpts.onEnd({
+      responseMessage: {
+        id: "resp-title-2",
+        role: "assistant",
+        parts: [{ type: "text", text: "follow-up answer", state: "done" }],
+      },
+    });
+
+    expect(generateThreadTitleMock).not.toHaveBeenCalled();
+    expect(updateThreadTitleMock).not.toHaveBeenCalled();
+  });
+
+  it("is best-effort: a titling failure is swallowed and does not throw out of onEnd", async () => {
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-assist-title-fail" }));
+    getThreadMock.mockResolvedValue(null);
+    generateThreadTitleMock.mockRejectedValue(new Error("model unavailable"));
+    const { POST } = await import("@/app/api/chat/assistant/route");
+    const res = await POST(makeRequest(validBody, "10.9.0.10"));
+    expect(res.status).toBe(200); // the chat response itself succeeded already
+
+    const streamOpts = toUIMessageStreamResponseMock.mock.calls[0]?.[0] as {
+      onEnd: (event: { responseMessage: unknown }) => Promise<void>;
+    };
+    await expect(
+      streamOpts.onEnd({
+        responseMessage: {
+          id: "resp-title-3",
+          role: "assistant",
+          parts: [{ type: "text", text: "an answer", state: "done" }],
+        },
+      }),
+    ).resolves.toBeUndefined();
+
+    // The assistant message still persisted despite the titling failure.
+    expect(appendMessagesMock).toHaveBeenCalledWith(
+      expect.anything(),
+      "u-assist-title-fail",
+      THREAD_ID,
+      [{ role: "assistant", parts: [{ type: "text", text: "an answer" }] }],
+    );
+    expect(updateThreadTitleMock).not.toHaveBeenCalled();
   });
 
   it("returns 429 after exhausting the expensive-tier budget", async () => {
