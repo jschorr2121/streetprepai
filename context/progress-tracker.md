@@ -16,6 +16,13 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — rate-limit stack consolidation + coverage push (2026-07-18, session 6) — IN PROGRESS
+
+- **fix(actions)** `actionErrorFromAppError` dropped `ValidationError.fieldErrors` — every Server Action translating a thrown ValidationError lost per-field form messages. Now propagated (`8bec85b`); regression test included in the batch below.
+- **Coverage push (~120 new tests)**: pure-module unit tests for `lib/audio/analyze`, `lib/curriculum/{cycle,progress,chapters}`, `lib/validation/parse`, `lib/auth/{action-result,server}`, `lib/logging/request-context`, plus real-module tests for `lib/ai/grading` (previously only ever `vi.mock`'d away — prompt building, score rounding, no-tool_use error path now covered) and an `INTERNAL`-on-grading-throw case in the qbank action spec. (`c1869ad`, `43ccc64`, `c28ee8d`.)
+- **Rate-limit consolidation (in flight)**: approved design extracts one shared sliding-window primitive (`lib/ratelimit/core.ts`) with the two existing surfaces (`lib/security/rate-limit.ts` Route Handler adapter, `lib/ratelimit/limiters.ts` Server Action adapter) kept as thin adapters; also closes a real gap — legacy `checkRateLimit` had NO store-error policy, so a Redis outage 500'd every route (now: deny for AI tiers, allow for cheap/public). Slice 1 landed (`1b011de`); slices 2–3 in progress.
+- Known follow-up filed as relay task: AI-calling Server Actions (e.g. `gradeAnswerAction`) never run `assertUnderQuota` — the monthly spend cap only guards Route Handlers (design review finding R4).
+
 ### Prod-readiness relay — gate-scoring integrity fix + paper-LBO NaN drill fix (2026-07-18, session 9)
 
 Fixed two verified findings, scoped to `web/` only, no schema migration:

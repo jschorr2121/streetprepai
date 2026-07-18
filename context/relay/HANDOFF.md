@@ -86,6 +86,28 @@
 
 ## Session log
 
+- **2026-07-18 (session 6, cloud, IN PROGRESS — checkpoint 1)** — Phase 5. Lane picked:
+  auth/rate-limit consolidation (design-first, opus design + opus implementation) +
+  parallel coverage push. Landed so far: **fieldErrors fix** (`8bec85b` — the shared
+  `actionErrorFromAppError` translator dropped `ValidationError.fieldErrors`; forms lost
+  inline messages on any thrown ValidationError); **~120 new unit tests** (`c1869ad`
+  pure modules: audio/analyze, curriculum cycle/progress/chapters, validation/parse,
+  auth action-result/server, logging/request-context; `43ccc64` real-module lib/ai/
+  grading tests — was only ever vi.mock'd away; `c28ee8d` reconciliation — see gotcha
+  below); consolidation **slice 1** (`1b011de`, shared core extracted, limiters.ts
+  repointed). In flight: slices 2–3 (rate-limit.ts adapter + store-error policy:
+  deny AI tiers / allow cheap+public — legacy had NO policy, Redis outage = 500 on
+  every route; then dead-code deletion). Queued next: R4 spend-cap gap (AI Server
+  Actions like gradeAnswerAction never call assertUnderQuota — only Route Handlers
+  enforce the monthly cap); unidentified flaky test (1 failure on fresh-clone run 1,
+  runs 2–3 fully green 521/521 — not yet hunted). **GOTCHA for future sessions:
+  worktree-isolated subagents get worktrees cut from MASTER, not from
+  fable/prod-readiness** — two test-writing agents authored against 99-commits-stale
+  code; one "missing file" was actually branch-only, and its substitute duplicated
+  existing branch tests (dropped in `c28ee8d`, its one novel case ported). If you
+  isolate agents in worktrees, tell them to `git checkout fable/prod-readiness` first,
+  or reconcile after like this session did.
+
 - **2026-07-18 (session 5, cloud, FINAL — 19 commits, all pushed, suite 521)** — Phase 5.
   Second half of the session ran three adversarial review sweeps + fixes on top of
   checkpoint 2's work: (1) **whisper spend blind spot** (CONFIRMED, also affects
