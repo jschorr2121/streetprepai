@@ -86,7 +86,33 @@
 
 ## Session log
 
-- **2026-07-18 (session 5, cloud, checkpoint 2 — all landed work committed)** — Phase 5.
+- **2026-07-18 (session 5, cloud, FINAL — 16 commits, all pushed, suite 472)** — Phase 5.
+  Second half of the session ran three adversarial review sweeps + fixes on top of
+  checkpoint 2's work: (1) **whisper spend blind spot** (CONFIRMED, also affects
+  master/prod today): neither transcribe route ever logged ai_usage — now one row
+  per call via surchargeUsd (duration/60 × $0.006); the token-priced whisper-1
+  PRICING entry was decorative and is deleted. (2) **relationships consistency**:
+  structure-chat/draft-followup wrap the Anthropic call → 502 like siblings;
+  resume-coach skips unknown weakness flags; dead 'markets' mode removed from
+  INTERVIEW_MODES (DB CHECK deliberately untouched). (3) **gate-scoring exploit
+  closed**: finishSittingAction now enforces 6h window + min distinct-question
+  count (canonical counts live in lib/curriculum/chapters.ts; clamped to pool for
+  thin sections); residual: served-question set not pinned (needs server-side
+  sittings — only build if Jake cares). (4) **paper-LBO NaN** (~1/24 of runs)
+  fixed, full-domain regression sweep added. (5) **new-thread flicker** fixed via
+  ChatSession stable mount key (unit-9 issue 06 filed AND closed this session).
+  **Clean-area map** (don't re-hunt without new evidence): see CHANGES.md session-5
+  entries — chatbot, interview/resume/relationships, learn/mastery/dashboard/
+  onboarding/applications/limiters/RLS all swept. **Next-lane menu for session 6**:
+  (a) Jake-gated go-aheads if answered (Unit 8 #06, chat onboarding, firm_data
+  brainstorm questions, PostHog); (b) auth/rate-limit stack consolidation
+  (lib/security/* vs lib/ratelimit/* — big, design-first, needs a fresh context);
+  (c) served-question-set pinning if gate integrity matters more than effort;
+  (d) e2e: get authed specs actually running once Jake supplies creds (then CI
+  secrets item); (e) perpetual: more coverage, UX polish, brainstorms. Suite
+  baseline for session 6: **472 passing / 63 files**; e2e 1 passed/10 skipped.
+
+- **2026-07-18 (session 5, cloud, checkpoint 2 — superseded by FINAL above)** — Phase 5.
   Committed this session (9 commits, all pushed): architecture.md embeddings drift;
   playwright `webServer` (e2e self-sufficient, CI e2e was unrunnable before);
   **LLM thread auto-titling** (haiku in `chat/assistant` onEnd, best-effort,
