@@ -1,5 +1,4 @@
-import { Ratelimit } from "@upstash/ratelimit";
-import { getRedis } from "./redis";
+import { buildLimiter, type LimiterCheck, type StoreErrorMode } from "@/lib/ratelimit/core";
 
 /**
  * Per-route tier. Tunes the request budget and burst window.
@@ -21,40 +20,37 @@ const TIER_CONFIG: Record<
   public: { user: { requests: 0, windowSec: 60 }, ip: { requests: 60, windowSec: 60 } },
 };
 
-// In-memory fallback for local dev when Upstash env is unset.
-type Bucket = { count: number; resetAt: number };
-const memBuckets = new Map<string, Bucket>();
+/**
+ * Store-failure policy by tier. AI tiers (expensive, whisper) fail CLOSED — a
+ * Redis outage must not grant unmetered LLM spend (AI fail-closed invariant).
+ * Non-AI tiers (cheap CRUD, public reads) fail OPEN so an infra outage never
+ * 500s a route that has no cost exposure.
+ */
+const STORE_ERROR_BY_TIER: Record<RateTier, StoreErrorMode> = {
+  cheap: "allow",
+  expensive: "deny",
+  whisper: "deny",
+  public: "allow",
+};
 
-function memCheck(key: string, limit: number, windowMs: number) {
-  const now = Date.now();
-  const b = memBuckets.get(key);
-  if (!b || b.resetAt <= now) {
-    memBuckets.set(key, { count: 1, resetAt: now + windowMs });
-    return { ok: true, remaining: limit - 1, resetAt: now + windowMs };
+// Cache built limiter closures by prefix + budget so the underlying Upstash
+// client (and the in-memory fallback bucket state) persists across requests.
+const limiterCache = new Map<string, (key: string) => Promise<LimiterCheck>>();
+function getLimiter(
+  prefix: string,
+  requests: number,
+  windowSec: number,
+  onStoreError: StoreErrorMode,
+): (key: string) => Promise<LimiterCheck> {
+  const cacheKey = `${prefix}:${requests}:${windowSec}`;
+  let limiter = limiterCache.get(cacheKey);
+  if (!limiter) {
+    // memFallback: local dev / tests count in-memory to the cap instead of
+    // degrading open. In production a configured Upstash store is used.
+    limiter = buildLimiter(prefix, requests, windowSec, { onStoreError, memFallback: true });
+    limiterCache.set(cacheKey, limiter);
   }
-  if (b.count >= limit) {
-    return { ok: false, remaining: 0, resetAt: b.resetAt };
-  }
-  b.count += 1;
-  return { ok: true, remaining: limit - b.count, resetAt: b.resetAt };
-}
-
-const rlCache = new Map<string, Ratelimit>();
-function rl(prefix: string, requests: number, windowSec: number): Ratelimit | null {
-  const redis = getRedis();
-  if (!redis) return null;
-  const key = `${prefix}:${requests}:${windowSec}`;
-  let inst = rlCache.get(key);
-  if (!inst) {
-    inst = new Ratelimit({
-      redis,
-      limiter: Ratelimit.slidingWindow(requests, `${windowSec} s`),
-      prefix,
-      analytics: false,
-    });
-    rlCache.set(key, inst);
-  }
-  return inst;
+  return limiter;
 }
 
 export type RateLimitResult = {
@@ -81,48 +77,36 @@ export async function checkRateLimit(
 ): Promise<RateLimitResult> {
   const cfg = TIER_CONFIG[tier];
   const ip = ipFromRequest(req);
+  const onStoreError = STORE_ERROR_BY_TIER[tier];
 
-  // Per-user check (skip for public tier or when no user)
+  // Per-user check (skip for public tier or when no user). First bucket to deny
+  // wins, so this runs before the IP check.
   if (userId && cfg.user.requests > 0) {
     const userKey = `rl:u:${tier}:${routeKey}:${userId}`;
-    const userLimiter = rl(`rl:u:${tier}:${routeKey}`, cfg.user.requests, cfg.user.windowSec);
-    if (userLimiter) {
-      const r = await userLimiter.limit(userKey);
-      if (!r.success) {
-        return {
-          ok: false,
-          reason: "user",
-          retryAfterSec: Math.ceil((r.reset - Date.now()) / 1000),
-        };
-      }
-    } else {
-      const r = memCheck(userKey, cfg.user.requests, cfg.user.windowSec * 1000);
-      if (!r.ok)
-        return {
-          ok: false,
-          reason: "user",
-          retryAfterSec: Math.ceil((r.resetAt - Date.now()) / 1000),
-        };
+    const userLimiter = getLimiter(
+      `rl:u:${tier}:${routeKey}`,
+      cfg.user.requests,
+      cfg.user.windowSec,
+      onStoreError,
+    );
+    const r = await userLimiter(userKey);
+    if (!r.allowed) {
+      return { ok: false, reason: "user", retryAfterSec: r.retryAfterSeconds };
     }
   }
 
   // Per-IP check
   if (cfg.ip.requests > 0) {
     const ipKey = `rl:i:${tier}:${routeKey}:${ip}`;
-    const ipLimiter = rl(`rl:i:${tier}:${routeKey}`, cfg.ip.requests, cfg.ip.windowSec);
-    if (ipLimiter) {
-      const r = await ipLimiter.limit(ipKey);
-      if (!r.success) {
-        return { ok: false, reason: "ip", retryAfterSec: Math.ceil((r.reset - Date.now()) / 1000) };
-      }
-    } else {
-      const r = memCheck(ipKey, cfg.ip.requests, cfg.ip.windowSec * 1000);
-      if (!r.ok)
-        return {
-          ok: false,
-          reason: "ip",
-          retryAfterSec: Math.ceil((r.resetAt - Date.now()) / 1000),
-        };
+    const ipLimiter = getLimiter(
+      `rl:i:${tier}:${routeKey}`,
+      cfg.ip.requests,
+      cfg.ip.windowSec,
+      onStoreError,
+    );
+    const r = await ipLimiter(ipKey);
+    if (!r.allowed) {
+      return { ok: false, reason: "ip", retryAfterSec: r.retryAfterSeconds };
     }
   }
 

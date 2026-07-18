@@ -89,6 +89,25 @@ describe("checkRateLimit (Upstash branch)", () => {
     const r = await checkRateLimit(req, "user-q", "cheap", "route/e");
     expect(r.ok).toBe(true);
   });
+
+  it("fails closed (denies) on an AI tier when the store throws", async () => {
+    // AI fail-closed invariant: a Redis outage must not grant unmetered spend.
+    limitFn.mockRejectedValue(new Error("redis down"));
+    const { checkRateLimit } = await import("@/lib/security/rate-limit");
+
+    const r = await checkRateLimit(makeReq("6.6.6.6"), "user-ai", "expensive", "route/ai");
+    expect(r.ok).toBe(false);
+    expect(r.reason).toBe("user");
+  });
+
+  it("fails open (allows) on a non-AI tier when the store throws", async () => {
+    // CRUD fail-open: an infra outage must not 500 a route with no cost exposure.
+    limitFn.mockRejectedValue(new Error("redis down"));
+    const { checkRateLimit } = await import("@/lib/security/rate-limit");
+
+    const r = await checkRateLimit(makeReq("7.7.7.7"), "user-crud", "cheap", "route/crud");
+    expect(r.ok).toBe(true);
+  });
 });
 
 describe("tooManyRequests", () => {
