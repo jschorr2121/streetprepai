@@ -26,7 +26,7 @@ import type { Executor } from "@/lib/db/client";
  * schema tables needed by lib/db/queries tests (profiles, applied_jobs,
  * chat_threads, chat_messages, qbank_questions, qbank_followups,
  * qbank_attempts, qbank_spaced_state, topic_mastery, section_progress,
- * chapter_progress).
+ * chapter_progress, ai_usage).
  * Each call returns a fresh database with empty tables.
  */
 export async function createPgliteDb(): Promise<Executor> {
@@ -187,6 +187,21 @@ export async function createPgliteDb(): Promise<Executor> {
       completed_at    timestamptz,
       updated_at      timestamptz   not null default now(),
       primary key (user_id, chapter_slug)
+    )
+  `);
+
+  await db.execute(`
+    create table ai_usage (
+      id                  uuid          primary key default gen_random_uuid(),
+      user_id             uuid,
+      endpoint            text          not null,
+      model               text          not null,
+      input_tokens        integer       not null,
+      output_tokens       integer       not null,
+      cache_read_tokens   integer       not null,
+      cache_write_tokens  integer       not null,
+      cost_usd            numeric(10, 6) not null,
+      created_at          timestamptz   not null default now()
     )
   `);
 

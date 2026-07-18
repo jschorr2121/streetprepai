@@ -123,6 +123,26 @@ so the session backfilled the missing 50 tests over qbank queries/actions instea
 (suite **441 passing**); issue 06 + chat-onboarding brainstorm are triage-gated on
 Jake. Next lanes: e2e coverage (fresh session), Jake's go-aheads.
 
+### Prod-readiness relay — Phase 5, coverage lane (2026-07-18, branch `fable/prod-readiness`)
+
+Raised real-behavior test coverage on the three lowest-covered, highest-risk modules
+found via `pnpm test:coverage`: `lib/auth/middleware.ts` (0% → 100% stmts/lines/branches
+— the `/api/*` 401 backstop, unauth/onboarding/landing redirect gating, and the
+`@supabase/ssr` cookie getAll/setAll plumbing that keeps refreshed sessions from
+randomly logging users out), `lib/db/queries/ai-usage.ts` (0% → 100% — PGlite-backed:
+user isolation, `gte` date-boundary inclusivity, desc ordering, numeric→JS-number cost
+mapping; this module backs both the `/dev/spend` dashboard and, transitively, the
+monthly AI-spend cap gate), and `lib/data/contacts.ts` (35% → 100% — filled in the
+previously-untested mutation paths: `createContact`, `upsertChatLog` insert/update
+branches, `saveChatStructured`, `saveChatFollowUpDraft`, `touchContactLastContact`,
+`updateContactStage`, plus two pre-existing error-path gaps in `getChatLogs`/
+`getChatLogsForContact`). Added the `ai_usage` table to the shared `pglite-db.ts`
+harness (now documented in its header comment) — reusable by future query tests.
+No bugs found in these modules. Global coverage: statements 33.37%→36.34%, branches
+28.89%→32.18%, functions 26.32%→28.77%, lines 33.19%→35.98%. Suite **472 → 521 passing**
+(65 files, +2 new: `tests/unit/lib/auth/middleware.test.ts`,
+`tests/unit/lib/db/queries/ai-usage.test.ts`). typecheck/lint/test all green.
+
 ### Prod-readiness relay — session 3, Phase 5 started (2026-07-16, cloud, branch `fable/prod-readiness`)
 
 First Phase 5 slice: the follow-ups loop is now real end-to-end — chat summaries create
