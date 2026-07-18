@@ -158,7 +158,11 @@ export function generateAccretionDilution(rng: Rng): Drill {
 export function generatePaperLbo(rng: Rng): Drill {
   const entryEbitda = randInt(rng, 50, 200);
   const entryMultiple = randInt(rng, 6, 11);
-  const leverage = randInt(rng, 3, 6); // turns of debt
+  // Leverage must stay strictly below the entry multiple — otherwise debt
+  // equals (or exceeds) TEV, equityIn hits zero (or negative), and MOIC/IRR
+  // come out NaN/Infinity. Capped at 6 turns as before; only the entryMultiple
+  // = 6 case actually tightens the range (leverage ∈ [3, 5] instead of [3, 6]).
+  const leverage = randInt(rng, 3, Math.min(6, entryMultiple - 1)); // turns of debt
   const years = pick(rng, [3, 5] as const);
   const ebitdaCagr = pick(rng, [0, 5, 8, 10] as const) / 100;
   const exitMultiple = entryMultiple; // held flat for a clean paper LBO

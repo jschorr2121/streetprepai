@@ -7,9 +7,7 @@ import { PracticeSession } from "@/components/learn/practice-session";
 import { requireUser } from "@/lib/auth/server";
 import { withUser } from "@/lib/db/client";
 import { getSectionDrillQuestions } from "@/lib/db/queries/qbank";
-import { getSection } from "@/lib/curriculum/chapters";
-
-const SECTION_DRILL_COUNT = 4;
+import { SECTION_DRILL_COUNT, getSection } from "@/lib/curriculum/chapters";
 
 export default async function SectionDrillPage({
   params,

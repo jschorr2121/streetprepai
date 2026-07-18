@@ -57,6 +57,16 @@ export type ChapterDef = {
 
 export const GATE_PASS_THRESHOLD = 0.85;
 
+// Canonical sitting sizes. These are the single source of truth for how many
+// questions a chapter gate / section drill serves — the gate and drill pages
+// import them to build the question set, and `finishSittingAction`
+// (app/(app)/learn/actions.ts) imports the same constants to independently
+// recompute the expected attempt count server-side. Keeping one definition
+// means the two can't drift apart, which matters because the client is never
+// trusted to assert its own pass/fail (see actions.ts header comment).
+export const GATE_QUESTION_COUNT = 8;
+export const SECTION_DRILL_COUNT = 4;
+
 /** Display metadata for each group, in the order they render on /learn. */
 export const GROUP_META: Record<ChapterGroup, { label: string; description: string }> = {
   "getting-in": {

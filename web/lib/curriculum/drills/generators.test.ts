@@ -60,4 +60,27 @@ describe("generatePaperLbo", () => {
     // IRR sign should match whether MOIC > 1.
     if (moic > 1) expect(irr).toBeGreaterThan(0);
   });
+
+  // Regression: entryMultiple ∈ [6,11] and leverage ∈ [3,6] used to be drawn
+  // independently. When both landed on 6, debt == entry TEV, equityIn hit
+  // zero, and MOIC/IRR came out NaN (or Infinity with EBITDA growth) — an
+  // unsolvable drill whose reveal literally read "NaNx". The fix constrains
+  // leverage to stay below entryMultiple. Sweep every entryMultiple outcome
+  // (6 values) against a dense sample of the leverage roll (10 values) so any
+  // reintroduction of an entryMultiple === leverage combo is caught.
+  it("MOIC/IRR are finite and positive across the full entryMultiple x leverage domain", () => {
+    for (let emStep = 0; emStep < 6; emStep++) {
+      // +epsilon nudges values off exact bucket boundaries from randInt's floor().
+      const entryMultipleRng = emStep / 6 + 1e-9;
+      for (let levStep = 0; levStep < 10; levStep++) {
+        const leverageRng = levStep / 10;
+        const d = generatePaperLbo(seq([0.5, entryMultipleRng, leverageRng, 0.5, 0.5]));
+        const moic = d.fields.find((f) => f.key === "moic")!.value;
+        const irr = d.fields.find((f) => f.key === "irr")!.value;
+        expect(Number.isFinite(moic)).toBe(true);
+        expect(Number.isFinite(irr)).toBe(true);
+        expect(moic).toBeGreaterThan(0);
+      }
+    }
+  });
 });

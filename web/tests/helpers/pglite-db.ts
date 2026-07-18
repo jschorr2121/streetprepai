@@ -25,7 +25,8 @@ import type { Executor } from "@/lib/db/client";
  * Creates an isolated in-memory PGlite Drizzle instance with the minimal
  * schema tables needed by lib/db/queries tests (profiles, applied_jobs,
  * chat_threads, chat_messages, qbank_questions, qbank_followups,
- * qbank_attempts, qbank_spaced_state, topic_mastery).
+ * qbank_attempts, qbank_spaced_state, topic_mastery, section_progress,
+ * chapter_progress).
  * Each call returns a fresh database with empty tables.
  */
 export async function createPgliteDb(): Promise<Executor> {
@@ -160,6 +161,32 @@ export async function createPgliteDb(): Promise<Executor> {
       attempts    integer       not null default 0,
       updated_at  timestamptz   not null default now(),
       primary key (user_id, topic)
+    )
+  `);
+
+  // Curriculum progress — section drills + chapter gates
+  // (lib/db/schema/curriculum-progress.ts).
+  await db.execute(`
+    create table section_progress (
+      user_id             uuid          not null,
+      chapter_slug        text          not null,
+      section_slug        text          not null,
+      read_at             timestamptz,
+      drill_score         numeric(5, 2),
+      drill_completed_at  timestamptz,
+      primary key (user_id, chapter_slug, section_slug)
+    )
+  `);
+
+  await db.execute(`
+    create table chapter_progress (
+      user_id         uuid          not null,
+      chapter_slug    text          not null,
+      gate_score      numeric(5, 2),
+      gate_passed_at  timestamptz,
+      completed_at    timestamptz,
+      updated_at      timestamptz   not null default now(),
+      primary key (user_id, chapter_slug)
     )
   `);
 

@@ -124,6 +124,45 @@ export async function getSectionDrillQuestions(
   return rows.map(mapQuestion);
 }
 
+/**
+ * Count of active, non-advanced questions available for a chapter's gate
+ * quiz. Lets `finishSittingAction` bound the expected sitting size to what
+ * the pool can actually serve, rather than a flat constant that could exceed
+ * a thin chapter's question count and lock out legitimate sittings.
+ */
+export async function countGateQuestions(db: Executor, chapterSlug: string): Promise<number> {
+  const rows = await db
+    .select({ n: sql<number>`count(*)::int` })
+    .from(qbankQuestions)
+    .where(
+      and(
+        eq(qbankQuestions.active, true),
+        eq(qbankQuestions.chapterSlug, chapterSlug),
+        eq(qbankQuestions.advanced, false),
+      ),
+    );
+  return rows[0]?.n ?? 0;
+}
+
+/** Count of active questions available for a section drill — see countGateQuestions. */
+export async function countSectionDrillQuestions(
+  db: Executor,
+  chapterSlug: string,
+  sectionSlug: string,
+): Promise<number> {
+  const rows = await db
+    .select({ n: sql<number>`count(*)::int` })
+    .from(qbankQuestions)
+    .where(
+      and(
+        eq(qbankQuestions.active, true),
+        eq(qbankQuestions.chapterSlug, chapterSlug),
+        eq(qbankQuestions.sectionSlug, sectionSlug),
+      ),
+    );
+  return rows[0]?.n ?? 0;
+}
+
 /** Mixed non-advanced questions across a chapter — the gate quiz. */
 export async function getGateQuestions(
   db: Executor,
@@ -291,6 +330,11 @@ export type AttemptSummary = {
  * Scores from a just-finished quiz sitting: latest attempt per question for
  * this user/context/chapter since `sinceIso`. Used to recompute gate and
  * section-drill results server-side instead of trusting client-sent scores.
+ *
+ * Already deduped to one row per `questionId` (latest attempt wins), so
+ * callers can treat `result.length` as both the attempt count and the
+ * distinct-question count — grading the same question repeatedly can't pad
+ * the count toward a gate's expected sitting size.
  */
 export async function listSittingScores(
   db: Executor,

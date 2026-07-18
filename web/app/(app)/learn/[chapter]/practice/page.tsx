@@ -7,9 +7,7 @@ import { PracticeSession } from "@/components/learn/practice-session";
 import { requireUser } from "@/lib/auth/server";
 import { withUser } from "@/lib/db/client";
 import { getGateQuestions } from "@/lib/db/queries/qbank";
-import { getChapter } from "@/lib/curriculum/chapters";
-
-const GATE_QUESTION_COUNT = 8;
+import { GATE_QUESTION_COUNT, getChapter } from "@/lib/curriculum/chapters";
 
 export default async function ChapterGatePage({
   params,

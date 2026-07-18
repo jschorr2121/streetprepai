@@ -11,17 +11,35 @@ import { z } from "zod";
 import { actionErrorFromAppError, type ActionResult } from "@/lib/auth/action-result";
 import { requireUser } from "@/lib/auth/server";
 import { withUser } from "@/lib/db/client";
-import { listSittingScores } from "@/lib/db/queries/qbank";
+import {
+  countGateQuestions,
+  countSectionDrillQuestions,
+  listSittingScores,
+} from "@/lib/db/queries/qbank";
 import {
   markChapterComplete,
   markSectionRead,
   recordGateResult,
   recordSectionDrill,
 } from "@/lib/db/queries/curriculum";
-import { GATE_PASS_THRESHOLD, coreSections, getChapter } from "@/lib/curriculum/chapters";
-import { AppError } from "@/lib/errors";
+import {
+  GATE_PASS_THRESHOLD,
+  GATE_QUESTION_COUNT,
+  SECTION_DRILL_COUNT,
+  coreSections,
+  getChapter,
+} from "@/lib/curriculum/chapters";
+import { AppError, ValidationError } from "@/lib/errors";
 import { logger } from "@/lib/logging/logger";
 import { curriculumProgressLimiter } from "@/lib/ratelimit/limiters";
+
+// A real gate/drill sitting takes minutes, not hours. This bounds how far
+// back `startedAt` (client-supplied) can reach when filtering attempts for
+// the score recompute below — generous enough to survive someone leaving the
+// tab open over a long lunch, but short enough that an attacker can't set
+// `startedAt` to an old timestamp and sweep unrelated historical attempts
+// (e.g. answers from a previous, unrelated qbank session) into the average.
+const MAX_SITTING_DURATION_MS = 6 * 60 * 60 * 1000;
 
 async function auth(): Promise<{ userId: string } | { error: ActionResult<never> }> {
   try {
@@ -99,6 +117,16 @@ export async function finishSittingAction(
   const chapter = getChapter(chapterSlug);
   if (!chapter) return { ok: false, error: { code: "NOT_FOUND", message: "Unknown chapter." } };
 
+  // Reject a `startedAt` that's implausibly old before touching the DB at
+  // all — see MAX_SITTING_DURATION_MS above for why.
+  const startedAtMs = Date.parse(startedAt);
+  if (Number.isNaN(startedAtMs) || Date.now() - startedAtMs > MAX_SITTING_DURATION_MS) {
+    return {
+      ok: false,
+      error: { code: "VALIDATION_FAILED", message: "This sitting expired — start it again." },
+    };
+  }
+
   const rl = await curriculumProgressLimiter(a.userId);
   if (!rl.allowed) {
     return { ok: false, error: { code: "RATE_LIMITED", message: "Slow down a moment." } };
@@ -113,6 +141,33 @@ export async function finishSittingAction(
         ...(sectionSlug ? { sectionSlug } : {}),
         sinceIso: startedAt,
       });
+
+      // The client tells us which chapter/section it drilled, never how many
+      // questions it was actually served or graded — that must be verified
+      // server-side, or a single easy-question attempt could be averaged in
+      // as if it were the whole sitting (e.g. an 8-question gate). Clamp the
+      // expectation to the pool size so a thin chapter/section can't lock a
+      // legitimate sitting out; `listSittingScores` already dedupes to one
+      // row per questionId, so `scores.length` is simultaneously the attempt
+      // count and the distinct-question count.
+      //
+      // Residual gap: this checks *how many* distinct questions were graded,
+      // not that they're the *specific* questions the gate/drill page served
+      // (we don't persist a per-sitting served-question set). Closing that
+      // fully would need server-side sitting sessions, which is out of scope
+      // for this fix.
+      const expectedCount =
+        context === "section-drill" && sectionSlug
+          ? Math.min(
+              SECTION_DRILL_COUNT,
+              await countSectionDrillQuestions(tx, chapterSlug, sectionSlug),
+            )
+          : Math.min(GATE_QUESTION_COUNT, await countGateQuestions(tx, chapterSlug));
+
+      if (expectedCount > 0 && scores.length < expectedCount) {
+        throw new ValidationError("Finish every question in this sitting before submitting.", {});
+      }
+
       const averageScore =
         scores.length > 0 ? scores.reduce((s, r) => s + r.score, 0) / scores.length : 0;
       const fraction = averageScore / 100;
@@ -149,6 +204,7 @@ export async function finishSittingAction(
     );
     return { ok: true, data };
   } catch (err) {
+    if (err instanceof AppError) return actionErrorFromAppError(err);
     logger.error({ userId: a.userId, action: "finish_sitting_failed" }, "finish_sitting_failed");
     Sentry.captureException(err);
     return { ok: false, error: { code: "INTERNAL", message: "Something went wrong." } };
