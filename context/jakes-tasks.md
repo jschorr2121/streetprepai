@@ -115,6 +115,15 @@ needs action it can't perform itself.
 
 ## 🟡 Before launch (not blocking dev, but don't ship without it)
 
+- [ ] **Set `NEXT_PUBLIC_SITE_URL` in Vercel env (Production + Preview)** (prod-readiness
+  relay, 2026-07-19) — the relay added robots.txt, sitemap.xml, and OpenGraph/Twitter
+  metadata (`web/lib/site.ts` centralizes the site URL). Without this var the code falls
+  back to `VERCEL_URL` (the per-deployment `*.vercel.app` URL), so canonical/OG URLs and
+  the sitemap would point at the wrong host in production. Set it to the real domain,
+  e.g. `https://<your-domain>`. Documented in `web/.env.example`. Also note: no OG image
+  exists yet — if you want link previews with an image, drop a 1200×630 asset in and the
+  relay can wire it.
+
 - [ ] **Re-enable "Confirm email" in Supabase** before production so real
   signups must verify their address (lowers spam/abuse). (Unit 4)
 - [ ] **Set Sentry build env vars in Vercel** — `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`,

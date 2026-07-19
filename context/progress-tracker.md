@@ -16,6 +16,21 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — component coverage, UX sweep, SEO baseline, ai_usage NOT NULL (2026-07-19, session 7) — COMPLETE
+
+11 commits pushed; suite **803 passing / 97 files** (from 707/78); typecheck/lint/
+build/repo-wide prettier all green. Details in `context/CHANGES.md` session-7 entry.
+Highlights: session-6's mystery flake identified (PGlite cold-WASM instantiation vs
+5s vitest default) and fixed with 15s test+hook timeouts; component dom coverage
+went 2 → 19 test files (+81 tests) over learn/relationships/nav/markdown/profile/
+firms/marketing; a fresh-eyes UX sweep produced 10 findings — 9 fixed (mode links,
+daily-drill dead end, topic deep-links, inline field errors, aria-describedby,
+label drift, regenerate/start-over data loss), 1 filed
+(`.scratch/ux-polish/issues/01` reading-lens keyboard a11y); SEO baseline
+(robots/sitemap/OG via `lib/site.ts`); deferred security Low #16 closed
+(migration 0011 makes `ai_usage.user_id` NOT NULL, `logUsage` hardened). New Jake
+items: apply 0011; set `NEXT_PUBLIC_SITE_URL` in Vercel.
+
 ### Prod-readiness relay — rate-limit stack consolidation + coverage push + AI cost fixes (2026-07-18, session 6) — COMPLETE
 
 Final numbers: ~18 commits pushed; suite **720 passing / 80 files** (from 521/65);

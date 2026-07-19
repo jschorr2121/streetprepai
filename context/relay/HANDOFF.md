@@ -86,6 +86,29 @@
 
 ## Session log
 
+- **2026-07-19 (session 7, cloud, FINAL — 11 commits, all pushed, suite 803/97)** —
+  Phase 5. Orchestrated as 8 parallel subagents (3 test batches, UX sweep, 2 UX
+  fixers, SEO, opus migration). (1) **Session-6 flake SOLVED**: chat.test.ts PGlite
+  cold-WASM instantiation ~6s vs 5s vitest default; node project now has
+  testTimeout+hookTimeout 15s — stop treating first-run failures as mysterious.
+  (2) **Component dom coverage 2 → 19 files (+81 tests)**; happy-dom gotchas: Radix
+  Tabs switch on mousedown, DropdownMenu opens on pointerdown, fake
+  IntersectionObserver needed, clipboard via defineProperty. (3) **UX sweep: 10
+  findings, 9 fixed** (see CHANGES session-7), 1 filed as
+  `.scratch/ux-polish/issues/01-reading-lens-keyboard-access.md` (ready-for-agent).
+  (4) **SEO baseline**: robots.ts/sitemap.ts/OG metadata via new `lib/site.ts`;
+  Jake must set NEXT_PUBLIC_SITE_URL in Vercel (filed); no og:image asset exists.
+  (5) **Deferred Low #16 CLOSED**: migration 0011 (ai_usage.user_id NOT NULL,
+  orphan NULL rows deleted — Jake applies, filed); logUsage skips+warns without
+  userId; pglite test schema mirrors NOT NULL. **Next-lane menu (session 8)**:
+  (a) Jake-gated go-aheads if answered (Unit 8 #06, chat onboarding, firm_data,
+  transcription model, e2e CI creds, NEXT_PUBLIC_SITE_URL/og:image); (b)
+  `.scratch/ux-polish/issues/01` reading-lens keyboard a11y (ready-for-agent);
+  (c) web_search_20260209 upgrade still money-gated; (d) brainstorm items: model
+  routing for grading, batch API embeddings; (e) perpetual: app/(app) page-level
+  tests are still untested surface (pages vs components), guide/reader area has no
+  dom tests, another fresh-eyes sweep on mobile layouts.
+
 - **2026-07-18 (session 6, cloud, FINAL — ~18 commits, all pushed, suite 720/80)** —
   Phase 5. Full-session summary (details in the two checkpoints below): (1) **auth/
   rate-limit consolidation COMPLETE** — one shared primitive `lib/ratelimit/core.ts`

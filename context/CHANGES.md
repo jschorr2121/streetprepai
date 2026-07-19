@@ -507,3 +507,38 @@ Four commits (`15765e0`…`4f38996`), each gated on typecheck + lint + full vite
   qbank/progress/applications tables. Earlier sweeps: chatbot subsystem (2 real findings,
   both fixed), interview/resume/relationships (1 invariant violation + 3 consistency
   gaps, all fixed). Session-final suite: **472 passing**.
+
+## Prod-readiness relay session 7 — Phase 5: component coverage, UX sweep, SEO, ai_usage NOT NULL (2026-07-19)
+
+- **Session-6 flake identified and fixed**: the "1 failure on first run after fresh
+  install" was `tests/unit/lib/db/queries/chat.test.ts` timing out at vitest's 5s
+  default while PGlite instantiates its WASM bundle on a cold filesystem cache
+  (~6s observed). Node project now sets `testTimeout`/`hookTimeout` 15s (hooks hit
+  the same wall under parallel load).
+- **Component (dom) coverage 2 → 19 files**: 81 new tests across learn (answer
+  card, drills, practice session gate pass/fail, qbank studio), relationships
+  (forms, outreach drawer, optimistic mark-done/stage-change with revert,
+  structure-notes round trip, streaming prep + 429), nav/markdown/profile/firms/
+  marketing. Happy-dom gotchas documented in tests: Radix Tabs activate on
+  mousedown, DropdownMenu on pointerdown; IntersectionObserver never fires (use a
+  fake); `navigator.clipboard` needs defineProperty.
+- **Fresh-eyes UX sweep → 10 findings, 9 fixed, 1 filed**
+  (`.scratch/ux-polish/issues/01` reading-lens keyboard access): mock-interview
+  `?mode=` links honored; daily-drill summary dead end got a Done link; dashboard
+  weak-topic Drill deep-links `?topic=` with validation + preselect; new-contact
+  form maps server fieldErrors to inline highlights; aria-describedby wired on all
+  three RHF forms; outreach-drawer disabled-button hint; advanced-track label
+  drift unified; firm-prep + contact-detail Regenerate no longer destroy prior
+  content on failure; resume-coach Start-over keeps the uploaded text.
+- **SEO baseline added**: `app/robots.ts` (disallow /api/ + authed routes),
+  `app/sitemap.ts` (4 public pages), OpenGraph/Twitter metadata + `metadataBase`
+  via new `lib/site.ts` (NEXT_PUBLIC_SITE_URL → VERCEL_URL → localhost). Jake:
+  set `NEXT_PUBLIC_SITE_URL` in Vercel (filed). No og:image asset exists yet.
+- **Deferred Low #16 closed**: `ai_usage.user_id` NOT NULL via migration 0011
+  (deletes unattributable NULL orphans — they're invisible to every per-user
+  spend-cap read, i.e. uncapped spend; guarded SET NOT NULL; idempotent).
+  `logUsage` now warns + skips instead of inserting attribution-less rows.
+  Enumerated all 14+ call sites: every production path supplies userId. Jake
+  applies 0011 (filed).
+- Gates at session end: typecheck ✅, lint 0 errors, suite **803 passing / 97
+  files** (from 707/78), build exit 0, repo-wide prettier ✅.
