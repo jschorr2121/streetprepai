@@ -46,23 +46,21 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const rightRailRef = useRef<HTMLDivElement>(null);
+  const explainButtonRef = useRef<HTMLButtonElement>(null);
+  const selectionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isPointerDownRef = useRef(false);
+  const focusOnSettleRef = useRef(false);
 
-  const handleMouseUp = useCallback(() => {
+  // Shared by the mouseup path (immediate) and the selectionchange path
+  // (debounced, below) — both just need "what does the current selection
+  // imply the popover should look like".
+  const computeSelectionPopover = useCallback(() => {
     const sel = window.getSelection();
-    if (!sel || sel.isCollapsed) {
-      setPopover(null);
-      return;
-    }
+    if (!sel || sel.isCollapsed) return null;
     const text = sel.toString().trim();
-    if (text.length < 4 || text.length > 1000) {
-      setPopover(null);
-      return;
-    }
+    if (text.length < 4 || text.length > 1000) return null;
     const range = sel.getRangeAt(0);
-    if (!contentRef.current?.contains(range.commonAncestorContainer)) {
-      setPopover(null);
-      return;
-    }
+    if (!contentRef.current?.contains(range.commonAncestorContainer)) return null;
     const rect = range.getBoundingClientRect();
 
     let sectionHeading: string | undefined;
@@ -74,18 +72,82 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
       sectionHeading = node.dataset.sectionHeading;
     }
 
-    setPopover({
+    return {
       x: rect.left + rect.width / 2,
       y: rect.top - 8,
       text,
       sectionHeading,
-    });
+    };
   }, []);
 
+  const handleMouseUp = useCallback(() => {
+    isPointerDownRef.current = false;
+    // A mouseup is an authoritative, final selection state — cancel any
+    // pending debounced selectionchange update so it doesn't fire a
+    // redundant (and possibly stale) popover a moment later.
+    if (selectionTimerRef.current) {
+      clearTimeout(selectionTimerRef.current);
+      selectionTimerRef.current = null;
+    }
+    setPopover(computeSelectionPopover());
+  }, [computeSelectionPopover]);
+
   useEffect(() => {
+    const onMouseDown = () => {
+      isPointerDownRef.current = true;
+    };
+    document.addEventListener("mousedown", onMouseDown);
     document.addEventListener("mouseup", handleMouseUp);
-    return () => document.removeEventListener("mouseup", handleMouseUp);
+    return () => {
+      document.removeEventListener("mousedown", onMouseDown);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
   }, [handleMouseUp]);
+
+  // Keyboard-driven selection (Shift+arrows, Shift+Home/End, etc.) never
+  // fires `mouseup`, so `selectionchange` is the only signal available.
+  // It fires on every caret move, including plain arrow keys with no
+  // selection at all, so debounce it and only act once the selection has
+  // been stable for a beat — this is also what keeps us from repositioning
+  // the popover on every keystroke while a selection is still being
+  // extended. Ignored entirely while the mouse button is down: a mouse
+  // drag is handled by `handleMouseUp` once it's released.
+  useEffect(() => {
+    const onSelectionChange = () => {
+      if (isPointerDownRef.current) return;
+      if (selectionTimerRef.current) clearTimeout(selectionTimerRef.current);
+      selectionTimerRef.current = setTimeout(() => {
+        selectionTimerRef.current = null;
+        const next = computeSelectionPopover();
+        focusOnSettleRef.current = next !== null;
+        setPopover((prev) => (prev === null && next === null ? prev : next));
+      }, 150);
+    };
+    document.addEventListener("selectionchange", onSelectionChange);
+    return () => {
+      document.removeEventListener("selectionchange", onSelectionChange);
+      if (selectionTimerRef.current) clearTimeout(selectionTimerRef.current);
+    };
+  }, [computeSelectionPopover]);
+
+  // Move focus into the popover once a keyboard-driven selection settles —
+  // never mid-selection (the debounce above already guarantees "settled"),
+  // and never for a mouse selection (mouse users can just click).
+  useEffect(() => {
+    if (popover && focusOnSettleRef.current) {
+      focusOnSettleRef.current = false;
+      explainButtonRef.current?.focus();
+    }
+  }, [popover]);
+
+  useEffect(() => {
+    if (!popover) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setPopover(null);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [popover]);
 
   async function explainSelection() {
     if (!popover) return;
@@ -444,7 +506,13 @@ export function ReadingLens({ guide, sections }: { guide: Guide; sections: Secti
           style={{ left: popover.x, top: popover.y }}
         >
           <div className="bg-popover text-popover-foreground flex items-center gap-1 rounded-md border p-1 shadow-md">
-            <Button size="sm" variant="ghost" className="h-8 gap-1.5" onClick={explainSelection}>
+            <Button
+              ref={explainButtonRef}
+              size="sm"
+              variant="ghost"
+              className="h-8 gap-1.5"
+              onClick={explainSelection}
+            >
               <TextSearch aria-hidden className="text-primary size-3.5" />
               Explain
             </Button>
