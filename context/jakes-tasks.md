@@ -115,6 +115,17 @@ needs action it can't perform itself.
 
 ## 🟡 Before launch (not blocking dev, but don't ship without it)
 
+- [ ] **Four quick dashboard checks from the launch-readiness brainstorm** (prod-readiness
+  relay, 2026-07-19 — details + sources in `context/brainstorms/2026-07-19-launch-readiness.md`):
+  (a) **Supabase plan/backup posture** — the project was found paused on 2026-07-12, which
+  suggests Free tier (auto-pauses after ~a week idle, no point-in-time recovery); confirm
+  the plan and backup story before real users exist. (b) **Google OAuth consent screen:
+  publish it if still in Testing** — Testing mode hard-caps sign-ins at 100 users with
+  7-day token expiry (this is the sign-in OAuth client, separate from the Unit-10 Calendar
+  one). (c) **Vercel plan + Spend Management** — confirm limits/alerts so a traffic spike
+  can't run up a surprise bill. (d) **Click through the password-reset email flow live
+  once** — it's never been verified end-to-end in prod.
+
 - [ ] **Set `NEXT_PUBLIC_SITE_URL` in Vercel env (Production + Preview)** (prod-readiness
   relay, 2026-07-19) — the relay added robots.txt, sitemap.xml, and OpenGraph/Twitter
   metadata (`web/lib/site.ts` centralizes the site URL). Without this var the code falls

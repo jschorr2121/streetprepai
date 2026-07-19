@@ -86,7 +86,22 @@
 
 ## Session log
 
-- **2026-07-19 (session 7, cloud, FINAL — 14 commits, all pushed, suite 855/105)** —
+- **2026-07-19 (session 7, cloud, FINAL — 16 commits, all pushed, suite 855/105)** —
+  Round 3: an opus adversarial review of the ENTIRE session diff (5a26680..HEAD)
+  came back clean on all 7 areas — migration idempotency, logUsage call-site
+  enumeration, robots/sitemap route sets, initialMode lazy init, regenerate
+  restore races, reading-lens listener cleanup, deep-link encoding — no fixes
+  needed (one accepted tradeoff: keyboard selection settle at 150ms pulls focus).
+  Launch-readiness brainstorm committed
+  (`context/brainstorms/2026-07-19-launch-readiness.md`): TOP AFK-SAFE BUILDS for
+  session 8+: (1) **self-serve account deletion** — architecture.md line 218
+  already promises it, DB cascades already exist in 0000_baseline, needs admin
+  delete call + Storage cleanup + UI (M, unblocked); (2) **feedback widget** (S);
+  (3) **privacy policy + ToS pages drafted** (S/M, Jake approves language).
+  Jake-gated launch checks filed to jakes-tasks (Supabase plan/backups, publish
+  Google OAuth consent screen — Testing mode caps at 100 sign-ins, Vercel spend,
+  password-reset live test). Also noted in brainstorm: ivfflat→HNSW candidate for
+  chat_embeddings at launch scale (not urgent).
   Round 2 (after the 803/97 checkpoint below): component coverage FINISHED — every
   non-shadcn component now has dom tests (27 files / 148 dom tests; mock-studio full
   mocked record→transcribe→score flow, resume-coach, firm-prep restore-on-failure,
