@@ -231,10 +231,10 @@ export function ResumeCoach() {
                 variant="ghost"
                 size="sm"
                 onClick={() => {
+                  // Keep rawText/pasteValue so re-critiquing doesn't force a
+                  // re-upload or re-paste of the resume.
                   setResult(null);
                   setApplied({});
-                  setRawText("");
-                  setPasteValue("");
                 }}
               >
                 Start over

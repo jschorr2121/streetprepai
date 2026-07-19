@@ -15,8 +15,8 @@ export function FirmPrep({ firm }: { firm: Firm }) {
   const [loading, setLoading] = useState(false);
 
   async function generate() {
+    const previousPrep = prep;
     setLoading(true);
-    setPrep("");
     setPrepError(null);
     try {
       const res = await fetch(`/api/firms/${firm.slug}/prep`, {
@@ -26,15 +26,24 @@ export function FirmPrep({ firm }: { firm: Firm }) {
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let acc = "";
+      let receivedContent = false;
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
         acc += decoder.decode(value, { stream: true });
         const { content, error } = splitStreamError(acc);
-        setPrep(content);
+        // Only replace the previous prep sheet once the new stream actually
+        // starts delivering content, so a failed regeneration doesn't leave
+        // the user staring at a blank card.
+        if (content) {
+          receivedContent = true;
+          setPrep(content);
+        }
         setPrepError(error);
       }
+      if (!receivedContent) setPrep(previousPrep);
     } catch {
+      setPrep(previousPrep);
       setPrepError("Sorry, something went wrong generating the prep sheet. Please try again.");
     } finally {
       setLoading(false);

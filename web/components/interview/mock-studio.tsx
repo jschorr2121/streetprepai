@@ -62,6 +62,10 @@ const MODES: Array<{
   },
 ];
 
+function isInterviewMode(value: string): value is InterviewMode {
+  return MODES.some((m) => m.id === value);
+}
+
 const MAX_RECORD_SECONDS = 90;
 
 type Phase =
@@ -73,10 +77,16 @@ type Phase =
   | "scoring"
   | "scored";
 
-export function MockStudio() {
-  const [mode, setMode] = useState<InterviewMode | null>(null);
-  const [question, setQuestion] = useState<InterviewQuestion | null>(null);
-  const [phase, setPhase] = useState<Phase>("idle");
+export function MockStudio({ initialMode }: { initialMode?: string } = {}) {
+  // Validate against the real mode list so an invalid/stale `?mode=` value
+  // (see MODES above) is silently ignored rather than crashing the picker.
+  const validInitialMode = initialMode && isInterviewMode(initialMode) ? initialMode : null;
+
+  const [mode, setMode] = useState<InterviewMode | null>(validInitialMode);
+  const [question, setQuestion] = useState<InterviewQuestion | null>(() =>
+    validInitialMode ? pickRandomQuestion(validInitialMode) : null,
+  );
+  const [phase, setPhase] = useState<Phase>(validInitialMode ? "ready" : "idle");
   const [elapsed, setElapsed] = useState(0);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [transcript, setTranscript] = useState<string | null>(null);
