@@ -123,22 +123,29 @@ export function OutreachDrawer({
             />
           </div>
 
-          <Button
-            onClick={generate}
-            disabled={loading || !linkedInContext.trim()}
-            className="w-full"
-          >
-            {loading ? (
-              <>
-                <Loader2 className="mr-1.5 size-4 animate-spin" aria-hidden />
-                Drafting…
-              </>
-            ) : draft ? (
-              "Regenerate"
-            ) : (
-              "Generate draft"
+          <div>
+            <Button
+              onClick={generate}
+              disabled={loading || !linkedInContext.trim()}
+              className="w-full"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="mr-1.5 size-4 animate-spin" aria-hidden />
+                  Drafting…
+                </>
+              ) : draft ? (
+                "Regenerate"
+              ) : (
+                "Generate draft"
+              )}
+            </Button>
+            {!loading && !linkedInContext.trim() && (
+              <p className="text-muted-foreground mt-1.5 text-xs">
+                Add a note about this contact above to enable drafting.
+              </p>
             )}
-          </Button>
+          </div>
 
           {draft && (
             <div className="space-y-5 border-t pt-2">

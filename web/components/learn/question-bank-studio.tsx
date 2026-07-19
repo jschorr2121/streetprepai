@@ -26,13 +26,18 @@ export function QuestionBankStudio({
   dueCount,
   dailyQuestions,
   topics,
+  initialTopic,
 }: {
   dueCount: number;
   dailyQuestions: AnswerCardQuestion[];
   topics: TopicOption[];
+  /** Preselected topic (e.g. from a dashboard "Drill" link) — already
+   * validated against `topics` by the caller. Jumps straight to the "By
+   * topic" tab with this topic selected. */
+  initialTopic?: string;
 }) {
   return (
-    <Tabs defaultValue="daily" className="w-full">
+    <Tabs defaultValue={initialTopic ? "topic" : "daily"} className="w-full">
       <TabsList className="mb-6">
         <TabsTrigger value="daily" className="gap-1.5">
           <CalendarClock className="size-4" /> Daily drill
@@ -64,12 +69,13 @@ export function QuestionBankStudio({
                 ? `${dueCount} weak item${dueCount === 1 ? "" : "s"} due for review, mixed with fresh questions across your topics.`
                 : "A mix of questions across every topic you've started."
             }
+            backHref="/tools/question-bank"
           />
         )}
       </TabsContent>
 
       <TabsContent value="topic">
-        <TopicPractice topics={topics} />
+        <TopicPractice topics={topics} initialTopic={initialTopic} />
       </TabsContent>
 
       <TabsContent value="mentalmath">
@@ -79,8 +85,8 @@ export function QuestionBankStudio({
   );
 }
 
-function TopicPractice({ topics }: { topics: TopicOption[] }) {
-  const [topic, setTopic] = useState<string>(topics[0]?.value ?? "");
+function TopicPractice({ topics, initialTopic }: { topics: TopicOption[]; initialTopic?: string }) {
+  const [topic, setTopic] = useState<string>(initialTopic ?? topics[0]?.value ?? "");
   const [difficulty, setDifficulty] = useState<(typeof DIFFICULTIES)[number]>("medium");
   const [question, setQuestion] = useState<AnswerCardQuestion | null>(null);
   const [pending, setPending] = useState(false);

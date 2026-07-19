@@ -17,8 +17,17 @@ const TOPIC_OPTIONS = [...new Map(chapters.map((c) => [c.topic, c.shortTitle])).
   ([value, label]) => ({ value, label }),
 );
 
-export default async function QuestionBankPage() {
+type Props = {
+  searchParams: Promise<{ topic?: string }>;
+};
+
+export default async function QuestionBankPage({ searchParams }: Props) {
   const user = await requireUser();
+  const { topic: rawTopic } = await searchParams;
+
+  // Validate the topic from the URL against the real topic list — reject
+  // unknown values silently rather than erroring.
+  const initialTopic = TOPIC_OPTIONS.find((t) => t.value === rawTopic)?.value;
 
   const { dueCount, due, fresh } = await withUser(
     { sub: user.id, role: "authenticated" },
@@ -78,6 +87,7 @@ export default async function QuestionBankPage() {
           questionType: q.questionType,
         }))}
         topics={TOPIC_OPTIONS}
+        initialTopic={initialTopic}
       />
     </div>
   );

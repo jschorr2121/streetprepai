@@ -105,6 +105,16 @@ describe("QuestionBankStudio", () => {
     expect(await screen.findByText("Slow down a moment.")).toBeInTheDocument();
   });
 
+  it("jumps to the By topic tab with the topic preselected when initialTopic is set", () => {
+    render(
+      <QuestionBankStudio dueCount={0} dailyQuestions={[]} topics={topics} initialTopic="ma" />,
+    );
+
+    // Lands directly on "By topic" (not the default "Daily drill" tab).
+    expect(screen.getByTestId("qbank-topic-ma")).toHaveClass("border-primary");
+    expect(screen.queryByTestId("practice-session")).not.toBeInTheDocument();
+  });
+
   it("switches between mental math drills", () => {
     render(<QuestionBankStudio dueCount={0} dailyQuestions={[]} topics={topics} />);
     switchTab(/mental math/i);

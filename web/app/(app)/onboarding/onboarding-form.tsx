@@ -120,9 +120,14 @@ export function OnboardingForm() {
           id="school"
           placeholder="e.g. University of Michigan"
           aria-invalid={Boolean(errors.school)}
+          aria-describedby={errors.school ? "school-error" : undefined}
           {...register("school")}
         />
-        {errors.school ? <p className="text-destructive text-sm">{errors.school.message}</p> : null}
+        {errors.school ? (
+          <p id="school-error" className="text-destructive text-sm">
+            {errors.school.message}
+          </p>
+        ) : null}
       </div>
 
       <div className="grid grid-cols-2 gap-4">
@@ -136,10 +141,13 @@ export function OnboardingForm() {
             max={GRAD_YEAR_RANGE.max}
             placeholder={String(GRAD_YEAR_RANGE.min + 2)}
             aria-invalid={Boolean(errors.graduationYear)}
+            aria-describedby={errors.graduationYear ? "graduationYear-error" : undefined}
             {...register("graduationYear", { valueAsNumber: true })}
           />
           {errors.graduationYear ? (
-            <p className="text-destructive text-sm">{errors.graduationYear.message}</p>
+            <p id="graduationYear-error" className="text-destructive text-sm">
+              {errors.graduationYear.message}
+            </p>
           ) : null}
         </div>
 
@@ -154,6 +162,7 @@ export function OnboardingForm() {
                   id="currentSemester"
                   className="w-full"
                   aria-invalid={Boolean(errors.currentSemester)}
+                  aria-describedby={errors.currentSemester ? "currentSemester-error" : undefined}
                 >
                   <SelectValue placeholder="Select…" />
                 </SelectTrigger>
@@ -168,7 +177,9 @@ export function OnboardingForm() {
             )}
           />
           {errors.currentSemester ? (
-            <p className="text-destructive text-sm">{errors.currentSemester.message}</p>
+            <p id="currentSemester-error" className="text-destructive text-sm">
+              {errors.currentSemester.message}
+            </p>
           ) : null}
         </div>
       </div>
@@ -202,6 +213,7 @@ export function OnboardingForm() {
           onBlur={() => addFirm(firmDraft)}
           placeholder="Type a firm and press Enter"
           aria-invalid={Boolean(errors.targetFirms)}
+          aria-describedby={errors.targetFirms ? "targetFirms-error" : undefined}
         />
         <div className="flex flex-wrap gap-1.5 pt-1">
           {SUGGESTED_FIRMS.filter((s) => !firms.includes(s)).map((s) => (
@@ -216,12 +228,14 @@ export function OnboardingForm() {
           ))}
         </div>
         {errors.targetFirms ? (
-          <p className="text-destructive text-sm">{errors.targetFirms.message}</p>
+          <p id="targetFirms-error" className="text-destructive text-sm">
+            {errors.targetFirms.message}
+          </p>
         ) : null}
       </div>
 
       <div className="space-y-1.5">
-        <Label>Study depth</Label>
+        <Label>Study Preferences</Label>
         <button
           type="button"
           role="switch"
@@ -237,11 +251,10 @@ export function OnboardingForm() {
             {advancedTrack ? "✓" : ""}
           </span>
           <span>
-            <span className="text-sm font-medium">Show advanced material</span>
+            <span className="text-sm font-medium">Advanced track</span>
             <span className="text-muted-foreground block text-xs">
-              Turn on the ⭐ elective sections and harder questions (deferred taxes, leases,
-              waterfalls, 338(h)(10)…). Aimed at PE-track or prior-experience candidates. You can
-              change this anytime in your profile.
+              Show ⭐ elective sections and harder questions (deferred taxes, leases, waterfalls,
+              338(h)(10)…). For PE-track or prior-experience candidates.
             </span>
           </span>
         </button>

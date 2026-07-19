@@ -216,7 +216,9 @@ export default async function DashboardPage() {
                       {Math.round(w.score * 100)}%
                     </span>
                     <Button asChild size="sm" variant="ghost" className="h-7 text-xs">
-                      <Link href="/tools/question-bank">Drill</Link>
+                      <Link href={`/tools/question-bank?topic=${encodeURIComponent(w.topic)}`}>
+                        Drill
+                      </Link>
                     </Button>
                   </div>
                 </li>

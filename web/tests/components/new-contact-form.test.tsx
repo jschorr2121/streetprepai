@@ -78,4 +78,27 @@ describe("NewContactForm", () => {
     expect(toastErrorMock).toHaveBeenCalledWith("Something went wrong.");
     expect(pushMock).not.toHaveBeenCalled();
   });
+
+  it("highlights server-side field errors instead of only toasting", async () => {
+    createContactActionMock.mockResolvedValue({
+      ok: false,
+      error: {
+        code: "VALIDATION_FAILED",
+        message: "Check the highlighted fields.",
+        fieldErrors: { firm: "Firm is required." },
+      },
+    });
+
+    render(<NewContactForm />);
+
+    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: "Alex Chen" } });
+    fireEvent.change(screen.getByLabelText(/firm/i), { target: { value: "Goldman Sachs" } });
+    fireEvent.click(screen.getByRole("button", { name: /add contact/i }));
+
+    await waitFor(() => expect(createContactActionMock).toHaveBeenCalledTimes(1));
+    expect(await screen.findByText("Firm is required.")).toBeInTheDocument();
+    expect(screen.getByLabelText(/firm/i)).toHaveAttribute("aria-describedby", "firm-error");
+    expect(toastErrorMock).toHaveBeenCalledWith("Check the highlighted fields.");
+    expect(pushMock).not.toHaveBeenCalled();
+  });
 });

@@ -166,8 +166,8 @@ export function ContactDetail({
   }
 
   async function generatePrepSheet() {
+    const previousPrepSheet = prepSheet;
     setPrepLoading(true);
-    setPrepSheet("");
     setPrepError(null);
     try {
       const res = await fetch("/api/relationships/prep-person", {
@@ -188,15 +188,24 @@ export function ContactDetail({
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let acc = "";
+      let receivedContent = false;
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
         acc += decoder.decode(value, { stream: true });
         const { content, error } = splitStreamError(acc);
-        setPrepSheet(content);
+        // Only replace the previous prep sheet once the new stream actually
+        // starts delivering content, so a failed regeneration doesn't leave
+        // the user staring at a blank card.
+        if (content) {
+          receivedContent = true;
+          setPrepSheet(content);
+        }
         setPrepError(error);
       }
+      if (!receivedContent) setPrepSheet(previousPrepSheet);
     } catch {
+      setPrepSheet(previousPrepSheet);
       setPrepError("Sorry, something went wrong generating the prep sheet. Please try again.");
     } finally {
       setPrepLoading(false);

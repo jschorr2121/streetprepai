@@ -40,6 +40,7 @@ export function NewContactForm() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<CreateContactFormInput>({
     resolver: zodResolver(CreateContactSchema),
@@ -62,6 +63,11 @@ export function NewContactForm() {
     startTransition(async () => {
       const result = await createContactAction(data);
       if (!result.ok) {
+        if (result.error.fieldErrors) {
+          for (const [field, message] of Object.entries(result.error.fieldErrors)) {
+            setError(field as keyof CreateContactFormInput, { message });
+          }
+        }
         toast.error(result.error.message ?? "Failed to add contact.");
         return;
       }
@@ -82,9 +88,14 @@ export function NewContactForm() {
             id="name"
             placeholder="Alex Chen"
             aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? "name-error" : undefined}
             {...register("name")}
           />
-          {errors.name && <p className="text-destructive text-xs">{errors.name.message}</p>}
+          {errors.name && (
+            <p id="name-error" className="text-destructive text-xs">
+              {errors.name.message}
+            </p>
+          )}
         </div>
 
         <div className="space-y-1.5">
@@ -95,9 +106,14 @@ export function NewContactForm() {
             id="firm"
             placeholder="Goldman Sachs"
             aria-invalid={!!errors.firm}
+            aria-describedby={errors.firm ? "firm-error" : undefined}
             {...register("firm")}
           />
-          {errors.firm && <p className="text-destructive text-xs">{errors.firm.message}</p>}
+          {errors.firm && (
+            <p id="firm-error" className="text-destructive text-xs">
+              {errors.firm.message}
+            </p>
+          )}
         </div>
 
         <div className="space-y-1.5">
@@ -122,9 +138,14 @@ export function NewContactForm() {
             inputMode="numeric"
             placeholder="2023"
             aria-invalid={!!errors.gradYear}
+            aria-describedby={errors.gradYear ? "gradYear-error" : undefined}
             {...register("gradYear")}
           />
-          {errors.gradYear && <p className="text-destructive text-xs">{errors.gradYear.message}</p>}
+          {errors.gradYear && (
+            <p id="gradYear-error" className="text-destructive text-xs">
+              {errors.gradYear.message}
+            </p>
+          )}
         </div>
 
         <div className="space-y-1.5">
@@ -140,6 +161,7 @@ export function NewContactForm() {
             id="stage"
             className="border-input bg-background text-foreground focus-visible:ring-ring h-9 w-full rounded-md border px-3 py-1 text-sm shadow-sm focus-visible:ring-1 focus-visible:outline-none"
             aria-invalid={!!errors.stage}
+            aria-describedby={errors.stage ? "stage-error" : undefined}
             {...register("stage")}
           >
             {CONTACT_STAGES.map((s) => (
@@ -148,7 +170,11 @@ export function NewContactForm() {
               </option>
             ))}
           </select>
-          {errors.stage && <p className="text-destructive text-xs">{errors.stage.message}</p>}
+          {errors.stage && (
+            <p id="stage-error" className="text-destructive text-xs">
+              {errors.stage.message}
+            </p>
+          )}
         </div>
       </div>
 
@@ -159,10 +185,13 @@ export function NewContactForm() {
           placeholder="Paste their LinkedIn about/experience text — the AI prep sheet uses it for hooks and talking points."
           rows={4}
           aria-invalid={!!errors.linkedinBio}
+          aria-describedby={errors.linkedinBio ? "linkedinBio-error" : undefined}
           {...register("linkedinBio")}
         />
         {errors.linkedinBio && (
-          <p className="text-destructive text-xs">{errors.linkedinBio.message}</p>
+          <p id="linkedinBio-error" className="text-destructive text-xs">
+            {errors.linkedinBio.message}
+          </p>
         )}
       </div>
 

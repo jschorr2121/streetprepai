@@ -44,6 +44,9 @@ describe("OutreachDrawer", () => {
       />,
     );
     expect(screen.getByRole("button", { name: /generate draft/i })).toBeDisabled();
+    expect(
+      screen.getByText(/add a note about this contact above to enable drafting/i),
+    ).toBeInTheDocument();
   });
 
   it("generates a draft and lets the user pick a subject and copy the email", async () => {

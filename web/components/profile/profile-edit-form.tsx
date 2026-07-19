@@ -167,10 +167,13 @@ export function ProfileEditForm({ profile }: Props) {
               id="fullName"
               placeholder="Jake Schorr"
               aria-invalid={Boolean(errors.fullName)}
+              aria-describedby={errors.fullName ? "fullName-error" : undefined}
               {...register("fullName")}
             />
             {errors.fullName ? (
-              <p className="text-destructive text-sm">{errors.fullName.message}</p>
+              <p id="fullName-error" className="text-destructive text-sm">
+                {errors.fullName.message}
+              </p>
             ) : null}
           </div>
 
@@ -181,10 +184,13 @@ export function ProfileEditForm({ profile }: Props) {
                 id="school"
                 placeholder="University of Michigan"
                 aria-invalid={Boolean(errors.school)}
+                aria-describedby={errors.school ? "school-error" : undefined}
                 {...register("school")}
               />
               {errors.school ? (
-                <p className="text-destructive text-sm">{errors.school.message}</p>
+                <p id="school-error" className="text-destructive text-sm">
+                  {errors.school.message}
+                </p>
               ) : null}
             </div>
 
@@ -198,10 +204,13 @@ export function ProfileEditForm({ profile }: Props) {
                 max={2100}
                 placeholder={String(new Date().getFullYear() + 2)}
                 aria-invalid={Boolean(errors.graduationYear)}
+                aria-describedby={errors.graduationYear ? "graduationYear-error" : undefined}
                 {...register("graduationYear", { valueAsNumber: true })}
               />
               {errors.graduationYear ? (
-                <p className="text-destructive text-sm">{errors.graduationYear.message}</p>
+                <p id="graduationYear-error" className="text-destructive text-sm">
+                  {errors.graduationYear.message}
+                </p>
               ) : null}
             </div>
           </div>
@@ -219,10 +228,13 @@ export function ProfileEditForm({ profile }: Props) {
             placeholder="Sophomore at Michigan studying Finance. Targeting BB/EB SA roles for Summer 2027…"
             className="resize-none"
             aria-invalid={Boolean(errors.bioSummary)}
+            aria-describedby={errors.bioSummary ? "bioSummary-error" : undefined}
             {...register("bioSummary")}
           />
           {errors.bioSummary ? (
-            <p className="text-destructive text-sm">{errors.bioSummary.message}</p>
+            <p id="bioSummary-error" className="text-destructive text-sm">
+              {errors.bioSummary.message}
+            </p>
           ) : null}
         </div>
       </section>
@@ -262,6 +274,7 @@ export function ProfileEditForm({ profile }: Props) {
               onBlur={() => addFirm(firmDraft)}
               placeholder="Type a firm and press Enter"
               aria-invalid={Boolean(errors.targetFirms)}
+              aria-describedby={errors.targetFirms ? "targetFirms-error" : undefined}
             />
             <div className="flex flex-wrap gap-1.5 pt-1">
               {SUGGESTED_FIRMS.filter((s) => !firms.includes(s)).map((s) => (
@@ -276,7 +289,9 @@ export function ProfileEditForm({ profile }: Props) {
               ))}
             </div>
             {errors.targetFirms ? (
-              <p className="text-destructive text-sm">{errors.targetFirms.message}</p>
+              <p id="targetFirms-error" className="text-destructive text-sm">
+                {errors.targetFirms.message}
+              </p>
             ) : null}
           </div>
 
@@ -310,6 +325,7 @@ export function ProfileEditForm({ profile }: Props) {
               onBlur={() => addRole(roleDraft)}
               placeholder="Type a role and press Enter"
               aria-invalid={Boolean(errors.targetRoles)}
+              aria-describedby={errors.targetRoles ? "targetRoles-error" : undefined}
             />
             <div className="flex flex-wrap gap-1.5 pt-1">
               {SUGGESTED_ROLES.filter((s) => !roles.includes(s)).map((s) => (
@@ -324,7 +340,9 @@ export function ProfileEditForm({ profile }: Props) {
               ))}
             </div>
             {errors.targetRoles ? (
-              <p className="text-destructive text-sm">{errors.targetRoles.message}</p>
+              <p id="targetRoles-error" className="text-destructive text-sm">
+                {errors.targetRoles.message}
+              </p>
             ) : null}
           </div>
         </div>
