@@ -47,6 +47,10 @@ export default defineConfig({
         test: {
           name: "node",
           environment: "node",
+          // PGlite-backed query tests (tests/helpers/pglite-db.ts) pay a one-off
+          // WASM instantiation cost that can exceed the 5s default on a cold
+          // filesystem cache (first run after a fresh pnpm install).
+          testTimeout: 15_000,
           // lib/**/*.test.ts covers colocated pure-function tests (the
           // code-standards convention) — without it lib/mastery/mastery.test.ts
           // silently never ran.
