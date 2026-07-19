@@ -3,6 +3,7 @@ import { IBM_Plex_Mono, Newsreader, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
 
 const schibsted = Schibsted_Grotesk({
   variable: "--font-schibsted",
@@ -22,9 +23,21 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Street Prep AI — The recruiting cycle, reimagined with AI",
-  description:
-    "AI-powered prep for IB recruiting. Voice mock interviews, relationship memory, firm intel, and active-reading guides built for undergrads targeting summer analyst offers.",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
