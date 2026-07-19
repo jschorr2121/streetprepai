@@ -145,7 +145,7 @@ export function ApplicationRow({ application }: Props) {
           aria-label="Delete application"
           disabled={isPending}
           onClick={handleDelete}
-          className="text-muted-foreground hover:text-destructive size-7"
+          className="text-muted-foreground hover:text-destructive size-9"
         >
           <Trash2 className="size-3.5" aria-hidden />
         </Button>

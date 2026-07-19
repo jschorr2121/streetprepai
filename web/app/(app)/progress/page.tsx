@@ -182,7 +182,7 @@ export default async function ProgressPage() {
       <section className="mt-10 mb-10">
         <h2 className="font-display mb-4 border-b pb-3 text-xl">Last 4 weeks</h2>
         <Card className="gap-3 p-5">
-          <div className="grid grid-cols-14 gap-1">
+          <div className="grid grid-cols-7 gap-1 sm:grid-cols-14">
             {activity.activeDays.map((active, i) => (
               <div
                 key={i}

@@ -104,7 +104,7 @@ export function RelationshipsTopWidgets({
               return (
                 <div
                   key={c.id}
-                  className="hover:bg-accent/30 flex items-start justify-between gap-4 p-4 transition-colors duration-150"
+                  className="hover:bg-accent/30 flex flex-col gap-3 p-4 transition-colors duration-150 sm:flex-row sm:items-start sm:justify-between sm:gap-4"
                 >
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
@@ -190,7 +190,7 @@ export function RelationshipsTopWidgets({
                   <Button
                     size="icon"
                     variant="ghost"
-                    className="size-7 shrink-0"
+                    className="size-9 shrink-0"
                     onClick={() => markDone(f.id)}
                     aria-label={`Mark follow-up for ${contact.name} done`}
                     title="Mark done"

@@ -107,35 +107,37 @@ export default async function ChapterPage({ params }: { params: Promise<{ chapte
           return (
             <li
               key={section.slug}
-              className="bg-card flex items-center gap-3 rounded-xl border p-4"
+              className="bg-card flex flex-col gap-3 rounded-xl border p-4 sm:flex-row sm:items-center"
             >
-              <div className="shrink-0">
-                {isRead ? (
-                  <CheckCircle2 className="text-primary size-5" />
-                ) : (
-                  <Circle className="text-muted-foreground/40 size-5" />
-                )}
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-muted-foreground text-xs">{i + 1}</span>
-                  <span className="truncate font-medium">{section.title}</span>
-                  {section.advanced && (
-                    <Star className="size-3.5 shrink-0 fill-amber-400 text-amber-400" />
+              <div className="flex min-w-0 flex-1 items-center gap-3">
+                <div className="shrink-0">
+                  {isRead ? (
+                    <CheckCircle2 className="text-primary size-5" />
+                  ) : (
+                    <Circle className="text-muted-foreground/40 size-5" />
                   )}
                 </div>
-                {guide && (
-                  <p className="text-muted-foreground mt-0.5 line-clamp-1 text-xs">
-                    {guide.description}
-                  </p>
-                )}
-                {!guide && (
-                  <p className="text-muted-foreground/70 mt-0.5 text-xs italic">
-                    Content in progress
-                  </p>
-                )}
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-muted-foreground text-xs">{i + 1}</span>
+                    <span className="truncate font-medium">{section.title}</span>
+                    {section.advanced && (
+                      <Star className="size-3.5 shrink-0 fill-amber-400 text-amber-400" />
+                    )}
+                  </div>
+                  {guide && (
+                    <p className="text-muted-foreground mt-0.5 line-clamp-1 text-xs">
+                      {guide.description}
+                    </p>
+                  )}
+                  {!guide && (
+                    <p className="text-muted-foreground/70 mt-0.5 text-xs italic">
+                      Content in progress
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="flex shrink-0 items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2 sm:shrink-0 sm:flex-nowrap">
                 {drilled && (
                   <span className="text-primary hidden items-center gap-1 text-xs sm:flex">
                     <Dumbbell className="size-3.5" /> Drilled

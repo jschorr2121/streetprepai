@@ -612,7 +612,7 @@ function ScoreReadout({ label, score }: { label: string; score: number }) {
 function RubricRow({ item }: { item: RubricItem }) {
   const tone = scoreTone(item.score);
   return (
-    <div className="grid grid-cols-[140px_1fr_auto] items-start gap-3">
+    <div className="grid grid-cols-1 items-start gap-3 sm:grid-cols-[140px_1fr_auto]">
       <p className="text-sm leading-snug font-medium">{item.dimension}</p>
       <p className="text-muted-foreground text-sm leading-relaxed">{item.comment}</p>
       <div className="flex items-center gap-2">

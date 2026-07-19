@@ -257,7 +257,7 @@ export function ResumeCoach() {
             </div>
             <aside className="space-y-3">
               <h2 className="eyebrow">Edited preview</h2>
-              <Card className="sticky top-6 max-h-[80vh] overflow-y-auto p-5">
+              <Card className="overflow-y-auto p-5 lg:sticky lg:top-6 lg:max-h-[80vh]">
                 <PreviewPane result={result} applied={applied} />
               </Card>
             </aside>

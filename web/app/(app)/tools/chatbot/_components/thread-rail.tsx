@@ -89,7 +89,7 @@ export function ThreadRail({
                     variant="ghost"
                     disabled={pending}
                     aria-label={`Options for ${t.title}`}
-                    className="size-7 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 data-[state=open]:opacity-100"
+                    className="size-9 opacity-100 md:size-7 md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100 md:data-[state=open]:opacity-100"
                   >
                     <MoreHorizontal className="size-3.5" />
                   </Button>
