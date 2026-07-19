@@ -542,3 +542,20 @@ Four commits (`15765e0`…`4f38996`), each gated on typecheck + lint + full vite
   applies 0011 (filed).
 - Gates at session end: typecheck ✅, lint 0 errors, suite **803 passing / 97
   files** (from 707/78), build exit 0, repo-wide prettier ✅.
+
+## Prod-readiness relay session 7 (continued) — component coverage complete, reading-lens a11y, mobile fixes (2026-07-19)
+
+- **Component coverage finished**: 49 more dom tests (mock-studio incl. full mocked
+  record→transcribe→score flow + initialMode validation; resume-coach incl.
+  start-over text preservation; firm-prep restore-on-failure + sentinel splitting;
+  chat-panel; product-tour via a getBoundingClientRect stub — happy-dom has no
+  layout engine; sidebar-profile-menu; google-button). Every non-shadcn component
+  now has tests.
+- **Reading-lens keyboard a11y shipped** (ux-polish issue 01 closed): debounced
+  selectionchange path + managed focus on settle + Escape dismiss; 3 dom tests.
+- **Mobile sweep → 8 findings, all fixed**: chapter-row control stacking,
+  thread-rail options always visible + 36px below md, 36px touch targets on
+  mark-done/delete, nudge-row stacking, resume preview sticky gated to lg,
+  mock-interview rubric grid collapse below sm, progress heatmap 7-col wrap.
+- Final gates: typecheck ✅, lint 0 errors, suite **855 passing / 105 files**,
+  build exit 0, repo-wide prettier ✅.

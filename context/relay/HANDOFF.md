@@ -86,7 +86,17 @@
 
 ## Session log
 
-- **2026-07-19 (session 7, cloud, FINAL — 11 commits, all pushed, suite 803/97)** —
+- **2026-07-19 (session 7, cloud, FINAL — 14 commits, all pushed, suite 855/105)** —
+  Round 2 (after the 803/97 checkpoint below): component coverage FINISHED — every
+  non-shadcn component now has dom tests (27 files / 148 dom tests; mock-studio full
+  mocked record→transcribe→score flow, resume-coach, firm-prep restore-on-failure,
+  chat-panel, product-tour via getBoundingClientRect stub, auth components);
+  reading-lens keyboard a11y SHIPPED (ux-polish/01 closed — debounced
+  selectionchange + managed focus + Escape); mobile sweep → 8 findings all fixed
+  (chapter-row stacking, thread-rail touch-visible options, 36px touch targets,
+  nudge-row stacking, resume sticky gated to lg, rubric grid collapse, heatmap
+  7-col wrap). Final gates: typecheck ✅ lint 0 err ✅ suite 855/105 ✅ build 0 ✅
+  prettier ✅. Round 1 summary follows.
   Phase 5. Orchestrated as 8 parallel subagents (3 test batches, UX sweep, 2 UX
   fixers, SEO, opus migration). (1) **Session-6 flake SOLVED**: chat.test.ts PGlite
   cold-WASM instantiation ~6s vs 5s vitest default; node project now has
