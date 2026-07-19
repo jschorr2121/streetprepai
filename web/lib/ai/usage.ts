@@ -20,6 +20,18 @@ export function logUsage(payload: UsagePayload): void {
     return;
   }
 
+  // ai_usage.user_id is NOT NULL (migration 0011) — a usage row with no owner
+  // is invisible to per-user spend caps (assertUnderQuota filters user_id), so
+  // it is worse than useless. Every real write path supplies a userId; if one
+  // is ever missing, skip the insert and surface it loudly rather than write an
+  // unattributable row (which the DB would reject anyway, swallowed below).
+  if (!payload.userId) {
+    console.warn(
+      `[ai/usage] logUsage: missing userId for endpoint "${payload.endpoint}" — usage not recorded`,
+    );
+    return;
+  }
+
   const costUsd = calculateCost(payload.model, payload.usage) + (payload.surchargeUsd ?? 0);
 
   // Supabase query builders are lazy thenables — the request only fires once
@@ -27,7 +39,7 @@ export function logUsage(payload: UsagePayload): void {
   void admin
     .from("ai_usage")
     .insert({
-      user_id: payload.userId ?? null,
+      user_id: payload.userId,
       endpoint: payload.endpoint,
       model: payload.model,
       input_tokens: payload.usage.input_tokens,

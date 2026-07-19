@@ -27,7 +27,7 @@ beforeEach(async () => {
 });
 
 async function insertUsage(overrides: {
-  userId: string | null;
+  userId: string;
   endpoint?: string;
   model?: string;
   inputTokens?: number;

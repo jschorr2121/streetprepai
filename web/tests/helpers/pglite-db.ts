@@ -193,7 +193,7 @@ export async function createPgliteDb(): Promise<Executor> {
   await db.execute(`
     create table ai_usage (
       id                  uuid          primary key default gen_random_uuid(),
-      user_id             uuid,
+      user_id             uuid          not null,
       endpoint            text          not null,
       model               text          not null,
       input_tokens        integer       not null,

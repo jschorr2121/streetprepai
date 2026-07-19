@@ -2,7 +2,7 @@ import { integer, numeric, pgTable, text, timestamp, uuid } from "drizzle-orm/pg
 
 export const aiUsage = pgTable("ai_usage", {
   id: uuid("id").notNull().primaryKey().defaultRandom(),
-  userId: uuid("user_id"),
+  userId: uuid("user_id").notNull(),
   endpoint: text("endpoint").notNull(),
   model: text("model").notNull(),
   inputTokens: integer("input_tokens").notNull(),

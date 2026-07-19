@@ -96,6 +96,16 @@ needs action it can't perform itself.
   semantic chat recall stops running at the default single-probe (which can silently
   miss matches for per-user filtered searches). Same SQL-editor flow as 0004/0005.
 
+- [ ] **Apply migration `0011_ai_usage_user_id_not_null.sql`** (prod-readiness relay,
+  2026-07-19) — security-review Low #16: makes `ai_usage.user_id` NOT NULL so a usage row
+  can never be un-attributed (a NULL owner is invisible to the per-user monthly spend cap in
+  `lib/ai/usage.ts::assertUnderQuota`, which filters `user_id = :uid`). Idempotent +
+  live-data-aware: it first DELETEs any existing NULL rows (unattributable orphans from the
+  pre-sweep / old lazy-thenable era — no recoverable owner, and per-user reads already
+  exclude them, so no real user's total drops) then runs a guarded `ALTER ... SET NOT NULL`.
+  Same manual SQL-editor flow as 0009/0010. The `DO` block RAISEs a NOTICE with the count of
+  orphan rows removed — note it if non-zero (that spend was never captured by any user's cap).
+
 - [ ] **Verify the production `firms` table is seeded** (prod-readiness relay, 2026-07-16) —
   `/firms`, `/firms/[slug]`, and the firm-prep route now read the `firms` table exclusively
   (the hardcoded seed arrays were deleted when the pages were wired to real data). Local dev

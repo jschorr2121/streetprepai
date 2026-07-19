@@ -104,6 +104,7 @@ describe("logUsage", () => {
       model: "claude-sonnet-4-6",
       usage: { input_tokens: 1, output_tokens: 1 },
       endpoint: "lazy-builder",
+      userId: "u-lazy",
     });
 
     await new Promise((r) => setTimeout(r, 0));
@@ -124,6 +125,7 @@ describe("logUsage", () => {
       model: "claude-sonnet-4-6",
       usage: { input_tokens: 1, output_tokens: 1 },
       endpoint: "err-insert",
+      userId: "u-err",
     });
 
     await new Promise((r) => setTimeout(r, 0));
@@ -131,11 +133,12 @@ describe("logUsage", () => {
     expect(err).toHaveBeenCalled();
   });
 
-  it("uses null user_id when userId is omitted", async () => {
+  it("skips the insert and warns when userId is omitted (ai_usage.user_id is NOT NULL)", async () => {
     const mocks = makeAdminMock();
     vi.doMock("@/lib/supabase/admin", () => ({
       getAdminClient: vi.fn(() => mocks.admin),
     }));
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
     const { logUsage } = await import("@/lib/ai/usage");
     logUsage({
       model: "claude-haiku-4-5-20251001",
@@ -144,8 +147,10 @@ describe("logUsage", () => {
     });
     await new Promise((r) => setTimeout(r, 0));
     await new Promise((r) => setTimeout(r, 0));
-    const inserted = mocks.insert.mock.calls[0]![0] as Record<string, unknown>;
-    expect(inserted.user_id).toBeNull();
+    // A row with no owner is invisible to per-user spend caps, so it must never
+    // be written — logUsage drops it and surfaces a warning instead.
+    expect(mocks.insert).not.toHaveBeenCalled();
+    expect(warn).toHaveBeenCalled();
   });
 });
 
