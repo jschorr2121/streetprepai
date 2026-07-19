@@ -51,6 +51,7 @@ export default defineConfig({
           // WASM instantiation cost that can exceed the 5s default on a cold
           // filesystem cache (first run after a fresh pnpm install).
           testTimeout: 15_000,
+          hookTimeout: 15_000,
           // lib/**/*.test.ts covers colocated pure-function tests (the
           // code-standards convention) — without it lib/mastery/mastery.test.ts
           // silently never ran.
