@@ -86,6 +86,22 @@
 
 ## Session log
 
+- **2026-07-20 (session 8, cloud, checkpoint 2 — 9 commits pushed, suite 931/122)** —
+  Wave 2 landed: **data export** (`f214517`, GET /api/account/export, 18 tables,
+  cheap tier, embeddings excluded — issue 01 closed), **injection framing**
+  (`79676d8`, ASSISTANT_SYSTEM frames tool/web_search results as untrusted data —
+  issue 02 closed), **dead schema deleted** (`4c48ad0` — resumes.ts +
+  interview-sessions.ts described tables with NO migration and NO call sites),
+  **page/reader coverage** (`c2c8cc3`, +37 tests: 8 page files w/ real branching
+  + markdown/reading-lens extensions; thin delegation pages skipped by design).
+  Inline review of the deletion action came back clean. IN FLIGHT at checkpoint:
+  an opus adversarial review of the entire session diff (52898c3..HEAD), focused
+  on export-route data exposure, deletion races/CSRF, health-route allowlist
+  bypass, feedback RLS, legal-page claim accuracy. Known follow-up gaps for
+  session 9: `lib/curriculum/progress.ts` + `cycle.ts` pure logic has no
+  dedicated unit tests; export could use a dedicated tight limiter (2/hour)
+  instead of cheap tier. Checkpoint-1 log follows.
+
 - **2026-07-20 (session 8, cloud, checkpoint 1 — 5 commits, suite 888/113)** —
   Phase 5, launch-compliance lane. Shipped the brainstorm's top-4 AFK-safe builds
   via 3 parallel agents (opus: deletion; sonnet: legal pages, feedback+health):

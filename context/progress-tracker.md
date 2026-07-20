@@ -18,7 +18,14 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ### Prod-readiness relay — launch-compliance builds: account deletion, legal pages, feedback, health (2026-07-20, session 8)
 
-Suite **888 passing / 113 files** (from 855/105); typecheck/lint/build/repo-wide
+Wave 2 (same day): **data export** shipped (`GET /api/account/export`, 18 tables,
+download button on settings — issue 01 closed), **assistant injection framing**
+(tool/web_search results framed as untrusted data — issue 02 closed), dead
+`resumes`/`interview_sessions` Drizzle schema files deleted (no migration ever
+created them), and **+37 page/reader tests** (suite **931/122**). An opus
+adversarial review of the full session diff runs at session end.
+
+Wave 1: suite **888 passing / 113 files** (from 855/105); typecheck/lint/build/repo-wide
 prettier all green. Shipped the top-4 AFK-safe items from the launch-readiness
 brainstorm as three parallel-agent slices: (1) **self-serve account deletion** at
 `/profile/settings` (confirm-twice type-DELETE dialog → storage-prefix cleanup →

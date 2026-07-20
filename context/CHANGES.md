@@ -604,3 +604,33 @@ verified together, committed per-slice.
   firm_data refresh ingests live web content).
 - Final gates: typecheck ✅, lint 0 errors (2 pre-existing warnings), suite
   **888 passing / 113 files** (from 855/105), build exit 0, repo-wide prettier ✅.
+
+## Prod-readiness relay session 8 (continued) — data export, injection framing, dead schema, page coverage (2026-07-20)
+
+- **Self-serve data export** (`f214517`) — `GET /api/account/export` (legacy
+  `requireUser` cheap tier + `withUser`/Drizzle) returns every user-owned row
+  (18 tables) grouped by table as a JSON attachment; download button on
+  `/profile/settings` above the Danger Zone. Embedding vectors excluded (noted
+  in payload meta); no Storage objects exist yet to include. Closes
+  launch-readiness issue 01. Known tradeoffs: cheap tier (30/min) not a
+  dedicated 2/hour limiter; full JSON buffered in memory (fine at current
+  per-user volumes).
+- **Assistant prompt injection framing** (`79676d8`) — `ASSISTANT_SYSTEM` now
+  explicitly frames tool + web_search results (firm descriptions, chat notes,
+  search snippets) as untrusted DATA, never instructions; string-assertion
+  regression test. Closes launch-readiness issue 02. Tool-result delimiter
+  wrapping deliberately skipped (capText already bounds fields; reshaping tool
+  results would ripple through tests/UI for marginal gain).
+- **Dead schema deleted** (`4c48ad0`) — `lib/db/schema/resumes.ts` +
+  `interview-sessions.ts` had no CREATE TABLE in any migration and zero call
+  sites (surfaced by the export audit); deleted. No deletion-cascade blind
+  spot — the tables never existed.
+- **Page-level + reader coverage** (`c2c8cc3`) — 8 new page-test files
+  targeting pages with real branching (dashboard flow, firm-detail notFound +
+  mention-matching, applications `?stage=` validation, question-bank due-first
+  dedup cap, onboarding redirect, learn gate/drill, dev-spend rollups) and
+  extended markdown/reading-lens tests (TOC, explain streaming, beginner-mode
+  per-section error isolation). Thin delegation-only pages skipped by design.
+  Noted gap for a later session: `lib/curriculum/progress.ts` + `cycle.ts`
+  pure logic has no dedicated unit tests (exercised only via page tests).
+- Suite after this block: **931 passing / 122 files**.
