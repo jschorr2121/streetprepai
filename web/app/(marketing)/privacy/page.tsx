@@ -75,13 +75,14 @@ export default function PrivacyPolicyPage() {
                 and the firms you&apos;re targeting.
               </li>
               <li>
-                <strong>Resumes</strong> — the PDF you upload, plus the structured data our AI
-                extracts from it (roles, bullets, dates).
+                <strong>Resumes</strong> — the resume you upload is processed to extract its text
+                and structured data (roles, bullets, dates), which we store; the original PDF file
+                itself is not retained today.
               </li>
               <li>
-                <strong>Mock interview recordings</strong> — audio from voice mock interviews and
-                video from HireVue-style practice, recorded directly in your browser, plus the text
-                transcript and AI score generated from each answer.
+                <strong>Mock interview answers</strong> — audio recorded in your browser during
+                voice mock interviews is sent for transcription; we keep the text transcript and the
+                AI score generated from each answer, not the raw recording.
               </li>
               <li>
                 <strong>Networking notes</strong> — anything you log about coffee chats and contacts
@@ -133,9 +134,8 @@ export default function PrivacyPolicyPage() {
                 that power semantic search.
               </li>
               <li>
-                <strong>Supabase</strong> — hosts our database, handles authentication
-                (email/password and Google sign-in), and stores uploaded files (resumes,
-                mock-interview recordings) in per-user storage.
+                <strong>Supabase</strong> — hosts our database and handles authentication
+                (email/password and Google sign-in).
               </li>
               <li>
                 <strong>Upstash</strong> — powers rate limiting on AI-calling routes. It sees
