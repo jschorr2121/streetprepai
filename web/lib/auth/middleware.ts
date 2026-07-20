@@ -20,7 +20,9 @@ const AUTH_ROUTES = ["/login", "/signup", "/forgot-password"];
 // the same browser never inherits the flag. Worst case on forgery: the user
 // skips the /onboarding redirect and sees an app shell with default profile
 // fields — it gates UX, not data access (RLS does that).
-const ONBOARDED_COOKIE = "sp-onboarded";
+// Exported so account deletion can clear it — a re-signup on the same browser
+// must re-run onboarding rather than inherit the deleted account's flag.
+export const ONBOARDED_COOKIE = "sp-onboarded";
 const ONBOARDING_ROUTE = "/onboarding";
 const DEFAULT_SIGNED_IN_ROUTE = "/dashboard";
 const DEFAULT_SIGNED_OUT_ROUTE = "/login";
@@ -30,6 +32,11 @@ const DEFAULT_SIGNED_OUT_ROUTE = "/login";
 //  - /reset-password runs under a recovery session (so the user IS authed) but
 //    must still be reachable to set a new password — don't bounce it to the app.
 const PUBLIC_PASSTHROUGH = ["/callback", "/reset-password"];
+
+// /api routes reachable without a session — currently just the uptime-monitor
+// liveness probe. Everything else under /api/* still hits the 401 backstop
+// below.
+const PUBLIC_API_ROUTES = ["/api/health"];
 
 function isAuthRoute(pathname: string): boolean {
   return AUTH_ROUTES.some((r) => pathname === r || pathname.startsWith(`${r}/`));
@@ -73,6 +80,7 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
   // instead of shipping open. API clients get 401 JSON, never a redirect.
   // No onboarding gate for APIs — routes decide their own data requirements.
   if (pathname.startsWith("/api")) {
+    if (PUBLIC_API_ROUTES.includes(pathname)) return response;
     if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }

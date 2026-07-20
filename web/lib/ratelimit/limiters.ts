@@ -103,3 +103,20 @@ export const qbankGradingLimiter = makeSlidingWindow("rl:action:qbank:grade", 20
  * No AI calls.
  */
 export const curriculumProgressLimiter = makeSlidingWindow("rl:action:curriculum", 120, 60);
+
+/**
+ * Limiter for the in-app feedback widget. No AI calls; cheap CRUD, but the
+ * widget is reachable from every authed page, so a tight budget keeps a
+ * runaway client (or a bored user mashing submit) from writing unbounded
+ * rows. 5 submissions per minute is generous for real feedback.
+ */
+export const feedbackLimiter = makeSlidingWindow("rl:action:feedback", 5, 60);
+
+/**
+ * Limiter for self-serve account deletion. No AI calls, but irreversible and
+ * destructive, so the budget is deliberately tight — a user never needs to
+ * delete their account more than a handful of times a minute (retries after a
+ * transient failure). Degrades open (default) if the store is down: a dead
+ * Redis must not permanently trap a user in an account they want gone.
+ */
+export const accountDeletionLimiter = makeSlidingWindow("rl:action:account:delete", 5, 60);

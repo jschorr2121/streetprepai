@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { PageHeader } from "@/components/page-header";
 import { ProfileEditForm } from "@/components/profile/profile-edit-form";
 import { requireUser } from "@/lib/auth/server";
@@ -28,6 +30,15 @@ export default async function ProfilePage() {
       {/* Edit form (client component — needs hooks for RHF + toasts) */}
       <div className="mt-8">
         <ProfileEditForm profile={profile} />
+      </div>
+
+      <div className="mt-6 border-t pt-6">
+        <Link
+          href="/profile/settings"
+          className="text-muted-foreground hover:text-foreground text-sm underline-offset-4 hover:underline"
+        >
+          Account settings
+        </Link>
       </div>
     </div>
   );

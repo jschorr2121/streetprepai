@@ -96,6 +96,14 @@ describe("updateSession — /api/* backstop", () => {
     // API requests never touch the onboarding gate.
     expect(fromMock).not.toHaveBeenCalled();
   });
+
+  it("passes through /api/health without a session (public allowlist)", async () => {
+    getUserMock.mockResolvedValue({ data: { user: null } });
+    const { updateSession } = await import("@/lib/auth/middleware");
+    const res = await updateSession(makeRequest("/api/health"));
+    expect(res.status).toBe(200);
+    expect(res.headers.get("location")).toBeNull();
+  });
 });
 
 describe("updateSession — passthrough routes", () => {
