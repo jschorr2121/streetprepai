@@ -16,6 +16,25 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — launch-compliance builds: account deletion, legal pages, feedback, health (2026-07-20, session 8)
+
+Suite **888 passing / 113 files** (from 855/105); typecheck/lint/build/repo-wide
+prettier all green. Shipped the top-4 AFK-safe items from the launch-readiness
+brainstorm as three parallel-agent slices: (1) **self-serve account deletion** at
+`/profile/settings` (confirm-twice type-DELETE dialog → storage-prefix cleanup →
+`auth.admin.deleteUser`; cascade audit over migrations 0000–0012 confirmed every
+user-owned table cascades from `auth.users`; clears `sp-onboarded`; PostHog
+person-delete deferred — analytics still unwired); (2) **privacy policy + ToS +
+custom 404** (`/privacy`, `/terms`, `app/not-found.tsx`, linked from footer/
+signup/sitemap; subprocessors verified from code — found and fixed the Groq→OpenAI
+transcription doc drift in architecture.md); (3) **feedback widget** (floating
+dialog on all authed pages → `feedback` table, migration 0012, owner RLS) +
+**`GET /api/health`** liveness probe (no-auth allowlisted in middleware, DB
+`select 1`, 200/503). Issues filed: `.scratch/launch-readiness/issues/01`
+data export, `02` prompt-injection review. New Jake items: apply 0012, legal
+review of privacy/terms, provision Storage buckets, `SUPABASE_SERVICE_ROLE_KEY`
+in Vercel, external uptime monitor.
+
 ### Prod-readiness relay — component coverage, UX sweep, SEO baseline, ai_usage NOT NULL (2026-07-19, session 7) — COMPLETE
 
 11 commits pushed; suite **803 passing / 97 files** (from 707/78); typecheck/lint/

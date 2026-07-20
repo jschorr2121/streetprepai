@@ -86,6 +86,30 @@
 
 ## Session log
 
+- **2026-07-20 (session 8, cloud, checkpoint 1 — 5 commits, suite 888/113)** —
+  Phase 5, launch-compliance lane. Shipped the brainstorm's top-4 AFK-safe builds
+  via 3 parallel agents (opus: deletion; sonnet: legal pages, feedback+health):
+  (1) **account deletion** at `/profile/settings` (`c3bc481`) — confirm-twice
+  type-DELETE, storage cleanup before `auth.admin.deleteUser`, cascade audit
+  0000–0012 clean (no explicit row deletes needed), `sp-onboarded` cleared,
+  `accountDeletionLimiter` fail-open. FINDING: **no Storage upload code exists
+  anywhere** (`.storage.from(` zero call sites) — buckets likely unprovisioned,
+  filed to jakes-tasks; deletion tolerates missing buckets. PostHog person-delete
+  deferred (analytics unwired, TODO in action). (2) **privacy + terms + 404**
+  (`8daf791`) — subprocessors verified from code; **Groq is doc drift** (both
+  transcribe routes call OpenAI whisper-1) — architecture.md fixed; governing law
+  is a visible Jake placeholder. (3) **feedback widget + GET /api/health**
+  (`d4819b6`) — migration **0012_feedback.sql** (0013 is next free), owner RLS,
+  `feedbackLimiter`; health probe allowlisted via `PUBLIC_API_ROUTES` in
+  middleware. Issues filed: `.scratch/launch-readiness/issues/01-data-export.md`
+  + `02-prompt-injection-review.md` (both ready-for-agent). New Jake items: apply
+  0012, legal review, storage buckets, `SUPABASE_SERVICE_ROLE_KEY` in Vercel,
+  uptime monitor. Gates at checkpoint: typecheck ✅ lint 0 err ✅ 888/113 ✅
+  build 0 ✅ prettier ✅. **Next lanes this session (in order): data-export issue
+  01 (reuses deletion enumeration, settings page now exists), prompt-injection
+  issue 02 (small), then page-level tests for app/(app) pages / guide-reader
+  dom tests (untested surface per session-7 menu).**
+
 - **2026-07-19 (session 7, cloud, FINAL — 16 commits, all pushed, suite 855/105)** —
   Round 3: an opus adversarial review of the ENTIRE session diff (5a26680..HEAD)
   came back clean on all 7 areas — migration idempotency, logUsage call-site

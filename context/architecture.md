@@ -15,7 +15,7 @@
 | AI SDK layer            | Vercel AI SDK for chatbot UI + `@anthropic-ai/sdk` for everything else      | `useChat` for the streaming tool-using chatbot; raw Anthropic SDK for explain, beginner mode, scoring, prep sheets, structuring (full control of prompt caching + tool use). |
 | Web search (chatbot)    | Anthropic native `web_search` tool                                          | Chatbot's web tool. No separate vendor; pricing rolled into Claude calls.                                                                           |
 | Embeddings              | OpenAI `text-embedding-3-small` (as built)                                  | Semantic search across networking chats and content. Voyage (`voyage-4-lite`/`-4-large`) was the originally locked vendor but was never installed; every shipped artifact (lib/ai/embeddings.ts, pgvector migrations, pricing) uses OpenAI. Switching to Voyage is an open product/cost decision (needs a re-embed plan) — see progress-tracker Open Questions. |
-| Speech-to-text          | Groq Whisper Turbo                                                          | Voice mock interview transcription and post-event note dictation. Cheap, fast inference.                                                            |
+| Speech-to-text          | OpenAI `whisper-1` (as built)                                               | Voice mock interview transcription and post-event note dictation. Groq Whisper Turbo was the originally planned vendor but was never wired — both transcribe routes call `api.openai.com` with `OPENAI_API_KEY` (no Groq key exists in code or `.env.example`). A cheaper-model swap (`gpt-4o-mini-transcribe`) is an open Jake decision in jakes-tasks. |
 | Resume parsing          | `pdf-parse` (text extraction) → Claude tool use (structured profile JSON)   | Two-stage: extract text from the PDF, then send to Claude for structured field extraction.                                                          |
 | Background jobs         | Inngest                                                                     | Spaced re-surfacing of weak Q-bank items, weekly firm-data refresh, prep-sheet pre-generation, embedding backfills, follow-up reminders.            |
 | Rate limiting           | Upstash Ratelimit + Upstash Redis                                           | Per-user, per-route sliding-window limits on AI endpoints. Non-optional given the LLM cost profile.                                                 |
@@ -67,7 +67,7 @@ Each folder owns one concern and exposes a stable public API via `index.ts`. Cro
 - `lib/db/` — Drizzle schema (`schema/`), typed queries (`queries/`), migrations (`migrations/`). **No** LLM calls, **no** UI imports. The only place SQL is written.
 - `lib/inngest/` — Inngest client + all background job functions (spaced re-surfacing, weekly firm refresh, prep-sheet pre-gen, embedding backfills, follow-up reminders). May import `lib/ai`, `lib/db`, `lib/embeddings`. **Never** imported from a Server Action or page.
 - `lib/embeddings/` — embedding generation (OpenAI `text-embedding-3-small` via `lib/ai/embeddings.ts` today), pgvector similarity search helpers. Imports `lib/db` for vector queries.
-- `lib/speech/` — Groq Whisper Turbo client wrapper.
+- `lib/speech/` — speech-to-text client wrapper (planned; as built, transcription lives in the two `app/api/**/transcribe` routes calling OpenAI `whisper-1` directly).
 - `lib/calendar/` — Google Calendar OAuth flow + sync logic + webhook handlers' business logic.
 - `lib/ratelimit/` — Upstash Ratelimit configurations per route. Exports named limiters consumed by Server Actions and API routes.
 - `lib/email/` — Resend client + React Email templates.
@@ -170,7 +170,7 @@ Reading-heavy prose for each chapter section. The `chapters`, `sections`, and `p
 - Every signed-in surface (`app/(app)/**`, `app/api/**` except webhooks) requires a valid Supabase Auth session. Anonymous access is allowed only on `app/(marketing)/**` and `app/(auth)/**`.
 - Sign-in methods: **email + password** and **Google OAuth**. Both flow through Supabase Auth.
 - Sessions are stored in HTTP-only cookies by `@supabase/ssr`. Server Components and Server Actions read the user via `lib/auth.requireUser()`, which throws/redirects on missing session.
-- Anthropic, OpenAI (embeddings), Groq, and other LLM API keys live in environment variables and are accessed only by server code in `lib/ai`, `lib/embeddings`, `lib/speech`. They never reach the browser.
+- Anthropic and OpenAI (embeddings + speech-to-text) API keys live in environment variables and are accessed only by server code in `lib/ai`, `lib/embeddings`, and the transcribe routes. They never reach the browser.
 - A Next.js middleware refreshes the Supabase session cookie on every request to `(app)` routes.
 
 ### Roles
@@ -215,14 +215,14 @@ A user becomes `admin` by an explicit row in an `admins` table; the role is mirr
 
 ### Account deletion + data export
 
-- **Self-serve account deletion is supported in phase 1.** A "Delete my account" action in `/profile/settings` cascades through every user-owned table and Storage prefix, deletes the PostHog person, and removes the Supabase Auth user. Deletion is irreversible and immediate.
+- **Self-serve account deletion is supported in phase 1** (shipped 2026-07-20, relay session 8). A "Delete my account" action in `/profile/settings` (confirm-twice, type DELETE) cleans the user's Storage prefixes (`resumes`, `mock-audio`, `mock-video` — graceful no-op until the buckets are provisioned), then removes the Supabase Auth user; every user-owned table cascades from `auth.users` (verified across migrations 0000–0012), so Postgres rows delete for free. Deletion is irreversible and immediate. The PostHog person-delete is **deferred until analytics is actually wired** (`lib/analytics` is unmounted today; TODO lives in the action).
 - **Data export is not in phase 1.** Users requesting an export email support; the export is produced manually until a self-serve flow is added.
 
 ## Invariants
 
 Rules the codebase must never violate. Each is enforceable and reviewable in a diff.
 
-1. **All LLM, embedding, and speech-to-text calls happen server-side.** The Anthropic, OpenAI, and Groq API keys live in environment variables and are touched only by code in `lib/ai`, `lib/embeddings`, `lib/speech`, and modules they call. Client components never import these keys or these modules.
+1. **All LLM, embedding, and speech-to-text calls happen server-side.** The Anthropic and OpenAI API keys live in environment variables and are touched only by code in `lib/ai`, `lib/embeddings`, the transcribe routes, and modules they call. Client components never import these keys or these modules.
 2. **No free-form JSON parsing from LLM output.** Any time we need structured data from Claude (resume parsing, chat structuring, scorecards, story framings, prep sheets), we use Claude **tool use** with a typed Zod-validated schema. Never `JSON.parse` of a model's text response.
 3. **Every user-owned table has RLS scoped to `auth.uid()` via `USING` and `WITH CHECK`.** User-facing paths read and write Postgres through a session-scoped Drizzle client, not the service-role key. The service-role key is used only inside `lib/inngest/**`, webhook handlers, and explicit admin operations.
 4. **Every LLM call writes one `llm_usage` row** (user_id, route, model, input tokens, output tokens, cost USD, latency ms, status). This is the cost-control backbone — never bypass it, even in scripts.

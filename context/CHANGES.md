@@ -559,3 +559,48 @@ Four commits (`15765e0`…`4f38996`), each gated on typecheck + lint + full vite
   mock-interview rubric grid collapse below sm, progress heatmap 7-col wrap.
 - Final gates: typecheck ✅, lint 0 errors, suite **855 passing / 105 files**,
   build exit 0, repo-wide prettier ✅.
+
+## Prod-readiness relay session 8 — launch compliance: account deletion, legal pages, feedback widget, health probe (2026-07-20)
+
+Worked the top AFK-safe items from `context/brainstorms/2026-07-19-launch-readiness.md`
+as three parallel subagent slices (opus for the destructive flow, sonnet for the rest),
+verified together, committed per-slice.
+
+- **Self-serve account deletion** (`c3bc481`) — new `/profile/settings` route with a
+  Danger Zone; confirm-twice dialog requires typing `DELETE`. `deleteAccountAction`:
+  auth → `accountDeletionLimiter` (5/min, fail-open — a dead Redis must not trap a
+  user in an account they want gone) → Storage cleanup (`resumes`/`mock-audio`/
+  `mock-video` `{userId}/` prefixes; paginated list, chunked remove, missing-bucket
+  tolerant, aborts BEFORE the auth delete on real faults) → `auth.admin.deleteUser`
+  → local sign-out + `sp-onboarded` cookie cleared (re-signup re-runs onboarding) →
+  redirect `/`. Cascade audit re-verified across migrations 0000–0012: every
+  user-owned table references `auth.users(id) on delete cascade`, so no explicit row
+  deletes. PostHog person-delete (promised in architecture.md) deferred with a TODO —
+  analytics is still unwired. Notable: **no Storage upload code exists anywhere yet**
+  (`.storage.from(` has zero call sites), so the buckets are likely unprovisioned —
+  filed to jakes-tasks. 10 new tests (order-of-operations, abort-before-delete,
+  dialog gating).
+- **Privacy Policy + Terms + custom 404** (`8daf791`) — `/privacy` and `/terms`
+  drafted from a code audit, not boilerplate: subprocessors verified against
+  package.json + real env reads (Supabase, Anthropic, OpenAI, Upstash, Vercel,
+  Sentry, PostHog-conditional; **Groq excluded — doc drift, see below**); honest AI
+  disclosures; governing law left as a visible Jake placeholder. Linked from the
+  marketing footer, signup page ("By signing up you agree…"), and sitemap.
+  `app/not-found.tsx` matches `error.tsx`'s styling. 10 new tests.
+- **Feedback widget + `/api/health`** (`d4819b6`) — floating dialog on every authed
+  page → `submitFeedbackAction` (Zod, `feedbackLimiter` 5/min, withUser/Drizzle)
+  into new `feedback` table (migration `0012_feedback.sql`, owner RLS, idempotent in
+  0010's style; Drizzle schema + PGlite test schema mirrored). Health probe:
+  GET-only `select 1` via `getDb()` with a 3s timeout, 200/503, no detail leaked,
+  allowlisted through the `/api/*` auth backstop (`PUBLIC_API_ROUTES` in
+  middleware) so external uptime monitors can reach it signed-out. 13 new tests.
+- **Doc drift fixed in architecture.md**: speech-to-text is OpenAI `whisper-1` as
+  built (both transcribe routes call `api.openai.com`; no Groq key exists in code or
+  `.env.example`) — the Groq Whisper Turbo claim was never wired. Also updated the
+  account-deletion paragraph to shipped reality.
+- **Issues filed**: `.scratch/launch-readiness/issues/01-data-export.md`
+  (portability; reuse deletion's enumeration) and `02-prompt-injection-review.md`
+  (indirect-injection framing for assistant tool content; matters more once
+  firm_data refresh ingests live web content).
+- Final gates: typecheck ✅, lint 0 errors (2 pre-existing warnings), suite
+  **888 passing / 113 files** (from 855/105), build exit 0, repo-wide prettier ✅.

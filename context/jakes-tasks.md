@@ -106,6 +106,23 @@ needs action it can't perform itself.
   Same manual SQL-editor flow as 0009/0010. The `DO` block RAISEs a NOTICE with the count of
   orphan rows removed — note it if non-zero (that spend was never captured by any user's cap).
 
+- [ ] **Apply migration `0012_feedback.sql`** (prod-readiness relay, 2026-07-20) — the new
+  in-app feedback widget (floating button on every authed page) writes to a `feedback`
+  table with owner RLS. Idempotent, same SQL-editor flow as 0010/0011. Until applied,
+  the widget shows a friendly error on submit — nothing else breaks.
+
+- [ ] **Provision Storage buckets `resumes`, `mock-audio`, `mock-video`** (prod-readiness
+  relay, 2026-07-20) — architecture.md documents them with per-user `{user_id}/…`
+  prefixes, but no upload code is wired anywhere yet and the buckets likely don't exist.
+  The new account-deletion flow cleans these prefixes and treats a missing bucket as
+  nothing-to-clean, so this isn't blocking — but create them (private, with per-user RLS
+  storage policies) before any upload feature lands. (Supabase dashboard → Storage.)
+
+- [ ] **Ensure `SUPABASE_SERVICE_ROLE_KEY` is set in Vercel env** (prod-readiness relay,
+  2026-07-20) — self-serve account deletion (`/profile/settings`) uses the admin client
+  for Storage cleanup + `auth.admin.deleteUser`. Without the key the action fails safe
+  with "temporarily unavailable" and deletes nothing.
+
 - [ ] **Verify the production `firms` table is seeded** (prod-readiness relay, 2026-07-16) —
   `/firms`, `/firms/[slug]`, and the firm-prep route now read the `firms` table exclusively
   (the hardcoded seed arrays were deleted when the pages were wired to real data). Local dev
@@ -134,6 +151,20 @@ needs action it can't perform itself.
   e.g. `https://<your-domain>`. Documented in `web/.env.example`. Also note: no OG image
   exists yet — if you want link previews with an image, drop a 1200×630 asset in and the
   relay can wire it.
+
+- [ ] **Review + approve the Privacy Policy and Terms of Service** (prod-readiness relay,
+  2026-07-20) — `/privacy` and `/terms` now exist (linked from the marketing footer,
+  signup page, and sitemap), drafted honestly from what the code actually does. Three
+  things need you before launch: (a) legal review of both pages (an agent draft is not
+  legal counsel); (b) Terms §10 has a visible `[Jake: choose governing law]` placeholder
+  to fill in; (c) both pages use `jacobschorr99@gmail.com` as the contact — confirm or
+  swap for a dedicated support address.
+
+- [ ] **Point an external uptime monitor at `GET /api/health`** (prod-readiness relay,
+  2026-07-20) — the new no-auth liveness probe does a real DB `select 1` and returns
+  `200 {"status":"ok"}` / `503 {"status":"degraded"}` with no detail leaked. UptimeRobot
+  or BetterStack free tier is enough: point it at `https://<prod-domain>/api/health` on
+  a 1–5 min interval so you hear about DNS/Vercel/Supabase-down before users do.
 
 - [ ] **Re-enable "Confirm email" in Supabase** before production so real
   signups must verify their address (lowers spam/abuse). (Unit 4)
