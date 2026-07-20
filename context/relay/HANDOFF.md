@@ -86,7 +86,10 @@
 
 ## Session log
 
-- **2026-07-20 (session 8, cloud, FINAL — 15 commits, all pushed, suite 932/122)** —
+- **2026-07-20 (session 8, cloud, FINAL — 17 commits, all pushed, suite 932/122)** —
+  Session tail after the notification: migration **0013** authored (`b766374`,
+  chat_embeddings ivfflat → HNSW while near-empty; match_chat_embeddings loses
+  the moot probes GUC; Jake applies — filed; NEXT FREE MIGRATION NUMBER: 0014).
   Session complete. Final round after checkpoint 3: UX sweep of the new
   surfaces → 2 fixes (`6f58f57`): settings page back-to-profile link; feedback
   button moved bottom-right → bottom-LEFT (sonner toasts render bottom-right at
