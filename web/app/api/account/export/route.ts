@@ -1,5 +1,6 @@
 import { withUser } from "@/lib/db/client";
 import { exportAccountData, type AccountExportData } from "@/lib/db/queries/account-export";
+import { accountExportLimiter } from "@/lib/ratelimit/limiters";
 import { clientSafeError } from "@/lib/security/client-error";
 import { requireUser } from "@/lib/security/require-user";
 
@@ -7,15 +8,22 @@ export const runtime = "nodejs";
 
 // GET /api/account/export — self-serve "download my data" (GDPR/CCPA
 // portability). Streams every user-owned row, grouped by table, as one JSON
-// attachment. No AI calls and no request body, so `cheap` is the closest fit
-// among the repo's rate tiers (`cheap`/`expensive`/`whisper`/`public`) — it's
-// the tier used for non-AI CRUD reads/writes elsewhere. This read is heavier
-// than a typical `cheap` route, but a dedicated tier would be new rate-limit
-// infra for a single low-traffic route, which is out of scope here.
+// attachment. Two limits stack: the `cheap` tier's generic user+IP buckets
+// via requireUser, plus a dedicated per-hour budget — each request selects
+// every row the user owns across 18 tables and buffers the JSON in memory,
+// far heavier than a normal `cheap` read.
 export async function GET(req: Request): Promise<Response> {
   const gate = await requireUser(req, { tier: "cheap", route: "account/export" });
   if (!gate.ok) return gate.response;
   const userId = gate.user.id;
+
+  const rl = await accountExportLimiter(userId);
+  if (!rl.allowed) {
+    return Response.json(
+      { error: "Too many export requests. Try again later." },
+      { status: 429, headers: { "Retry-After": String(rl.retryAfterSeconds) } },
+    );
+  }
 
   let data: AccountExportData;
   try {

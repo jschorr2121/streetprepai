@@ -29,6 +29,15 @@ vi.mock("@/lib/db/queries/account-export", () => ({
   exportAccountData: (...args: unknown[]) => exportAccountDataMock(...args),
 }));
 
+const exportLimiterMock = vi.fn(
+  async (): Promise<{ allowed: true } | { allowed: false; retryAfterSeconds: number }> => ({
+    allowed: true,
+  }),
+);
+vi.mock("@/lib/ratelimit/limiters", () => ({
+  accountExportLimiter: (userId: string) => exportLimiterMock(userId),
+}));
+
 function fakeExport(userId: string) {
   return {
     profile: { userId, fullName: "Test User" },
@@ -59,6 +68,7 @@ beforeEach(() => {
   getUserMock.mockReset();
   withUserMock.mockClear();
   exportAccountDataMock.mockReset();
+  exportLimiterMock.mockClear();
 });
 
 function makeReq(ip = "10.0.0.1"): Request {
@@ -152,5 +162,20 @@ describe("GET /api/account/export", () => {
     }
     expect(statuses.slice(0, 30).every((s) => s === 200)).toBe(true);
     expect(statuses[30]).toBe(429);
+  });
+
+  it("returns 429 with Retry-After when the dedicated per-hour export budget denies", async () => {
+    const user = fakeUser();
+    getUserMock.mockResolvedValue(user);
+    exportAccountDataMock.mockResolvedValue(fakeExport(user.id));
+    exportLimiterMock.mockResolvedValueOnce({ allowed: false, retryAfterSeconds: 1200 });
+
+    const { GET } = await import("@/app/api/account/export/route");
+    const res = await GET(makeReq());
+
+    expect(res.status).toBe(429);
+    expect(res.headers.get("Retry-After")).toBe("1200");
+    expect(exportLimiterMock).toHaveBeenCalledWith(user.id);
+    expect(exportAccountDataMock).not.toHaveBeenCalled();
   });
 });

@@ -120,3 +120,12 @@ export const feedbackLimiter = makeSlidingWindow("rl:action:feedback", 5, 60);
  * Redis must not permanently trap a user in an account they want gone.
  */
 export const accountDeletionLimiter = makeSlidingWindow("rl:action:account:delete", 5, 60);
+
+/**
+ * Limiter for the full-account data export. No AI calls, but each request
+ * selects every row the user owns across 18 tables and buffers the JSON in
+ * memory — far heavier than a normal `cheap`-tier read. A user only ever
+ * needs an export occasionally, so the budget is per-hour, not per-minute.
+ * Degrades open (default): a dead Redis must not block a data-rights request.
+ */
+export const accountExportLimiter = makeSlidingWindow("rl:route:account:export", 6, 3600);
