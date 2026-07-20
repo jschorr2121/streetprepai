@@ -106,6 +106,14 @@ needs action it can't perform itself.
   Same manual SQL-editor flow as 0009/0010. The `DO` block RAISEs a NOTICE with the count of
   orphan rows removed — note it if non-zero (that spend was never captured by any user's cap).
 
+- [ ] **Apply migration `0013_hnsw_chat_embeddings.sql`** (prod-readiness relay, 2026-07-20)
+  — swaps the `chat_embeddings` vector index from IVFFlat to HNSW while the table is
+  still near-empty (IVFFlat trains centroids on whatever rows exist at build time and
+  never re-balances; HNSW has no training step, so recall holds as data grows from
+  zero — see brainstorm 2026-07-19 §2.5). Idempotent; same SQL-editor flow as 0009–0012.
+  Best applied together with (and after) 0009 — it supersedes 0009's `ivfflat.probes`
+  tweak on `match_chat_embeddings`.
+
 - [ ] **Apply migration `0012_feedback.sql`** (prod-readiness relay, 2026-07-20) — the new
   in-app feedback widget (floating button on every authed page) writes to a `feedback`
   table with owner RLS. Idempotent, same SQL-editor flow as 0010/0011. Until applied,

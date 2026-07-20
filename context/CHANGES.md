@@ -664,3 +664,7 @@ allowlist, feedback RLS/XSS, the health probe, and legal-page claims.
   probes must be reachable; `select 1` is trivial; the 3s timeout doesn't
   cancel the underlying query — noted, harmless at probe cadence).
 - Suite after fixes: **932 passing / 122 files**.
+- **Migration 0013 authored** (session-8 tail): `chat_embeddings` IVFFlat →
+  HNSW while the table is near-empty (no training-step dependency, recall holds
+  from zero rows); `match_chat_embeddings` recreated without the now-moot
+  `ivfflat.probes` GUC. Jake applies (filed; supersedes 0009's probes tweak).
