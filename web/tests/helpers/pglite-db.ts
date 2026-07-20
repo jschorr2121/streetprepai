@@ -26,7 +26,7 @@ import type { Executor } from "@/lib/db/client";
  * schema tables needed by lib/db/queries tests (profiles, applied_jobs,
  * chat_threads, chat_messages, qbank_questions, qbank_followups,
  * qbank_attempts, qbank_spaced_state, topic_mastery, section_progress,
- * chapter_progress, ai_usage).
+ * chapter_progress, ai_usage, feedback).
  * Each call returns a fresh database with empty tables.
  */
 export async function createPgliteDb(): Promise<Executor> {
@@ -202,6 +202,17 @@ export async function createPgliteDb(): Promise<Executor> {
       cache_write_tokens  integer       not null,
       cost_usd            numeric(10, 6) not null,
       created_at          timestamptz   not null default now()
+    )
+  `);
+
+  // In-app feedback widget submissions (migration 0012).
+  await db.execute(`
+    create table feedback (
+      id          uuid          primary key default gen_random_uuid(),
+      user_id     uuid          not null,
+      route       text          not null,
+      message     text          not null,
+      created_at  timestamptz   not null default now()
     )
   `);
 

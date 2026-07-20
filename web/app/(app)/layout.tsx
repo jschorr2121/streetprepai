@@ -1,4 +1,5 @@
 import { AppNav } from "@/components/app-nav";
+import { FeedbackWidget } from "@/components/feedback/feedback-widget";
 import { requireUser } from "@/lib/auth/server";
 
 // All (app) routes depend on the signed-in session — force dynamic so Next.js
@@ -16,6 +17,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     <div className="flex min-h-screen flex-col lg:flex-row">
       <AppNav email={user.email ?? ""} fullName={fullName} />
       <main className="min-w-0 flex-1">{children}</main>
+      <FeedbackWidget />
     </div>
   );
 }

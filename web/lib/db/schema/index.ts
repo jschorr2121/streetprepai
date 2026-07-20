@@ -6,6 +6,7 @@ export * from "./chat-threads";
 export * from "./chats";
 export * from "./contacts";
 export * from "./curriculum-progress";
+export * from "./feedback";
 export * from "./firms";
 export * from "./followups";
 export * from "./guide-progress";
