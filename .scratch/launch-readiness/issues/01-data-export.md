@@ -1,6 +1,6 @@
 # 01 — Self-serve data export ("download my data")
 
-Status: ready-for-agent
+Status: done — GET /api/account/export (cheap tier, withUser/Drizzle, embeddings excluded) + download button on /profile/settings above the Danger Zone; resumes/interview_sessions Drizzle tables found to have no backing migration and were excluded (see route comment).
 Blocked by: account deletion landing (relay session 8) — reuse its table/storage enumeration
 
 ## Problem
