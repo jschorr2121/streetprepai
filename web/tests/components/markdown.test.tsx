@@ -62,4 +62,49 @@ describe("Markdown", () => {
     expect(screen.getByText("a")).toBeInTheDocument();
     expect(screen.getByText("b")).toBeInTheDocument();
   });
+
+  it("renders level-2 and level-3 headings distinctly", () => {
+    render(<Markdown content={["## A section", "", "### A subsection"].join("\n")} />);
+
+    expect(screen.getByRole("heading", { level: 2, name: "A section" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 3, name: "A subsection" })).toBeInTheDocument();
+  });
+
+  it("renders an ordered list, preserving item order", () => {
+    render(<Markdown content={["1. First step", "2. Second step", "3. Third step"].join("\n")} />);
+
+    const items = screen.getAllByRole("listitem");
+    expect(items.map((li) => li.textContent)).toEqual(["First step", "Second step", "Third step"]);
+    expect(items[0]!.closest("ol")).not.toBeNull();
+  });
+
+  it("renders bold, italic, and inline code within a paragraph", () => {
+    render(<Markdown content="This is **bold**, this is *italic*, and this is `code`." />);
+
+    const bold = screen.getByText("bold");
+    expect(bold.tagName).toBe("STRONG");
+    const italic = screen.getByText("italic");
+    expect(italic.tagName).toBe("EM");
+    const code = screen.getByText("code");
+    expect(code.tagName).toBe("CODE");
+  });
+
+  it("joins wrapped paragraph lines into a single paragraph and starts a new one on a blank line", () => {
+    render(
+      <Markdown
+        content={[
+          "First line of paragraph one,",
+          "continued on a second line.",
+          "",
+          "A second paragraph.",
+        ].join("\n")}
+      />,
+    );
+
+    const paragraphs = screen.getAllByText(/paragraph/);
+    expect(paragraphs[0]!.textContent).toBe(
+      "First line of paragraph one, continued on a second line.",
+    );
+    expect(screen.getByText("A second paragraph.")).toBeInTheDocument();
+  });
 });
