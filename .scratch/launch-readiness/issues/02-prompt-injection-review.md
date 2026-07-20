@@ -1,6 +1,6 @@
 # 02 — Indirect prompt-injection review pass on assistant tool content
 
-Status: ready-for-agent
+Status: done — ASSISTANT_SYSTEM now explicitly frames tool/web_search results (firm data, chat notes) as untrusted DATA, never instructions; cheap string-assertion test added.
 Blocked by: —
 
 ## Problem
