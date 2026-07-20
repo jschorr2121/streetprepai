@@ -12,6 +12,17 @@ export default function SignupPage() {
         <p className="text-muted-foreground text-sm">Start prepping for IB recruiting.</p>
       </div>
       <SignupForm />
+      <p className="text-muted-foreground text-xs">
+        By signing up you agree to the{" "}
+        <Link href="/terms" className="text-primary hover:underline">
+          Terms
+        </Link>{" "}
+        and{" "}
+        <Link href="/privacy" className="text-primary hover:underline">
+          Privacy Policy
+        </Link>
+        .
+      </p>
       <p className="text-muted-foreground border-t pt-4 text-sm">
         Already have an account?{" "}
         <Link href="/login" className="text-primary font-medium hover:underline">

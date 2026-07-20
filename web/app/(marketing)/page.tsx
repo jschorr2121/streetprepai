@@ -281,7 +281,17 @@ export default function LandingPage() {
               AI
             </span>
           </div>
-          <p className="font-mono text-xs">Prototype · {new Date().getFullYear()}</p>
+          <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
+            <nav className="flex items-center gap-4 font-mono text-xs" aria-label="Legal">
+              <Link href="/privacy" className="hover:text-foreground transition-colors">
+                Privacy
+              </Link>
+              <Link href="/terms" className="hover:text-foreground transition-colors">
+                Terms
+              </Link>
+            </nav>
+            <p className="font-mono text-xs">Prototype · {new Date().getFullYear()}</p>
+          </div>
         </div>
       </footer>
     </div>
