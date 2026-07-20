@@ -634,3 +634,33 @@ verified together, committed per-slice.
   Noted gap for a later session: `lib/curriculum/progress.ts` + `cycle.ts`
   pure logic has no dedicated unit tests (exercised only via page tests).
 - Suite after this block: **931 passing / 122 files**.
+
+## Prod-readiness relay session 8 (continued) — adversarial review results + fixes (2026-07-20)
+
+An opus adversarial review of the entire session diff (52898c3..HEAD) audited
+export cross-user isolation, deletion ordering/CSRF/races, the middleware
+allowlist, feedback RLS/XSS, the health probe, and legal-page claims.
+
+- **Clean (traced, not assumed)**: export runs inside `withUser` (RLS claims
+  set transaction-locally) AND every select carries an explicit
+  `eq(userId)` filter; GET returns a non-script-loadable JSON object with no
+  CORS headers, so it isn't cross-origin exfiltratable. Deletion's ordering is
+  enforced + test-covered; Server Actions in Next 16.2.10 carry built-in
+  Origin/Host CSRF protection; concurrent double-delete degrades to an error,
+  not a crash. `PUBLIC_API_ROUTES.includes(pathname)` is exact-match on the
+  normalized pathname — no traversal bypass. Feedback RLS `FOR ALL` +
+  `with check` on `auth.uid()`; message is write-only (no XSS surface);
+  widget captures pathname only (no query tokens).
+- **Fixed — privacy-page honesty** (`28c3ee6`, `7b8e47a`): the portability
+  bullet claimed no self-serve export exists (it shipped this session — now
+  points at Profile → Settings → Download your data); retention/security/
+  collection sections claimed 30-day recording deletion, signed-URL file
+  serving, and Supabase per-user file storage — none of which exist (no
+  storage upload code anywhere). The policy now only claims what the code does.
+- **Fixed — export limiter** (`c09f4ea`): dedicated `accountExportLimiter`
+  (6/hour, fail-open) stacked on the cheap tier; 429 + Retry-After path
+  test-pinned.
+- **Accepted**: /api/health stays unauthenticated + unthrottled (liveness
+  probes must be reachable; `select 1` is trivial; the 3s timeout doesn't
+  cancel the underlying query — noted, harmless at probe cadence).
+- Suite after fixes: **932 passing / 122 files**.

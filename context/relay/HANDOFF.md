@@ -86,6 +86,22 @@
 
 ## Session log
 
+- **2026-07-20 (session 8, cloud, checkpoint 3 — 13 commits pushed, suite 932/122)** —
+  Opus adversarial review of the whole session diff came back with 2 CONFIRMED
+  findings, both fixed: **privacy-page claims contradicted the code** (said no
+  export tool exists while this session shipped one; claimed 30-day recording
+  deletion / signed-URL serving / per-user file storage — no storage code
+  exists anywhere) → `28c3ee6` + `7b8e47a`; export route got a dedicated
+  6/hour `accountExportLimiter` stacked on the cheap tier → `c09f4ea`.
+  Review confirmed CLEAN with traced evidence: export cross-user isolation
+  (withUser RLS + explicit eq filters, no CORS), deletion CSRF/order/races,
+  middleware exact-match allowlist, feedback RLS/XSS. Accepted: /api/health
+  unauthenticated+unthrottled by design. CORRECTION to checkpoint 2's
+  follow-up list: `lib/curriculum/progress.ts` + `cycle.ts` ARE fully tested
+  (session 6's c1869ad, 28 tests) — a coverage agent misreported the gap; do
+  NOT re-add. IN FLIGHT: sonnet UX sweep over the new surfaces (settings page,
+  feedback widget overlap/z-index, legal pages, 404). Checkpoint-2 log follows.
+
 - **2026-07-20 (session 8, cloud, checkpoint 2 — 9 commits pushed, suite 931/122)** —
   Wave 2 landed: **data export** (`f214517`, GET /api/account/export, 18 tables,
   cheap tier, embeddings excluded — issue 01 closed), **injection framing**
