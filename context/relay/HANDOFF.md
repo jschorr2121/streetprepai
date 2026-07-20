@@ -86,6 +86,30 @@
 
 ## Session log
 
+- **2026-07-20 (session 8, cloud, FINAL — 15 commits, all pushed, suite 932/122)** —
+  Session complete. Final round after checkpoint 3: UX sweep of the new
+  surfaces → 2 fixes (`6f58f57`): settings page back-to-profile link; feedback
+  button moved bottom-right → bottom-LEFT (sonner toasts render bottom-right at
+  z-index ~1e9 directly over it, and the chatbot composer's send button overlaps
+  the same corner — bottom-left verified unclaimed app-wide). Clean on
+  everything else it audited (dialog a11y, export-button 401 behavior, legal-page
+  chrome consistency, 404; NOTE: the product is deliberately LIGHT-MODE-ONLY
+  per ui-context.md §3 — don't "fix" dark theme). Final gates: typecheck ✅
+  lint 0 err (2 pre-existing warnings) ✅ suite 932/122 ✅ build exit 0 ✅
+  repo-wide prettier ✅. **Session-8 shipped in total**: account deletion,
+  data export (+dedicated 6/hour limiter), privacy/ToS/404 (+honesty fixes
+  from review), feedback widget + migration 0012, /api/health, injection
+  framing, dead-schema deletion, +81 tests net, 2 issues filed AND closed
+  same-session, 5 new Jake tasks. **Next-lane menu (session 9)**: (a) Jake-gated
+  go-aheads if answered (Unit 8 #06, chat onboarding, firm_data, transcription
+  model, e2e CI creds, NEXT_PUBLIC_SITE_URL/og:image, legal-language approval);
+  (b) perpetual: another bug-hunt sweep with fresh eyes (the clean-area map in
+  CHANGES session-5 is aging), e2e specs for the new settings/export/feedback
+  flows (mocked, free), HNSW migration for chat_embeddings (brainstorm
+  2026-07-19), model routing for grading / batch embeddings (cost brainstorm);
+  (c) watch: whether Jake applied 0010–0012 (prod 500s on /tools/chatbot until
+  0010; feedback errors until 0012).
+
 - **2026-07-20 (session 8, cloud, checkpoint 3 — 13 commits pushed, suite 932/122)** —
   Opus adversarial review of the whole session diff came back with 2 CONFIRMED
   findings, both fixed: **privacy-page claims contradicted the code** (said no

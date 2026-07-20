@@ -16,7 +16,12 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
-### Prod-readiness relay — launch-compliance builds: account deletion, legal pages, feedback, health (2026-07-20, session 8)
+### Prod-readiness relay — launch-compliance builds: account deletion, legal pages, feedback, health (2026-07-20, session 8) — COMPLETE
+
+Final: 15 commits, suite **932/122**, all gates green. Wave 3: opus adversarial
+review → privacy-page honesty fixes + dedicated export limiter (6/hour); UX
+sweep → settings back-link + feedback button moved bottom-left (sonner toast
+collision). Wave-2 and wave-1 details below.
 
 Wave 2 (same day): **data export** shipped (`GET /api/account/export`, 18 tables,
 download button on settings — issue 01 closed), **assistant injection framing**
