@@ -176,11 +176,11 @@ export default function PrivacyPolicyPage() {
             <p>We keep your account data for as long as your account is active. Some specifics:</p>
             <ul>
               <li>
-                Raw mock-interview audio and video files are automatically deleted 30 days after
-                they&apos;re recorded. The text transcript and AI scorecard from that session are
-                kept as part of your account history.
+                Mock-interview transcripts and AI scorecards are kept as part of your account
+                history. If we add storage of raw audio/video recordings or resume files in the
+                future, we&apos;ll update this policy with their retention rules before that feature
+                ships.
               </li>
-              <li>Resumes are kept until you delete them or delete your account.</li>
               <li>
                 You can delete your account and everything tied to it at any time — go to{" "}
                 <strong>Profile → Settings → Delete my account</strong>. Deletion removes your data
@@ -200,16 +200,15 @@ export default function PrivacyPolicyPage() {
                 <strong>Profile → Settings</strong>; this is immediate and irreversible.
               </li>
               <li>
-                <strong>Portability</strong> — a self-serve export tool isn&apos;t built yet; in the
-                meantime, email us and we&apos;ll get you a copy of your data.
+                <strong>Portability</strong> — download a copy of everything tied to your account as
+                a JSON file from <strong>Profile → Settings → Download your data</strong>.
               </li>
             </ul>
 
             <h2 id="security">Security</h2>
             <p>
               Access to your data is enforced at the database level — every row you own is scoped to
-              your account, and files are served through short-lived signed links rather than public
-              URLs. AI provider API keys are only ever used server-side and never reach your
+              your account. AI provider API keys are only ever used server-side and never reach your
               browser.
             </p>
 
