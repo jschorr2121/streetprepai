@@ -1,3 +1,6 @@
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+
 import { PageHeader } from "@/components/page-header";
 import { DeleteAccountDialog } from "@/components/profile/delete-account-dialog";
 import { Button } from "@/components/ui/button";
@@ -13,6 +16,12 @@ export default async function ProfileSettingsPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-8 md:px-10">
+      <Button asChild variant="ghost" size="sm" className="mb-4 -ml-2 gap-1">
+        <Link href="/profile">
+          <ArrowLeft className="size-3.5" aria-hidden />
+          Back to profile
+        </Link>
+      </Button>
       <PageHeader
         eyebrow="Account"
         title="Settings"

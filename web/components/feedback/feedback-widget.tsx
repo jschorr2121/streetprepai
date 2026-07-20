@@ -72,7 +72,12 @@ export function FeedbackWidget() {
         <Button
           variant="outline"
           size="sm"
-          className="text-muted-foreground fixed right-4 bottom-4 z-30 gap-1.5 shadow-sm"
+          // Bottom-left, not bottom-right: sonner's Toaster defaults to
+          // bottom-right (z-index ~1e9, see components/ui/sonner.tsx), and
+          // the chatbot composer's send button sits flush against the
+          // bottom-right corner too. Bottom-left is the one corner nothing
+          // else claims.
+          className="text-muted-foreground fixed bottom-4 left-4 z-30 gap-1.5 shadow-sm"
         >
           <MessageSquarePlus aria-hidden className="size-3.5" />
           Feedback
