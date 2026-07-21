@@ -85,6 +85,24 @@ async function recordGateAttempt(questionId: string, score: number, answeredAt: 
   });
 }
 
+async function recordGateFollowupAttempt(
+  questionId: string,
+  followupId: string,
+  score: number,
+  answeredAt: string,
+) {
+  await db.insert(qbankAttempts).values({
+    userId: USER_ID,
+    questionId,
+    followupId,
+    answer: "follow-up answer",
+    score: score.toFixed(2),
+    correct: score >= 70,
+    context: "chapter-gate",
+    answeredAt,
+  });
+}
+
 beforeEach(async () => {
   db = await createPgliteDb();
   withUserMock.mockReset();
@@ -187,6 +205,32 @@ describe("finishSittingAction — chapter gate", () => {
     const rows = await db.select().from(chapterProgress);
     expect(rows).toHaveLength(1);
     expect(rows[0]!.gatePassedAt).not.toBeNull();
+  });
+
+  // BUG A regression: a follow-up answered later (harder rubric, lower score)
+  // shares its parent's questionId. It must not overwrite the main answer's
+  // score in the gate average and flip a passing sitting to a fail.
+  it("ignores follow-up attempts when averaging the gate, so they cannot flip a pass to a fail", async () => {
+    const startedAt = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+    for (let i = 0; i < GATE_QUESTION_COUNT; i++) {
+      await recordGateAttempt(`q-${i}`, 90, new Date().toISOString());
+    }
+    // A single low-scoring follow-up on q-0, graded after its main answer. If it
+    // won the per-question dedup, q-0 would read as 10 and the average would
+    // drop from 90 to ~80 — below the 85% gate — flipping pass → fail.
+    await recordGateFollowupAttempt("q-0", "f-0", 10, new Date(Date.now() + 1000).toISOString());
+
+    const result = await finishSittingAction({
+      chapterSlug: CHAPTER,
+      context: "chapter-gate",
+      startedAt,
+    });
+
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.data.averageScore).toBeCloseTo(90, 1);
+      expect(result.data.passed).toBe(true);
+    }
   });
 
   it("does not pass when the chapter has fewer questions than the gate target, once every available one is graded", async () => {

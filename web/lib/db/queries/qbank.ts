@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, inArray, lte, sql } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, isNull, lte, sql } from "drizzle-orm";
 
 import type { Executor } from "@/lib/db/client";
 import { qbankAttempts, qbankFollowups, qbankQuestions, qbankSpacedState } from "@/lib/db/schema";
@@ -331,10 +331,17 @@ export type AttemptSummary = {
  * this user/context/chapter since `sinceIso`. Used to recompute gate and
  * section-drill results server-side instead of trusting client-sent scores.
  *
+ * Only *main* question attempts count toward the sitting — follow-up attempts
+ * (`followup_id` set) are enrichment graded on a harder rubric and are
+ * excluded here. A follow-up shares its parent's `questionId`, so without this
+ * filter its later, harder-rubric score would win the latest-per-question
+ * dedup below and silently replace the main answer's score in the gate/drill
+ * average (and could flip a gate pass/fail).
+ *
  * Already deduped to one row per `questionId` (latest attempt wins), so
  * callers can treat `result.length` as both the attempt count and the
- * distinct-question count — grading the same question repeatedly can't pad
- * the count toward a gate's expected sitting size.
+ * distinct-question count — grading the same question repeatedly, or answering
+ * its follow-ups, can't pad the count toward a gate's expected sitting size.
  */
 export async function listSittingScores(
   db: Executor,
@@ -349,6 +356,7 @@ export async function listSittingScores(
   const filters = [
     eq(qbankAttempts.userId, opts.userId),
     eq(qbankAttempts.context, opts.context),
+    isNull(qbankAttempts.followupId),
     eq(qbankQuestions.chapterSlug, opts.chapterSlug),
     sql`${qbankAttempts.answeredAt} >= ${opts.sinceIso}`,
   ];

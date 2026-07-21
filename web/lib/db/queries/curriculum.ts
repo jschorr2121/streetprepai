@@ -137,6 +137,42 @@ export async function getTopicMastery(
   return r ? { topic: r.topic, score: Number(r.score), attempts: r.attempts } : null;
 }
 
+/**
+ * Read a topic's mastery row locked `FOR UPDATE` for a read-modify-write grade.
+ * Callers inside a `withUser` transaction use this instead of `getTopicMastery`
+ * so two concurrent grades for the same (user, topic) serialize on the row lock
+ * rather than both reading the old value and clobbering each other's update
+ * (lost update). The second grade blocks until the first commits, then reads
+ * the already-updated score/attempt count.
+ *
+ * A zero row is materialized first (insert-or-ignore) so the lock always has a
+ * row to hold — `FOR UPDATE` locks nothing when no row exists, which would
+ * leave the very-first-attempt double-submit racing. A freshly materialized
+ * `{ score: 0, attempts: 0 }` is arithmetically identical to "no row" for
+ * `updateMastery` (attempts 0 → 1, prevScore 0), so the computed result is
+ * unchanged — only the concurrency behaviour is fixed.
+ */
+export async function getTopicMasteryForUpdate(
+  db: Executor,
+  userId: string,
+  topic: string,
+): Promise<TopicMasteryEntry> {
+  await db
+    .insert(topicMastery)
+    .values({ userId, topic, score: "0", attempts: 0, updatedAt: new Date().toISOString() })
+    .onConflictDoNothing({ target: [topicMastery.userId, topicMastery.topic] });
+
+  const rows = await db
+    .select()
+    .from(topicMastery)
+    .where(and(eq(topicMastery.userId, userId), eq(topicMastery.topic, topic)))
+    .for("update")
+    .limit(1);
+  const r = rows[0];
+  if (!r) throw new Error("topic_mastery row missing after insert-or-ignore");
+  return { topic: r.topic, score: Number(r.score), attempts: r.attempts };
+}
+
 export async function upsertTopicMastery(
   db: Executor,
   userId: string,

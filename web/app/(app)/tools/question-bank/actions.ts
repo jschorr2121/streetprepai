@@ -27,7 +27,7 @@ import {
   upsertSpacedState,
 } from "@/lib/db/queries/qbank";
 import { getProfile } from "@/lib/db/queries/profile";
-import { getTopicMastery, upsertTopicMastery } from "@/lib/db/queries/curriculum";
+import { getTopicMasteryForUpdate, upsertTopicMastery } from "@/lib/db/queries/curriculum";
 import { AppError } from "@/lib/errors";
 import { logger } from "@/lib/logging/logger";
 import { nextReview, updateMastery, type AttemptKind } from "@/lib/mastery/mastery";
@@ -252,7 +252,9 @@ export async function gradeAnswerAction(
         : context === "chapter-gate"
           ? "gate"
           : "first";
-      const prevMastery = await getTopicMastery(tx, userId, question.topic);
+      // Read-modify-write mastery under a row lock so concurrent grades for the
+      // same (user, topic) can't clobber each other's update (lost update).
+      const prevMastery = await getTopicMasteryForUpdate(tx, userId, question.topic);
       await upsertTopicMastery(
         tx,
         userId,

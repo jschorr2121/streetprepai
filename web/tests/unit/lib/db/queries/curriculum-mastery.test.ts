@@ -13,8 +13,14 @@
 
 import { describe, expect, it, beforeEach } from "vitest";
 
-import { getTopicMastery, listTopicMastery, upsertTopicMastery } from "@/lib/db/queries/curriculum";
+import {
+  getTopicMastery,
+  getTopicMasteryForUpdate,
+  listTopicMastery,
+  upsertTopicMastery,
+} from "@/lib/db/queries/curriculum";
 import type { Executor } from "@/lib/db/client";
+import { updateMastery } from "@/lib/mastery/mastery";
 import { createPgliteDb } from "../../../../helpers/pglite-db";
 
 const USER_A = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
@@ -92,6 +98,66 @@ describe("upsertTopicMastery", () => {
     const b = await getTopicMastery(db, USER_B, "valuation");
     expect(a!.score).toBe(0.9);
     expect(b!.score).toBe(0.1);
+  });
+});
+
+// ─── getTopicMasteryForUpdate ────────────────────────────────────────────────────
+// BUG B: the mastery grade is a read-modify-write. This locks the row FOR
+// UPDATE (materializing a zero row first) so concurrent grades serialize
+// instead of clobbering each other. PGlite is single-connection, so true
+// blocking can't be exercised here — these prove the SQL path runs and that a
+// materialized zero row is arithmetically identical to "no row", preserving the
+// updateMastery formula exactly.
+
+describe("getTopicMasteryForUpdate", () => {
+  it("materializes and returns a zero row when none exists", async () => {
+    const entry = await getTopicMasteryForUpdate(db, USER_A, "valuation");
+    expect(entry).toEqual({ topic: "valuation", score: 0, attempts: 0 });
+
+    // The zero row is persisted so FOR UPDATE has something to lock.
+    const all = await listTopicMastery(db, USER_A);
+    expect(all).toEqual([{ topic: "valuation", score: 0, attempts: 0 }]);
+  });
+
+  it("returns the existing row without overwriting it (insert-or-ignore)", async () => {
+    await upsertTopicMastery(db, USER_A, { topic: "valuation", score: 0.65, attempts: 3 });
+
+    const entry = await getTopicMasteryForUpdate(db, USER_A, "valuation");
+    expect(entry).toEqual({ topic: "valuation", score: 0.65, attempts: 3 });
+
+    // Still one row, unchanged.
+    const all = await listTopicMastery(db, USER_A);
+    expect(all).toHaveLength(1);
+    expect(all[0]!.attempts).toBe(3);
+  });
+
+  it("a zero row yields the same first-attempt result as passing null to updateMastery", async () => {
+    const locked = await getTopicMasteryForUpdate(db, USER_A, "valuation");
+    const fromZero = updateMastery(locked, "valuation", 80, "first");
+    const fromNull = updateMastery(null, "valuation", 80, "first");
+    expect(fromZero).toEqual(fromNull);
+  });
+
+  it("read-lock-compute-write across two grades accumulates attempts and folds scores", async () => {
+    // Mirrors gradeAnswerAction's persistence path: lock → updateMastery → upsert.
+    const prev1 = await getTopicMasteryForUpdate(db, USER_A, "valuation");
+    await upsertTopicMastery(db, USER_A, updateMastery(prev1, "valuation", 100, "first"));
+
+    const prev2 = await getTopicMasteryForUpdate(db, USER_A, "valuation");
+    await upsertTopicMastery(db, USER_A, updateMastery(prev2, "valuation", 100, "first"));
+
+    const final = await getTopicMastery(db, USER_A, "valuation");
+    expect(final!.attempts).toBe(2);
+    // Two perfect answers pull mastery strictly up from 0, without either grade
+    // resetting the other's attempt count.
+    expect(final!.score).toBeGreaterThan(0);
+    expect(final!.score).toBeLessThanOrEqual(1);
+  });
+
+  // TWO-USER ISOLATION.
+  it("materializes a row only for the acting user", async () => {
+    await getTopicMasteryForUpdate(db, USER_A, "valuation");
+    expect(await listTopicMastery(db, USER_B)).toEqual([]);
   });
 });
 

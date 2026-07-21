@@ -12,6 +12,7 @@ import { describe, expect, it, beforeEach } from "vitest";
 import {
   getQuestionById,
   listRecentAttempts,
+  listSittingScores,
   pickQuestion,
   recordAttempt,
   getSpacedState,
@@ -287,6 +288,166 @@ describe("recordAttempt + listRecentAttempts", () => {
     expect(attemptsA[0]!.score).toBe(70);
     expect(attemptsB).toHaveLength(1);
     expect(attemptsB[0]!.score).toBe(60);
+  });
+});
+
+// ─── listSittingScores ─────────────────────────────────────────────────────────
+
+describe("listSittingScores", () => {
+  const CHAPTER = "accounting";
+  const SINCE = new Date(Date.UTC(2026, 0, 1, 0, 0, 0)).toISOString();
+
+  async function seedGateQuestion(id: string) {
+    await seedQuestion({ id, topic: "accounting", chapterSlug: CHAPTER, sectionSlug: null });
+  }
+
+  it("returns the latest main attempt per question, scored and deduped", async () => {
+    await seedGateQuestion("q-1");
+    await seedGateQuestion("q-2");
+    await db.insert(qbankAttempts).values([
+      {
+        userId: USER_A,
+        questionId: "q-1",
+        answer: "first try",
+        score: "40.00",
+        correct: false,
+        context: "chapter-gate",
+        answeredAt: new Date(Date.UTC(2026, 0, 2, 12, 0, 0)).toISOString(),
+      },
+      {
+        userId: USER_A,
+        questionId: "q-1",
+        answer: "second try",
+        score: "80.00",
+        correct: true,
+        context: "chapter-gate",
+        answeredAt: new Date(Date.UTC(2026, 0, 2, 12, 5, 0)).toISOString(),
+      },
+      {
+        userId: USER_A,
+        questionId: "q-2",
+        answer: "only try",
+        score: "90.00",
+        correct: true,
+        context: "chapter-gate",
+        answeredAt: new Date(Date.UTC(2026, 0, 2, 12, 6, 0)).toISOString(),
+      },
+    ]);
+
+    const scores = await listSittingScores(db, {
+      userId: USER_A,
+      context: "chapter-gate",
+      chapterSlug: CHAPTER,
+      sinceIso: SINCE,
+    });
+
+    expect(scores).toHaveLength(2);
+    const byQ = Object.fromEntries(scores.map((s) => [s.questionId, s.score]));
+    expect(byQ["q-1"]).toBe(80); // latest main attempt wins, not the earlier 40
+    expect(byQ["q-2"]).toBe(90);
+  });
+
+  // BUG A regression: a follow-up shares its parent's questionId and is graded
+  // on a harder rubric. It must NOT win the latest-per-question dedup and
+  // replace the main answer's score in the sitting average.
+  it("excludes follow-up attempts so they cannot overwrite the main score", async () => {
+    await seedGateQuestion("q-1");
+    await db.insert(qbankAttempts).values([
+      {
+        userId: USER_A,
+        questionId: "q-1",
+        answer: "main answer",
+        score: "90.00",
+        correct: true,
+        context: "chapter-gate",
+        answeredAt: new Date(Date.UTC(2026, 0, 2, 12, 0, 0)).toISOString(),
+      },
+      {
+        userId: USER_A,
+        questionId: "q-1",
+        followupId: "f-1",
+        answer: "follow-up answer",
+        score: "30.00",
+        correct: false,
+        context: "chapter-gate",
+        // Later than the main attempt — would win the dedup without the filter.
+        answeredAt: new Date(Date.UTC(2026, 0, 2, 12, 10, 0)).toISOString(),
+      },
+    ]);
+
+    const scores = await listSittingScores(db, {
+      userId: USER_A,
+      context: "chapter-gate",
+      chapterSlug: CHAPTER,
+      sinceIso: SINCE,
+    });
+
+    expect(scores).toHaveLength(1);
+    expect(scores[0]!.score).toBe(90);
+  });
+
+  // BUG A regression: a follow-up answered without a main attempt in the window
+  // must not create a phantom distinct-question row that pads the sitting count.
+  it("does not count a follow-up-only row toward the distinct-question count", async () => {
+    await seedGateQuestion("q-1");
+    await db.insert(qbankAttempts).values({
+      userId: USER_A,
+      questionId: "q-1",
+      followupId: "f-1",
+      answer: "follow-up only",
+      score: "100.00",
+      correct: true,
+      context: "chapter-gate",
+      answeredAt: new Date(Date.UTC(2026, 0, 2, 12, 0, 0)).toISOString(),
+    });
+
+    const scores = await listSittingScores(db, {
+      userId: USER_A,
+      context: "chapter-gate",
+      chapterSlug: CHAPTER,
+      sinceIso: SINCE,
+    });
+
+    expect(scores).toEqual([]);
+  });
+
+  it("filters by context and section", async () => {
+    await seedQuestion({
+      id: "q-sec",
+      chapterSlug: CHAPTER,
+      sectionSlug: "income-statement-anatomy",
+    });
+    await seedQuestion({ id: "q-other-sec", chapterSlug: CHAPTER, sectionSlug: "balance-sheet" });
+    await db.insert(qbankAttempts).values([
+      {
+        userId: USER_A,
+        questionId: "q-sec",
+        answer: "a",
+        score: "70.00",
+        correct: true,
+        context: "section-drill",
+        answeredAt: new Date(Date.UTC(2026, 0, 2, 12, 0, 0)).toISOString(),
+      },
+      {
+        userId: USER_A,
+        questionId: "q-other-sec",
+        answer: "b",
+        score: "80.00",
+        correct: true,
+        context: "section-drill",
+        answeredAt: new Date(Date.UTC(2026, 0, 2, 12, 0, 0)).toISOString(),
+      },
+    ]);
+
+    const scores = await listSittingScores(db, {
+      userId: USER_A,
+      context: "section-drill",
+      chapterSlug: CHAPTER,
+      sectionSlug: "income-statement-anatomy",
+      sinceIso: SINCE,
+    });
+
+    expect(scores.map((s) => s.questionId)).toEqual(["q-sec"]);
   });
 });
 

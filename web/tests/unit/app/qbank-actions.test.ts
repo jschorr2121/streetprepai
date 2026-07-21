@@ -29,7 +29,7 @@ const {
   recordAttemptMock,
   upsertSpacedStateMock,
   getProfileMock,
-  getTopicMasteryMock,
+  getTopicMasteryForUpdateMock,
   upsertTopicMasteryMock,
   gradeAnswerMock,
   assertAiActionAllowedMock,
@@ -45,7 +45,7 @@ const {
   recordAttemptMock: vi.fn(),
   upsertSpacedStateMock: vi.fn(),
   getProfileMock: vi.fn(),
-  getTopicMasteryMock: vi.fn(),
+  getTopicMasteryForUpdateMock: vi.fn(),
   upsertTopicMasteryMock: vi.fn(),
   gradeAnswerMock: vi.fn(),
   assertAiActionAllowedMock: vi.fn(),
@@ -70,7 +70,7 @@ vi.mock("@/lib/db/queries/profile", () => ({
 }));
 
 vi.mock("@/lib/db/queries/curriculum", () => ({
-  getTopicMastery: getTopicMasteryMock,
+  getTopicMasteryForUpdate: getTopicMasteryForUpdateMock,
   upsertTopicMastery: upsertTopicMasteryMock,
 }));
 
@@ -137,7 +137,7 @@ beforeEach(() => {
   recordAttemptMock.mockReset();
   upsertSpacedStateMock.mockReset();
   getProfileMock.mockReset();
-  getTopicMasteryMock.mockReset();
+  getTopicMasteryForUpdateMock.mockReset();
   upsertTopicMasteryMock.mockReset();
   gradeAnswerMock.mockReset();
   assertAiActionAllowedMock.mockReset();
@@ -146,7 +146,7 @@ beforeEach(() => {
   getProfileMock.mockResolvedValue({ userId: USER_ID, advancedTrack: false });
   getFollowupsMock.mockResolvedValue([]);
   getSpacedStateMock.mockResolvedValue(null);
-  getTopicMasteryMock.mockResolvedValue(null);
+  getTopicMasteryForUpdateMock.mockResolvedValue({ topic: "valuation", score: 0, attempts: 0 });
   recordAttemptMock.mockResolvedValue(undefined);
   upsertSpacedStateMock.mockResolvedValue(undefined);
   upsertTopicMasteryMock.mockResolvedValue(undefined);
