@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import {
   Briefcase,
@@ -80,6 +81,7 @@ type Phase =
   | "scored";
 
 export function MockStudio({ initialMode }: { initialMode?: string } = {}) {
+  const router = useRouter();
   // Validate against the real mode list so an invalid/stale `?mode=` value
   // (see MODES above) is silently ignored rather than crashing the picker.
   const validInitialMode = initialMode && isInterviewMode(initialMode) ? initialMode : null;
@@ -126,30 +128,38 @@ export function MockStudio({ initialMode }: { initialMode?: string } = {}) {
   // to the unmount AbortController: a user who navigates away right after
   // scoring should still get their session saved rather than have the write
   // cancelled mid-flight. A standalone timeout still guards against a hang.
-  const saveSession = useCallback(async (payload: InterviewSaveInput) => {
-    try {
-      const res = await fetch("/api/interview/save", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        signal: AbortSignal.timeout(20_000),
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        if (mountedRef.current) {
-          setSaveError(
-            typeof data.error === "string"
-              ? data.error
-              : `Could not save this session (HTTP ${res.status}).`,
-          );
+  const saveSession = useCallback(
+    async (payload: InterviewSaveInput) => {
+      try {
+        const res = await fetch("/api/interview/save", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          signal: AbortSignal.timeout(20_000),
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          if (mountedRef.current) {
+            setSaveError(
+              typeof data.error === "string"
+                ? data.error
+                : `Could not save this session (HTTP ${res.status}).`,
+            );
+          }
+          return;
         }
-        return;
+        if (mountedRef.current) setSaveError(null);
+        // Refresh the server-rendered Past Sessions list below so the new row
+        // shows up without a manual reload. Safe to call even if we've since
+        // unmounted/navigated away — it just re-fetches the current route's
+        // server data and is a no-op if that route is no longer mounted.
+        router.refresh();
+      } catch {
+        if (mountedRef.current) setSaveError("Could not save this session.");
       }
-      if (mountedRef.current) setSaveError(null);
-    } catch {
-      if (mountedRef.current) setSaveError("Could not save this session.");
-    }
-  }, []);
+    },
+    [router],
+  );
 
   const pickMode = (m: InterviewMode) => {
     setMode(m);

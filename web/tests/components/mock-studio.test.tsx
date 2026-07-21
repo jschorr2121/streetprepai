@@ -6,6 +6,12 @@ import { MockStudio } from "@/components/interview/mock-studio";
 import type { InterviewQuestion } from "@/lib/data/interview-questions";
 import type { Scorecard } from "@/app/api/interview/score/route";
 
+const { refreshMock } = vi.hoisted(() => ({ refreshMock: vi.fn() }));
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn(), refresh: refreshMock }),
+}));
+
 vi.mock("sonner", () => ({
   toast: { error: vi.fn(), message: vi.fn(), success: vi.fn() },
 }));
@@ -94,6 +100,7 @@ beforeEach(() => {
   nextQuestionCall = 0;
   vi.mocked(toast.error).mockReset();
   vi.mocked(toast.message).mockReset();
+  refreshMock.mockReset();
 });
 
 afterEach(() => {
@@ -204,6 +211,9 @@ describe("MockStudio", () => {
     });
     // No save-failure notice on the happy path.
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    // A successful save refreshes the page so the server-rendered Past
+    // Sessions list picks up the new row.
+    await waitFor(() => expect(refreshMock).toHaveBeenCalled());
 
     fireEvent.click(screen.getByRole("button", { name: /try another question/i }));
     expect(screen.getByText("Walk me through a DCF. (again)")).toBeInTheDocument();
@@ -241,6 +251,8 @@ describe("MockStudio", () => {
     await waitFor(() =>
       expect(screen.getByRole("alert")).toHaveTextContent("Could not save the interview."),
     );
+    // A failed save shouldn't refresh — there's no new row to pick up.
+    expect(refreshMock).not.toHaveBeenCalled();
   });
 
   it("shows a toast and returns to review when scoring fails after transcription", async () => {

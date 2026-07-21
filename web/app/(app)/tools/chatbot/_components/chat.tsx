@@ -169,9 +169,11 @@ export function computeNextChatSessionState(
 export function ChatSession({
   activeThreadId,
   initialMessages,
+  truncated,
 }: {
   activeThreadId: string | null;
   initialMessages: UIMessage[];
+  truncated: boolean;
 }) {
   const [session, setSession] = useState<ChatSessionState>(() => ({
     knownId: activeThreadId,
@@ -187,6 +189,7 @@ export function ChatSession({
       key={session.mountKey}
       initialThreadId={activeThreadId}
       initialMessages={initialMessages}
+      truncated={truncated}
     />
   );
 }
@@ -194,9 +197,11 @@ export function ChatSession({
 export function AssistantChat({
   initialThreadId,
   initialMessages,
+  truncated,
 }: {
   initialThreadId: string | null;
   initialMessages: UIMessage[];
+  truncated: boolean;
 }) {
   // The thread is created server-side on the first message; for a brand-new
   // conversation the client picks the id up front so follow-up turns and a
@@ -271,6 +276,11 @@ export function AssistantChat({
               ))}
             </div>
           </div>
+        )}
+        {truncated && (
+          <p className="text-muted-foreground text-center text-xs">
+            Showing the most recent {initialMessages.length} messages.
+          </p>
         )}
         {messages.map((m) => {
           const text = messageText(m);

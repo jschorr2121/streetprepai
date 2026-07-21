@@ -16,6 +16,18 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### UX fix batch — mock-interview save refresh, loading-skeleton parity, tour focus scroll, aria-live narrowing, chatbot truncation notice (2026-07-21) — COMPLETE
+
+Five verified UX findings fixed on `fable/prod-readiness`. Suite **982 passing / 127 files** (from 982/126 — the interview refresh cases extend the existing `mock-studio.test.tsx` plus one new file); typecheck/lint/build/format all green.
+
+1. **Mock-interview save now refreshes the page (HIGH).** `MockStudio.saveSession` (`web/components/interview/mock-studio.tsx`) posts to `/api/interview/save` but never told the server-rendered Past Sessions list about the new row — it only showed up after a manual reload. Added `useRouter()` + `router.refresh()` on the success path (same pattern as `contact-detail.tsx`), unconditional (not gated on `mountedRef`) since `router.refresh()` is safe to call after unmount/navigation. Extended `web/tests/components/mock-studio.test.tsx` (mocks `next/navigation`'s `useRouter`) to assert `refresh()` fires on a successful save and does **not** fire on a failed one.
+2. **`mock-interview/loading.tsx` rebuilt to match the real page (MED).** Old skeleton used `max-w-3xl` centered `py-16`; real page (`app/(app)/tools/mock-interview/page.tsx`) is `mx-auto max-w-4xl px-6 py-8 md:px-8`, left-aligned, with a `PageHeader` block, a 4-card mode-picker grid, then the past-sessions list. New skeleton mirrors those container classes and section shapes (matching the sibling convention in `resume-coach/loading.tsx` and `relationships/loading.tsx` — plain bordered divs, not the `Card`/`PageHeader` components themselves).
+3. **Product tour focus-scroll fight fixed (MED).** `components/tour/product-tour.tsx`'s per-step `panelRef.current?.focus()` now passes `{ preventScroll: true }` — on tight viewports the browser's focus-driven scroll was racing the spotlight's own scroll-triggered `recompute()`.
+4. **Narrowed 5 over-broad `aria-live` regions (LOW/consistency).** `firm-prep.tsx`, `contact-detail.tsx` (×3: prep sheet, structure notes, draft follow-up), `outreach-drawer.tsx` all wrapped the *entire* button label — including the static "Generate"/"Regenerate"/"Draft" text — in `<span role="status" aria-live="polite">`, so every label change (not just the loading transition) fired a screen-reader announcement. Narrowed each so only the loading-state fragment (`<Loader2/> Generating…` etc.) sits inside the live region; the static label renders as plain text outside it. No visual change (button's own flex/gap classes already handled spacing).
+5. **Chatbot silent truncation now has an honest note (LOW).** `getMessages` for the thread page is capped at `PAGE_LOAD_MESSAGES` (200) with no "load older" UI. `app/(app)/tools/chatbot/page.tsx` now computes `truncated = messages.length === PAGE_LOAD_MESSAGES` and threads it through `ChatSession` → `AssistantChat` (`_components/chat.tsx`); when true, a muted "Showing the most recent N messages." line renders above the message list. New test `web/tests/components/chatbot-chat.test.tsx` (mocks `@ai-sdk/react`'s `useChat` and `next/navigation`) covers both the truncated and non-truncated cases.
+
+No Jake action needed — no schema/migration, no dashboard/secret/third-party setup; all five fixes are self-contained code changes.
+
 ### Observability & error triage — Sentry pino integration, logger-routed error paths, AI-call context (2026-07-21) — COMPLETE
 
 Implemented the four AFK-safe items from

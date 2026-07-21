@@ -389,18 +389,16 @@ export function ContactDetail({
                 </p>
               </div>
               <Button size="sm" onClick={generatePrepSheet} disabled={prepLoading}>
-                <span role="status" aria-live="polite">
-                  {prepLoading ? (
-                    <>
-                      <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
-                      Generating…
-                    </>
-                  ) : prepSheet ? (
-                    "Regenerate"
-                  ) : (
-                    "Generate"
-                  )}
-                </span>
+                {prepLoading ? (
+                  <span role="status" aria-live="polite">
+                    <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
+                    Generating…
+                  </span>
+                ) : prepSheet ? (
+                  "Regenerate"
+                ) : (
+                  "Generate"
+                )}
               </Button>
             </div>
             {contact.linkedinBio && (
@@ -497,16 +495,14 @@ export function ContactDetail({
             )}
             <div className="mt-3 flex gap-2">
               <Button size="sm" onClick={structureNotes} disabled={!notes.trim() || structuring}>
-                <span role="status" aria-live="polite">
-                  {structuring ? (
-                    <>
-                      <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
-                      Structuring…
-                    </>
-                  ) : (
-                    "Structure notes"
-                  )}
-                </span>
+                {structuring ? (
+                  <span role="status" aria-live="polite">
+                    <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
+                    Structuring…
+                  </span>
+                ) : (
+                  "Structure notes"
+                )}
               </Button>
             </div>
 
@@ -559,18 +555,16 @@ export function ContactDetail({
                     onClick={draftFollowUp}
                     disabled={draftingFollowUp}
                   >
-                    <span role="status" aria-live="polite">
-                      {draftingFollowUp ? (
-                        <>
-                          <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
-                          Drafting…
-                        </>
-                      ) : followUp ? (
-                        "Regenerate"
-                      ) : (
-                        "Draft follow-up"
-                      )}
-                    </span>
+                    {draftingFollowUp ? (
+                      <span role="status" aria-live="polite">
+                        <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
+                        Drafting…
+                      </span>
+                    ) : followUp ? (
+                      "Regenerate"
+                    ) : (
+                      "Draft follow-up"
+                    )}
                   </Button>
                 </div>
                 {followUp ? (

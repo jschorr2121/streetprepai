@@ -40,6 +40,12 @@ export default async function ChatbotPage({
     };
   });
 
+  // We only fetch the newest PAGE_LOAD_MESSAGES rows — hitting that exact
+  // count is our (imperfect but cheap) signal that older messages exist and
+  // weren't loaded. There's no "load older" affordance yet, so all we do is
+  // tell the user honestly that the view is truncated.
+  const truncated = messages.length === PAGE_LOAD_MESSAGES;
+
   return (
     // Mobile has the sticky h-14 top bar; desktop main starts at the viewport top.
     <div className="mx-auto flex h-[calc(100dvh-3.5rem)] max-w-5xl flex-col px-6 pt-8 md:px-10 lg:h-dvh">
@@ -64,7 +70,11 @@ export default async function ChatbotPage({
               </div>
             </details>
           )}
-          <ChatSession activeThreadId={active?.id ?? null} initialMessages={messages} />
+          <ChatSession
+            activeThreadId={active?.id ?? null}
+            initialMessages={messages}
+            truncated={truncated}
+          />
         </div>
       </div>
     </div>

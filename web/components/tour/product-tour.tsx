@@ -122,7 +122,7 @@ export function ProductTour({ steps, active }: { steps: TourStep[]; active: bool
   // repeatedly steal focus).
   useEffect(() => {
     if (active && !dismissed && rect && lastFocusedIndexRef.current !== index) {
-      panelRef.current?.focus();
+      panelRef.current?.focus({ preventScroll: true });
       lastFocusedIndexRef.current = index;
     }
   }, [active, dismissed, rect, index]);
