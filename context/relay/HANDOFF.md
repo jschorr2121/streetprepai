@@ -86,6 +86,33 @@ SCOPING-2026-07-17.md` before touching qbank). **Good next lanes (session 5+)**:
 
 ## Session log
 
+- **2026-07-21 (session 9, cloud, checkpoint 3 — 15 commits pushed, suite 977/125)** —
+  Second wave after checkpoint 2 + the user notification: **observability
+  brainstorm** committed (`6718dbe`, `context/brainstorms/2026-07-21-
+observability-error-triage.md` — web-researched, ranked, AFK-safe vs
+  Jake-gated split) and its **top-4 AFK-safe items shipped** (`70ab465`):
+  Sentry pinoIntegration + enableLogs (API verified against installed
+  @sentry/nextjs 10.51.0 — option shape is `{error:{levels}}`, NOT the
+  `captureErrors` shape some docs show), clientSafeError → logger (covers all
+  22 route sites in one edit), lib/ai/usage.ts silent console failures →
+  structured logger + `ai_call` Sentry context (the pino integration only
+  forwards `err` onto captured exceptions — setContext is required for the
+  rest), chat/assistant consumeStream onError → logger. New Jake item filed:
+  Sentry alert-rule threshold. **Auth/middleware/chatbot bug hunt** came back:
+  auth flows + middleware CLEAN (open-redirect, reset poisoning, session
+  spoofing all traced and refuted — Server Actions reject cross-origin before
+  the body runs, so headers().origin is trustworthy there); 2 chatbot findings
+  FIXED (`3f4ae48`): getMessages unbounded full-thread reload every turn →
+  optional limit (route passes its 30-message window; thread page bounds at
+  200; account export reads chat_messages directly, untouched); createThread
+  now returns whether its insert won so racing first-POSTs can't double-bill
+  title generation. Accepted/known-low from the hunt: concurrent posts to one
+  thread don't see each other's just-sent message (cosmetic); spend cap
+  fail-open is documented design; Server-Action limiters lack memFallback but
+  NODE_ENV=production makes it unreachable on Vercel. IN FLIGHT at checkpoint:
+  JSON-body content-length guard for parseJson (hunt finding 10, low).
+  Suite at checkpoint: **977 passing / 125 files**, build green.
+
 - **2026-07-21 (session 9, cloud, checkpoint 2 — 9 commits pushed, suite 973/125)** —
   All lanes landed since checkpoint 1: **applications fixes** (`e33b2d0` — blank
   deadline no longer breaks saves; clear-vs-absent update semantics for
@@ -348,7 +375,7 @@ SCOPING-2026-07-17.md` before touching qbank). **Good next lanes (session 5+)**:
 - **2026-07-18 (session 5, cloud, FINAL — 19 commits, all pushed, suite 521)** — Phase 5.
   Second half of the session ran three adversarial review sweeps + fixes on top of
   checkpoint 2's work: (1) **whisper spend blind spot** (CONFIRMED, also affects
-  master/prod today): neither transcribe route ever logged ai_usage — now one row
+  master/prod today): neither transcribe route ever logged ai*usage — now one row
   per call via surchargeUsd (duration/60 × $0.006); the token-priced whisper-1
   PRICING entry was decorative and is deleted. (2) **relationships consistency**:
   structure-chat/draft-followup wrap the Anthropic call → 502 like siblings;
@@ -365,7 +392,7 @@ SCOPING-2026-07-17.md` before touching qbank). **Good next lanes (session 5+)**:
   onboarding/applications/limiters/RLS all swept. **Next-lane menu for session 6**:
   (a) Jake-gated go-aheads if answered (Unit 8 #06, chat onboarding, firm_data
   brainstorm questions, PostHog); (b) auth/rate-limit stack consolidation
-  (lib/security/_ vs lib/ratelimit/_ — big, design-first, needs a fresh context);
+  (lib/security/* vs lib/ratelimit/\_ — big, design-first, needs a fresh context);
   (c) served-question-set pinning if gate integrity matters more than effort;
   (d) e2e: get authed specs actually running once Jake supplies creds (then CI
   secrets item); (e) perpetual: more coverage, UX polish, brainstorms. Suite
