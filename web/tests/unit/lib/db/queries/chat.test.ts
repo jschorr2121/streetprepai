@@ -32,17 +32,21 @@ describe("lib/db/queries/chat", () => {
 
   it("createThread on a duplicate id is a silent no-op (concurrent first-message race)", async () => {
     const db = await createPgliteDb();
-    await createThread(db, USER_A, THREAD_1, "original title");
+    // The winning insert reports true — callers (route.ts's isNewThread) rely
+    // on this to know they're the one that actually created the thread.
+    await expect(createThread(db, USER_A, THREAD_1, "original title")).resolves.toBe(true);
 
     // A second createThread for the same client-supplied uuid PK — the losing
     // side of two concurrent first POSTs — must not throw (would surface as a
-    // 500 and drop the user turn). onConflictDoNothing keeps the original row.
-    await expect(createThread(db, USER_A, THREAD_1, "racing title")).resolves.toBeUndefined();
+    // 500 and drop the user turn) and must report false: onConflictDoNothing
+    // keeps the original row and this racer did not insert anything.
+    await expect(createThread(db, USER_A, THREAD_1, "racing title")).resolves.toBe(false);
     expect((await getThread(db, USER_A, THREAD_1))?.title).toBe("original title");
 
-    // A different user colliding on the same id also no-ops and cannot take
-    // ownership: the row still belongs to USER_A, and USER_B sees nothing.
-    await expect(createThread(db, USER_B, THREAD_1, "hijack")).resolves.toBeUndefined();
+    // A different user colliding on the same id also no-ops (reports false)
+    // and cannot take ownership: the row still belongs to USER_A, and USER_B
+    // sees nothing.
+    await expect(createThread(db, USER_B, THREAD_1, "hijack")).resolves.toBe(false);
     expect(await getThread(db, USER_B, THREAD_1)).toBeNull();
     expect((await getThread(db, USER_A, THREAD_1))?.title).toBe("original title");
   });
@@ -84,6 +88,36 @@ describe("lib/db/queries/chat", () => {
 
     // Cross-user read comes back empty.
     expect(await getMessages(db, USER_B, THREAD_1)).toEqual([]);
+  });
+
+  it("limit bounds getMessages to the most recent N, still returned oldest-first", async () => {
+    const db = await createPgliteDb();
+    await createThread(db, USER_A, THREAD_1, "t");
+    // 5 turns; bound to the last 2 — must come back as [turn 3, turn 4], not
+    // [turn 0, turn 1] (a naive `.limit(N)` without the desc-then-reverse
+    // flip would return the oldest N instead of the newest N).
+    for (let i = 0; i < 5; i++) {
+      await appendMessages(db, USER_A, THREAD_1, [
+        { role: "user", parts: [{ type: "text", text: `turn ${i}` }] },
+      ]);
+    }
+
+    const bounded = await getMessages(db, USER_A, THREAD_1, 2);
+    expect(bounded.map((m) => m.parts[0]?.text)).toEqual(["turn 3", "turn 4"]);
+
+    // Unbounded still returns everything, oldest-first.
+    const all = await getMessages(db, USER_A, THREAD_1);
+    expect(all.map((m) => m.parts[0]?.text)).toEqual([
+      "turn 0",
+      "turn 1",
+      "turn 2",
+      "turn 3",
+      "turn 4",
+    ]);
+
+    // A limit larger than the thread's message count is a no-op bound.
+    const overshoot = await getMessages(db, USER_A, THREAD_1, 100);
+    expect(overshoot).toHaveLength(5);
   });
 
   it("skips malformed content rows instead of failing the thread", async () => {

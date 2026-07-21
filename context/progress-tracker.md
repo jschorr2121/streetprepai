@@ -207,6 +207,44 @@ transfer ownership. Suite 454 passing. Known residual (accepted): whether
 full vs partial assistant text persists on a hard disconnect is still
 timing-dependent — the guaranteed win is usage logging.
 
+### Prod-readiness relay — chatbot unbounded history + title-generation race (2026-07-21, cloud, branch `fable/prod-readiness`)
+
+Two traced findings fixed in `lib/db/queries/chat.ts` + `app/api/chat/assistant/route.ts`:
+
+- **Unbounded history reload (MEDIUM).** `getMessages` had no LIMIT — every
+  POST re-read + Zod-parsed the entire thread (unbounded DB read/parse cost as
+  a thread grows, tool outputs are KBs each) before the route sliced to the
+  last 30 for the model. `getMessages` now takes an optional `limit`:
+  implemented as `orderBy(desc(seq)).limit(N)` then `.reverse()` so callers
+  still get oldest-first output. Per-call-site decision: `route.ts` passes
+  `MODEL_CONTEXT_MESSAGES` (30) — no point loading turns the model-context
+  slice will discard anyway; the page loader (`app/(app)/tools/chatbot/page.tsx`)
+  passes a new `PAGE_LOAD_MESSAGES = 200` — the UI legitimately wants more than
+  the model's window, just bounded against a pathological thread. The
+  account-data export (`lib/db/queries/account-export.ts`) does **not** call
+  `getMessages` — it reads `chatMessages` directly and stays unbounded/complete
+  by construction, verified by grep, not touched.
+- **Double title-generation spend on a race (LOW).** `isNewThread` was derived
+  from `!existing` (computed before `createThread`'s `onConflictDoNothing`
+  insert resolves), so two concurrent first POSTs for the same thread id could
+  both see `isNewThread = true` and both fire a billed `generateThreadTitle`
+  call. `createThread` now returns whether it actually inserted the row
+  (`.onConflictDoNothing(...).returning(...)`, row count > 0 — confirmed zero
+  rows on conflict under PGlite too, not just Postgres proper), and the route
+  uses that return value as `isNewThread` instead. Title-generation logic
+  itself is unchanged.
+
+Tests: extended `tests/unit/lib/db/queries/chat.test.ts` (createThread race
+now asserts `true`/`false` return values; new `limit` test asserts bounded +
+still-oldest-first output, including an over-large limit no-op) and
+`tests/integration/api/chat/assistant.test.ts` (`createThreadMock` now
+defaults to `true`; new test asserts titling is skipped when `createThread`
+resolves `false` — i.e. this racer lost). Verification: typecheck ✅, lint ✅
+(0 errors, pre-existing warnings only), vitest **125 files / 977 tests
+passing** ✅, build ✅. No Jake action needed — no schema/migration change (the
+existing `seq` bigint-identity column was already there for ordering), no
+dashboard/secret/third-party setup.
+
 ### Prod-readiness relay — LLM thread auto-titling (2026-07-18, cloud, branch `fable/prod-readiness`)
 
 Closed the last Unit 9 deferral: chatbot threads were titled by truncating the

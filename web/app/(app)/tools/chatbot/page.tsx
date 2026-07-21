@@ -7,6 +7,12 @@ import { getMessages, listThreads, type ChatThread } from "@/lib/db/queries/chat
 import { ChatSession } from "./_components/chat";
 import { ThreadRail } from "./_components/thread-rail";
 
+// The page load renders the full visible conversation (not just the model's
+// context window), so this is generous relative to the assistant route's
+// MODEL_CONTEXT_MESSAGES — bounded only to cap worst-case read/parse cost on
+// an extremely long-lived thread.
+const PAGE_LOAD_MESSAGES = 200;
+
 export default async function ChatbotPage({
   searchParams,
 }: {
@@ -30,7 +36,7 @@ export default async function ChatbotPage({
     return {
       threads: all,
       active: selected,
-      messages: selected ? await getMessages(tx, user.id, selected.id) : [],
+      messages: selected ? await getMessages(tx, user.id, selected.id, PAGE_LOAD_MESSAGES) : [],
     };
   });
 

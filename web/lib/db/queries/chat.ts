@@ -82,12 +82,21 @@ export type ChatThread = {
   updatedAt: string;
 };
 
+/**
+ * Returns whether this call actually inserted the thread row (true) versus
+ * losing a PK conflict to a concurrent first POST (false). Callers use this
+ * — not "did I see an existing thread?" — to gate one-time-per-thread work
+ * like LLM auto-titling: `!existing` is decided before this insert resolves,
+ * so two concurrent first POSTs would both compute `!existing === true` and
+ * both fire a billed title generation. The insert's own row count is the only
+ * thing that can't be double-true for the same PK.
+ */
 export async function createThread(
   db: Executor,
   userId: string,
   threadId: string,
   title: string,
-): Promise<void> {
+): Promise<boolean> {
   // `id` is a client-supplied uuid PK. Two concurrent first POSTs with the same
   // threadId both see getThread → null and both try to insert; without this the
   // loser hits a unique-PK violation → uncaught 500 and the user turn is dropped.
@@ -103,9 +112,12 @@ export async function createThread(
   // row the caller doesn't own. The attacker cannot read or mutate the victim's
   // thread; the only residue is orphan attacker-owned messages that only the
   // attacker can see and that cascade-delete with the victim's thread.
-  await db.insert(chatThreads).values({ id: threadId, userId, title }).onConflictDoNothing({
-    target: chatThreads.id,
-  });
+  const inserted = await db
+    .insert(chatThreads)
+    .values({ id: threadId, userId, title })
+    .onConflictDoNothing({ target: chatThreads.id })
+    .returning({ id: chatThreads.id });
+  return inserted.length > 0;
 }
 
 export async function getThread(
@@ -154,16 +166,35 @@ export async function listThreads(db: Executor, userId: string): Promise<ChatThr
   }));
 }
 
+/**
+ * Load a thread's messages, oldest first. `limit` bounds the query to the
+ * most recent `limit` messages (a thread can accumulate an unbounded number
+ * of turns over its lifetime, each carrying KBs of tool-call payloads) — pass
+ * it whenever the caller doesn't need full history. Omit it only when every
+ * message is genuinely required. (The account-data export needs every
+ * message too, but reads `chatMessages` directly rather than through this
+ * function, so it is unaffected by this default either way.)
+ */
 export async function getMessages(
   db: Executor,
   userId: string,
   threadId: string,
+  limit?: number,
 ): Promise<ChatUIMessage[]> {
-  const rows = await db
-    .select()
-    .from(chatMessages)
-    .where(and(eq(chatMessages.threadId, threadId), eq(chatMessages.userId, userId)))
-    .orderBy(asc(chatMessages.seq));
+  const where = and(eq(chatMessages.threadId, threadId), eq(chatMessages.userId, userId));
+  const rows =
+    limit === undefined
+      ? await db.select().from(chatMessages).where(where).orderBy(asc(chatMessages.seq))
+      : // Fetch the newest `limit` rows, then flip to ascending — the caller
+        // always wants oldest-first regardless of whether it's bounded.
+        (
+          await db
+            .select()
+            .from(chatMessages)
+            .where(where)
+            .orderBy(desc(chatMessages.seq))
+            .limit(limit)
+        ).reverse();
 
   const messages: ChatUIMessage[] = [];
   for (const row of rows) {

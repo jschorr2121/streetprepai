@@ -105,6 +105,9 @@ beforeEach(() => {
   withUserMock.mockClear();
   getThreadMock.mockReset();
   createThreadMock.mockReset();
+  // Default: the insert succeeds (the common, non-racing case). Tests for the
+  // concurrent-first-POST race override this to `false`.
+  createThreadMock.mockResolvedValue(true);
   getMessagesMock.mockReset();
   appendMessagesMock.mockReset();
   updateThreadTitleMock.mockReset();
@@ -472,6 +475,31 @@ describe("POST /api/chat/assistant", () => {
         id: "resp-title-2",
         role: "assistant",
         parts: [{ type: "text", text: "follow-up answer", state: "done" }],
+      },
+    });
+
+    expect(generateThreadTitleMock).not.toHaveBeenCalled();
+    expect(updateThreadTitleMock).not.toHaveBeenCalled();
+  });
+
+  it("skips titling when createThread loses the concurrent-first-POST race", async () => {
+    // Both racers see getThread → null, but only one insert actually lands.
+    // isNewThread must come from createThread's own result, not from
+    // `!existing` — otherwise the loser would also fire a billed title call.
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-assist-title-race" }));
+    getThreadMock.mockResolvedValue(null);
+    createThreadMock.mockResolvedValue(false); // lost the race
+    const { POST } = await import("@/app/api/chat/assistant/route");
+    await POST(makeRequest(validBody, "10.9.0.15"));
+
+    const streamOpts = toUIMessageStreamResponseMock.mock.calls[0]?.[0] as {
+      onEnd: (event: { responseMessage: unknown }) => Promise<void>;
+    };
+    await streamOpts.onEnd({
+      responseMessage: {
+        id: "resp-title-race",
+        role: "assistant",
+        parts: [{ type: "text", text: "an answer", state: "done" }],
       },
     });
 

@@ -48,12 +48,18 @@ export async function POST(req: Request): Promise<Response> {
   // transaction — the user's message survives even if the stream fails.
   // `isNewThread` gates LLM auto-titling below: only the first exchange
   // gets a generated title: later turns keep whatever title already stuck.
+  // It's derived from createThread's own insert result (not `!existing`)
+  // because two concurrent first POSTs both observe `existing === null`
+  // before either insert resolves — `!existing` would make both racers fire
+  // a billed title generation. Only the row that actually got inserted here
+  // is the "real" first POST.
   let isNewThread = false;
   const prior = await withUser({ sub: userId, role: "authenticated" }, async (tx) => {
     const existing = await getThread(tx, userId, threadId);
-    isNewThread = !existing;
-    if (!existing) await createThread(tx, userId, threadId, title);
-    const history = existing ? await getMessages(tx, userId, threadId) : [];
+    if (!existing) isNewThread = await createThread(tx, userId, threadId, title);
+    // Bounded to the same window the model will see below — no point loading
+    // (and Zod-parsing) turns that MODEL_CONTEXT_MESSAGES will just slice off.
+    const history = existing ? await getMessages(tx, userId, threadId, MODEL_CONTEXT_MESSAGES) : [];
     await appendMessages(tx, userId, threadId, [{ role: "user", parts: userParts }]);
     return history;
   });
