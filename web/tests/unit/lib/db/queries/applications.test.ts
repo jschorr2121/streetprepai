@@ -20,6 +20,7 @@ import {
   updateApplication,
 } from "@/lib/db/queries/applications";
 import type { Executor } from "@/lib/db/client";
+import { NotFoundError } from "@/lib/errors";
 import { createPgliteDb } from "../../../../helpers/pglite-db";
 
 const USER_A = "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa";
@@ -183,6 +184,42 @@ describe("updateApplication", () => {
     expect(updated.notes).toBe("Phone screen done.");
     expect(updated.firm).toBe("Jefferies"); // unchanged
   });
+
+  it("clears url and deadline to NULL when passed explicit null (clear-vs-absent contract)", async () => {
+    const app = await createApplication(db, USER_A, {
+      firm: "Blackstone",
+      role: "Analyst",
+      stage: "applied",
+      url: "https://careers.blackstone.com/job/1",
+      deadline: "2026-09-01",
+    });
+
+    const updated = await updateApplication(db, app.id, { url: null, deadline: null });
+    expect(updated.url).toBeUndefined();
+    expect(updated.deadline).toBeUndefined();
+  });
+
+  it("leaves url and deadline untouched when omitted from the input", async () => {
+    const app = await createApplication(db, USER_A, {
+      firm: "Perella Weinberg",
+      role: "Analyst",
+      stage: "applied",
+      url: "https://careers.pwp.com/job/1",
+      deadline: "2026-09-01",
+    });
+
+    const updated = await updateApplication(db, app.id, { stage: "interview" });
+    expect(updated.url).toBe("https://careers.pwp.com/job/1");
+    expect(updated.deadline).toBe("2026-09-01");
+  });
+
+  // BUG 3 (TOCTOU): a row deleted between the caller's ownership check and
+  // this mutation must surface as NotFoundError, not a raw "no rows" crash.
+  it("throws NotFoundError when the row no longer exists", async () => {
+    await expect(
+      updateApplication(db, "00000000-0000-4000-8000-000000000000", { stage: "interview" }),
+    ).rejects.toThrow(NotFoundError);
+  });
 });
 
 // ─── deleteApplication ────────────────────────────────────────────────────────
@@ -199,5 +236,13 @@ describe("deleteApplication", () => {
 
     const fetched = await getApplicationById(db, app.id, USER_A);
     expect(fetched).toBeNull();
+  });
+
+  // BUG 3 (TOCTOU): deleting an already-gone row (double-click, two tabs)
+  // must throw NotFoundError instead of silently no-op'ing.
+  it("throws NotFoundError when the row no longer exists", async () => {
+    await expect(
+      deleteApplication(db, "00000000-0000-4000-8000-000000000000"),
+    ).rejects.toThrow(NotFoundError);
   });
 });

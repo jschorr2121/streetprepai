@@ -2,6 +2,7 @@ import { and, desc, eq } from "drizzle-orm";
 
 import type { Executor } from "@/lib/db/client";
 import { appliedJobs } from "@/lib/db/schema";
+import { NotFoundError } from "@/lib/errors";
 import type { AppliedJob, AppliedJobStage } from "@/lib/types";
 
 // ─── Row → domain type mapping ────────────────────────────────────────────────
@@ -37,13 +38,19 @@ export type CreateApplicationInput = {
   notes?: string;
 };
 
+/**
+ * `url` / `deadline` use clear-vs-absent semantics on update: `undefined`
+ * means "field not sent — leave the existing value untouched", while `null`
+ * means "explicitly cleared — write NULL". A non-null string sets the value.
+ * (Create always maps missing/"" to NULL — see `createApplication`.)
+ */
 export type UpdateApplicationInput = {
   firm?: string;
   role?: string;
   group?: string;
   stage?: AppliedJobStage;
-  url?: string;
-  deadline?: string;
+  url?: string | null;
+  deadline?: string | null;
   notes?: string;
 };
 
@@ -129,6 +136,11 @@ export async function createApplication(
  * Caller must confirm ownership before invoking (ownership check is step 4 of
  * the Server Action skeleton; this query does not re-check it).
  * Run inside `withUser` so RLS USING policy applies as a safety net.
+ *
+ * Throws `NotFoundError` if the row no longer exists at mutation time (e.g. a
+ * TOCTOU race with a concurrent delete after the caller's ownership check) —
+ * callers should let this surface via the normal AppError → ActionResult path
+ * rather than treating it as an unexpected INTERNAL failure.
  */
 export async function updateApplication(
   db: Executor,
@@ -149,7 +161,7 @@ export async function updateApplication(
   const rows = await db.update(appliedJobs).set(set).where(eq(appliedJobs.id, id)).returning();
 
   const row = rows[0];
-  if (!row) throw new Error("Update returned no rows — row may have been deleted.");
+  if (!row) throw new NotFoundError("Application not found.");
   return mapRow(row);
 }
 
@@ -157,7 +169,16 @@ export async function updateApplication(
  * Delete an application row by id.
  * Caller must confirm ownership before invoking.
  * Run inside `withUser` so RLS USING policy applies as a safety net.
+ *
+ * Throws `NotFoundError` if zero rows were deleted (row already gone —
+ * TOCTOU race), so callers get the same AppError-based NOT_FOUND path as a
+ * failed ownership check instead of silently no-op'ing.
  */
 export async function deleteApplication(db: Executor, id: string): Promise<void> {
-  await db.delete(appliedJobs).where(eq(appliedJobs.id, id));
+  const rows = await db
+    .delete(appliedJobs)
+    .where(eq(appliedJobs.id, id))
+    .returning({ id: appliedJobs.id });
+
+  if (rows.length === 0) throw new NotFoundError("Application not found.");
 }

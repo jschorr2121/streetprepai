@@ -176,6 +176,43 @@ describe("createApplicationSchema", () => {
     });
     expect(result.success).toBe(true);
   });
+
+  // BUG 1 regression — blank Deadline used to pass Zod (empty string satisfies
+  // `.max(40).optional()` trivially) and crash the DB write with a raw
+  // Postgres "invalid input syntax for type date" error.
+  it("accepts an empty string deadline (treated as no deadline)", () => {
+    const result = createApplicationSchema.safeParse({
+      firm: "GS",
+      role: "Analyst",
+      stage: "applied",
+      deadline: "",
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("accepts a yyyy-mm-dd deadline (the <input type=\"date\"> format)", () => {
+    const result = createApplicationSchema.safeParse({
+      firm: "GS",
+      role: "Analyst",
+      stage: "applied",
+      deadline: "2026-09-01",
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("rejects a non-ISO deadline before it can reach the date column", () => {
+    const result = createApplicationSchema.safeParse({
+      firm: "GS",
+      role: "Analyst",
+      stage: "applied",
+      deadline: "09/01/2026",
+    });
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      const paths = result.error.issues.map((i) => i.path[0]);
+      expect(paths).toContain("deadline");
+    }
+  });
 });
 
 // ─── 2. createApplicationAction — UNAUTHORIZED ────────────────────────────────

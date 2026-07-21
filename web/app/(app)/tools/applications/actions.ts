@@ -42,7 +42,16 @@ export const createApplicationSchema = z.object({
   group: z.string().trim().max(120).optional(),
   stage: z.enum(APPLIED_JOB_STAGES),
   url: z.string().trim().url("Must be a valid URL.").max(2048).optional().or(z.literal("")),
-  deadline: z.string().trim().max(40).optional(),
+  // <input type="date"> sends yyyy-mm-dd (or "" when cleared). Enforce that
+  // shape here so a malformed value never reaches the Postgres `date` column
+  // (which rejects "" and other non-ISO strings with a raw driver error).
+  deadline: z
+    .string()
+    .trim()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Deadline must be a valid date.")
+    .max(40)
+    .optional()
+    .or(z.literal("")),
   notes: z
     .string()
     .trim()
@@ -107,10 +116,11 @@ export async function createApplicationAction(input: unknown): Promise<ActionRes
   // Step 5 — Work.
   let application: AppliedJob;
   try {
-    // Normalise empty-string url to undefined so the DB stores NULL.
+    // Normalise empty-string url/deadline to undefined so the DB stores NULL.
     const data = {
       ...parsed.data,
       url: parsed.data.url === "" ? undefined : parsed.data.url,
+      deadline: parsed.data.deadline === "" ? undefined : parsed.data.deadline,
     };
     application = await withUser({ sub: userId, role: "authenticated" }, (tx) =>
       createApplication(tx, userId, data),
@@ -195,14 +205,22 @@ export async function updateApplicationAction(input: unknown): Promise<ActionRes
   let application: AppliedJob;
   try {
     const { id, ...fields } = parsed.data;
+    // Clear-vs-absent semantics: a field absent from the payload is left
+    // untouched (`undefined`, skipped by the query layer's `!== undefined`
+    // guard); a field explicitly sent as "" clears the column (`null`). Only
+    // url/deadline support clearing today — see UpdateApplicationInput.
     const data = {
       ...fields,
-      url: fields.url === "" ? undefined : fields.url,
+      ...("url" in fields ? { url: fields.url === "" ? null : fields.url } : {}),
+      ...("deadline" in fields
+        ? { deadline: fields.deadline === "" ? null : fields.deadline }
+        : {}),
     };
     application = await withUser({ sub: userId, role: "authenticated" }, (tx) =>
       updateApplication(tx, id, data),
     );
   } catch (err) {
+    if (err instanceof AppError) return actionErrorFromAppError(err);
     logger.error({ userId, action: "application_update_failed" }, "application_update_failed");
     Sentry.captureException(err);
     return { ok: false, error: { code: "INTERNAL", message: "Something went wrong." } };
@@ -286,6 +304,7 @@ export async function deleteApplicationAction(
       deleteApplication(tx, parsed.data.id),
     );
   } catch (err) {
+    if (err instanceof AppError) return actionErrorFromAppError(err);
     logger.error({ userId, action: "application_delete_failed" }, "application_delete_failed");
     Sentry.captureException(err);
     return { ok: false, error: { code: "INTERNAL", message: "Something went wrong." } };
