@@ -10,6 +10,7 @@ import { useState } from "react";
 import { CheckCircle2, ChevronRight, Circle, Loader2, Sparkles, XCircle } from "lucide-react";
 
 import { gradeAnswerAction } from "@/app/(app)/tools/question-bank/actions";
+import { StatusLine } from "@/components/status-line";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -115,25 +116,27 @@ export function AnswerCard({
         className="resize-y"
       />
 
-      {!grade && (
-        <div className="mt-3 flex items-center justify-between">
-          <span className="text-muted-foreground text-xs">
-            Graded on a published rubric — you&apos;ll see exactly what you hit and missed.
-          </span>
-          <Button onClick={submitMain} disabled={!answer.trim() || pending} className="gap-1.5">
-            {pending ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : (
-              <Sparkles className="size-4" />
-            )}
-            {pending ? "Grading…" : "Submit for grading"}
-          </Button>
-        </div>
-      )}
+      <StatusLine>
+        {!grade && (
+          <div className="mt-3 flex items-center justify-between">
+            <span className="text-muted-foreground text-xs">
+              Graded on a published rubric — you&apos;ll see exactly what you hit and missed.
+            </span>
+            <Button onClick={submitMain} disabled={!answer.trim() || pending} className="gap-1.5">
+              {pending ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <Sparkles className="size-4" />
+              )}
+              {pending ? "Grading…" : "Submit for grading"}
+            </Button>
+          </div>
+        )}
 
-      {error && <p className="text-destructive mt-3 text-sm">{error}</p>}
+        {error && <p className="text-destructive mt-3 text-sm">{error}</p>}
 
-      {grade && <RubricResult grade={grade} />}
+        {grade && <RubricResult grade={grade} />}
+      </StatusLine>
 
       {/* Follow-up probe — mirrors real interviewer escalation. */}
       {followupGrade && (

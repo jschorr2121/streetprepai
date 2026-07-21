@@ -79,6 +79,30 @@ describe("ProductTour", () => {
     expect(screen.getByText("Guides and drills.")).toBeInTheDocument();
   });
 
+  it("moves focus into the tooltip panel on activation and again on each step change", () => {
+    renderTour();
+    const panel = screen.getByRole("heading", { name: "Learn" }).closest("div")!;
+    expect(panel).toHaveFocus();
+
+    fireEvent.click(screen.getByRole("button", { name: /next/i }));
+    const nextPanel = screen.getByRole("heading", { name: "Interview" }).closest("div")!;
+    expect(nextPanel).toHaveFocus();
+  });
+
+  it("restores focus to the previously focused element when the tour is skipped", () => {
+    const opener = document.createElement("button");
+    opener.textContent = "Open";
+    document.body.appendChild(opener);
+    opener.focus();
+    expect(opener).toHaveFocus();
+
+    renderTour();
+    fireEvent.click(screen.getByRole("button", { name: /skip tour/i }));
+
+    expect(opener).toHaveFocus();
+    opener.remove();
+  });
+
   it("advances with Next and returns with Back", () => {
     renderTour();
     fireEvent.click(screen.getByRole("button", { name: /next/i }));

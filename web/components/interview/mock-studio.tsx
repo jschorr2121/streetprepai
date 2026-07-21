@@ -17,6 +17,7 @@ import {
   Target,
 } from "lucide-react";
 
+import { StatusLine } from "@/components/status-line";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -423,12 +424,12 @@ export function MockStudio({ initialMode }: { initialMode?: string } = {}) {
           )}
 
           {(phase === "transcribing" || phase === "scoring") && (
-            <div className="text-muted-foreground flex items-center justify-center gap-3 py-6">
+            <StatusLine className="text-muted-foreground flex items-center justify-center gap-3 py-6">
               <Loader2 className="text-primary size-5 animate-spin" />
               <span className="text-sm">
                 {phase === "transcribing" ? "Transcribing your answer…" : "Claude is scoring…"}
               </span>
-            </div>
+            </StatusLine>
           )}
         </Card>
       )}
@@ -485,9 +486,19 @@ function ScorecardView({
 }) {
   const [showRubric, setShowRubric] = useState(true);
   const [showModel, setShowModel] = useState(false);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  // Move focus to the scorecard once it mounts so screen reader users land
+  // on the results instead of staying wherever "Submit for scoring" was.
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, []);
 
   return (
     <div className="space-y-5">
+      <h2 ref={headingRef} tabIndex={-1} className="eyebrow outline-none">
+        Scorecard
+      </h2>
       <Card className="p-6">
         <div className="grid gap-6 sm:grid-cols-2">
           <ScoreReadout label="Content" score={scorecard.content_score} />

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Markdown } from "@/components/reader/markdown";
+import { StatusLine } from "@/components/status-line";
 import { splitStreamError } from "@/lib/streaming/stream-error";
 import { ArrowUp, Loader2 } from "lucide-react";
 
@@ -153,7 +154,10 @@ export function ChatPanel({
                     )}
                   </>
                 ) : (
-                  <Loader2 className="text-muted-foreground size-3.5 animate-spin" />
+                  <StatusLine>
+                    <Loader2 className="text-muted-foreground size-3.5 animate-spin" />
+                    <span className="sr-only">Assistant is responding…</span>
+                  </StatusLine>
                 )}
               </div>
             </div>

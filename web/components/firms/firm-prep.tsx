@@ -76,16 +76,18 @@ export function FirmPrep({ firm }: { firm: Firm }) {
             </p>
           </div>
           <Button size="sm" onClick={generate} disabled={loading}>
-            {loading ? (
-              <>
-                <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
-                Generating…
-              </>
-            ) : prep ? (
-              "Regenerate"
-            ) : (
-              "Generate"
-            )}
+            <span role="status" aria-live="polite">
+              {loading ? (
+                <>
+                  <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
+                  Generating…
+                </>
+              ) : prep ? (
+                "Regenerate"
+              ) : (
+                "Generate"
+              )}
+            </span>
           </Button>
         </div>
 

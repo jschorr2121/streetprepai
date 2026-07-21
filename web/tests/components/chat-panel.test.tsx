@@ -56,6 +56,8 @@ describe("ChatPanel", () => {
     fireEvent.click(screen.getByRole("button", { name: /send message/i }));
 
     expect(screen.getByText("What is a DCF?")).toBeInTheDocument();
+    // The pending assistant turn is a polite live region, not a bare spinner.
+    expect(screen.getByRole("status")).toBeInTheDocument();
     expect(await screen.findByText("The DCF discounts free cash flow.")).toBeInTheDocument();
     expect(fetch).toHaveBeenCalledWith(
       "/api/chat/stream",

@@ -198,6 +198,7 @@ export function ContactsView({
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => tab === "calendar" && setTab("search")}
               placeholder="Search everyone and every note…"
+              aria-label="Search contacts and notes"
               className="pl-9"
             />
           </div>

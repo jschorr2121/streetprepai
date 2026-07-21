@@ -139,7 +139,7 @@ export function ResumeCoach() {
                 className="hover:bg-accent/30 w-full rounded-md border border-dashed p-10 text-center transition-colors duration-150 disabled:pointer-events-none disabled:opacity-60"
               >
                 <Upload className="text-muted-foreground mx-auto size-6" />
-                <p className="mt-3 font-medium">
+                <p role="status" aria-live="polite" className="mt-3 font-medium">
                   {extracting ? "Extracting…" : "Drop your resume PDF here or click to browse"}
                 </p>
                 <p className="text-muted-foreground mt-1 text-sm">
@@ -173,6 +173,9 @@ export function ResumeCoach() {
                     <Button onClick={() => void runCritique(rawText)} disabled={critiquing}>
                       {critiquing && <Loader2 className="size-4 animate-spin" />}
                       Critique &amp; rewrite
+                      <span role="status" aria-live="polite" className="sr-only">
+                        {critiquing ? "Critiquing your resume…" : ""}
+                      </span>
                     </Button>
                   </div>
                 </div>
@@ -193,6 +196,9 @@ export function ResumeCoach() {
                 >
                   {critiquing && <Loader2 className="size-4 animate-spin" />}
                   Critique &amp; rewrite
+                  <span role="status" aria-live="polite" className="sr-only">
+                    {critiquing ? "Critiquing your resume…" : ""}
+                  </span>
                 </Button>
               </div>
             </TabsContent>

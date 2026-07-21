@@ -129,16 +129,18 @@ export function OutreachDrawer({
               disabled={loading || !linkedInContext.trim()}
               className="w-full"
             >
-              {loading ? (
-                <>
-                  <Loader2 className="mr-1.5 size-4 animate-spin" aria-hidden />
-                  Drafting…
-                </>
-              ) : draft ? (
-                "Regenerate"
-              ) : (
-                "Generate draft"
-              )}
+              <span role="status" aria-live="polite">
+                {loading ? (
+                  <>
+                    <Loader2 className="mr-1.5 size-4 animate-spin" aria-hidden />
+                    Drafting…
+                  </>
+                ) : draft ? (
+                  "Regenerate"
+                ) : (
+                  "Generate draft"
+                )}
+              </span>
             </Button>
             {!loading && !linkedInContext.trim() && (
               <p className="text-muted-foreground mt-1.5 text-xs">

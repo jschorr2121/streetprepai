@@ -58,6 +58,9 @@ describe("AnswerCard", () => {
 
     const submit = screen.getByRole("button", { name: /submit for grading/i });
     expect(submit).toBeDisabled();
+    // The grading pending/result area is a polite live region so "Grading…"
+    // and the rubric result get announced without the user needing to poll.
+    expect(screen.getByRole("status")).toBeInTheDocument();
 
     const textarea = screen.getByPlaceholderText(/answer as you would/i);
     fireEvent.change(textarea, { target: { value: "Project FCF, discount at WACC." } });

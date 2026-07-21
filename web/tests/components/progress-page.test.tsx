@@ -63,6 +63,9 @@ describe("ProgressPage", () => {
     ).toBeInTheDocument();
     // Streak count and this-week count both render as bare "0"s.
     expect(screen.getAllByText("0", { exact: true }).length).toBe(2);
+    // The activity heatmap conveys active/inactive by color alone — it needs
+    // a text alternative rather than relying on the 28 individual cells.
+    expect(screen.getByRole("img", { name: /0 of 28 days active/i })).toBeInTheDocument();
   });
 
   it("shows overall mastery, this-week count, and ranked weak topics once questions are graded", async () => {

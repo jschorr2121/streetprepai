@@ -174,10 +174,15 @@ describe("MockStudio", () => {
     const submitButton = await screen.findByRole("button", { name: /submit for scoring/i });
     fireEvent.click(submitButton);
 
+    // "Transcribing your answer…" / "Claude is scoring…" is a polite live region.
+    expect(screen.getByRole("status")).toBeInTheDocument();
+
     expect(await screen.findByText("You discount cash flows.")).toBeInTheDocument();
     expect(screen.getByText("82")).toBeInTheDocument();
     expect(screen.getByText("68")).toBeInTheDocument();
     expect(screen.getByText("Clean walk through the formula.")).toBeInTheDocument();
+    // Focus lands on the scorecard heading so screen readers land on results.
+    await waitFor(() => expect(screen.getByRole("heading", { name: "Scorecard" })).toHaveFocus());
 
     fireEvent.click(screen.getByRole("button", { name: /try another question/i }));
     expect(screen.getByText("Walk me through a DCF. (again)")).toBeInTheDocument();

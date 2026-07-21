@@ -389,16 +389,18 @@ export function ContactDetail({
                 </p>
               </div>
               <Button size="sm" onClick={generatePrepSheet} disabled={prepLoading}>
-                {prepLoading ? (
-                  <>
-                    <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
-                    Generating…
-                  </>
-                ) : prepSheet ? (
-                  "Regenerate"
-                ) : (
-                  "Generate"
-                )}
+                <span role="status" aria-live="polite">
+                  {prepLoading ? (
+                    <>
+                      <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
+                      Generating…
+                    </>
+                  ) : prepSheet ? (
+                    "Regenerate"
+                  ) : (
+                    "Generate"
+                  )}
+                </span>
               </Button>
             </div>
             {contact.linkedinBio && (
@@ -475,7 +477,11 @@ export function ContactDetail({
               </Button>
             </div>
             {(recording || transcribing) && (
-              <p className="text-muted-foreground mt-2 flex items-center gap-1.5 text-xs">
+              <p
+                role="status"
+                aria-live="polite"
+                className="text-muted-foreground mt-2 flex items-center gap-1.5 text-xs"
+              >
                 {recording ? (
                   <>
                     <span className="bg-destructive size-1.5 animate-pulse rounded-full" />
@@ -491,14 +497,16 @@ export function ContactDetail({
             )}
             <div className="mt-3 flex gap-2">
               <Button size="sm" onClick={structureNotes} disabled={!notes.trim() || structuring}>
-                {structuring ? (
-                  <>
-                    <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
-                    Structuring…
-                  </>
-                ) : (
-                  "Structure notes"
-                )}
+                <span role="status" aria-live="polite">
+                  {structuring ? (
+                    <>
+                      <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
+                      Structuring…
+                    </>
+                  ) : (
+                    "Structure notes"
+                  )}
+                </span>
               </Button>
             </div>
 
@@ -551,16 +559,18 @@ export function ContactDetail({
                     onClick={draftFollowUp}
                     disabled={draftingFollowUp}
                   >
-                    {draftingFollowUp ? (
-                      <>
-                        <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
-                        Drafting…
-                      </>
-                    ) : followUp ? (
-                      "Regenerate"
-                    ) : (
-                      "Draft follow-up"
-                    )}
+                    <span role="status" aria-live="polite">
+                      {draftingFollowUp ? (
+                        <>
+                          <Loader2 className="mr-1.5 size-3.5 animate-spin" aria-hidden />
+                          Drafting…
+                        </>
+                      ) : followUp ? (
+                        "Regenerate"
+                      ) : (
+                        "Draft follow-up"
+                      )}
+                    </span>
                   </Button>
                 </div>
                 {followUp ? (

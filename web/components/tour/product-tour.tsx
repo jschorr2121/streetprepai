@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { completeTourAction } from "@/app/(app)/dashboard/actions";
 import { Button } from "@/components/ui/button";
@@ -32,6 +32,16 @@ function measure(selector: string): Rect | null {
   };
 }
 
+/** Focusable descendants of `container`, in DOM order — used to trap Tab/Shift+Tab. */
+function getFocusable(container: HTMLElement | null): HTMLElement[] {
+  if (!container) return [];
+  return Array.from(
+    container.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    ),
+  );
+}
+
 /**
  * First-time spotlight walkthrough. Steps through `steps` in order, dimming
  * the page and cutting out a highlight box around each step's target element
@@ -43,6 +53,9 @@ export function ProductTour({ steps, active }: { steps: TourStep[]; active: bool
   const [index, setIndex] = useState(0);
   const [rect, setRect] = useState<Rect | null>(null);
   const [dismissed, setDismissed] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const lastFocusedIndexRef = useRef<number | null>(null);
 
   const finish = useCallback(() => {
     setDismissed(true);
@@ -90,6 +103,45 @@ export function ProductTour({ steps, active }: { steps: TourStep[]; active: bool
     return () => window.removeEventListener("keydown", onKey);
   }, [finish]);
 
+  // Capture whatever had focus before the tour opened, and restore it once
+  // the tour closes (dismissed, or the parent flips `active` off).
+  useEffect(() => {
+    if (active && !dismissed) {
+      if (!previousFocusRef.current) {
+        previousFocusRef.current = document.activeElement as HTMLElement | null;
+      }
+    } else if (previousFocusRef.current) {
+      previousFocusRef.current.focus();
+      previousFocusRef.current = null;
+    }
+  }, [active, dismissed]);
+
+  // Move focus into the tooltip panel on activation and on every step change
+  // (guarded by lastFocusedIndexRef so resize/scroll-triggered rect
+  // recomputes — which produce a new `rect` object at the same step — don't
+  // repeatedly steal focus).
+  useEffect(() => {
+    if (active && !dismissed && rect && lastFocusedIndexRef.current !== index) {
+      panelRef.current?.focus();
+      lastFocusedIndexRef.current = index;
+    }
+  }, [active, dismissed, rect, index]);
+
+  function trapTabKey(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (e.key !== "Tab") return;
+    const focusable = getFocusable(panelRef.current);
+    if (focusable.length === 0) return;
+    const first = focusable[0]!;
+    const last = focusable[focusable.length - 1]!;
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
   if (!active || dismissed || !rect || index >= steps.length) return null;
 
   const step = steps[index]!;
@@ -113,7 +165,10 @@ export function ProductTour({ steps, active }: { steps: TourStep[]; active: bool
         }}
       />
       <div
-        className="bg-popover text-popover-foreground border-border fixed z-10 w-80 rounded-md border p-4 shadow-lg transition-all duration-200"
+        ref={panelRef}
+        tabIndex={-1}
+        onKeyDown={trapTabKey}
+        className="bg-popover text-popover-foreground border-border fixed z-10 w-80 rounded-md border p-4 shadow-lg transition-all duration-200 outline-none"
         style={{
           top: below ? tooltipTop : undefined,
           bottom: below ? undefined : window.innerHeight - tooltipTop,

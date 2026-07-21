@@ -182,10 +182,15 @@ export default async function ProgressPage() {
       <section className="mt-10 mb-10">
         <h2 className="font-display mb-4 border-b pb-3 text-xl">Last 4 weeks</h2>
         <Card className="gap-3 p-5">
-          <div className="grid grid-cols-7 gap-1 sm:grid-cols-14">
+          <div
+            role="img"
+            aria-label={`Activity heatmap: ${activity.activeDays.filter(Boolean).length} of ${activity.activeDays.length} days active in the last 4 weeks, oldest first`}
+            className="grid grid-cols-7 gap-1 sm:grid-cols-14"
+          >
             {activity.activeDays.map((active, i) => (
               <div
                 key={i}
+                aria-hidden="true"
                 className={cn("aspect-square rounded-[2px]", active ? "bg-success/80" : "bg-muted")}
               />
             ))}

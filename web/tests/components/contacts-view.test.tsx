@@ -81,6 +81,11 @@ describe("ContactsView", () => {
     expect(screen.queryByRole("list", { name: /your contacts/i })).not.toBeInTheDocument();
   });
 
+  it("labels the search input for assistive tech", () => {
+    render(<ContactsView contacts={contacts} chatLogs={[]} events={[]} />);
+    expect(screen.getByRole("textbox", { name: /search contacts and notes/i })).toBeVisible();
+  });
+
   it("filters contacts by the search query", () => {
     render(<ContactsView contacts={contacts} chatLogs={[]} events={[]} />);
     fireEvent.change(screen.getByPlaceholderText(/search everyone/i), {

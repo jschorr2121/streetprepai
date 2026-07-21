@@ -7,6 +7,7 @@ import { DefaultChatTransport, getToolName, isToolUIPart, type UIMessage } from 
 import { ArrowUp, Loader2 } from "lucide-react";
 
 import { Markdown } from "@/components/reader/markdown";
+import { StatusLine } from "@/components/status-line";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -312,7 +313,10 @@ export function AssistantChat({
                     <SourceList parts={m.parts} />
                   </div>
                 ) : (
-                  <Loader2 className="text-muted-foreground size-3.5 animate-spin" />
+                  <StatusLine>
+                    <Loader2 className="text-muted-foreground size-3.5 animate-spin" />
+                    <span className="sr-only">Assistant is responding…</span>
+                  </StatusLine>
                 )}
               </div>
             </div>
@@ -320,7 +324,10 @@ export function AssistantChat({
         })}
         {status === "submitted" && (
           <div className="flex justify-start">
-            <Loader2 className="text-muted-foreground size-3.5 animate-spin" />
+            <StatusLine>
+              <Loader2 className="text-muted-foreground size-3.5 animate-spin" />
+              <span className="sr-only">Assistant is responding…</span>
+            </StatusLine>
           </div>
         )}
         {error && (
