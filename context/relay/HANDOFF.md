@@ -86,6 +86,33 @@
 
 ## Session log
 
+- **2026-07-21 (session 9, cloud, checkpoint 1 — 3 commits pushed)** — Phase 5,
+  three-lane fan-out (e2e specs / fresh-eyes bug hunt / a11y sweep). Landed:
+  **e2e specs for settings/export/feedback** (`59c6625`, 5 gated tests, baseline
+  now 1 passed / 15 skipped; deletion spec never clicks the enabled destructive
+  button; feedback submit is a Server Action posting to the page URL — drive UI
+  up to but never past the action); **content-length pre-checks** (`f4203ad`,
+  shared `lib/security/content-length.ts` — resume/extract, interview/transcribe,
+  whisper/transcribe all buffered full bodies before size checks; critique cap
+  unified to exported 20k constant); **qbank gate-scoring + mastery race**
+  (`a6eac02` — listSittingScores now excludes follow-up attempts (they share the
+  parent's question_id; a later harder-rubric follow-up score could flip a gate
+  pass→fail) and topic mastery uses getTopicMasteryForUpdate (insert-or-ignore
+  zero row + FOR UPDATE; works on PGlite + drizzle 0.45.2)). Bug-hunt digest
+  REMAINING (not yet fixed): **mock interviews never persisted** — the complete
+  `/api/interview/save` route + saveMockInterview + tests exist but
+  mock-studio.tsx never calls it (and getMockInterviews has no caller/history
+  view); applications blank-deadline crash + url-clear-on-update no-op +
+  NOT_FOUND error shape (fixer in flight); serveQuestionAction has no limiter
+  (intentional per test comment — left); resume caps/e2e selector fixed above.
+  A11y sweep digest: 4 high (chat/mock-studio/answer-card missing live regions,
+  product-tour has zero focus management) + systemic spinner-no-status pattern
+  (fixer in flight, shared status-line component). In flight at checkpoint:
+  a11y fixer, applications fixer; queued: mock-studio save wiring (blocked on
+  a11y agent releasing mock-studio.tsx), final gates + prettier repo-wide.
+  GOTCHA: concurrent vitest runs contend — PGlite cold-start beforeEach can
+  time out (>15s) under load; re-run the file alone before believing a failure.
+
 - **2026-07-20 (session 8, cloud, FINAL — 17 commits, all pushed, suite 932/122)** —
   Session tail after the notification: migration **0013** authored (`b766374`,
   chat_embeddings ivfflat → HNSW while near-empty; match_chat_embeddings loses

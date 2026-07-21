@@ -16,6 +16,26 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Prod-readiness relay — bug-hunt fixes + e2e/a11y sweeps (2026-07-21, session 9) — IN PROGRESS
+
+Checkpoint 1 (3 commits pushed): (1) **e2e specs for session-8 surfaces**
+(`59c6625`, 5 gated tests: settings sections, export link + intercepted
+download, delete-dialog DELETE gating — destructive button never clicked,
+feedback validation; e2e baseline now 1 passed / 15 skipped). (2) **oversized
+request bodies rejected before buffering** (`f4203ad`, new
+`lib/security/content-length` helper shared by resume/extract +
+interview/transcribe + whisper/transcribe — all three buffered the whole
+body before their size checks; resume critique cap unified to one 20k
+constant; stale resume e2e selector fixed). (3) **qbank gate-scoring fix +
+mastery race** (`a6eac02`, follow-up attempts share the parent's
+question_id and were silently replacing main-question scores in gate/drill
+averages — could flip pass→fail; topic mastery now row-locks via
+insert-or-ignore + SELECT FOR UPDATE so concurrent grades can't lose
+updates; +11 tests). In flight: a11y live-region/focus fixes (systemic
+sweep), applications-tracker fixes (blank deadline crash, url-clear
+semantics, NOT_FOUND shape), then mock-interview save wiring (found: the
+whole `/api/interview/save` path + tests exist but the UI never calls it).
+
 ### Prod-readiness relay — launch-compliance builds: account deletion, legal pages, feedback, health (2026-07-20, session 8) — COMPLETE
 
 Final: 15 commits, suite **932/122**, all gates green. Wave 3: opus adversarial
