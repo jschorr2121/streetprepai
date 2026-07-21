@@ -30,6 +30,7 @@ import {
 } from "@/lib/data/interview-questions";
 import { analyzeAudio, type TimestampedWord } from "@/lib/audio/analyze";
 import type { Scorecard, RubricItem } from "@/app/api/interview/score/route";
+import type { InterviewSaveInput } from "@/lib/validation/schemas/interview";
 
 const MODES: Array<{
   id: InterviewMode;
@@ -92,6 +93,7 @@ export function MockStudio({ initialMode }: { initialMode?: string } = {}) {
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [transcript, setTranscript] = useState<string | null>(null);
   const [scorecard, setScorecard] = useState<Scorecard | null>(null);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
@@ -99,10 +101,15 @@ export function MockStudio({ initialMode }: { initialMode?: string } = {}) {
   const audioBlobRef = useRef<Blob | null>(null);
   const tickerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const submitAbortRef = useRef<AbortController | null>(null);
+  // Tracks live-ness for the fire-and-forget save below — that request is
+  // deliberately NOT tied to submitAbortRef (see submit()), so it can still
+  // resolve after unmount; this just guards the resulting setState.
+  const mountedRef = useRef(true);
 
   // Cleanup on unmount.
   useEffect(() => {
     return () => {
+      mountedRef.current = false;
       if (tickerRef.current) clearInterval(tickerRef.current);
       if (streamRef.current) {
         streamRef.current.getTracks().forEach((t) => t.stop());
@@ -113,12 +120,44 @@ export function MockStudio({ initialMode }: { initialMode?: string } = {}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Best-effort persistence of a completed, scored session. Fired after
+  // scoring succeeds; failures never block or unwind the scorecard already on
+  // screen — they just surface a small inline notice. Deliberately not tied
+  // to the unmount AbortController: a user who navigates away right after
+  // scoring should still get their session saved rather than have the write
+  // cancelled mid-flight. A standalone timeout still guards against a hang.
+  const saveSession = useCallback(async (payload: InterviewSaveInput) => {
+    try {
+      const res = await fetch("/api/interview/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        signal: AbortSignal.timeout(20_000),
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        if (mountedRef.current) {
+          setSaveError(
+            typeof data.error === "string"
+              ? data.error
+              : `Could not save this session (HTTP ${res.status}).`,
+          );
+        }
+        return;
+      }
+      if (mountedRef.current) setSaveError(null);
+    } catch {
+      if (mountedRef.current) setSaveError("Could not save this session.");
+    }
+  }, []);
+
   const pickMode = (m: InterviewMode) => {
     setMode(m);
     const q = pickRandomQuestion(m);
     setQuestion(q);
     setTranscript(null);
     setScorecard(null);
+    setSaveError(null);
     if (audioUrl) {
       URL.revokeObjectURL(audioUrl);
       setAudioUrl(null);
@@ -134,6 +173,7 @@ export function MockStudio({ initialMode }: { initialMode?: string } = {}) {
     setQuestion(q);
     setTranscript(null);
     setScorecard(null);
+    setSaveError(null);
     if (audioUrl) {
       URL.revokeObjectURL(audioUrl);
       setAudioUrl(null);
@@ -224,6 +264,7 @@ export function MockStudio({ initialMode }: { initialMode?: string } = {}) {
     audioBlobRef.current = null;
     setTranscript(null);
     setScorecard(null);
+    setSaveError(null);
     setElapsed(0);
     setPhase("ready");
   };
@@ -237,6 +278,7 @@ export function MockStudio({ initialMode }: { initialMode?: string } = {}) {
     setPhase("transcribing");
     setTranscript(null);
     setScorecard(null);
+    setSaveError(null);
 
     // Tie both fetches to component lifetime so navigating away mid-submit
     // aborts the request instead of resolving into setState on an unmounted tree.
@@ -306,8 +348,20 @@ export function MockStudio({ initialMode }: { initialMode?: string } = {}) {
         setPhase("review");
         return;
       }
-      setScorecard(data as Scorecard);
+      const scored = data as Scorecard;
+      setScorecard(scored);
       setPhase("scored");
+      // Best-effort: the scorecard above is already rendered, so a save
+      // failure here only shows a small notice — it never re-throws or
+      // reverts the phase.
+      void saveSession({
+        questionText: question.text,
+        mode: question.mode,
+        transcript: text,
+        scorecard: scored,
+        audioMetrics,
+        durationSeconds: elapsed,
+      });
     } catch (err) {
       if (unmountAbort.signal.aborted) return; // unmounted mid-request
       toast.error(
@@ -319,7 +373,7 @@ export function MockStudio({ initialMode }: { initialMode?: string } = {}) {
       );
       setPhase("review");
     }
-  }, [question]);
+  }, [question, elapsed, saveSession]);
 
   const remaining = Math.max(0, MAX_RECORD_SECONDS - elapsed);
 
@@ -449,7 +503,11 @@ export function MockStudio({ initialMode }: { initialMode?: string } = {}) {
 
       {/* Scorecard */}
       {scorecard && phase === "scored" && (
-        <ScorecardView scorecard={scorecard} onTryAnother={nextQuestionSameMode} />
+        <ScorecardView
+          scorecard={scorecard}
+          onTryAnother={nextQuestionSameMode}
+          saveError={saveError}
+        />
       )}
     </div>
   );
@@ -480,9 +538,11 @@ function formatTime(seconds: number): string {
 function ScorecardView({
   scorecard,
   onTryAnother,
+  saveError,
 }: {
   scorecard: Scorecard;
   onTryAnother: () => void;
+  saveError: string | null;
 }) {
   const [showRubric, setShowRubric] = useState(true);
   const [showModel, setShowModel] = useState(false);
@@ -499,6 +559,11 @@ function ScorecardView({
       <h2 ref={headingRef} tabIndex={-1} className="eyebrow outline-none">
         Scorecard
       </h2>
+      {saveError && (
+        <p className="text-destructive text-xs" role="alert">
+          This session scored above, but couldn&apos;t be saved to your history: {saveError}
+        </p>
+      )}
       <Card className="p-6">
         <div className="grid gap-6 sm:grid-cols-2">
           <ScoreReadout label="Content" score={scorecard.content_score} />

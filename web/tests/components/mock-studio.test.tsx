@@ -150,7 +150,7 @@ describe("MockStudio", () => {
     );
   });
 
-  it("records, transcribes, scores, and lets the user try another question", async () => {
+  it("records, transcribes, scores, saves, and lets the user try another question", async () => {
     stubRecordingApis();
     const fetchMock = vi.fn().mockImplementation((url: string) => {
       if (url === "/api/interview/transcribe") {
@@ -160,6 +160,9 @@ describe("MockStudio", () => {
       }
       if (url === "/api/interview/score") {
         return Promise.resolve(jsonResponse(scorecard));
+      }
+      if (url === "/api/interview/save") {
+        return Promise.resolve(jsonResponse({ id: "mi-1", createdAt: "2026-01-01T00:00:00.000Z" }));
       }
       throw new Error(`unexpected url ${url}`);
     });
@@ -184,9 +187,60 @@ describe("MockStudio", () => {
     // Focus lands on the scorecard heading so screen readers land on results.
     await waitFor(() => expect(screen.getByRole("heading", { name: "Scorecard" })).toHaveFocus());
 
+    // The completed, scored session is persisted after scoring succeeds.
+    await waitFor(() =>
+      expect(fetchMock).toHaveBeenCalledWith(
+        "/api/interview/save",
+        expect.objectContaining({ method: "POST" }),
+      ),
+    );
+    const saveCall = fetchMock.mock.calls.find(([url]) => url === "/api/interview/save");
+    const savedBody: unknown = JSON.parse(saveCall![1].body as string);
+    expect(savedBody).toMatchObject({
+      questionText: "Walk me through a DCF.",
+      mode: "technical",
+      transcript: "You discount cash flows.",
+      scorecard: expect.objectContaining({ content_score: 82, delivery_score: 68 }),
+    });
+    // No save-failure notice on the happy path.
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+
     fireEvent.click(screen.getByRole("button", { name: /try another question/i }));
     expect(screen.getByText("Walk me through a DCF. (again)")).toBeInTheDocument();
     expect(screen.queryByText("82")).not.toBeInTheDocument();
+  });
+
+  it("still renders the scorecard and shows a small notice when the save request fails", async () => {
+    stubRecordingApis();
+    const fetchMock = vi.fn().mockImplementation((url: string) => {
+      if (url === "/api/interview/transcribe") {
+        return Promise.resolve(jsonResponse({ transcript: "Answer text.", words: [] }));
+      }
+      if (url === "/api/interview/score") {
+        return Promise.resolve(jsonResponse(scorecard));
+      }
+      if (url === "/api/interview/save") {
+        return Promise.resolve(
+          jsonResponse({ error: "Could not save the interview." }, false, 500),
+        );
+      }
+      throw new Error(`unexpected url ${url}`);
+    });
+    vi.stubGlobal("fetch", fetchMock);
+
+    render(<MockStudio initialMode="technical" />);
+    fireEvent.click(screen.getByRole("button", { name: /start recording/i }));
+    await screen.findByRole("button", { name: /stop/i });
+    fireEvent.click(screen.getByRole("button", { name: /stop/i }));
+    fireEvent.click(await screen.findByRole("button", { name: /submit for scoring/i }));
+
+    // Scorecard renders and is fully usable even though the save 500s.
+    expect(await screen.findByRole("heading", { name: "Scorecard" })).toBeInTheDocument();
+    expect(screen.getByText("82")).toBeInTheDocument();
+
+    await waitFor(() =>
+      expect(screen.getByRole("alert")).toHaveTextContent("Could not save the interview."),
+    );
   });
 
   it("shows a toast and returns to review when scoring fails after transcription", async () => {
