@@ -743,3 +743,36 @@ traced evidence). Suite 932/122 → **973 passing / 125 files**; build green.
 - **Left alone deliberately**: `serveQuestionAction` has no limiter (explicit
   design per test comment); `getTopicMastery` (non-locking) kept exported for
   its remaining reader use.
+
+## Prod-readiness relay session 9 (continued) — observability wiring, chatbot fixes, JSON body guard (2026-07-21)
+
+- **Observability quick wins shipped** (`70ab465`, from the new brainstorm
+  `2026-07-21-observability-error-triage.md`): Sentry server config enables
+  logs + `pinoIntegration` (API verified against installed @sentry/nextjs
+  10.51.0 — the real option shape is `{error:{levels}}`, not the
+  `captureErrors` shape some docs show), so every `logger.error` becomes a
+  Sentry event; `clientSafeError` routes through the shared logger (one edit
+  covers all 22 route call sites); `lib/ai/usage.ts`'s four silent
+  `console.*` failure paths (spend-cap / usage tracking) now log structured
+  fields and attach an `ai_call` Sentry context (the pino integration only
+  forwards `err` onto captured exceptions); chat/assistant mid-stream
+  consume errors reach the logger. Jake item filed: Sentry alert-rule
+  threshold so the newly-surfaced errors don't flood him.
+- **Auth/middleware/chatbot hunt** (read-only): auth flows and middleware
+  CLEAN — open-redirect, reset-poisoning, and session-spoofing vectors each
+  traced and refuted (Server Actions reject cross-origin requests before the
+  body runs, so `headers().origin` is genuine there). Chatbot findings fixed
+  (`3f4ae48`): `getMessages` reloaded and Zod-parsed a thread's ENTIRE
+  history on every turn — now takes a limit (route: its 30-message model
+  window; thread page: 200; account export reads `chat_messages` directly
+  and stays complete); `createThread` returns whether its
+  onConflictDoNothing insert actually won, so racing first-POSTs to a new
+  thread no longer double-bill haiku title generation. Accepted lows:
+  concurrent posts to one thread don't see each other's just-sent message
+  (cosmetic); spend-cap fail-open is documented design.
+- **JSON body-size guard** (`78e8111`): `parseJson` pre-checks declared
+  Content-Length (2 MB cap — chat/stream's worst-case legitimate payload is
+  ~1.5 MB of multi-byte guide content, everything else ≤~300 KB) before
+  `req.json()` buffers the body; 413 with the existing error shape. Server
+  Actions already bounded by Next's default 1 MB bodySizeLimit.
+- Session-9 final suite: **980 passing / 125 files**.
