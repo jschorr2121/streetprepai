@@ -17,6 +17,14 @@ vi.mock("@/lib/supabase/get-user", () => ({
   getUserOrNull: () => getUserMock().catch(() => null),
 }));
 
+// consumeStream's onError logs through the shared logger (not console.error)
+// so a mid-stream failure on this highest-volume route reaches Sentry via the
+// server config's pinoIntegration.
+const loggerErrorMock = vi.fn();
+vi.mock("@/lib/logging/logger", () => ({
+  logger: { info: vi.fn(), warn: vi.fn(), error: loggerErrorMock, debug: vi.fn() },
+}));
+
 const toUIMessageStreamResponseMock = vi.fn();
 const consumeStreamMock = vi.fn(() => Promise.resolve());
 const streamTextMock = vi.fn(() => ({
@@ -92,6 +100,7 @@ beforeEach(() => {
   toUIMessageStreamResponseMock.mockReset();
   toUIMessageStreamResponseMock.mockReturnValue(new Response("stream", { status: 200 }));
   consumeStreamMock.mockClear();
+  loggerErrorMock.mockClear();
   logUsageMock.mockReset();
   withUserMock.mockClear();
   getThreadMock.mockReset();
@@ -390,6 +399,30 @@ describe("POST /api/chat/assistant", () => {
         userId: "u-assist-drain",
         surchargeUsd: 0,
       }),
+    );
+  });
+
+  it("logs a mid-stream consumeStream failure through the shared logger", async () => {
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-assist-stream-err" }));
+    getThreadMock.mockResolvedValue(null);
+    const { POST } = await import("@/app/api/chat/assistant/route");
+    await POST(makeRequest(validBody, "10.9.0.14"));
+
+    // Drive consumeStream's onError the way the AI SDK would on a mid-stream
+    // failure (rate limit, context-length error, provider outage).
+    const opts = consumeStreamMock.mock.calls[0]?.[0] as {
+      onError: (err: unknown) => void;
+    };
+    const streamErr = new Error("upstream connection reset");
+    opts.onError(streamErr);
+
+    expect(loggerErrorMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        err: streamErr,
+        routeKey: "chat/assistant",
+        userId: "u-assist-stream-err",
+      }),
+      "chat_assistant_stream_consume_error",
     );
   });
 

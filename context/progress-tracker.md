@@ -16,6 +16,43 @@ Feature work. Next up: **Unit 7 (Application Tracker)** — first net-new featur
 
 ## Completed
 
+### Observability & error triage — Sentry pino integration, logger-routed error paths, AI-call context (2026-07-21) — COMPLETE
+
+Implemented the four AFK-safe items from
+`context/brainstorms/2026-07-21-observability-error-triage.md` (ideas #1–#4).
+Suite **975 passing / 125 files**; typecheck/lint/build/format all green.
+
+1. **`Sentry.pinoIntegration()` + `enableLogs: true`** in
+   `web/sentry.server.config.ts`. Verified the exact option shape against the
+   installed `@sentry/nextjs@10.51.0`'s `.d.ts` (not training data/docs
+   snippets) — the real shape is `{ error: { levels: ["error"] } }`, **not**
+   the `{ captureErrors: [...] }` shape some docs describe. Every
+   `logger.error(...)` call is now a real Sentry event with zero per-call-site
+   wiring.
+2. **Routed the shared `clientSafeError` (`web/lib/security/client-error.ts`,
+   22 call sites) and all of `web/lib/ai/usage.ts`'s `console.warn`/`error`**
+   (admin-client-missing, missing-userId, insert-failed, and the
+   `getUserUsageThisMonth` query-failure path) through the pino `logger`,
+   using the `err` key pino/Sentry expect for stack traces.
+3. **`chat/assistant`'s `consumeStream({ onError })`** now logs through
+   `logger.error` (with `routeKey`/`userId`) instead of `console.error`. The
+   route's other two pre-existing `console.error` call sites (persist-failure,
+   title-gen-failure) were left as-is — out of this task's named scope.
+4. **AI-call context on Sentry events**: `lib/ai/usage.ts` calls
+   `Sentry.setContext("ai_call", { model, endpoint, userId, costUsd })`
+   alongside each failure's `logger` call. Verified from the installed pino
+   integration's source that its error→`captureException` path only reads the
+   `err` key off the log payload (it does **not** forward other structured
+   fields onto the captured exception) — so `setContext` is the only way
+   those fields reach the Sentry Issue; the same fields are also included
+   directly in the paired `logger.error` payload so they reach Sentry's Logs
+   product (via `enableLogs`) regardless of scope-propagation behavior.
+
+Not done here (explicitly out of scope): idea #7 (`ai_usage.latencyMs`
+schema/capture — own unit) and any Sentry *client* config changes. Jake item
+logged: set a Sentry alert-rule threshold before the newly-surfaced errors
+cause notification fatigue (`context/jakes-tasks.md`, 🟠 section).
+
 ### Prod-readiness relay — bug-hunt fixes, mock-interview persistence, a11y, e2e (2026-07-21, session 9) — COMPLETE
 
 9 commits pushed; suite **973 passing / 125 files** (from 932/122); typecheck/

@@ -20,6 +20,16 @@ import type {
   MessageStreamEvent,
 } from "@anthropic-ai/sdk/resources/messages";
 
+// clientSafeError (lib/security/client-error.ts) routes through the shared
+// pino logger rather than raw console.error, so its output is captured to
+// Sentry via the server config's pinoIntegration.
+const { loggerMock } = vi.hoisted(() => ({
+  loggerMock: { info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() },
+}));
+vi.mock("@/lib/logging/logger", () => ({
+  logger: loggerMock,
+}));
+
 import { streamTextResponse } from "@/lib/ai/stream-response";
 import { STREAM_ERROR_SENTINEL } from "@/lib/streaming/stream-error";
 
@@ -89,8 +99,6 @@ describe("streamTextResponse", () => {
   });
 
   it("frames a mid-stream error with the sentinel after partial content", async () => {
-    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-
     const stream = fakeStream([textDelta("partial "), textDelta("content")], new Error("boom"));
 
     const response = streamTextResponse(stream, "test-route");
@@ -100,23 +108,18 @@ describe("streamTextResponse", () => {
     expect(sentinelIndex).toBeGreaterThan(-1);
     expect(body.slice(0, sentinelIndex)).toBe("partial content");
     expect(body.slice(sentinelIndex + 1)).toBe("The response failed. Please try again.");
-
-    consoleErrorSpy.mockRestore();
   });
 
   it("logs the real error server-side via clientSafeError while returning only the public message", async () => {
-    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     const err = new Error("upstream exploded");
 
     const stream = fakeStream([], err);
     const response = streamTextResponse(stream, "my-route");
     const body = await response.text();
 
-    expect(consoleErrorSpy).toHaveBeenCalledWith("[my-route]", err);
+    expect(loggerMock.error).toHaveBeenCalledWith({ route: "my-route", err }, "route_error");
     expect(body).not.toContain("upstream exploded");
     expect(body).toBe(`${STREAM_ERROR_SENTINEL}The response failed. Please try again.`);
-
-    consoleErrorSpy.mockRestore();
   });
 
   it("strips any sentinel character embedded in model text before enqueueing (defense in depth)", async () => {
@@ -129,8 +132,6 @@ describe("streamTextResponse", () => {
   });
 
   it("returns a Response with plain-text headers and a 200 status, even on error", async () => {
-    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-
     const okResponse = streamTextResponse(fakeStream([textDelta("hi")]), "test-route");
     expect(okResponse.status).toBe(200);
     expect(okResponse.headers.get("Content-Type")).toBe("text/plain; charset=utf-8");
@@ -142,7 +143,5 @@ describe("streamTextResponse", () => {
     expect(errResponse.status).toBe(200);
     expect(errResponse.headers.get("Content-Type")).toBe("text/plain; charset=utf-8");
     await errResponse.text();
-
-    consoleErrorSpy.mockRestore();
   });
 });

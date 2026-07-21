@@ -17,6 +17,7 @@ import {
   updateThreadTitle,
   type StoredPart,
 } from "@/lib/db/queries/chat";
+import { logger } from "@/lib/logging/logger";
 import { requireUser } from "@/lib/security/require-user";
 import { parseJson } from "@/lib/validation/parse";
 import { AssistantChatSchema } from "@/lib/validation/schemas/chat";
@@ -123,7 +124,8 @@ export async function POST(req: Request): Promise<Response> {
   // is the documented AI SDK pattern for reliable persistence/usage on abort.
   // Fire-and-forget: consumeStream internally routes any error to onError.
   void result.consumeStream({
-    onError: (err) => console.error("[chat/assistant] consumeStream error:", err),
+    onError: (err) =>
+      logger.error({ err, routeKey: ENDPOINT, userId }, "chat_assistant_stream_consume_error"),
   });
 
   return result.toUIMessageStreamResponse({

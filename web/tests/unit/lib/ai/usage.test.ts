@@ -1,5 +1,31 @@
 import { describe, expect, it, beforeEach, vi } from "vitest";
 
+// `lib/ai/usage.ts` reports failures through the shared pino `logger` (which
+// the Sentry server config's `pinoIntegration` forwards as real Sentry
+// events/logs) instead of raw `console.*`, and attaches AI-call context via
+// `Sentry.setContext`. Both are neutralised here so tests assert on call
+// shape rather than real transports.
+const { loggerMock, setContextMock } = vi.hoisted(() => ({
+  loggerMock: { info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() },
+  setContextMock: vi.fn(),
+}));
+
+vi.mock("@/lib/logging/logger", () => ({
+  logger: loggerMock,
+}));
+
+vi.mock("@sentry/nextjs", () => ({
+  setContext: setContextMock,
+}));
+
+beforeEach(() => {
+  loggerMock.info.mockClear();
+  loggerMock.warn.mockClear();
+  loggerMock.error.mockClear();
+  loggerMock.debug.mockClear();
+  setContextMock.mockClear();
+});
+
 type InsertFn = ReturnType<typeof vi.fn>;
 type GteFn = ReturnType<typeof vi.fn>;
 
@@ -69,7 +95,6 @@ describe("logUsage", () => {
     vi.doMock("@/lib/supabase/admin", () => ({
       getAdminClient: vi.fn(() => null),
     }));
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
 
     const { logUsage } = await import("@/lib/ai/usage");
     expect(() =>
@@ -82,8 +107,13 @@ describe("logUsage", () => {
 
     await new Promise((r) => setTimeout(r, 0));
     await new Promise((r) => setTimeout(r, 0));
-    // Warning should fire at least once for missing admin.
-    expect(warn).toHaveBeenCalled();
+    // Warning should fire at least once for missing admin, through the shared
+    // logger (not raw console.warn) so it's captured to Sentry via the pino
+    // integration.
+    expect(loggerMock.warn).toHaveBeenCalledWith(
+      expect.objectContaining({ endpoint: "test/null-admin", model: "claude-haiku-4-5-20251001" }),
+      "ai_usage_admin_client_unavailable",
+    );
   });
 
   it("subscribes to the lazy Supabase builder so the insert actually fires", async () => {
@@ -111,14 +141,13 @@ describe("logUsage", () => {
     expect(then).toHaveBeenCalled();
   });
 
-  it("logs an error when the insert fails", async () => {
+  it("logs an error and attaches ai_call Sentry context when the insert fails", async () => {
     const mocks = makeAdminMock({
       insertResult: { data: null, error: { message: "insert boom" } },
     });
     vi.doMock("@/lib/supabase/admin", () => ({
       getAdminClient: vi.fn(() => mocks.admin),
     }));
-    const err = vi.spyOn(console, "error").mockImplementation(() => {});
 
     const { logUsage } = await import("@/lib/ai/usage");
     logUsage({
@@ -130,7 +159,26 @@ describe("logUsage", () => {
 
     await new Promise((r) => setTimeout(r, 0));
     await new Promise((r) => setTimeout(r, 0));
-    expect(err).toHaveBeenCalled();
+
+    expect(loggerMock.error).toHaveBeenCalledWith(
+      expect.objectContaining({
+        err: { message: "insert boom" },
+        endpoint: "err-insert",
+        model: "claude-sonnet-4-6",
+        userId: "u-err",
+      }),
+      "ai_usage_insert_failed",
+    );
+    // AI-call context (model/endpoint/userId/cost) rides along on the Sentry
+    // scope so a captured event carries enough to diagnose without the logs.
+    expect(setContextMock).toHaveBeenCalledWith(
+      "ai_call",
+      expect.objectContaining({
+        model: "claude-sonnet-4-6",
+        endpoint: "err-insert",
+        userId: "u-err",
+      }),
+    );
   });
 
   it("skips the insert and warns when userId is omitted (ai_usage.user_id is NOT NULL)", async () => {
@@ -138,7 +186,6 @@ describe("logUsage", () => {
     vi.doMock("@/lib/supabase/admin", () => ({
       getAdminClient: vi.fn(() => mocks.admin),
     }));
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
     const { logUsage } = await import("@/lib/ai/usage");
     logUsage({
       model: "claude-haiku-4-5-20251001",
@@ -150,7 +197,10 @@ describe("logUsage", () => {
     // A row with no owner is invisible to per-user spend caps, so it must never
     // be written — logUsage drops it and surfaces a warning instead.
     expect(mocks.insert).not.toHaveBeenCalled();
-    expect(warn).toHaveBeenCalled();
+    expect(loggerMock.warn).toHaveBeenCalledWith(
+      expect.objectContaining({ endpoint: "anon" }),
+      "ai_usage_missing_user_id",
+    );
   });
 });
 
@@ -260,11 +310,13 @@ describe("getUserUsageThisMonth", () => {
     vi.doMock("@/lib/supabase/admin", () => ({
       getAdminClient: vi.fn(() => mocks.admin),
     }));
-    const err = vi.spyOn(console, "error").mockImplementation(() => {});
     const { getUserUsageThisMonth } = await import("@/lib/ai/usage");
     const r = await getUserUsageThisMonth("u-err");
     expect(r).toEqual({ totalUsd: 0, rowCount: 0 });
-    expect(err).toHaveBeenCalled();
+    expect(loggerMock.error).toHaveBeenCalledWith(
+      expect.objectContaining({ err: { message: "boom" }, userId: "u-err" }),
+      "ai_usage_month_query_failed",
+    );
   });
 });
 

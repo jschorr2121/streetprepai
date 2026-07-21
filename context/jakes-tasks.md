@@ -35,6 +35,23 @@ needs action it can't perform itself.
 
 ## 🟠 Upcoming units (do before that unit starts, not blocking today)
 
+- [ ] **Set a Sentry alert-rule threshold before dozens of previously-silent
+  errors start emailing you** (observability session, 2026-07-21) — this session
+  wired `Sentry.pinoIntegration()` + `enableLogs: true` into
+  `web/sentry.server.config.ts` and routed the 22 `clientSafeError` call sites,
+  `lib/ai/usage.ts`'s spend-cap/usage-logging failures, and `chat/assistant`'s
+  mid-stream `consumeStream` errors through the shared pino `logger` — every one
+  of those is now a real Sentry event/log with zero further code changes. Once
+  `SENTRY_DSN` is set in prod, go to Sentry → Alerts and replace the default
+  "notify on every new issue" rule with a frequency threshold (e.g. "seen more
+  than N times in M minutes") — otherwise a single user's transient network
+  blip can page you same as a real outage. While there, check whether your
+  Sentry plan includes the newer AI-powered issue grouping / ML Priority Alerts
+  (cuts noise ~35–40% per Sentry's own numbers) — worth turning on instead of
+  hand-tuning frequency thresholds if your plan has it. Full context:
+  `context/brainstorms/2026-07-21-observability-error-triage.md` (ideas #5 and
+  the "AI-powered issue grouping" rejected-item entry).
+
 - [ ] **Unit 8 issue 06 triage (AI-generated qbank questions)** (relay session 4,
   2026-07-17) — Unit 8 issues 01–05 turned out to be already shipped by Unit 11 (see
   `.scratch/unit-8-question-bank/SCOPING-2026-07-17.md`); issue 06 is the only one left

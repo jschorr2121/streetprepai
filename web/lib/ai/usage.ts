@@ -1,5 +1,8 @@
+import * as Sentry from "@sentry/nextjs";
+
 import { getAdminClient } from "@/lib/supabase/admin";
 import { RateLimitedError } from "@/lib/errors";
+import { logger } from "@/lib/logging/logger";
 import { calculateCost, type TokenUsage } from "./pricing";
 
 export type UsagePayload = {
@@ -11,11 +14,26 @@ export type UsagePayload = {
   surchargeUsd?: number;
 };
 
+// Attaches model/endpoint/userId/cost as Sentry context on the current
+// isolation scope so an AI-call failure captured downstream (pino integration
+// or a direct Sentry.captureException) carries enough to diagnose without
+// digging through logs. Also folded directly into the paired `logger` call's
+// structured payload below: the pino integration's error-capture path only
+// reads the `err` key off that payload, it does NOT forward other fields onto
+// the captured exception event, so setContext is the only way those fields
+// reach the Issue itself — the log payload fields separately reach Sentry's
+// Logs product via `enableLogs`.
+function setAiCallContext(fields: Record<string, unknown>): void {
+  Sentry.setContext("ai_call", fields);
+}
+
 export function logUsage(payload: UsagePayload): void {
   const admin = getAdminClient();
   if (!admin) {
-    console.warn(
-      "[ai/usage] logUsage: admin client unavailable (SUPABASE_SERVICE_ROLE_KEY not set)",
+    setAiCallContext({ model: payload.model, endpoint: payload.endpoint, userId: payload.userId });
+    logger.warn(
+      { endpoint: payload.endpoint, model: payload.model },
+      "ai_usage_admin_client_unavailable",
     );
     return;
   }
@@ -26,9 +44,8 @@ export function logUsage(payload: UsagePayload): void {
   // is ever missing, skip the insert and surface it loudly rather than write an
   // unattributable row (which the DB would reject anyway, swallowed below).
   if (!payload.userId) {
-    console.warn(
-      `[ai/usage] logUsage: missing userId for endpoint "${payload.endpoint}" — usage not recorded`,
-    );
+    setAiCallContext({ model: payload.model, endpoint: payload.endpoint });
+    logger.warn({ endpoint: payload.endpoint, model: payload.model }, "ai_usage_missing_user_id");
     return;
   }
 
@@ -50,7 +67,22 @@ export function logUsage(payload: UsagePayload): void {
     })
     .then(({ error }) => {
       if (error) {
-        console.error("[ai/usage] logUsage insert failed:", error);
+        setAiCallContext({
+          model: payload.model,
+          endpoint: payload.endpoint,
+          userId: payload.userId,
+          costUsd,
+        });
+        logger.error(
+          {
+            err: error,
+            endpoint: payload.endpoint,
+            model: payload.model,
+            userId: payload.userId,
+            costUsd,
+          },
+          "ai_usage_insert_failed",
+        );
       }
     });
 }
@@ -123,7 +155,7 @@ export async function getUserUsageThisMonth(userId: string): Promise<UsageMonthR
     .gte("created_at", start.toISOString());
 
   if (error || !data) {
-    console.error("[ai/usage] getUserUsageThisMonth error:", error);
+    logger.error({ err: error, userId }, "ai_usage_month_query_failed");
     return { totalUsd: 0, rowCount: 0 };
   }
 

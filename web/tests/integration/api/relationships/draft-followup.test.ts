@@ -13,6 +13,13 @@ vi.mock("@/lib/supabase/get-user", () => ({
   getUserOrNull: () => getUserMock().catch(() => null),
 }));
 
+// clientSafeError (lib/security/client-error.ts) logs through the shared pino
+// logger rather than raw console.error.
+const loggerErrorMock = vi.fn();
+vi.mock("@/lib/logging/logger", () => ({
+  logger: { info: vi.fn(), warn: vi.fn(), error: loggerErrorMock, debug: vi.fn() },
+}));
+
 const createMock = vi.fn().mockResolvedValue({
   content: [
     {
@@ -127,7 +134,6 @@ describe("POST /api/relationships/draft-followup", () => {
   it("returns 502 and logs server-side when the Anthropic call throws", async () => {
     getUserMock.mockResolvedValue(fakeUser({ id: "u-df-throw" }));
     createMock.mockRejectedValueOnce(new Error("upstream boom"));
-    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     const { POST } = await import("@/app/api/relationships/draft-followup/route");
     const res = await POST(
       new Request("http://localhost/api/relationships/draft-followup", {
@@ -140,8 +146,10 @@ describe("POST /api/relationships/draft-followup", () => {
     const json = await res.json();
     expect(typeof json.error).toBe("string");
     expect(json.error).not.toContain("upstream boom");
-    expect(errorSpy).toHaveBeenCalledWith("[relationships/draft-followup]", expect.any(Error));
-    errorSpy.mockRestore();
+    expect(loggerErrorMock).toHaveBeenCalledWith(
+      { route: "relationships/draft-followup", err: expect.any(Error) },
+      "route_error",
+    );
   });
 
   it("returns 429 after exhausting per-user budget", async () => {

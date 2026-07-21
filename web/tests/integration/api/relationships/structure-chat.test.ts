@@ -13,6 +13,13 @@ vi.mock("@/lib/supabase/get-user", () => ({
   getUserOrNull: () => getUserMock().catch(() => null),
 }));
 
+// clientSafeError (lib/security/client-error.ts) logs through the shared pino
+// logger rather than raw console.error.
+const loggerErrorMock = vi.fn();
+vi.mock("@/lib/logging/logger", () => ({
+  logger: { info: vi.fn(), warn: vi.fn(), error: loggerErrorMock, debug: vi.fn() },
+}));
+
 const createMock = vi.fn().mockResolvedValue({
   content: [
     {
@@ -129,7 +136,6 @@ describe("POST /api/relationships/structure-chat", () => {
   it("returns 502 and logs server-side when the Anthropic call throws", async () => {
     getUserMock.mockResolvedValue(fakeUser({ id: "u-sc-throw" }));
     createMock.mockRejectedValueOnce(new Error("upstream boom"));
-    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     const { POST } = await import("@/app/api/relationships/structure-chat/route");
     const res = await POST(
       new Request("http://localhost/api/relationships/structure-chat", {
@@ -142,8 +148,10 @@ describe("POST /api/relationships/structure-chat", () => {
     const json = await res.json();
     expect(typeof json.error).toBe("string");
     expect(json.error).not.toContain("upstream boom");
-    expect(errorSpy).toHaveBeenCalledWith("[relationships/structure-chat]", expect.any(Error));
-    errorSpy.mockRestore();
+    expect(loggerErrorMock).toHaveBeenCalledWith(
+      { route: "relationships/structure-chat", err: expect.any(Error) },
+      "route_error",
+    );
   });
 
   it("returns 429 after exhausting per-user budget", async () => {
