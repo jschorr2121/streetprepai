@@ -241,8 +241,8 @@ describe("deleteApplication", () => {
   // BUG 3 (TOCTOU): deleting an already-gone row (double-click, two tabs)
   // must throw NotFoundError instead of silently no-op'ing.
   it("throws NotFoundError when the row no longer exists", async () => {
-    await expect(
-      deleteApplication(db, "00000000-0000-4000-8000-000000000000"),
-    ).rejects.toThrow(NotFoundError);
+    await expect(deleteApplication(db, "00000000-0000-4000-8000-000000000000")).rejects.toThrow(
+      NotFoundError,
+    );
   });
 });
