@@ -110,7 +110,7 @@ Fixed two verified findings, scoped to `web/` only, no schema migration:
   1. **De-duplicated canonical sitting sizes.** `GATE_QUESTION_COUNT` (8) and `SECTION_DRILL_COUNT` (4) moved from page-level consts (`learn/[chapter]/practice/page.tsx`, `learn/[chapter]/drill/[section]/page.tsx`) into `lib/curriculum/chapters.ts` next to `GATE_PASS_THRESHOLD`; both pages now import them, and `finishSittingAction` imports the same constants — the client-facing count and the server-side check can no longer drift apart.
   2. **Server-side count enforcement.** Added `countGateQuestions` / `countSectionDrillQuestions` to `lib/db/queries/qbank.ts`. `finishSittingAction` now computes `expectedCount = min(GATE_QUESTION_COUNT | SECTION_DRILL_COUNT, <available pool size>)` — clamped to the pool so a thin chapter/section (some have as few as 1–6 seeded questions) can't lock legitimate sittings out — and rejects (`VALIDATION_FAILED`, via a `ValidationError` caught in the action's top-level `catch`) when `scores.length < expectedCount`. `listSittingScores` already dedupes to the latest attempt per `questionId`, so `scores.length` is simultaneously the attempt count and the distinct-question count — grading the same question repeatedly can't pad toward the target either. Documented in `listSittingScores`'s docstring.
   3. **Bounded the `startedAt` window.** Added `MAX_SITTING_DURATION_MS = 6h` in `actions.ts`; a `startedAt` older than that (or unparseable) is rejected before any DB access, closing the historical-attempt-sweep vector. 6h is deliberately generous (survives a long lunch break) — commented why.
-  - **Residual, called out in-code:** the fix verifies *how many* distinct questions were graded, not that they're the *specific* questions the gate/drill page actually served (no per-sitting served-question set is persisted). Closing that fully needs server-side sitting sessions — out of scope for this fix per the finding's own guidance.
+  - **Residual, called out in-code:** the fix verifies _how many_ distinct questions were graded, not that they're the _specific_ questions the gate/drill page actually served (no per-sitting served-question set is persisted). Closing that fully needs server-side sitting sessions — out of scope for this fix per the finding's own guidance.
   - Client side needed no changes: `components/learn/practice-session.tsx` already displays `res.error.message` on a failed `finishSittingAction` call and offers a "Try again" retry (which mints a fresh `startedAt`), so the new rejection path degrades gracefully.
 - **Paper LBO drill could reveal `NaNx`.** `generatePaperLbo` (`lib/curriculum/drills/generators.ts`) drew `entryMultiple = randInt(6,11)` and `leverage = randInt(3,6)` independently; when both landed on 6, `equityIn = entryTev - debt = 0`, making MOIC/IRR `NaN` (or `Infinity` with EBITDA growth) — an unsolvable drill. Fixed by constraining `leverage = randInt(rng, 3, Math.min(6, entryMultiple - 1))`, so leverage always stays strictly below the entry multiple (only tightens the range when `entryMultiple === 6`, from `[3,6]` to `[3,5]`).
 
@@ -303,8 +303,8 @@ pushed to `fable/prod-readiness` (12 commits), every commit gated on typecheck +
 vitest (+ `pnpm build`). Highlights: the fix-first `lib/ai/usage.ts` lazy-thenable bug (cost
 tracking never wrote rows) is fixed with a regression test; security response headers
 (CSP/HSTS/XFO/nosniff/Referrer-Policy/Permissions-Policy) added; raw server error text no
-longer leaks to clients (12 routes, new `lib/security/client-error.ts`); LLM tool *arguments*
-and *outputs* are Zod-validated (chat/general tools, structure-chat, draft-outreach,
+longer leaks to clients (12 routes, new `lib/security/client-error.ts`); LLM tool _arguments_
+and _outputs_ are Zod-validated (chat/general tools, structure-chat, draft-outreach,
 resume/critique); the service-role `chat_embeddings` upsert now has an ownership check; AI
 rate limiters fail closed on store errors; the monthly per-user AI spend cap ($20 default,
 `AI_USER_MONTHLY_CAP_USD`) is enforced in `requireUser`; markdown renderer blocks
@@ -323,6 +323,7 @@ turns in chat schema (#13), `firm/prep` prompt isolation (#14), `ai_usage` null
 is NOT in the cloud clone — worked from `security-review-2026-06-01.md` instead.
 
 ### UI Revamp — "The Analyst's Desk" (2026-07-06, branch `design/ui-overhaul`)
+
 - Full-app redesign replacing the emerald/Geist "modern edtech" language and the
   abandoned "ink" direction (old tip tagged `archive/ink-design`; branch was reset
   to master baseline first). New language documented in `ui-context.md` (rewritten):
@@ -355,6 +356,7 @@ is NOT in the cloud clone — worked from `security-review-2026-06-01.md` instea
   `prefers-reduced-motion`. New `ticker`/`chip-drift` keyframes in globals.css.
 
 ### Spec authoring (multi-session workflow)
+
 - `project-overview.md` — product definition, 12 goals, core user flow, 16-chapter learning flow, six AI tools, scope cuts (jobs/community/mentors/flashcards), 14 success criteria.
 - `architecture.md` — full stack table, system boundaries (learning flow spine + tools layered on top), storage model (Postgres + pgvector + Supabase Storage + Upstash Redis + MDX), auth and access (`user`/`admin`, RLS, profile-required/resume-optional onboarding, self-serve delete in phase 1), 10 architectural invariants.
 - `ui-context.md` — modern edtech aesthetic, emerald accent, Geist Sans/Mono, light-only, full color tokens (oklch), border radius scale, shadcn `new-york`, layout patterns (incl. 3-column reader rule), Lucide icons, motion conventions.
@@ -364,11 +366,13 @@ is NOT in the cloud clone — worked from `security-review-2026-06-01.md` instea
 - Codebase audit against spec: ~50–60% aligned. Sentry, Upstash, PostHog, Pino, Supabase auth helpers, real DB tables, testing infra already in place.
 
 ### Decisions (locked in CHANGES.md)
+
 - Stack vendors locked: Voyage `voyage-4-lite`, Groq Whisper Turbo, Inngest, Resend, direct Google Calendar OAuth.
 - HireVue video back in phase 1 via MediaRecorder + Supabase Storage (raw `.webm`, 30-day retention).
 - Migration strategy: in-place via tracer-bullet vertical slices.
 
 ### Unit 1 — Cleanup (completed 2026-05-19)
+
 - Removed 24 ` 2.*` duplicate files (3 API routes, 2 lib/supabase, 5 lib/ai, 5 lib/data, 2 api/profile dirs, plus 7 coverage artifacts) plus 3 stale `coverage/* 2/` directories.
 - Deleted cut-feature routes: `app/(app)/{community,jobs,network,pricing-analysis}` and their API: `app/api/applied-jobs/*`, `app/api/_debug/*`.
 - Deleted cut-feature lib/data: `lib/data/applied-jobs.ts`, `lib/data/jobs.ts`.
@@ -382,14 +386,17 @@ is NOT in the cloud clone — worked from `security-review-2026-06-01.md` instea
 - **Verification:** `pnpm typecheck` ✅ clean, `pnpm lint` ✅ 0 errors (7 unused-var warnings remain — non-blocking), `pnpm build` ✅ successful.
 
 ### Unit 2 — Dependency parity (completed; commit `aef7a83`)
+
 - Installed: `drizzle-orm`, `drizzle-kit`, `inngest`, `groq-sdk`, `googleapis`, `resend`, `@react-email/components`, `react-hook-form`, `@hookform/resolvers`, `date-fns`, `ai`, `@ai-sdk/anthropic`, `postgres`, `drizzle-zod`.
 - **Known gap:** `voyageai` (the locked embeddings vendor) was NOT installed. Defer until embeddings work begins, or install in a follow-up. Tracked in Open Questions.
 
 ### Unit 5 — IA refactor / spine + tools (completed; commit `ee815e0`)
+
 - Reshaped routing to the spine+tools IA: `app/(app)/learn`, `app/(app)/tools/{chatbot,question-bank,applications,resume-coach,story-framer,relationships,mock-interview}`, `app/(app)/sectors/[slug]`, plus `dashboard`, `firms`, `profile`, `progress`.
 - Sidebar reorganized to match. No logic changes — pure route/nav reshape, which is why it was safe to land ahead of Units 3/4/6.
 
 ### Unit 3 — Drizzle wrap / read-only proof (completed 2026-06-02)
+
 - **Connection:** `DATABASE_URL` (transaction pooler, 6543, `prepare:false`) for runtime, `DIRECT_URL` (session pooler, 5432) for schema ops — both `aws-1-us-east-2.pooler.supabase.com`. Env loaded into drizzle-kit via Node `--env-file=.env.local` (no `dotenv` dep).
 - **Schema introspection:** `scripts/introspect.mjs` (custom postgres.js generator, `pnpm db:pull`) → `lib/db/schema/` for all 15 tables + `index.ts` barrel. Replaces `drizzle-kit pull`, which hangs against the Supabase pooler. Deterministic (no diff on re-run). Captures columns/types (incl. `text[]`, `vector(N)`), nullability, PKs, common defaults; FKs + indexes deferred.
 - **Client + RLS:** `lib/db/client.ts` exports the singleton admin `db` and `withUser(token, fn)` — the hybrid wrapper (option 3) that sets `request.jwt.claims` + `set local role` per transaction so RLS applies. `Executor` type lets query fns take `db` or a tx.
@@ -402,6 +409,7 @@ is NOT in the cloud clone — worked from `security-review-2026-06-01.md` instea
 All surfaces specified in the unit-4 spec were already implemented (prior session). This session audited every file, fixed two test issues, fixed a build-time pre-render regression, and applied the DB migration file.
 
 **Files confirmed complete (all pre-existing or completed this session):**
+
 - `web/proxy.ts` — Next.js 16's `middleware.ts` equivalent; Supabase SSR session refresh + auth/onboarding gating. Already present.
 - `web/lib/auth/middleware.ts` — `updateSession()` helper with full redirect logic. Already present.
 - `web/lib/auth/server.ts` — `requireUser()`, `getCurrentUserOrNull()`, `UnauthorizedError`. Already present.
@@ -427,6 +435,7 @@ All surfaces specified in the unit-4 spec were already implemented (prior sessio
 - `web/tests/e2e/auth.spec.ts` — public gate + golden path e2e. Already present.
 
 **Changes made this session:**
+
 - `web/tests/unit/app/onboarding-action.test.ts` — fixed ETIMEDOUT by mocking `@sentry/nextjs`; fixed `vi.mock` hoisting error by using `vi.hoisted` for `withUserMock`.
 - `web/app/(app)/layout.tsx` — added `export const dynamic = "force-dynamic"` (app layout calls `requireUser()` → static prerender fails at build).
 - `web/supabase/migrations/0004_profiles_onboarding.sql` — created: adds `current_semester text` + `onboarded_at timestamptz` to `public.profiles` (idempotent); verifies `profiles_owner` RLS policy exists.
@@ -464,30 +473,36 @@ Addressed security and quality findings from the live security + engineering rev
 Full implementation of the curriculum + daily workflow so a new user is carried end-to-end. Code + content complete, migrations applied live, toolchain verified, production deployed.
 
 **Curriculum spine (static):**
+
 - `lib/curriculum/chapters.ts` — 16-chapter manifest (sections, slugs, spine-vs-reference kind, gated flag, per-chapter tool exercise, ⭐ advanced sections). `GATE_PASS_THRESHOLD = 0.85`.
 - `lib/curriculum/progress.ts` — pure `computeFlow()` deriving next-up + per-chapter status from progress rows.
 - `lib/curriculum/cycle.ts` — recruiting-cycle widget logic (semester → foundation/accelerated/interview path + focus).
 - `lib/curriculum/drills/generators.ts` (+ test) — parameterized 3-statement / TSM / accretion-dilution / paper-LBO drills, random each round, locally checked.
 
 **Content generated (parallel Sonnet workflows):**
+
 - **~65 new section MDX readings** in `content/guides/` (all 97 manifest sections now have a file). Written as original prose from PDF facts/coverage/sequencing per Jake — no BIWS/M&I text, names, or worked numbers reused (curriculum.md §7). First workflow stalled on iCloud FS read-timeouts mid-run (killed the question phase, left 10 guides unwritten); recovered with a **write-only** workflow (all data embedded in prompts, zero source reads) — 22/22 agents succeeded.
 - **532 AI-graded questions + 1,199 follow-ups** in `lib/curriculum/seed/questions/*.json`, tagged with manifest chapter/section slugs, difficulty, rubric key points, misconceptions, model answers, follow-up trees. Gated technical chapters (8–13) have 40–71 non-advanced questions each; thin coverage only in ungated recruiting/firms/sectors reference chapters.
 
 **Data + queries:**
+
 - Migration `0006_curriculum.sql` — `qbank_questions`/`qbank_followups` (shared, read-only), `qbank_attempts`/`qbank_spaced_state`/`topic_mastery`/`section_progress`/`chapter_progress` (RLS owner-scoped), `profiles.advanced_track`.
 - `scripts/build-qbank-seed.mjs` → `0007_qbank_seed.sql` (generated; validates every question against the manifest, idempotent `on conflict do nothing`).
 - Drizzle schema `lib/db/schema/{qbank,curriculum-progress}.ts` + `profiles.advancedTrack`; queries `lib/db/queries/{qbank,curriculum}.ts` (pick/serve, section-drill/gate/interleaved selection, due-review, attempts, spaced state, mastery upsert).
 
 **AI grading (published rubric):**
+
 - `lib/ai/grading.ts` — Sonnet tool-use grades key points (weighted) + misconceptions + **depth calibration**; returns the full rubric to the user. `lib/mastery/mastery.ts` (+ test) — EWMA mastery + 2–3-day spaced re-surfacing until answered correct twice.
 - Server Actions (7-step skeleton, rate-limited, RLS-scoped): `tools/question-bank/actions.ts` (`gradeAnswerAction`, `serveQuestionAction`), `learn/actions.ts` (`markSectionReadAction`, `finishSittingAction`, `completeUngatedChapterAction`). New limiters: `qbankGradingLimiter`, `curriculumProgressLimiter`.
 
 **UI:**
+
 - `/learn` chapter grid (continue-where-you-left-off), `/learn/[chapter]`, `/learn/[chapter]/drill/[section]`, `/learn/[chapter]/practice` (gate). Question Bank studio (daily interleaved drill + due queue, practice-by-topic, mental-math generators). Dashboard rebuilt on real data (cycle widget, weak areas, due count, continue-flow). Advanced-track toggle in onboarding + profile (schema, action, `setOnboarded`/`updateProfile` all wired). Section reading reuses the existing `/guide/[slug]` Reading-Lens reader.
 
 **✅ Verified live (2026-07-12):** repo moved out of iCloud to `~/Developer/InterviewPrep` (root cause of the prior `ETIMEDOUT` toolchain failures — confirmed, `pnpm install`/`typecheck` now run clean). Migrations `0006`/`0007` applied via `supabase db query --linked` (dashboard SQL editor rejected 0007 as too large): `qbank_questions` = 532 rows, `qbank_followups` = 1,199 rows. `pnpm typecheck` caught 3 real type errors (dashboard weak-topics lookup, question-bank topic-predicate, onboarding `advancedTrack` zod `.default()` diverging resolver input/output types) — fixed in commit `18dabe3`. Vercel Root Directory was fixed to `web` by Jake; production deploy is green (`dpl_7CkHvXL2a55ZKnFJT7zBmDb79ims`).
 
 ### Chapter 10 (Valuation) gap sections authored (completed 2026-07-12)
+
 - Wrote 3 missing `content/guides/*.md` sections referenced in `lib/curriculum/chapters.ts`'s `valuation` chapter: `metrics-and-multiples.md` (EBIT/EBITDA/net income/FCF, multiples-as-Value=CF/(r-g)-shorthand, two-company margin worked example), `football-field-and-interpretation.md` (assembling comps+precedents+DCF into a range, valuation-hierarchy-by-context, worked football-field example), `other-methodologies-and-sector-multiples.md` (advanced/elective: SOTP, liquidation/NAV, M&A premiums analysis, LBO-as-floor, sector multiples survey — EBITDAR/EBITDAX/FFO/AFFO/P-TBV/per-subscriber).
 - Sourced from commercial prep-guide extracts for facts/sequencing only per sourcing rules in curriculum.md §7 — all prose and worked-example numbers original, no named case studies or vendor references carried over.
 - Chapter 10 (`valuation`) now has all 6 sections in `chapters.ts` present as guide files. Chapters 9 and 11 (`ev-equity-value`, `dcf`) remain fully covered from prior work; other chapters' gaps (ch. 1–2, ch. 8 §5–8, ch. 14) still open per curriculum.md §6.
@@ -498,7 +513,7 @@ Full implementation of the curriculum + daily workflow so a new user is carried 
 - **`tests/e2e/chatbot.spec.ts`** (new): the "why JPM" golden path from Unit 9's PRD — `/tools/chatbot?thread=new` → send → mocked assistant reply renders → URL gains `?thread=<uuid>`; a second test checks the thread rail gets an entry. Mocks `/api/chat/assistant` via `page.route` with a hand-built AI SDK **v7.0.31** UI-message-stream (SSE `data: <json>\n\n` chunks — `start`/`start-step`/`text-start`/`text-delta`/`text-end`/`finish-step`/`finish`, then `data: [DONE]`; format verified against `node_modules/ai/dist/index.js`, not training data), so it never needs `STREETPREP_E2E_LIVE_AI`.
 - **`tests/e2e/question-bank.spec.ts`** (new): drives the "By topic" tab — `serveQuestionAction` is a pure DB read (no AI), so the spec serves a question and proves the "Submit for grading" button enables on input, without ever calling `gradeAnswerAction` (that hits Claude). Added `data-testid="qbank-topic-<value>"`/`qbank-difficulty-<value>`/`qbank-serve-button` to `components/learn/question-bank-studio.tsx` (attribute-only).
 - **`tests/e2e/_helpers.ts`** gained `AUTH_STORAGE_STATE_PATH`, `buildUiMessageStream()`, `UI_MESSAGE_STREAM_HEADERS`.
-- Wired the previously-inert `storageState` into the five *existing* authed specs that assumed a logged-in session but never had one (`profile.spec.ts`, `applications.spec.ts`, `interview.spec.ts`, `resume.spec.ts`, the authed describe in `chat.spec.ts`) via `test.use({ storageState: AUTH_STORAGE_STATE_PATH })` scoped inside each gated `describe` — `auth.spec.ts` untouched on purpose (its public redirect test and self-contained signup golden path must stay unauthed).
+- Wired the previously-inert `storageState` into the five _existing_ authed specs that assumed a logged-in session but never had one (`profile.spec.ts`, `applications.spec.ts`, `interview.spec.ts`, `resume.spec.ts`, the authed describe in `chat.spec.ts`) via `test.use({ storageState: AUTH_STORAGE_STATE_PATH })` scoped inside each gated `describe` — `auth.spec.ts` untouched on purpose (its public redirect test and self-contained signup golden path must stay unauthed).
 - Verified: typecheck/lint/prettier clean; `pnpm test:e2e` under CI's placeholder env → **1 passed, 10 skipped** (was 1 passed / 6 skipped). CI has no auth secrets yet, so these specs stay skipped there by design — filed to `jakes-tasks.md` (optional, not blocking) with the exact secrets + workflow edit needed to actually run them.
 - Full detail + rationale in `context/relay/HANDOFF.md`'s 2026-07-18 session-5 entry.
 
@@ -517,11 +532,13 @@ Each unit has a dedicated spec file in `context/feature-specs/`. Read that spec 
 > Units 1, 2, and 5 are done — see Completed. Unit 3 is In Progress. The remaining foundation backlog is below.
 
 ### Unit 6 — Server Action pattern proof
+
 Spec: [`context/feature-specs/unit-6-server-action-pattern.md`](feature-specs/unit-6-server-action-pattern.md)
 
 Summary: migrate `POST /api/profile/save` to a `saveProfileAction` Server Action that implements the 7-step skeleton from `code-standards.md`. Becomes the canonical reference for future migrations.
 
 ### Unit 6 — Server Action pattern proof
+
 Spec: [`context/feature-specs/unit-6-server-action-pattern.md`](feature-specs/unit-6-server-action-pattern.md)
 
 Summary: migrate `POST /api/profile/save` to a `saveProfileAction` Server Action that implements the 7-step skeleton from `code-standards.md`. Becomes the canonical reference for future migrations.
@@ -555,6 +572,7 @@ Summary: migrate `POST /api/profile/save` to a `saveProfileAction` Server Action
 Full CRUD feature for personal job-application tracking, built on the patterns from Units 3/4/6.
 
 **Files created/modified:**
+
 - `lib/db/queries/applications.ts` — `getApplications`, `getApplicationById`, `createApplication`, `updateApplication`, `deleteApplication` (Drizzle, `(db, ...args)` pattern).
 - `app/(app)/tools/applications/actions.ts` — three Server Actions following 7-step skeleton: `createApplicationAction`, `updateApplicationAction`, `deleteApplicationAction`. Colocated Zod schemas.
 - `app/(app)/tools/applications/page.tsx` — server component; loads applications via `withUser → getApplications`; reads `searchParams.stage`; renders filter + list.

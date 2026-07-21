@@ -8,54 +8,54 @@
 ## Phase checklist
 
 - [x] Phase 1 — Correctness & security hardening — **DONE** (session 1). Fix-first
-  usage.ts bug ✅, security headers ✅, error-leak sweep ✅, LLM tool arg+output Zod ✅,
-  service-role ownership check ✅, AI limiters fail-closed ✅, spend cap wired ✅, markdown
-  href guard ✅, unused deps ✅, Sentry plugin ✅, `/api/*` proxy auth backstop ✅ (#1),
-  next 16.2.10 + react 19.2.7 ✅ (#6/#7), `db:*` script guard ✅ (#9), earnings-text
-  prompt isolation ✅ (#14). Deferred Lows (accepted, revisit only if priorities change):
-  #13 client-supplied assistant turns — inherent to the stateless chat API; #11 XFF IP
-  key — platform-managed on Vercel; #16 `ai_usage.user_id` nullable — needs a
-  backfill-aware migration file.
+      usage.ts bug ✅, security headers ✅, error-leak sweep ✅, LLM tool arg+output Zod ✅,
+      service-role ownership check ✅, AI limiters fail-closed ✅, spend cap wired ✅, markdown
+      href guard ✅, unused deps ✅, Sentry plugin ✅, `/api/*` proxy auth backstop ✅ (#1),
+      next 16.2.10 + react 19.2.7 ✅ (#6/#7), `db:*` script guard ✅ (#9), earnings-text
+      prompt isolation ✅ (#14). Deferred Lows (accepted, revisit only if priorities change):
+      #13 client-supplied assistant turns — inherent to the stateless chat API; #11 XFF IP
+      key — platform-managed on Vercel; #16 `ai_usage.user_id` nullable — needs a
+      backfill-aware migration file.
 - [x] Phase 2 — Performance — **DONE** (session 2). The latency was network round trips:
-  withUser overhead 8→3 statements/txn ✅, getUser deduped via React cache() ✅, proxy
-  onboarding read memoized in a user-scoped cookie ✅, page reads pipelined with
-  Promise.all (postgres.js pipelines; dashboard ~17→~7 RTs/navigation) ✅, question-bank
-  double transaction folded ✅, migration `0009_perf_indexes_2.sql` authored (2 covering
-  indexes, 10 prefix-redundant drops, ivfflat probes=10) — **Jake applies** ✅, loading
-  skeletons on all 6 DB-backed routes that lacked one ✅, dead `lib/cache` removed ✅.
-  Prompt-caching invariant verified satisfied (OpenAI routes cache automatically; the
-  uncached Anthropic prompts are <1K tokens). Bundle measured: Sentry (incl. Replay,
-  deliberate) + zod v4 dominate; Turbopack supports neither the analyzer nor Sentry
-  treeshake options — documented in CHANGES.md, not changed.
+      withUser overhead 8→3 statements/txn ✅, getUser deduped via React cache() ✅, proxy
+      onboarding read memoized in a user-scoped cookie ✅, page reads pipelined with
+      Promise.all (postgres.js pipelines; dashboard ~17→~7 RTs/navigation) ✅, question-bank
+      double transaction folded ✅, migration `0009_perf_indexes_2.sql` authored (2 covering
+      indexes, 10 prefix-redundant drops, ivfflat probes=10) — **Jake applies** ✅, loading
+      skeletons on all 6 DB-backed routes that lacked one ✅, dead `lib/cache` removed ✅.
+      Prompt-caching invariant verified satisfied (OpenAI routes cache automatically; the
+      uncached Anthropic prompts are <1K tokens). Bundle measured: Sentry (incl. Replay,
+      deliberate) + zod v4 dominate; Turbopack supports neither the analyzer nor Sentry
+      treeshake options — documented in CHANGES.md, not changed.
 - [x] Phase 3 — UX fixes & bugs — **DONE** (sessions 2+3). Session 2: screen-by-screen
-  sweep, ~27 fixes (mobile nav, gate scoring, tour, progress page fabrication, vitest
-  include; see CHANGES.md). Session 3 closed the backlog: relationships + firm pages
-  wired to real per-user data with genuine empty states (seed arrays deleted) ✅, real
-  /new contact form (RHF+Zod → createContactAction) ✅, pipeline stage changes persisted
-  (optimistic + revert) ✅, **chats now actually persist** (nothing ever wrote to `chats`;
-  logChatAction saves notes before the AI call, saveChatSummaryAction persists the
-  validated summary, structure-chat now gets contactId+chatId so the embedding path
-  finally runs; prep-person gets contactId → semantic recall live) ✅, stream mid-error
-  sentinel (ASCII record-separator framing via lib/streaming/stream-error + shared streamTextResponse;
-  5 routes, 4 clients render styled role=alert + retain partial content) ✅, mock-studio
-  abort-on-unmount ✅.
+      sweep, ~27 fixes (mobile nav, gate scoring, tour, progress page fabrication, vitest
+      include; see CHANGES.md). Session 3 closed the backlog: relationships + firm pages
+      wired to real per-user data with genuine empty states (seed arrays deleted) ✅, real
+      /new contact form (RHF+Zod → createContactAction) ✅, pipeline stage changes persisted
+      (optimistic + revert) ✅, **chats now actually persist** (nothing ever wrote to `chats`;
+      logChatAction saves notes before the AI call, saveChatSummaryAction persists the
+      validated summary, structure-chat now gets contactId+chatId so the embedding path
+      finally runs; prep-person gets contactId → semantic recall live) ✅, stream mid-error
+      sentinel (ASCII record-separator framing via lib/streaming/stream-error + shared streamTextResponse;
+      5 routes, 4 clients render styled role=alert + retain partial content) ✅, mock-studio
+      abort-on-unmount ✅.
 - [x] Phase 4 — Production-readiness checklist — **DONE** (session 3). `.env.example`
-  regenerated from an audit of every `process.env` read and git-tracked
-  (`!.env.example` exception) ✅; repo-wide prettier applied — format:check was failing
-  on 89 files and is CI's first gate; all six CI steps verified green locally ✅;
-  deps: next/react already current, bumped eslint-config-next 16.2.10, zod 4.4.3,
-  supabase-js 2.110.7 (each verified) ✅; robustness audit → interview/score now
-  Zod-parses tool output (was the ONLY tool-call route that didn't — non-array rubric
-  = uncaught 500 on the core scoring flow) and extract-resume validates model JSON
-  before returning ✅; CONTRIBUTING.md stale env-var name + main→master fixed ✅;
-  Confirm-email toggle already in jakes-tasks ✅. Accepted-low: whisper transcribe
-  `as`-casts its verbose_json response (degrades via ?? fallbacks — documented, not
-  changed).
+      regenerated from an audit of every `process.env` read and git-tracked
+      (`!.env.example` exception) ✅; repo-wide prettier applied — format:check was failing
+      on 89 files and is CI's first gate; all six CI steps verified green locally ✅;
+      deps: next/react already current, bumped eslint-config-next 16.2.10, zod 4.4.3,
+      supabase-js 2.110.7 (each verified) ✅; robustness audit → interview/score now
+      Zod-parses tool output (was the ONLY tool-call route that didn't — non-array rubric
+      = uncaught 500 on the core scoring flow) and extract-resume validates model JSON
+      before returning ✅; CONTRIBUTING.md stale env-var name + main→master fixed ✅;
+      Confirm-email toggle already in jakes-tasks ✅. Accepted-low: whisper transcribe
+      `as`-casts its verbose_json response (degrades via ?? fallbacks — documented, not
+      changed).
 - [~] Phase 5 — Perpetual improvement — **in progress** (session 3 started it).
   Done: follow-ups loop closed (session 3); **UNIT 9 COMPLETE — all five issues**
   (session 4, see log); **Unit 8 scoped + its test debt closed** (session 4 —
   issues 01–05 were already shipped by Unit 11; read `.scratch/unit-8-question-bank/
-  SCOPING-2026-07-17.md` before touching qbank). **Good next lanes (session 5+)**:
+SCOPING-2026-07-17.md` before touching qbank). **Good next lanes (session 5+)**:
   (1) e2e coverage — playwright specs for the chatbot golden path ("why JPM",
   mocked LLM) + question bank, `STREETPREP_E2E_AUTH=1`, best started with fresh
   context; (2) Jake-gated go-aheads once answered in jakes-tasks: Unit 8 #06
@@ -190,14 +190,14 @@
   issue 02 closed), **dead schema deleted** (`4c48ad0` — resumes.ts +
   interview-sessions.ts described tables with NO migration and NO call sites),
   **page/reader coverage** (`c2c8cc3`, +37 tests: 8 page files w/ real branching
-  + markdown/reading-lens extensions; thin delegation pages skipped by design).
-  Inline review of the deletion action came back clean. IN FLIGHT at checkpoint:
-  an opus adversarial review of the entire session diff (52898c3..HEAD), focused
-  on export-route data exposure, deletion races/CSRF, health-route allowlist
-  bypass, feedback RLS, legal-page claim accuracy. Known follow-up gaps for
-  session 9: `lib/curriculum/progress.ts` + `cycle.ts` pure logic has no
-  dedicated unit tests; export could use a dedicated tight limiter (2/hour)
-  instead of cheap tier. Checkpoint-1 log follows.
+  - markdown/reading-lens extensions; thin delegation pages skipped by design).
+    Inline review of the deletion action came back clean. IN FLIGHT at checkpoint:
+    an opus adversarial review of the entire session diff (52898c3..HEAD), focused
+    on export-route data exposure, deletion races/CSRF, health-route allowlist
+    bypass, feedback RLS, legal-page claim accuracy. Known follow-up gaps for
+    session 9: `lib/curriculum/progress.ts` + `cycle.ts` pure logic has no
+    dedicated unit tests; export could use a dedicated tight limiter (2/hour)
+    instead of cheap tier. Checkpoint-1 log follows.
 
 - **2026-07-20 (session 8, cloud, checkpoint 1 — 5 commits, suite 888/113)** —
   Phase 5, launch-compliance lane. Shipped the brainstorm's top-4 AFK-safe builds
@@ -215,13 +215,13 @@
   (`d4819b6`) — migration **0012_feedback.sql** (0013 is next free), owner RLS,
   `feedbackLimiter`; health probe allowlisted via `PUBLIC_API_ROUTES` in
   middleware. Issues filed: `.scratch/launch-readiness/issues/01-data-export.md`
-  + `02-prompt-injection-review.md` (both ready-for-agent). New Jake items: apply
-  0012, legal review, storage buckets, `SUPABASE_SERVICE_ROLE_KEY` in Vercel,
-  uptime monitor. Gates at checkpoint: typecheck ✅ lint 0 err ✅ 888/113 ✅
-  build 0 ✅ prettier ✅. **Next lanes this session (in order): data-export issue
-  01 (reuses deletion enumeration, settings page now exists), prompt-injection
-  issue 02 (small), then page-level tests for app/(app) pages / guide-reader
-  dom tests (untested surface per session-7 menu).**
+  - `02-prompt-injection-review.md` (both ready-for-agent). New Jake items: apply
+    0012, legal review, storage buckets, `SUPABASE_SERVICE_ROLE_KEY` in Vercel,
+    uptime monitor. Gates at checkpoint: typecheck ✅ lint 0 err ✅ 888/113 ✅
+    build 0 ✅ prettier ✅. **Next lanes this session (in order): data-export issue
+    01 (reuses deletion enumeration, settings page now exists), prompt-injection
+    issue 02 (small), then page-level tests for app/(app) pages / guide-reader
+    dom tests (untested surface per session-7 menu).**
 
 - **2026-07-19 (session 7, cloud, FINAL — 16 commits, all pushed, suite 855/105)** —
   Round 3: an opus adversarial review of the ENTIRE session diff (5a26680..HEAD)
@@ -365,7 +365,7 @@
   onboarding/applications/limiters/RLS all swept. **Next-lane menu for session 6**:
   (a) Jake-gated go-aheads if answered (Unit 8 #06, chat onboarding, firm_data
   brainstorm questions, PostHog); (b) auth/rate-limit stack consolidation
-  (lib/security/* vs lib/ratelimit/* — big, design-first, needs a fresh context);
+  (lib/security/_ vs lib/ratelimit/_ — big, design-first, needs a fresh context);
   (c) served-question-set pinning if gate integrity matters more than effort;
   (d) e2e: get authed specs actually running once Jake supplies creds (then CI
   secrets item); (e) perpetual: more coverage, UX polish, brainstorms. Suite
@@ -397,7 +397,7 @@
   relationships routes. Session-5 facts for later sessions: (a) run local e2e
   with `PLAYWRIGHT_CHROMIUM_EXECUTABLE=/opt/pw-browsers/chromium` + CI
   placeholder env → 1 passed/10 skipped is the green baseline; (b) mocking the
-  assistant stream = `buildUiMessageStream()` in tests/e2e/_helpers.ts;
+  assistant stream = `buildUiMessageStream()` in tests/e2e/\_helpers.ts;
   (c) `logUsage` is sync fire-and-forget by design at all call sites.
 
 - **2026-07-18 (session 5, cloud, IN PROGRESS — checkpoint)** — Phase 5. Committed so
@@ -439,7 +439,7 @@
     `qbank-serve-button"` to `components/learn/question-bank-studio.tsx` only
     (attribute-only; did not touch `AnswerCard`/`PracticeSession`, which
     another concurrent agent's chatbot work didn't overlap with either). Also
-    wired the previously-inert `storageState` into the five *existing* authed
+    wired the previously-inert `storageState` into the five _existing_ authed
     specs that assumed a logged-in session but never had one
     (`profile.spec.ts`, `applications.spec.ts`, `interview.spec.ts`,
     `resume.spec.ts`, and the authed describe in `chat.spec.ts`) via
@@ -466,7 +466,7 @@
   column orders messages; (d) `StoredPartSchema` in `lib/db/queries/chat.ts` governs
   what persists (text + settled tool parts + source-url; extend it for new part
   types — jsonb needs no migration); (e) `sdkUsageToTokenUsage` + `logUsage
-  surchargeUsd` in `lib/ai/usage.ts` are the AI-SDK usage adapters (web search =
+surchargeUsd` in `lib/ai/usage.ts` are the AI-SDK usage adapters (web search =
   $0.01/call); (f) tools live in `buildAssistantTools(userId)` (closure-injected
   userId; provider web_search added in the route); search_chat_logs is hybrid
   semantic+keyword with an optional firm scope; (g) **0010 must be applied by Jake**
@@ -476,7 +476,7 @@
   refresh pipeline (own unit); LLM auto-titling of threads; deleting
   `lib/streaming/stream-error` is NOT possible yet (guide chat still uses it).
   **Session tail**: Unit 8 diffed (`.scratch/unit-8-question-bank/
-  SCOPING-2026-07-17.md`) — issues 01–05 were already shipped by Unit 11; the 50-test
+SCOPING-2026-07-17.md`) — issues 01–05 were already shipped by Unit 11; the 50-test
   debt backfill is done (suite **441 passing**); issue 06 + chat-onboarding are
   triage-gated on Jake (jakes-tasks). **Next lanes for session 5**: (1) e2e coverage
   (fresh context recommended: playwright specs for chatbot golden path + question
@@ -486,12 +486,12 @@
 - **2026-07-16 (session 3, cloud, later)** — **Phase 4 COMPLETE + Phase 5 started**;
   ~8 more commits. Phase 4: repo-wide prettier (CI gate 1 was failing on 89 files —
   KEEP `pnpm format` before committing or CI breaks again), `.env.example` regenerated
-  + git-tracked, dep patches (eslint-config-next/zod/supabase-js; majors deliberately
-  skipped), robustness fixes (interview/score + extract-resume now Zod-parse LLM
-  output), mid-stream-error integration test. Phase 5 slice: follow-ups loop closed
-  (summary → followup rows w/ dedupe + unit-tested date normalization, widget
-  mark-done, draft persisted). Suite **362 passing**. Next lanes in the Phase 5
-  checklist note above.
+  - git-tracked, dep patches (eslint-config-next/zod/supabase-js; majors deliberately
+    skipped), robustness fixes (interview/score + extract-resume now Zod-parse LLM
+    output), mid-stream-error integration test. Phase 5 slice: follow-ups loop closed
+    (summary → followup rows w/ dedupe + unit-tested date normalization, widget
+    mark-done, draft persisted). Suite **362 passing**. Next lanes in the Phase 5
+    checklist note above.
 - **2026-07-16 (session 3, cloud)** — **Phase 3 COMPLETE**; 4 commits
   (`15765e0`…`4f38996`). Closed the whole Phase 3 backlog (see checklist above). New
   facts: (a) contact CRUD lives in `lib/data/contacts.ts` (Supabase-client style, NOT
@@ -510,7 +510,7 @@
 - **2026-07-16 (session 2, cloud, later)** — **Phase 3 mostly done**; 7 more commits
   (`847dbe9`…`c97c0ed`). Mobile nav added (Sheet drawer + top bar); gate/tour/practice
   state-machine bugs fixed; progress page rebuilt on real data (new `lib/mastery/
-  activity.ts` + tests); vitest include fixed (lib colocated tests now run — suite 346);
+activity.ts` + tests); vitest include fixed (lib colocated tests now run — suite 346);
   ~20 medium/low UX fixes. Suite: **346 passing**; build green. Remaining Phase 3
   backlog listed in the checklist above — start with the relationships real-data slice.
 - **2026-07-16 (session 2, cloud)** — **Phase 2 COMPLETE**; 8 commits pushed

@@ -14,8 +14,8 @@ A live log of decisions and changes that emerge as we fill in the `templates/con
 - **Resume-driven profile:** users fill out their profile by uploading their resume; profile data feeds the chatbot, story framer, and prep sheets.
 - **Chatbot is tool-using:** chatbot can pull from profile, networking history, web, IB knowledge, and firm data — not just guide-scoped Q&A.
 - **HireVue practice** is a first-class mock-interview mode (currently the codebase mentions only voice mock; HireVue framing is explicit).
-- **Networking discovery:** in addition to tracking past contacts, the spec includes discovering *new* people to network with (new feature, not in current codebase).
-- **Learning flow teaches the tools:** chapters in the learning flow don't just teach concepts — they teach users *how to use the product's own tools* in context. E.g., the Networking chapter walks the user through the Relationship Manager; the Behavioral chapter walks them through the Story Framer. Pedagogy and practice are integrated.
+- **Networking discovery:** in addition to tracking past contacts, the spec includes discovering _new_ people to network with (new feature, not in current codebase).
+- **Learning flow teaches the tools:** chapters in the learning flow don't just teach concepts — they teach users _how to use the product's own tools_ in context. E.g., the Networking chapter walks the user through the Relationship Manager; the Behavioral chapter walks them through the Story Framer. Pedagogy and practice are integrated.
 - **Cut from the spec** (currently in codebase as stubs or partially built):
   - Job hub (filterable IB postings)
   - Community forum + interview report exchange
@@ -78,7 +78,7 @@ A live log of decisions and changes that emerge as we fill in the `templates/con
 - **Technical Question Bank** extended with three new behaviors:
   - Difficulty levels (easy / medium / hard) per question.
   - Follow-up question trees: 3–5 deeper probes per Q, fired on correct answer.
-  - Spaced re-surfacing of weak/incorrect questions every 2–3 days. (Note: this is *not* the standalone flashcard feature — that stays cut. This is in-Q-bank re-serving driven by mastery model state.)
+  - Spaced re-surfacing of weak/incorrect questions every 2–3 days. (Note: this is _not_ the standalone flashcard feature — that stays cut. This is in-Q-bank re-serving driven by mastery model state.)
 - **Mock Interview Studio** now includes adaptive follow-up questions that branch off each answer, mimicking real interviewer probing.
 - **Firm Pages** now include 10–15 firm-specific interview questions per firm (sourced from interview reports), in addition to earnings/deals/intel.
 - **Brain Teasers & Mental Math** added as a dedicated technical chapter (was missing before).
@@ -117,7 +117,7 @@ A live log of decisions and changes that emerge as we fill in the `templates/con
 
 ### System Boundaries (locked 2026-05-11)
 
-- **Routing model:** *learning flow as the spine + tools layered on top.* `app/(app)/learn/[chapter]/[section]` is the spine; `app/(app)/tools/{chatbot,story-framer,resume-coach,mock-interview,question-bank,relationships}` is the toolset; `app/(app)/{dashboard,firms,sectors,profile,progress}` are top-level surfaces. **This is a re-architecture from the current codebase**, which has a flat `(app)/` with all features as siblings.
+- **Routing model:** _learning flow as the spine + tools layered on top._ `app/(app)/learn/[chapter]/[section]` is the spine; `app/(app)/tools/{chatbot,story-framer,resume-coach,mock-interview,question-bank,relationships}` is the toolset; `app/(app)/{dashboard,firms,sectors,profile,progress}` are top-level surfaces. **This is a re-architecture from the current codebase**, which has a flat `(app)/` with all features as siblings.
 - **Server Actions for mutations + Route Handlers for streaming/webhooks only.** Replaces the current "everything is a Route Handler" pattern.
 - **`lib/` is domain-driven** (one folder per concern) with explicit public APIs and enforced boundary rules. Replaces the current `lib/ai`/`lib/data`/`lib/supabase` minimal split.
 - **`components/`** split into `ui/` (shadcn primitives), `learn/`, `tools/*/`, surface-specific folders, and `shared/`.
@@ -183,12 +183,14 @@ The currently-shipping UI is essentially the locked target, with two notable add
 ## Code Standards decisions (locked 2026-05-18)
 
 ### TypeScript
+
 - **`strict: true` plus `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noPropertyAccessFromIndexSignature`.** Three extras chosen because together they catch ~40% of runtime bugs strict alone misses.
 - **`any` banned**, `unknown` for external input, `as` only for already-validated external shapes.
 - **Branded types for IDs** (`UserId`, `ContactId`, etc.) to prevent ID mix-ups at the type level.
 - **Parse, don't validate, at boundaries** — every external input flows through Zod before reaching business logic.
 
 ### Next.js + React
+
 - **Server Components by default.** `'use client'` only for interactivity/hooks/browser APIs.
 - **Server Actions for all mutations**; Route Handlers for streaming, webhooks, health only.
 - **Server Action return shape:** discriminated union `{ ok: true, data } | { ok: false, error: { code, message, fieldErrors? } }`.
@@ -199,6 +201,7 @@ The currently-shipping UI is essentially the locked target, with two notable add
 - **No `useEffect` for data fetching.** Server Components or Server Actions only.
 
 ### Drizzle / Data Access
+
 - **Module-per-domain query files** in `lib/db/queries/<domain>.ts`. Named-function exports, no class repositories.
 - **Functions take `(db, ...args)` explicitly** so the same function works inside transactions.
 - **Transactions for multi-step mutations** that must atomically succeed or fail. No external HTTP calls inside transactions.
@@ -208,17 +211,20 @@ The currently-shipping UI is essentially the locked target, with two notable add
 - **No mocking the database in tests** — real Postgres or PGlite.
 
 ### Errors + Logging
+
 - **Custom `AppError` hierarchy in `lib/errors.ts`:** `ValidationError`, `UnauthorizedError`, `NotFoundError`, `RateLimitedError`, `LLMError`, `ExternalServiceError`. Translated to discriminated-union failures at the Server Action boundary; unknowns captured to Sentry.
 - **Pino structured logger** in `lib/logger.ts`. Standard fields `userId`, `action`, resource IDs. Levels: `error`/`warn`/`info`/`debug`. `console.log` banned by ESLint.
 - **Sensitive data redaction** via pino's `redact` config; LLM outputs logged as token counts + 80-char preview only.
 
 ### Dates
+
 - **Postgres `timestamp with time zone`** in UTC; ISO 8601 over the wire.
 - **Native `Date` + `date-fns`** (tree-shakeable). No moment, no luxon, no day.js.
 - **Immutable use only** — never `Date.setX()`.
 - **User-facing display in local timezone** via `Intl.DateTimeFormat`.
 
 ### Naming
+
 - **Files:** `kebab-case.tsx`.
 - **Folders:** `kebab-case`.
 - **React components:** `PascalCase` named exports inside kebab-case files.
@@ -230,14 +236,17 @@ The currently-shipping UI is essentially the locked target, with two notable add
 - **DB tables/columns:** `snake_case` plurals.
 
 ### Exports + Imports
+
 - **Named exports throughout.** Default exports only where Next.js requires (`page.tsx`, `layout.tsx`, `error.tsx`, `not-found.tsx`, `loading.tsx`, `template.tsx`, `route.ts`, middleware, Inngest handler).
 - **Path alias `@/` for all cross-folder imports**; `./` for siblings.
 - **Import order auto-sorted by Prettier:** built-in → third-party → `@/` → relative.
 
 ### Comments
+
 - **Light. Comment the non-obvious WHY + brief orientation comments on substantial sections of code** (the user's explicit preference, slightly more than "minimal" — encourages 1-line section summaries on 30+ line blocks, especially in `lib/ai/` prompts, `lib/mastery/` math, Inngest functions). No JSDoc on every function. No "added for X" notes.
 
 ### Styling
+
 - **Tailwind utility classes only.** No CSS modules, no styled-components.
 - **Tokens, not hex.** `bg-primary`, never `#047857`.
 - **Radius scale from `ui-context.md`.**
@@ -245,11 +254,13 @@ The currently-shipping UI is essentially the locked target, with two notable add
 - **shadcn primitives edited in place**, never wrapped.
 
 ### Testing
+
 - **Vitest** for unit; **Playwright** for critical e2e flows.
 - **LLM calls mocked** in CI; **real DB** in integration tests.
 - **No coverage targets** — meaningful tests over high numbers.
 
 ### CI/Quality Gates
+
 - **ESLint + Prettier on every PR via GitHub Actions.** Custom ESLint rules: no `console.log`, no `any`, no default exports outside Next.js conventions, no imports of server-only modules from `components/**`.
 
 ## AI Workflow decisions (locked 2026-05-18)
@@ -292,9 +303,10 @@ Implemented per `feature-specs/unit-3-drizzle-wrap.md`, with two deviations from
 - **RLS: `withUser(token, fn)` wrapper in `lib/db/client.ts`** (the spec's recommended hybrid option 3). Runs `fn` inside a transaction that sets `request.jwt.claims` + `set local role authenticated`, then resets — so `auth.uid()`-based RLS policies apply even though the pooler connection itself is privileged. Role value is whitelisted before interpolation.
 
 Other notes:
+
 - **Connection:** `DATABASE_URL` = transaction pooler (port 6543, `prepare: false`) for app runtime; `DIRECT_URL` = session pooler (port 5432) for schema ops. Both on `aws-1-us-east-2.pooler.supabase.com`. drizzle-kit env is loaded via Node's native `--env-file=.env.local` (no `dotenv` dependency added).
 - **Introspected tables (15):** the DB still contains the cut `jobs` and `applied_jobs` tables (Unit 1 removed their app code, not the tables). They're introspected as-is; a cleanup migration to drop them can come later.
-- **Migrated call site:** the profile *read* in `app/api/chat/general/route.ts` now uses `withUser(...) → getProfile(tx, userId)` from `lib/db/queries/profile.ts`. `lib/data/profile.ts` and its other callers (`lib/ai/assistant-tools.ts`, the save route) are untouched — both paths coexist, per spec.
+- **Migrated call site:** the profile _read_ in `app/api/chat/general/route.ts` now uses `withUser(...) → getProfile(tx, userId)` from `lib/db/queries/profile.ts`. `lib/data/profile.ts` and its other callers (`lib/ai/assistant-tools.ts`, the save route) are untouched — both paths coexist, per spec.
 - **Verification:** custom introspection determinism check (no diff on re-run), typecheck ✅, lint ✅, 3 Vitest unit tests for `getProfile` ✅, `pnpm build` (see progress-tracker).
 
 ---
@@ -324,7 +336,7 @@ First cloud run of the `fable/prod-readiness` relay (see `context/RELAY-QUEUE.md
 - **Decision — CSP without nonces:** security headers (CSP, HSTS, nosniff, X-Frame-Options DENY, Referrer-Policy, Permissions-Policy) are set via `next.config.ts` `headers()`. `script-src` keeps `'unsafe-inline'` because nonce-based CSP forces fully dynamic rendering (kills static/ISR caching), which conflicts with the Phase 2 performance goal. External origins (Supabase, PostHog, Sentry ingest) derive from env at build time.
 - **Decision — lazy Drizzle client** (`lib/db/client.ts`): the module-scope `DATABASE_URL` throw broke `next build` page-data collection in any env without DB creds (including CI, whose build step has no DATABASE_URL). Client now created on first use; same fail-fast error at first query. No caller imported `db` directly (all go through `withUser`), so the export became `getDb()`.
 - **Error hygiene:** new `lib/security/client-error.ts`; 12 routes stopped returning raw upstream error text (SDK/parser/Postgres internals) to clients — logged server-side, generic display-safe message returned. Streaming routes emit a generic `[Error: ...]` line.
-- **LLM trust boundary:** assistant tool arguments (chat/general) are Zod-validated per tool; tool failures return generic errors (raw internals no longer flow back through the model). Tool *output* is Zod-validated before returning in structure-chat, draft-outreach, and resume/critique (extra keys stripped; 502 on shape mismatch).
+- **LLM trust boundary:** assistant tool arguments (chat/general) are Zod-validated per tool; tool failures return generic errors (raw internals no longer flow back through the model). Tool _output_ is Zod-validated before returning in structure-chat, draft-outreach, and resume/critique (extra keys stripped; 502 on shape mismatch).
 - **Ownership check on service-role write:** structure-chat's `chat_embeddings` upsert (PK = client-supplied `chat_id`, RLS bypassed) now verifies the chat row belongs to the caller + matches the contact before writing (closes finding #2 of security-review-2026-06-01).
 - **Decision — split rate-limit store-failure policy** (`lib/ratelimit/limiters.ts`): AI-spend limiters (qbank grading) now **fail closed** on Upstash errors/missing prod env (unmetered Claude spend is worse than a blocked grader); auth/CRUD limiters keep the documented degrade-open policy (an infra outage must not block sign-in). Unit-tested both ways.
 - **Monthly AI spend cap enforced** (finding #3): `requireUser` checks `assertUnderQuota` on expensive/whisper tiers (and `spendCap: true` for AI-on-cheap-tier routes, e.g. profile/extract-resume). Default $20/user/month via `AI_USER_MONTHLY_CAP_USD`.
@@ -407,7 +419,7 @@ Four commits (`15765e0`…`4f38996`), each gated on typecheck + lint + full vite
 - **Stream mid-error protocol** — the five plain-text streaming routes (chat/stream, lens/explain, lens/beginner, relationships/prep-person, firms/prep) appended literal `[Error: …]` prose to the byte stream on mid-stream failure, which clients rendered as if the model said it. New `lib/streaming/stream-error.ts` frames the client-safe message with an ASCII record separator (stripped from model deltas as insurance; unit-tested), and `lib/ai/stream-response.ts#streamTextResponse` replaces ~30 lines of identical ReadableStream boilerplate per route. All four consuming components split the accumulator, keep partial content, render the error as a styled `role=alert` line; the chat panel restores the typed prompt for one-click retry. Dev-facing "check ANTHROPIC_API_KEY" copy removed from user-visible error paths.
 - **Mock-studio abort-on-unmount** — transcribe/score fetches now share an AbortController aborted in the unmount cleanup (combined with the existing 120s timeout via `AbortSignal.any`); no more setState/toasts on an unmounted tree.
 - **Relationships + firms real data** — the list/detail/firms pages rendered hardcoded seed contacts/chats/events/firms under first-person copy (the deepest dishonesty left). Now: `requireUser()` + pipelined `lib/data` reads, genuine empty states (contacts CTA empty state, calendar-tab default switched to contacts when eventless, firms empty note), seed arrays deleted. `/tools/relationships/new` is a real RHF+Zod form → `createContactAction`; pipeline stage changes persist via `updateContactStageAction` (optimistic override, revert + toast on failure) through new non-AI `contactsLimiter`. Fixed pipeline cards navigating to the legacy `/relationships/[id]` path.
-- **Chat persistence** — nothing ever wrote to the `chats` table: "log a chat" structured notes into local state, so history/search/firm recall/embeddings all ran on nothing. `logChatAction` saves raw notes *before* the AI call (notes survive structuring failure; same-sitting re-structure updates rather than duplicates; stamps the contact's last-contact date for the nudges widget); `saveChatSummaryAction` persists the Zod-validated summary. The client now passes contactId+chatId to structure-chat — activating the pre-existing but never-exercised server-side pgvector embedding write — and prep-person gets contactId so prep sheets use semantic recall over real past chats.
+- **Chat persistence** — nothing ever wrote to the `chats` table: "log a chat" structured notes into local state, so history/search/firm recall/embeddings all ran on nothing. `logChatAction` saves raw notes _before_ the AI call (notes survive structuring failure; same-sitting re-structure updates rather than duplicates; stamps the contact's last-contact date for the nudges widget); `saveChatSummaryAction` persists the Zod-validated summary. The client now passes contactId+chatId to structure-chat — activating the pre-existing but never-exercised server-side pgvector embedding write — and prep-person gets contactId so prep sheets use semantic recall over real past chats.
 - **Decision:** contact/chat mutations live in `lib/data/contacts.ts` (Supabase session-client style) rather than Drizzle/`withUser`, matching the domain's existing reads that the chatbot tools already use. The Server Actions still follow the 7-step skeleton.
 - **Decision:** AI route schemas no longer require a non-empty `contactTitle` (user-created contacts may have none; prompts tolerate the blank).
 - **Filed to jakes-tasks:** verify the production `firms` table contains seed.sql's firms insert — the firms pages + firm-prep route now read it exclusively.
