@@ -10,7 +10,14 @@
  * falls through (returns `null`), so callers MUST keep an authoritative
  * post-read size check (on the buffered `ArrayBuffer`/`File.size`) as the
  * backstop.
+ *
+ * The declared length includes multipart boundary/part-header overhead, so a
+ * file at exactly the cap would otherwise trip the pre-check that the
+ * authoritative `file.size` comparison would let through. A small slack keeps
+ * the pre-check strictly weaker than the backstop.
  */
+const MULTIPART_OVERHEAD_SLACK_BYTES = 8_192;
+
 export function rejectIfContentLengthExceeds(
   req: Request,
   maxBytes: number,
@@ -20,7 +27,9 @@ export function rejectIfContentLengthExceeds(
   if (!raw) return null;
 
   const declared = Number(raw);
-  if (!Number.isFinite(declared) || declared <= maxBytes) return null;
+  if (!Number.isFinite(declared) || declared <= maxBytes + MULTIPART_OVERHEAD_SLACK_BYTES) {
+    return null;
+  }
 
   return Response.json({ error: message }, { status: 413 });
 }

@@ -36,6 +36,17 @@ import { APPLIED_JOB_STAGES, NOTES_MAX_LENGTH } from "@/lib/validation/schemas/a
 // ─── Colocated Zod schemas ────────────────────────────────────────────────────
 // Client components import these for RHF resolver validation (single source of truth).
 
+// `new Date("2026-02-31")` rolls over to March 3 instead of failing, so the
+// shape regex alone would admit impossible calendar dates that Postgres's
+// `date` column then rejects with a raw driver error. Round-trip the parts.
+function isRealCalendarDate(value: string): boolean {
+  const [year = 0, month = 0, day = 0] = value.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return (
+    date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day
+  );
+}
+
 export const createApplicationSchema = z.object({
   firm: z.string().trim().min(1, "Firm is required.").max(200),
   role: z.string().trim().min(1, "Role is required.").max(200),
@@ -50,6 +61,7 @@ export const createApplicationSchema = z.object({
     .trim()
     .regex(/^\d{4}-\d{2}-\d{2}$/, "Deadline must be a valid date.")
     .max(40)
+    .refine(isRealCalendarDate, "Deadline must be a valid date.")
     .optional()
     .or(z.literal("")),
   notes: z

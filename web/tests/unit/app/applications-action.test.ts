@@ -190,7 +190,7 @@ describe("createApplicationSchema", () => {
     expect(result.success).toBe(true);
   });
 
-  it("accepts a yyyy-mm-dd deadline (the <input type=\"date\"> format)", () => {
+  it('accepts a yyyy-mm-dd deadline (the <input type="date"> format)', () => {
     const result = createApplicationSchema.safeParse({
       firm: "GS",
       role: "Analyst",
@@ -211,6 +211,20 @@ describe("createApplicationSchema", () => {
     if (!result.success) {
       const paths = result.error.issues.map((i) => i.path[0]);
       expect(paths).toContain("deadline");
+    }
+  });
+
+  it("rejects an impossible calendar date that matches the yyyy-mm-dd shape", () => {
+    // new Date("2026-02-31") silently rolls over to March 3, so the regex
+    // alone would let this through to Postgres, which rejects it.
+    for (const deadline of ["2026-02-31", "2026-13-05", "2026-04-31"]) {
+      const result = createApplicationSchema.safeParse({
+        firm: "GS",
+        role: "Analyst",
+        stage: "applied",
+        deadline,
+      });
+      expect(result.success).toBe(false);
     }
   });
 });

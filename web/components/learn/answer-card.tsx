@@ -116,27 +116,32 @@ export function AnswerCard({
         className="resize-y"
       />
 
+      {!grade && (
+        <div className="mt-3 flex items-center justify-between">
+          <span className="text-muted-foreground text-xs">
+            Graded on a published rubric — you&apos;ll see exactly what you hit and missed.
+          </span>
+          <Button onClick={submitMain} disabled={!answer.trim() || pending} className="gap-1.5">
+            {pending ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <Sparkles className="size-4" />
+            )}
+            {pending ? "Grading…" : "Submit for grading"}
+          </Button>
+        </div>
+      )}
+
+      {/* Live region holds only short announcements — keeping the toggling
+          submit button and the full rubric out avoids repeated/verbose
+          screen-reader chatter. */}
       <StatusLine>
-        {!grade && (
-          <div className="mt-3 flex items-center justify-between">
-            <span className="text-muted-foreground text-xs">
-              Graded on a published rubric — you&apos;ll see exactly what you hit and missed.
-            </span>
-            <Button onClick={submitMain} disabled={!answer.trim() || pending} className="gap-1.5">
-              {pending ? (
-                <Loader2 className="size-4 animate-spin" />
-              ) : (
-                <Sparkles className="size-4" />
-              )}
-              {pending ? "Grading…" : "Submit for grading"}
-            </Button>
-          </div>
-        )}
-
+        {pending && <span className="sr-only">Grading your answer…</span>}
         {error && <p className="text-destructive mt-3 text-sm">{error}</p>}
-
-        {grade && <RubricResult grade={grade} />}
+        {grade && <span className="sr-only">Grading complete. Rubric results follow.</span>}
       </StatusLine>
+
+      {grade && <RubricResult grade={grade} />}
 
       {/* Follow-up probe — mirrors real interviewer escalation. */}
       {followupGrade && (
