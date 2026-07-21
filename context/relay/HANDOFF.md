@@ -86,6 +86,40 @@ SCOPING-2026-07-17.md` before touching qbank). **Good next lanes (session 5+)**:
 
 ## Session log
 
+- **2026-07-21 (session 9, cloud, FINAL — 19 commits, all pushed, suite 982/126)** —
+  Session tail after checkpoint 3: **JSON body-size guard** (`78e8111` —
+  parseJson pre-checks declared Content-Length at 2 MB; chat/stream's
+  legitimate worst case is ~1.5 MB of multi-byte guide content, so do NOT
+  lower this cap casually; Server Actions already bounded by Next's default
+  1 MB bodySizeLimit); **UX sweep of the session-9 surfaces → 5 fixes**
+  (`63238d3`): completed mock interviews now appear in Past Sessions without
+  a hard reload (router.refresh() after save — the sweep caught that the
+  server-rendered list never revalidated), mock-interview skeleton rebuilt to
+  match the real page layout, tour focus uses preventScroll (was fighting the
+  spotlight recompute on tight viewports), button live regions narrowed to
+  the loading fragment only, chatbot thread page states its 200-message
+  bound. Final gates (real exit codes): typecheck ✅ lint 0 err (2
+  pre-existing warnings) ✅ suite **982/126** ✅ build ✅ repo-wide prettier ✅.
+  **Session-9 shipped in total**: mock-interview persistence + Past Sessions,
+  qbank gate-scoring fix + mastery FOR UPDATE, applications deadline/clear/
+  NOT_FOUND fixes, body-size pre-checks (binary + JSON), systemic a11y (live
+  regions + tour focus), observability wiring (pino→Sentry + ai_call
+  context), chatbot history bound + title-race fix, 5 gated e2e specs,
+  observability brainstorm, opus adversarial review (all majors clean, lows
+  fixed), +50 tests net (932→982). One new Jake item (Sentry alert-rule
+  threshold). **Next-lane menu (session 10)**: (a) Jake-gated go-aheads if
+  answered (Unit 8 #06, chat onboarding, firm_data, transcription model,
+  e2e CI creds, NEXT_PUBLIC_SITE_URL/og:image, legal approval, Sentry alert
+  rule); (b) perpetual: ai_usage.latencyMs migration + capture (own unit,
+  brainstorm 2026-07-21 idea 7 — closes an architecture.md invariant-4 doc
+  drift), a "load earlier messages" affordance for 200+-message chatbot
+  threads (only the honest notice exists today), bug-hunt areas still
+  unswept this pass (onboarding actions, profile actions, guide reader
+  internals, lib/data/\* Supabase-client layer), dom tests for the
+  session-9 past-sessions/status-line surfaces beyond what shipped;
+  (c) watch: Jake applying 0009–0013 (prod 500s on /tools/chatbot until
+  0010; feedback errors until 0012).
+
 - **2026-07-21 (session 9, cloud, checkpoint 3 — 15 commits pushed, suite 977/125)** —
   Second wave after checkpoint 2 + the user notification: **observability
   brainstorm** committed (`6718dbe`, `context/brainstorms/2026-07-21-
