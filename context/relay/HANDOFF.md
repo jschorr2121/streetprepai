@@ -86,6 +86,33 @@
 
 ## Session log
 
+- **2026-07-21 (session 9, cloud, checkpoint 2 — 9 commits pushed, suite 973/125)** —
+  All lanes landed since checkpoint 1: **applications fixes** (`e33b2d0` — blank
+  deadline no longer breaks saves; clear-vs-absent update semantics for
+  url/deadline; NOT_FOUND on TOCTOU races; +PGlite integration suite),
+  **a11y fixes** (`6d1e106` — shared `components/status-line.tsx` StatusLine
+  wraps every AI-wait spinner; product-tour focus trap/restore; scorecard
+  focus on scoring; heatmap role=img label), **mock-interview persistence**
+  (`b03665f` — save path was fully built but never called; studio now saves
+  best-effort after scoring + new Past Sessions list on /tools/mock-interview;
+  mock_interviews already in account export), **opus adversarial review of the
+  session diff** — all majors CONFIRMED CLEAN with traced evidence (qbank
+  follow-up exclusion can't lock out gates: follow-ups only fire after a
+  correct main answer; mastery zero-row is rollback-safe same-tx; Zod key
+  presence works as the update semantics assume; e2e specs have no destructive
+  fall-through even with real creds), 3 low findings all fixed (`151edbe` —
+  multipart slack in content-length pre-check, real calendar-date validation
+  for deadline (`new Date("2026-02-31")` rolls over, doesn't fail!),
+  answer-card live region narrowed). Full gates verified by the last agent run:
+  typecheck ✅ lint 0 err (2 pre-existing warnings) ✅ suite 973/125 ✅ build ✅.
+  No new Jake items this session. **Next-lane menu (session 10)**: (a) Jake-gated
+  go-aheads if answered (Unit 8 #06, chat onboarding, firm_data, transcription
+  model, e2e CI creds, NEXT_PUBLIC_SITE_URL/og:image, legal approval); (b)
+  perpetual: bug-hunt the areas session 9 didn't re-sweep (chatbot/unit-9
+  internals, auth flows, middleware), model-routing/batch-API cost items still
+  eval-gated, another brainstorm lane (e.g. observability/error triage or
+  activation polish); (c) watch: Jake applying 0009–0013.
+
 - **2026-07-21 (session 9, cloud, checkpoint 1 — 3 commits pushed)** — Phase 5,
   three-lane fan-out (e2e specs / fresh-eyes bug hunt / a11y sweep). Landed:
   **e2e specs for settings/export/feedback** (`59c6625`, 5 gated tests, baseline

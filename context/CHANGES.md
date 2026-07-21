@@ -668,3 +668,66 @@ allowlist, feedback RLS/XSS, the health probe, and legal-page claims.
   HNSW while the table is near-empty (no training-step dependency, recall holds
   from zero rows); `match_chat_embeddings` recreated without the now-moot
   `ivfflat.probes` GUC. Jake applies (filed; supersedes 0009's probes tweak).
+
+## Prod-readiness relay session 9 — bug-hunt fixes, mock-interview persistence, a11y, e2e (2026-07-21)
+
+Three-lane fan-out (e2e specs / fresh-eyes bug hunt over aging areas / a11y
+sweep), then fixers per digest, then an opus adversarial review of the whole
+session diff (2 low findings fixed, everything else confirmed clean with
+traced evidence). Suite 932/122 → **973 passing / 125 files**; build green.
+
+- **Fixed — mock interviews never persisted** (`b03665f`): the complete
+  `/api/interview/save` path (route, `saveMockInterview`, schema, tests)
+  existed but `mock-studio.tsx` never called it — every completed interview
+  vanished on navigation, and `getMockInterviews` had zero app callers.
+  Scoring now fires a best-effort save (typed against `InterviewSaveSchema`,
+  deliberately not tied to the unmount abort, 20s timeout, inline notice on
+  failure without blocking the scorecard) and `/tools/mock-interview` gained
+  a Past Sessions list (latest 10; scorecard JSONB Zod-parsed, malformed rows
+  degrade to "Not scored"). `mock_interviews` was already in the account export.
+- **Fixed — qbank follow-up scores clobbered gate averages** (`a6eac02`):
+  follow-up attempts share the parent's `question_id` and are answered later,
+  so `listSittingScores`' latest-per-question dedup let a harder-rubric
+  follow-up score replace the main answer's in gate/drill averaging (could
+  flip pass→fail). Now filters `followup_id IS NULL`; review traced that no
+  other consumer (pickQuestion mastery gate, distinct-count, resurfacing)
+  needed the same change — a follow-up only fires after a correct main answer,
+  so no lockout path exists.
+- **Fixed — topic-mastery lost-update race** (`a6eac02`): grade actions did
+  SELECT → compute in JS → upsert with no lock; concurrent grades clobbered
+  each other. New `getTopicMasteryForUpdate` materializes a zero row
+  (insert-or-ignore) then `SELECT ... FOR UPDATE`, same tx as the grade
+  persist (rollback-safe; zero row is arithmetically identical to null for
+  `updateMastery`). Verified on drizzle 0.45.2 + PGlite.
+- **Fixed — blank Deadline broke application saves** (`e33b2d0`): `""` passed
+  Zod, skipped the `?? null` fallback, and hit the Postgres `date` column —
+  creation failed with a swallowed generic error on the ordinary happy path
+  (the form defaults deadline to `""`). Now validates yyyy-mm-dd-or-empty
+  (plus real calendar round-trip after review — `new Date("2026-02-31")`
+  rolls over instead of failing, `151edbe`), updates distinguish absent-key
+  (untouched) from explicit `""` (clear to NULL) for url+deadline, and
+  update/delete on a vanished row surface NOT_FOUND instead of INTERNAL.
+- **Fixed — request bodies buffered before size checks** (`f4203ad`): resume/
+  extract, interview/transcribe, and whisper/transcribe all read the full
+  body into memory before rejecting oversized uploads. New shared
+  `lib/security/content-length.ts` 413s on the declared Content-Length first
+  (with multipart-overhead slack per review, `151edbe`; post-read checks stay
+  authoritative). Resume critique cap unified to one exported 20k constant
+  (schema said 25000, route said 20000); stale `resume.spec.ts` selector fixed.
+- **A11y sweep + fixes** (`6d1e106`): new shared `StatusLine`
+  (role=status aria-live=polite) wraps every AI-wait spinner+text (chatbot,
+  mock-studio, grading, guide chat, contact generate/structure/draft, firm
+  prep, outreach, resume critique); product tour got real focus management
+  (focus-into-panel per step, Tab trap, restore-on-close — it had
+  aria-modal with zero focus handling); scorecard heading takes focus on
+  scoring; activity heatmap got a role=img summary label; contacts search
+  labeled. Review follow-up (`151edbe`): answer-card live region narrowed to
+  short announcements so the toggling submit button and full rubric don't
+  re-announce.
+- **e2e specs for session-8 surfaces** (`59c6625`): 5 gated tests
+  (settings/export/delete-dialog/feedback); deletion spec never clicks the
+  enabled destructive button; export intercepted via page.route. Gated
+  baseline now **1 passed / 15 skipped**.
+- **Left alone deliberately**: `serveQuestionAction` has no limiter (explicit
+  design per test comment); `getTopicMastery` (non-locking) kept exported for
+  its remaining reader use.
