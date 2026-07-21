@@ -86,6 +86,28 @@ describe("POST /api/resume/extract", () => {
     expect(res.status).toBe(400);
   });
 
+  it("returns 413 from a declared Content-Length over the cap without reading the body", async () => {
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-rx-big" }));
+    const { POST } = await import("@/app/api/resume/extract/route");
+    // Body itself is tiny — only the *declared* Content-Length is oversized.
+    // A route that buffered before checking would still 413 eventually, but
+    // this proves the check runs before any body-reading call.
+    const res = await POST(
+      new Request("http://localhost/api/resume/extract", {
+        method: "POST",
+        body: "tiny",
+        headers: {
+          "x-forwarded-for": "18.0.0.9",
+          "Content-Type": "application/pdf",
+          "Content-Length": String(6 * 1024 * 1024), // > 5 MB cap
+        },
+      }),
+    );
+    expect(res.status).toBe(413);
+    const json = await res.json();
+    expect(json.error).toMatch(/larger than 5 MB/i);
+  });
+
   it("returns extracted text on happy path", async () => {
     getUserMock.mockResolvedValue(fakeUser({ id: "u-rx-ok" }));
     const { POST } = await import("@/app/api/resume/extract/route");

@@ -1,7 +1,11 @@
 import { requireUser } from "@/lib/security/require-user";
 import { clientSafeError } from "@/lib/security/client-error";
 import { parseJson } from "@/lib/validation/parse";
-import { ResumeCritiqueOutputSchema, ResumeCritiqueSchema } from "@/lib/validation/schemas/resume";
+import {
+  MAX_RESUME_CRITIQUE_CHARS,
+  ResumeCritiqueOutputSchema,
+  ResumeCritiqueSchema,
+} from "@/lib/validation/schemas/resume";
 import { getAnthropic, MODELS } from "@/lib/ai/anthropic";
 import { RESUME_CRITIQUE_SYSTEM } from "@/lib/ai/prompts";
 import { logUsage } from "@/lib/ai/usage";
@@ -9,8 +13,6 @@ import { wrapUserText } from "@/lib/ai/sanitize";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
-
-const MAX_RESUME_CHARS = 20_000;
 
 export type WeaknessFlag =
   | "vague"
@@ -56,10 +58,10 @@ export async function POST(req: Request): Promise<Response> {
 
   const { rawText } = parsed.data;
 
-  if (rawText.length > MAX_RESUME_CHARS) {
+  if (rawText.length > MAX_RESUME_CRITIQUE_CHARS) {
     return Response.json(
       {
-        error: `Resume text is ${rawText.length} chars; max is ${MAX_RESUME_CHARS}.`,
+        error: `Resume text is ${rawText.length} chars; max is ${MAX_RESUME_CRITIQUE_CHARS}.`,
       },
       { status: 413 },
     );
@@ -187,7 +189,7 @@ export async function POST(req: Request): Promise<Response> {
       messages: [
         {
           role: "user",
-          content: `Here is the raw text of a student's resume (extracted from PDF — formatting may be imperfect):\n\n${wrapUserText(rawText, "resume", { maxChars: 25000 })}\n\nIdentify the sections, extract every bullet, and produce a banker-style critique and rewrite for each one. Call the \`critique_resume\` tool with the result.`,
+          content: `Here is the raw text of a student's resume (extracted from PDF — formatting may be imperfect):\n\n${wrapUserText(rawText, "resume", { maxChars: MAX_RESUME_CRITIQUE_CHARS })}\n\nIdentify the sections, extract every bullet, and produce a banker-style critique and rewrite for each one. Call the \`critique_resume\` tool with the result.`,
         },
       ],
     });

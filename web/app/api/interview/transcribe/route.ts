@@ -1,5 +1,6 @@
 import { requireUser } from "@/lib/security/require-user";
 import { clientSafeError } from "@/lib/security/client-error";
+import { rejectIfContentLengthExceeds } from "@/lib/security/content-length";
 import { logUsage } from "@/lib/ai/usage";
 import { WHISPER_USD_PER_MINUTE } from "@/lib/ai/pricing";
 import type { TimestampedWord } from "@/lib/audio/analyze";
@@ -8,6 +9,7 @@ export const runtime = "nodejs";
 export const maxDuration = 30;
 
 const MAX_AUDIO_BYTES = 25 * 1024 * 1024; // OpenAI Whisper hard limit.
+const MAX_AUDIO_MESSAGE = "Audio is larger than 25 MB.";
 
 export interface TranscribeResponse {
   transcript: string;
@@ -29,6 +31,12 @@ export async function POST(req: Request): Promise<Response> {
 
   const contentType = req.headers.get("content-type") ?? "";
 
+  // Fast-path: reject a declared oversized body before buffering it. Falls
+  // through (null) for chunked/missing Content-Length — the post-read checks
+  // below are the authoritative backstop.
+  const tooLarge = rejectIfContentLengthExceeds(req, MAX_AUDIO_BYTES, MAX_AUDIO_MESSAGE);
+  if (tooLarge) return tooLarge;
+
   let audioBuffer: Buffer;
   let filename = "audio.webm";
   let mimeType = "audio/webm";
@@ -41,7 +49,7 @@ export async function POST(req: Request): Promise<Response> {
         return Response.json({ error: "No `file` field in form-data." }, { status: 400 });
       }
       if (file.size > MAX_AUDIO_BYTES) {
-        return Response.json({ error: "Audio is larger than 25 MB." }, { status: 413 });
+        return Response.json({ error: MAX_AUDIO_MESSAGE }, { status: 413 });
       }
       if (file.size === 0) {
         return Response.json({ error: "Empty audio file." }, { status: 400 });
@@ -52,7 +60,7 @@ export async function POST(req: Request): Promise<Response> {
     } else if (contentType.startsWith("audio/")) {
       const arrayBuf = await req.arrayBuffer();
       if (arrayBuf.byteLength > MAX_AUDIO_BYTES) {
-        return Response.json({ error: "Audio is larger than 25 MB." }, { status: 413 });
+        return Response.json({ error: MAX_AUDIO_MESSAGE }, { status: 413 });
       }
       if (arrayBuf.byteLength === 0) {
         return Response.json({ error: "Empty audio body." }, { status: 400 });

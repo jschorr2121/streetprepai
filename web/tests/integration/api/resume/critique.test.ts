@@ -3,6 +3,7 @@
  */
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fakeUser } from "@/tests/fixtures/user";
+import { MAX_RESUME_CRITIQUE_CHARS } from "@/lib/validation/schemas/resume";
 
 vi.stubEnv("UPSTASH_REDIS_REST_URL", "");
 vi.stubEnv("UPSTASH_REDIS_REST_TOKEN", "");
@@ -134,6 +135,36 @@ describe("POST /api/resume/critique", () => {
     expect(json.summary.top_issues).toEqual(["vague bullets"]);
     // Keys outside the validated tool-output schema are stripped.
     expect(json.score).toBeUndefined();
+  });
+
+  it("rejects rawText one char over the shared cap at the schema layer (400)", async () => {
+    // Schema (lib/validation/schemas/resume.ts) and the route's manual length
+    // check both derive from MAX_RESUME_CRITIQUE_CHARS — anything over that
+    // never reaches the route's own 413 check because parseJson's zod
+    // validation rejects it first.
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-rc-toolong" }));
+    const { POST } = await import("@/app/api/resume/critique/route");
+    const res = await POST(
+      new Request("http://localhost/api/resume/critique", {
+        method: "POST",
+        body: JSON.stringify({ rawText: "a".repeat(MAX_RESUME_CRITIQUE_CHARS + 1) }),
+        headers: { "x-forwarded-for": "17.0.0.9", "Content-Type": "application/json" },
+      }),
+    );
+    expect(res.status).toBe(400);
+  });
+
+  it("accepts rawText exactly at the shared cap", async () => {
+    getUserMock.mockResolvedValue(fakeUser({ id: "u-rc-atcap" }));
+    const { POST } = await import("@/app/api/resume/critique/route");
+    const res = await POST(
+      new Request("http://localhost/api/resume/critique", {
+        method: "POST",
+        body: JSON.stringify({ rawText: "a".repeat(MAX_RESUME_CRITIQUE_CHARS) }),
+        headers: { "x-forwarded-for": "17.0.0.10", "Content-Type": "application/json" },
+      }),
+    );
+    expect(res.status).toBe(200);
   });
 
   it("returns 429 after exhausting per-user budget", async () => {

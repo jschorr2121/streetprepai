@@ -38,7 +38,9 @@ test.describe("Resume Coach (live Anthropic — costs $)", () => {
       { timeout: 50_000 },
     );
 
-    await page.getByRole("button", { name: /review resume/i }).click();
+    // Accessible name matches resume-coach.tsx's "Critique & rewrite" button
+    // (statically verified only — this spec is env-gated, not run live here).
+    await page.getByRole("button", { name: /critique.*rewrite/i }).click();
 
     const res = await responsePromise;
     expect(res.status()).toBe(200);

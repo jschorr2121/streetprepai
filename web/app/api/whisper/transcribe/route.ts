@@ -1,5 +1,6 @@
 import { requireUser } from "@/lib/security/require-user";
 import { clientSafeError } from "@/lib/security/client-error";
+import { rejectIfContentLengthExceeds } from "@/lib/security/content-length";
 import { logUsage } from "@/lib/ai/usage";
 import { WHISPER_USD_PER_MINUTE } from "@/lib/ai/pricing";
 
@@ -7,6 +8,7 @@ export const runtime = "nodejs";
 export const maxDuration = 60;
 
 const MAX_AUDIO_BYTES = 25 * 1024 * 1024; // OpenAI hard limit: 25 MB.
+const MAX_AUDIO_MESSAGE = "Audio file too large (max 25 MB).";
 
 export interface TranscribeResult {
   transcript: string;
@@ -33,6 +35,12 @@ export async function POST(req: Request): Promise<Response> {
     );
   }
 
+  // Fast-path: reject a declared oversized body before buffering it. Falls
+  // through (null) for chunked/missing Content-Length — the post-read check
+  // below is the authoritative backstop.
+  const tooLarge = rejectIfContentLengthExceeds(req, MAX_AUDIO_BYTES, MAX_AUDIO_MESSAGE);
+  if (tooLarge) return tooLarge;
+
   let incoming: FormData;
   try {
     incoming = await req.formData();
@@ -51,7 +59,7 @@ export async function POST(req: Request): Promise<Response> {
     return Response.json({ error: "Audio file is empty." }, { status: 400 });
   }
   if (file.size > MAX_AUDIO_BYTES) {
-    return Response.json({ error: "Audio file too large (max 25 MB)." }, { status: 413 });
+    return Response.json({ error: MAX_AUDIO_MESSAGE }, { status: 413 });
   }
 
   const upstream = new FormData();

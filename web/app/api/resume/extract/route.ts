@@ -1,11 +1,13 @@
 import { requireUser } from "@/lib/security/require-user";
 import { clientSafeError } from "@/lib/security/client-error";
+import { rejectIfContentLengthExceeds } from "@/lib/security/content-length";
 import { PDFParse } from "pdf-parse";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
 
 const MAX_PDF_BYTES = 5 * 1024 * 1024; // 5 MB
+const MAX_PDF_MESSAGE = "PDF is larger than 5 MB. Try a slimmer export.";
 
 export async function POST(req: Request): Promise<Response> {
   const gate = await requireUser(req, { tier: "cheap", route: "resume/extract" });
@@ -13,15 +15,18 @@ export async function POST(req: Request): Promise<Response> {
 
   const contentType = req.headers.get("content-type") ?? "";
 
+  // Fast-path: reject a declared oversized body before buffering it. Falls
+  // through (null) for chunked/missing Content-Length — the post-read checks
+  // below are the authoritative backstop.
+  const tooLarge = rejectIfContentLengthExceeds(req, MAX_PDF_BYTES, MAX_PDF_MESSAGE);
+  if (tooLarge) return tooLarge;
+
   let buf: Buffer;
   try {
     if (contentType.includes("application/pdf")) {
       const arrayBuf = await req.arrayBuffer();
       if (arrayBuf.byteLength > MAX_PDF_BYTES) {
-        return Response.json(
-          { error: "PDF is larger than 5 MB. Try a slimmer export." },
-          { status: 413 },
-        );
+        return Response.json({ error: MAX_PDF_MESSAGE }, { status: 413 });
       }
       if (arrayBuf.byteLength === 0) {
         return Response.json({ error: "Empty file." }, { status: 400 });
@@ -34,10 +39,7 @@ export async function POST(req: Request): Promise<Response> {
         return Response.json({ error: "No `file` field in form." }, { status: 400 });
       }
       if (file.size > MAX_PDF_BYTES) {
-        return Response.json(
-          { error: "PDF is larger than 5 MB. Try a slimmer export." },
-          { status: 413 },
-        );
+        return Response.json({ error: MAX_PDF_MESSAGE }, { status: 413 });
       }
       buf = Buffer.from(await file.arrayBuffer());
     } else {

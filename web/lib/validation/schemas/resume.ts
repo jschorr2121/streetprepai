@@ -1,8 +1,15 @@
 import { z } from "zod";
 
+/**
+ * Single source of truth for the resume/critique raw-text size cap. Enforced
+ * here (schema) and again in the route handler (which needs the raw length
+ * before the AI call to report a precise char count) — both must agree.
+ */
+export const MAX_RESUME_CRITIQUE_CHARS = 20_000;
+
 export const ResumeCritiqueSchema = z
   .object({
-    rawText: z.string().trim().min(1).max(25000),
+    rawText: z.string().trim().min(1).max(MAX_RESUME_CRITIQUE_CHARS),
   })
   .strict();
 export type ResumeCritiqueInput = z.infer<typeof ResumeCritiqueSchema>;
